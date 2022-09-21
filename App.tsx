@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
-import firebase from './database/clientApp';
 
 export default function App() {
-  console.log(firebase);
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Vouchers 4 Veggies</Text>
     </View>
   );
 }
