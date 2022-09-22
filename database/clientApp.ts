@@ -1,5 +1,6 @@
-import {initializeApp} from "firebase/app";
-import {getFirestore} from 'firebase/firestore';
+import {initializeApp} from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 import{
     FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN,
@@ -20,10 +21,7 @@ const firebaseConfig = {
     measurementId: FIREBASE_MEASUREMENT_ID
 }
 
+const fbApp = initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
-const firestore = getFirestore(app);
-
-
-export default firestore;
+export default fbApp;
 
