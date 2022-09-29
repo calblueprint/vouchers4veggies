@@ -1,21 +1,61 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 export default function Homepage () {
-  const [showScanner, setShowScanner] = useState(false);
+  const [stage, setStage] = useState("Welcome");
+  const [header, setHeader] = useState("Hello! Scan your vouchers");
+  const [scanButtonText, setScanButtonText] = useState("Scan");
+  const [counter, setCounter] = useState(0);
+  
+  const scanVoucher = (event) => {
+    if (stage === "Welcome") {
+      setStage("First Scan");
+    } else if (stage === "Finished Scanning") {
+      setStage("Multiple Scans")
+      setScanButtonText("Scan");
+    } else {
+      if (stage === "First Scan") {
+        setStage("Multiple Scans");
+        setHeader("Scan your voucher(s)");
+      } else {
+        setHeader("Scan another");
+      }
+      // TODO: add handling for if scanning fails
+      setCounter(event.target.value + 1);
+    }
+  }
 
-  const scanVoucher = () => {
-    setShowScanner(true);
+  const finishScanning = () => {
+    setStage("Finished Scanning");
+    setHeader(`Thank you! You have submitted ${counter} vouchers!`);
+    setScanButtonText("Scan more");
   }
 
   return (
     <View style={styles.container}>
-      <Text>Hello! Scan your vouchers</Text>
-      <button onClick={scanVoucher}>Scan</button>
-      {showScanner ?
+      <Text>{header}</Text>
+
+      {stage === "First Scan" || stage === "Multiple Scans" ?
         <div>
-          placeholder
+          scanning placeholder
         </div> : null
+      }
+
+
+      {stage === "Finished Scanning" ?
+        <button>
+          Go to homepage
+        </button> : null
+      }
+
+      <button onClick={scanVoucher} value={counter}>
+        {scanButtonText}
+      </button>
+
+      {stage === "Multiple Scans" ?
+        <button onClick={finishScanning}>
+          I'm done scanning
+        </button> : null
       }
     </View>
   );
