@@ -12,6 +12,7 @@ export default function App() {
     <NavigationContainer>
       <View style={styles.container}>
         <Text>Vouchers 4 Veggies</Text>
+        <Homepage></Homepage>
       </View>
     </NavigationContainer>
   );
@@ -30,6 +31,7 @@ const MyStack = () => {
         />
       </Stack.Navigator>
     </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
