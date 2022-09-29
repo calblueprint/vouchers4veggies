@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Homepage from './screens/Homepage'
 import Invoice from './screens/Invoice'
 import Profile from './screens/Profile'
-import NavigationBar from './components/navbar'
+import NavigationBar from './components/Navbar'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
