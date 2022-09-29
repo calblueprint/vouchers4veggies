@@ -1,11 +1,22 @@
 import * as React from 'react';
-import {View, Text} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-const InvoiceBox = (props: string) => {
+
+const InvoiceBox = () => {
     return (
-        <div
-            >
+        <div style={{backgroundColor: "#000000", color: "#FFFFFF", padding: "10px", margin: "20px"}}>
 
         </div>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
+
+export default InvoiceBox;
