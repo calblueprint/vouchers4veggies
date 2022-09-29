@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function Scanner () {
   return (
     <div style={{backgroundColor: "#000000", color: "#FFFFFF", padding: "10px"}}>
-        camera placeholder coming soon (she lied)
+        scanner coming soon (she lied)
     </div>
   );
 }
