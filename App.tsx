@@ -27,8 +27,8 @@ const MyStack = () => {
         <Stack.Screen
           name="Home"
           component={Homepage}
-          options={{ title: "Welcome"}}
         />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   )
