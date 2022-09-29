@@ -30,6 +30,7 @@ export default function Homepage () {
     setStage("Finished Scanning");
     setHeader(`Thank you! You have submitted ${counter} vouchers!`);
     setScanButtonText("Scan more");
+    // TODO: update scanner with checkmark
   }
 
   return (
