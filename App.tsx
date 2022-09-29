@@ -1,7 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native';
+//add this import statement
+import { getAllTestDocs } from './database/queries';
 
 
 export default function App() {
+	//call the function here
+  getAllTestDocs();
   return (
     <View style={styles.container}>
       <Text>Vouchers 4 Veggies</Text>
