@@ -5,16 +5,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import Homepage from './screens/Homepage'
 import Invoice from './screens/Invoice'
 import Profile from './screens/Profile'
+import NavigationBar from './components/navbar'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Text>Vouchers 4 Veggies</Text>
-        <Homepage></Homepage>
-      </View>
-    </NavigationContainer>
+    <NavigationBar></NavigationBar>
   );
 }
 
