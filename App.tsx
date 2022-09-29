@@ -1,10 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
+import Homepage from './screens/Homepage'
+import Invoice from './screens/Invoice'
+import Profile from './screens/Profile'
 
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Vouchers 4 Veggies</Text>
+      <Homepage></Homepage>
+      <Invoice></Invoice>
+      <Profile></Profile>
     </View>
   );
 }
