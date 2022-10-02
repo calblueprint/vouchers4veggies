@@ -2,9 +2,8 @@ import { StyleSheet, Text, View } from 'react-native';
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';
 
-
 export default function App() {
-	//call the function here
+  //call the function here
   getAllTestDocs();
   return (
     <View style={styles.container}>
