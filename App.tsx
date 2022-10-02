@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 //add this import statement
-import { getAllTestDocs } from './database/queries';
+import { getAllTestDocs } from './src/database/queries';
 
 
 export default function App() {
