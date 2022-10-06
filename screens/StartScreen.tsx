@@ -5,8 +5,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from './Login';
 
-export default function StartScreen({ navigation }) {
-  console.log(navigation);
+export default function StartScreen(props) {
+  console.log(props.navigation);
+  console.log(props.navigation.push);
 
   return (
     <View style={styles.container}>
@@ -14,7 +15,7 @@ export default function StartScreen({ navigation }) {
 
       <View>
         <Button
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => props.navigation.push('Login')}
           title="Login"
           color="#f2f2f2"
         />
@@ -22,7 +23,7 @@ export default function StartScreen({ navigation }) {
 
       <View>
         <Button
-          onPress={() => navigation.navigate('Signup')}
+          onPress={() => props.navigation.push('Signup')}
           title="Signup"
           color="#d9d9d9"
         />
