@@ -23,7 +23,8 @@ export default function App() {
   </NavigationContainer>;
   getAllTestDocs();
 
-  return <StartScreen navigation={Stack.Navigator}></StartScreen>;
+  // return <StartScreen></StartScreen>;
+  return <Login></Login>;
 }
 
 const styles = StyleSheet.create({
