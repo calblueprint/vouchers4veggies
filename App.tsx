@@ -11,8 +11,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
 
+//add this import statement
+import { getAllTestDocs } from './src/database/queries';
 
 export default function App() {
+  //call the function here
+  getAllTestDocs();
   return (
     
     <Login></Login>
