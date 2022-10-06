@@ -45,12 +45,7 @@ export default function Login() {
         </View>
 
         <View>
-          <Button
-            onPress={submitForm}
-            // style={{ ...styles.form_button, ...styles.h4_heading }}
-            title="Login"
-            color="#d9d9d9"
-          />
+          <Button onPress={submitForm} title="Login" color="#d9d9d9" />
         </View>
       </Form>
 
