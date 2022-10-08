@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native';
-//add this import statement
+import TestBarcodeScanner from './src/screens/TestBarcodeScanner';
 import { getAllTestDocs } from './src/database/queries';
 
-
 export default function App() {
-	//call the function here
   getAllTestDocs();
   return (
-    <View style={styles.container}>
-      <Text>Vouchers 4 Veggies</Text>
-    </View>
+    <>
+      <TestBarcodeScanner></TestBarcodeScanner>
+      <View style={styles.container}>
+        <Text>Vouchers 4 Veggies</Text>
+      </View>
+    </>
   );
 }
 
