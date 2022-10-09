@@ -1,0 +1,8 @@
+//settings.json
+{
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+  "editor.formatOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "files.autoSave": "onFocusChange"
+}

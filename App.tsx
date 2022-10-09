@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import VendorsListDemo from './VendorsListDemo';
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';
+import { H1Heading } from './assets/Fonts';
 
 export default function App() {
   //call the function here
@@ -12,16 +13,6 @@ export default function App() {
       <VendorsListDemo />
     </View>
   );
-}
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(woff2|woff|eot|ttf|otf)$/,
-        use: ["file-loader"],
-      },
-    ],
-  },
 }
 const styles = StyleSheet.create({
   container: {
