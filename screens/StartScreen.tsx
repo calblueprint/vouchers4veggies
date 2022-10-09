@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Login from './Login';
+import { Login } from './Login';
 
-export default function StartScreen() {
+export const StartScreen = () => {
   const toLoginScreen = () => {};
   const toSignupScreen = () => {};
 
@@ -22,7 +22,7 @@ export default function StartScreen() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

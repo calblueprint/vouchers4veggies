@@ -2,7 +2,7 @@ import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
 import Form from 'react-native-form';
 import { useState } from 'react';
 
-export default function Login() {
+export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -52,7 +52,7 @@ export default function Login() {
       <Text>Don't have an account? {<a href={'./Signup'}>Sign up.</a>} </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
