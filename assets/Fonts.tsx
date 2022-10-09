@@ -1,4 +1,12 @@
 import styled from 'styled-components/native';
+import ManropeBold from './Manrope/static/Manrope-Bold.ttf';
+import ManropeExtraBold from './Manrope/static/Manrope-ExtraBold.ttf';
+import ManropeExtraLight from './Manrope/static/Manrope-ExtraLight.ttf';
+import ManropeLight from './Manrope/static/Manrope-Light.ttf';
+import ManropeMedium from './Manrope/static/Manrope-Medium.ttf';
+import ManropeRegular from './Manrope/static/Manrope-Regular.ttf';
+import ManropeSemiBold from './Manrope/static/Manrope-SemiBold.ttf';
+import { createGlobalStyle } from 'styled-components';
 
 export const H1Heading = styled.Text`
 	font-family: 'Manrope';

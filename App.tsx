@@ -13,7 +13,16 @@ export default function App() {
     </View>
   );
 }
-
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(woff2|woff|eot|ttf|otf)$/,
+        use: ["file-loader"],
+      },
+    ],
+  },
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
