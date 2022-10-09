@@ -5,8 +5,12 @@
 
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import { getAllVendors, getVouchersByVendorUuid } from './src/database/queries';
-import { Vendor, Voucher } from './src/types/types';
+import {
+  createVoucher,
+  getAllVendors,
+  getVouchersByVendorUuid,
+} from './src/database/queries';
+import { Vendor, Voucher, VoucherCreate, VoucherType } from './src/types/types';
 
 export default function VendorsListDemo() {
   const [vendors, setVendors] = useState<Vendor[]>([]);
@@ -43,10 +47,21 @@ export default function VendorsListDemo() {
   }, [selectedVendor]);
 
   const onSelectVendor = async (vendor: Vendor) => setSelectedVendor(vendor);
+  const onCreateVoucher = async () => {
+    const voucher: VoucherCreate = {
+      type: VoucherType.GREEN,
+      value: 10,
+      vendorUuid: 'abc',
+      expiration_date: '4442',
+    };
+    const uuid = await createVoucher(voucher);
+    console.log('New uiud: ', uuid);
+  };
 
   return (
     <View>
       <Text>{`All Vendors (${vendors.length})`}</Text>
+      <Text onPress={onCreateVoucher}>{`Create Vouchers`}</Text>
       {vendors.map(vendor => (
         <View key={vendor.uuid} onTouchEnd={() => onSelectVendor(vendor)}>
           <Text>{`name: ${vendor.name} | uuid: ${vendor.uuid}`}</Text>

@@ -14,6 +14,11 @@ export type Voucher = {
   expiration_date: string;
 };
 
+export type VoucherCreate = Pick<
+  Voucher,
+  'type' | 'value' | 'vendorUuid' | 'expiration_date'
+>;
+
 export enum VoucherType {
   GREEN,
   ORANGE,

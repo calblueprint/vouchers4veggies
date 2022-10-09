@@ -1,11 +1,12 @@
 import {
+  addDoc,
   collection,
   getDocs,
   getFirestore,
   query,
   where,
 } from 'firebase/firestore';
-import { uuid, Vendor, Voucher } from '../types/types';
+import { uuid, Vendor, Voucher, VoucherCreate } from '../types/types';
 import fbApp from './clientApp';
 
 const db = getFirestore(fbApp);
@@ -78,6 +79,18 @@ export const getVoucher = async (uuid: uuid): Promise<Voucher> => {
     return querySnapshot.docs[0]?.data() as Voucher;
   } catch (e) {
     console.warn('(getVoucher)', e);
+    throw e;
+  }
+};
+
+// TODO: Convert ENUM to actual type
+export const createVoucher = async (voucher: VoucherCreate): Promise<uuid> => {
+  try {
+    const docRef = await addDoc(voucherCollection, voucher);
+    console.log('Document ref id: ', docRef.id);
+    return docRef.id;
+  } catch (e) {
+    console.warn('(createVoucher)', e);
     throw e;
   }
 };
