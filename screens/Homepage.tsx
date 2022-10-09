@@ -9,6 +9,7 @@ export const Homepage = () => {
   const [counter, setCounter] = useState(0);
 
   const scanVoucher = (event: any) => {
+    console.log(event);
     if (stage === 'Welcome') {
       setStage('First Scan');
     } else if (stage === 'Finished Scanning') {
@@ -22,7 +23,7 @@ export const Homepage = () => {
         setHeader('Scan another');
       }
       // TODO: add handling for if scanning fails
-      setCounter(Number(event.target.value) + 1);
+      setCounter(counter + 1);
     }
   };
 
@@ -40,17 +41,17 @@ export const Homepage = () => {
       <Text>{header}</Text>
 
       {stage === 'First Scan' || stage === 'Multiple Scans' ? (
-        <div>
+        <View>
           <Scanner />
-        </div>
+        </View>
       ) : null}
 
       {stage === 'Finished Scanning' ? <button>Go to homepage</button> : null}
 
-      <Button onPress={scanVoucher}>{scanButtonText}</Button>
+      <Button onPress={scanVoucher} title={scanButtonText} />
 
       {stage === 'Multiple Scans' ? (
-        <button onClick={finishScanning}>I'm done scanning</button>
+        <Button onPress={finishScanning} title="I'm done scanning" />
       ) : null}
     </View>
   );

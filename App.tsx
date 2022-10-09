@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <View>
-      <Homepage />
+      <Profile />
       <NavigationBar />
     </View>
   );
