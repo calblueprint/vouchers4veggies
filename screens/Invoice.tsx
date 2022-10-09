@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
-import InvoiceBox from '.././components/invoice_box'
+import InvoiceBox from '../components/InvoiceBox';
 
-
-export default function Invoice () {
+export const Invoice = () => {
   return (
     <View style={styles.container}>
       <Text>Invoice History</Text>
@@ -11,7 +10,7 @@ export default function Invoice () {
       <InvoiceBox></InvoiceBox>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { useState } from 'react';
-import Scanner from '../components/scanner';
+import Scanner from '../components/Scanner';
 
-export default function Homepage() {
+export const Homepage = () => {
   const [stage, setStage] = useState('Welcome');
   const [header, setHeader] = useState('Hello! Scan your vouchers');
   const [scanButtonText, setScanButtonText] = useState('Scan');
@@ -47,16 +47,14 @@ export default function Homepage() {
 
       {stage === 'Finished Scanning' ? <button>Go to homepage</button> : null}
 
-      <button onClick={scanVoucher} value={counter}>
-        {scanButtonText}
-      </button>
+      <Button onPress={scanVoucher}>{scanButtonText}</Button>
 
       {stage === 'Multiple Scans' ? (
         <button onClick={finishScanning}>I'm done scanning</button>
       ) : null}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

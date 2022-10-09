@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const InvoiceBox = () => {
   return (
-    <div
+    <View
       style={{
         backgroundColor: '#000000',
-        color: '#FFFFFF',
         padding: '10px',
         margin: '20px',
       }}
-    ></div>
+    ></View>
   );
 };
 

@@ -1,10 +1,10 @@
-import react from 'react'
+import react from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Scanner () {
+export default function Scanner() {
   return (
-    <div style={{backgroundColor: "#000000", color: "#FFFFFF", padding: "10px"}}>
-        scanner coming soon (she lied)
-    </div>
+    <View style={{ backgroundColor: '#000000', padding: '10px' }}>
+      <Text style={{ color: '#FFFFFF' }}>scanner coming soon (she lied)</Text>
+    </View>
   );
 }
