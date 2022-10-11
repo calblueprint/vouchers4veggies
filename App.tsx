@@ -9,7 +9,7 @@ export default function App() {
   getAllTestDocs();
   return (
     <View style={styles.container}>
-      <Text>Vouchers 4 Veggies</Text>
+      <H1Heading>Vouchers 4 Veggies</H1Heading>
       <VendorsListDemo />
     </View>
   );
