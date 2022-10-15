@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+
 import VendorsListDemo from './VendorsListDemo';
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';
