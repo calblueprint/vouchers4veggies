@@ -15,6 +15,7 @@ export default function App() {
   //call the function here
   getAllTestDocs();
   return (
+<<<<<<< HEAD
     <View style={styles.container}>
       <Homepage></Homepage>
       <Invoice></Invoice>
@@ -22,6 +23,33 @@ export default function App() {
     </View>
   );
 }
+=======
+    <NavigationContainer>
+      <View style={styles.container}>
+        <Text>Vouchers 4 Veggies</Text>
+        <Homepage></Homepage>
+      </View>
+    </NavigationContainer>
+  );
+}
+
+const Stack = createNativeStackNavigator(); 
+
+const MyStack = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Homepage}
+          options={{ title: "Welcome"}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+
+>>>>>>> 4a53eb3 (A BUTTON!)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
