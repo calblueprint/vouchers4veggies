@@ -1,4 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
+import Homepage from './screens/Homepage'
+import Invoice from './screens/Invoice'
+import Profile from './screens/Profile'
 
 import VendorsListDemo from './VendorsListDemo';
 //add this import statement
@@ -10,8 +13,9 @@ export default function App() {
   getAllTestDocs();
   return (
     <View style={styles.container}>
-      <H1Heading>Vouchers 4 Veggies</H1Heading>
-      <VendorsListDemo />
+      <Homepage></Homepage>
+      <Invoice></Invoice>
+      <Profile></Profile>
     </View>
   );
 }
