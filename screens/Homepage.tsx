@@ -18,7 +18,7 @@ export const Homepage = () => {
   };
 
   const scanVoucher = (event: any) => {
-    // TODO: add handling for if scanning fails
+    // add handling for if scanning fails
     if (!showScanner) {
       setShowScanner(true);
       setHeading('Scan your voucher(s).');
@@ -31,7 +31,6 @@ export const Homepage = () => {
     setShowScanner(false);
     setShowScanButton(false);
     setHeading('Review vouchers');
-    // TODO: update scanner with checkmark
   };
 
   const submitVouchers = () => {
@@ -65,8 +64,6 @@ export const Homepage = () => {
           <Scanner />
         </View>
       ) : null}
-
-      {/* {stage === 'Finished Scanning' ? <button>Go to homepage</button> : null} */}
 
       {!finishedScanning ? (
         showScanButton ? (
