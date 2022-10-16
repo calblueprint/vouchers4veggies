@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Homepage from './screens/Homepage';
 import Invoice from './screens/Invoice';
 import Profile from './screens/Profile';
-import Signup from './screens/Signup';
+import Login from './screens/Login';
 import NavigationBar from './components/Navbar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -17,9 +17,7 @@ import { getAllTestDocs } from './src/database/queries';
 import { H1Heading } from './assets/Fonts';
 
 export default function App() {
-  //call the function here
-  getAllTestDocs();
-  return <Signup></Signup>;
+  return <Login></Login>;
 }
 
 const Stack = createNativeStackNavigator();
