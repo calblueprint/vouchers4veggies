@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Touchable,
+} from 'react-native';
 import { useState } from 'react';
 import Scanner from '../components/Scanner';
 
@@ -51,13 +57,14 @@ export const Homepage = () => {
   return (
     <View style={styles.container}>
       {counter > 0 ? (
-        <Button
-          onPress={reviewVouchers}
-          title={`Review ${nText(counter, 'voucher')}`}
-        />
+        <TouchableOpacity onPress={reviewVouchers} style={styles.dark_button}>
+          <Text style={styles.body_text}>
+            Review {nText(counter, 'voucher')}
+          </Text>
+        </TouchableOpacity>
       ) : null}
 
-      <Text>{heading}</Text>
+      <Text style={styles.h2_heading}>{heading}</Text>
 
       {showScanner ? (
         <View>
@@ -67,17 +74,24 @@ export const Homepage = () => {
 
       {!finishedScanning ? (
         showScanButton ? (
-          <Button onPress={scanVoucher} title="Scan" />
+          <TouchableOpacity onPress={scanVoucher} style={styles.dark_button}>
+            <Text style={styles.h4_heading}>Scan</Text>
+          </TouchableOpacity>
         ) : (
-          <Button
-            onPress={submitVouchers}
-            title={`Submit ${nText(counter, 'voucher')}`}
-          />
+          <TouchableOpacity onPress={submitVouchers} style={styles.dark_button}>
+            <Text style={styles.h4_heading}>
+              Submit {nText(counter, 'voucher')}
+            </Text>
+          </TouchableOpacity>
         )
       ) : (
         <View>
-          <Button onPress={goToHomepage} title="Go to homepage" />
-          <Button onPress={submitMore} title="Submit more" />
+          <TouchableOpacity onPress={goToHomepage} style={styles.light_button}>
+            <Text style={styles.h4_heading}>Go to homepage</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={submitMore} style={styles.dark_button}>
+            <Text style={styles.h4_heading}>Submit more</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -90,5 +104,34 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  h2_heading: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: '5%',
+  },
+  h4_heading: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  body_text: {
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  dark_button: {
+    backgroundColor: '#d9d9d9',
+    width: '80%',
+    padding: '10px',
+    marginTop: '5%',
+    marginBottom: '5%',
+  },
+  light_button: {
+    backgroundColor: '#f2f2f2',
+    width: '80%',
+    padding: '10px',
+    marginTop: '5%',
+    marginBottom: '5%',
   },
 });
