@@ -20,27 +20,21 @@ export const Login = () => {
       <View style={styles.form_container}>
         <View>
           <Text style={styles.h4_heading}>Email</Text>
-
-          <View>
-            <TextInput
-              onChangeText={newText => setEmail(newText)}
-              style={styles.form_field}
-              value={email}
-            />
-          </View>
+          <TextInput
+            onChangeText={newText => setEmail(newText)}
+            style={styles.form_field}
+            value={email}
+          />
         </View>
 
         <View>
           <Text style={styles.h4_heading}>Password</Text>
-
-          <View>
-            <TextInput
-              onChangeText={newText => setPassword(newText)}
-              style={styles.form_field}
-              value={password}
-              secureTextEntry={true}
-            />
-          </View>
+          <TextInput
+            onChangeText={newText => setPassword(newText)}
+            style={styles.form_field}
+            value={password}
+            secureTextEntry={true}
+          />
         </View>
 
         <View>
