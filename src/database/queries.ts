@@ -1,7 +1,8 @@
 import {
-  addDoc,
   collection,
   getDocs,
+  addDoc,
+  deleteDoc,
   getFirestore,
   query,
   where,
@@ -15,6 +16,8 @@ import {
   VoucherCreate,
   VoucherStatus,
 } from '../types/types';
+import { defaultEventBridgePolicies } from 'twilio/lib/jwt/taskrouter/util';
+import { ExternalCampaignList } from 'twilio/lib/rest/messaging/v1/externalCampaign';
 import fbApp from './clientApp';
 
 const db = getFirestore(fbApp);
@@ -145,3 +148,48 @@ export const getVouchersByVendorUuid = async (
     throw e;
   }
 };
+
+/**
+ * Create a new "vendor" document and at it to the vendors collection.
+ */
+export async function createVendor(email: string, name: string) {
+  try {
+    const docRef = await addDoc(vendorCollection, {
+      email: email,
+      name: name,
+    }).then(docRef => {
+      console.log(docRef.id);
+    });
+  } catch (e) {
+    console.warn('(createVendor)', e);
+    throw e;
+  }
+}
+
+/**
+ * Update an existing "vendor" document in the vendors collection.
+ */
+export async function updateVendor(uuid: uuid, email: string, name: string) {
+  try {
+    const docRef = await updateDoc(doc(db, 'vendors', uuid), {
+      name: name,
+    }).then(docRef => {
+      console.log(name);
+    });
+  } catch (e) {
+    console.warn('(updateVendor)', e);
+    throw e;
+  }
+}
+
+/**
+ * Delete a "vendor" document in the vendors collection given its uuid.
+ */
+export async function deleteVendor(uuid: uuid) {
+  try {
+    await deleteDoc(doc(db, 'vendors', uuid));
+  } catch (e) {
+    console.warn('(deleteVendor)', e);
+    throw e;
+  }
+}
