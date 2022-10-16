@@ -1,9 +1,5 @@
-import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
-import { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Login } from './Login';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import React from 'react';
 
 export const StartScreen = () => {
   const toLoginScreen = () => {};
