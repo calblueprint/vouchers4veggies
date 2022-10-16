@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import VendorsListDemo from './VendorsListDemo';
+import { Homepage } from './screens/Homepage';
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';
 
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Vouchers 4 Veggies</Text>
-      <VendorsListDemo />
+      <Homepage />
     </View>
   );
 }
