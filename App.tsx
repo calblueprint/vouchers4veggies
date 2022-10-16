@@ -5,7 +5,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import Homepage from './screens/Homepage';
 import Invoice from './screens/Invoice';
 import Profile from './screens/Profile';
-import NavigationBar from './components/navbar';
+import Signup from './screens/Signup';
+import NavigationBar from './components/Navbar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator();
@@ -18,14 +19,7 @@ import { H1Heading } from './assets/Fonts';
 export default function App() {
   //call the function here
   getAllTestDocs();
-  return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Text>Vouchers 4 Veggies</Text>
-        <Homepage></Homepage>
-      </View>
-    </NavigationContainer>
-  );
+  return <Signup></Signup>;
 }
 
 const Stack = createNativeStackNavigator();
