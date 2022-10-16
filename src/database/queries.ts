@@ -16,8 +16,6 @@ import {
   VoucherCreate,
   VoucherStatus,
 } from '../types/types';
-import { defaultEventBridgePolicies } from 'twilio/lib/jwt/taskrouter/util';
-import { ExternalCampaignList } from 'twilio/lib/rest/messaging/v1/externalCampaign';
 import fbApp from './clientApp';
 
 const db = getFirestore(fbApp);
@@ -171,7 +169,7 @@ export async function createVendor(email: string, name: string) {
  */
 export async function updateVendor(uuid: uuid, email: string, name: string) {
   try {
-    const docRef = await updateDoc(doc(db, 'vendors', uuid), {
+    const docRef = await updateDoc(doc(vendorCollection, uuid), {
       name: name,
     }).then(docRef => {
       console.log(name);
@@ -187,7 +185,7 @@ export async function updateVendor(uuid: uuid, email: string, name: string) {
  */
 export async function deleteVendor(uuid: uuid) {
   try {
-    await deleteDoc(doc(db, 'vendors', uuid));
+    await deleteDoc(doc(vendorCollection, uuid));
   } catch (e) {
     console.warn('(deleteVendor)', e);
     throw e;
