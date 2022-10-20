@@ -5,6 +5,9 @@ import {
   getFirestore,
   query,
   where,
+  doc,
+  updateDoc,
+  setDoc,
 } from 'firebase/firestore';
 import { uuid, Vendor, Voucher, VoucherCreate } from '../types/types';
 import fbApp from './clientApp';
@@ -91,6 +94,46 @@ export const createVoucher = async (voucher: VoucherCreate): Promise<uuid> => {
     return docRef.id;
   } catch (e) {
     console.warn('(createVoucher)', e);
+    throw e;
+  }
+};
+
+/**
+ * Find a Voucher using uuid and update its vendorUuid if found.
+ */
+export const setVoucherVendorUuid = async (
+  uuid: uuid,
+  vendor_uuid: uuid,
+): Promise<void> => {
+  try {
+    const docRef = doc(db, 'vouchers', uuid);
+    const data = {
+      vendor_uuid: vendor_uuid,
+    };
+    await updateDoc(docRef, data);
+    return;
+  } catch (e) {
+    console.warn('(setVoucherVendorUuid)', e);
+    throw e;
+  }
+};
+
+/**
+ * Find a Voucher using uuid and update its status if found.
+ */
+export const setVoucherStatus = async (
+  uuid: uuid,
+  status: string,
+): Promise<void> => {
+  try {
+    const docRef = doc(db, 'vouchers', uuid);
+    const data = {
+      status: status,
+    };
+    await updateDoc(docRef, data);
+    return;
+  } catch (e) {
+    console.warn('(setVoucherStatus)', e);
     throw e;
   }
 };

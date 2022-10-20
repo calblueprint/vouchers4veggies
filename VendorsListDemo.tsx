@@ -55,7 +55,7 @@ export default function VendorsListDemo() {
       expiration_date: '4442',
     };
     const uuid = await createVoucher(voucher);
-    console.log('New uiud: ', uuid);
+    console.log('New uuid: ', uuid);
   };
 
   return (
