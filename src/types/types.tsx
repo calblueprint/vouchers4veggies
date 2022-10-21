@@ -11,12 +11,12 @@ export type Voucher = {
   type: VoucherType;
   value: number;
   vendorUuid: uuid;
-  expiration_date: string;
+  expirationDate: string;
 };
 
 export type VoucherCreate = Pick<
   Voucher,
-  'type' | 'value' | 'vendorUuid' | 'expiration_date'
+  'type' | 'value' | 'vendorUuid' | 'expirationDate'
 >;
 
 export enum VoucherType {

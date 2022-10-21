@@ -52,7 +52,7 @@ export default function VendorsListDemo() {
       type: VoucherType.GREEN,
       value: 10,
       vendorUuid: 'abc',
-      expiration_date: '4442',
+      expirationDate: '4442',
     };
     const uuid = await createVoucher(voucher);
     console.log('New uuid: ', uuid);

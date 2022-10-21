@@ -108,7 +108,7 @@ export const setVoucherVendorUuid = async (
   try {
     const docRef = doc(db, 'vouchers', uuid);
     const data = {
-      vendor_uuid: vendor_uuid,
+      vendorUuid: vendor_uuid,
     };
     await updateDoc(docRef, data);
     return;
