@@ -12,6 +12,7 @@ export type Voucher = {
   value: number;
   vendorUuid: uuid;
   expirationDate: string;
+  status: VoucherStatus;
 };
 
 export type VoucherCreate = Pick<
@@ -23,4 +24,9 @@ export enum VoucherType {
   GREEN,
   ORANGE,
   PURPLE,
+}
+
+export enum VoucherStatus {
+  PAID,
+  UNPAID,
 }

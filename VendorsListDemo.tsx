@@ -10,7 +10,13 @@ import {
   getAllVendors,
   getVouchersByVendorUuid,
 } from './src/database/queries';
-import { Vendor, Voucher, VoucherCreate, VoucherType } from './src/types/types';
+import {
+  Vendor,
+  Voucher,
+  VoucherCreate,
+  VoucherStatus,
+  VoucherType,
+} from './src/types/types';
 
 export default function VendorsListDemo() {
   const [vendors, setVendors] = useState<Vendor[]>([]);
