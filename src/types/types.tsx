@@ -17,16 +17,16 @@ export type Voucher = {
 
 export type VoucherCreate = Pick<
   Voucher,
-  'type' | 'value' | 'vendorUuid' | 'expirationDate'
+  'type' | 'value' | 'vendorUuid' | 'expirationDate' | 'status'
 >;
 
 export enum VoucherType {
-  GREEN,
-  ORANGE,
-  PURPLE,
+  GREEN = 'green',
+  ORANGE = 'orange',
+  PURPLE = 'purple',
 }
 
 export enum VoucherStatus {
-  PAID,
-  UNPAID,
+  PAID = 'paid',
+  UNPAID = 'unpaid',
 }

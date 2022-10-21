@@ -92,11 +92,10 @@ export const getVoucher = async (uuid: uuid): Promise<Voucher> => {
   }
 };
 
-// TODO: Convert ENUM to actual type
 export const createVoucher = async (voucher: VoucherCreate): Promise<uuid> => {
   try {
     const docRef = await addDoc(voucherCollection, voucher);
-    console.log('Document ref id: ', docRef.id);
+    await updateDoc(docRef, { uuid: docRef.id });
     return docRef.id;
   } catch (e) {
     console.warn('(createVoucher)', e);

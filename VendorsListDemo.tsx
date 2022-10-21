@@ -59,6 +59,7 @@ export default function VendorsListDemo() {
       value: 10,
       vendorUuid: 'abc',
       expirationDate: '4442',
+      status: VoucherStatus.UNPAID,
     };
     const uuid = await createVoucher(voucher);
     console.log('New uuid: ', uuid);
