@@ -66,6 +66,21 @@ export default function App() {
   return <Login></Login>;
 }
 
+const Stack = createNativeStackNavigator(); 
+
+const MyStack = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "Welcome"}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
