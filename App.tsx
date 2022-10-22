@@ -53,9 +53,11 @@ export default function App() {
   }, [appIsReady]);
 
   if (!appIsReady) {
+    console.log('NEW LINE');
     return null;
   }
 
+  console.log('test newline');
   getAllTestDocs();
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
