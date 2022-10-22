@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 1eaff5b16a3fbc480ee06e68014b30b624c8d213
 
 export const Fonts = {
   'manrope-bold': require('./Manrope/static/Manrope-Bold.ttf'),

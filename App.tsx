@@ -2,7 +2,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Login } from './screens/LoginScreen';
+import { Login } from './src/screens/LoginScreen';
 
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';
@@ -63,6 +63,7 @@ export default function App() {
   // return <StartScreen></StartScreen>;
   return <Login></Login>;
 }
+
 
 const styles = StyleSheet.create({
   container: {
