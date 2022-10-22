@@ -7,7 +7,6 @@ import {
   where,
   doc,
   updateDoc,
-  setDoc,
 } from 'firebase/firestore';
 import {
   uuid,
