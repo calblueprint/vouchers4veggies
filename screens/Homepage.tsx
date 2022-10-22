@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
-import Scanner from '../components/Scanner';
+import Scanner from '../components/scanner';
 
 export default function Homepage () {
   const [stage, setStage] = useState("Welcome");
