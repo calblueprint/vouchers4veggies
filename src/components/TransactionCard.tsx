@@ -4,21 +4,22 @@ import { H2Heading } from '../../assets/Fonts';
 
 export const TransactionCard = (props: any) => {
   return (
-    <View>
+    <View style={styles.row}>
       <View>
         <Text>{props.id}</Text>
         <Text>{props.date}</Text>
       </View>
-      <Text>x{props.amount}</Text>
+      <Text>x{props.count}</Text>
       <Text>${props.price}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  row: {
     flex: 1,
     backgroundColor: '#fff',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
