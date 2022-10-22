@@ -19,7 +19,7 @@ export const TransactionCard = (props: any) => {
       <Icon.Button
         name="right"
         size={25}
-        style={{ ...styles.icon_button, ...styles.right_align }}
+        style={{ ...styles.icon_button }}
         color="#A9A9A9"
       />
     </View>
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   icon_button: {
+    justifyContent: 'center',
     backgroundColor: '#fff',
   },
   spacing: {

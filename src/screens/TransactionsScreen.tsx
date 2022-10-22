@@ -20,10 +20,13 @@ export const TransactionsScreen = () => {
         <Button title="Add manually" />
       </View>
       <H2Heading>Transactions</H2Heading>
-      {/* <SearchBar></SearchBar> */}
+      <Text style={{ backgroundColor: '#000000' }}>
+        Search bar placeholder :P
+      </Text>
 
       {transactions.map(item => (
         <TransactionCard
+          key={item.id}
           id={item.id}
           date={item.date}
           count={item.count}
