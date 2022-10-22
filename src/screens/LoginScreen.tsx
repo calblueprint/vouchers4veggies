@@ -21,28 +21,22 @@ export const LoginScreen = () => {
       >{`Welcome back!\nPlease login.`}</H1Heading>
 
       <View style={styles.form_container}>
-        <View>
-          <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
-          <TextInput
-            onChangeText={newText => setEmail(newText)}
-            style={styles.form_field}
-            value={email}
-          />
-        </View>
+        <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
+        <TextInput
+          onChangeText={newText => setEmail(newText)}
+          style={styles.form_field}
+          value={email}
+        />
 
-        <View>
-          <H4_Card_Nav_Tab>Password</H4_Card_Nav_Tab>
-          <TextInput
-            onChangeText={newText => setPassword(newText)}
-            style={styles.form_field}
-            value={password}
-            secureTextEntry={true}
-          />
-        </View>
+        <H4_Card_Nav_Tab>Password</H4_Card_Nav_Tab>
+        <TextInput
+          onChangeText={newText => setPassword(newText)}
+          style={styles.form_field}
+          value={password}
+          secureTextEntry={true}
+        />
 
-        <View>
-          <Button onPress={submitForm} title="Login" />
-        </View>
+        <Button onPress={submitForm} title="Login" />
       </View>
 
       <Text>
@@ -66,7 +60,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   form_container: {
-    width: '80%',
+    width: 300,
     height: '50%',
   },
   form_field: {
