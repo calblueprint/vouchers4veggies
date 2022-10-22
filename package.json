@@ -2,9 +2,13 @@
   "dependencies": {
     "@expo/webpack-config": "^0.17.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@react-navigation/bottom-tabs": "^6.4.0",
 =======
 >>>>>>> c7af51e (navbar in progress:)
+=======
+    "@react-navigation/bottom-tabs": "^6.4.0",
+>>>>>>> 3c3283f (navbar done)
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.0",
     "dotenv": "^16.0.2",
