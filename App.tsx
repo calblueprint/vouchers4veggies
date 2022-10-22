@@ -3,7 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { H1Heading } from './assets/Fonts';
 import { StyleSheet, Text, View } from 'react-native';
-import { Homepage } from './screens/Homepage';
+import { Homepage } from './src/screens/Homepage';
 import { getAllTestDocs } from './src/database/queries';
 
 // Keep the splash screen visible while we fetch resources

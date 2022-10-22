@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 import React, { useState } from 'react';
 import Scanner from '../components/Scanner';
-import { H2Heading } from '../assets/Fonts';
+import { H2Heading } from '../../assets/Fonts';
 
 export const Homepage = () => {
   const [showScanner, setShowScanner] = useState(false);
