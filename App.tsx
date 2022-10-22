@@ -66,9 +66,10 @@ export default function App() {
     <View style={styles.container} onLayout={onLayoutRootView}>
       <H1Heading>Vouchers 4 Veggies</H1Heading>
       <VendorsListDemo />
-    </View>
-  );
+      </View>
+  )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
