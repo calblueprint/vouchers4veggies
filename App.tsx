@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -23,6 +24,20 @@ async function loadResourcesAsync() {
     }),
   ]);
 }
+=======
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View } from 'react-native';
+import { Homepage } from './screens/Homepage';
+import { Invoice } from './screens/Invoice';
+import { Profile } from './screens/Profile';
+import { PageContainer } from './src/screens/styles';
+import { NavigationBar } from './components/NavigationBar';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// const Tab = createBottomTabNavigator();
+>>>>>>> Stashed changes
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -58,10 +73,16 @@ export default function App() {
 
   getAllTestDocs();
   return (
+<<<<<<< Updated upstream
     <View style={styles.container} onLayout={onLayoutRootView}>
       <H1Heading>Vouchers 4 Veggies</H1Heading>
       <VendorsListDemo />
     </View>
+=======
+    <NavigationContainer>
+      <NavigationBar />
+    </NavigationContainer>
+>>>>>>> Stashed changes
   );
 }
 const styles = StyleSheet.create({
