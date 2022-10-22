@@ -2,11 +2,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Homepage from './screens/Homepage';
-import Invoice from './screens/Invoice';
-import Profile from './screens/Profile';
 import Login from './screens/Login';
-import NavigationBar from './components/Navbar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //add this import statement
@@ -71,6 +67,12 @@ export default function App() {
       <VendorsListDemo />
       </View>
   )
+}
+
+export default function App() {
+  //call the function here
+  getAllTestDocs();
+  return <Login></Login>;
 }
 
 const styles = StyleSheet.create({
