@@ -1,9 +1,4 @@
 import styled from 'styled-components/native';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 1eaff5b16a3fbc480ee06e68014b30b624c8d213
 
 export const Fonts = {
   'manrope-bold': require('./Manrope/static/Manrope-Bold.ttf'),
@@ -14,7 +9,6 @@ export const Fonts = {
   'manrope-regular': require('./Manrope/static/Manrope-Regular.ttf'),
   'manrope-semiBold': require('./Manrope/static/Manrope-SemiBold.ttf'),
 };
->>>>>>> a641825 (mobile update complete)
 
 export const H1Heading = styled.Text`
   font-family: 'manrope-bold';

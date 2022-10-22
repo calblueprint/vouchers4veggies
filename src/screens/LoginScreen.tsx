@@ -2,7 +2,7 @@ import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
 import React, { useState } from 'react';
 import { H1Heading, H4_Card_Nav_Tab } from '../../assets/Fonts';
 
-export const Login = () => {
+export const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,7 +16,9 @@ export const Login = () => {
 
   return (
     <View style={styles.container}>
-      <H1Heading>{`Welcome back!\nPlease login.`}</H1Heading>
+      <H1Heading
+        style={styles.center_text}
+      >{`Welcome back!\nPlease login.`}</H1Heading>
 
       <View style={styles.form_container}>
         <View>
@@ -59,6 +61,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  center_text: {
+    textAlign: 'center',
   },
   form_container: {
     width: '80%',
