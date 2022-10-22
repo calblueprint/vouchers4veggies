@@ -3,9 +3,6 @@ import {
   getDocs,
   getFirestore,
   query,
-  doc,
-  arrayRemove,
-  arrayUnion,
   where,
 } from 'firebase/firestore';
 import { uuid, Vendor, Voucher, Transaction } from '../types/types';
