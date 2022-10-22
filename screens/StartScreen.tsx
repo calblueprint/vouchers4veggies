@@ -1,24 +1,31 @@
 import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
 import { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Login from './Login';
 
-export default function StartScreen(props) {
-  const toLoginScreen = () => {
-    props.navigation.navigate('Login');
-  };
-  const toSignupScreen = () => {
-    props.navigation.navigate('Signup');
-  };
+export default function StartScreen({ navigation }) {
+  console.log(navigation);
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Hello! Let's get started.</Text>
 
       <View>
-        <Button onPress={toLoginScreen} title="Login" color="#f2f2f2" />
+        <Button
+          onPress={() => navigation.navigate('Login')}
+          title="Login"
+          color="#f2f2f2"
+        />
       </View>
 
       <View>
-        <Button onPress={toSignupScreen} title="Signup" color="#d9d9d9" />
+        <Button
+          onPress={() => navigation.navigate('Signup')}
+          title="Signup"
+          color="#d9d9d9"
+        />
       </View>
     </View>
   );
