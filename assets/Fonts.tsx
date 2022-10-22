@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { createGlobalStyle } from 'styled-components';
 
 export const Fonts = {
   'manrope-bold': require('./Manrope/static/Manrope-Bold.ttf'),
