@@ -1,4 +1,17 @@
 import styled from 'styled-components/native';
+<<<<<<< HEAD
+=======
+
+export const Fonts = {
+  'manrope-bold': require('./Manrope/static/Manrope-Bold.ttf'),
+  'manrope-extraBold': require('./Manrope/static/Manrope-ExtraBold.ttf'),
+  'manrope-extraLight': require('./Manrope/static/Manrope-ExtraLight.ttf'),
+  'manrope-light': require('./Manrope/static/Manrope-Light.ttf'),
+  'manrope-medium': require('./Manrope/static/Manrope-Medium.ttf'),
+  'manrope-regular': require('./Manrope/static/Manrope-Regular.ttf'),
+  'manrope-semiBold': require('./Manrope/static/Manrope-SemiBold.ttf'),
+};
+>>>>>>> a641825 (mobile update complete)
 
 export const H1Heading = styled.Text`
   font-family: 'manrope-bold';

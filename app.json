@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "vouchersveggies",
+    "slug": "vouchersveggies",
+    "version": "1.0.0",
+    "sdkVersion": "46.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ]
+  }
+}

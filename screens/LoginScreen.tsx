@@ -1,5 +1,6 @@
 import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
 import React, { useState } from 'react';
+import { H1Heading, H4_Card_Nav_Tab } from '../assets/Fonts';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,17 +10,17 @@ export const Login = () => {
     // query firebase
   };
 
+  const goToSignup = () => {
+    // set up routing to sign up page
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.h1_heading}>
-        Welcome back!
-        <br />
-        Please login.
-      </Text>
+      <H1Heading>{`Welcome back!\nPlease login.`}</H1Heading>
 
       <View style={styles.form_container}>
         <View>
-          <Text style={styles.h4_heading}>Email</Text>
+          <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
           <TextInput
             onChangeText={newText => setEmail(newText)}
             style={styles.form_field}
@@ -28,7 +29,7 @@ export const Login = () => {
         </View>
 
         <View>
-          <Text style={styles.h4_heading}>Password</Text>
+          <H4_Card_Nav_Tab>Password</H4_Card_Nav_Tab>
           <TextInput
             onChangeText={newText => setPassword(newText)}
             style={styles.form_field}
@@ -38,11 +39,16 @@ export const Login = () => {
         </View>
 
         <View>
-          <Button onPress={submitForm} title="Login" color="#d9d9d9" />
+          <Button onPress={submitForm} title="Login" />
         </View>
       </View>
 
-      <Text>Don't have an account? {<a href={'./Signup'}>Sign up.</a>} </Text>
+      <Text>
+        Don't have an account?{' '}
+        <Text style={styles.underline} onPress={goToSignup}>
+          Sign up.
+        </Text>
+      </Text>
     </View>
   );
 };
@@ -54,16 +60,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  h1_heading: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    margin: '5%',
-  },
-  h4_heading: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
   form_container: {
     width: '80%',
     height: '50%',
@@ -72,7 +68,11 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: '#f2f2f2',
     backgroundColor: '#f2f2f2',
-    padding: '5px',
-    margin: '10px',
+    padding: 5,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  underline: {
+    textDecorationLine: 'underline',
   },
 });
