@@ -4,6 +4,7 @@ export type Vendor = {
   uuid: uuid;
   email: string;
   name: string;
+  transactions: Transaction[];
 };
 
 export type Voucher = {
@@ -30,3 +31,15 @@ export enum VoucherStatus {
   PAID = 'paid',
   UNPAID = 'unpaid',
 }
+
+export type Transaction = {
+  date: Date;
+  uuid: uuid;
+  vendorUUID: uuid;
+  vouchers: Array<uuid>;
+};
+
+export type TransactionCreate = Pick<
+  Transaction,
+  'date' | 'vendorUUID' | 'vouchers'
+>;
