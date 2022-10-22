@@ -16,7 +16,9 @@ export const TransactionsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ ...styles.align_right, ...styles.row }}>
+      <View
+        style={{ ...styles.align_right, ...styles.row, ...styles.top_spacing }}
+      >
         <Button title="Add manually" />
       </View>
 
@@ -30,7 +32,9 @@ export const TransactionsScreen = () => {
             justifyContent: 'center',
           }}
         >
-          <Text style={{ color: '#FFFFFF' }}>Search bar placeholder :P</Text>
+          <Text style={{ color: '#FFFFFF' }}>
+            ------ Search bar placeholder :P ------
+          </Text>
         </View>
         <View style={styles.horizontal_spacing}>
           <Button title="Filter" />
@@ -61,13 +65,16 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
   },
+  top_spacing: {
+    paddingTop: 40,
+  },
   vertical_spacing: {
     paddingTop: 20,
     paddingBottom: 20,
   },
   horizontal_spacing: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
   align_right: {
     justifyContent: 'flex-end',
