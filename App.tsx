@@ -5,6 +5,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import Homepage from './screens/Homepage';
 import Invoice from './screens/Invoice';
 import Profile from './screens/Profile';
+import Login from './screens/Login';
+import NavigationBar from './components/Navbar';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';
