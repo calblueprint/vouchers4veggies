@@ -16,13 +16,26 @@ export const TransactionsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.align_right}>
+      <View style={{ ...styles.align_right, ...styles.row }}>
         <Button title="Add manually" />
       </View>
-      <H2Heading>Transactions</H2Heading>
-      <Text style={{ backgroundColor: '#000000' }}>
-        Search bar placeholder :P
-      </Text>
+
+      <H2Heading style={styles.vertical_spacing}>Transactions</H2Heading>
+
+      <View style={styles.row}>
+        <View
+          style={{
+            backgroundColor: '#000000',
+            padding: 2,
+            justifyContent: 'center',
+          }}
+        >
+          <Text style={{ color: '#FFFFFF' }}>Search bar placeholder :P</Text>
+        </View>
+        <View style={styles.horizontal_spacing}>
+          <Button title="Filter" />
+        </View>
+      </View>
 
       {transactions.map(item => (
         <TransactionCard
@@ -44,9 +57,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  align_right: {
+  row: {
     width: '100%',
     flexDirection: 'row',
+  },
+  vertical_spacing: {
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  horizontal_spacing: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  align_right: {
     justifyContent: 'flex-end',
     marginTop: 20,
     marginRight: 60,
