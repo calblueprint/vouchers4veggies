@@ -1,12 +1,5 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Touchable,
-  Button,
-} from 'react-native';
-import { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
 import Scanner from '../components/Scanner';
 import { H2Heading } from '../assets/Fonts';
 
@@ -59,17 +52,22 @@ export const Homepage = () => {
   return (
     <View style={styles.container}>
       {!finishedScanning && counter > 0 ? (
-        <Button
-          onPress={reviewVouchers}
-          title={`Review ${nText(counter, 'voucher')}`}
-        />
+        <View style={styles.right_view}>
+          <Button
+            onPress={reviewVouchers}
+            title={`Review ${nText(counter, 'voucher')}`}
+          />
+        </View>
       ) : null}
+
       <H2Heading>{heading}</H2Heading>
+
       {showScanner ? (
         <View>
           <Scanner />
         </View>
       ) : null}
+
       {!finishedScanning ? (
         showScanButton ? (
           <Button onPress={scanVoucher} title="Scan" />
@@ -103,5 +101,8 @@ const styles = StyleSheet.create({
   wide_view: {
     width: '100%',
     alignItems: 'center',
+  },
+  right_view: {
+    alignItems: 'flex-end',
   },
 });
