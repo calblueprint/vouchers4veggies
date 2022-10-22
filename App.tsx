@@ -68,7 +68,6 @@ export default function App() {
     <View style={styles.container}>
       <Text>Vouchers 4 Veggies</Text>
       <Homepage />
->>>>>>> 6bea27b (updated homepage)
     </View>
   );
 }
