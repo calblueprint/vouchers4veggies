@@ -60,17 +60,13 @@ export default function App() {
 
   getAllTestDocs();
   return (
-<<<<<<< HEAD
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <H1Heading>Vouchers 4 Veggies</H1Heading>
-      <VendorsListDemo />
-=======
     <View style={styles.container}>
       <Text>Vouchers 4 Veggies</Text>
       <Homepage />
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

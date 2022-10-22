@@ -64,7 +64,7 @@ export const Homepage = () => {
           title={`Review ${nText(counter, 'voucher')}`}
         />
       ) : null}
-      <Text style={styles.h2_heading}>{heading}</Text>
+      <H2Heading>{heading}</H2Heading>
       {showScanner ? (
         <View>
           <Scanner />
