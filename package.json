@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@expo/webpack-config": "^0.16.19",
+    "@expo/webpack-config": "^0.17.0",
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.0",
     "dotenv": "^16.0.2",
     "expo": "^46.0.0",
     "expo-constants": "^13.2.4",
@@ -14,9 +16,13 @@
     "stable": "^0.1.8",
     "expo-barcode-scanner": "~11.4.0",
     "react-native-screens": "~3.15.0",
+<<<<<<< HEAD
     "react-native-safe-area-context": "4.3.1",
     "styled-components": "^5.3.6",
     "expo-splash-screen": "~0.16.2"
+=======
+    "react-native-safe-area-context": "4.3.1"
+>>>>>>> 71f16e5 (rebasing continues)
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
