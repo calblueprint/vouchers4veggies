@@ -1,12 +1,10 @@
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { LoginScreen } from './src/screens/LoginScreen';
-import { StartScreen } from './src/screens/StartScreen';
-
-//add this import statement
+import { StyleSheet, View } from 'react-native';
+import { H1Heading } from './assets/Fonts';
 import { getAllTestDocs } from './src/database/queries';
+import VendorsListDemo from './VendorsListDemo';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -61,12 +59,11 @@ export default function App() {
   getAllTestDocs();
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {/* <StartScreen /> */}
-      <LoginScreen />
+      <H1Heading>Vouchers 4 Veggies</H1Heading>
+      <VendorsListDemo />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
