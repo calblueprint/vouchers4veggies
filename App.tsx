@@ -3,8 +3,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Login } from './screens/LoginScreen';
-import { StartScreen } from './screens/StartScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';

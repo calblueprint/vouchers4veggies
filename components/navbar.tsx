@@ -4,9 +4,9 @@ import {View, Text} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import Homepage from '.././screens/Homepage'
-import Invoice from '.././screens/Invoice'
-import Profile from '.././screens/Profile'
+import Homepage from '../screens/Homepage'
+import Invoice from '../screens/Invoice'
+import Profile from '../screens/Profile'
 
 const home = "Home";
 

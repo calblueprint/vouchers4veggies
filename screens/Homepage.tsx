@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { MouseEventHandler, useState } from 'react';
+import { useState } from 'react';
+import Scanner from '../components/Scanner';
 
 export default function Homepage () {
   const [stage, setStage] = useState("Welcome");
@@ -21,7 +22,7 @@ export default function Homepage () {
         setHeader("Scan another");
       }
       // TODO: add handling for if scanning fails
-      setCounter(event.target.value + 1);
+      setCounter(Number(event.target.value) + 1);
     }
   }
 
@@ -33,11 +34,15 @@ export default function Homepage () {
 
   return (
     <View style={styles.container}>
+      {counter > 0 ?
+        <Text>placeholder x{counter}</Text> : null
+      }
+
       <Text>{header}</Text>
 
       {stage === "First Scan" || stage === "Multiple Scans" ?
         <div>
-          scanning placeholder
+          <Scanner />
         </div> : null
       }
 
