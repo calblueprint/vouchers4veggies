@@ -1,17 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
-import { ChangeEvent, useState } from "react";
+import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
+import Form from 'react-native-form';
+import { useState } from 'react';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const editEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const editPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const submitForm = () => {
     // query firebase
@@ -19,54 +12,49 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ ...styles.centered_text, ...styles.h1_heading }}>
+      <Text style={styles.h1_heading}>
         Welcome back!
         <br />
         Please login.
       </Text>
 
-      <form style={styles.form_container}>
-        <div>
+      <Form style={styles.form_container}>
+        <View>
           <Text style={styles.h4_heading}>Email</Text>
 
-          <div style={styles.centered_text}>
-            <input
-              onChange={editEmail}
-              className="input"
+          <View>
+            <TextInput
+              onChangeText={newText => setEmail(newText)}
               style={styles.form_field}
               value={email}
-              type="text"
             />
-          </div>
-        </div>
+          </View>
+        </View>
 
-        <div>
+        <View>
           <Text style={styles.h4_heading}>Password</Text>
 
-          <div style={styles.centered_text}>
-            <input
-              onChange={editPassword}
-              className="input"
+          <View>
+            <TextInput
+              onChangeText={newText => setPassword(newText)}
               style={styles.form_field}
               value={password}
-              type="password"
+              secureTextEntry={true}
             />
-          </div>
-        </div>
+          </View>
+        </View>
 
-        <div style={styles.centered_text}>
-          <button
-            onClick={submitForm}
-            style={{ ...styles.form_button, ...styles.h4_heading }}
-            className="btn"
-            type="submit"
-          >
-            Login
-          </button>
-        </div>
-      </form>
+        <View>
+          <Button
+            onPress={submitForm}
+            // style={{ ...styles.form_button, ...styles.h4_heading }}
+            title="Login"
+            color="#d9d9d9"
+          />
+        </View>
+      </Form>
 
-      <Text>Don't have an account? {<a href={"./Signup"}>Sign up.</a>} </Text>
+      <Text>Don't have an account? {<a href={'./Signup'}>Sign up.</a>} </Text>
     </View>
   );
 }
@@ -74,37 +62,28 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  centered_text: {
-    textAlign: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   h1_heading: {
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   h4_heading: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   form_container: {
-    width: "80%",
-    height: "50%",
+    width: '80%',
+    height: '50%',
   },
   form_field: {
-    width: "100%",
-    borderColor: "#f2f2f2",
-    backgroundColor: "#f2f2f2",
-    padding: "5px",
-    margin: "10px"
+    width: '100%',
+    borderColor: '#f2f2f2',
+    backgroundColor: '#f2f2f2',
+    padding: '5px',
+    margin: '10px',
   },
-  form_button: {
-    width: "100%",
-    borderColor: "#d9d9d9",
-    backgroundColor: "#d9d9d9",
-    padding: "5px",
-    margin: "10px"
-  }
 });
