@@ -2,15 +2,9 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-<<<<<<< HEAD
 import { Login } from './screens/LoginScreen';
 import { StartScreen } from './screens/StartScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-=======
-import Homepage from './screens/Homepage'
-import Invoice from './screens/Invoice'
-import Profile from './screens/Profile'
->>>>>>> c6fde23 (screen testing)
 
 //add this import statement
 import { getAllTestDocs } from './src/database/queries';
@@ -36,7 +30,6 @@ async function loadResourcesAsync() {
 }
 
 export default function App() {
-<<<<<<< HEAD
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
@@ -71,15 +64,6 @@ export default function App() {
   getAllTestDocs();
   // return <StartScreen></StartScreen>;
   return <Login></Login>;
-=======
-  return (
-    <View style={styles.container}>
-      <Homepage></Homepage>
-      <Invoice></Invoice>
-      <Profile></Profile>
-    </View>
-  );
->>>>>>> c6fde23 (screen testing)
 }
 
 const styles = StyleSheet.create({
