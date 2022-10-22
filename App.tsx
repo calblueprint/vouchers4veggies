@@ -62,12 +62,8 @@ export default function App() {
   }
 
   getAllTestDocs();
-  return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <H1Heading>Vouchers 4 Veggies</H1Heading>
-      <VendorsListDemo />
-      </View>
-  )
+  // return <StartScreen></StartScreen>;
+  return <Login></Login>;
 }
 
 const styles = StyleSheet.create({

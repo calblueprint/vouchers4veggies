@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
+    margin: '5%',
   },
   h4_heading: {
     fontSize: 14,
