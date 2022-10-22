@@ -3,56 +3,86 @@ import { useState } from 'react';
 import Scanner from '../components/Scanner';
 
 export const Homepage = () => {
-  const [stage, setStage] = useState('Welcome');
-  const [header, setHeader] = useState('Hello! Scan your vouchers');
-  const [scanButtonText, setScanButtonText] = useState('Scan');
+  const [showScanner, setShowScanner] = useState(false);
+  const [heading, setHeading] = useState('Hello! Scan your voucher(s).');
   const [counter, setCounter] = useState(0);
+  const [showScanButton, setShowScanButton] = useState(true);
+  const [finishedScanning, setFinishedScanning] = useState(false);
+
+  const nText = (n: number, text: string) => {
+    if (n == 1) {
+      return `${n} ${text}`;
+    } else {
+      return `${n} ${text}s`;
+    }
+  };
 
   const scanVoucher = (event: any) => {
-    console.log(event);
-    if (stage === 'Welcome') {
-      setStage('First Scan');
-    } else if (stage === 'Finished Scanning') {
-      setStage('Multiple Scans');
-      setScanButtonText('Scan');
+    // TODO: add handling for if scanning fails
+    if (!showScanner) {
+      setShowScanner(true);
+      setHeading('Scan your voucher(s).');
     } else {
-      if (stage === 'First Scan') {
-        setStage('Multiple Scans');
-        setHeader('Scan your voucher(s)');
-      } else {
-        setHeader('Scan another');
-      }
-      // TODO: add handling for if scanning fails
       setCounter(counter + 1);
     }
   };
 
-  const finishScanning = () => {
-    setStage('Finished Scanning');
-    setHeader(`Thank you! You have submitted ${counter} vouchers!`);
-    setScanButtonText('Scan more');
+  const reviewVouchers = () => {
+    setShowScanner(false);
+    setShowScanButton(false);
+    setHeading('Review vouchers');
     // TODO: update scanner with checkmark
+  };
+
+  const submitVouchers = () => {
+    setFinishedScanning(true);
+    setHeading(`You submitted ${nText(counter, 'voucher')}!`);
+  };
+
+  const goToHomepage = () => {};
+
+  const submitMore = () => {
+    setFinishedScanning(false);
+    setShowScanner(true);
+    setShowScanButton(true);
+    setCounter(0);
+    setHeading('Scan your voucher(s).');
   };
 
   return (
     <View style={styles.container}>
-      {counter > 0 ? <Text>placeholder x{counter}</Text> : null}
+      {counter > 0 ? (
+        <Button
+          onPress={reviewVouchers}
+          title={`Review ${nText(counter, 'voucher')}`}
+        />
+      ) : null}
 
-      <Text>{header}</Text>
+      <Text>{heading}</Text>
 
-      {stage === 'First Scan' || stage === 'Multiple Scans' ? (
+      {showScanner ? (
         <View>
           <Scanner />
         </View>
       ) : null}
 
-      {stage === 'Finished Scanning' ? <button>Go to homepage</button> : null}
+      {/* {stage === 'Finished Scanning' ? <button>Go to homepage</button> : null} */}
 
-      <Button onPress={scanVoucher} title={scanButtonText} />
-
-      {stage === 'Multiple Scans' ? (
-        <Button onPress={finishScanning} title="I'm done scanning" />
-      ) : null}
+      {!finishedScanning ? (
+        showScanButton ? (
+          <Button onPress={scanVoucher} title="Scan" />
+        ) : (
+          <Button
+            onPress={submitVouchers}
+            title={`Submit ${nText(counter, 'voucher')}`}
+          />
+        )
+      ) : (
+        <View>
+          <Button onPress={goToHomepage} title="Go to homepage" />
+          <Button onPress={submitMore} title="Submit more" />
+        </View>
+      )}
     </View>
   );
 };
