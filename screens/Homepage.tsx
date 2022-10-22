@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import Scanner from '../components/Scanner';
+import { H2Heading } from '../assets/Fonts';
 
 export const Homepage = () => {
   const [showScanner, setShowScanner] = useState(false);
@@ -58,60 +59,34 @@ export const Homepage = () => {
   return (
     <View style={styles.container}>
       {!finishedScanning && counter > 0 ? (
-        <TouchableOpacity
+        <Button
           onPress={reviewVouchers}
-          style={{ ...styles.button, ...styles.right_button }}
-        >
-          <Text style={styles.body_text}>
-            Review {nText(counter, 'voucher')}
-          </Text>
-        </TouchableOpacity>
+          title={`Review ${nText(counter, 'voucher')}`}
+        />
       ) : null}
-
       <Text style={styles.h2_heading}>{heading}</Text>
-
       {showScanner ? (
         <View>
           <Scanner />
         </View>
       ) : null}
-
       {!finishedScanning ? (
         showScanButton ? (
-          <TouchableOpacity
-            onPress={scanVoucher}
-            style={{ ...styles.button, ...styles.dark_button }}
-          >
-            <Text style={styles.h4_heading}>Scan</Text>
-          </TouchableOpacity>
+          <Button onPress={scanVoucher} title="Scan" />
         ) : (
           <View style={styles.wide_view}>
             {/* display voucher data */}
             <Text>Voucher data here</Text>
-            <TouchableOpacity
+            <Button
               onPress={submitVouchers}
-              style={{ ...styles.button, ...styles.dark_button }}
-            >
-              <Text style={styles.h4_heading}>
-                Submit {nText(counter, 'voucher')}
-              </Text>
-            </TouchableOpacity>
+              title={`Submit ${nText(counter, 'voucher')}`}
+            />
           </View>
         )
       ) : (
         <View style={styles.wide_view}>
-          <TouchableOpacity
-            onPress={goToHomepage}
-            style={{ ...styles.button, ...styles.light_button }}
-          >
-            <Text style={styles.h4_heading}>Go to homepage</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={submitMore}
-            style={{ ...styles.button, ...styles.dark_button }}
-          >
-            <Text style={styles.h4_heading}>Submit more</Text>
-          </TouchableOpacity>
+          <Button onPress={goToHomepage} title="Go to homepage" />
+          <Button onPress={submitMore} title="Submit more" />
         </View>
       )}
     </View>
@@ -128,37 +103,5 @@ const styles = StyleSheet.create({
   wide_view: {
     width: '100%',
     alignItems: 'center',
-  },
-  h2_heading: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    margin: '5%',
-  },
-  h4_heading: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  body_text: {
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  button: {
-    padding: '10px',
-    marginTop: '5%',
-    marginBottom: '5%',
-  },
-  dark_button: {
-    backgroundColor: '#d9d9d9',
-    width: '80%',
-  },
-  light_button: {
-    backgroundColor: '#f2f2f2',
-    width: '80%',
-  },
-  right_button: {
-    backgroundColor: '#d9d9d9',
-    float: 'right',
   },
 });
