@@ -9,9 +9,11 @@ export const StartScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Hello! Let's get started.</Text>
+
       <View style={styles.button}>
-        <Button onPress={toLoginScreen} title="Login" />
+        <Button onPress={toLoginScreen} title="Login" color="#f2f2f2" />
       </View>
+
       <View style={styles.button}>
         <Button onPress={toSignupScreen} title="Signup" color="#d9d9d9" />
       </View>
