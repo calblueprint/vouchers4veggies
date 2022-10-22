@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { H1Heading } from './assets/Fonts';
 import { getAllTestDocs } from './src/database/queries';
 import VendorsListDemo from './VendorsListDemo';
+import { TransactionCard } from './src/components/TransactionCard';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
