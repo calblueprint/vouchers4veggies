@@ -19,3 +19,10 @@ export enum VoucherType {
   ORANGE,
   PURPLE,
 }
+
+export type Transaction = {
+  date: string;
+  uuid: uuid;
+  vendorUUID: uuid;
+  vouchers: Array<uuid>;
+}
