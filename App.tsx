@@ -3,6 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { H1Heading } from './assets/Fonts';
+import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 import VendorsListDemo from './VendorsListDemo';
 
@@ -61,6 +62,7 @@ export default function App() {
     <View style={styles.container} onLayout={onLayoutRootView}>
       <H1Heading>Vouchers 4 Veggies</H1Heading>
       <VendorsListDemo />
+      <AuthDemo />
     </View>
   );
 }
