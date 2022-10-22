@@ -19,7 +19,7 @@ export const StartScreen = () => {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
