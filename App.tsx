@@ -3,6 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/Login';
+import StartScreen from './screens/StartScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //add this import statement
@@ -67,12 +68,6 @@ export default function App() {
       <VendorsListDemo />
       </View>
   )
-}
-
-export default function App() {
-  //call the function here
-  getAllTestDocs();
-  return <Login></Login>;
 }
 
 const styles = StyleSheet.create({
