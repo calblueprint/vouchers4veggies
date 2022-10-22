@@ -1,6 +1,5 @@
 import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
-import Form from 'react-native-form';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,7 +17,7 @@ export const Login = () => {
         Please login.
       </Text>
 
-      <Form style={styles.form_container}>
+      <View style={styles.form_container}>
         <View>
           <Text style={styles.h4_heading}>Email</Text>
 
@@ -47,7 +46,7 @@ export const Login = () => {
         <View>
           <Button onPress={submitForm} title="Login" color="#d9d9d9" />
         </View>
-      </Form>
+      </View>
 
       <Text>Don't have an account? {<a href={'./Signup'}>Sign up.</a>} </Text>
     </View>
