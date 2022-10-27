@@ -4,9 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Colors } from '../assets/Colors';
 import { Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
-import { Homepage } from '../screens/Homepage';
-import { Invoice } from '../screens/Invoice';
-import { Profile } from '../screens/Profile';
+import { Homepage } from '../src/screens/Homepage';
+import { Invoice } from '../src/screens/Invoice';
+import { Profile } from '../src/screens/Profile';
 
 const home = 'Home';
 
@@ -16,7 +16,7 @@ export const NavigationBar = () => {
   return (
     <Tab.Navigator
       initialRouteName={home}
-      barStyle={{ backgroundColor: Colors.brandMagenta }}
+      barStyle={{ backgroundColor: Colors.magenta }}
     >
       <Tab.Screen
         name="Home"

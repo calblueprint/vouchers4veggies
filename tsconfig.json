@@ -10,12 +10,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "target": "ESNext",
-<<<<<<< Updated upstream
     "strict": true,
     "typeRoots": ["node_modules/@types", "./src/types"]
-
-=======
-    "strict": true
->>>>>>> Stashed changes
   }
 }
