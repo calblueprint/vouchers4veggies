@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { H3_Subheading, Body_2_Subtext, Body_1_Text } from '../../assets/Fonts';
+import { Colors } from '../../assets/Colors';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 export const TransactionCard = (props: any) => {
@@ -20,7 +21,7 @@ export const TransactionCard = (props: any) => {
         name="right"
         size={25}
         style={{ ...styles.icon_button }}
-        color="#A9A9A9"
+        color={Colors.midGray}
       />
     </View>
   );
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     borderTopStyle: 'solid',
     borderBottomStyle: 'solid',
     borderRadius: 2,
-    borderColor: '#f2f2f2',
+    borderColor: Colors.lightGray,
     width: '100%',
   },
   left_align: {
