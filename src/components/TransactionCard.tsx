@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import React from 'react';
 import { H3_Subheading, Body_2_Subtext, Body_1_Text } from '../../assets/Fonts';
 import Icon from 'react-native-vector-icons/AntDesign';
 
