@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import { NavigationBar } from './components/NavigationBar';
 // import { H1Heading } from './assets/Fonts';
+import { H1Heading } from './assets/Fonts';
+import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 // import VendorsListDemo from './VendorsListDemo';
 
