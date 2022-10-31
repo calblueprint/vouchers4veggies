@@ -1,45 +1,33 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 
-export const Row = styled.View`
-  display: flex;
+export const ContentContainer = styled.View`
   flex: 1;
-  background-color: #fff;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-`;
-
-export const LeftContentContainer = styled.View`
-  flex: 4;
   flex-direction: column;
   justify-content: center;
-  align-content: flex-start;
-  padding-left: 20px;
+  align-items: center;
 `;
 
-export const RightContentContainer = styled.View`
-  flex: 1;
+export const Row = styled.View`
+  width: 100%;
   flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding-right: 10px;
-  margin-right: 30px;
 `;
 
-export const LongRightContentContainer = styled.View`
-  flex: 2;
+export const VerticalSpacingContainer = styled.View`
+  padding-top: 20px;
+  padding-bottom: 20px;
+`;
+
+export const HorizontalSpacingContainer = styled.View`
+  padding-left: 15px;
+  padding-right: 15px;
+`;
+
+export const RightButtonContainer = styled.View`
+  width: 100%;
   flex-direction: row;
-  align-items: flex-end;
+  padding-top: 40px;
   justify-content: flex-end;
-  padding-right: 10px;
+  margin-top: 20px;
+  margin-right: 60px;
 `;
-
-export const Styles = StyleSheet.create({
-  IconButton: {
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-});

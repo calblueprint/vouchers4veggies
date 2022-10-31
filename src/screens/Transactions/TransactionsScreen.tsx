@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import { TransactionCard } from '../../components/Transactions/TransactionCard';
 import { H2Heading } from '../../../assets/Fonts';
+import {
+  ContentContainer,
+  Row,
+  RightButtonContainer,
+  VerticalSpacingContainer,
+  HorizontalSpacingContainer,
+} from './styles';
 
 export const TransactionsScreen = () => {
   const [transactions, setTransactions] = useState([
@@ -14,16 +21,16 @@ export const TransactionsScreen = () => {
   ]);
 
   return (
-    <View style={styles.container}>
-      <View
-        style={{ ...styles.align_right, ...styles.row, ...styles.top_spacing }}
-      >
+    <ContentContainer>
+      <RightButtonContainer>
         <Button title="Add manually" />
-      </View>
+      </RightButtonContainer>
 
-      <H2Heading style={styles.vertical_spacing}>Transactions</H2Heading>
+      <VerticalSpacingContainer>
+        <H2Heading>Transactions</H2Heading>
+      </VerticalSpacingContainer>
 
-      <View style={styles.row}>
+      <Row>
         <View
           style={{
             backgroundColor: '#000000',
@@ -35,10 +42,10 @@ export const TransactionsScreen = () => {
             ------ Search bar placeholder :P ------
           </Text>
         </View>
-        <View style={styles.horizontal_spacing}>
+        <HorizontalSpacingContainer>
           <Button title="Filter" />
-        </View>
-      </View>
+        </HorizontalSpacingContainer>
+      </Row>
 
       {transactions.map(item => (
         <TransactionCard
@@ -49,35 +56,6 @@ export const TransactionsScreen = () => {
           price={item.price}
         />
       ))}
-    </View>
+    </ContentContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  row: {
-    width: '100%',
-    flexDirection: 'row',
-  },
-  top_spacing: {
-    paddingTop: 40,
-  },
-  vertical_spacing: {
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-  horizontal_spacing: {
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-  align_right: {
-    justifyContent: 'flex-end',
-    marginTop: 20,
-    marginRight: 60,
-  },
-});
