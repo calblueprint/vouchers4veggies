@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { StyleSheet } from 'react-native';
 
 export const ContentContainer = styled.View`
   flex: 1;
