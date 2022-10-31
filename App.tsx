@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { H1Heading } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
+import { TransactionsScreen } from './src/screens/Transactions/TransactionsScreen';
 import VendorsListDemo from './VendorsListDemo';
 
 // Keep the splash screen visible while we fetch resources
@@ -61,7 +62,7 @@ export default function App() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <H1Heading>Vouchers 4 Veggies</H1Heading>
-      <VendorsListDemo />
+      <TransactionsScreen />
       <AuthDemo />
     </View>
   );

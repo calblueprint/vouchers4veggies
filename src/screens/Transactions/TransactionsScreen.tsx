@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { TransactionCard } from '../components/TransactionCard';
-import { H2Heading } from '../../assets/Fonts';
+import { TransactionCard } from '../../components/Transactions/TransactionCard';
+import { H2Heading } from '../../../assets/Fonts';
 
 export const TransactionsScreen = () => {
   const [transactions, setTransactions] = useState([
