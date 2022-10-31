@@ -1,19 +1,6 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 
-// export const Row = styled.View`
-//     display: flex
-//     backgroundColor: '#fff',
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'flex-start',
-//     borderTopStyle: 'solid',
-//     borderBottomStyle: 'solid',
-//     borderRadius: 2,
-//     borderColor: Colors.lightGray,
-//     width: '100%',
-// `;
-
 export const Row = styled.View`
   display: flex;
   flex: 1;

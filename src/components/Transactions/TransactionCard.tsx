@@ -11,7 +11,7 @@ import {
   RightContentContainer,
   LongRightContentContainer,
   Styles,
-} from '../../screens/Transactions/styles';
+} from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 export const TransactionCard = (props: any) => {
