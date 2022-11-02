@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Colors } from '../assets/Colors';
+import { Colors } from '../../assets/Colors';
 import { Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons';
-import { Homepage } from '../src/screens/Homepage';
-import { Invoice } from '../src/screens/Invoice';
-import { Profile } from '../src/screens/Profile';
+import { Homepage } from '../screens/Homepage';
+import { Invoice } from '../screens/Invoice';
+import { Profile } from '../screens/Profile';
 
 const home = 'Home';
 

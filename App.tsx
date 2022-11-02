@@ -3,12 +3,13 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
-import { NavigationBar } from './components/NavigationBar';
+import { NavigationBar } from './src/navigation/NavigationBar';
 // import { H1Heading } from './assets/Fonts';
 import { H1Heading } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 // import VendorsListDemo from './VendorsListDemo';
+// import { TransactionsScreen } from './src/screens/Transactions/TransactionsScreen';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -69,6 +70,7 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
