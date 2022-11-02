@@ -1,6 +1,6 @@
 import { StyleSheet, View, Button } from 'react-native';
 import React from 'react';
-import { H1Heading } from '../../assets/Fonts';
+import { H1Heading } from '../../../assets/Fonts';
 
 export const StartScreen = () => {
   const toLoginScreen = () => {};

@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
 import React, { useState } from 'react';
-import { H1Heading, H4_Card_Nav_Tab } from '../../assets/Fonts';
-import { Colors } from '../../assets/Colors';
+import { H1Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
+import { Colors } from '../../../assets/Colors';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState('');
