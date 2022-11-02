@@ -3,7 +3,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
-import { NavigationBar } from './src/navigation/NavigationBar';
+import { NavigationBar } from './src/navigation/BottomNav';
 // import { H1Heading } from './assets/Fonts';
 import { H1Heading } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
