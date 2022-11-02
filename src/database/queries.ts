@@ -156,11 +156,7 @@ export const createVendor = async (vendor: VendorCreate): Promise<uuid> => {
 }
 
 /**
-<<<<<<< HEAD
- * Update an existing "vendor" document in the vendors collection.
-=======
  * Update an existing "vendor" name. 
->>>>>>> 1dacd2b (made fixes to vendors queries)
  */
 export const updateVendorName = async (name: string, vendor: Partial<Vendor>) => {
   try {
