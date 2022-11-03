@@ -160,9 +160,8 @@ export const getTransaction = async (uuid: uuid): Promise<Transaction> => {
 //     throw e;
 //   }
 // }
-
-const testQueries = async () => {
-  const transaction = await getTransaction('8HEjHtFLvaMKsyEtLd0g');
-  console.log(transaction);
-};
-testQueries();
+// const testQueries = async () => {
+//   const transaction = await getTransaction('8HEjHtFLvaMKsyEtLd0g');
+//   console.log(transaction);
+// };
+// testQueries();
