@@ -7,9 +7,9 @@ import {
 import { Colors } from '../../../assets/Colors';
 import {
   Row,
-  LeftContentContainer,
-  RightContentContainer,
-  LongRightContentContainer,
+  DateIdContainer,
+  CountContainer,
+  PriceContainer,
   Styles,
 } from './styles';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -17,16 +17,16 @@ import Icon from 'react-native-vector-icons/AntDesign';
 export const TransactionCard = (props: any) => {
   return (
     <Row>
-      <LeftContentContainer>
+      <DateIdContainer>
         <Body_2_Subtext>ID {props.id}</Body_2_Subtext>
         <Body_1_Text>{props.date}</Body_1_Text>
-      </LeftContentContainer>
-      <RightContentContainer>
+      </DateIdContainer>
+      <CountContainer>
         <Body_1_Text>x{props.count}</Body_1_Text>
-      </RightContentContainer>
-      <LongRightContentContainer>
+      </CountContainer>
+      <PriceContainer>
         <H3_Subheading>${props.price}</H3_Subheading>
-      </LongRightContentContainer>
+      </PriceContainer>
       <Icon.Button
         name="right"
         size={25}

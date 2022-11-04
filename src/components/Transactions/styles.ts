@@ -12,7 +12,7 @@ export const Row = styled.View`
   border-bottom: 1px solid black;
 `;
 
-export const LeftContentContainer = styled.View`
+export const DateIdContainer = styled.View`
   flex: 4;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,7 @@ export const LeftContentContainer = styled.View`
   padding-left: 20px;
 `;
 
-export const RightContentContainer = styled.View`
+export const CountContainer = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: flex-end;
@@ -29,7 +29,7 @@ export const RightContentContainer = styled.View`
   margin-right: 30px;
 `;
 
-export const LongRightContentContainer = styled.View`
+export const PriceContainer = styled.View`
   flex: 2;
   flex-direction: row;
   align-items: flex-end;
