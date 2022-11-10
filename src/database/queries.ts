@@ -6,6 +6,7 @@ import {
   query,
   where,
   updateDoc,
+  doc,
 } from 'firebase/firestore';
 import {
   uuid,
