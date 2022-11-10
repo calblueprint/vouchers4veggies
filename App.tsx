@@ -6,7 +6,7 @@ import { H1Heading } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 import VendorsListDemo from './VendorsListDemo';
-
+// import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 

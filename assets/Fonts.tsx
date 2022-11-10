@@ -38,6 +38,6 @@ export const Body_1_Text = styled.Text`
 export const Body_2_Subtext = styled.Text`
   font-family: 'manrope-regular';
   font-style: normal;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 14px;
 `;
