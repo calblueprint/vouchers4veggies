@@ -41,3 +41,11 @@ export const Body_2_Subtext = styled.Text`
   font-size: 10px;
   line-height: 14px;
 `;
+
+export const ButtonTextWhite = styled.Text`
+  font-family: 'manrope-semibold';
+  font-style: normal;
+  font-size: 18px;
+  line-height: 25px;
+  color: #ffffff;
+`;
