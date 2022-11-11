@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
 import React, { useState } from 'react';
 import { H1Heading, H4_Card_Nav_Tab } from '../../../../assets/Fonts';
+import { InputField } from '../../../components/InputField/InputField';
 import { Colors } from '../../../../assets/Colors';
 
 export const LoginScreen = () => {
@@ -23,16 +24,11 @@ export const LoginScreen = () => {
 
       <View style={styles.form_container}>
         <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
-        <TextInput
-          onChangeText={newText => setEmail(newText)}
-          style={styles.form_field}
-          value={email}
-        />
+        <InputField onChange={setEmail} value={email} />
 
         <H4_Card_Nav_Tab>Password</H4_Card_Nav_Tab>
-        <TextInput
-          onChangeText={newText => setPassword(newText)}
-          style={styles.form_field}
+        <InputField
+          onChange={setPassword}
           value={password}
           secureTextEntry={true}
         />
@@ -63,14 +59,6 @@ const styles = StyleSheet.create({
   form_container: {
     width: 300,
     height: '50%',
-  },
-  form_field: {
-    width: '100%',
-    borderColor: Colors.lightGray,
-    backgroundColor: Colors.lightGray,
-    padding: 5,
-    marginTop: 10,
-    marginBottom: 20,
   },
   underline: {
     textDecorationLine: 'underline',
