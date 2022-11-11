@@ -6,7 +6,9 @@ import { H1Heading } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 import VendorsListDemo from './VendorsListDemo';
-import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
+// import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
+import { LoginScreen } from './src/screens/auth/Login/LoginScreen';
+
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -60,9 +62,10 @@ export default function App() {
   getAllTestDocs();
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <H1Heading>Vouchers 4 Veggies</H1Heading>
+      {/* <H1Heading>Vouchers 4 Veggies</H1Heading>
       <VendorsListDemo />
-      <AuthDemo />
+      <AuthDemo /> */}
+      <LoginScreen />
     </View>
   );
 }
