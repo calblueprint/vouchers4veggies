@@ -1,23 +1,17 @@
-import { getAuth } from '@firebase/auth';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-import React, { useCallback, useEffect, useReducer, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { H1Heading, H3_Subheading } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import {
   AuthContext,
-  AuthContextAction,
   AuthContextType,
-  AuthState,
-} from './src/screens/AuthContext';
+  getAuthContext,
+  useAuthReducer,
+} from './src/screens/auth/AuthContext';
 import VendorsListDemo from './VendorsListDemo';
 // import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
 // Keep the splash screen visible while we fetch resources
@@ -40,6 +34,7 @@ async function loadResourcesAsync() {
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  const [authState, dispatch] = useAuthReducer();
 
   /**
    * Load any resources or data that we need prior to rendering the app
@@ -81,38 +76,6 @@ export default function App() {
     restoreAuthToken();
   }, []);
 
-  const [authState, dispatch] = useReducer(
-    (prevState: AuthState, action: AuthContextAction) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null,
-          };
-        default:
-          return prevState;
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      userToken: null,
-    },
-  );
-
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady && !authState.isLoading) {
       // This tells the splash screen to hide immediately! If we call this after
@@ -125,47 +88,7 @@ export default function App() {
   }, [appIsReady, authState.isLoading]);
 
   const authContext: AuthContextType = React.useMemo(
-    () => ({
-      signIn: async (email: string, password: string) => {
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-          .then(async userCredential => {
-            const { user } = userCredential;
-
-            console.log(
-              'Auth Success: signed in user with email',
-              userCredential.user.email,
-            );
-            // After getting the user credential, persist the uid in AsyncStorage
-            await AsyncStorage.setItem('uid', user.uid);
-            dispatch({ type: 'SIGN_IN', token: user.uid });
-          })
-          .catch(error => {
-            console.warn('(signIn) error', error);
-          });
-      },
-      signOut: async () => {
-        // Remove the uid from AsyncStorage
-        await AsyncStorage.removeItem('uid');
-        dispatch({ type: 'SIGN_OUT' });
-      },
-      signUp: async (email: string, password: string) => {
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-          .then(async userCredential => {
-            const { user } = userCredential;
-            console.log(
-              'Auth Success: created user with email',
-              userCredential.user.email,
-            );
-            await AsyncStorage.setItem('uid', user.uid);
-            dispatch({ type: 'SIGN_IN', token: user.uid });
-          })
-          .catch(error => {
-            console.warn('(signUp) error', error);
-          });
-      },
-    }),
+    () => getAuthContext(dispatch),
     [],
   );
 

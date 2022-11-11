@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Button, TextInput, View } from 'react-native';
-import { AuthContext } from './src/screens/AuthContext';
+import { AuthContext } from './src/screens/auth/AuthContext';
 
 /**
  * Simple demo component to test Firebase authentication.
