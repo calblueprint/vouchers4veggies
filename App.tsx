@@ -64,8 +64,10 @@ export default function App() {
 
       try {
         userToken = await AsyncStorage.getItem('uid');
+        // TODO: Check if token is valid
       } catch (e) {
-        // Restoring token failed
+        // Restoring token failed. This means that the user is not logged in.
+        // Note that this is not actually an error.
       }
 
       // This will switch to the App screen or Auth screen and this loading
