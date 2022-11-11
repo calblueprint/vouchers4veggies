@@ -6,9 +6,8 @@ import { H1Heading, ButtonTextWhite } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 import VendorsListDemo from './VendorsListDemo';
-import ButtonView from './src/components/ButtonComponents';
+//import ButtonView from './src/components/ButtonComponents';
 import { ButtonMagenta } from './src/components/Components';
-
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
