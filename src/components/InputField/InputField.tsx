@@ -6,13 +6,7 @@ import {
   Body_1_Text,
 } from '../../../assets/Fonts';
 import { Colors } from '../../../assets/Colors';
-import {
-  Row,
-  DateIdContainer,
-  CountContainer,
-  PriceContainer,
-  Styles,
-} from './styles';
+import { Styles } from './styles';
 
 export const InputField = (props: any) => {
   const [isActive, setIsActive] = useState(false);

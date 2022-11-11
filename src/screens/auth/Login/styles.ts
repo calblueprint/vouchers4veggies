@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../../../assets/Colors';
 
 // refactor with global components
 export const ButtonMagenta = styled.TouchableOpacity`
