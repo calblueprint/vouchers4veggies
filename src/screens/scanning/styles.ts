@@ -16,10 +16,35 @@ export const ScannerContainer = styled.View`
   margin-bottom: 40px;
 `;
 
+export const TopContainer = styled.View`
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+`;
+
+export const LogoContainer = styled.ImageBackground`
+  width: 50px;
+  height: 60px;
+`;
+
+export const VoucherCounter = styled.View`
+  width: 30px;
+  height: 30px;
+  background: ${Colors.lightMagenta});
+  border: 1px solid ${Colors.brightMagenta};
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const PageContainer = styled.View`
   margin: 5%;
   background-color: ${Colors.offWhite};
-  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
 `;

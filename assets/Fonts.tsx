@@ -43,6 +43,12 @@ export const Body_2_Subtext = styled.Text`
   line-height: 14px;
 `;
 
+export const CounterText = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 16px;
+`;
+
 export const MagentaText = styled.Text`
   color: ${Colors.magenta};
 `;
