@@ -47,7 +47,8 @@ export default function AppNavigator() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {authState.userToken == null ? (
-          // TODO @wangannie: replace with AuthStackNavigator
+          // TODO: replace with AuthStackNavigator once styled
+          // auth screens have functionality integrated
           <AuthDemo />
         ) : (
           <NavigationBar />
