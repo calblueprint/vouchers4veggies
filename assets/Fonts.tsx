@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { Colors } from './Colors';
 
 export const H1Heading = styled.Text`
   font-family: 'manrope-bold';
@@ -40,4 +41,20 @@ export const Body_2_Subtext = styled.Text`
   font-style: normal;
   font-size: 12px;
   line-height: 14px;
+`;
+
+export const MagentaText = styled.Text`
+  color: ${Colors.magenta};
+`;
+
+export const ButtonTextWhite = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 18px;
+  line-height: 25px;
+  color: ${Colors.offWhite};
+`;
+
+export const CenterText = styled.Text`
+  text-align: center;
 `;

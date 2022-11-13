@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 import { H1Heading } from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
+import ScanningScreen from './src/screens/scanning/ScanningScreen';
 import VendorsListDemo from './VendorsListDemo';
 // import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
 // Keep the splash screen visible while we fetch resources
@@ -60,9 +61,10 @@ export default function App() {
   getAllTestDocs();
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <H1Heading>Vouchers 4 Veggies</H1Heading>
-      <VendorsListDemo />
-      <AuthDemo />
+      {/* <H1Heading>Vouchers 4 Veggies</H1Heading> */}
+      {/* <VendorsListDemo />
+      <AuthDemo /> */}
+      <ScanningScreen />
     </View>
   );
 }
