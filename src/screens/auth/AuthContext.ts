@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { createContext, useReducer } from 'react';
+import fbApp from '../../database/clientApp';
 
 export type AuthContextType = {
   signIn: (email: string, password: string) => void;
@@ -65,7 +66,7 @@ export const getAuthContext = (
   dispatch: React.Dispatch<AuthContextAction>,
 ): AuthContextType => ({
   signIn: async (email: string, password: string) => {
-    const auth = getAuth();
+    const auth = getAuth(fbApp);
     signInWithEmailAndPassword(auth, email, password)
       .then(async userCredential => {
         const { user } = userCredential;
@@ -88,7 +89,7 @@ export const getAuthContext = (
     dispatch({ type: 'SIGN_OUT' });
   },
   signUp: async (email: string, password: string) => {
-    const auth = getAuth();
+    const auth = getAuth(fbApp);
     createUserWithEmailAndPassword(auth, email, password)
       .then(async userCredential => {
         const { user } = userCredential;
