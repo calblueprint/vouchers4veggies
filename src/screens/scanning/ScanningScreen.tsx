@@ -5,6 +5,7 @@ import {
   Body_1_Text,
   ButtonTextWhite,
   CenterText,
+  CounterText,
   H2Heading,
   MagentaText,
 } from '../../../assets/Fonts';
@@ -12,15 +13,21 @@ import {
   ButtonMagenta,
   Container,
   HeaderContainer,
+  LogoContainer,
   PageContainer,
   ScannerContainer,
   TitleContainer,
+  TopContainer,
+  VoucherCounter,
 } from './styles';
+
+const v4vLogo = require('../../../assets/logo-1.png');
 
 const ScanningScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type, setType] = useState<any>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(false);
+  const [scanCounter, incrementScanned] = useState(0);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -35,6 +42,7 @@ const ScanningScreen = () => {
     if (!scanned) {
       const { type, data, bounds: { origin } = {} } = scanningResult;
       // const { x, y } = origin;
+      incrementScanned(scanCounter + 1);
       setScanned(true);
       alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     }
@@ -50,6 +58,12 @@ const ScanningScreen = () => {
   return (
     <SafeAreaView>
       <PageContainer>
+        <TopContainer>
+          <LogoContainer source={v4vLogo}></LogoContainer>
+          <VoucherCounter>
+            <CounterText>{scanCounter}</CounterText>
+          </VoucherCounter>
+        </TopContainer>
         <HeaderContainer>
           <TitleContainer>
             <H2Heading>Scan your voucher(s).</H2Heading>
