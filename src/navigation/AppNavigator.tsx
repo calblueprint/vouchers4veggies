@@ -1,16 +1,14 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
+import AuthDemo from '../../AuthDemo';
 import {
   AuthContext,
   AuthContextType,
   getAuthContext,
   useAuthReducer,
 } from '../screens/auth/AuthContext';
-
-import { H1Heading, H3_Subheading } from '../../assets/Fonts';
-import AuthDemo from '../../AuthDemo';
-import VendorsListDemo from '../../VendorsListDemo';
+import { NavigationBar } from './BottomTabNavigator';
 
 export default function AppNavigator() {
   const [authState, dispatch] = useAuthReducer();
@@ -48,16 +46,12 @@ export default function AppNavigator() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <H1Heading>Vouchers 4 Veggies</H1Heading>
         {authState.userToken == null ? (
-          <H3_Subheading>No user token</H3_Subheading>
+          // TODO @wangannie: replace with AuthStackNavigator
+          <AuthDemo />
         ) : (
-          <>
-            <H3_Subheading>user token is {authState.userToken}</H3_Subheading>
-            <VendorsListDemo />
-          </>
+          <NavigationBar />
         )}
-        <AuthDemo />
       </NavigationContainer>
     </AuthContext.Provider>
   );

@@ -14,12 +14,11 @@ export default function AuthDemo() {
   const handleCreateAccount = async () => signUp(email, password);
 
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <TextInput onChangeText={setEmail} value={email} />
       <TextInput onChangeText={setPassword} value={password} />
       <Button onPress={handleCreateAccount} title="Create Account" />
       <Button onPress={handleSignIn} title="Sign In" />
-      <Button onPress={signOut} title="Sign Out" />
     </View>
   );
 }
