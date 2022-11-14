@@ -4,9 +4,9 @@ import { AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Colors } from '../../assets/Colors';
 
-import ProfileScreen from '../screens/profile/ProfileScreen';
-import ScannerScreen from '../screens/scanner/ScannerScreen';
-import TransactionsScreen from '../screens/Transactions/TransactionsScreen';
+import ProfileStackNavigator from './stacks/ProfileStackNavigator';
+import ScannerStackNavigator from './stacks/ScannerStackNavigator';
+import TransactionStackNavigator from './stacks/TransactionStackNavigator';
 
 const initialRouteName = 'Home';
 
@@ -20,7 +20,7 @@ export const NavigationBar = () => {
     >
       <Tab.Screen
         name="Home"
-        component={ScannerScreen}
+        component={ScannerStackNavigator}
         options={{
           tabBarLabel: 'Scan',
           tabBarIcon: ({ color }) => (
@@ -30,7 +30,7 @@ export const NavigationBar = () => {
       ></Tab.Screen>
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileStackNavigator}
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
@@ -40,7 +40,7 @@ export const NavigationBar = () => {
       ></Tab.Screen>
       <Tab.Screen
         name="Transactions"
-        component={TransactionsScreen}
+        component={TransactionStackNavigator}
         options={{
           tabBarLabel: 'Transactions',
           tabBarIcon: ({ color }) => (
