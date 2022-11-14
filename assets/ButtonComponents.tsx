@@ -1,50 +1,7 @@
 import styled from 'styled-components/native';
 import { Colors } from './Colors';
 
-/**
- * Styling for white button
- */
-// export const ButtonWhite = styled.TouchableOpacity`
-//   box-sizing: border-box;
-//   width: 59px;
-//   height: 25px;
-//   font-family: 'Manrope';
-//   font-style: normal;
-//   font-weight: 600;
-//   font-size: 18px;
-//   line-height: 25px;
-//   text-align: center;
-//   color: ${Colors.midBlack};
-//   flex: none;
-//   order: 0;
-//   flex-grow: 0;
-//   border: 2px solid ${Colors.magenta};
-//   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-//   border-radius: 5px;
-// `;
-
-/**
- * Styling for magenta button
- */
-// export const ButtonMagenta = styled.TouchableOpacity`
-//   box-sizing: border-box;
-//   width: 59px;
-//   height: 25px;
-//   font-family: 'Manrope';
-//   font-style: normal;
-//   font-weight: 600;
-//   font-size: 18px;
-//   line-height: 25px;
-//   text-align: center;
-//   color: ${Colors.offWhite};
-//   flex: none;
-//   order: 0;
-//   flex-grow: 0;
-//   background: ${Colors.magenta};
-//   border: 2px solid ${Colors.magenta};
-//   border-radius: 5px;
-// `;
-
+//TODO: @oahnh fix static widths
 export const ButtonMagenta = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
@@ -56,9 +13,7 @@ export const ButtonMagenta = styled.TouchableOpacity`
   padding: 9px 9px;
   border-color: ${Colors.magenta};
 `;
-/**
- * Styling for gray button
- */
+
 export const ButtonGray = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
@@ -77,4 +32,21 @@ export const ButtonWhite = styled.TouchableOpacity`
   background: ${Colors.offWhite};
   padding: 9px 9px;
   border: 2px solid ${Colors.magenta};
+`;
+
+export const InputField = styled.TextInput`
+  border: 1px solid ${Colors.midGray};
+  background: ${Colors.lightGray};
+  border-radius: 5px;
+  padding: 8px 17px;
+  width: 277px;
+`;
+
+export const LargeInputField = styled.TextInput`
+  font-size: 18px;
+  border: 1px solid ${Colors.midGray};
+  background: ${Colors.lightGray};
+  border-radius: 5px;
+  padding: 8px 20px 18px 19px;
+  width: 317px;
 `;

@@ -43,7 +43,7 @@ export const Body_2_Subtext = styled.Text`
 `;
 
 export const ButtonTextWhite = styled.Text`
-  font-family: 'manrope-semibold';
+  font-family: 'manrope-semiBold';
   font-style: normal;
   font-size: 18px;
   line-height: 25px;
