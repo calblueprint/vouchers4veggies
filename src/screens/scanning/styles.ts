@@ -46,7 +46,8 @@ export const PageContainer = styled.View`
   background-color: ${Colors.offWhite};
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-bottom: 125px;
 `;
 
 export const TitleContainer = styled.View`
