@@ -11,17 +11,14 @@ import {
 } from '../../../assets/Fonts';
 import {
   ButtonMagenta,
-  Container,
   HeaderContainer,
   LogoContainer,
   PageContainer,
   ScannerContainer,
-  styles,
   TitleContainer,
   TopContainer,
   VoucherCounter,
 } from './styles';
-import styled from 'styled-components';
 
 const v4vLogo = require('../../../assets/logo-1.png');
 
