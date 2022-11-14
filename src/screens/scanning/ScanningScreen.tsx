@@ -16,10 +16,12 @@ import {
   LogoContainer,
   PageContainer,
   ScannerContainer,
+  styles,
   TitleContainer,
   TopContainer,
   VoucherCounter,
 } from './styles';
+import styled from 'styled-components';
 
 const v4vLogo = require('../../../assets/logo-1.png');
 
@@ -81,7 +83,7 @@ const ScanningScreen = () => {
             onBarCodeScanned={handleBarCodeScanned}
             type={type}
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.code39]}
-            style={[StyleSheet.absoluteFillObject]}
+            style={[StyleSheet.absoluteFillObject, styles.container]}
           />
         </ScannerContainer>
 
@@ -93,5 +95,12 @@ const ScanningScreen = () => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+    borderRadius: 10,
+  },
+});
 
 export default ScanningScreen;
