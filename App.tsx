@@ -2,10 +2,22 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, StyleSheet, View, Text } from 'react-native';
-import { H1Heading } from './assets/Fonts';
+import {
+  H1Heading,
+  ButtonTextWhite,
+  H4_Card_Nav_Tab,
+  Body_1_Text,
+} from './assets/Fonts';
 import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 import VendorsListDemo from './VendorsListDemo';
+import {
+  ButtonMagenta,
+  ButtonWhite,
+  ButtonGray,
+  InputField,
+  LargeInputField,
+} from './assets/ButtonComponents';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -60,9 +72,11 @@ export default function App() {
   return (
     //COMMENT OUT THE CODE BELOW TO VIEW THE EXAMPLE BUTTON
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <H1Heading>Vouchers 4 Veggies</H1Heading>
+      {/* <H1Heading>Vouchers 4 Veggies</H1Heading>
       <VendorsListDemo />
-      <AuthDemo />
+      <AuthDemo /> */}
+      <InputField value={'default text'} />
+      <LargeInputField value={'default text'} />
     </View>
   );
 }
