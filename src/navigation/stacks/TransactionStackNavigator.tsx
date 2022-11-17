@@ -14,7 +14,7 @@ export default function TransactionStackNavigator() {
       }}
     >
       <TransactionStack.Screen
-        name="Transactions"
+        name="TransactionsScreen"
         component={TransactionsScreen}
       />
     </TransactionStack.Navigator>
