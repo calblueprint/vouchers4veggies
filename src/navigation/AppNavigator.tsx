@@ -43,6 +43,7 @@ export default function AppNavigator() {
     () => getAuthContext(dispatch),
     [],
   );
+  //COMMENT THIS OUT BEFORE MERGING
   testQueries();
   return (
     <AuthContext.Provider value={authContext}>
