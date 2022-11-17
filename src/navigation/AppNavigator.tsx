@@ -43,6 +43,7 @@ export default function AppNavigator() {
     () => getAuthContext(dispatch),
     [],
   );
+  testQueries();
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>

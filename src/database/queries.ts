@@ -7,6 +7,9 @@ import {
   where,
   updateDoc,
   doc,
+  FieldValue,
+  arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 import {
   uuid,
@@ -182,7 +185,6 @@ export const getAllTransactions = async (): Promise<Transaction[]> => {
 /**
  * Get all transactions for Vendor
  */
-//TODO: call getTransac on all transaction ids -> return them
 export const getVendorTransactions = async (
   vendorUuid: string,
 ): Promise<Transaction[]> => {
@@ -216,13 +218,13 @@ export const getTransaction = async (uuid: uuid): Promise<Transaction> => {
 /**
  * Add a Voucher to the voucher array in the `Transaction` collection.
  */
+//TODO: configure add + removing vouchers from transaction
 export const addVoucherToTransaction = async (
   transactionUUID: uuid,
-  voucherUUID: string,
+  voucherUuid: string,
 ): Promise<void> => {
   try {
-    const transactionArray = await getTransaction(transactionUUID);
-    return transactionArray.arrayUnion(voucherUUID);
+    const docRef = doc(transactionCollection, transactionUUID);
   } catch (e) {
     console.warn('(addVoucherToTransaction)', e);
     throw e;
@@ -232,24 +234,28 @@ export const addVoucherToTransaction = async (
 /**
  * Remove a Voucher to the voucher array in the `Transaction` collection.
  */
-//  export const removeVoucherFromTransaction = async (transactionUUID: uuid, voucherUUID: uuid): Promise<void> => {
-//   try {
-//     const dbQuery = query(transactionCollection);
-//     const querySnapshot = await getDocs(dbQuery);
-//     const transactionArray = querySnapshot.getTransaction(transactionUUID).data().Vouchers;
-//     return transactionArray.arrayRemove(voucherUUID);
-//   } catch (e) {
-//     console.warn('(removeVoucherFromTransaction)', e);
-//     throw e;
-//   }
-// }
+export const removeVoucherFromTransaction = async (
+  transactionUUID: uuid,
+  voucherUUID: uuid,
+): Promise<void> => {
+  try {
+    const dbQuery = query(transactionCollection);
+    const querySnapshot = await getDocs(dbQuery);
+    const transactionArray = querySnapshot
+      .getTransaction(transactionUUID)
+      .data().Vouchers;
+    return transactionArray.arrayRemove(voucherUUID);
+  } catch (e) {
+    console.warn('(removeVoucherFromTransaction)', e);
+    throw e;
+  }
+};
 
+//Test your queries here
 export const testQueries = async () => {
   const vendor = await getVendorTransactions('HxMk3UuwzP7zrxsitpws');
   console.log(vendor);
   const testGet = await getTransaction('1hXxw6dKCwBop9mFuXbj');
   console.log(testGet);
-  // const trans = await getTransaction(vendor[0].uuid).then(res =>
-  //   console.log({ vendor, res }),
   // );
 };
