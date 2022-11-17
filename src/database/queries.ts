@@ -16,6 +16,7 @@ import {
   VoucherStatus,
   Transaction,
 } from '../types/types';
+
 import fbApp from './clientApp';
 
 const db = getFirestore(fbApp);
