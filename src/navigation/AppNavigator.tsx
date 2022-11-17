@@ -9,6 +9,7 @@ import {
   useAuthReducer,
 } from '../screens/auth/AuthContext';
 import { NavigationBar } from './BottomTabNavigator';
+import { testQueries } from '../database/queries';
 
 export default function AppNavigator() {
   const [authState, dispatch] = useAuthReducer();
@@ -42,7 +43,8 @@ export default function AppNavigator() {
     () => getAuthContext(dispatch),
     [],
   );
-
+  //COMMENT THIS OUT BEFORE MERGING
+  testQueries();
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
