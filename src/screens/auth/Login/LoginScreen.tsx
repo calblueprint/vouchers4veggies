@@ -9,7 +9,7 @@ import { ButtonMagenta } from '../../../../assets/Components';
 import { InputField } from '../../../components/InputField/InputField';
 import {
   HeadingContainer,
-  LoginContainer,
+  Container,
   LogoContainer,
   FormContainer,
   Styles,
@@ -38,15 +38,13 @@ export const LoginScreen = () => {
   };
 
   return (
-    <LoginContainer>
+    <Container>
       {/* logo placeholder */}
-      <HeadingContainer>
-        <LogoContainer>
-          <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-            <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-          </View>
-        </LogoContainer>
-      </HeadingContainer>
+      <LogoContainer>
+        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
+          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
+        </View>
+      </LogoContainer>
 
       <FormContainer>
         <HeadingContainer>
@@ -94,6 +92,6 @@ export const LoginScreen = () => {
           </Body_1_Text>
         </Body_1_Text>
       </VerticalSpacingContainer>
-    </LoginContainer>
+    </Container>
   );
 };

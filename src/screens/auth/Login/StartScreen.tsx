@@ -1,23 +1,50 @@
-import { StyleSheet, View, Button } from 'react-native';
+import { Text, StyleSheet, View, Button } from 'react-native';
 import React from 'react';
-import { H1Heading } from '../../../../assets/Fonts';
+import { H1Heading, H4_Card_Nav_Tab } from '../../../../assets/Fonts';
+import { ButtonWhite, ButtonMagenta } from '../../../../assets/Components';
+import {
+  ButtonContainer,
+  Container,
+  DarkGrayText,
+  LogoContainer,
+  StartContainer,
+  WhiteText,
+} from './styles';
 
 export const StartScreen = () => {
   const toLoginScreen = () => {};
   const toSignupScreen = () => {};
 
   return (
-    <View style={styles.container}>
-      <H1Heading>Hello! Let's get started.</H1Heading>
+    <Container>
+      {/* logo placeholder */}
+      <LogoContainer>
+        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
+          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
+        </View>
+      </LogoContainer>
 
-      <View style={styles.button}>
-        <Button onPress={toLoginScreen} title="Login" />
-      </View>
+      <StartContainer>
+        <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
 
-      <View style={styles.button}>
-        <Button onPress={toSignupScreen} title="Signup" />
-      </View>
-    </View>
+        <ButtonContainer>
+          <ButtonWhite>
+            <DarkGrayText>
+              <H4_Card_Nav_Tab onPress={toLoginScreen}>Login</H4_Card_Nav_Tab>
+            </DarkGrayText>
+          </ButtonWhite>
+        </ButtonContainer>
+        <ButtonContainer>
+          <ButtonMagenta>
+            <WhiteText>
+              <H4_Card_Nav_Tab onPress={toSignupScreen}>
+                Sign Up
+              </H4_Card_Nav_Tab>
+            </WhiteText>
+          </ButtonMagenta>
+        </ButtonContainer>
+      </StartContainer>
+    </Container>
   );
 };
 
