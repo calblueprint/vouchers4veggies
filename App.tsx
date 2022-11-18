@@ -7,8 +7,7 @@ import AuthDemo from './AuthDemo';
 import { getAllTestDocs } from './src/database/queries';
 import VendorsListDemo from './VendorsListDemo';
 // import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
-import { StartScreen } from './src/screens/auth/Login/StartScreen';
-import { LoginScreen } from './src/screens/auth/Login/LoginScreen';
+import AppNavigator from './src/navigation/AppNavigator';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -61,9 +60,7 @@ export default function App() {
 
   return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {/* <AppNavigator /> */}
-      <LoginScreen />
-      {/* <StartScreen /> */}
+      <AppNavigator />
     </View>
   );
 }

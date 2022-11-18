@@ -1,12 +1,8 @@
 import { Text, View } from 'react-native';
 import React, { useState } from 'react';
-import {
-  H2Heading,
-  H4_Card_Nav_Tab,
-  Body_1_Text,
-} from '../../../../assets/Fonts';
-import { ButtonMagenta } from '../../../../assets/Components';
-import { InputField } from '../../../components/InputField/InputField';
+import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
+import { ButtonMagenta } from '../../../assets/Components';
+import { InputField } from '../../components/InputField/InputField';
 import {
   HeadingContainer,
   LoginContainer,

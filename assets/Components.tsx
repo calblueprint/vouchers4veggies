@@ -7,7 +7,7 @@ export const ButtonMagenta = styled.TouchableOpacity`
   align-items: center;
   border-width: 2px;
   border-radius: 5px;
-  width: 257px;
+  width: 277px;
   background: ${Colors.magenta};
   text-color: white;
   padding: 9px 9px;
