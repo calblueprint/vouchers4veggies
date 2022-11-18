@@ -1,13 +1,13 @@
-import { Text, StyleSheet, View, Button } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { H1Heading, H4_Card_Nav_Tab } from '../../../../assets/Fonts';
 import { ButtonWhite, ButtonMagenta } from '../../../../assets/Components';
 import {
-  ButtonContainer,
   Container,
   DarkGrayText,
   LogoContainer,
   StartContainer,
+  StartScreenButtonContainer,
   WhiteText,
 } from './styles';
 
@@ -27,14 +27,15 @@ export const StartScreen = () => {
       <StartContainer>
         <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
 
-        <ButtonContainer>
+        <StartScreenButtonContainer>
           <ButtonWhite>
             <DarkGrayText>
               <H4_Card_Nav_Tab onPress={toLoginScreen}>Login</H4_Card_Nav_Tab>
             </DarkGrayText>
           </ButtonWhite>
-        </ButtonContainer>
-        <ButtonContainer>
+        </StartScreenButtonContainer>
+
+        <StartScreenButtonContainer>
           <ButtonMagenta>
             <WhiteText>
               <H4_Card_Nav_Tab onPress={toSignupScreen}>
@@ -42,7 +43,7 @@ export const StartScreen = () => {
               </H4_Card_Nav_Tab>
             </WhiteText>
           </ButtonMagenta>
-        </ButtonContainer>
+        </StartScreenButtonContainer>
       </StartContainer>
     </Container>
   );

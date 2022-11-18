@@ -12,27 +12,26 @@ export const Container = styled.View`
 `;
 
 export const StartContainer = styled.View`
-  top: 24.35%;
+  top: 25%;
   align-items: center;
 `;
 
 export const LogoContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
-  margin-left: 7.73%;
-  margin-top: 2.83%;
+  margin-left: 10%;
+  margin-top: 4%;
 `;
 
 export const HeadingContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
-  margin-top: 4.03%;
-  margin-bottom: 2.46%;
+  margin-top: 14%;
+  margin-bottom: 4%;
 `;
 
 export const FormContainer = styled.View`
-  width: 73.87%;
-  height: 50%;
+  width: 75%;
 `;
 
 export const RowContainer = styled.View`
@@ -62,14 +61,21 @@ export const ButtonContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 6.15%;
+  margin-top: 12%;
+`;
+
+export const StartScreenButtonContainer = styled.View`
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5%;
 `;
 
 export const VerticalSpacingContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 2.71%;
+  margin-top: 6%;
 `;
 
 export const WhiteText = styled.Text`

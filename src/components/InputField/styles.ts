@@ -9,8 +9,8 @@ export const Styles = StyleSheet.create({
     backgroundColor: Colors.lightGray,
     paddingVertical: 7,
     paddingHorizontal: 10,
-    marginTop: '1.48%',
-    marginBottom: '1.72%',
+    marginTop: '3%',
+    marginBottom: '4%',
     borderRadius: 5,
   },
   FormFieldFocus: {
@@ -19,8 +19,8 @@ export const Styles = StyleSheet.create({
     backgroundColor: Colors.offWhite,
     paddingVertical: 7,
     paddingHorizontal: 10,
-    marginTop: '1.48%',
-    marginBottom: '1.72%',
+    marginTop: '3%',
+    marginBottom: '4%',
     borderRadius: 5,
   },
 });
