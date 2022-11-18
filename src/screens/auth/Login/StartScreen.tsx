@@ -3,11 +3,11 @@ import React from 'react';
 import { H1Heading, H4_Card_Nav_Tab } from '../../../../assets/Fonts';
 import { ButtonWhite, ButtonMagenta } from '../../../../assets/Components';
 import {
-  Container,
+  LoginContainer,
   DarkGrayText,
   LogoContainer,
   StartContainer,
-  StartScreenButtonContainer,
+  ButtonContainer,
   WhiteText,
 } from './styles';
 
@@ -16,7 +16,7 @@ export const StartScreen = () => {
   const toSignupScreen = () => {};
 
   return (
-    <Container>
+    <LoginContainer>
       {/* logo placeholder */}
       <LogoContainer>
         <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
@@ -27,15 +27,15 @@ export const StartScreen = () => {
       <StartContainer>
         <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
 
-        <StartScreenButtonContainer>
+        <ButtonContainer>
           <ButtonWhite>
             <DarkGrayText>
               <H4_Card_Nav_Tab onPress={toLoginScreen}>Login</H4_Card_Nav_Tab>
             </DarkGrayText>
           </ButtonWhite>
-        </StartScreenButtonContainer>
+        </ButtonContainer>
 
-        <StartScreenButtonContainer>
+        <ButtonContainer>
           <ButtonMagenta>
             <WhiteText>
               <H4_Card_Nav_Tab onPress={toSignupScreen}>
@@ -43,9 +43,9 @@ export const StartScreen = () => {
               </H4_Card_Nav_Tab>
             </WhiteText>
           </ButtonMagenta>
-        </StartScreenButtonContainer>
+        </ButtonContainer>
       </StartContainer>
-    </Container>
+    </LoginContainer>
   );
 };
 

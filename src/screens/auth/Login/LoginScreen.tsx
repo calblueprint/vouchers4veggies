@@ -9,12 +9,12 @@ import { ButtonMagenta } from '../../../../assets/Components';
 import { InputField } from '../../../components/InputField/InputField';
 import {
   HeadingContainer,
-  Container,
+  LoginContainer,
   LogoContainer,
   FormContainer,
   Styles,
-  ButtonContainer,
-  VerticalSpacingContainer,
+  VerticalSpacingButtonContainer,
+  SmallTextContainer,
   RowContainer,
   RightAlignContainer,
   LeftAlignContainer,
@@ -38,7 +38,7 @@ export const LoginScreen = () => {
   };
 
   return (
-    <Container>
+    <LoginContainer>
       {/* logo placeholder */}
       <LogoContainer>
         <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
@@ -75,23 +75,23 @@ export const LoginScreen = () => {
           secureTextEntry={true}
         />
 
-        <ButtonContainer>
+        <VerticalSpacingButtonContainer>
           <ButtonMagenta>
             <WhiteText>
               <H4_Card_Nav_Tab onPress={submitForm}>Login</H4_Card_Nav_Tab>
             </WhiteText>
           </ButtonMagenta>
-        </ButtonContainer>
+        </VerticalSpacingButtonContainer>
 
-        <VerticalSpacingContainer>
+        <SmallTextContainer>
           <Body_1_Text>
             Don't have an account?{' '}
             <Body_1_Text style={Styles.underline} onPress={goToSignup}>
               Sign up.
             </Body_1_Text>
           </Body_1_Text>
-        </VerticalSpacingContainer>
+        </SmallTextContainer>
       </FormContainer>
-    </Container>
+    </LoginContainer>
   );
 };
