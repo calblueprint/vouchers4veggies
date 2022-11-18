@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
 import { InputField } from '../../components/InputField/InputField';
@@ -16,19 +16,16 @@ import {
   LeftAlignContainer,
   WhiteText,
 } from './styles';
+import { AuthContext } from './AuthContext';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const submitForm = () => {
-    // query firebase
-  };
+  const { signIn } = useContext(AuthContext);
+  const handleSignIn = async () => signIn(email, password);
 
-  const goToSignup = () => {
-    // set up routing to sign up page
-  };
-
+  // TODO: implement password reset functionality @selene-huang
   const resetPassword = () => {
     // password flow
   };
@@ -72,9 +69,9 @@ export const LoginScreen = () => {
         />
 
         <VerticalSpacingButtonContainer>
-          <ButtonMagenta>
+          <ButtonMagenta onPress={handleSignIn}>
             <WhiteText>
-              <H4_Card_Nav_Tab onPress={submitForm}>Login</H4_Card_Nav_Tab>
+              <H4_Card_Nav_Tab>Login</H4_Card_Nav_Tab>
             </WhiteText>
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
@@ -82,9 +79,7 @@ export const LoginScreen = () => {
         <SmallTextContainer>
           <Body_1_Text>
             Don't have an account?{' '}
-            <Body_1_Text style={Styles.underline} onPress={goToSignup}>
-              Sign up.
-            </Body_1_Text>
+            <Body_1_Text style={Styles.underline}>Sign up.</Body_1_Text>
           </Body_1_Text>
         </SmallTextContainer>
       </FormContainer>
