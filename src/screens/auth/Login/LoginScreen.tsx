@@ -1,8 +1,18 @@
 import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
 import React, { useState } from 'react';
-import { H1Heading, H4_Card_Nav_Tab } from '../../../../assets/Fonts';
+import {
+  H1Heading,
+  H2Heading,
+  H4_Card_Nav_Tab,
+} from '../../../../assets/Fonts';
 import { InputField } from '../../../components/InputField/InputField';
 import { Colors } from '../../../../assets/Colors';
+import {
+  LeftAlignedContainer,
+  LoginContainer,
+  FormContainer,
+  Styles,
+} from './styles';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -17,12 +27,19 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <H1Heading
-        style={styles.center_text}
-      >{`Welcome back!\nPlease login.`}</H1Heading>
+    <LoginContainer>
+      {/* logo placeholder */}
+      <LeftAlignedContainer>
+        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
+          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
+        </View>
+      </LeftAlignedContainer>
 
-      <View style={styles.form_container}>
+      <FormContainer>
+        <LeftAlignedContainer>
+          <H2Heading>Welcome back!</H2Heading>
+        </LeftAlignedContainer>
+
         <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
         <InputField onChange={setEmail} value={email} />
 
@@ -34,33 +51,15 @@ export const LoginScreen = () => {
         />
 
         <Button onPress={submitForm} title="Login" />
-      </View>
-
-      <Text>
-        Don't have an account?{' '}
-        <Text style={styles.underline} onPress={goToSignup}>
-          Sign up.
+      </FormContainer>
+      <LeftAlignedContainer>
+        <Text>
+          Don't have an account?{' '}
+          <Text style={Styles.underline} onPress={goToSignup}>
+            Sign up.
+          </Text>
         </Text>
-      </Text>
-    </View>
+      </LeftAlignedContainer>
+    </LoginContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  center_text: {
-    textAlign: 'center',
-  },
-  form_container: {
-    width: 300,
-    height: '50%',
-  },
-  underline: {
-    textDecorationLine: 'underline',
-  },
-});

@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
-import {
-  H3_Subheading,
-  Body_2_Subtext,
-  Body_1_Text,
-} from '../../../assets/Fonts';
-import { Colors } from '../../../assets/Colors';
+import { TextInput } from 'react-native';
 import { Styles } from './styles';
 
 export const InputField = (props: any) => {

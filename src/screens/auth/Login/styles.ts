@@ -14,3 +14,26 @@ export const ButtonMagenta = styled.TouchableOpacity`
   padding: 9px 9px;
   border-color: ${Colors.magenta};
 `;
+
+export const LoginContainer = styled.View`
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LeftAlignedContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+`;
+
+export const FormContainer = styled.View`
+  width: 277;
+  height: 50%;
+`;
+
+export const Styles = StyleSheet.create({
+  underline: {
+    textDecorationLine: 'underline',
+  },
+});
