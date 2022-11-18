@@ -1,17 +1,24 @@
-import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { useState } from 'react';
 import {
-  H1Heading,
   H2Heading,
   H4_Card_Nav_Tab,
+  Body_1_Text,
 } from '../../../../assets/Fonts';
+import { ButtonMagenta } from '../../../../assets/Components';
 import { InputField } from '../../../components/InputField/InputField';
-import { Colors } from '../../../../assets/Colors';
 import {
-  LeftAlignedContainer,
+  HeadingContainer,
   LoginContainer,
+  LogoContainer,
   FormContainer,
   Styles,
+  ButtonContainer,
+  VerticalSpacingContainer,
+  RowContainer,
+  RightAlignContainer,
+  LeftAlignContainer,
+  WhiteText,
 } from './styles';
 
 export const LoginScreen = () => {
@@ -26,40 +33,62 @@ export const LoginScreen = () => {
     // set up routing to sign up page
   };
 
+  const resetPassword = () => {
+    // password flow
+  };
+
   return (
     <LoginContainer>
       {/* logo placeholder */}
-      <LeftAlignedContainer>
-        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-        </View>
-      </LeftAlignedContainer>
+      <HeadingContainer>
+        <LogoContainer>
+          <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
+            <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
+          </View>
+        </LogoContainer>
+      </HeadingContainer>
 
       <FormContainer>
-        <LeftAlignedContainer>
+        <HeadingContainer>
           <H2Heading>Welcome back!</H2Heading>
-        </LeftAlignedContainer>
+        </HeadingContainer>
 
-        <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
+        <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
         <InputField onChange={setEmail} value={email} />
 
-        <H4_Card_Nav_Tab>Password</H4_Card_Nav_Tab>
+        <RowContainer>
+          <LeftAlignContainer>
+            <Body_1_Text style={Styles.bold}>Password</Body_1_Text>
+          </LeftAlignContainer>
+          <RightAlignContainer>
+            <Body_1_Text style={Styles.underline} onPress={resetPassword}>
+              Forgot password?
+            </Body_1_Text>
+          </RightAlignContainer>
+        </RowContainer>
         <InputField
           onChange={setPassword}
           value={password}
           secureTextEntry={true}
         />
 
-        <Button onPress={submitForm} title="Login" />
+        <ButtonContainer>
+          <ButtonMagenta>
+            <WhiteText>
+              <H4_Card_Nav_Tab onPress={submitForm}>Login</H4_Card_Nav_Tab>
+            </WhiteText>
+          </ButtonMagenta>
+        </ButtonContainer>
       </FormContainer>
-      <LeftAlignedContainer>
-        <Text>
+
+      <VerticalSpacingContainer>
+        <Body_1_Text>
           Don't have an account?{' '}
-          <Text style={Styles.underline} onPress={goToSignup}>
+          <Body_1_Text style={Styles.underline} onPress={goToSignup}>
             Sign up.
-          </Text>
-        </Text>
-      </LeftAlignedContainer>
+          </Body_1_Text>
+        </Body_1_Text>
+      </VerticalSpacingContainer>
     </LoginContainer>
   );
 };
