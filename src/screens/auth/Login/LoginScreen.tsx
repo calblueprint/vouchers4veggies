@@ -82,16 +82,16 @@ export const LoginScreen = () => {
             </WhiteText>
           </ButtonMagenta>
         </ButtonContainer>
-      </FormContainer>
 
-      <VerticalSpacingContainer>
-        <Body_1_Text>
-          Don't have an account?{' '}
-          <Body_1_Text style={Styles.underline} onPress={goToSignup}>
-            Sign up.
+        <VerticalSpacingContainer>
+          <Body_1_Text>
+            Don't have an account?{' '}
+            <Body_1_Text style={Styles.underline} onPress={goToSignup}>
+              Sign up.
+            </Body_1_Text>
           </Body_1_Text>
-        </Body_1_Text>
-      </VerticalSpacingContainer>
+        </VerticalSpacingContainer>
+      </FormContainer>
     </Container>
   );
 };

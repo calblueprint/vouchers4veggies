@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '../../../../assets/Colors';
 
 export const Container = styled.View`
+  width: 100%;
+  display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: flex-start;
@@ -10,7 +12,7 @@ export const Container = styled.View`
 `;
 
 export const StartContainer = styled.View`
-  top: 20%;
+  top: 24.35%;
   align-items: center;
 `;
 
@@ -24,12 +26,12 @@ export const LogoContainer = styled.View`
 export const HeadingContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
-  margin-top: 35px;
-  margin-bottom: 25px;
+  margin-top: 4.03%;
+  margin-bottom: 2.46%;
 `;
 
 export const FormContainer = styled.View`
-  width: 277px;
+  width: 73.87%;
   height: 50%;
 `;
 
@@ -57,16 +59,17 @@ export const RightAlignContainer = styled.View`
 `;
 
 export const ButtonContainer = styled.View`
-  flex: 1;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 35px;
-  margin-bottom: 25px;
+  margin-top: 6.15%;
 `;
 
 export const VerticalSpacingContainer = styled.View`
-  margin-top: 25px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 2.71%;
 `;
 
 export const WhiteText = styled.Text`

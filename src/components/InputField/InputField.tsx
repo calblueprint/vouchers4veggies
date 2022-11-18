@@ -17,6 +17,7 @@ export const InputField = (props: any) => {
       placeholderTextColor={Colors.midGray}
       secureTextEntry={props.secureTextEntry}
       autoCorrect={false}
+      autoCapitalize="none"
     />
   );
 };
