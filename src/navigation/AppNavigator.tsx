@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import AuthDemo from '../../AuthDemo';
 import {
   AuthContext,
   AuthContextType,
@@ -48,8 +47,6 @@ export default function AppNavigator() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {authState.userToken == null ? (
-          // TODO: replace with AuthStackNavigator once styled
-          // auth screens have functionality integrated
           <AuthStackNavigator />
         ) : (
           <NavigationBar />
