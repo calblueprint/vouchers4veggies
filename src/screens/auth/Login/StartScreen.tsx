@@ -12,8 +12,12 @@ import {
 } from './styles';
 
 export const StartScreen = () => {
-  const toLoginScreen = () => {};
-  const toSignupScreen = () => {};
+  const toLoginScreen = () => {
+    // implement routing
+  };
+  const toSignupScreen = () => {
+    // implement routing
+  };
 
   return (
     <LoginContainer>
