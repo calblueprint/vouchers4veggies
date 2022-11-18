@@ -7,6 +7,7 @@ import {
   CenterText,
   CounterText,
   H2Heading,
+  H4_Card_Nav_Tab,
   MagentaText,
 } from '../../../assets/Fonts';
 import {
@@ -18,7 +19,9 @@ import {
   TitleContainer,
   TopContainer,
   VoucherCounter,
+  ButtonContainer,
 } from './styles';
+import { ButtonWhite } from '../../../assets/Components';
 
 const v4vLogo = require('../../../assets/logo-1.png');
 
@@ -85,9 +88,23 @@ const ScanningScreen = () => {
         </ScannerContainer>
 
         {/* need to discuss button flow */}
-        <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
-          <ButtonTextWhite>Scan Again</ButtonTextWhite>
-        </ButtonMagenta>
+        {scanCounter === 0 ? (
+          <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
+            <ButtonTextWhite>Scan</ButtonTextWhite>
+          </ButtonMagenta>
+        ) : (
+          <ButtonContainer>
+            <ButtonMagenta
+              disabled={!scanned}
+              onPress={() => setScanned(false)}
+            >
+              <ButtonTextWhite>Scan Again</ButtonTextWhite>
+            </ButtonMagenta>
+            <ButtonWhite>
+              <H4_Card_Nav_Tab>Review & Submit</H4_Card_Nav_Tab>
+            </ButtonWhite>
+          </ButtonContainer>
+        )}
       </PageContainer>
     </SafeAreaView>
   );

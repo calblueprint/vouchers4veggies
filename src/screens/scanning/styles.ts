@@ -69,8 +69,15 @@ export const ButtonMagenta = styled.TouchableOpacity`
   background: ${Colors.magenta};
   padding: 9px 9px;
   border-color: ${Colors.magenta};
+  margin-bottom: 16px;
 `;
 
 export const Container = styled.ScrollView`
   width: 100%;
+`;
+
+export const ButtonContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 `;

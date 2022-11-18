@@ -1,11 +1,11 @@
 import { StyleSheet, View } from 'react-native';
-import { H2Heading, H3_Subheading } from '../../../assets/Fonts';
+import ScanningScreen from '../scanning/ScanningScreen';
 
+//TODO: Implement screen here
 export default function ScannerScreen() {
   return (
     <View style={styles.container}>
-      <H2Heading>Scanner Screen</H2Heading>
-      <H3_Subheading>To be implemented...</H3_Subheading>
+      <ScanningScreen />
     </View>
   );
 }
