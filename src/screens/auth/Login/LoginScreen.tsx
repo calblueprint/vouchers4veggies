@@ -54,7 +54,11 @@ export const LoginScreen = () => {
         </HeadingContainer>
 
         <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
-        <InputField onChange={setEmail} value={email} />
+        <InputField
+          onChange={setEmail}
+          value={email}
+          placeholder="Enter email"
+        />
 
         <RowContainer>
           <LeftAlignContainer>
@@ -69,6 +73,7 @@ export const LoginScreen = () => {
         <InputField
           onChange={setPassword}
           value={password}
+          placeholder="Enter password"
           secureTextEntry={true}
         />
 
