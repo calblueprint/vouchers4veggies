@@ -1,7 +1,21 @@
-import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { useState } from 'react';
-import { H1Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
-import { Colors } from '../../../assets/Colors';
+import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
+import { ButtonMagenta } from '../../../assets/Components';
+import { InputField } from '../../components/InputField/InputField';
+import {
+  HeadingContainer,
+  LoginContainer,
+  LogoContainer,
+  FormContainer,
+  Styles,
+  VerticalSpacingButtonContainer,
+  SmallTextContainer,
+  RowContainer,
+  RightAlignContainer,
+  LeftAlignContainer,
+  WhiteText,
+} from './styles';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -15,64 +29,65 @@ export const LoginScreen = () => {
     // set up routing to sign up page
   };
 
-  return (
-    <View style={styles.container}>
-      <H1Heading
-        style={styles.center_text}
-      >{`Welcome back!\nPlease login.`}</H1Heading>
+  const resetPassword = () => {
+    // password flow
+  };
 
-      <View style={styles.form_container}>
-        <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
-        <TextInput
-          onChangeText={newText => setEmail(newText)}
-          style={styles.form_field}
+  return (
+    <LoginContainer>
+      {/* logo placeholder */}
+      <LogoContainer>
+        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
+          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
+        </View>
+      </LogoContainer>
+
+      <FormContainer>
+        <HeadingContainer>
+          <H2Heading>Welcome back!</H2Heading>
+        </HeadingContainer>
+
+        <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
+        <InputField
+          onChange={setEmail}
           value={email}
+          placeholder="Enter email"
         />
 
-        <H4_Card_Nav_Tab>Password</H4_Card_Nav_Tab>
-        <TextInput
-          onChangeText={newText => setPassword(newText)}
-          style={styles.form_field}
+        <RowContainer>
+          <LeftAlignContainer>
+            <Body_1_Text style={Styles.bold}>Password</Body_1_Text>
+          </LeftAlignContainer>
+          <RightAlignContainer>
+            <Body_1_Text style={Styles.underline} onPress={resetPassword}>
+              Forgot password?
+            </Body_1_Text>
+          </RightAlignContainer>
+        </RowContainer>
+        <InputField
+          onChange={setPassword}
           value={password}
+          placeholder="Enter password"
           secureTextEntry={true}
         />
 
-        <Button onPress={submitForm} title="Login" />
-      </View>
+        <VerticalSpacingButtonContainer>
+          <ButtonMagenta>
+            <WhiteText>
+              <H4_Card_Nav_Tab onPress={submitForm}>Login</H4_Card_Nav_Tab>
+            </WhiteText>
+          </ButtonMagenta>
+        </VerticalSpacingButtonContainer>
 
-      <Text>
-        Don't have an account?{' '}
-        <Text style={styles.underline} onPress={goToSignup}>
-          Sign up.
-        </Text>
-      </Text>
-    </View>
+        <SmallTextContainer>
+          <Body_1_Text>
+            Don't have an account?{' '}
+            <Body_1_Text style={Styles.underline} onPress={goToSignup}>
+              Sign up.
+            </Body_1_Text>
+          </Body_1_Text>
+        </SmallTextContainer>
+      </FormContainer>
+    </LoginContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  center_text: {
-    textAlign: 'center',
-  },
-  form_container: {
-    width: 300,
-    height: '50%',
-  },
-  form_field: {
-    width: '100%',
-    borderColor: Colors.lightGray,
-    backgroundColor: Colors.lightGray,
-    padding: 5,
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  underline: {
-    textDecorationLine: 'underline',
-  },
-});
