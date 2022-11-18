@@ -9,6 +9,7 @@ import {
   useAuthReducer,
 } from '../screens/auth/AuthContext';
 import { NavigationBar } from './BottomTabNavigator';
+import AuthStackNavigator from './stacks/AuthStackNavigator';
 
 export default function AppNavigator() {
   const [authState, dispatch] = useAuthReducer();
@@ -49,7 +50,7 @@ export default function AppNavigator() {
         {authState.userToken == null ? (
           // TODO: replace with AuthStackNavigator once styled
           // auth screens have functionality integrated
-          <AuthDemo />
+          <AuthStackNavigator />
         ) : (
           <NavigationBar />
         )}

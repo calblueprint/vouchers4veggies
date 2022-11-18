@@ -12,13 +12,6 @@ import {
 } from './styles';
 
 export const StartScreen = ({ route, navigation }: any) => {
-  const toLoginScreen = () => {
-    // implement routing
-  };
-  const toSignupScreen = () => {
-    // implement routing
-  };
-
   return (
     <View style={styles.container}>
       <LoginContainer>
@@ -33,7 +26,7 @@ export const StartScreen = ({ route, navigation }: any) => {
           <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
 
           <ButtonContainer>
-            <ButtonWhite onPress={toLoginScreen}>
+            <ButtonWhite onPress={() => navigation.navigate('Login')}>
               <DarkGrayText>
                 <H4_Card_Nav_Tab>Login</H4_Card_Nav_Tab>
               </DarkGrayText>
@@ -41,7 +34,7 @@ export const StartScreen = ({ route, navigation }: any) => {
           </ButtonContainer>
 
           <ButtonContainer>
-            <ButtonMagenta onPress={toSignupScreen}>
+            <ButtonMagenta>
               <WhiteText>
                 <H4_Card_Nav_Tab>Sign Up</H4_Card_Nav_Tab>
               </WhiteText>
