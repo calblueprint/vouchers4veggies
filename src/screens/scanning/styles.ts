@@ -61,30 +61,8 @@ export const ButtonContainer = styled.View`
   align-content: space-between;
 `;
 
-export const FormContainer = styled.View`
-  margin-top: 20px;
-  margin-bottom: 20px;
-`;
-
-// will be used later
-export const FieldContainer = styled.View``;
-
-// TODO: refactor to use selene's dropdown component
-export const DropDownContainer = styled.View`
-  width: 277px;
-  height: 35px;
-  background: ${Colors.offWhite};
-  border: 2px solid ${Colors.lightMagenta};
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 6px;
-  margin-bottom: 8px;
-`;
-
 export const ReviewHeader = styled.View`
-  width: 100%
+  width: 85%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -92,17 +70,14 @@ export const ReviewHeader = styled.View`
   margin-bottom: 46px;
 `;
 
-export const ReviewContainer = styled.ScrollView`
+export const ReviewContainer = styled.View`
   display: flex;
-  flex-grow: 1;
-  max-height: 50%;
-  justifycontent: center;
-  alignitems: 'center';
-  border: 1px solid #ffffff;
+  flex-direction: column;
   width: 100%;
-  border-top-color: ${Colors.lightGray};
-  border-bottom-color: ${Colors.lightGray};
-  margin-bottom: 30px;
+  align-items: center;
+  border-top: 1px solid ${Colors.lightGray};
+  border-bottom: 1px solid ${Colors.lightGray};
+  background-color: pink;
 `;
 
 export const ReviewScreenContainer = styled.View`
@@ -119,8 +94,4 @@ export const AggregateContainer = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-`;
-
-export const SafeArea = styled.SafeAreaView`
-  background-color: ${Colors.offWhite};
 `;
