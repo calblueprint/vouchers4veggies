@@ -2,11 +2,6 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { H1Heading } from './assets/Fonts';
-import AuthDemo from './AuthDemo';
-import { getAllTestDocs } from './src/database/queries';
-import VendorsListDemo from './VendorsListDemo';
-// import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
 import AppNavigator from './src/navigation/AppNavigator';
 
 // Keep the splash screen visible while we fetch resources

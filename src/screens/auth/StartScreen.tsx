@@ -33,7 +33,7 @@ export const StartScreen = ({ route, navigation }: any) => {
           <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
 
           <ButtonContainer>
-            <ButtonWhite onPress={() => navigation.navigate('Login')}>
+            <ButtonWhite onPress={toLoginScreen}>
               <DarkGrayText>
                 <H4_Card_Nav_Tab>Login</H4_Card_Nav_Tab>
               </DarkGrayText>
