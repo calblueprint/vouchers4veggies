@@ -42,18 +42,21 @@ export const useAuthReducer = () =>
             ...prevState,
             userToken: action.token,
             isLoading: false,
+            errorMessage: null,
           };
         case 'SIGN_IN':
           return {
             ...prevState,
             isSignout: false,
             userToken: action.token,
+            errorMessage: null,
           };
         case 'SIGN_OUT':
           return {
             ...prevState,
             isSignout: true,
             userToken: null,
+            errorMessage: null,
           };
         case 'ERROR':
           return {
