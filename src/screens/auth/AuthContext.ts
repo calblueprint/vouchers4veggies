@@ -18,16 +18,20 @@ export type AuthState = {
   userToken: string | null;
   isLoading: boolean;
   isSignout: boolean; // TODO: @wangannie use this to change the animation of the screen when signing out
+  errorMessage: string | null;
 };
 
 export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType,
 );
 
+AuthContext.displayName = 'AuthContext';
+
 export type AuthContextAction =
   | { type: 'RESTORE_TOKEN'; token: string | null }
   | { type: 'SIGN_IN'; token: string }
-  | { type: 'SIGN_OUT' };
+  | { type: 'SIGN_OUT' }
+  | { type: 'ERROR'; errorMessage: string };
 
 export const useAuthReducer = () =>
   useReducer(
@@ -51,6 +55,11 @@ export const useAuthReducer = () =>
             isSignout: true,
             userToken: null,
           };
+        case 'ERROR':
+          return {
+            ...prevState,
+            errorMessage: action.errorMessage,
+          };
         default:
           return prevState;
       }
@@ -59,6 +68,7 @@ export const useAuthReducer = () =>
       isLoading: true,
       isSignout: false,
       userToken: null,
+      errorMessage: null,
     },
   );
 
@@ -81,6 +91,7 @@ export const getAuthContext = (
       })
       .catch(error => {
         console.warn('(signIn) error', error);
+        dispatch({ type: 'ERROR', errorMessage: error.message });
       });
   },
   signOut: async () => {
@@ -102,6 +113,7 @@ export const getAuthContext = (
       })
       .catch(error => {
         console.warn('(signUp) error', error);
+        dispatch({ type: 'ERROR', errorMessage: error.message });
       });
   },
 });
