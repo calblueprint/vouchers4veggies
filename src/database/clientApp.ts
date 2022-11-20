@@ -20,6 +20,7 @@ const firebaseConfig = {
   masurementId: FIREBASE_MEASUREMENT_ID,
 };
 
+console.log('firebaseConfig', firebaseConfig);
 const fbApp = initializeApp(firebaseConfig);
 
 export default fbApp;

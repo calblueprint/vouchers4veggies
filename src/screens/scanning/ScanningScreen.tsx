@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Text, StyleSheet, SafeAreaView } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import {
   Body_1_Text,
@@ -12,14 +12,15 @@ import {
 } from '../../../assets/Fonts';
 import {
   ButtonMagenta,
-  HeaderContainer,
   LogoContainer,
   PageContainer,
   ScannerContainer,
   TitleContainer,
-  TopContainer,
   VoucherCounter,
   ButtonContainer,
+  Header,
+  BodyContainer,
+  SafeArea,
 } from './styles';
 import { ButtonWhite } from '../../../assets/Components';
 
@@ -58,17 +59,20 @@ const ScanningScreen = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeArea>
       <PageContainer>
-        <TopContainer>
+        <Header>
           <LogoContainer source={v4vLogo}></LogoContainer>
           <VoucherCounter>
             <CounterText>{scanCounter}</CounterText>
           </VoucherCounter>
-        </TopContainer>
-        <HeaderContainer>
+        </Header>
+
+        <BodyContainer>
           <TitleContainer>
-            <H2Heading>Scan your voucher(s).</H2Heading>
+            <CenterText>
+              <H2Heading>Scan your voucher(s).</H2Heading>
+            </CenterText>
           </TitleContainer>
           <Body_1_Text>
             <CenterText>
@@ -76,7 +80,7 @@ const ScanningScreen = () => {
               <MagentaText>purple box.</MagentaText>
             </CenterText>
           </Body_1_Text>
-        </HeaderContainer>
+        </BodyContainer>
 
         <ScannerContainer>
           <BarCodeScanner
@@ -106,7 +110,7 @@ const ScanningScreen = () => {
           </ButtonContainer>
         )}
       </PageContainer>
-    </SafeAreaView>
+    </SafeArea>
   );
 };
 
