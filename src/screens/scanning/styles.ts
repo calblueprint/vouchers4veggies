@@ -1,9 +1,13 @@
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
+export const SafeArea = styled.SafeAreaView`
+  background-color: ${Colors.offWhite};
+`;
+
 export const ScannerContainer = styled.View`
   width: 277px;
-  height: 277px;
+  height: 237px;
   background: ${Colors.offWhite};
   border: 2px solid ${Colors.lightMagenta};
   border-radius: 12px;
@@ -15,13 +19,13 @@ export const ScannerContainer = styled.View`
   margin-bottom: 40px;
 `;
 
-export const TopContainer = styled.View`
+export const Header = styled.View`
   width: 70%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 36px;
+  margin-bottom: 26px;
 `;
 
 export const LogoContainer = styled.ImageBackground`
@@ -41,19 +45,16 @@ export const VoucherCounter = styled.View`
 `;
 
 export const PageContainer = styled.View`
-  margin: 5%;
-  background-color: ${Colors.offWhite};
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 125px;
+  justify-content: center;
 `;
 
 export const TitleContainer = styled.View`
   padding-bottom: 12px;
 `;
 
-export const HeaderContainer = styled.View`
+export const BodyContainer = styled.View`
   width: 277px;
   align-items: center;
   margin-bottom: 35px;
