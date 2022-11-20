@@ -4,6 +4,7 @@ import { Colors } from '../../../assets/Colors';
 
 export const Styles = StyleSheet.create({
   FormField: {
+    height: 35,
     borderWidth: 1,
     borderColor: Colors.midGray,
     backgroundColor: Colors.lightGray,

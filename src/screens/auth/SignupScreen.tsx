@@ -4,11 +4,26 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Button,
 } from 'react-native';
-import React, { useState } from 'react';
-import { H1Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
+import {
+  HeadingContainer,
+  LoginContainer,
+  LogoContainer,
+  FormContainer,
+  Styles,
+  VerticalSpacingButtonContainer,
+  SmallTextContainer,
+  RowContainer,
+  RightAlignContainer,
+  LeftAlignContainer,
+  WhiteText,
+} from './styles';
+import { ButtonMagenta } from '../../../assets/Components';
+import { InputField } from '../../components/InputField/InputField';
+import React, { useState, useContext } from 'react';
+import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
 import { Colors } from '../../../assets/Colors';
+import { AuthContext } from './AuthContext';
 
 export const SignupScreen = () => {
   const [name, setName] = useState('');
@@ -57,9 +72,9 @@ export const SignupScreen = () => {
 
   return (
     <View style={styles.container}>
-      <H1Heading
+      <H2Heading
         style={styles.left_text}
-      >{`Hi there! Please\ncreate an account.`}</H1Heading>
+      >{`Hi there! Please\ncreate an account.`}</H2Heading>
 
       <View style={styles.form_container}>
         <H4_Card_Nav_Tab>Name</H4_Card_Nav_Tab>
