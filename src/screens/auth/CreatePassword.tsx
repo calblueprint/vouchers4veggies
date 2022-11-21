@@ -1,4 +1,4 @@
-import { Text, View, Pressable } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { useState } from 'react';
 import {
   H2Heading,
@@ -30,9 +30,6 @@ export const CreatePassword = () => {
   const [password, setPassword] = useState('');
   const [confirm, confirmPassword] = useState('');
 
-  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
-    togglePasswordVisibility();
-
   const submitPassword = () => {
     //write data to firebase
     console.log(password);
@@ -63,7 +60,6 @@ export const CreatePassword = () => {
           onChange={setPassword}
           value={password}
           placeholder="Enter password"
-          secureTextEntry={passwordVisibility}
         />
 
         <RowContainer>
