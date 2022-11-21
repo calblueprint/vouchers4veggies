@@ -1,10 +1,8 @@
-import {
-  StyleSheet,
-  TextInput,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
+import { ButtonMagenta } from '../../../assets/Components';
+import { InputField } from '../../components/InputField/InputField';
 import {
   HeadingContainer,
   LoginContainer,
@@ -14,25 +12,14 @@ import {
   VerticalSpacingButtonContainer,
   SmallTextContainer,
   RowContainer,
-  RightAlignContainer,
   LeftAlignContainer,
   WhiteText,
 } from './styles';
-import { ButtonMagenta } from '../../../assets/Components';
-import { InputField } from '../../components/InputField/InputField';
-import React, { useState, useContext } from 'react';
-import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
-import { Colors } from '../../../assets/Colors';
 import { AuthContext } from './AuthContext';
 
 export const SignupScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [verifyPassword, setVerifyPassword] = useState('');
-
-  // const [submitted, setSubmitted] = useState(false);
-  // const [error, setError] = useState(false);
 
   const submitForm = () => {
     //write data to firebase
@@ -40,115 +27,50 @@ export const SignupScreen = () => {
     console.log(email);
   };
 
-  const goToLogin = () => {
-    //routing to login in screen
-  };
-
-  //   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
-  //     setEmail(e.target.value);
-  //     setSubmitted(false);
-  //   };
-
-  //   const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
-  //     setPassword(e.target.value);
-  //     setSubmitted(false);
-  //   };
-
-  //   const handleVerifyPassword = (e: ChangeEvent<HTMLInputElement>) => {
-  //     setVerifyPassword(e.target.value);
-  //     setSubmitted(false);
-  //   };
-
-  //   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-  //     e.preventDefault();
-  //     if (email === '' || password === '' || verifyPassword === '') {
-  //       setError(true);
-  //     } else if (verifyPassword !== password) {
-  //       setError(true);
-  //     } else {
-  //       setSubmitted(true);
-  //     }
-  //   };
-
   return (
-    <View style={styles.container}>
-      <H2Heading
-        style={styles.left_text}
-      >{`Hi there! Please\ncreate an account.`}</H2Heading>
+    <LoginContainer>
+      {/* logo placeholder */}
+      <LogoContainer>
+        <View
+          style={{ backgroundColor: 'black', width: 50, height: 59.29 }}
+        ></View>
+      </LogoContainer>
 
-      <View style={styles.form_container}>
-        <H4_Card_Nav_Tab>Name</H4_Card_Nav_Tab>
-        <TextInput
-          //{
-          //figure out how to change border color to magenta upon onFocus
-          //}
-          onChangeText={newText => setName(newText)}
-          placeholder="Enter name"
-          placeholderTextColor={Colors.midGray}
-          style={styles.form_field}
-          value={name}
-        />
+      <FormContainer>
+        <HeadingContainer>
+          <H2Heading>Hi there! Please create an account.</H2Heading>
+        </HeadingContainer>
 
-        <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
-        <TextInput
-          onChangeText={newText => setEmail(newText)}
-          placeholder="Enter email"
-          placeholderTextColor={Colors.midGray}
-          style={styles.form_field}
+        <Body_1_Text style={Styles.bold}>Name</Body_1_Text>
+        <InputField onChange={setName} value={name} placeholder="Enter name" />
+
+        <RowContainer>
+          <LeftAlignContainer>
+            <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
+          </LeftAlignContainer>
+        </RowContainer>
+
+        <InputField
+          onChange={setEmail}
           value={email}
+          placeholder="Enter email"
         />
 
-        <TouchableOpacity style={styles.button} onPress={submitForm}>
-          <Text style={styles.white}>Next</Text>
-        </TouchableOpacity>
-      </View>
+        <VerticalSpacingButtonContainer>
+          <ButtonMagenta onPress={submitForm}>
+            <WhiteText>
+              <H4_Card_Nav_Tab>Next</H4_Card_Nav_Tab>
+            </WhiteText>
+          </ButtonMagenta>
+        </VerticalSpacingButtonContainer>
 
-      <Text>
-        Already have an account?{' '}
-        <Text style={styles.underline} onPress={goToLogin}>
-          Login.
-        </Text>
-      </Text>
-    </View>
+        <SmallTextContainer>
+          <Body_1_Text>
+            Already have an account?{' '}
+            <Body_1_Text style={Styles.underline}>Login</Body_1_Text>
+          </Body_1_Text>
+        </SmallTextContainer>
+      </FormContainer>
+    </LoginContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  center_text: {
-    textAlign: 'center',
-  },
-  left_text: {
-    textAlign: 'left',
-  },
-  form_container: {
-    width: 300,
-    height: '50%',
-  },
-  form_field: {
-    width: '100%',
-    backgroundColor: Colors.lightGray,
-    borderColor: Colors.darkGray,
-    borderRadius: 5,
-    padding: 10,
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  underline: {
-    textDecorationLine: 'underline',
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: Colors.magenta,
-    padding: 10,
-    borderRadius: 5,
-  },
-  white: {
-    color: Colors.offWhite,
-  },
-});

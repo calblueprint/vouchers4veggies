@@ -3,8 +3,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
-import { LoginScreen } from './src/screens/auth/LoginScreen';
-import { SignupScreen_2 } from './src/screens/auth/SignupScreen_2';
+import { SignupScreen } from './src/screens/auth/SignupScreen';
+import { CreatePassword } from './src/screens/auth/CreatePassword';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -57,7 +57,7 @@ export default function App() {
 
   return !resourcesLoaded ? null : (
     // <View style={styles.container} onLayout={onLayoutRootView}>
-    <SignupScreen_2></SignupScreen_2>
+    <CreatePassword></CreatePassword>
     // <AppNavigator />
     // </View>
   );
