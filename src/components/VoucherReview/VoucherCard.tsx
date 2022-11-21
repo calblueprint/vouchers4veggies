@@ -12,7 +12,7 @@ export const VoucherCard = (props: any) => {
         <Body_1_Text>{props.date}</Body_1_Text>
       </DateIdContainer>
       <PriceEditContainer>
-        <H3_Subheading>${props.price}</H3_Subheading>
+        <H3_Subheading>$ {props.amount}</H3_Subheading>
       </PriceEditContainer>
       <MaterialCommunityIcons
         name="pencil-outline"
