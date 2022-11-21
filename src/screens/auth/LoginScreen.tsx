@@ -4,6 +4,7 @@ import { ButtonMagenta } from '../../../assets/Components';
 import { Body_1_Text, H2Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
 import { InputField } from '../../components/InputField/InputField';
 import { AuthContext } from './AuthContext';
+
 import {
   FormContainer,
   HeadingContainer,
@@ -18,14 +19,16 @@ import {
   WhiteText,
 } from './styles';
 
-export const LoginScreen = () => {
+export function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const { signIn, authState } = useContext(AuthContext);
 
-  const handleSignIn = async () => signIn(email, password);
+  const { dispatch } = AuthContext();
+
+  const handleSignIn = async () => signIn(dispatch, { email, password });
 
   useEffect(() => {
     if (authState?.errorMessage) {
@@ -83,9 +86,9 @@ export const LoginScreen = () => {
           onChange={onChangePassword}
           value={password}
           placeholder="Enter password"
-          secureTextEntry={true}
+          secureTextEntry
         />
-        {errorMessage != '' && (
+        {errorMessage !== '' && (
           <Body_1_Text style={Styles.errorText}>{errorMessage}</Body_1_Text>
         )}
         <VerticalSpacingButtonContainer>
@@ -105,4 +108,4 @@ export const LoginScreen = () => {
       </FormContainer>
     </LoginContainer>
   );
-};
+}
