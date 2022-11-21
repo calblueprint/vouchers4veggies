@@ -1,44 +1,48 @@
 import React, { useState } from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, View, Pressable } from 'react-native';
 import { Styles } from './styles';
 import { Colors } from '../../../assets/Colors';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const PasswordInput = (props: any) => {
   const [isActive, setIsActive] = useState(false);
+  const { passwordVisibility, handlePasswordVisibility } =
+    togglePasswordVisibility();
 
   return (
-    <TextInput
-      onBlur={() => setIsActive(false)}
-      onFocus={() => setIsActive(true)}
-      onChangeText={newText => props.onChange(newText)}
-      style={isActive ? Styles.FormFieldFocus : Styles.FormField}
-      value={props.value}
-      placeholder={props.placeholder}
-      placeholderTextColor={Colors.midGray}
-      secureTextEntry={props.secureTextEntry}
-      autoCorrect={false}
-      autoCapitalize="none"
-    />
+    <View style={isActive ? Styles.FormFieldFocus : Styles.FormField}>
+      <TextInput
+        style={Styles.TextInputField}
+        onBlur={() => setIsActive(false)}
+        onFocus={() => setIsActive(true)}
+        onChangeText={newText => props.onChange(newText)}
+        value={props.value}
+        placeholder={props.placeholder}
+        placeholderTextColor={Colors.midGray}
+        secureTextEntry={passwordVisibility}
+        autoCorrect={false}
+        autoCapitalize="none"
+      />
+      <Pressable onPress={handlePasswordVisibility}>
+        <MaterialCommunityIcons
+          name={passwordVisibility ? 'eye' : 'eye-off'}
+          size={22}
+          color="#232323"
+        />
+      </Pressable>
+    </View>
   );
 };
 
 export const togglePasswordVisibility = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(true);
-  const [rightIcon, setRightIcon] = useState('eye');
 
   const handlePasswordVisibility = () => {
-    if (rightIcon == 'eye') {
-      setRightIcon('eye-off');
-      setPasswordVisibility(!passwordVisibility);
-    } else if (rightIcon == 'eye-off') {
-      setRightIcon('eye');
-      setPasswordVisibility(!passwordVisibility);
-    }
+    setPasswordVisibility(!passwordVisibility);
   };
 
   return {
     passwordVisibility,
-    rightIcon,
     handlePasswordVisibility,
   };
 };
