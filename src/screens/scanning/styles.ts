@@ -5,23 +5,14 @@ export const SafeArea = styled.SafeAreaView`
   background-color: ${Colors.offWhite};
 `;
 
-export const ScannerContainer = styled.View`
-  width: 277px;
-  height: 237px;
-  background: ${Colors.offWhite};
-  border: 2px solid ${Colors.lightMagenta};
-  border-radius: 12px;
+export const PageContainer = styled.View`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
+  justify-content: center;
 `;
 
 export const Header = styled.View`
   width: 70%;
-  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -44,20 +35,14 @@ export const VoucherCounter = styled.View`
   align-items: center;
 `;
 
-export const PageContainer = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const TitleContainer = styled.View`
-  padding-bottom: 12px;
-`;
-
 export const BodyContainer = styled.View`
   width: 277px;
   align-items: center;
   margin-bottom: 35px;
+`;
+
+export const TitleContainer = styled.View`
+  padding-bottom: 12px;
 `;
 
 export const ButtonMagenta = styled.TouchableOpacity`
@@ -72,8 +57,18 @@ export const ButtonMagenta = styled.TouchableOpacity`
   margin-bottom: 16px;
 `;
 
-export const Container = styled.ScrollView`
-  width: 100%;
+export const ScannerContainer = styled.View`
+  width: 277px;
+  height: 237px;
+  background: ${Colors.offWhite};
+  border: 2px solid ${Colors.lightMagenta};
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 `;
 
 export const ButtonContainer = styled.View`
