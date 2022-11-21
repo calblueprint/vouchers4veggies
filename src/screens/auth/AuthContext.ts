@@ -31,7 +31,7 @@ export type AuthContextAction =
   | { type: 'RESTORE_TOKEN'; token: string | null }
   | { type: 'SIGN_IN'; token: string }
   | { type: 'SIGN_OUT' }
-  | { type: 'ERROR'; errorMessage: string };
+  | { type: 'SET_ERROR_MESSAGE'; errorMessage: string };
 
 export const useAuthReducer = () =>
   useReducer(
@@ -58,7 +58,7 @@ export const useAuthReducer = () =>
             userToken: null,
             errorMessage: null,
           };
-        case 'ERROR':
+        case 'SET_ERROR_MESSAGE':
           return {
             ...prevState,
             errorMessage: action.errorMessage,
@@ -94,7 +94,7 @@ export const getAuthContext = (
       })
       .catch(error => {
         console.warn('(signIn) error', error);
-        dispatch({ type: 'ERROR', errorMessage: error.message });
+        dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage: error.message });
       });
   },
   signOut: async () => {
@@ -116,7 +116,7 @@ export const getAuthContext = (
       })
       .catch(error => {
         console.warn('(signUp) error', error);
-        dispatch({ type: 'ERROR', errorMessage: error.message });
+        dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage: error.message });
       });
   },
 });
