@@ -62,7 +62,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const ReviewHeader = styled.View`
-  width: 85%;
+  width: 100%
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
