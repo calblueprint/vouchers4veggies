@@ -40,6 +40,9 @@
       }
     ],
     "react/jsx-props-no-spreading": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "no-shadow": "off", // replaced by ts-eslint rule below
+    "@typescript-eslint/no-shadow": "error"
   }
 }
