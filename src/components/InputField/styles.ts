@@ -1,6 +1,5 @@
-import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../assets/Colors';
+import Colors from '../../../assets/Colors';
 
 export const Styles = StyleSheet.create({
   FormField: {

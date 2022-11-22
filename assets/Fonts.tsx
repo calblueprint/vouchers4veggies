@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Colors } from './Colors';
+import Colors from './Colors';
 
 export const H1Heading = styled.Text`
   font-family: 'manrope-bold';

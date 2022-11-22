@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { TextInput } from 'react-native';
+import Colors from '../../../assets/Colors';
 import { Styles } from './styles';
-import { Colors } from '../../../assets/Colors';
 
-export const InputField = (props: any) => {
+export function InputField(props: any) {
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -20,4 +20,4 @@ export const InputField = (props: any) => {
       autoCapitalize="none"
     />
   );
-};
+}

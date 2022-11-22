@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Colors } from '../../../assets/Colors';
+import Colors from '../../../assets/Colors';
+
 import { Body1Text, Body2Subtext, H3Subheading } from '../../../assets/Fonts';
 import {
   CountContainer,

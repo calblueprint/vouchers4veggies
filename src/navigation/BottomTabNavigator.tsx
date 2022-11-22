@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Colors } from '../../assets/Colors';
 
+import Colors from '../../assets/Colors';
 import ProfileStackNavigator from './stacks/ProfileStackNavigator';
 import ScannerStackNavigator from './stacks/ScannerStackNavigator';
 import TransactionStackNavigator from './stacks/TransactionStackNavigator';
@@ -12,7 +12,7 @@ const initialRouteName = 'Home';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const NavigationBar = () => {
+export function NavigationBar() {
   return (
     <Tab.Navigator
       initialRouteName={initialRouteName}
@@ -27,7 +27,7 @@ export const NavigationBar = () => {
             <AntDesign name="scan1" color={color} size={26} />
           ),
         }}
-      ></Tab.Screen>
+      />
       <Tab.Screen
         name="Profile"
         component={ProfileStackNavigator}
@@ -37,7 +37,7 @@ export const NavigationBar = () => {
             <Ionicons name="md-person-outline" color={color} size={26} />
           ),
         }}
-      ></Tab.Screen>
+      />
       <Tab.Screen
         name="Transactions"
         component={TransactionStackNavigator}
@@ -47,7 +47,7 @@ export const NavigationBar = () => {
             <MaterialIcons name="compare-arrows" color={color} size={26} />
           ),
         }}
-      ></Tab.Screen>
+      />
     </Tab.Navigator>
   );
-};
+}

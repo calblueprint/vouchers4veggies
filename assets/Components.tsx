@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Colors } from './Colors';
+import Colors from './Colors';
 
 // TODO: @oahnh fix static widths
 export const ButtonMagenta = styled.TouchableOpacity`

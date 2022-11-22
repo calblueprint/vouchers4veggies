@@ -1,5 +1,5 @@
 import { ActivityIndicator } from 'react-native';
-import { Colors } from '../../../assets/Colors';
+import Colors from '../../../assets/Colors';
 
 export default function LoadingSpinner() {
   return (
