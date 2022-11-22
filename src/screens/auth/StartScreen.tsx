@@ -12,6 +12,19 @@ import {
   WhiteText,
 } from './styles';
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    width: 300,
+    margin: 10,
+  },
+});
+
 export default function StartScreen({
   navigation,
 }: AuthStackScreenProps<'Start'>) {
@@ -49,16 +62,3 @@ export default function StartScreen({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    width: 300,
-    margin: 10,
-  },
-});

@@ -19,7 +19,7 @@ import {
   WhiteText,
 } from './styles';
 
-export function LoginScreen() {
+export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -99,7 +99,7 @@ export function LoginScreen() {
 
         <SmallTextContainer>
           <Body1Text>
-            Don't have an account?{' '}
+            {`Don't have an account? `}
             <Body1Text style={Styles.underline}>Sign up.</Body1Text>
           </Body1Text>
         </SmallTextContainer>
