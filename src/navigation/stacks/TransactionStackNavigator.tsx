@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 import TransactionsScreen from '../../screens/Transactions/TransactionsScreen';
 import { TransactionStackParamList } from '../types';
 

@@ -13,7 +13,7 @@ const initialRouteName = 'Home';
 
 const Tab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
-export function NavigationBar() {
+export default function NavigationBar() {
   return (
     <Tab.Navigator
       initialRouteName={initialRouteName}

@@ -1,14 +1,6 @@
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ScanningScreen from '../scanning/ScanningScreen';
-
-//TODO: Implement screen here
-export default function ScannerScreen() {
-  return (
-    <View style={styles.container}>
-      <ScanningScreen />
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -18,3 +10,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// TODO: Implement screen here
+export default function ScannerScreen() {
+  return (
+    <View style={styles.container}>
+      <ScanningScreen />
+    </View>
+  );
+}

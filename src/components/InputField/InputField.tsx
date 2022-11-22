@@ -1,21 +1,33 @@
 import React, { useState } from 'react';
 import { TextInput } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { Styles } from './styles';
+import Styles from './styles';
 
-export function InputField(props: any) {
+type InputFieldProps = {
+  onChange: (text: string) => void;
+  value: string;
+  placeholder: string;
+  secureTextEntry: boolean;
+};
+
+export default function InputField({
+  onChange,
+  value,
+  placeholder,
+  secureTextEntry = false,
+}: InputFieldProps) {
   const [isActive, setIsActive] = useState(false);
 
   return (
     <TextInput
       onBlur={() => setIsActive(false)}
       onFocus={() => setIsActive(true)}
-      onChangeText={newText => props.onChange(newText)}
+      onChangeText={onChange}
       style={isActive ? Styles.FormFieldFocus : Styles.FormField}
-      value={props.value}
-      placeholder={props.placeholder}
+      value={value}
+      placeholder={placeholder}
       placeholderTextColor={Colors.midGray}
-      secureTextEntry={props.secureTextEntry}
+      secureTextEntry={secureTextEntry}
       autoCorrect={false}
       autoCapitalize="none"
     />

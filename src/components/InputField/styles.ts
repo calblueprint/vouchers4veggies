@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 
-export const Styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   FormField: {
     borderWidth: 1,
     borderColor: Colors.midGray,
@@ -23,3 +23,5 @@ export const Styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
+
+export default Styles;
