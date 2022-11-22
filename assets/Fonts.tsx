@@ -15,28 +15,28 @@ export const H2Heading = styled.Text`
   line-height: 41px;
 `;
 
-export const H3_Subheading = styled.Text`
+export const H3Subheading = styled.Text`
   font-family: 'manrope-medium';
   font-style: normal;
   font-size: 24px;
   line-height: 33px;
 `;
 
-export const H4_Card_Nav_Tab = styled.Text`
+export const H4CardNavTab = styled.Text`
   font-family: 'manrope-semiBold';
   font-style: normal;
   font-size: 18px;
   line-height: 25px;
 `;
 
-export const Body_1_Text = styled.Text`
+export const Body1Text = styled.Text`
   font-family: 'manrope-regular';
   font-style: normal;
   font-size: 14px;
   line-height: 19px;
 `;
 
-export const Body_2_Subtext = styled.Text`
+export const Body2Subtext = styled.Text`
   font-family: 'manrope-regular';
   font-style: normal;
   font-size: 12px;

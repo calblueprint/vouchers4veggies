@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { ButtonWhite } from '../../../assets/Components';
 import {
-  Body_1_Text,
+  Body1Text,
   ButtonTextWhite,
   CenterText,
   CounterText,
   H2Heading,
-  H4_Card_Nav_Tab,
+  H4CardNavTab,
   MagentaText,
 } from '../../../assets/Fonts';
 import {
+  ButtonContainer,
   ButtonMagenta,
   HeaderContainer,
   LogoContainer,
@@ -19,14 +21,12 @@ import {
   TitleContainer,
   TopContainer,
   VoucherCounter,
-  ButtonContainer,
 } from './styles';
-import { ButtonWhite } from '../../../assets/Components';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
 
-const ScanningScreen = () => {
+function ScanningScreen() {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(false);
@@ -62,7 +62,7 @@ const ScanningScreen = () => {
     <SafeAreaView>
       <PageContainer>
         <TopContainer>
-          <LogoContainer source={v4vLogo}></LogoContainer>
+          <LogoContainer source={v4vLogo} />
           <VoucherCounter>
             <CounterText>{scanCounter}</CounterText>
           </VoucherCounter>
@@ -71,12 +71,12 @@ const ScanningScreen = () => {
           <TitleContainer>
             <H2Heading>Scan your voucher(s).</H2Heading>
           </TitleContainer>
-          <Body_1_Text>
+          <Body1Text>
             <CenterText>
               Point your camera at the QR code and line it up with the{' '}
               <MagentaText>purple box.</MagentaText>
             </CenterText>
-          </Body_1_Text>
+          </Body1Text>
         </HeaderContainer>
 
         <ScannerContainer>
@@ -102,14 +102,14 @@ const ScanningScreen = () => {
               <ButtonTextWhite>Scan Again</ButtonTextWhite>
             </ButtonMagenta>
             <ButtonWhite>
-              <H4_Card_Nav_Tab>Review & Submit</H4_Card_Nav_Tab>
+              <H4CardNavTab>Review & Submit</H4CardNavTab>
             </ButtonWhite>
           </ButtonContainer>
         )}
       </PageContainer>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

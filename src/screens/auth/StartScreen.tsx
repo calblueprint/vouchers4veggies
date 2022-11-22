@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
-import { H1Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
+import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import {
   ButtonContainer,
   DarkGrayText,
@@ -11,7 +11,7 @@ import {
   WhiteText,
 } from './styles';
 
-export const StartScreen = ({ route, navigation }: any) => {
+export function StartScreen({ route, navigation }: any) {
   return (
     <View style={styles.container}>
       <LoginContainer>
@@ -28,7 +28,7 @@ export const StartScreen = ({ route, navigation }: any) => {
           <ButtonContainer>
             <ButtonWhite onPress={() => navigation.navigate('Login')}>
               <DarkGrayText>
-                <H4_Card_Nav_Tab>Login</H4_Card_Nav_Tab>
+                <H4CardNavTab>Login</H4CardNavTab>
               </DarkGrayText>
             </ButtonWhite>
           </ButtonContainer>
@@ -37,7 +37,7 @@ export const StartScreen = ({ route, navigation }: any) => {
             {/* TODO: navigate to signup screen */}
             <ButtonMagenta>
               <WhiteText>
-                <H4_Card_Nav_Tab>Sign Up</H4_Card_Nav_Tab>
+                <H4CardNavTab>Sign Up</H4CardNavTab>
               </WhiteText>
             </ButtonMagenta>
           </ButtonContainer>
@@ -45,7 +45,7 @@ export const StartScreen = ({ route, navigation }: any) => {
       </LoginContainer>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
