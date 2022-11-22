@@ -7,10 +7,11 @@ import Colors from '../../assets/Colors';
 import ProfileStackNavigator from './stacks/ProfileStackNavigator';
 import ScannerStackNavigator from './stacks/ScannerStackNavigator';
 import TransactionStackNavigator from './stacks/TransactionStackNavigator';
+import { BottomTabParamList } from './types';
 
 const initialRouteName = 'Home';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
 export function NavigationBar() {
   return (

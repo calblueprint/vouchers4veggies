@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
+import { AuthStackScreenProps } from '../../navigation/types';
 import {
   ButtonContainer,
   DarkGrayText,
@@ -11,7 +12,9 @@ import {
   WhiteText,
 } from './styles';
 
-export function StartScreen({ route, navigation }: any) {
+export default function StartScreen({
+  navigation,
+}: AuthStackScreenProps<'Start'>) {
   return (
     <View style={styles.container}>
       <LoginContainer>

@@ -1,7 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TransactionsScreen from '../../screens/Transactions/TransactionsScreen';
+import { TransactionStackParamList } from '../types';
 
-const TransactionStack = createNativeStackNavigator();
+const TransactionStack =
+  createNativeStackNavigator<TransactionStackParamList>();
 
 /**
  * Stack navigator for the transaction/invoice screens.
