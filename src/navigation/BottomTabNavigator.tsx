@@ -13,6 +13,18 @@ const initialRouteName = 'Home';
 
 const Tab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
+function ScanIcon({ color }: { color: string }) {
+  return <AntDesign name="scan1" color={color} size={26} />;
+}
+
+function ProfileIcon({ color }: { color: string }) {
+  return <Ionicons name="md-person-outline" color={color} size={26} />;
+}
+
+function TransactionIcon({ color }: { color: string }) {
+  return <MaterialIcons name="compare-arrows" color={color} size={26} />;
+}
+
 export default function NavigationBar() {
   return (
     <Tab.Navigator
@@ -24,9 +36,7 @@ export default function NavigationBar() {
         component={ScannerStackNavigator}
         options={{
           tabBarLabel: 'Scan',
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="scan1" color={color} size={26} />
-          ),
+          tabBarIcon: ScanIcon,
         }}
       />
       <Tab.Screen
@@ -34,9 +44,7 @@ export default function NavigationBar() {
         component={ProfileStackNavigator}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="md-person-outline" color={color} size={26} />
-          ),
+          tabBarIcon: ProfileIcon,
         }}
       />
       <Tab.Screen
@@ -44,9 +52,7 @@ export default function NavigationBar() {
         component={TransactionStackNavigator}
         options={{
           tabBarLabel: 'Transactions',
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="compare-arrows" color={color} size={26} />
-          ),
+          tabBarIcon: TransactionIcon,
         }}
       />
     </Tab.Navigator>
