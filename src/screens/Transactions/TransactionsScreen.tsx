@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
-import { TransactionCard } from '../../components/Transactions/TransactionCard';
+import TransactionCard from '../../components/Transactions/TransactionCard';
 import {
   AddManuallyContainer,
   FilterRow,

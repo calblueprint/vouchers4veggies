@@ -13,7 +13,7 @@ import {
 type TransactionCardProps = {
   date: string;
   id: string;
-  price: string;
+  price: number;
   count: number;
 };
 export default function TransactionCard({

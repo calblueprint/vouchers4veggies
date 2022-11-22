@@ -7,7 +7,7 @@ type InputFieldProps = {
   onChange: (text: string) => void;
   value: string;
   placeholder: string;
-  secureTextEntry: boolean;
+  secureTextEntry?: boolean;
 };
 
 export default function InputField({

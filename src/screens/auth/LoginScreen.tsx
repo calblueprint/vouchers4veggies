@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
-import { InputField } from '../../components/InputField/InputField';
+import InputField from '../../components/InputField/InputField';
+
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
+
 import { useAuthContext } from './AuthContext';
+
 import {
   FormContainer,
   HeadingContainer,
@@ -87,7 +90,7 @@ export default function LoginScreen() {
           secureTextEntry
         />
         {showErrorMessage && errorMessage && (
-          <Body_1_Text style={Styles.errorText}>{errorMessage}</Body_1_Text>
+          <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
         )}
         <VerticalSpacingButtonContainer>
           <ButtonMagenta onPress={handleSignIn}>

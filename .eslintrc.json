@@ -43,6 +43,8 @@
     "object-curly-newline": "off",
     "@typescript-eslint/no-explicit-any": "error",
     "no-shadow": "off", // replaced by ts-eslint rule below
-    "@typescript-eslint/no-shadow": "error"
+    "@typescript-eslint/no-shadow": "error",
+    "react/prop-types": "off", // We do not use prop-types
+    "react/require-default-props": "off" // We do not use prop-types
   }
 }
