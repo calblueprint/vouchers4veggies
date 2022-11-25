@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Colors } from '../../../assets/Colors';
 import {
   H2Heading,
   Body_1_Text,
   ButtonTextWhite,
   H3_Subheading,
+  H1Heading,
 } from '../../../assets/Fonts';
 import {
   HeaderContainer,
@@ -14,7 +15,7 @@ import {
   ReviewHeader,
   ReviewScreenContainer,
 } from './styles';
-import { VoucherCard } from '../../components/VoucherReview/VoucherCard';
+import VoucherCard from '../../components/VoucherReview/VoucherCard';
 import { Ionicons } from '@expo/vector-icons';
 import { ButtonMagenta } from '../../../assets/Components';
 
@@ -50,30 +51,39 @@ const ReviewScreen = () => {
     },
   ]);
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-      }}
-    >
-      <SafeAreaView>
+    <SafeAreaView>
+      <PageContainer>
         <ReviewHeader>
           <Ionicons name="chevron-back" size={25} color={Colors.darkGray} />
-          <H3_Subheading>Back</H3_Subheading>
+          <Body_1_Text>Back</Body_1_Text>
         </ReviewHeader>
-        {/* {vouchers.map(item => (
-        <VoucherCard
-          key={item.id}
-          id={item.id}
-          amount={item.amount}
-          date={item.date}
-        />
-      ))} */}
-      </SafeAreaView>
-    </View>
+        <H2Heading>Review Vouchers</H2Heading>
+        {/* Make this container scrollable */}
+        <View style={styles.container}>
+          {vouchers.map(item => (
+            <VoucherCard
+              key={item.id}
+              id={item.id}
+              date={item.date}
+              amount={item.amount}
+            />
+          ))}
+        </View>
+      </PageContainer>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    border: '1px solid #ffffff',
+    width: '100%',
+    borderTopColor: `${Colors.lightGray}`,
+    borderBottomColor: `${Colors.lightGray}`,
+  },
+});
 
 export default ReviewScreen;
