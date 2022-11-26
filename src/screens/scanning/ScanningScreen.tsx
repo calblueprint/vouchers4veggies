@@ -11,7 +11,6 @@ import {
   MagentaText,
 } from '../../../assets/Fonts';
 import {
-  ButtonMagenta,
   HeaderContainer,
   LogoContainer,
   PageContainer,
@@ -21,7 +20,7 @@ import {
   VoucherCounter,
   ButtonContainer,
 } from './styles';
-import { ButtonWhite } from '../../../assets/Components';
+import { ButtonWhite, ButtonMagenta } from '../../../assets/Components';
 
 const v4vLogo = require('../../../assets/logo-1.png');
 

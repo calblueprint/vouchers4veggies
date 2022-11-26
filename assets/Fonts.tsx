@@ -64,3 +64,10 @@ export const ButtonTextWhite = styled.Text`
 export const CenterText = styled.Text`
   text-align: center;
 `;
+
+export const LabelText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-weight: 600px;
+  font-size: 14px;
+  line-height: 19px;
+`;

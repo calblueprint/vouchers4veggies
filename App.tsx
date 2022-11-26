@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
 import ReviewScreen from './src/screens/scanning/ReviewScreen';
-import { VoucherCard } from './src/components/VoucherReview/VoucherCard';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -57,8 +56,7 @@ export default function App() {
 
   return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {/* <AppNavigator /> */}
-      <ReviewScreen />
+      <AppNavigator />
     </View>
   );
 }
