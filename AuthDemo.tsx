@@ -4,6 +4,7 @@ import { AuthContext } from './src/screens/auth/AuthContext';
 
 /**
  * Simple demo component to test Firebase authentication.
+ * TODO: @wangannie remove once we implement auth functionality in auth screens.
  */
 export default function AuthDemo() {
   const [email, setEmail] = useState('example@gmail.com');

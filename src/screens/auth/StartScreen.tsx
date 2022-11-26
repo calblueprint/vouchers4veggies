@@ -1,24 +1,17 @@
-import { Text, StyleSheet, View } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { H1Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
-import { ButtonWhite, ButtonMagenta } from '../../../assets/Components';
 import {
-  LoginContainer,
+  ButtonContainer,
   DarkGrayText,
+  LoginContainer,
   LogoContainer,
   StartContainer,
-  ButtonContainer,
   WhiteText,
 } from './styles';
 
 export const StartScreen = ({ route, navigation }: any) => {
-  const toLoginScreen = () => {
-    // implement routing
-  };
-  const toSignupScreen = () => {
-    // implement routing
-  };
-
   return (
     <View style={styles.container}>
       <LoginContainer>
@@ -33,7 +26,7 @@ export const StartScreen = ({ route, navigation }: any) => {
           <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
 
           <ButtonContainer>
-            <ButtonWhite onPress={toLoginScreen}>
+            <ButtonWhite onPress={() => navigation.navigate('Login')}>
               <DarkGrayText>
                 <H4_Card_Nav_Tab>Login</H4_Card_Nav_Tab>
               </DarkGrayText>
@@ -41,7 +34,8 @@ export const StartScreen = ({ route, navigation }: any) => {
           </ButtonContainer>
 
           <ButtonContainer>
-            <ButtonMagenta onPress={toSignupScreen}>
+            {/* TODO: navigate to signup screen */}
+            <ButtonMagenta>
               <WhiteText>
                 <H4_Card_Nav_Tab>Sign Up</H4_Card_Nav_Tab>
               </WhiteText>
