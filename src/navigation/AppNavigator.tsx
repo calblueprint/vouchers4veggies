@@ -40,11 +40,11 @@ export default function AppNavigator() {
 
   const authContext: AuthContextType = React.useMemo(
     () => getAuthContext(dispatch),
-    [],
+    [dispatch],
   );
 
   return (
-    <AuthContext.Provider value={authContext}>
+    <AuthContext.Provider value={{ authState, ...authContext }}>
       <NavigationContainer>
         {authState.userToken == null ? (
           <AuthStackNavigator />

@@ -18,16 +18,20 @@ export type AuthState = {
   userToken: string | null;
   isLoading: boolean;
   isSignout: boolean; // TODO: @wangannie use this to change the animation of the screen when signing out
+  errorMessage: string | null;
 };
 
 export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType,
 );
 
+AuthContext.displayName = 'AuthContext';
+
 export type AuthContextAction =
   | { type: 'RESTORE_TOKEN'; token: string | null }
   | { type: 'SIGN_IN'; token: string }
-  | { type: 'SIGN_OUT' };
+  | { type: 'SIGN_OUT' }
+  | { type: 'SET_ERROR_MESSAGE'; errorMessage: string };
 
 export const useAuthReducer = () =>
   useReducer(
@@ -38,18 +42,26 @@ export const useAuthReducer = () =>
             ...prevState,
             userToken: action.token,
             isLoading: false,
+            errorMessage: null,
           };
         case 'SIGN_IN':
           return {
             ...prevState,
             isSignout: false,
             userToken: action.token,
+            errorMessage: null,
           };
         case 'SIGN_OUT':
           return {
             ...prevState,
             isSignout: true,
             userToken: null,
+            errorMessage: null,
+          };
+        case 'SET_ERROR_MESSAGE':
+          return {
+            ...prevState,
+            errorMessage: action.errorMessage,
           };
         default:
           return prevState;
@@ -59,6 +71,7 @@ export const useAuthReducer = () =>
       isLoading: true,
       isSignout: false,
       userToken: null,
+      errorMessage: null,
     },
   );
 
@@ -81,6 +94,7 @@ export const getAuthContext = (
       })
       .catch(error => {
         console.warn('(signIn) error', error);
+        dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage: error.message });
       });
   },
   signOut: async () => {
@@ -102,6 +116,7 @@ export const getAuthContext = (
       })
       .catch(error => {
         console.warn('(signUp) error', error);
+        dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage: error.message });
       });
   },
 });
