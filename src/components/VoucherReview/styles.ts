@@ -6,7 +6,7 @@ export const ReviewRow = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 23px 29px;
+  padding: 23px 0px;
   width: 100%;
 `;
 

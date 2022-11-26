@@ -70,14 +70,17 @@ export const ReviewHeader = styled.View`
   margin-bottom: 46px;
 `;
 
-export const ReviewContainer = styled.View`
+export const ReviewContainer = styled.ScrollView`
   display: flex;
-  flex-direction: column;
+  flex-grow: 1;
+  max-height: 50%;
+  justifycontent: center;
+  alignitems: 'center';
+  border: 1px solid #ffffff;
   width: 100%;
-  align-items: center;
-  border-top: 1px solid ${Colors.lightGray};
-  border-bottom: 1px solid ${Colors.lightGray};
-  background-color: pink;
+  border-top-color: ${Colors.lightGray};
+  border-bottom-color: ${Colors.lightGray};
+  margin-bottom: 30px;
 `;
 
 export const ReviewScreenContainer = styled.View`

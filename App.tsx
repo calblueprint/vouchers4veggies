@@ -1,10 +1,9 @@
-/* eslint-disable global-require */
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
-import { AuthContextProvider } from './src/screens/auth/AuthContext';
+import ReviewScreen from './src/screens/scanning/ReviewScreen';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -24,12 +23,6 @@ async function loadResourcesAsync() {
   ]);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
 export default function App() {
   const [resourcesLoaded, setResourcesLoaded] = useState(false);
 
@@ -41,7 +34,6 @@ export default function App() {
       try {
         await loadResourcesAsync();
       } catch (e) {
-        // eslint-disable-next-line no-console
         console.warn(e);
       } finally {
         // Tell the application to render
@@ -64,9 +56,13 @@ export default function App() {
 
   return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <AuthContextProvider>
-        <AppNavigator />
-      </AuthContextProvider>
+      <AppNavigator />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

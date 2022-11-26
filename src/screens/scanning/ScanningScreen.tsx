@@ -1,18 +1,16 @@
+import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
 import {
-  Body1Text,
+  Body_1_Text,
   ButtonTextWhite,
   CenterText,
   CounterText,
   H2Heading,
-  H4CardNavTab,
+  H4_Card_Nav_Tab,
   MagentaText,
 } from '../../../assets/Fonts';
 import {
-  SafeArea,
-  ButtonContainer,
   HeaderContainer,
   LogoContainer,
   PageContainer,
@@ -20,23 +18,15 @@ import {
   TitleContainer,
   TopContainer,
   VoucherCounter,
+  ButtonContainer,
 } from './styles';
 import { ButtonWhite, ButtonMagenta } from '../../../assets/Components';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
 
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-    borderRadius: 10,
-  },
-});
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ScanningScreen({ navigation }: any) {
+const ScanningScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
-  const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
+  const [type, setType] = useState<any>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanCounter, incrementScanned] = useState(0);
 
@@ -51,10 +41,10 @@ export default function ScanningScreen({ navigation }: any) {
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
-      const { data } = scanningResult;
+      const { type, data, bounds: { origin } = {} } = scanningResult;
+      // const { x, y } = origin;
       incrementScanned(scanCounter + 1);
       setScanned(true);
-      // eslint-disable-next-line no-alert
       alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     }
   };
@@ -67,10 +57,10 @@ export default function ScanningScreen({ navigation }: any) {
   }
 
   return (
-    <SafeArea>
+    <SafeAreaView>
       <PageContainer>
         <TopContainer>
-          <LogoContainer source={v4vLogo} />
+          <LogoContainer source={v4vLogo}></LogoContainer>
           <VoucherCounter>
             <CounterText>{scanCounter}</CounterText>
           </VoucherCounter>
@@ -79,12 +69,12 @@ export default function ScanningScreen({ navigation }: any) {
           <TitleContainer>
             <H2Heading>Scan your voucher(s).</H2Heading>
           </TitleContainer>
-          <Body1Text>
+          <Body_1_Text>
             <CenterText>
               Point your camera at the QR code and line it up with the{' '}
               <MagentaText>purple box.</MagentaText>
             </CenterText>
-          </Body1Text>
+          </Body_1_Text>
         </HeaderContainer>
 
         <ScannerContainer>
@@ -109,12 +99,21 @@ export default function ScanningScreen({ navigation }: any) {
             >
               <ButtonTextWhite>Scan Again</ButtonTextWhite>
             </ButtonMagenta>
-            <ButtonWhite onPress={() => navigation.navigate('Review')}>
-              <H4CardNavTab>Review & Submit</H4CardNavTab>
+            <ButtonWhite>
+              <H4_Card_Nav_Tab>Review & Submit</H4_Card_Nav_Tab>
             </ButtonWhite>
           </ButtonContainer>
         )}
       </PageContainer>
-    </SafeArea>
+    </SafeAreaView>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+    borderRadius: 10,
+  },
+});
+
+export default ScanningScreen;
