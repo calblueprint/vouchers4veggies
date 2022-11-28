@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, TextInput, View } from 'react-native';
-import { AuthContext } from './src/screens/auth/AuthContext';
+import { useAuthContext } from './src/screens/auth/AuthContext';
+import { signIn, signUp } from './src/utils/authUtils';
 
 /**
  * Simple demo component to test Firebase authentication.
@@ -10,9 +11,9 @@ export default function AuthDemo() {
   const [email, setEmail] = useState('example@gmail.com');
   const [password, setPassword] = useState('password');
 
-  const { signIn, signUp, signOut } = useContext(AuthContext);
-  const handleSignIn = async () => signIn(email, password);
-  const handleCreateAccount = async () => signUp(email, password);
+  const { dispatch } = useAuthContext();
+  const handleSignIn = async () => signIn(dispatch, { email, password });
+  const handleCreateAccount = async () => signUp(dispatch, { email, password });
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
