@@ -39,7 +39,7 @@ We strongly recommend using a Node version manager like [nvm](https://github.com
 
 - **[VSCode](https://code.visualstudio.com/) (recommended)**
   1. Open the `vouchers4veggies` project in VSCode.
-  2. You should see a pop-up on the bottom right to "install the recommended extensions for this repository". Install all workspace recommendations.
+  2. Install recommended workspace VSCode extensions. You should see a pop-up on the bottom right to "install the recommended extensions for this repository".
 
 ### Running the app
 
