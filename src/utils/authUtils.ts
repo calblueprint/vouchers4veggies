@@ -6,6 +6,16 @@ import {
 import fbApp from '../database/clientApp';
 import { AuthDispatch } from '../screens/auth/AuthContext';
 
+/**
+ * Helper function to set the error message in the auth context.
+ * Use this function instead of using the dispatch directly.
+ * We can add more error handling/reporting logic (e.g. reporting errors to Sentry) here in the future.
+ */
+export const setAuthErrorMessage = (
+  dispatch: AuthDispatch,
+  errorMessage: string,
+) => dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage });
+
 export const signIn = async (
   dispatch: AuthDispatch,
   params: { email: string; password: string },
@@ -22,7 +32,7 @@ export const signIn = async (
     })
     .catch(error => {
       console.warn('(signIn) error', error);
-      dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage: error.message });
+      setAuthErrorMessage(dispatch, error.message);
     });
 };
 
@@ -35,7 +45,7 @@ export const signOut = async (dispatch: AuthDispatch) => {
     })
     .catch(error => {
       console.warn('(signOut) error', error);
-      dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage: error.message });
+      setAuthErrorMessage(dispatch, error.message);
     });
 };
 
@@ -55,6 +65,6 @@ export const signUp = async (
     })
     .catch(error => {
       console.warn('(signUp) error', error);
-      dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage: error.message });
+      setAuthErrorMessage(dispatch, error.message);
     });
 };
