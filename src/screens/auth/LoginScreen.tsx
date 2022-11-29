@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
 import { Body_1_Text, H2Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
 import { InputField } from '../../components/InputField/InputField';
-import { AuthContext } from './AuthContext';
-
+import { signIn } from '../../utils/authUtils';
+import { useAuthContext } from './AuthContext';
 import {
   FormContainer,
   HeadingContainer,
@@ -24,9 +24,7 @@ export function LoginScreen() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { signIn, authState } = useContext(AuthContext);
-
-  const { dispatch } = AuthContext();
+  const { authState, dispatch } = useAuthContext();
 
   const handleSignIn = async () => signIn(dispatch, { email, password });
 
