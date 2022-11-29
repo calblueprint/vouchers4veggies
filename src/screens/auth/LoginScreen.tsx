@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
 import { Body_1_Text, H2Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
 import { InputField } from '../../components/InputField/InputField';
-import { signIn } from '../../utils/authUtils';
+import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 import { useAuthContext } from './AuthContext';
 import {
   FormContainer,
@@ -22,25 +22,25 @@ import {
 export function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const { errorMessage, dispatch } = useAuthContext();
 
-  const { authState, dispatch } = useAuthContext();
-
-  const handleSignIn = async () => signIn(dispatch, { email, password });
-
-  useEffect(() => {
-    if (authState?.errorMessage) {
-      setErrorMessage(authState.errorMessage);
+  const handleSignIn = async () => {
+    if (email && password) {
+      await signIn(dispatch, { email, password });
+    } else {
+      setAuthErrorMessage(dispatch, 'Please enter your email and password.');
     }
-  }, [authState]);
+    setShowErrorMessage(true);
+  };
 
   const onChangeEmail = (value: string) => {
-    setErrorMessage('');
+    setShowErrorMessage(false);
     setEmail(value);
   };
 
   const onChangePassword = (value: string) => {
-    setErrorMessage('');
+    setShowErrorMessage(false);
     setPassword(value);
   };
 
@@ -86,7 +86,7 @@ export function LoginScreen() {
           placeholder="Enter password"
           secureTextEntry
         />
-        {errorMessage !== '' && (
+        {showErrorMessage && errorMessage && (
           <Body_1_Text style={Styles.errorText}>{errorMessage}</Body_1_Text>
         )}
         <VerticalSpacingButtonContainer>
