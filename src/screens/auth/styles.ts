@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 import { Colors } from '../../../assets/Colors';
 
 export const LoginContainer = styled.View`
@@ -92,5 +92,8 @@ export const Styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '600',
+  },
+  errorText: {
+    color: Colors.alertRed,
   },
 });

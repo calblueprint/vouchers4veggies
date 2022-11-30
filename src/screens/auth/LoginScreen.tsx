@@ -1,29 +1,48 @@
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
-import React, { useState, useContext } from 'react';
-import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
+import { Body_1_Text, H2Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
 import { InputField } from '../../components/InputField/InputField';
+import { signIn } from '../../utils/authUtils';
+import { useAuthContext } from './AuthContext';
 import {
+  FormContainer,
   HeadingContainer,
+  LeftAlignContainer,
   LoginContainer,
   LogoContainer,
-  FormContainer,
+  RightAlignContainer,
+  RowContainer,
+  SmallTextContainer,
   Styles,
   VerticalSpacingButtonContainer,
-  SmallTextContainer,
-  RowContainer,
-  RightAlignContainer,
-  LeftAlignContainer,
   WhiteText,
 } from './styles';
-import { AuthContext } from './AuthContext';
 
-export const LoginScreen = () => {
+export function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const { signIn } = useContext(AuthContext);
-  const handleSignIn = async () => signIn(email, password);
+  const { authState, dispatch } = useAuthContext();
+
+  const handleSignIn = async () => signIn(dispatch, { email, password });
+
+  useEffect(() => {
+    if (authState?.errorMessage) {
+      setErrorMessage(authState.errorMessage);
+    }
+  }, [authState]);
+
+  const onChangeEmail = (value: string) => {
+    setErrorMessage('');
+    setEmail(value);
+  };
+
+  const onChangePassword = (value: string) => {
+    setErrorMessage('');
+    setPassword(value);
+  };
 
   // TODO: implement password reset functionality @selene-huang
   const resetPassword = () => {
@@ -46,7 +65,7 @@ export const LoginScreen = () => {
 
         <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
         <InputField
-          onChange={setEmail}
+          onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
         />
@@ -62,12 +81,14 @@ export const LoginScreen = () => {
           </RightAlignContainer>
         </RowContainer>
         <InputField
-          onChange={setPassword}
+          onChange={onChangePassword}
           value={password}
           placeholder="Enter password"
-          secureTextEntry={true}
+          secureTextEntry
         />
-
+        {errorMessage !== '' && (
+          <Body_1_Text style={Styles.errorText}>{errorMessage}</Body_1_Text>
+        )}
         <VerticalSpacingButtonContainer>
           <ButtonMagenta onPress={handleSignIn}>
             <WhiteText>
@@ -85,4 +106,4 @@ export const LoginScreen = () => {
       </FormContainer>
     </LoginContainer>
   );
-};
+}
