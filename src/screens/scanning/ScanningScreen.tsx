@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import {
   Body_1_Text,
+  ButtonTextBlack,
   ButtonTextWhite,
   CenterText,
   CounterText,
@@ -11,7 +12,6 @@ import {
   MagentaText,
 } from '../../../assets/Fonts';
 import {
-  ButtonMagenta,
   LogoContainer,
   PageContainer,
   ScannerContainer,
@@ -22,7 +22,13 @@ import {
   BodyContainer,
   SafeArea,
 } from './styles';
-import { ButtonWhite } from '../../../assets/Components';
+import {
+  AddManuallyButton,
+  ButtonMagenta,
+  ButtonWhite,
+} from '../../../assets/Components';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { Colors } from '../../../assets/Colors';
 
 const v4vLogo = require('../../../assets/logo-1.png');
 
@@ -42,13 +48,11 @@ const ScanningScreen = () => {
   }, []);
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
-    if (!scanned) {
-      const { type, data, bounds: { origin } = {} } = scanningResult;
-      // const { x, y } = origin;
-      incrementScanned(scanCounter + 1);
-      setScanned(true);
-      alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    }
+    const { type, data, bounds: { origin } = {} } = scanningResult;
+    // const { x, y } = origin;
+    incrementScanned(scanCounter + 1);
+    setScanned(true);
+    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
   if (hasPermission === null) {
@@ -61,12 +65,31 @@ const ScanningScreen = () => {
   return (
     <SafeArea>
       <PageContainer>
-        <Header>
-          <LogoContainer source={v4vLogo}></LogoContainer>
-          <VoucherCounter>
-            <CounterText>{scanCounter}</CounterText>
-          </VoucherCounter>
-        </Header>
+        {scanCounter === 0 ? (
+          <Header>
+            <LogoContainer source={v4vLogo}></LogoContainer>
+            <AddManuallyButton>
+              <ButtonTextBlack>
+                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+                {'  '}
+                Add Manually
+              </ButtonTextBlack>
+            </AddManuallyButton>
+          </Header>
+        ) : (
+          <Header>
+            <VoucherCounter>
+              <CounterText>{scanCounter}</CounterText>
+            </VoucherCounter>
+            <AddManuallyButton>
+              <ButtonTextBlack>
+                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+                {'  '}
+                Add Manually
+              </ButtonTextBlack>
+            </AddManuallyButton>
+          </Header>
+        )}
 
         <BodyContainer>
           <TitleContainer>
@@ -76,7 +99,7 @@ const ScanningScreen = () => {
           </TitleContainer>
           <Body_1_Text>
             <CenterText>
-              Point your camera at the QR code and line it up with the{' '}
+              Point your camera at the barcode and line it up with the{' '}
               <MagentaText>purple box.</MagentaText>
             </CenterText>
           </Body_1_Text>
@@ -91,22 +114,11 @@ const ScanningScreen = () => {
           />
         </ScannerContainer>
 
-        {/* need to discuss button flow */}
-        {scanCounter === 0 ? (
-          <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
-            <ButtonTextWhite>Scan</ButtonTextWhite>
-          </ButtonMagenta>
-        ) : (
+        {scanCounter > 0 && (
           <ButtonContainer>
-            <ButtonMagenta
-              disabled={!scanned}
-              onPress={() => setScanned(false)}
-            >
-              <ButtonTextWhite>Scan Again</ButtonTextWhite>
+            <ButtonMagenta>
+              <ButtonTextWhite>Review & Submit</ButtonTextWhite>
             </ButtonMagenta>
-            <ButtonWhite>
-              <H4_Card_Nav_Tab>Review & Submit</H4_Card_Nav_Tab>
-            </ButtonWhite>
           </ButtonContainer>
         )}
       </PageContainer>

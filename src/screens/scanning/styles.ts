@@ -12,7 +12,7 @@ export const PageContainer = styled.View`
 `;
 
 export const Header = styled.View`
-  width: 70%;
+  width: 75%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -43,18 +43,6 @@ export const BodyContainer = styled.View`
 
 export const TitleContainer = styled.View`
   padding-bottom: 12px;
-`;
-
-export const ButtonMagenta = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  border-width: 2px;
-  border-radius: 5px;
-  width: 277px;
-  background: ${Colors.magenta};
-  padding: 9px 9px;
-  border-color: ${Colors.magenta};
-  margin-bottom: 16px;
 `;
 
 export const ScannerContainer = styled.View`
