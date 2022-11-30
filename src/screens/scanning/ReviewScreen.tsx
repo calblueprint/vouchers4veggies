@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
 import { Colors } from '../../../assets/Colors';
 import {
   H2Heading,
@@ -13,6 +13,7 @@ import {
   ReviewContainer,
   ReviewHeader,
   AggregateContainer,
+  SafeArea,
 } from './styles';
 import VoucherCard from '../../components/VoucherReview/VoucherCard';
 import { Ionicons } from '@expo/vector-icons';
@@ -49,7 +50,7 @@ const ReviewScreen = () => {
     },
   ]);
   return (
-    <SafeAreaView>
+    <SafeArea>
       <PageContainer>
         <ReviewHeader>
           <Ionicons name="chevron-back" size={25} color={Colors.darkGray} />
@@ -81,7 +82,7 @@ const ReviewScreen = () => {
           </ButtonMagenta>
         </View>
       </PageContainer>
-    </SafeAreaView>
+    </SafeArea>
   );
 };
 
