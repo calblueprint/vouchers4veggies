@@ -14,8 +14,8 @@ export default function ScannerStackNavigator() {
         headerShown: false,
       }}
     >
-      <ScannerStack.Screen name="Review" component={ReviewScreen} />
       <ScannerStack.Screen name="Scanner" component={ScannerScreen} />
+      <ScannerStack.Screen name="Review" component={ReviewScreen} />
     </ScannerStack.Navigator>
   );
 }
