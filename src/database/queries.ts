@@ -6,15 +6,12 @@ import {
   FieldValue,
   query,
   where,
-<<<<<<< HEAD
   Transaction,
-=======
   updateDoc,
   doc,
   FieldValue,
   arrayUnion,
   arrayRemove,
->>>>>>> 2ca6ee46d4e70277cfe316117e664e91bfd1c040
 } from 'firebase/firestore';
 import {
   uuid,
@@ -223,28 +220,19 @@ export const getTransaction = async (uuid: uuid): Promise<Transaction> => {
 /**
  * Add a Voucher to the voucher array in the `Transaction` collection.
  */
-<<<<<<< HEAD
 export const addVoucherToTransaction = async (
   transactionUUID: uuid,
-  voucherUUID: Voucher,
+  voucherUUID: string,
 ): Promise<void> => {
   try {
-    // const transactionArray = collection(transactionCollection, 'Vouchers');
-    const dbQuery = query(
+    const docRef = query(
       transactionCollection,
-      where('uuid', '==', transactionUUID),
+      where('transactions', '==', transactionUUID),
     );
-    const querySnapshot = await getDocs(dbQuery);
-    const voucherArray = query(dbQuery, where('Voucher', '==', voucherUUID));
-=======
-//TODO: configure add + removing vouchers from transaction
-export const addVoucherToTransaction = async (
-  transactionUUID: uuid,
-  voucherUuid: string,
-): Promise<void> => {
-  try {
-    const docRef = doc(transactionCollection, transactionUUID);
->>>>>>> 2ca6ee46d4e70277cfe316117e664e91bfd1c040
+    const querySnapshot = await getDocs(docRef);
+    const transacArray = querySnapshot.docs.map(doc => doc.data() as Voucher);
+    const newArray = transacArray.arrayUnion(voucherUUID);
+    return transactionCollection.update('Vouchers', newArray);
   } catch (e) {
     console.warn('(addVoucherToTransaction)', e);
     throw e;
@@ -259,25 +247,20 @@ export const removeVoucherFromTransaction = async (
   voucherUUID: uuid,
 ): Promise<void> => {
   try {
-    const dbQuery = query(transactionCollection);
-    const querySnapshot = await getDocs(dbQuery);
-    const transactionArray = querySnapshot
-      .getTransaction(transactionUUID)
-      .data().Vouchers;
-    return transactionArray.arrayRemove(voucherUUID);
+    const docRef = query(
+      transactionCollection,
+      where('transactions', '==', transactionUUID),
+    );
+    const querySnapshot = await getDocs(docRef);
+    const transacArray = querySnapshot.docs.map(doc => doc.data() as Voucher);
+    const newArray = transacArray.arrayRemove(voucherUUID);
+    return transactionCollection.update('Vouchers', newArray);
   } catch (e) {
     console.warn('(removeVoucherFromTransaction)', e);
     throw e;
   }
 };
 
-<<<<<<< HEAD
-const testQueries = async () => {
-  const transaction = await getTransaction('8HEjHtFLvaMKsyEtLd0g');
-  console.log(transaction);
-};
-testQueries();
-=======
 //Test your queries here
 export const testQueries = async () => {
   const vendor = await getVendorTransactions('HxMk3UuwzP7zrxsitpws');
@@ -286,4 +269,3 @@ export const testQueries = async () => {
   console.log(testGet);
   // );
 };
->>>>>>> 2ca6ee46d4e70277cfe316117e664e91bfd1c040
