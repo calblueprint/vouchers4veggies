@@ -21,7 +21,7 @@ export const signIn = async (
   params: { email: string; password: string },
 ) => {
   const auth = getAuth(fbApp);
-  signInWithEmailAndPassword(auth, params.email, params.password)
+  await signInWithEmailAndPassword(auth, params.email, params.password)
     .then(async userCredential => {
       const { user } = userCredential;
       console.log(
@@ -38,7 +38,7 @@ export const signIn = async (
 
 export const signOut = async (dispatch: AuthDispatch) => {
   const auth = getAuth(fbApp);
-  auth
+  await auth
     .signOut()
     .then(() => {
       dispatch({ type: 'SIGN_OUT' });
@@ -54,7 +54,7 @@ export const signUp = async (
   params: { email: string; password: string },
 ) => {
   const auth = getAuth(fbApp);
-  createUserWithEmailAndPassword(auth, params.email, params.password)
+  await createUserWithEmailAndPassword(auth, params.email, params.password)
     .then(async userCredential => {
       const { user } = userCredential;
       console.log(
