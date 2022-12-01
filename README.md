@@ -60,3 +60,15 @@ We strongly recommend using a Node version manager like [nvm](https://github.com
      - **Expo Go (Recommended)**: [download Expo Go](https://docs.expo.dev/get-started/installation/#2-expo-go-app-for-android-and) on your phone, **connect to same network as your laptop**, and use your phone camera to scan the QR code displayed in the command line.
      -  Web: typing `w` into the expo command line opens the app in a web view. 
         -  Warning: since the app is designed to be used on a mobile app, web compatibility might be limited, and some functionality might be different when using the web setup.
+
+### Troubleshooting
+<!-- Add common/known setup issues in toggles here -->
+<details>
+<summary>Starting the expo app results in `FirebaseError: Firebase: Error (auth/invalid-api-key)` but .env exists with the correct credentials.</summary>
+
+   For whatever reason, sometimes the env variables don't get picked up, but adding the following line to [clientApp.ts](src/database/clientApp.ts) usually fixes it.
+
+   ```js
+   console.log(firebaseConfig);
+   ```
+</details>
