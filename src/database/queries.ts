@@ -257,8 +257,7 @@ export const removeVoucherFromTransaction = async (
     const transacArray = querySnapshot.docs.map(
       doc => doc.data() as Array<String>,
     );
-    const newArray = transacArray.arrayRemove(voucherUUID);
-    return transactionCollection.update('Vouchers', newArray);
+    docRef.update({ Vouchers: FieldValue.arrayUnion(voucherUUID) });
   } catch (e) {
     console.warn('(removeVoucherFromTransaction)', e);
     throw e;
