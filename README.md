@@ -21,9 +21,14 @@ We strongly recommend using a Node version manager like [nvm](https://github.com
 
 1. Clone the repo & install dependencies
    1. Clone this repo
-        ```sh
-        git clone git@github.com:calblueprint/vouchers4veggies.git
-        ```
+      * using SSH (recommended)
+         ```sh
+         git clone git@github.com:calblueprint/vouchers4veggies.git
+         ```
+      * using HTTPS
+         ```sh
+         git clone https://github.com/calblueprint/vouchers4veggies.git
+         ```
    2. Enter the cloned directory
         ```sh
         cd vouchers4veggies
@@ -33,8 +38,12 @@ We strongly recommend using a Node version manager like [nvm](https://github.com
       npm install
       ```
 2. Set up secrets:
-   1. Retrieve the `.env` file from [Blueprint's internal Notion](https://www.notion.so/calblueprint/Firebase-Environment-Variables-c30a053fba4c47559f9f4944e4962a9f) (access is required) and add it to the root directory of the repo (`vouchers4veggies/.env`).
+   1. In the project's root directory (`vouchers4veggies/`), create a new file named `.env`
+   2. Copy the credentials from [Blueprint's internal Notion](https://www.notion.so/calblueprint/Firebase-Environment-Variables-c30a053fba4c47559f9f4944e4962a9f) (access is required) and paste them into the `.env` file.
 
+**Helpful resources**
+* [GitHub: Cloning a Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository#cloning-a-repository)
+* [GitHub: Generating SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 ### Development environment
 
 - **[VSCode](https://code.visualstudio.com/) (recommended)**
