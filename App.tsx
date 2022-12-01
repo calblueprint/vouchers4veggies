@@ -2,11 +2,9 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { H1Heading } from './assets/Fonts';
-import AuthDemo from './AuthDemo';
-import { getAllTestDocs } from './src/database/queries';
-import VendorsListDemo from './VendorsListDemo';
-// import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
+import AppNavigator from './src/navigation/AppNavigator';
+import { AuthContextProvider } from './src/screens/auth/AuthContext';
+
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -26,8 +24,11 @@ async function loadResourcesAsync() {
 }
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
+  const [resourcesLoaded, setResourcesLoaded] = useState(false);
 
+  /**
+   * Load any resources or data that we need prior to rendering the app
+   */
   useEffect(() => {
     async function prepare() {
       try {
@@ -36,41 +37,34 @@ export default function App() {
         console.warn(e);
       } finally {
         // Tell the application to render
-        setAppIsReady(true);
+        setResourcesLoaded(true);
       }
     }
     prepare();
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
+    if (resourcesLoaded) {
       // This tells the splash screen to hide immediately! If we call this after
-      // `setAppIsReady`, then we may see a blank screen while the app is
+      // `setResourcesLoaded`, then we may see a blank screen while the app is
       // loading its initial state and rendering its first pixels. So instead,
       // we hide the splash screen once we know the root view has already
       // performed layout.
       await SplashScreen.hideAsync();
     }
-  }, [appIsReady]);
+  }, [resourcesLoaded]);
 
-  if (!appIsReady) {
-    return null;
-  }
-
-  getAllTestDocs();
-  return (
+  return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <H1Heading>Vouchers 4 Veggies</H1Heading>
-      <VendorsListDemo />
-      <AuthDemo />
+      <AuthContextProvider>
+        <AppNavigator />
+      </AuthContextProvider>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

@@ -1,78 +1,109 @@
-import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
-import React, { useState } from 'react';
-import { H1Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
-import { Colors } from '../../../assets/Colors';
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import { ButtonMagenta } from '../../../assets/Components';
+import { Body_1_Text, H2Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
+import { InputField } from '../../components/InputField/InputField';
+import { signIn } from '../../utils/authUtils';
+import { useAuthContext } from './AuthContext';
+import {
+  FormContainer,
+  HeadingContainer,
+  LeftAlignContainer,
+  LoginContainer,
+  LogoContainer,
+  RightAlignContainer,
+  RowContainer,
+  SmallTextContainer,
+  Styles,
+  VerticalSpacingButtonContainer,
+  WhiteText,
+} from './styles';
 
-export const LoginScreen = () => {
+export function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const submitForm = () => {
-    // query firebase
+  const { authState, dispatch } = useAuthContext();
+
+  const handleSignIn = async () => signIn(dispatch, { email, password });
+
+  useEffect(() => {
+    if (authState?.errorMessage) {
+      setErrorMessage(authState.errorMessage);
+    }
+  }, [authState]);
+
+  const onChangeEmail = (value: string) => {
+    setErrorMessage('');
+    setEmail(value);
   };
 
-  const goToSignup = () => {
-    // set up routing to sign up page
+  const onChangePassword = (value: string) => {
+    setErrorMessage('');
+    setPassword(value);
+  };
+
+  // TODO: implement password reset functionality @selene-huang
+  const resetPassword = () => {
+    // password flow
   };
 
   return (
-    <View style={styles.container}>
-      <H1Heading
-        style={styles.center_text}
-      >{`Welcome back!\nPlease login.`}</H1Heading>
+    <LoginContainer>
+      {/* logo placeholder */}
+      <LogoContainer>
+        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
+          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
+        </View>
+      </LogoContainer>
 
-      <View style={styles.form_container}>
-        <H4_Card_Nav_Tab>Email</H4_Card_Nav_Tab>
-        <TextInput
-          onChangeText={newText => setEmail(newText)}
-          style={styles.form_field}
+      <FormContainer>
+        <HeadingContainer>
+          <H2Heading>Welcome back!</H2Heading>
+        </HeadingContainer>
+
+        <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
+        <InputField
+          onChange={onChangeEmail}
           value={email}
+          placeholder="Enter email"
         />
 
-        <H4_Card_Nav_Tab>Password</H4_Card_Nav_Tab>
-        <TextInput
-          onChangeText={newText => setPassword(newText)}
-          style={styles.form_field}
+        <RowContainer>
+          <LeftAlignContainer>
+            <Body_1_Text style={Styles.bold}>Password</Body_1_Text>
+          </LeftAlignContainer>
+          <RightAlignContainer>
+            <Body_1_Text style={Styles.underline} onPress={resetPassword}>
+              Forgot password?
+            </Body_1_Text>
+          </RightAlignContainer>
+        </RowContainer>
+        <InputField
+          onChange={onChangePassword}
           value={password}
-          secureTextEntry={true}
+          placeholder="Enter password"
+          secureTextEntry
         />
+        {errorMessage !== '' && (
+          <Body_1_Text style={Styles.errorText}>{errorMessage}</Body_1_Text>
+        )}
+        <VerticalSpacingButtonContainer>
+          <ButtonMagenta onPress={handleSignIn}>
+            <WhiteText>
+              <H4_Card_Nav_Tab>Login</H4_Card_Nav_Tab>
+            </WhiteText>
+          </ButtonMagenta>
+        </VerticalSpacingButtonContainer>
 
-        <Button onPress={submitForm} title="Login" />
-      </View>
-
-      <Text>
-        Don't have an account?{' '}
-        <Text style={styles.underline} onPress={goToSignup}>
-          Sign up.
-        </Text>
-      </Text>
-    </View>
+        <SmallTextContainer>
+          <Body_1_Text>
+            Don't have an account?{' '}
+            <Body_1_Text style={Styles.underline}>Sign up.</Body_1_Text>
+          </Body_1_Text>
+        </SmallTextContainer>
+      </FormContainer>
+    </LoginContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  center_text: {
-    textAlign: 'center',
-  },
-  form_container: {
-    width: 300,
-    height: '50%',
-  },
-  form_field: {
-    width: '100%',
-    borderColor: Colors.lightGray,
-    backgroundColor: Colors.lightGray,
-    padding: 5,
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  underline: {
-    textDecorationLine: 'underline',
-  },
-});
+}
