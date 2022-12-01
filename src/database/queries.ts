@@ -230,7 +230,9 @@ export const addVoucherToTransaction = async (
       where('transactions', '==', transactionUUID),
     );
     const querySnapshot = await getDocs(docRef);
-    const transacArray = querySnapshot.docs.map(doc => doc.data() as Voucher);
+    const transacArray = querySnapshot.docs.map(
+      doc => doc.data() as Array<String>,
+    );
     const newArray = transacArray.arrayUnion(voucherUUID);
     return transactionCollection.update('Vouchers', newArray);
   } catch (e) {
@@ -252,7 +254,9 @@ export const removeVoucherFromTransaction = async (
       where('transactions', '==', transactionUUID),
     );
     const querySnapshot = await getDocs(docRef);
-    const transacArray = querySnapshot.docs.map(doc => doc.data() as Voucher);
+    const transacArray = querySnapshot.docs.map(
+      doc => doc.data() as Array<String>,
+    );
     const newArray = transacArray.arrayRemove(voucherUUID);
     return transactionCollection.update('Vouchers', newArray);
   } catch (e) {
