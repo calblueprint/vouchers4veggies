@@ -1,21 +1,41 @@
-import { StyleSheet, TextInput, Text, View, Button } from 'react-native';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import {
-  H1Heading,
   H3_Subheading,
+  Body_1_Text,
+  H1Heading,
+  H2Heading,
   H4_Card_Nav_Tab,
+  ButtonTextWhite,
 } from '../../../assets/Fonts';
-import { Colors } from '../../../assets/Colors';
-import { sendPasswordResetEmail } from 'firebase/auth';
+import { InputField } from '../../components/InputField/InputField';
+import { signIn } from '../../utils/authUtils';
+import { useAuthContext } from './AuthContext';
+import {
+  ButtonContainer,
+  FormContainer,
+  HeadingContainer,
+  LeftAlignContainer,
+  LoginContainer,
+  LogoContainer,
+  RightAlignContainer,
+  RowContainer,
+  SmallTextContainer,
+  Styles,
+  VerticalSpacingButtonContainer,
+  WhiteText,
+} from './styles';
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({ route, navigation }: any) => {
   const [name, setName] = useState(0);
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <H1Heading style={styles.center_text} name={name} setName={setName}>
         name
       </H1Heading>
@@ -40,7 +60,10 @@ export const ProfileScreen = () => {
           password
         </H3_Subheading>
       </View>
-    </View>
+      <ButtonMagenta>
+        <ButtonTextWhite>Log Out</ButtonTextWhite>
+      </ButtonMagenta>
+    </SafeAreaView>
   );
 };
 
