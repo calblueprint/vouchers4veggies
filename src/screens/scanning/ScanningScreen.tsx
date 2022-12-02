@@ -23,11 +23,12 @@ import {
 } from './styles';
 import { ButtonWhite } from '../../../assets/Components';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
 
 const ScanningScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
-  const [type, setType] = useState<any>(BarCodeScanner.Constants.Type.back);
+  const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanCounter, incrementScanned] = useState(0);
 
@@ -42,10 +43,10 @@ const ScanningScreen = () => {
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
-      const { type, data, bounds: { origin } = {} } = scanningResult;
-      // const { x, y } = origin;
+      const { data } = scanningResult;
       incrementScanned(scanCounter + 1);
       setScanned(true);
+      // eslint-disable-next-line no-alert
       alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     }
   };
