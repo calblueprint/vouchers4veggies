@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
-  Body_1_Text,
   ButtonTextWhite,
   CenterText,
   H2Heading,
   InputTitleText,
 } from '../../../assets/Fonts';
-import { VoucherType } from '../../types/types';
 import {
   LogoContainer,
   PageContainer,
@@ -19,16 +17,16 @@ import {
   FieldContainer,
   FormContainer,
 } from './styles';
-import { Dropdown } from 'react-native-element-dropdown';
-import { InputField } from '../../components/InputField/InputField';
+import InputField from '../../components/InputField/InputField';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
 
-const ManualVoucherScreen = () => {
+function ManualVoucherScreen() {
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanCounter, incrementScanned] = useState(0);
-  const [transactionID, setID] = useState<String>();
-  const [voucherAmount, setVoucherAmount] = useState<String>();
+  const [transactionID, setID] = useState<string>();
+  const [voucherAmount, setVoucherAmount] = useState<string>();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
@@ -40,7 +38,7 @@ const ManualVoucherScreen = () => {
     <SafeArea>
       <PageContainer>
         <Header>
-          <LogoContainer source={v4vLogo}></LogoContainer>
+          <LogoContainer source={v4vLogo} />
         </Header>
 
         <BodyContainer>
@@ -60,7 +58,7 @@ const ManualVoucherScreen = () => {
             </FieldContainer>
             <FieldContainer>
               <InputTitleText>Voucher Color</InputTitleText>
-              <DropDownContainer></DropDownContainer>
+              <DropDownContainer />
             </FieldContainer>
             <FieldContainer>
               <InputTitleText>Amount</InputTitleText>
@@ -78,6 +76,6 @@ const ManualVoucherScreen = () => {
       </PageContainer>
     </SafeArea>
   );
-};
+}
 
 export default ManualVoucherScreen;
