@@ -99,3 +99,11 @@ export const InputTitleText = styled.Text`
   font-size: 14px;
   line-height: 19px;
 `;
+
+
+export const LabelText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-weight: 600px;
+  font-size: 14px;
+  line-height: 19px;
+`;
