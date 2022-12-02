@@ -24,6 +24,7 @@ export const signIn = async (
   await signInWithEmailAndPassword(auth, params.email, params.password)
     .then(async userCredential => {
       const { user } = userCredential;
+      // eslint-disable-next-line no-console
       console.log(
         'Auth Success: signed in user with email',
         userCredential.user.email,
@@ -31,6 +32,7 @@ export const signIn = async (
       dispatch({ type: 'SIGN_IN', user });
     })
     .catch(error => {
+      // eslint-disable-next-line no-console
       console.warn('(signIn) error', error);
       setAuthErrorMessage(dispatch, error.message);
     });
@@ -44,6 +46,7 @@ export const signOut = async (dispatch: AuthDispatch) => {
       dispatch({ type: 'SIGN_OUT' });
     })
     .catch(error => {
+      // eslint-disable-next-line no-console
       console.warn('(signOut) error', error);
       setAuthErrorMessage(dispatch, error.message);
     });
@@ -57,6 +60,7 @@ export const signUp = async (
   await createUserWithEmailAndPassword(auth, params.email, params.password)
     .then(async userCredential => {
       const { user } = userCredential;
+      // eslint-disable-next-line no-console
       console.log(
         'Auth Success: created user with email',
         userCredential.user.email,
@@ -64,6 +68,7 @@ export const signUp = async (
       dispatch({ type: 'SIGN_IN', user });
     })
     .catch(error => {
+      // eslint-disable-next-line no-console
       console.warn('(signUp) error', error);
       setAuthErrorMessage(dispatch, error.message);
     });

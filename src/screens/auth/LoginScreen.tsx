@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
-import { Body_1_Text, H2Heading, H4_Card_Nav_Tab } from '../../../assets/Fonts';
-import { InputField } from '../../components/InputField/InputField';
+import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
+import InputField from '../../components/InputField/InputField';
+
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
+
 import { useAuthContext } from './AuthContext';
+
 import {
   FormContainer,
   HeadingContainer,
@@ -19,7 +22,7 @@ import {
   WhiteText,
 } from './styles';
 
-export function LoginScreen() {
+export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -63,7 +66,7 @@ export function LoginScreen() {
           <H2Heading>Welcome back!</H2Heading>
         </HeadingContainer>
 
-        <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
+        <Body1Text style={Styles.bold}>Email</Body1Text>
         <InputField
           onChange={onChangeEmail}
           value={email}
@@ -72,12 +75,12 @@ export function LoginScreen() {
 
         <RowContainer>
           <LeftAlignContainer>
-            <Body_1_Text style={Styles.bold}>Password</Body_1_Text>
+            <Body1Text style={Styles.bold}>Password</Body1Text>
           </LeftAlignContainer>
           <RightAlignContainer>
-            <Body_1_Text style={Styles.underline} onPress={resetPassword}>
+            <Body1Text style={Styles.underline} onPress={resetPassword}>
               Forgot password?
-            </Body_1_Text>
+            </Body1Text>
           </RightAlignContainer>
         </RowContainer>
         <InputField
@@ -87,21 +90,21 @@ export function LoginScreen() {
           secureTextEntry
         />
         {showErrorMessage && errorMessage && (
-          <Body_1_Text style={Styles.errorText}>{errorMessage}</Body_1_Text>
+          <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
         )}
         <VerticalSpacingButtonContainer>
           <ButtonMagenta onPress={handleSignIn}>
             <WhiteText>
-              <H4_Card_Nav_Tab>Login</H4_Card_Nav_Tab>
+              <H4CardNavTab>Login</H4CardNavTab>
             </WhiteText>
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
 
         <SmallTextContainer>
-          <Body_1_Text>
-            Don't have an account?{' '}
-            <Body_1_Text style={Styles.underline}>Sign up.</Body_1_Text>
-          </Body_1_Text>
+          <Body1Text>
+            {`Don't have an account? `}
+            <Body1Text style={Styles.underline}>Sign up.</Body1Text>
+          </Body1Text>
         </SmallTextContainer>
       </FormContainer>
     </LoginContainer>
