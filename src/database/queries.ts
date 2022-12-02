@@ -228,7 +228,6 @@ const updateTransaction = async (transaction: Partial<Transaction>) => {
 /**
  *
  * @param uuid | Transaction uuid
- * @param vouchers | vouchers contained in the transaction
  * @param voucherUUID | voucher to add
  */
 export const addVoucherToTransaction = async (
