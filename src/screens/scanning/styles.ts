@@ -120,3 +120,7 @@ export const AggregateContainer = styled.View`
   align-items: center;
   margin-top: 10px;
 `;
+
+export const SafeArea = styled.SafeAreaView`
+  background-color: ${Colors.offWhite};
+`;
