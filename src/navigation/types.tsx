@@ -20,6 +20,7 @@ export type BottomTabScreenProps<T extends keyof BottomTabParamList> =
 
 export type ScannerStackParamList = {
   Scanner: undefined;
+  AddManual: undefined;
 };
 
 export type ProfileStackParamList = {
