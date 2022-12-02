@@ -6,6 +6,7 @@ export const ReviewRow = styled.View`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  padding: 23px 29px;
 `;
 
 export const DateIdContainer = styled.View`
@@ -19,6 +20,7 @@ export const DateIdContainer = styled.View`
 export const PriceEditContainer = styled.View`
   flex: 2;
   flex-direction: row;
+  align-items: flex-end;
   justify-content: flex-end;
   padding-right: 10px;
 `;
