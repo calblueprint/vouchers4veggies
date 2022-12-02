@@ -9,15 +9,11 @@ import AuthStackNavigator from './stacks/AuthStackNavigator';
 export default function AppNavigator() {
   const { user, isLoading } = useAuthContext();
 
-  return (
+  return isLoading ? (
+    <LoadingSpinner />
+  ) : (
     <NavigationContainer>
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : user ? (
-        <NavigationBar />
-      ) : (
-        <AuthStackNavigator />
-      )}
+      {user ? <NavigationBar /> : <AuthStackNavigator />}
     </NavigationContainer>
   );
 }
