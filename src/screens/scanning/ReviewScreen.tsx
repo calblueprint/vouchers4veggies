@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { SafeAreaView, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import Colors from '../../../assets/Colors';
 import {
   H2Heading,
   Body1Text,
   ButtonTextWhite,
   H3Subheading,
-  H1Heading,
+  LabelText,
 } from '../../../assets/Fonts';
 import {
-  HeaderContainer,
   PageContainer,
   ReviewContainer,
   ReviewHeader,
-  ReviewScreenContainer,
+  AggregateContainer,
 } from './styles';
 import VoucherCard from '../../components/VoucherReview/VoucherCard';
 import { Ionicons } from '@expo/vector-icons';
 import { ButtonMagenta } from '../../../assets/Components';
 
-//TODO: @oahnh Figure out why voucher card doesn't render in view
 //TODO: add props to store voucher
 const ReviewScreen = () => {
   // TODO: onSubmit function to create new transaction for vendor
@@ -57,9 +55,9 @@ const ReviewScreen = () => {
           <Ionicons name="chevron-back" size={25} color={Colors.darkGray} />
           <Body1Text>Back</Body1Text>
         </ReviewHeader>
-        <H2Heading>Review Vouchers</H2Heading>
+        <H2Heading style={{ marginBottom: 37 }}>Review Vouchers</H2Heading>
         {/* Make this container scrollable */}
-        <View style={styles.container}>
+        <ReviewContainer>
           {vouchers.map(item => (
             <VoucherCard
               key={item.id}
@@ -68,22 +66,23 @@ const ReviewScreen = () => {
               amount={item.amount}
             />
           ))}
+        </ReviewContainer>
+        <AggregateContainer>
+          <LabelText>Amount</LabelText>
+          <H3Subheading>x{vouchers.length}</H3Subheading>
+        </AggregateContainer>
+        <AggregateContainer>
+          <LabelText>Total</LabelText>
+          <H3Subheading>$31.45</H3Subheading>
+        </AggregateContainer>
+        <View style={{ marginTop: 46 }}>
+          <ButtonMagenta>
+            <ButtonTextWhite>Submit</ButtonTextWhite>
+          </ButtonMagenta>
         </View>
       </PageContainer>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    flexDirection: 'column',
-    alignItems: 'center',
-    border: '1px solid #ffffff',
-    width: '100%',
-    borderTopColor: `${Colors.lightGray}`,
-    borderBottomColor: `${Colors.lightGray}`,
-  },
-});
 
 export default ReviewScreen;

@@ -12,8 +12,11 @@ import {
   MagentaText,
 } from '../../../assets/Fonts';
 import {
+<<<<<<< HEAD
   ButtonContainer,
   ButtonMagenta,
+=======
+>>>>>>> 49892ea (TODO: fix bg color difference)
   HeaderContainer,
   LogoContainer,
   PageContainer,
@@ -22,6 +25,10 @@ import {
   TopContainer,
   VoucherCounter,
 } from './styles';
+<<<<<<< HEAD
+=======
+import { ButtonWhite, ButtonMagenta } from '../../../assets/Components';
+>>>>>>> 49892ea (TODO: fix bg color difference)
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');

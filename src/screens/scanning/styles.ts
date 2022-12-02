@@ -59,18 +59,6 @@ export const HeaderContainer = styled.View`
   margin-bottom: 35px;
 `;
 
-export const ButtonMagenta = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  border-width: 2px;
-  border-radius: 5px;
-  width: 277px;
-  background: ${Colors.magenta};
-  padding: 9px 9px;
-  border-color: ${Colors.magenta};
-  margin-bottom: 16px;
-`;
-
 export const Container = styled.ScrollView`
   width: 100%;
 `;
@@ -90,14 +78,17 @@ export const ReviewHeader = styled.View`
   margin-bottom: 46px;
 `;
 
-export const ReviewContainer = styled.View`
+export const ReviewContainer = styled.ScrollView`
   display: flex;
-  flex-direction: column;
+  flex-grow: 1;
+  max-height: 50%;
+  justifycontent: center;
+  alignitems: 'center';
+  border: 1px solid #ffffff;
   width: 100%;
-  align-items: center;
-  border-top: 1px solid ${Colors.lightGray};
-  border-bottom: 1px solid ${Colors.lightGray};
-  background-color: pink;
+  border-top-color: ${Colors.lightGray};
+  border-bottom-color: ${Colors.lightGray};
+  margin-bottom: 30px;
 `;
 
 export const ReviewScreenContainer = styled.View`
@@ -105,4 +96,13 @@ export const ReviewScreenContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const AggregateContainer = styled.View`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 `;
