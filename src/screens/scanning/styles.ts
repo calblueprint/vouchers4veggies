@@ -78,3 +78,29 @@ export const DropDownContainer = styled.View`
   margin-top: 6px;
   margin-bottom: 8px;
 `;
+
+export const ReviewHeader = styled.View`
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 46px;
+`;
+
+export const ReviewContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  border-top: 1px solid ${Colors.lightGray};
+  border-bottom: 1px solid ${Colors.lightGray};
+  background-color: pink;
+`;
+
+export const ReviewScreenContainer = styled.View`
+  margin: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

@@ -3,6 +3,7 @@ import React from 'react';
 import ManualVoucherScreen from '../../screens/scanning/ManualVoucherScreen';
 import ScanningScreen from '../../screens/scanning/ScanningScreen';
 import { ScannerStackParamList } from '../types';
+import ReviewScreen from '../../screens/scanning/ReviewScreen';
 
 const ScannerStack = createNativeStackNavigator<ScannerStackParamList>();
 
@@ -21,6 +22,7 @@ export default function ScannerStackNavigator() {
         name="ManualVoucherScreen"
         component={ManualVoucherScreen}
       />
+      <ScannerStack.Screen name="ReviewScreen" component={ReviewScreen} />
     </ScannerStack.Navigator>
   );
 }
