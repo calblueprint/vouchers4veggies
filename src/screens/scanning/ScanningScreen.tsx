@@ -8,7 +8,6 @@ import {
   CenterText,
   CounterText,
   H2Heading,
-  H4_Card_Nav_Tab,
   MagentaText,
 } from '../../../assets/Fonts';
 import {
@@ -22,11 +21,7 @@ import {
   BodyContainer,
   SafeArea,
 } from './styles';
-import {
-  AddManuallyButton,
-  ButtonMagenta,
-  ButtonWhite,
-} from '../../../assets/Components';
+import { AddManuallyButton, ButtonMagenta } from '../../../assets/Components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Colors } from '../../../assets/Colors';
 
