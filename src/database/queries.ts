@@ -265,22 +265,58 @@ export const addVoucherToTransaction = async (
 /**
  * Remove a Voucher to the voucher array in the `Transaction` collection.
  */
+// export const removeVoucherFromTransaction = async (
+//   transactionUUID: uuid,
+//   voucherUUID: uuid,
+// ): Promise<void> => {
+//   try {
+//     const docRef = query(
+//       transactionCollection,
+//       where('transactions', '==', transactionUUID),
+//     );
+//     const querySnapshot = await getDocs(docRef);
+//     const transacArray = querySnapshot.docs.map(
+//       doc => doc.data() as Array<String>,
+//     );
+//     docRef.update({ Vouchers: FieldValue.arrayUnion(voucherUUID) });
+//   } catch (e) {
+//     console.warn('(removeVoucherFromTransaction)', e);
+//     throw e;
+//   }
+// };
+/**
+ *
+ * @param uuid | Transaction uuid
+ * @param voucherUUID | voucher to remove
+ */
 export const removeVoucherFromTransaction = async (
-  transactionUUID: uuid,
-  voucherUUID: uuid,
+  uuid: uuid,
+  voucherUUID: string,
 ): Promise<void> => {
   try {
-    const docRef = query(
-      transactionCollection,
-      where('transactions', '==', transactionUUID),
-    );
-    const querySnapshot = await getDocs(docRef);
-    const transacArray = querySnapshot.docs.map(
-      doc => doc.data() as Array<String>,
-    );
-    docRef.update({ Vouchers: FieldValue.arrayUnion(voucherUUID) });
+    const docRef = doc(transactionCollection, uuid);
+
+    const transaction = await getTransaction(uuid);
+    const transactionVouchers = transaction.vouchers;
+    transaction.FieldValue.arrayRemove(voucherUUID);
+    await updateDoc(docRef, { vouchers: transactionVouchers });
+    // const docRef = doc
+    // // const docRef = query(
+    // //   transactionCollection,
+    // //   where('uuid', '==', transactionUUID),
+    // // );
+    // const querySnapshot = await getDocs(docRef);
+    // const transacArray = querySnapshot.docs.map(
+    //   doc => doc.data() as Transaction,
+    // );
+    // const transacVouchers = transacArray[0].vouchers;
+    // // console.log('QSnapshot: ', querySnapshot.docs);
+    // console.log('Transaction: ', transacArray);
+    // console.log('Vouchers: ', transacVouchers);
+    // transacVouchers.push(voucherUUID);
+    // console.log('Updated Vouchers', transacVouchers);
   } catch (e) {
-    console.warn('(removeVoucherFromTransaction)', e);
+    console.warn('(addVoucherToTransaction)', e);
     throw e;
   }
 };
@@ -297,5 +333,11 @@ export const testQueries = async () => {
     '1hXxw6dKCwBop9mFuXbj',
     'UFP3gWFeIajfbih3Uimo',
   );
+  const testRemove = await removeVoucherFromTransaction(
+    '8HEjHtFLvaMKsyEtLd0g',
+    'Voucher 3 ID',
+  );
+  console.log('addTransaction', testAdd);
+  // console.log('removeTransactions: ', testRemove);
   // );
 };

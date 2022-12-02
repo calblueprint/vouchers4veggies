@@ -33,6 +33,7 @@ export enum VoucherStatus {
 }
 
 export type Transaction = {
+  FieldValue: any;
   date: Date;
   uuid: uuid;
   vendorUUID: uuid;
