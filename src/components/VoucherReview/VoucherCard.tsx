@@ -4,7 +4,7 @@ import Colors from '../../../assets/Colors';
 import { Body1Text, H3Subheading } from '../../../assets/Fonts';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export const VoucherCard = (props: any) => {
+const VoucherCard = (props: any) => {
   return (
     <ReviewRow>
       <DateIdContainer>
@@ -22,3 +22,5 @@ export const VoucherCard = (props: any) => {
     </ReviewRow>
   );
 };
+
+export default VoucherCard;
