@@ -2,6 +2,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { testQueries } from './src/database/queries';
 import AppNavigator from './src/navigation/AppNavigator';
 // import TransactionsScreen from './src/screens/Transactions/TransactionsScreen';
 // Keep the splash screen visible while we fetch resources
@@ -53,6 +54,7 @@ export default function App() {
     }
   }, [resourcesLoaded]);
 
+  testQueries();
   return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <AppNavigator />
