@@ -10,8 +10,12 @@ import {
   HorizontalSpacingContainer,
   CardContainer,
 } from './styles';
+import { DropdownButton } from '../../components/Dropdown/DropdownButton';
+
+// import { DropdownButton } from '../../components/Dropdown/DropdownButton';
 
 const TransactionsScreen = () => {
+  const onChange = () => {};
   const [transactions, setTransactions] = useState([
     {
       id: '123123',
@@ -64,6 +68,12 @@ const TransactionsScreen = () => {
     },
   ]);
 
+  const countMenu = [
+    { label: '1-10', value: '1' },
+    { label: '11-20', value: '2' },
+    { label: '21+', value: '3' },
+  ];
+
   return (
     <TransactionsContainer>
       <LogoContainer>
@@ -77,17 +87,7 @@ const TransactionsScreen = () => {
       </Title>
 
       <FilterRow>
-        <View
-          style={{
-            backgroundColor: '#000000',
-            padding: 2,
-            justifyContent: 'center',
-          }}
-        >
-          <Text style={{ color: '#FFFFFF' }}>
-            ------ Search bar placeholder :P ------
-          </Text>
-        </View>
+        <DropdownButton title="Count" data={countMenu} onSelect={onChange} />
         <HorizontalSpacingContainer>
           <Button title="Filter" />
         </HorizontalSpacingContainer>
