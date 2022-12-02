@@ -33,7 +33,7 @@ export default function LoginScreen() {
       await signIn(dispatch, { email, password });
     } else {
       setAuthErrorMessage(dispatch, 'Please enter your email and password.');
-    }
+      }
     setShowErrorMessage(true);
   };
 
