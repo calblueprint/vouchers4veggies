@@ -69,7 +69,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint:check": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "prettier:check": "npx prettier --check .",
+    "prettier:fix": "npx prettier --write ."
   },
   "version": "1.0.0",
   "private": true,
