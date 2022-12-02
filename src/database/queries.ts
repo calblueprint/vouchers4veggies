@@ -1,20 +1,15 @@
 import {
-  addDoc,
   collection,
   getDocs,
+  addDoc,
+  deleteDoc,
   getFirestore,
   query,
   where,
   doc,
   updateDoc,
 } from 'firebase/firestore';
-import {
-  uuid,
-  Vendor,
-  Voucher,
-  VoucherCreate,
-  VoucherStatus,
-} from '../types/types';
+import { uuid, Vendor, Voucher, VoucherCreate, VoucherStatus, VendorCreate } from '../types/types';
 import fbApp from './clientApp';
 
 const db = getFirestore(fbApp);
@@ -145,3 +140,56 @@ export const getVouchersByVendorUuid = async (
     throw e;
   }
 };
+
+/**
+ * Create a new "vendor" document and at it to the vendors collection.
+ */
+export const createVendor = async (vendor: VendorCreate): Promise<uuid> => {
+  try {
+    const docRef = await addDoc(vendorCollection, vendor);
+    await updateDoc(docRef, { uuid: docRef.id});
+    return docRef.id; 
+  } catch (e) {
+    console.warn('(createVendor)', e);
+    throw e;
+  }
+}
+
+/**
+ * Update an existing "vendor" name. 
+ */
+export const updateVendorName = async (name: string, vendor: Partial<Vendor>) => {
+  try {
+    const docRef = doc(vendorCollection, vendor.uuid);
+    await updateDoc(docRef, {name: name})
+  } catch (e) {
+  console.warn('(updateVendorName)', e);
+  throw e;
+  }
+}
+
+/**
+ * Update an existing "vendor's" email. 
+ */
+export const updateVendorEmail = async (email: string, vendor: Partial<Vendor>) => {
+  try {
+    const docRef = doc(vendorCollection, vendor.uuid);
+    await updateDoc(docRef, {email: email})
+  } catch (e) {
+  console.warn('(updateVendorEmail)', e);
+  throw e;
+  }
+}
+
+/**
+ * Delete a "vendor" document in the vendors collection given its uuid.
+ */
+export async function deleteVendor(vendor: Vendor) {
+  try {
+    await deleteDoc(doc(vendorCollection, 
+      vendor.uuid))
+  } catch (e) {
+    console.warn('(deleteVendor)', e);
+    throw e;
+  }
+}

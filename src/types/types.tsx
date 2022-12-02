@@ -6,6 +6,10 @@ export type Vendor = {
   name: string;
 };
 
+export type VendorCreate = Pick<Vendor, 
+  'email' | 'name'
+>;
+
 export type Voucher = {
   uuid: uuid;
   type: VoucherType;
@@ -30,3 +34,4 @@ export enum VoucherStatus {
   PAID = 'paid',
   UNPAID = 'unpaid',
 }
+
