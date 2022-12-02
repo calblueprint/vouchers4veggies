@@ -72,3 +72,10 @@ export const ButtonTextBlack = styled.Text`
   line-height: 16px;
   color: ${Colors.midBlack};
 `;
+
+export const InputTitleText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
