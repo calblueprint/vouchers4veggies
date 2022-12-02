@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../../assets/Colors';
 
 export const Row = styled.View`
   display: flex;
@@ -41,5 +42,14 @@ export const Styles = StyleSheet.create({
   IconButton: {
     justifyContent: 'center',
     backgroundColor: '#fff',
+  },
+  bold: {
+    fontWeight: '600',
+  },
+  green: {
+    color: Colors.alertGreen,
+  },
+  red: {
+    color: Colors.alertRed,
   },
 });

@@ -5,6 +5,8 @@ import { StyleSheet, View } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
 import { AuthContextProvider } from './src/screens/auth/AuthContext';
 
+import TransactionScreen from './src/screens/Transactions/TransactionsScreen';
+
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
@@ -56,9 +58,10 @@ export default function App() {
 
   return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <AuthContextProvider>
+      {/* <AuthContextProvider>
         <AppNavigator />
-      </AuthContextProvider>
+      </AuthContextProvider> */}
+      <TransactionScreen />
     </View>
   );
 }
