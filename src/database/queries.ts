@@ -1,4 +1,5 @@
 import {
+  addDoc,
   collection,
   getDocs,
   getFirestore,
@@ -7,8 +8,16 @@ import {
   arrayRemove,
   arrayUnion,
   where,
+  doc,
+  updateDoc,
 } from 'firebase/firestore';
-import { uuid, Vendor, Voucher, Transaction } from '../types/types';
+import {
+  uuid,
+  Vendor,
+  Voucher,
+  VoucherCreate,
+  VoucherStatus,
+} from '../types/types';
 import fbApp from './clientApp';
 
 const db = getFirestore(fbApp);
@@ -87,6 +96,42 @@ export const getVoucher = async (uuid: uuid): Promise<Voucher> => {
     throw e;
   }
 };
+
+export const createVoucher = async (voucher: VoucherCreate): Promise<uuid> => {
+  try {
+    const docRef = await addDoc(voucherCollection, voucher);
+    await updateDoc(docRef, { uuid: docRef.id });
+    return docRef.id;
+  } catch (e) {
+    console.warn('(createVoucher)', e);
+    throw e;
+  }
+};
+
+/**
+ * Helper for all setter functions
+ */
+const updateVoucher = async (voucher: Partial<Voucher>) => {
+  try {
+    const docRef = doc(voucherCollection, voucher.uuid);
+    await updateDoc(docRef, voucher);
+  } catch (e) {
+    console.warn('(updateVoucher)', e);
+    throw e;
+  }
+};
+
+/**
+ * Setter function to update a Voucher's status
+ */
+export const setVoucherStatus = async (uuid: uuid, status: VoucherStatus) =>
+  updateVoucher({ uuid, status });
+
+/**
+ * Setter function to update a Voucher's VendorUuid
+ */
+export const setVoucherVendorUuid = async (uuid: uuid, vendorUuid: uuid) =>
+  updateVoucher({ uuid, vendorUuid });
 
 /**
  * Fetch all vouchers for a given vendor.
