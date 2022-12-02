@@ -3,9 +3,9 @@ import { Text, View, Button } from 'react-native';
 import { TransactionCard } from '../../components/Transactions/TransactionCard';
 import { H2Heading } from '../../../assets/Fonts';
 import {
+  LogoContainer,
   TransactionsContainer,
   FilterRow,
-  AddManuallyContainer,
   Title,
   HorizontalSpacingContainer,
   CardContainer,
@@ -56,19 +56,21 @@ const TransactionsScreen = () => {
       status: 'unpaid',
     },
     {
-      id: '127428',
+      id: '127458',
       date: '10/01/22 1:29PM PST',
       count: 3,
-      price: 7.29,
+      price: 7.99,
       status: 'unpaid',
     },
   ]);
 
   return (
     <TransactionsContainer>
-      <AddManuallyContainer>
-        <Button title="Add manually" />
-      </AddManuallyContainer>
+      <LogoContainer>
+        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
+          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
+        </View>
+      </LogoContainer>
 
       <Title>
         <H2Heading>Transactions</H2Heading>

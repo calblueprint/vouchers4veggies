@@ -9,8 +9,6 @@ export const Row = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
 `;
 
 export const DateIdContainer = styled.View`
@@ -45,6 +43,9 @@ export const Styles = StyleSheet.create({
   },
   bold: {
     fontWeight: '600',
+  },
+  semibold: {
+    fontWeight: '500',
   },
   green: {
     color: Colors.alertGreen,

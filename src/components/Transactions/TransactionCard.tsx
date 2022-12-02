@@ -31,10 +31,10 @@ export const TransactionCard = (props: any) => {
         </Row>
       </DateIdContainer>
       <CountContainer>
-        <Body_1_Text>x{props.count}</Body_1_Text>
+        <Body_1_Text style={Styles.bold}>x{props.count}</Body_1_Text>
       </CountContainer>
       <PriceContainer>
-        <H3_Subheading>${props.price}</H3_Subheading>
+        <H3_Subheading style={Styles.semibold}>${props.price}</H3_Subheading>
       </PriceContainer>
       <Icon.Button
         name="right"
