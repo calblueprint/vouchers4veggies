@@ -5,8 +5,8 @@ import { H1Heading, H4CardNavTab, H3Subheading } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
 import {
   ButtonContainer,
-  DarkGrayText,
   LoginContainer,
+  DarkGrayText,
   LogoContainer,
   StartContainer,
   WhiteText,
