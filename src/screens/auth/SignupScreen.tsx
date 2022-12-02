@@ -25,6 +25,7 @@ export const SignupScreen = () => {
     //write data to firebase
     console.log(name);
     console.log(email);
+    //route to next page -> createPassword
   };
 
   return (
