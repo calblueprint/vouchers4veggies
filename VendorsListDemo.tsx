@@ -3,7 +3,7 @@
  * Selecting a vendor fetches and displays all vouchers for the selected vendor.
  */
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import {
   createVoucher,
@@ -30,6 +30,7 @@ export default function VendorsListDemo() {
         const allVendors = await getAllVendors();
         setVendors(allVendors);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('(useEffect)[VendorsListDemo]', error);
       }
     };
@@ -46,6 +47,7 @@ export default function VendorsListDemo() {
 
         setVouchers(selectedVendorVouchers);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('(useEffect)[VendorsListDemo]', error);
       }
     };
@@ -62,13 +64,14 @@ export default function VendorsListDemo() {
       status: VoucherStatus.UNPAID,
     };
     const uuid = await createVoucher(voucher);
+    // eslint-disable-next-line no-console
     console.log('New uuid: ', uuid);
   };
 
   return (
     <View>
       <Text>{`All Vendors (${vendors.length})`}</Text>
-      <Text onPress={onCreateVoucher}>{`Create Vouchers`}</Text>
+      <Text onPress={onCreateVoucher}>Create Vouchers</Text>
       {vendors.map(vendor => (
         <View key={vendor.uuid} onTouchEnd={() => onSelectVendor(vendor)}>
           <Text>{`name: ${vendor.name} | uuid: ${vendor.uuid}`}</Text>

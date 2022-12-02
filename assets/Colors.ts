@@ -1,4 +1,4 @@
-export const Colors = {
+const Colors = {
   magenta: '#962E8A',
   redMagenta: '#B80083',
   brightMagenta: '#BD25B4',
@@ -14,3 +14,5 @@ export const Colors = {
   superL: '#FCE3E3',
   alertGreen: '#239E0F',
 };
+
+export default Colors;

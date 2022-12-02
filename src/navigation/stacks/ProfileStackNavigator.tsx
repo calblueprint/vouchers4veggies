@@ -1,7 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 import ProfileScreen from '../../screens/profile/ProfileScreen';
+import { ProfileStackParamList } from '../types';
 
-const ProfileStack = createNativeStackNavigator();
+const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 
 /**
  * Stack navigator for the profile screens.

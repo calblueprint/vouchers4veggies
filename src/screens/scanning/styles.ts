@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Colors } from '../../../assets/Colors';
+import Colors from '../../../assets/Colors';
 
 export const SafeArea = styled.SafeAreaView`
   background-color: ${Colors.offWhite};

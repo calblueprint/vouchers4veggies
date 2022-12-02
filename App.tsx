@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -23,6 +24,12 @@ async function loadResourcesAsync() {
   ]);
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
 export default function App() {
   const [resourcesLoaded, setResourcesLoaded] = useState(false);
 
@@ -34,6 +41,7 @@ export default function App() {
       try {
         await loadResourcesAsync();
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.warn(e);
       } finally {
         // Tell the application to render
@@ -62,9 +70,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

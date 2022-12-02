@@ -1,16 +1,16 @@
-export type uuid = string;
+export type Uuid = string;
 
 export type Vendor = {
-  uuid: uuid;
+  uuid: Uuid;
   email: string;
   name: string;
 };
 
 export type Voucher = {
-  uuid: uuid;
+  uuid: Uuid;
   type: VoucherType;
   value: number;
-  vendorUuid: uuid;
+  vendorUuid: Uuid;
   expirationDate: string;
   status: VoucherStatus;
 };
