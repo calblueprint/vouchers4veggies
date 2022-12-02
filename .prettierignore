@@ -2,3 +2,4 @@
 .expo/
 *.md
 *.html
+package-lock.json
