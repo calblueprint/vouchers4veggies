@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
-import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
+import { H1Heading, H4CardNavTab, H3Subheading } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
 import {
   ButtonContainer,
@@ -44,7 +44,7 @@ export default function StartScreen({
           <ButtonContainer>
             <ButtonWhite onPress={() => navigation.navigate('Login')}>
               <DarkGrayText>
-                <H4CardNavTab>Login</H4CardNavTab>
+                <H4CardNavTab>{1 === 1 ? 'Login' : 'No'}</H4CardNavTab>
               </DarkGrayText>
             </ButtonWhite>
           </ButtonContainer>
