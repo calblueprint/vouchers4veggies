@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import ScannerScreen from '../../screens/scanner/ScannerScreen';
 import { ScannerStackParamList } from '../types';
+import ReviewScreen from '../../screens/scanning/ReviewScreen';
 
 const ScannerStack = createNativeStackNavigator<ScannerStackParamList>();
 
@@ -16,6 +17,7 @@ export default function ScannerStackNavigator() {
       }}
     >
       <ScannerStack.Screen name="Scanner" component={ScannerScreen} />
+      <ScannerStack.Screen name="Review" component={ReviewScreen} />
     </ScannerStack.Navigator>
   );
 }
