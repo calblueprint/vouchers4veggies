@@ -15,7 +15,7 @@ import {
   LeftAlignContainer,
   WhiteText,
 } from './styles';
-import { AuthContext } from './AuthContext';
+// import { AuthContext } from './AuthContext';
 
 export const SignupScreen = () => {
   const [name, setName] = useState('');
