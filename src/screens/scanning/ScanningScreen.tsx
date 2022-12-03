@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {
   ButtonTextBlack,
   Body1Text,
@@ -22,7 +23,6 @@ import {
   SafeArea,
 } from './styles';
 import { AddManuallyButton, ButtonMagenta } from '../../../assets/Components';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -70,7 +70,7 @@ export default function ScanningScreen() {
       <PageContainer>
         {scanCounter === 0 ? (
           <Header>
-            <LogoContainer source={v4vLogo}></LogoContainer>
+            <LogoContainer source={v4vLogo} />
             <AddManuallyButton>
               <ButtonTextBlack>
                 <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
