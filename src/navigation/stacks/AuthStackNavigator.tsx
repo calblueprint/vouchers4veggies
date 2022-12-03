@@ -21,8 +21,8 @@ export default function AuthStackNavigator() {
     >
       <AuthStack.Screen name="Start" component={StartScreen} />
       <AuthStack.Screen name="Login" component={LoginScreen} />
-      <AuthStack.Screen name="Sign Up" component={SignupScreen} />
-      <AuthStack.Screen name="Create Password" component={CreatePassword} />
+      <AuthStack.Screen name="Signup" component={SignupScreen} />
+      <AuthStack.Screen name="Createpassword" component={CreatePassword} />
     </AuthStack.Navigator>
   );
 }

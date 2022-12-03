@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, View, Pressable } from 'react-native';
-import { Styles } from './styles';
-import { Colors } from '../../../assets/Colors';
+import Styles from './styles';
+import Colors from '../../../assets/Colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const PasswordInput = (props: any) => {

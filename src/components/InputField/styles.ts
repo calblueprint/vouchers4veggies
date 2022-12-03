@@ -32,7 +32,10 @@ const Styles = StyleSheet.create({
     width: '100%',
   },
   Icon: {
-    position: 'relative',
+    position: 'absolute',
+    right: 10,
+    top: 5,
+    bottom: 5,
   },
 });
 

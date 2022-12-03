@@ -1,8 +1,8 @@
 import { Text, View } from 'react-native';
 import React, { useState } from 'react';
-import { H2Heading, H4_Card_Nav_Tab, Body_1_Text } from '../../../assets/Fonts';
+import { H2Heading, H4CardNavTab, Body1Text } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
-import { InputField } from '../../components/InputField/InputField';
+import InputField from '../../components/InputField/InputField';
 import {
   HeadingContainer,
   LoginContainer,
@@ -45,12 +45,12 @@ export const SignupScreen = ({ route, navigation }: any) => {
           <H2Heading>Hi there! Please create an account.</H2Heading>
         </HeadingContainer>
 
-        <Body_1_Text style={Styles.bold}>Name</Body_1_Text>
+        <Body1Text style={Styles.bold}>Name</Body1Text>
         <InputField onChange={setName} value={name} placeholder="Enter name" />
 
         <RowContainer>
           <LeftAlignContainer>
-            <Body_1_Text style={Styles.bold}>Email</Body_1_Text>
+            <Body1Text style={Styles.bold}>Email</Body1Text>
           </LeftAlignContainer>
         </RowContainer>
 
@@ -62,23 +62,23 @@ export const SignupScreen = ({ route, navigation }: any) => {
 
         <VerticalSpacingButtonContainer>
           {/* <ButtonMagenta onPress={submitForm}> */}
-          <ButtonMagenta onPress={() => navigation.navigate('Create Password')}>
+          <ButtonMagenta onPress={() => navigation.navigate('Createpassword')}>
             <WhiteText>
-              <H4_Card_Nav_Tab>Next</H4_Card_Nav_Tab>
+              <H4CardNavTab>Next</H4CardNavTab>
             </WhiteText>
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
 
         <SmallTextContainer>
-          <Body_1_Text>
+          <Body1Text>
             Already have an account?{' '}
-            <Body_1_Text
+            <Body1Text
               style={Styles.underline}
               onClick={() => navigation.navigate('Login')}
             >
               Login
-            </Body_1_Text>
-          </Body_1_Text>
+            </Body1Text>
+          </Body1Text>
         </SmallTextContainer>
       </FormContainer>
     </LoginContainer>

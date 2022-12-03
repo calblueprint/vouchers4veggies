@@ -2,9 +2,9 @@ import { Text, View } from 'react-native';
 import React, { useState } from 'react';
 import {
   H2Heading,
-  H4_Card_Nav_Tab,
-  Body_1_Text,
-  Body_2_Subtext,
+  H4CardNavTab,
+  Body1Text,
+  Body2Subtext,
 } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
@@ -54,7 +54,7 @@ export const CreatePassword = () => {
 
         <RowContainer>
           <LeftAlignContainer>
-            <Body_1_Text style={Styles.bold}>Password</Body_1_Text>
+            <Body1Text style={Styles.bold}>Password</Body1Text>
           </LeftAlignContainer>
         </RowContainer>
 
@@ -66,7 +66,7 @@ export const CreatePassword = () => {
 
         <RowContainer>
           <LeftAlignContainer>
-            <Body_1_Text style={Styles.bold}>Confirm Password</Body_1_Text>
+            <Body1Text style={Styles.bold}>Confirm Password</Body1Text>
           </LeftAlignContainer>
         </RowContainer>
 
@@ -77,16 +77,16 @@ export const CreatePassword = () => {
           secureTextEntry={true}
         />
 
-        <Body_2_Subtext>
+        <Body2Subtext>
           <Text
             style={{ lineHeight: 20 }}
           >{`Password must include: \n❌ 8-20 characters \n❌ At least 1 capital letter`}</Text>
-        </Body_2_Subtext>
+        </Body2Subtext>
 
         <VerticalSpacingButtonContainer>
           <ButtonMagenta onPress={submitPassword}>
             <WhiteText>
-              <H4_Card_Nav_Tab>Next</H4_Card_Nav_Tab>
+              <H4CardNavTab>Next</H4CardNavTab>
             </WhiteText>
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
