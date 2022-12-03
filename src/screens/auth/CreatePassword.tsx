@@ -7,10 +7,7 @@ import {
   Body2Subtext,
 } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
-import {
-  PasswordInput,
-  togglePasswordVisibility,
-} from '../../components/InputField/PasswordInput';
+import { PasswordInput } from '../../components/InputField/PasswordInput';
 import {
   HeadingContainer,
   LoginContainer,
@@ -18,24 +15,19 @@ import {
   FormContainer,
   Styles,
   VerticalSpacingButtonContainer,
-  SmallTextContainer,
   RowContainer,
   LeftAlignContainer,
   WhiteText,
 } from './styles';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useAuthContext } from './AuthContext';
+// import { useAuthContext } from './AuthContext';
 
-export const CreatePassword = () => {
+export default function CreatePassword() {
   const [password, setPassword] = useState('');
   const [confirm, confirmPassword] = useState('');
 
   const submitPassword = () => {
-    //write data to firebase
-
-    //TO-DO: @allisonhongberkeley error-checking, make sure password == confirm
-    console.log(password);
-    console.log(confirm);
+    // write data to firebase
+    // TO-DO: @allisonhongberkeley error-checking, make sure password == confirm
   };
 
   return (
@@ -74,7 +66,7 @@ export const CreatePassword = () => {
           onChange={confirmPassword}
           value={confirm}
           placeholder="Enter same password"
-          secureTextEntry={true}
+          secureTextEntry
         />
 
         <Body2Subtext>
@@ -93,4 +85,4 @@ export const CreatePassword = () => {
       </FormContainer>
     </LoginContainer>
   );
-};
+}

@@ -1,8 +1,10 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import React, { useState } from 'react';
 import { H2Heading, H4CardNavTab, Body1Text } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
+import { AuthStackScreenProps } from '../../navigation/types';
+
 import {
   HeadingContainer,
   LoginContainer,
@@ -15,10 +17,10 @@ import {
   LeftAlignContainer,
   WhiteText,
 } from './styles';
-import { signUp } from '../../utils/authUtils';
-import { useAuthContext } from './AuthContext';
 
-export const SignupScreen = ({ route, navigation }: any) => {
+export default function SignupScreen({
+  navigation,
+}: AuthStackScreenProps<'Start'>) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
@@ -83,4 +85,4 @@ export const SignupScreen = ({ route, navigation }: any) => {
       </FormContainer>
     </LoginContainer>
   );
-};
+}
