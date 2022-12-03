@@ -1,40 +1,51 @@
 import React from 'react';
-import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Colors from '../../../assets/Colors';
 import {
-  H3_Subheading,
-  Body_2_Subtext,
   Body_1_Text,
+  Body_2_Subtext,
+  H3_Subheading,
 } from '../../../assets/Fonts';
-import { Colors } from '../../../assets/Colors';
 import {
-  Row,
-  DateIdContainer,
   CountContainer,
+  DateIdContainer,
   PriceContainer,
+  Row,
   Styles,
 } from './styles';
 import { AntDesign } from '@expo/vector-icons';
 
-export const TransactionCard = (props: any) => {
+type TransactionCardProps = {
+  date: string;
+  id: string;
+  price: number;
+  count: number;
+  status: string;
+};
+export default function TransactionCard({
+  date,
+  id,
+  price,
+  count,
+  status,
+}: TransactionCardProps) {
   return (
     <Row>
       <DateIdContainer>
-        <Body_2_Subtext>ID {props.id}</Body_2_Subtext>
-        <Body_1_Text style={Styles.bold}>{props.date}</Body_1_Text>
+        <Body_2_Subtext>ID {id}</Body_2_Subtext>
+        <Body_1_Text style={Styles.bold}>{date}</Body_1_Text>
         <Row>
           <Body_2_Subtext>Status: </Body_2_Subtext>
-          <Body_2_Subtext
-            style={props.status === 'paid' ? Styles.green : Styles.red}
-          >
-            {props.status}
+          <Body_2_Subtext style={status === 'paid' ? Styles.green : Styles.red}>
+            {status}
           </Body_2_Subtext>
         </Row>
       </DateIdContainer>
       <CountContainer>
-        <Body_1_Text style={Styles.bold}>x{props.count}</Body_1_Text>
+        <Body_1_Text style={Styles.bold}>x{count}</Body_1_Text>
       </CountContainer>
       <PriceContainer>
-        <H3_Subheading style={Styles.semibold}>${props.price}</H3_Subheading>
+        <H3_Subheading style={Styles.semibold}>${price}</H3_Subheading>
       </PriceContainer>
       <AntDesign.Button
         name="right"
@@ -44,4 +55,4 @@ export const TransactionCard = (props: any) => {
       />
     </Row>
   );
-};
+}

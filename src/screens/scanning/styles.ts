@@ -1,6 +1,5 @@
-import { BarCodeScanner } from 'expo-barcode-scanner';
 import styled from 'styled-components/native';
-import { Colors } from '../../../assets/Colors';
+import Colors from '../../../assets/Colors';
 
 export const ScannerContainer = styled.View`
   width: 277px;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View, Button } from 'react-native';
-import { TransactionCard } from '../../components/Transactions/TransactionCard';
+import { Button, Text, View } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
+import TransactionCard from '../../components/Transactions/TransactionCard';
 import {
   LogoContainer,
   TransactionsContainer,
@@ -11,10 +11,9 @@ import {
   CardContainer,
 } from './styles';
 import { DropdownButton } from '../../components/Dropdown/DropdownButton';
-
 // import { DropdownButton } from '../../components/Dropdown/DropdownButton';
 
-const TransactionsScreen = () => {
+export default function TransactionsScreen() {
   const onChange = () => {};
   const [transactions, setTransactions] = useState([
     {
@@ -112,6 +111,4 @@ const TransactionsScreen = () => {
       </CardContainer>
     </TransactionsContainer>
   );
-};
-
-export default TransactionsScreen;
+}
