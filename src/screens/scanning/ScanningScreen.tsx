@@ -24,6 +24,7 @@ import {
 } from './styles';
 import { AddManuallyButton, ButtonMagenta } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
+import { ScannerStackScreenProps } from '../../navigation/types';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
@@ -35,7 +36,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ScanningScreen() {
+export default function ScanningScreen({
+  navigation,
+}: ScannerStackScreenProps<'ScanningScreen'>) {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(false);
@@ -71,7 +74,9 @@ export default function ScanningScreen() {
         {scanCounter === 0 ? (
           <Header>
             <LogoContainer source={v4vLogo} />
-            <AddManuallyButton>
+            <AddManuallyButton
+              onPress={() => navigation.navigate('ManualVoucherScreen')}
+            >
               <ButtonTextBlack>
                 <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
                 {'  '}
@@ -84,7 +89,9 @@ export default function ScanningScreen() {
             <VoucherCounter>
               <CounterText>{scanCounter}</CounterText>
             </VoucherCounter>
-            <AddManuallyButton>
+            <AddManuallyButton
+              onPress={() => navigation.navigate('ManualVoucherScreen')}
+            >
               <ButtonTextBlack>
                 <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
                 {'  '}
@@ -119,7 +126,9 @@ export default function ScanningScreen() {
 
         {scanCounter > 0 && (
           <ButtonContainer>
-            <ButtonMagenta>
+            <ButtonMagenta
+            // onPress={() => navigation.navigate('ReviewScreen')}
+            >
               <ButtonTextWhite>Review & Submit</ButtonTextWhite>
             </ButtonMagenta>
           </ButtonContainer>
