@@ -32,6 +32,8 @@ export const CreatePassword = () => {
 
   const submitPassword = () => {
     //write data to firebase
+
+    //TO-DO: @allisonhongberkeley error-checking, make sure password == confirm
     console.log(password);
     console.log(confirm);
   };

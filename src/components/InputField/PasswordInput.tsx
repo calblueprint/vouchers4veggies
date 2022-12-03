@@ -10,26 +10,28 @@ export const PasswordInput = (props: any) => {
     togglePasswordVisibility();
 
   return (
-    <View style={isActive ? Styles.FormFieldFocus : Styles.FormField}>
-      <TextInput
-        style={Styles.TextInputField}
-        onBlur={() => setIsActive(false)}
-        onFocus={() => setIsActive(true)}
-        onChangeText={newText => props.onChange(newText)}
-        value={props.value}
-        placeholder={props.placeholder}
-        placeholderTextColor={Colors.midGray}
-        secureTextEntry={passwordVisibility}
-        autoCorrect={false}
-        autoCapitalize="none"
-      />
-      <Pressable onPress={handlePasswordVisibility}>
-        <MaterialCommunityIcons
-          name={passwordVisibility ? 'eye' : 'eye-off'}
-          size={22}
-          color="#232323"
+    <View>
+      <View style={isActive ? Styles.FormFieldFocus : Styles.FormField}>
+        <TextInput
+          style={Styles.TextInputField}
+          onBlur={() => setIsActive(false)}
+          onFocus={() => setIsActive(true)}
+          onChangeText={newText => props.onChange(newText)}
+          value={props.value}
+          placeholder={props.placeholder}
+          placeholderTextColor={Colors.midGray}
+          secureTextEntry={passwordVisibility}
+          autoCorrect={false}
+          autoCapitalize="none"
         />
-      </Pressable>
+        <Pressable style={Styles.Icon} onPress={handlePasswordVisibility}>
+          <MaterialCommunityIcons
+            name={passwordVisibility ? 'eye-outline' : 'eye-off-outline'}
+            size={22}
+            color="#232323"
+          />
+        </Pressable>
+      </View>
     </View>
   );
 };

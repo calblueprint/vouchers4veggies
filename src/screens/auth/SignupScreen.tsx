@@ -72,7 +72,12 @@ export const SignupScreen = ({ route, navigation }: any) => {
         <SmallTextContainer>
           <Body_1_Text>
             Already have an account?{' '}
-            <Body_1_Text style={Styles.underline}>Login</Body_1_Text>
+            <Body_1_Text
+              style={Styles.underline}
+              onClick={() => navigation.navigate('Login')}
+            >
+              Login
+            </Body_1_Text>
           </Body_1_Text>
         </SmallTextContainer>
       </FormContainer>

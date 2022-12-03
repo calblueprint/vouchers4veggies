@@ -3,6 +3,7 @@ import Colors from '../../../assets/Colors';
 
 const Styles = StyleSheet.create({
   FormField: {
+    flex: 1,
     borderWidth: 1,
     borderColor: Colors.midGray,
     backgroundColor: Colors.lightGray,
@@ -15,6 +16,7 @@ const Styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   FormFieldFocus: {
+    flex: 1,
     borderWidth: 1,
     borderColor: Colors.magenta,
     backgroundColor: Colors.offWhite,
@@ -28,6 +30,9 @@ const Styles = StyleSheet.create({
   },
   TextInputField: {
     width: '100%',
+  },
+  Icon: {
+    position: 'relative',
   },
 });
 
