@@ -24,7 +24,7 @@ import {
   WhiteText,
 } from './styles';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AuthContext } from './AuthContext';
+import { useAuthContext } from './AuthContext';
 
 export const CreatePassword = () => {
   const [password, setPassword] = useState('');

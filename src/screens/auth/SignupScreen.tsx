@@ -15,14 +15,17 @@ import {
   LeftAlignContainer,
   WhiteText,
 } from './styles';
-// import { AuthContext } from './AuthContext';
+import { signUp } from '../../utils/authUtils';
+import { useAuthContext } from './AuthContext';
 
 export const SignupScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
+  // const { authState, dispatch } = useAuthContext();
+
   const submitForm = () => {
-    //write data to firebase
+    //transfer data to createPassword screen
     console.log(name);
     console.log(email);
     //route to next page -> createPassword
