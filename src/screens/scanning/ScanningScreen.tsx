@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {
-  Body_1_Text,
   ButtonTextBlack,
+  Body1Text,
   ButtonTextWhite,
   CenterText,
   CounterText,
@@ -11,25 +12,32 @@ import {
   MagentaText,
 } from '../../../assets/Fonts';
 import {
+  ButtonContainer,
   LogoContainer,
   PageContainer,
   ScannerContainer,
   TitleContainer,
   VoucherCounter,
-  ButtonContainer,
   Header,
   BodyContainer,
   SafeArea,
 } from './styles';
 import { AddManuallyButton, ButtonMagenta } from '../../../assets/Components';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { Colors } from '../../../assets/Colors';
+import Colors from '../../../assets/Colors';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
 
-const ScanningScreen = () => {
+const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+    borderRadius: 10,
+  },
+});
+
+export default function ScanningScreen() {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
-  const [type, setType] = useState<any>(BarCodeScanner.Constants.Type.back);
+  const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanCounter, incrementScanned] = useState(0);
 
@@ -43,10 +51,10 @@ const ScanningScreen = () => {
   }, []);
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
-    const { type, data, bounds: { origin } = {} } = scanningResult;
-    // const { x, y } = origin;
+    const { data } = scanningResult;
     incrementScanned(scanCounter + 1);
     setScanned(true);
+    // eslint-disable-next-line no-alert
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
@@ -62,7 +70,7 @@ const ScanningScreen = () => {
       <PageContainer>
         {scanCounter === 0 ? (
           <Header>
-            <LogoContainer source={v4vLogo}></LogoContainer>
+            <LogoContainer source={v4vLogo} />
             <AddManuallyButton>
               <ButtonTextBlack>
                 <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
@@ -92,12 +100,12 @@ const ScanningScreen = () => {
               <H2Heading>Scan your voucher(s).</H2Heading>
             </CenterText>
           </TitleContainer>
-          <Body_1_Text>
+          <Body1Text>
             <CenterText>
               Point your camera at the barcode and line it up with the{' '}
               <MagentaText>purple box.</MagentaText>
             </CenterText>
-          </Body_1_Text>
+          </Body1Text>
         </BodyContainer>
 
         <ScannerContainer>
@@ -119,13 +127,4 @@ const ScanningScreen = () => {
       </PageContainer>
     </SafeArea>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-    borderRadius: 10,
-  },
-});
-
-export default ScanningScreen;
+}
