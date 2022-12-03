@@ -66,10 +66,10 @@ export default function App() {
 
   return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      {/* <AuthContextProvider>
+      <AuthContextProvider>
         <AppNavigator />
-      </AuthContextProvider> */}
-      <TransactionScreen />
+      </AuthContextProvider>
+      {/* <TransactionScreen /> */}
     </View>
   );
 }

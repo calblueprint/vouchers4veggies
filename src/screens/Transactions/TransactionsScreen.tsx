@@ -10,7 +10,7 @@ import {
   HorizontalSpacingContainer,
   CardContainer,
 } from './styles';
-import { DropdownButton } from '../../components/Dropdown/DropdownButton';
+import { Dropdown } from '../../components/Dropdown/Dropdown';
 // import { DropdownButton } from '../../components/Dropdown/DropdownButton';
 
 export default function TransactionsScreen() {
