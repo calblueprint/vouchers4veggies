@@ -2,7 +2,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { LoginScreen } from '../../screens/auth/LoginScreen';
 import StartScreen from '../../screens/auth/StartScreen';
-import SignupScreen from '../../screens/auth/SignupScreen';
+import { SignupScreen } from '../../screens/auth/SignupScreen';
+import { CreatePassword } from '../../screens/auth/CreatePassword';
 
 
 import { AuthStackParamList } from '../types';
@@ -22,6 +23,7 @@ export default function AuthStackNavigator() {
       <AuthStack.Screen name="Start" component={StartScreen} />
       <AuthStack.Screen name="Login" component={LoginScreen} />
       <AuthStack.Screen name="Sign Up" component={SignupScreen} />
+      <AuthStack.Screen name="Create Password" component={CreatePassword} />
     </AuthStack.Navigator>
   );
 }

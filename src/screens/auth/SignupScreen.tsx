@@ -18,7 +18,7 @@ import {
 import { signUp } from '../../utils/authUtils';
 import { useAuthContext } from './AuthContext';
 
-export const SignupScreen = () => {
+export const SignupScreen = ({ route, navigation }: any) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
@@ -61,7 +61,8 @@ export const SignupScreen = () => {
         />
 
         <VerticalSpacingButtonContainer>
-          <ButtonMagenta onPress={submitForm}>
+          {/* <ButtonMagenta onPress={submitForm}> */}
+          <ButtonMagenta onPress={() => navigation.navigate('Create Password')}>
             <WhiteText>
               <H4_Card_Nav_Tab>Next</H4_Card_Nav_Tab>
             </WhiteText>
