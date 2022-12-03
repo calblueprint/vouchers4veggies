@@ -1,8 +1,8 @@
 ---
-name: Lint Code Base
+name: Lint
 
 #############################
-# Start the job on all push #
+# Start the job on push #
 #############################
 on:
   push:
@@ -16,7 +16,7 @@ on:
 jobs:
   build:
     # Name the Job
-    name: Lint Code Base
+    name: Run ESLint & Prettier
     # Set the agent to run on
     runs-on: ubuntu-latest
 
@@ -43,4 +43,9 @@ jobs:
       # Lint codebase #
       ################################
       - name: Run ESLint
-        run: npm eslint .
+        run: npx eslint .
+      ################################
+      # Check Prettier on codebase #
+      ################################
+      - name: Run Prettier
+        run: npx prettier --check .

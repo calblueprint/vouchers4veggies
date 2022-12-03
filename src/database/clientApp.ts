@@ -1,3 +1,4 @@
+import { initializeApp } from 'firebase/app';
 import {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
@@ -6,9 +7,7 @@ import {
   FIREBASE_MESSAGING_SENDER_ID,
   FIREBASE_PROJECT_ID,
   FIREBASE_STORAGE_BUCKET,
-} from '@env';
-import { initializeApp } from 'firebase/app';
-import 'firebase/auth';
+} from 'react-native-dotenv';
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
