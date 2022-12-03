@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
 import {
   H2Heading,
@@ -16,11 +17,10 @@ import {
   SafeArea,
 } from './styles';
 import VoucherCard from '../../components/VoucherReview/VoucherCard';
-import { Ionicons } from '@expo/vector-icons';
 import { ButtonMagenta } from '../../../assets/Components';
 
-//TODO: add props to store voucher
-const ReviewScreen = () => {
+// TODO: add props to store voucher
+function ReviewScreen({ navigation }: any) {
   // TODO: onSubmit function to create new transaction for vendor
   const [vouchers, setVouchers] = useState([
     {
@@ -53,7 +53,12 @@ const ReviewScreen = () => {
     <SafeArea>
       <PageContainer>
         <ReviewHeader>
-          <Ionicons name="chevron-back" size={25} color={Colors.darkGray} />
+          <Ionicons
+            name="chevron-back"
+            size={25}
+            color={Colors.darkGray}
+            onPress={() => navigation.goBack()}
+          />
           <Body1Text>Back</Body1Text>
         </ReviewHeader>
         <H2Heading style={{ marginBottom: 37 }}>Review Vouchers</H2Heading>
@@ -84,6 +89,6 @@ const ReviewScreen = () => {
       </PageContainer>
     </SafeArea>
   );
-};
+}
 
 export default ReviewScreen;

@@ -1,7 +1,6 @@
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import { ButtonWhite } from '../../../assets/Components';
+import { StyleSheet, Text } from 'react-native';
 import {
   Body1Text,
   ButtonTextWhite,
@@ -12,11 +11,8 @@ import {
   MagentaText,
 } from '../../../assets/Fonts';
 import {
-<<<<<<< HEAD
+  SafeArea,
   ButtonContainer,
-  ButtonMagenta,
-=======
->>>>>>> 49892ea (TODO: fix bg color difference)
   HeaderContainer,
   LogoContainer,
   PageContainer,
@@ -25,10 +21,7 @@ import {
   TopContainer,
   VoucherCounter,
 } from './styles';
-<<<<<<< HEAD
-=======
 import { ButtonWhite, ButtonMagenta } from '../../../assets/Components';
->>>>>>> 49892ea (TODO: fix bg color difference)
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
@@ -40,7 +33,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ScanningScreen() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function ScanningScreen({ navigation }: any) {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(false);
@@ -73,7 +67,7 @@ export default function ScanningScreen() {
   }
 
   return (
-    <SafeAreaView>
+    <SafeArea>
       <PageContainer>
         <TopContainer>
           <LogoContainer source={v4vLogo} />
@@ -115,12 +109,12 @@ export default function ScanningScreen() {
             >
               <ButtonTextWhite>Scan Again</ButtonTextWhite>
             </ButtonMagenta>
-            <ButtonWhite>
+            <ButtonWhite onPress={() => navigation.navigate('Review')}>
               <H4CardNavTab>Review & Submit</H4CardNavTab>
             </ButtonWhite>
           </ButtonContainer>
         )}
       </PageContainer>
-    </SafeAreaView>
+    </SafeArea>
   );
 }
