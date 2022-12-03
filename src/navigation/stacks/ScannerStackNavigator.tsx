@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ScannerStackParamList } from '../types';
 import ReviewScreen from '../../screens/scanning/ReviewScreen';
+// import ScannerScreen from '../../screens/scanner/ScannerScreen';
 import ScanningScreen from '../../screens/scanning/ScanningScreen';
 import ManualVoucherScreen from '../../screens/scanning/ManualVoucherScreen';
 
