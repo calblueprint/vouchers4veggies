@@ -13,7 +13,7 @@ import {
   PriceContainer,
   Styles,
 } from './styles';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { AntDesign } from '@expo/vector-icons';
 
 export const TransactionCard = (props: any) => {
   return (
@@ -36,7 +36,7 @@ export const TransactionCard = (props: any) => {
       <PriceContainer>
         <H3_Subheading style={Styles.semibold}>${props.price}</H3_Subheading>
       </PriceContainer>
-      <Icon.Button
+      <AntDesign.Button
         name="right"
         size={25}
         style={Styles.IconButton}

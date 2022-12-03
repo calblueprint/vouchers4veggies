@@ -87,7 +87,12 @@ const TransactionsScreen = () => {
       </Title>
 
       <FilterRow>
-        <DropdownButton title="Count" data={countMenu} onSelect={onChange} />
+        <DropdownButton
+          title="Count"
+          data={countMenu}
+          onChange={onChange}
+          dropdownPosition="bottom"
+        />
         <HorizontalSpacingContainer>
           <Button title="Filter" />
         </HorizontalSpacingContainer>
