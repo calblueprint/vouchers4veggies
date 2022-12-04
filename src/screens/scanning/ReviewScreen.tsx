@@ -10,7 +10,6 @@ import {
   LabelText,
 } from '../../../assets/Fonts';
 import {
-  PageContainer,
   ReviewContainer,
   ReviewHeader,
   AggregateContainer,
@@ -52,42 +51,40 @@ function ReviewScreen({ navigation }: any) {
   ]);
   return (
     <SafeArea>
-      <PageContainer>
-        <ReviewHeader>
-          <Ionicons
-            name="chevron-back"
-            size={25}
-            color={Colors.darkGray}
-            onPress={() => navigation.goBack()}
+      <ReviewHeader>
+        <Ionicons
+          name="chevron-back"
+          size={25}
+          color={Colors.darkGray}
+          onPress={() => navigation.goBack()}
+        />
+        <Body1Text>Back</Body1Text>
+      </ReviewHeader>
+      <H2Heading style={{ marginBottom: 37 }}>Review Vouchers</H2Heading>
+      {/* Make this container scrollable */}
+      <ReviewContainer>
+        {vouchers.map(item => (
+          <VoucherCard
+            key={item.id}
+            id={item.id}
+            date={item.date}
+            amount={item.amount}
           />
-          <Body1Text>Back</Body1Text>
-        </ReviewHeader>
-        <H2Heading style={{ marginBottom: 37 }}>Review Vouchers</H2Heading>
-        {/* Make this container scrollable */}
-        <ReviewContainer>
-          {vouchers.map(item => (
-            <VoucherCard
-              key={item.id}
-              id={item.id}
-              date={item.date}
-              amount={item.amount}
-            />
-          ))}
-        </ReviewContainer>
-        <AggregateContainer>
-          <LabelText>Amount</LabelText>
-          <H3Subheading>x{vouchers.length}</H3Subheading>
-        </AggregateContainer>
-        <AggregateContainer>
-          <LabelText>Total</LabelText>
-          <H3Subheading>$31.45</H3Subheading>
-        </AggregateContainer>
-        <View style={{ marginTop: 46 }}>
-          <ButtonMagenta>
-            <ButtonTextWhite>Submit</ButtonTextWhite>
-          </ButtonMagenta>
-        </View>
-      </PageContainer>
+        ))}
+      </ReviewContainer>
+      <AggregateContainer>
+        <LabelText>Amount</LabelText>
+        <H3Subheading>x{vouchers.length}</H3Subheading>
+      </AggregateContainer>
+      <AggregateContainer>
+        <LabelText>Total</LabelText>
+        <H3Subheading>$31.45</H3Subheading>
+      </AggregateContainer>
+      <View style={{ marginTop: 46 }}>
+        <ButtonMagenta>
+          <ButtonTextWhite>Submit</ButtonTextWhite>
+        </ButtonMagenta>
+      </View>
     </SafeArea>
   );
 }

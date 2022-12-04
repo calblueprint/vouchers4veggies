@@ -152,9 +152,7 @@ export default function ScanningScreen({
           <ButtonWhite disabled={!scanned} onPress={() => setScanned(false)}>
             <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
           </ButtonWhite>
-          <ButtonMagenta
-          // onPress={() => navigation.navigate('ReviewScreen')}
-          >
+          <ButtonMagenta onPress={() => navigation.navigate('ReviewScreen')}>
             <ButtonTextWhite>Review & Submit</ButtonTextWhite>
           </ButtonMagenta>
         </ButtonContainer>
