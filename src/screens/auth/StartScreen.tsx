@@ -50,8 +50,7 @@ export default function StartScreen({
           </ButtonContainer>
 
           <ButtonContainer>
-            {/* TODO: navigate to signup screen */}
-            <ButtonMagenta>
+            <ButtonMagenta onPress={() => navigation.navigate('SignUp')}>
               <WhiteText>
                 <H4CardNavTab>Sign Up</H4CardNavTab>
               </WhiteText>

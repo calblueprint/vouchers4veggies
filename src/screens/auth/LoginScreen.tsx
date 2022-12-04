@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
+import { AuthStackScreenProps } from '../../navigation/types';
 
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 
@@ -22,7 +23,9 @@ import {
   WhiteText,
 } from './styles';
 
-export default function LoginScreen() {
+export default function LoginScreen({
+  navigation,
+}: AuthStackScreenProps<'Login'>) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -103,7 +106,12 @@ export default function LoginScreen() {
         <SmallTextContainer>
           <Body1Text>
             {`Don't have an account? `}
-            <Body1Text style={Styles.underline}>Sign up.</Body1Text>
+            <Body1Text
+              style={Styles.underline}
+              onClick={() => navigation.navigate('SignUp')}
+            >
+              Sign up.
+            </Body1Text>
           </Body1Text>
         </SmallTextContainer>
       </FormContainer>
