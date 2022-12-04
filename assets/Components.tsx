@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/native';
+import styled from 'styled-components/native';
 import Colors from './Colors';
 
 // TODO: @oahnh fix static widths
@@ -13,6 +13,7 @@ export const ButtonMagenta = styled.TouchableOpacity`
   padding: 9px 9px;
   border-color: ${Colors.magenta};
   margin-bottom: 16px;
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 `;
 
 export const ButtonGray = styled.TouchableOpacity`
@@ -34,7 +35,7 @@ export const ButtonWhite = styled.TouchableOpacity`
   padding: 9px 9px;
   border: 2px solid ${Colors.magenta};
   margin-bottom: 16px;
-  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 `;
 
 export const AddManuallyButton = styled.TouchableOpacity`
