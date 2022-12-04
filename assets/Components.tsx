@@ -12,6 +12,7 @@ export const ButtonMagenta = styled.TouchableOpacity`
   text-color: white;
   padding: 9px 9px;
   border-color: ${Colors.magenta};
+  margin-bottom: 16px;
 `;
 
 export const ButtonGray = styled.TouchableOpacity`
@@ -32,6 +33,7 @@ export const ButtonWhite = styled.TouchableOpacity`
   background: ${Colors.offWhite};
   padding: 9px 9px;
   border: 2px solid ${Colors.magenta};
+  margin-bottom: 16px;
 `;
 
 export const AddManuallyButton = styled.TouchableOpacity`

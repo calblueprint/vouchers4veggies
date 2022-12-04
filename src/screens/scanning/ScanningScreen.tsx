@@ -10,11 +10,11 @@ import {
   CounterText,
   H2Heading,
   MagentaText,
+  ButtonTextMagenta,
 } from '../../../assets/Fonts';
 import {
   ButtonContainer,
   LogoContainer,
-  PageContainer,
   ScannerContainer,
   TitleContainer,
   VoucherCounter,
@@ -22,9 +22,14 @@ import {
   BodyContainer,
   SafeArea,
 } from './styles';
-import { AddManuallyButton, ButtonMagenta } from '../../../assets/Components';
+import {
+  AddManuallyButton,
+  ButtonMagenta,
+  ButtonWhite,
+} from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
+import VoucherModal from '../../components/VoucherModal/VoucherModal';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
@@ -54,11 +59,13 @@ export default function ScanningScreen({
   }, []);
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
-    const { data } = scanningResult;
-    incrementScanned(scanCounter + 1);
-    setScanned(true);
-    // eslint-disable-next-line no-alert
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    if (!scanned) {
+      const { data } = scanningResult;
+      incrementScanned(scanCounter + 1);
+      setScanned(true);
+      // eslint-disable-next-line no-alert
+      alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    }
   };
 
   if (hasPermission === null) {
@@ -70,70 +77,86 @@ export default function ScanningScreen({
 
   return (
     <SafeArea>
-      <PageContainer>
-        {scanCounter === 0 ? (
-          <Header>
-            <LogoContainer source={v4vLogo} />
-            <AddManuallyButton
-              onPress={() => navigation.navigate('ManualVoucherScreen')}
-            >
-              <ButtonTextBlack>
-                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-                {'  '}
-                Add Manually
-              </ButtonTextBlack>
-            </AddManuallyButton>
-          </Header>
-        ) : (
-          <Header>
-            <VoucherCounter>
-              <CounterText>{scanCounter}</CounterText>
-            </VoucherCounter>
-            <AddManuallyButton
-              onPress={() => navigation.navigate('ManualVoucherScreen')}
-            >
-              <ButtonTextBlack>
-                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-                {'  '}
-                Add Manually
-              </ButtonTextBlack>
-            </AddManuallyButton>
-          </Header>
-        )}
+      {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
+      {scanCounter === 0 ? (
+        <Header>
+          <LogoContainer source={v4vLogo} />
+          <AddManuallyButton
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
+          >
+            <ButtonTextBlack>
+              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+              {'  '}
+              Add Manually
+            </ButtonTextBlack>
+          </AddManuallyButton>
+        </Header>
+      ) : (
+        <Header>
+          <VoucherCounter>
+            <CounterText>{scanCounter}</CounterText>
+          </VoucherCounter>
+          <AddManuallyButton
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
+          >
+            <ButtonTextBlack>
+              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+              {'  '}
+              Add Manually
+            </ButtonTextBlack>
+          </AddManuallyButton>
+        </Header>
+      )}
 
-        <BodyContainer>
-          <TitleContainer>
-            <CenterText>
-              <H2Heading>Scan your voucher(s).</H2Heading>
-            </CenterText>
-          </TitleContainer>
-          <Body1Text>
-            <CenterText>
-              Point your camera at the barcode and line it up with the{' '}
-              <MagentaText>purple box.</MagentaText>
-            </CenterText>
-          </Body1Text>
-        </BodyContainer>
+      <BodyContainer>
+        <TitleContainer>
+          <CenterText>
+            <H2Heading>Scan your voucher(s).</H2Heading>
+          </CenterText>
+        </TitleContainer>
+        <Body1Text>
+          <CenterText>
+            Point your camera at the barcode and line it up with the{' '}
+            <MagentaText>purple box.</MagentaText>
+          </CenterText>
+        </Body1Text>
+      </BodyContainer>
 
-        <ScannerContainer>
-          <BarCodeScanner
-            onBarCodeScanned={handleBarCodeScanned}
-            type={type}
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.code39]}
-            style={[StyleSheet.absoluteFillObject, styles.container]}
-          />
-        </ScannerContainer>
+      <ScannerContainer>
+        <BarCodeScanner
+          onBarCodeScanned={handleBarCodeScanned}
+          type={type}
+          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.code39]}
+          style={[StyleSheet.absoluteFillObject, styles.container]}
+        />
+      </ScannerContainer>
 
-        {scanCounter > 0 && (
-          <ButtonContainer>
-            <ButtonMagenta
-            // onPress={() => navigation.navigate('ReviewScreen')}
-            >
-              <ButtonTextWhite>Review & Submit</ButtonTextWhite>
-            </ButtonMagenta>
-          </ButtonContainer>
-        )}
-      </PageContainer>
+      {scanCounter === 0 ? (
+        <ButtonMagenta onPress={() => setScanned(false)}>
+          <ButtonTextWhite>Scan</ButtonTextWhite>
+        </ButtonMagenta>
+      ) : (
+        <ButtonContainer>
+          <ButtonWhite disabled={!scanned} onPress={() => setScanned(false)}>
+            <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
+          </ButtonWhite>
+          <ButtonMagenta
+          // onPress={() => navigation.navigate('ReviewScreen')}
+          >
+            <ButtonTextWhite>Review & Submit</ButtonTextWhite>
+          </ButtonMagenta>
+        </ButtonContainer>
+      )}
+
+      {/* {scanCounter > 0 && (
+        <ButtonContainer>
+          <ButtonMagenta
+          // onPress={() => navigation.navigate('ReviewScreen')}
+          >
+            <ButtonTextWhite>Review & Submit</ButtonTextWhite>
+          </ButtonMagenta>
+        </ButtonContainer>
+      )} */}
     </SafeArea>
   );
 }

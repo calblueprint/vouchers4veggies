@@ -73,6 +73,14 @@ export const ButtonTextBlack = styled.Text`
   color: ${Colors.midBlack};
 `;
 
+export const ButtonTextMagenta = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 18px;
+  line-height: 25px;
+  color: ${Colors.magenta};
+`;
+
 export const InputTitleText = styled.Text`
   font-family: 'manrope-semiBold';
   font-style: normal;

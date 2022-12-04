@@ -8,7 +8,6 @@ import {
 } from '../../../assets/Fonts';
 import {
   LogoContainer,
-  PageContainer,
   TitleContainer,
   Header,
   BodyContainer,
@@ -36,44 +35,42 @@ function ManualVoucherScreen() {
 
   return (
     <SafeArea>
-      <PageContainer>
-        <Header>
-          <LogoContainer source={v4vLogo} />
-        </Header>
+      <Header>
+        <LogoContainer source={v4vLogo} />
+      </Header>
 
-        <BodyContainer>
-          <TitleContainer>
-            <CenterText>
-              <H2Heading>Add a voucher</H2Heading>
-            </CenterText>
-          </TitleContainer>
-          <FormContainer>
-            <FieldContainer>
-              <InputTitleText>Transaction ID</InputTitleText>
-              <InputField
-                onChange={setID}
-                value={transactionID}
-                placeholder="Enter ID"
-              />
-            </FieldContainer>
-            <FieldContainer>
-              <InputTitleText>Voucher Color</InputTitleText>
-              <DropDownContainer />
-            </FieldContainer>
-            <FieldContainer>
-              <InputTitleText>Amount</InputTitleText>
-              <InputField
-                onChange={setVoucherAmount}
-                value={voucherAmount}
-                placeholder="Enter Amount"
-              />
-            </FieldContainer>
-          </FormContainer>
-          <ButtonMagenta>
-            <ButtonTextWhite>Add Voucher</ButtonTextWhite>
-          </ButtonMagenta>
-        </BodyContainer>
-      </PageContainer>
+      <BodyContainer>
+        <TitleContainer>
+          <CenterText>
+            <H2Heading>Add a voucher</H2Heading>
+          </CenterText>
+        </TitleContainer>
+        <FormContainer>
+          <FieldContainer>
+            <InputTitleText>Transaction ID</InputTitleText>
+            <InputField
+              onChange={setID}
+              value={transactionID}
+              placeholder="Enter ID"
+            />
+          </FieldContainer>
+          <FieldContainer>
+            <InputTitleText>Voucher Color</InputTitleText>
+            <DropDownContainer />
+          </FieldContainer>
+          <FieldContainer>
+            <InputTitleText>Amount</InputTitleText>
+            <InputField
+              onChange={setVoucherAmount}
+              value={voucherAmount}
+              placeholder="Enter Amount"
+            />
+          </FieldContainer>
+        </FormContainer>
+        <ButtonMagenta>
+          <ButtonTextWhite>Add Voucher</ButtonTextWhite>
+        </ButtonMagenta>
+      </BodyContainer>
     </SafeArea>
   );
 }
