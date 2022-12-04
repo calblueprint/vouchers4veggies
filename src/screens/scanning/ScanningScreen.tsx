@@ -72,7 +72,9 @@ export default function ScanningScreen({ navigation }: any) {
         {scanCounter === 0 ? (
           <Header>
             <LogoContainer source={v4vLogo} />
-            <AddManuallyButton>
+            <AddManuallyButton
+              onPress={() => navigation.navigate('ManualVoucher')}
+            >
               <ButtonTextBlack>
                 <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
                 {'  '}
@@ -120,7 +122,7 @@ export default function ScanningScreen({ navigation }: any) {
 
         {scanCounter > 0 && (
           <ButtonContainer>
-            <ButtonMagenta>
+            <ButtonMagenta onPress={() => navigation.navigate('Review')}>
               <ButtonTextWhite>Review & Submit</ButtonTextWhite>
             </ButtonMagenta>
           </ButtonContainer>

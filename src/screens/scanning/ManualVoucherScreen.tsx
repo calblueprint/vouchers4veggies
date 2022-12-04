@@ -25,8 +25,8 @@ const v4vLogo = require('../../../assets/logo-1.png');
 function ManualVoucherScreen() {
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanCounter, incrementScanned] = useState(0);
-  const [transactionID, setID] = useState<string>();
-  const [voucherAmount, setVoucherAmount] = useState<string>();
+  const [transactionID, setID] = useState<string>('');
+  const [voucherAmount, setVoucherAmount] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([

@@ -20,6 +20,7 @@ import VoucherCard from '../../components/VoucherReview/VoucherCard';
 import { ButtonMagenta } from '../../../assets/Components';
 
 // TODO: add props to store voucher
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function ReviewScreen({ navigation }: any) {
   // TODO: onSubmit function to create new transaction for vendor
   const [vouchers, setVouchers] = useState([
