@@ -46,7 +46,7 @@ export default function ScanningScreen({
 }: ScannerStackScreenProps<'ScanningScreen'>) {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
-  const [scanned, setScanned] = useState<boolean>(false);
+  const [scanned, setScanned] = useState<boolean>(true);
   const [scanCounter, incrementScanned] = useState(0);
 
   useEffect(() => {
@@ -147,16 +147,6 @@ export default function ScanningScreen({
           </ButtonMagenta>
         </ButtonContainer>
       )}
-
-      {/* {scanCounter > 0 && (
-        <ButtonContainer>
-          <ButtonMagenta
-          // onPress={() => navigation.navigate('ReviewScreen')}
-          >
-            <ButtonTextWhite>Review & Submit</ButtonTextWhite>
-          </ButtonMagenta>
-        </ButtonContainer>
-      )} */}
     </SafeArea>
   );
 }
