@@ -2,17 +2,30 @@ import * as React from 'react';
 
 import { AntDesign, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { Colors } from '../../assets/Colors';
 
+import Colors from '../../assets/Colors';
 import ProfileStackNavigator from './stacks/ProfileStackNavigator';
 import ScannerStackNavigator from './stacks/ScannerStackNavigator';
 import TransactionStackNavigator from './stacks/TransactionStackNavigator';
+import { BottomTabParamList } from './types';
 
 const initialRouteName = 'Home';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator<BottomTabParamList>();
 
-export const NavigationBar = () => {
+function ScanIcon({ color }: { color: string }) {
+  return <AntDesign name="scan1" color={color} size={26} />;
+}
+
+function ProfileIcon({ color }: { color: string }) {
+  return <Ionicons name="md-person-outline" color={color} size={26} />;
+}
+
+function TransactionIcon({ color }: { color: string }) {
+  return <MaterialIcons name="compare-arrows" color={color} size={26} />;
+}
+
+export default function NavigationBar() {
   return (
     <Tab.Navigator
       initialRouteName={initialRouteName}
@@ -23,31 +36,25 @@ export const NavigationBar = () => {
         component={ScannerStackNavigator}
         options={{
           tabBarLabel: 'Scan',
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="scan1" color={color} size={26} />
-          ),
+          tabBarIcon: ScanIcon,
         }}
-      ></Tab.Screen>
+      />
       <Tab.Screen
         name="Profile"
         component={ProfileStackNavigator}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="md-person-outline" color={color} size={26} />
-          ),
+          tabBarIcon: ProfileIcon,
         }}
-      ></Tab.Screen>
+      />
       <Tab.Screen
         name="Transactions"
         component={TransactionStackNavigator}
         options={{
           tabBarLabel: 'Transactions',
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="compare-arrows" color={color} size={26} />
-          ),
+          tabBarIcon: TransactionIcon,
         }}
-      ></Tab.Screen>
+      />
     </Tab.Navigator>
   );
-};
+}

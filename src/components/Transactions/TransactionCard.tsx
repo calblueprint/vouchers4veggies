@@ -1,31 +1,38 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Colors from '../../../assets/Colors';
+import { Body1Text, Body2Subtext, H3Subheading } from '../../../assets/Fonts';
 import {
-  H3_Subheading,
-  Body_2_Subtext,
-  Body_1_Text,
-} from '../../../assets/Fonts';
-import { Colors } from '../../../assets/Colors';
-import {
-  Row,
-  DateIdContainer,
   CountContainer,
+  DateIdContainer,
   PriceContainer,
+  Row,
   Styles,
 } from './styles';
-import Icon from 'react-native-vector-icons/AntDesign';
 
-export const TransactionCard = (props: any) => {
+type TransactionCardProps = {
+  date: string;
+  id: string;
+  price: number;
+  count: number;
+};
+export default function TransactionCard({
+  date,
+  id,
+  price,
+  count,
+}: TransactionCardProps) {
   return (
     <Row>
       <DateIdContainer>
-        <Body_2_Subtext>ID {props.id}</Body_2_Subtext>
-        <Body_1_Text>{props.date}</Body_1_Text>
+        <Body2Subtext>{`ID ${id}`}</Body2Subtext>
+        <Body1Text>{date}</Body1Text>
       </DateIdContainer>
       <CountContainer>
-        <Body_1_Text>x{props.count}</Body_1_Text>
+        <Body1Text>{`x${count}`}</Body1Text>
       </CountContainer>
       <PriceContainer>
-        <H3_Subheading>${props.price}</H3_Subheading>
+        <H3Subheading>{`$${price}`}</H3Subheading>
       </PriceContainer>
       <Icon.Button
         name="right"
@@ -35,4 +42,4 @@ export const TransactionCard = (props: any) => {
       />
     </Row>
   );
-};
+}
