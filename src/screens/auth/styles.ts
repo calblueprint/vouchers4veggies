@@ -96,4 +96,9 @@ export const Styles = StyleSheet.create({
   errorText: {
     color: Colors.alertRed,
   },
+  logoPlaceholder: {
+    backgroundColor: 'black',
+    width: 50,
+    height: 59.29,
+  },
 });

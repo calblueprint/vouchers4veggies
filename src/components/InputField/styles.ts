@@ -34,8 +34,8 @@ const Styles = StyleSheet.create({
   Icon: {
     position: 'absolute',
     right: 10,
-    top: 5,
-    bottom: 5,
+    top: '25%',
+    bottom: '50%',
   },
 });
 

@@ -5,7 +5,7 @@ const Colors = {
   midLightMagenta: 'rgba(150, 46, 138, 0.77)',
   lightMagenta: 'rgba(150, 46, 138, 0.4)',
   midBlack: 'rgba(150, 46, 138, 0.4)',
-  darkGray: '#272929',
+  darkGray: '#525454',
   midGray: '#A9A9A9',
   lightGray: '#F2F2F2',
   offWhite: '#FFFFFF',

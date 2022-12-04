@@ -23,23 +23,18 @@ export default function SignupScreen({
 }: AuthStackScreenProps<'Start'>) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-  // const { authState, dispatch } = useAuthContext();
-
-  const submitForm = () => {
-    //transfer data to createPassword screen
-    console.log(name);
-    console.log(email);
-    //route to next page -> createPassword
+  // TO-DO: @allisonhongberkeley transfer data to createPassword screen
+  const handleSubmit = () => {
+    navigation.navigate('CreatePassword');
   };
 
   return (
     <LoginContainer>
       {/* logo placeholder */}
       <LogoContainer>
-        <View
-          style={{ backgroundColor: 'black', width: 50, height: 59.29 }}
-        ></View>
+        <View style={Styles.logoPlaceholder}></View>
       </LogoContainer>
 
       <FormContainer>
@@ -63,8 +58,7 @@ export default function SignupScreen({
         />
 
         <VerticalSpacingButtonContainer>
-          {/* <ButtonMagenta onPress={submitForm}> */}
-          <ButtonMagenta onPress={() => navigation.navigate('Createpassword')}>
+          <ButtonMagenta onPress={handleSubmit}>
             <WhiteText>
               <H4CardNavTab>Next</H4CardNavTab>
             </WhiteText>
@@ -73,7 +67,7 @@ export default function SignupScreen({
 
         <SmallTextContainer>
           <Body1Text>
-            Already have an account?{' '}
+            {`Already have an account `}
             <Body1Text
               style={Styles.underline}
               onClick={() => navigation.navigate('Login')}

@@ -3,7 +3,7 @@ import React from 'react';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import StartScreen from '../../screens/auth/StartScreen';
 import SignupScreen from '../../screens/auth/SignupScreen';
-import CreatePassword from '../../screens/auth/CreatePassword';
+import CreatePasswordScreen from '../../screens/auth/CreatePasswordScreen';
 
 import { AuthStackParamList } from '../types';
 
@@ -21,8 +21,11 @@ export default function AuthStackNavigator() {
     >
       <AuthStack.Screen name="Start" component={StartScreen} />
       <AuthStack.Screen name="Login" component={LoginScreen} />
-      <AuthStack.Screen name="Signup" component={SignupScreen} />
-      <AuthStack.Screen name="Createpassword" component={CreatePassword} />
+      <AuthStack.Screen name="SignUp" component={SignupScreen} />
+      <AuthStack.Screen
+        name="CreatePassword"
+        component={CreatePasswordScreen}
+      />
     </AuthStack.Navigator>
   );
 }

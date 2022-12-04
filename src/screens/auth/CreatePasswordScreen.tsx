@@ -6,8 +6,8 @@ import {
   Body1Text,
   Body2Subtext,
 } from '../../../assets/Fonts';
+import InputField from '../../components/InputField/InputField';
 import { ButtonMagenta } from '../../../assets/Components';
-import { PasswordInput } from '../../components/InputField/PasswordInput';
 import {
   HeadingContainer,
   LoginContainer,
@@ -19,14 +19,18 @@ import {
   LeftAlignContainer,
   WhiteText,
 } from './styles';
-// import { useAuthContext } from './AuthContext';
+import { setAuthErrorMessage, signUp } from '../../utils/authUtils';
+
+import { useAuthContext } from './AuthContext';
 
 export default function CreatePassword() {
   const [password, setPassword] = useState('');
-  const [confirm, confirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showError, setShowError] = useState(false);
+  const { errorMessage, dispatch } = useAuthContext();
 
   const submitPassword = () => {
-    // write data to firebase
+    // TO-DO: @allisonhongberkeley write data to firebase
     // TO-DO: @allisonhongberkeley error-checking, make sure password == confirm
   };
 
@@ -34,9 +38,7 @@ export default function CreatePassword() {
     <LoginContainer>
       {/* logo placeholder */}
       <LogoContainer>
-        <View
-          style={{ backgroundColor: 'black', width: 50, height: 59.29 }}
-        ></View>
+        <View style={Styles.logoPlaceholder}></View>
       </LogoContainer>
 
       <FormContainer>
@@ -50,10 +52,11 @@ export default function CreatePassword() {
           </LeftAlignContainer>
         </RowContainer>
 
-        <PasswordInput
+        <InputField
           onChange={setPassword}
           value={password}
           placeholder="Enter password"
+          secureTextEntry
         />
 
         <RowContainer>
@@ -62,17 +65,15 @@ export default function CreatePassword() {
           </LeftAlignContainer>
         </RowContainer>
 
-        <PasswordInput
-          onChange={confirmPassword}
-          value={confirm}
+        <InputField
+          onChange={setConfirmPassword}
+          value={confirmPassword}
           placeholder="Enter same password"
           secureTextEntry
         />
 
         <Body2Subtext>
-          <Text
-            style={{ lineHeight: 20 }}
-          >{`Password must include: \n❌ 8-20 characters \n❌ At least 1 capital letter`}</Text>
+          <Text>{`Password must include: \n❌ 8-20 characters \n❌ At least 1 capital letter`}</Text>
         </Body2Subtext>
 
         <VerticalSpacingButtonContainer>
