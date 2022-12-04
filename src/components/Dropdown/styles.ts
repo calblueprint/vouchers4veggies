@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   mainWrap: {
     justifyContent: 'center',
   },
@@ -65,3 +65,5 @@ export const styles = StyleSheet.create({
     height: 45,
   },
 });
+
+export default styles;

@@ -1,11 +1,7 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
-import {
-  Body_1_Text,
-  Body_2_Subtext,
-  H3_Subheading,
-} from '../../../assets/Fonts';
+import { Body1Text, Body2Subtext, H3Subheading } from '../../../assets/Fonts';
 import {
   CountContainer,
   DateIdContainer,
@@ -13,7 +9,6 @@ import {
   Row,
   Styles,
 } from './styles';
-import { AntDesign } from '@expo/vector-icons';
 
 type TransactionCardProps = {
   date: string;
@@ -32,20 +27,20 @@ export default function TransactionCard({
   return (
     <Row>
       <DateIdContainer>
-        <Body_2_Subtext>ID {id}</Body_2_Subtext>
-        <Body_1_Text style={Styles.bold}>{date}</Body_1_Text>
+        <Body2Subtext>ID {id}</Body2Subtext>
+        <Body1Text style={Styles.bold}>{date}</Body1Text>
         <Row>
-          <Body_2_Subtext>Status: </Body_2_Subtext>
-          <Body_2_Subtext style={status === 'paid' ? Styles.green : Styles.red}>
+          <Body2Subtext>Status: </Body2Subtext>
+          <Body2Subtext style={status === 'paid' ? Styles.green : Styles.red}>
             {status}
-          </Body_2_Subtext>
+          </Body2Subtext>
         </Row>
       </DateIdContainer>
       <CountContainer>
-        <Body_1_Text style={Styles.bold}>x{count}</Body_1_Text>
+        <Body1Text style={Styles.bold}>x{count}</Body1Text>
       </CountContainer>
       <PriceContainer>
-        <H3_Subheading style={Styles.semibold}>${price}</H3_Subheading>
+        <H3Subheading style={Styles.semibold}>${price}</H3Subheading>
       </PriceContainer>
       <AntDesign.Button
         name="right"

@@ -10,11 +10,13 @@ import {
   HorizontalSpacingContainer,
   CardContainer,
 } from './styles';
-import { Dropdown } from '../../components/Dropdown/Dropdown';
+import Dropdown from '../../components/Dropdown/Dropdown';
 // import { DropdownButton } from '../../components/Dropdown/DropdownButton';
 
 export default function TransactionsScreen() {
-  const onChange = () => {};
+  const onChange = () => {
+    const a = 2;
+  };
   const [transactions, setTransactions] = useState([
     {
       id: '123123',
@@ -86,11 +88,11 @@ export default function TransactionsScreen() {
       </Title>
 
       <FilterRow>
-        <DropdownButton
-          title="Count"
+        <Dropdown
+          label="Count"
           data={countMenu}
-          onChange={onChange}
-          dropdownPosition="bottom"
+          onSelect={onChange}
+          // dropdownPosition="bottom"
         />
         <HorizontalSpacingContainer>
           <Button title="Filter" />
