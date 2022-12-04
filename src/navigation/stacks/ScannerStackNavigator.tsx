@@ -1,6 +1,5 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import ScannerScreen from '../../screens/scanner/ScannerScreen';
 import ManualVoucherScreen from '../../screens/scanning/ManualVoucherScreen';
 import { ScannerStackParamList } from '../types';
 import ReviewScreen from '../../screens/scanning/ReviewScreen';
@@ -19,12 +18,12 @@ export default function ScannerStackNavigator() {
         headerShown: false,
       }}
     >
-      <ScannerStack.Screen name="Scanner" component={ScanningScreen} />
-      <ScannerStack.Screen name="Review" component={ReviewScreen} />
+      <ScannerStack.Screen name="ScanningScreen" component={ScanningScreen} />
       <ScannerStack.Screen
-        name="ManualVoucher"
+        name="ManualVoucherScreen"
         component={ManualVoucherScreen}
       />
+      <ScannerStack.Screen name="ReviewScreen" component={ReviewScreen} />
     </ScannerStack.Navigator>
   );
 }

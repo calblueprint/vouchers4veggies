@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Toast from 'react-native-toast-message';
 import {
   ButtonTextBlack,
   Body1Text,
@@ -10,20 +11,26 @@ import {
   CounterText,
   H2Heading,
   MagentaText,
+  ButtonTextMagenta,
 } from '../../../assets/Fonts';
 import {
   SafeArea,
   ButtonContainer,
   LogoContainer,
-  PageContainer,
   ScannerContainer,
   TitleContainer,
   VoucherCounter,
   Header,
   BodyContainer,
 } from './styles';
-import { AddManuallyButton, ButtonMagenta } from '../../../assets/Components';
+import {
+  AddManuallyButton,
+  ButtonMagenta,
+  ButtonWhite,
+} from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
+import { ScannerStackScreenProps } from '../../navigation/types';
+// import VoucherModal from '../../components/VoucherModal/VoucherModal';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
@@ -35,11 +42,12 @@ const styles = StyleSheet.create({
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function ScanningScreen({ navigation }: any) {
+export default function ScanningScreen({
+  navigation,
+}: ScannerStackScreenProps<'ScanningScreen'>) {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
-  const [scanned, setScanned] = useState<boolean>(false);
+  const [scanned, setScanned] = useState<boolean>(true);
   const [scanCounter, incrementScanned] = useState(0);
 
   useEffect(() => {
@@ -51,12 +59,25 @@ export default function ScanningScreen({ navigation }: any) {
     getBarCodeScannerPermissions();
   }, []);
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      topOffset: 50,
+      text1: 'Voucher Scanned!',
+      visibilityTime: 2000,
+    });
+  };
+
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
-    const { data } = scanningResult;
-    incrementScanned(scanCounter + 1);
-    setScanned(true);
-    // eslint-disable-next-line no-alert
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    if (!scanned) {
+      const { data } = scanningResult;
+      incrementScanned(scanCounter + 1);
+      setScanned(true);
+      // eslint-disable-next-line no-alert
+      // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+      showToast();
+    }
   };
 
   if (hasPermission === null) {
@@ -68,66 +89,77 @@ export default function ScanningScreen({ navigation }: any) {
 
   return (
     <SafeArea>
-      <PageContainer>
-        {scanCounter === 0 ? (
-          <Header>
-            <LogoContainer source={v4vLogo} />
-            <AddManuallyButton
-              onPress={() => navigation.navigate('ManualVoucher')}
-            >
-              <ButtonTextBlack>
-                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-                {'  '}
-                Add Manually
-              </ButtonTextBlack>
-            </AddManuallyButton>
-          </Header>
-        ) : (
-          <Header>
-            <VoucherCounter>
-              <CounterText>{scanCounter}</CounterText>
-            </VoucherCounter>
-            <AddManuallyButton>
-              <ButtonTextBlack>
-                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-                {'  '}
-                Add Manually
-              </ButtonTextBlack>
-            </AddManuallyButton>
-          </Header>
-        )}
+      {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
+      {scanCounter === 0 ? (
+        <Header>
+          <LogoContainer source={v4vLogo} />
+          <AddManuallyButton
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
+          >
+            <ButtonTextBlack>
+              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+              {'  '}
+              Add Manually
+            </ButtonTextBlack>
+          </AddManuallyButton>
+        </Header>
+      ) : (
+        <Header>
+          <VoucherCounter>
+            <CounterText>{scanCounter}</CounterText>
+          </VoucherCounter>
+          <AddManuallyButton
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
+          >
+            <ButtonTextBlack>
+              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+              {'  '}
+              Add Manually
+            </ButtonTextBlack>
+          </AddManuallyButton>
+        </Header>
+      )}
 
-        <BodyContainer>
-          <TitleContainer>
-            <CenterText>
-              <H2Heading>Scan your voucher(s).</H2Heading>
-            </CenterText>
-          </TitleContainer>
-          <Body1Text>
-            <CenterText>
-              Point your camera at the barcode and line it up with the{' '}
-              <MagentaText>purple box.</MagentaText>
-            </CenterText>
-          </Body1Text>
-        </BodyContainer>
+      <BodyContainer>
+        <TitleContainer>
+          <CenterText>
+            <H2Heading>Scan your voucher(s).</H2Heading>
+          </CenterText>
+        </TitleContainer>
+        <Body1Text>
+          <CenterText>
+            Point your camera at the barcode and line it up with the{' '}
+            <MagentaText>purple box.</MagentaText>
+          </CenterText>
+        </Body1Text>
+      </BodyContainer>
 
-        <ScannerContainer>
-          <BarCodeScanner
-            onBarCodeScanned={handleBarCodeScanned}
-            type={type}
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.code39]}
-            style={[StyleSheet.absoluteFillObject, styles.container]}
-          />
-        </ScannerContainer>
+      <ScannerContainer>
+        <BarCodeScanner
+          onBarCodeScanned={handleBarCodeScanned}
+          type={type}
+          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.code39]}
+          style={[StyleSheet.absoluteFillObject, styles.container]}
+        />
+      </ScannerContainer>
 
-        {scanCounter > 0 && (
-          <ButtonContainer>
-            <ButtonMagenta onPress={() => navigation.navigate('Review')}>
-              <ButtonTextWhite>Review & Submit</ButtonTextWhite>
-            </ButtonMagenta>
-          </ButtonContainer>
-        )}
-      </PageContainer>
+      {scanCounter === 0 ? (
+        <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
+          <ButtonTextWhite>Scan</ButtonTextWhite>
+        </ButtonMagenta>
+      ) : (
+        <ButtonContainer>
+          <ButtonWhite disabled={!scanned} onPress={() => setScanned(false)}>
+            <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
+          </ButtonWhite>
+          <ButtonMagenta
+          // onPress={() => navigation.navigate('ReviewScreen')}
+          >
+            <ButtonTextWhite>Review & Submit</ButtonTextWhite>
+          </ButtonMagenta>
+        </ButtonContainer>
+      )}
+      <Toast />
     </SafeArea>
   );
 }
