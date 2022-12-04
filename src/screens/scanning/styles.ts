@@ -4,16 +4,12 @@ import Colors from '../../../assets/Colors';
 export const SafeArea = styled.SafeAreaView`
   background-color: ${Colors.offWhite};
   min-height: 100%;
-`;
-
-export const PageContainer = styled.View`
-  display: flex;
   align-items: center;
-  justify-content: center;
+  flex: 1;
 `;
 
 export const Header = styled.View`
-  width: 75%;
+  width: 85%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
