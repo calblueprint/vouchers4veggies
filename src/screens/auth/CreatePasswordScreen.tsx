@@ -29,9 +29,23 @@ export default function CreatePassword() {
   const [showError, setShowError] = useState(false);
   const { errorMessage, dispatch } = useAuthContext();
 
-  const submitPassword = () => {
+  const handleSignUp = async () => {
     // TO-DO: @allisonhongberkeley write data to firebase
     // TO-DO: @allisonhongberkeley error-checking, make sure password == confirm
+    if (password !== confirmPassword) {
+      setAuthErrorMessage(dispatch, 'Passwords must match');
+    }
+    setShowError(true);
+  };
+
+  const onChangePassword = (value: string) => {
+    setShowError(false);
+    setPassword(value);
+  };
+
+  const onChangeConfirmPassword = (value: string) => {
+    setShowError(false);
+    setConfirmPassword(value);
   };
 
   return (
@@ -53,7 +67,7 @@ export default function CreatePassword() {
         </RowContainer>
 
         <InputField
-          onChange={setPassword}
+          onChange={onChangePassword}
           value={password}
           placeholder="Enter password"
           secureTextEntry
@@ -66,7 +80,7 @@ export default function CreatePassword() {
         </RowContainer>
 
         <InputField
-          onChange={setConfirmPassword}
+          onChange={onChangeConfirmPassword}
           value={confirmPassword}
           placeholder="Enter same password"
           secureTextEntry
@@ -77,7 +91,7 @@ export default function CreatePassword() {
         </Body2Subtext>
 
         <VerticalSpacingButtonContainer>
-          <ButtonMagenta onPress={submitPassword}>
+          <ButtonMagenta onPress={handleSignUp}>
             <WhiteText>
               <H4CardNavTab>Next</H4CardNavTab>
             </WhiteText>
