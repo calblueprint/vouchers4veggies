@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Toast from 'react-native-toast-message';
 import {
   ButtonTextBlack,
   Body1Text,
@@ -29,7 +30,7 @@ import {
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
-import VoucherModal from '../../components/VoucherModal/VoucherModal';
+// import VoucherModal from '../../components/VoucherModal/VoucherModal';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
@@ -58,13 +59,24 @@ export default function ScanningScreen({
     getBarCodeScannerPermissions();
   }, []);
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      topOffset: 50,
+      text1: 'Voucher Scanned!',
+      visibilityTime: 2000,
+    });
+  };
+
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       const { data } = scanningResult;
       incrementScanned(scanCounter + 1);
       setScanned(true);
       // eslint-disable-next-line no-alert
-      alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+      // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+      showToast();
     }
   };
 
@@ -132,7 +144,7 @@ export default function ScanningScreen({
       </ScannerContainer>
 
       {scanCounter === 0 ? (
-        <ButtonMagenta onPress={() => setScanned(false)}>
+        <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>
       ) : (
@@ -147,6 +159,7 @@ export default function ScanningScreen({
           </ButtonMagenta>
         </ButtonContainer>
       )}
+      <Toast />
     </SafeArea>
   );
 }
