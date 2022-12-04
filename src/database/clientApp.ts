@@ -19,6 +19,8 @@ const firebaseConfig = {
   masurementId: FIREBASE_MEASUREMENT_ID,
 };
 
+// eslint-disable-next-line no-console
+console.log('firebaseConfig', firebaseConfig);
 const fbApp = initializeApp(firebaseConfig);
 
 export default fbApp;

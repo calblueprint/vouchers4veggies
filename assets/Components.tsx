@@ -34,6 +34,17 @@ export const ButtonWhite = styled.TouchableOpacity`
   border: 2px solid ${Colors.magenta};
 `;
 
+export const AddManuallyButton = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 129px;
+  height: 28px;
+  background: ${Colors.lightMagenta};
+  border: 0.828025px solid ${Colors.lightGray};
+  border-radius: 17.8025px;
+`;
+
 export const InputField = styled.TextInput`
   font-style: 'normal';
   border: 1px solid ${Colors.midGray};

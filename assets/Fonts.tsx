@@ -65,9 +65,17 @@ export const CenterText = styled.Text`
   text-align: center;
 `;
 
-export const LabelText = styled.Text`
+export const ButtonTextBlack = styled.Text`
   font-family: 'manrope-semiBold';
-  font-weight: 600px;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: ${Colors.midBlack};
+`;
+
+export const InputTitleText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
   font-size: 14px;
   line-height: 19px;
 `;
