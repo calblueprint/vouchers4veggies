@@ -12,6 +12,8 @@ export const ButtonMagenta = styled.TouchableOpacity`
   text-color: white;
   padding: 9px 9px;
   border-color: ${Colors.magenta};
+  margin-bottom: 16px;
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 `;
 
 export const ButtonGray = styled.TouchableOpacity`
@@ -29,9 +31,22 @@ export const ButtonWhite = styled.TouchableOpacity`
   align-items: center;
   border-radius: 5px;
   width: 277px;
-  background: ${Colors.offWhite};
+  background: white;
   padding: 9px 9px;
   border: 2px solid ${Colors.magenta};
+  margin-bottom: 16px;
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+`;
+
+export const AddManuallyButton = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 129px;
+  height: 28px;
+  background: ${Colors.lightMagenta};
+  border: 0.828025px solid ${Colors.lightGray};
+  border-radius: 17.8025px;
 `;
 
 export const InputField = styled.TextInput`

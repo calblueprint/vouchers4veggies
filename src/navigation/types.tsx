@@ -19,7 +19,9 @@ export type BottomTabScreenProps<T extends keyof BottomTabParamList> =
   MaterialBottomTabNavigationProp<BottomTabParamList, T>;
 
 export type ScannerStackParamList = {
-  Scanner: undefined;
+  ScanningScreen: undefined;
+  ManualVoucherScreen: undefined;
+  ReviewScreen: undefined;
 };
 
 export type ProfileStackParamList = {
