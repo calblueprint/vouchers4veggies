@@ -22,16 +22,16 @@ import InputField from '../../components/InputField/InputField';
 const v4vLogo = require('../../../assets/logo-1.png');
 
 function ManualVoucherScreen() {
-  const [scanned, setScanned] = useState<boolean>(false);
-  const [scanCounter, incrementScanned] = useState(0);
-  const [transactionID, setID] = useState<string>();
-  const [voucherAmount, setVoucherAmount] = useState<string>();
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-  ]);
+  const [transactionID, setID] = useState<string>('');
+  const [voucherAmount, setVoucherAmount] = useState<string>('');
+
+  // to be used for backend
+  // const [scanCounter, incrementScanned] = useState(0);
+  // const [value, setValue] = useState(null);
+  // const [items, setItems] = useState([
+  //   { label: 'Apple', value: 'apple' },
+  //   { label: 'Banana', value: 'banana' },
+  // ]);
 
   return (
     <SafeArea>
@@ -55,7 +55,8 @@ function ManualVoucherScreen() {
             />
           </FieldContainer>
           <FieldContainer>
-            <InputTitleText>Voucher Color</InputTitleText>
+            <InputTitleText>Voucher Color</InputTitleText>\
+            {/* TODO: implement dropdown component */}
             <DropDownContainer />
           </FieldContainer>
           <FieldContainer>
