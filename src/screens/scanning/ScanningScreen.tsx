@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Toast from 'react-native-toast-message';
@@ -71,10 +71,10 @@ export default function ScanningScreen({
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
       incrementScanned(scanCounter + 1);
       setScanned(true);
-      // eslint-disable-next-line no-alert
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
       showToast();
     }
