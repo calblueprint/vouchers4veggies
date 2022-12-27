@@ -14,6 +14,7 @@ import {
   ReviewHeader,
   AggregateContainer,
   SafeArea,
+  PageContainer,
 } from './styles';
 import VoucherCard from '../../components/VoucherReview/VoucherCard';
 import { ButtonMagenta } from '../../../assets/Components';
@@ -51,40 +52,42 @@ function ReviewScreen({ navigation }: any) {
   ]);
   return (
     <SafeArea>
-      <ReviewHeader>
-        <Ionicons
-          name="chevron-back"
-          size={25}
-          color={Colors.darkGray}
-          onPress={() => navigation.goBack()}
-        />
-        <Body1Text>Back</Body1Text>
-      </ReviewHeader>
-      <H2Heading style={{ marginBottom: 37 }}>Review Vouchers</H2Heading>
-      {/* Make this container scrollable */}
-      <ReviewContainer>
-        {vouchers.map(item => (
-          <VoucherCard
-            key={item.id}
-            id={item.id}
-            date={item.date}
-            amount={item.amount}
+      <PageContainer>
+        <ReviewHeader>
+          <Ionicons
+            name="chevron-back"
+            size={25}
+            color={Colors.darkGray}
+            onPress={() => navigation.goBack()}
           />
-        ))}
-      </ReviewContainer>
-      <AggregateContainer>
-        <LabelText>Amount</LabelText>
-        <H3Subheading>x{vouchers.length}</H3Subheading>
-      </AggregateContainer>
-      <AggregateContainer>
-        <LabelText>Total</LabelText>
-        <H3Subheading>$31.45</H3Subheading>
-      </AggregateContainer>
-      <View style={{ marginTop: 46 }}>
-        <ButtonMagenta>
-          <ButtonTextWhite>Submit</ButtonTextWhite>
-        </ButtonMagenta>
-      </View>
+          <Body1Text>Back</Body1Text>
+        </ReviewHeader>
+        <H2Heading style={{ marginBottom: 37 }}>Review Vouchers</H2Heading>
+        {/* Make this container scrollable */}
+        <ReviewContainer>
+          {vouchers.map(item => (
+            <VoucherCard
+              key={item.id}
+              id={item.id}
+              date={item.date}
+              amount={item.amount}
+            />
+          ))}
+        </ReviewContainer>
+        <AggregateContainer>
+          <LabelText>Amount</LabelText>
+          <H3Subheading>x{vouchers.length}</H3Subheading>
+        </AggregateContainer>
+        <AggregateContainer>
+          <LabelText>Total</LabelText>
+          <H3Subheading>$31.45</H3Subheading>
+        </AggregateContainer>
+        <View style={{ marginTop: 15 }}>
+          <ButtonMagenta>
+            <ButtonTextWhite>Submit</ButtonTextWhite>
+          </ButtonMagenta>
+        </View>
+      </PageContainer>
     </SafeArea>
   );
 }

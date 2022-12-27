@@ -123,4 +123,11 @@ export const DropDownContainer = styled.View`
   margin-bottom: 8px;
 `;
 
+export const PageContainer = styled.View`
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const FieldContainer = styled.View``;
