@@ -110,6 +110,10 @@ export const FormContainer = styled.View`
   margin-bottom: 20px;
 `;
 
+// will be used later
+export const FieldContainer = styled.View``;
+
+// TODO: refactor to use selene's dropdown component
 export const DropDownContainer = styled.View`
   width: 277px;
   height: 35px;
@@ -129,5 +133,3 @@ export const PageContainer = styled.View`
   justify-content: center;
   align-items: center;
 `;
-
-export const FieldContainer = styled.View``;

@@ -71,10 +71,10 @@ export default function ScanningScreen({
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
       incrementScanned(scanCounter + 1);
       setScanned(true);
-      // eslint-disable-next-line no-alert
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
       showToast();
     }
