@@ -19,7 +19,7 @@ export const Header = styled.View`
 export const VoucherCounter = styled.View`
   width: 30px;
   height: 30px;
-  background: ${Colors.lightMagenta});
+  background: ${Colors.lightMagenta};
   border: 1px solid ${Colors.brightMagenta};
   border-radius: 15px;
   display: flex;
@@ -62,7 +62,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const ReviewHeader = styled.View`
-  width: 100%
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -72,10 +72,8 @@ export const ReviewHeader = styled.View`
 
 export const ReviewContainer = styled.ScrollView`
   display: flex;
-  flex-grow: 1;
-  max-height: 50%;
-  justifycontent: center;
-  alignitems: 'center';
+  min-height: inherit;
+  max-height: 40%;
   border: 1px solid #ffffff;
   width: 100%;
   border-top-color: ${Colors.lightGray};
@@ -96,7 +94,7 @@ export const AggregateContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 2%;
 `;
 
 export const SafeArea = styled.SafeAreaView`

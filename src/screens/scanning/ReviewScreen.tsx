@@ -56,7 +56,7 @@ const ReviewScreen = () => {
           <Ionicons name="chevron-back" size={25} color={Colors.darkGray} />
           <Body_1_Text>Back</Body_1_Text>
         </ReviewHeader>
-        <H2Heading style={{ marginBottom: 37 }}>Review Vouchers</H2Heading>
+        <H2Heading style={{ marginBottom: '3%' }}>Review Vouchers</H2Heading>
         {/* Make this container scrollable */}
         <ReviewContainer>
           {vouchers.map(item => (
@@ -76,7 +76,7 @@ const ReviewScreen = () => {
           <LabelText>Total</LabelText>
           <H3_Subheading>$31.45</H3_Subheading>
         </AggregateContainer>
-        <View style={{ marginTop: 46 }}>
+        <View style={{ marginTop: '3%' }}>
           <ButtonMagenta>
             <ButtonTextWhite>Submit</ButtonTextWhite>
           </ButtonMagenta>
