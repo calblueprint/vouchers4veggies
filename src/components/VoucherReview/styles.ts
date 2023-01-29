@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { Body_1_Text } from '../../../assets/Fonts';
 
 export const ReviewRow = styled.View`
   display: flex;

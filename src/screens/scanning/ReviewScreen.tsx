@@ -22,7 +22,7 @@ import { ButtonMagenta } from '../../../assets/Components';
 //TODO: add props to store voucher
 const ReviewScreen = () => {
   // TODO: onSubmit function to create new transaction for vendor
-  const [vouchers, setVouchers] = useState([
+  const [vouchers] = useState([
     {
       id: '1000001',
       date: '10/15/22 09:24PM ',
