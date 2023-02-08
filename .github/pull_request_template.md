@@ -8,7 +8,7 @@
 [//]: # "Optional but strongly recommended - Add screenshots of expected behavior - GIFs if you're feeling fancy!"
 
 ## How to review
-[//]: # "Required - Describe the order in which to review files and what to expect when testing locally. Should this be reviewed commit by commit, or all at once? What are some user flows to test? What are some edge cases to look out for?"
+[//]: # "Required - Describe the order in which to review files and what to expect when testing locally. Is there anything specifically you want feedback on? Should this be reviewed commit by commit, or all at once? What are some user flows to test? What are some edge cases to look out for?"
 
 ## Next steps
 [//]: # "Optional - What's NOT in this PR, doesn't work yet, and/or still needs to be done. Note any temporary fixes in this PR that should be cleaned up later."
