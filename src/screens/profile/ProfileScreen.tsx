@@ -10,7 +10,14 @@ import {
 } from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
-import { ButtonMagenta, LogoContainer } from '../scanning/styles';
+import {
+  ButtonContainer,
+  DarkGrayText,
+  LoginContainer,
+  LogoContainer,
+  StartContainer,
+  WhiteText,
+} from './styles';
 import { ButtonTextWhite } from '../../../assets/Fonts';
 
 export default function ProfileScreen() {
