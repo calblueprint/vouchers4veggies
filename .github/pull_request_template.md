@@ -1,22 +1,31 @@
-# ✨ New in this PR ✨
+[//]: # "These comments are meant for your reference. They are invisible and don't need to be deleted!"
 
-## One liner: what did you do? 🚨 
-_give a brief overview of your PR_
+## What's new in this PR
+### Description
+[//]: # "Required - Describe what's new in this PR in a few lines. A description and bullet points for specifics will suffice."
 
+### Screenshots
 
-## Coverage 🙆‍♀️
-_use this section to break up your task into submodules and track progress_ 
- - [ ] Task 1 
- - [ ] Task 2 
+[//]: # "Optional but strongly recommended - Add screenshots of expected behavior - GIFs if you're feeling fancy!"
 
-## How can the reviewer test your code? 👩‍💻
-_example: run `npm start` and click through Navigation bar_ 
+## How to review
 
-## Any bugs you encountered or still having trouble with? 🐛
-_describe how you solved them such that someone can follow your explanation_ 
+[//]: # 'Required - Describe the order in which to review files and what to expect when testing locally.'
 
+## Next steps
 
-## Resources 📔
-_link online resources and related PRs_ 
+[//]: # "Optional - What's NOT in this PR, doesn't work yet, and/or still needs to be done"
 
-🥦 CC: @oahnh
+## Relevant Links
+
+### Online sources
+
+[//]: # 'Optional - copy links to any tutorial or documentation that was useful to you when working on this PR'
+
+### Related PRs
+
+[//]: # "Optional - related PRs you're waiting on/ PRs that will conflict, etc; if this is a refactor, feel free to add PRs that previously modified this code"
+
+[//]: # 'This tags the project leader as a default. Feel free to change, or add on anyone who you should be in on the conversation.'
+  
+🥦 CC: @sauhardjain
