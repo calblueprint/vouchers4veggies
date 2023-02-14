@@ -5,7 +5,7 @@
 [//]: # "Required - Describe what's new in this PR in a few lines. A description and bullet points for specifics will suffice."
 
 ### Screenshots
-[//]: # "Optional but strongly recommended - Add screenshots of expected behavior - GIFs if you're feeling fancy!"
+[//]: # "Required for frontend changes, otherwise optional but strongly recommended. Add screenshots of expected behavior - GIFs if you're feeling fancy!"
 
 ## How to review
 [//]: # "Required - Describe the order in which to review files and what to expect when testing locally. Is there anything specifically you want feedback on? Should this be reviewed commit by commit, or all at once? What are some user flows to test? What are some edge cases to look out for?"
