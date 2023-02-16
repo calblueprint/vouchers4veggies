@@ -184,30 +184,38 @@ export const getTransaction = async (uuid: uuid): Promise<Transaction> => {
 /**
  * Add a Voucher to the voucher array in the `Transaction` collection.
  */
-// export const addVoucherToTransaction = async (transactionUUID: uuid, voucherUUID: Voucher): Promise<void> => {
-//   try {
-//     const transactionArray = getTransaction(transactionUUID).Vouchers;
-//     return transactionArray.arrayUnion(voucherUUID);
-//   } catch (e) {
-//     console.warn('(addVoucherToTransaction)', e);
-//     throw e;
-//   }
-// }
+export const addVoucherToTransaction = async (
+  transactionUUID: uuid,
+  voucherUUID: Voucher,
+): Promise<void> => {
+  try {
+    const transactionArray = getTransaction(transactionUUID).Vouchers;
+    return transactionArray.arrayUnion(voucherUUID);
+  } catch (e) {
+    console.warn('(addVoucherToTransaction)', e);
+    throw e;
+  }
+};
 
 /**
  * Remove a Voucher to the voucher array in the `Transaction` collection.
  */
-//  export const removeVoucherFromTransaction = async (transactionUUID: uuid, voucherUUID: uuid): Promise<void> => {
-//   try {
-//     const dbQuery = query(transactionCollection);
-//     const querySnapshot = await getDocs(dbQuery);
-//     const transactionArray = querySnapshot.getTransaction(transactionUUID).data().Vouchers;
-//     return transactionArray.arrayRemove(voucherUUID);
-//   } catch (e) {
-//     console.warn('(removeVoucherFromTransaction)', e);
-//     throw e;
-//   }
-// }
+export const removeVoucherFromTransaction = async (
+  transactionUUID: uuid,
+  voucherUUID: uuid,
+): Promise<void> => {
+  try {
+    const dbQuery = query(transactionCollection);
+    const querySnapshot = await getDocs(dbQuery);
+    const transactionArray = querySnapshot
+      .getTransaction(transactionUUID)
+      .data().Vouchers;
+    return transactionArray.arrayRemove(voucherUUID);
+  } catch (e) {
+    console.warn('(removeVoucherFromTransaction)', e);
+    throw e;
+  }
+};
 
 const testQueries = async () => {
   const transaction = await getTransaction('8HEjHtFLvaMKsyEtLd0g');
