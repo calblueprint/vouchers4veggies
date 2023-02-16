@@ -88,7 +88,7 @@ export function AuthContextProvider({
       dispatch({ type: 'RESTORE_USER', user });
     });
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
 
   const authContextValue = useMemo(
     () => ({
