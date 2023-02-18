@@ -10,7 +10,6 @@ import {
   getAllVendors,
   getVouchersByVendorUuid,
   createTransaction,
-  getAllTransactions,
   getTransactionsByVendorUuid,
 } from './src/database/queries';
 import {
@@ -140,6 +139,13 @@ export default function VendorsListDemo() {
             <View key={uuid}>
               <Text>{`uuid: ${uuid}`}</Text>
               <Text>{`type: ${type}`}</Text>
+              <Text>{`value: ${value}`}</Text>
+            </View>
+          ))}
+          <Text>{`Transactions for ${selectedVendor?.name} (${transactions.length})`}</Text>
+          {transactions.map(({ uuid, value }) => (
+            <View key={uuid}>
+              <Text>{`uuid: ${uuid}`}</Text>
               <Text>{`value: ${value}`}</Text>
             </View>
           ))}
