@@ -17,8 +17,9 @@ import {
   LogoContainer,
   StartContainer,
   WhiteText,
-} from './styles';
+} from '../auth/styles';
 import { ButtonTextWhite } from '../../../assets/Fonts';
+import { ButtonMagenta } from '../scanning/styles';
 
 export default function ProfileScreen() {
   const { dispatch } = useAuthContext();
