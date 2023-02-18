@@ -42,7 +42,7 @@ export type Transaction = {
 
 export type TransactionCreate = Pick<
   Transaction,
-  'status' | 'value' | 'voucherArray' | 'vendorUuid'
+  'status' | 'voucherArray' | 'vendorUuid'
 >;
 
 export enum TransactionStatus {

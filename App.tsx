@@ -3,6 +3,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import VendorsListDemo from './VendorsListDemo';
 import AppNavigator from './src/navigation/AppNavigator';
 import { AuthContextProvider } from './src/screens/auth/AuthContext';
 
@@ -65,7 +66,8 @@ export default function App() {
   return !resourcesLoaded ? null : (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <AuthContextProvider>
-        <AppNavigator />
+        <VendorsListDemo />
+        {/* <AppNavigator /> */}
       </AuthContextProvider>
     </View>
   );

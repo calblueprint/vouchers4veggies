@@ -198,21 +198,6 @@ export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
   }
 };
 
-// fix
-export const createTransaction = async (
-  transaction: TransactionCreate,
-): Promise<Uuid> => {
-  try {
-    const docRef = await addDoc(transactionCollection, transaction);
-    await updateDoc(docRef, { uuid: docRef.id, timestamp: Date.now() });
-    return docRef.id;
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('(createTransaction)', e);
-    throw e;
-  }
-};
-
 /**
  * Helper for all setter functions
  */
@@ -223,6 +208,35 @@ const updateTransaction = async (transaction: Partial<Transaction>) => {
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(updateTransaction)', e);
+    throw e;
+  }
+};
+
+/**
+ *  Helper for calculating a Transaction's value
+ */
+export const calculateValue = async (voucherArray: Uuid[]) => {
+  let value = 0;
+  await Promise.all(
+    voucherArray.map(async v => {
+      const voucher = await getVoucher(v);
+      value += voucher.value;
+    }),
+  );
+  return value;
+};
+
+export const createTransaction = async (
+  transaction: TransactionCreate,
+): Promise<Uuid> => {
+  try {
+    const docRef = await addDoc(transactionCollection, transaction);
+    const value = await calculateValue(transaction.voucherArray);
+    await updateDoc(docRef, { uuid: docRef.id, timestamp: Date.now(), value });
+    return docRef.id;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(createTransaction)', e);
     throw e;
   }
 };
@@ -242,12 +256,7 @@ export const setTransactionVoucherArray = async (
   uuid: Uuid,
   voucherArray: Uuid[],
 ) => {
-  let value = 0;
-  const addVouchers = async (v: string) => {
-    const voucher = await getVoucher(v);
-    value += voucher.value;
-  };
-  voucherArray.forEach(addVouchers);
+  const value = await calculateValue(voucherArray);
   updateTransaction({ uuid, voucherArray, value });
 };
 
