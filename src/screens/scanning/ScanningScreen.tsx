@@ -11,6 +11,7 @@ import {
   H4CardNavTab,
   MagentaText,
 } from '../../../assets/Fonts';
+import StandardLogo from '../../components/common/StandardLogo';
 import {
   ButtonContainer,
   ButtonMagenta,
@@ -69,7 +70,7 @@ export default function ScanningScreen() {
     <SafeAreaView>
       <PageContainer>
         <TopContainer>
-          <LogoContainer source={v4vLogo} />
+          <StandardLogo />
           <VoucherCounter>
             <CounterText>{scanCounter}</CounterText>
           </VoucherCounter>
