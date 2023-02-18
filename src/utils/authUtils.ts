@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import fbApp from '../database/clientApp';
 import { AuthDispatch } from '../screens/auth/AuthContext';
@@ -15,6 +16,23 @@ export const setAuthErrorMessage = (
   dispatch: AuthDispatch,
   errorMessage: string,
 ) => dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage });
+
+export const forgotPassword = async (
+  dispatch: AuthDispatch,
+  params: { email: string },
+) => {
+  const auth = getAuth();
+  await sendPasswordResetEmail(auth, params.email)
+    .then(() => {
+      // eslint-disable-next-line no-console
+      console.log('Email Sent!');
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.warn('(forgotPassword) error', error);
+      setAuthErrorMessage(dispatch, error.message);
+    });
+};
 
 export const signIn = async (
   dispatch: AuthDispatch,

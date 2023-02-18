@@ -4,6 +4,10 @@ import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
 
+import { setAuthErrorMessage, forgotPassword } from '../../utils/authUtils';
+
+import { useAuthContext } from './AuthContext';
+
 import {
   FormContainer,
   HeadingContainer,
@@ -17,9 +21,20 @@ import {
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const { errorMessage, dispatch } = useAuthContext();
 
   const onChangeEmail = (value: string) => {
     setEmail(value);
+  };
+
+  const handleSendEmail = async () => {
+    if (email) {
+      await forgotPassword(dispatch, { email });
+    } else {
+      setAuthErrorMessage(dispatch, 'Please enter your email and password.');
+    }
+    setShowErrorMessage(true);
   };
 
   return (
@@ -49,9 +64,11 @@ export default function ForgotPasswordScreen() {
           value={email}
           placeholder="Enter email"
         />
-
+        {showErrorMessage && errorMessage && (
+          <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
+        )}
         <VerticalSpacingButtonContainer>
-          <ButtonMagenta>
+          <ButtonMagenta onPress={handleSendEmail}>
             <WhiteText>
               <H4CardNavTab>Send email</H4CardNavTab>
             </WhiteText>
