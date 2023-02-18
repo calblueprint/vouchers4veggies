@@ -30,3 +30,22 @@ export enum VoucherStatus {
   PAID = 'paid',
   UNPAID = 'unpaid',
 }
+
+export type Transaction = {
+  uuid: Uuid;
+  timestamp: Date;
+  status: TransactionStatus;
+  value: number;
+  voucherArray: Uuid[];
+  vendorUuid: Uuid;
+};
+
+export type TransactionCreate = Pick<
+  Transaction,
+  'status' | 'value' | 'voucherArray' | 'vendorUuid'
+>;
+
+export enum TransactionStatus {
+  PAID = 'paid',
+  UNPAID = 'unpaid',
+}

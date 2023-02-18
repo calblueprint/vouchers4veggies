@@ -16,6 +16,9 @@ import {
   Voucher,
   VoucherCreate,
   VoucherStatus,
+  Transaction,
+  TransactionCreate,
+  TransactionStatus,
 } from '../types/types';
 import fbApp from './clientApp';
 
@@ -23,6 +26,7 @@ const db = getFirestore(fbApp);
 const testColl = collection(db, 'test-col');
 const vendorCollection = collection(db, 'vendors');
 const voucherCollection = collection(db, 'vouchers');
+const transactionCollection = collection(db, 'transactions');
 
 /**
  * Function to test connection to Firestore.
@@ -159,6 +163,116 @@ export const getVouchersByVendorUuid = async (
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVouchersByVendorUuid)', e);
+    throw e;
+  }
+};
+
+/**
+ * Get all transactions from the `transactions` collection.
+ */
+export const getAllTransactions = async (): Promise<Transaction[]> => {
+  try {
+    const dbQuery = query(transactionCollection);
+    const querySnapshots = await getDocs(dbQuery);
+
+    return querySnapshots.docs.map(document => document.data() as Transaction);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getAllTransactions)', e);
+    throw e;
+  }
+};
+
+/**
+ * Query the `transactions` collection and return a Transaction if the uuid is found.
+ */
+export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
+  try {
+    const dbQuery = query(transactionCollection, where('uuid', '==', uuid));
+    const querySnapshot = await getDocs(dbQuery);
+    return querySnapshot.docs[0]?.data() as Transaction;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getTransaction)', e);
+    throw e;
+  }
+};
+
+// fix
+export const createTransaction = async (
+  transaction: TransactionCreate,
+): Promise<Uuid> => {
+  try {
+    const docRef = await addDoc(transactionCollection, transaction);
+    await updateDoc(docRef, { uuid: docRef.id, timestamp: Date.now() });
+    return docRef.id;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(createTransaction)', e);
+    throw e;
+  }
+};
+
+/**
+ * Helper for all setter functions
+ */
+const updateTransaction = async (transaction: Partial<Transaction>) => {
+  try {
+    const docRef = doc(voucherCollection, transaction.uuid);
+    await updateDoc(docRef, transaction);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(updateTransaction)', e);
+    throw e;
+  }
+};
+
+/**
+ * Setter function to update a Transaction's status
+ */
+export const setTransactionStatus = async (
+  uuid: Uuid,
+  status: TransactionStatus,
+) => updateTransaction({ uuid, status });
+
+/**
+ * Setter function to update a Transaction's voucherArray
+ */
+export const setTransactionVoucherArray = async (
+  uuid: Uuid,
+  voucherArray: Uuid[],
+) => {
+  let value = 0;
+  const addVouchers = async (v: string) => {
+    const voucher = await getVoucher(v);
+    value += voucher.value;
+  };
+  voucherArray.forEach(addVouchers);
+  updateTransaction({ uuid, voucherArray, value });
+};
+
+/**
+ * Setter function to update a Transaction's VendorUuid
+ */
+export const setTransactionTimestamp = async (uuid: Uuid, vendorUuid: Uuid) =>
+  updateTransaction({ uuid, vendorUuid });
+
+/**
+ * Fetch all transactions for a given vendor.
+ */
+export const getTransactionsByVendorUuid = async (
+  vendorUuid: Uuid,
+): Promise<Transaction[]> => {
+  try {
+    const dbQuery = query(
+      transactionCollection,
+      where('vendor_uuid', '==', vendorUuid),
+    );
+    const querySnapshots = await getDocs(dbQuery);
+    return querySnapshots.docs.map(document => document.data() as Transaction);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getTransactionsByVendorUuid)', e);
     throw e;
   }
 };
