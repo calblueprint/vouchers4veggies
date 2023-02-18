@@ -55,7 +55,7 @@ function ManualVoucherScreen() {
             />
           </FieldContainer>
           <FieldContainer>
-            <InputTitleText>Voucher Color</InputTitleText>\
+            <InputTitleText>Voucher Color</InputTitleText>
             {/* TODO: implement dropdown component */}
             <DropDownContainer />
           </FieldContainer>
