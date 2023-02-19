@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "fc600ca8-9104-4545-93ad-fccb1898ecfe"
+      }
+    },
+    "owner": "vouchers4veggies",
+    "slug": "vouchers4veggies",
+    "android": {
+      "package": "org.calblueprint.vouchers4veggies"
+    },
+    "ios": {
+      "bundleIdentifier": "org.calblueprint.vouchers4veggies"
+    }
+  }
+}
