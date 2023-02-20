@@ -1,27 +1,19 @@
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const ScannerContainer = styled.View`
-  width: 277px;
-  height: 277px;
-  background: ${Colors.offWhite};
-  border: 2px solid ${Colors.lightMagenta};
-  border-radius: 12px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+export const SafeArea = styled.SafeAreaView`
+  background-color: ${Colors.offWhite};
+  min-height: 100%;
   align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
+  flex: 1;
 `;
 
-export const TopContainer = styled.View`
-  width: 70%;
-  display: flex;
+export const Header = styled.View`
+  width: 85%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 36px;
+  margin-bottom: 26px;
 `;
 
 export const LogoContainer = styled.ImageBackground`
@@ -40,43 +32,54 @@ export const VoucherCounter = styled.View`
   align-items: center;
 `;
 
-export const PageContainer = styled.View`
-  margin: 5%;
-  background-color: ${Colors.offWhite};
-  display: flex;
+export const BodyContainer = styled.View`
+  width: 277px;
   align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 125px;
+  margin-bottom: 35px;
 `;
 
 export const TitleContainer = styled.View`
   padding-bottom: 12px;
 `;
 
-export const HeaderContainer = styled.View`
+export const ScannerContainer = styled.View`
   width: 277px;
+  height: 237px;
+  background: ${Colors.offWhite};
+  border: 2px solid ${Colors.lightMagenta};
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 35px;
-`;
-
-export const ButtonMagenta = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  border-width: 2px;
-  border-radius: 5px;
-  width: 277px;
-  background: ${Colors.magenta};
-  padding: 9px 9px;
-  border-color: ${Colors.magenta};
-  margin-bottom: 16px;
-`;
-
-export const Container = styled.ScrollView`
-  width: 100%;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 `;
 
 export const ButtonContainer = styled.View`
   display: flex;
   flex-direction: column;
   align-content: space-between;
+`;
+
+export const FormContainer = styled.View`
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+// will be used later
+export const FieldContainer = styled.View``;
+
+// TODO: refactor to use selene's dropdown component
+export const DropDownContainer = styled.View`
+  width: 277px;
+  height: 35px;
+  background: ${Colors.offWhite};
+  border: 2px solid ${Colors.lightMagenta};
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+  margin-bottom: 8px;
 `;

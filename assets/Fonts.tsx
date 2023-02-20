@@ -64,3 +64,26 @@ export const ButtonTextWhite = styled.Text`
 export const CenterText = styled.Text`
   text-align: center;
 `;
+
+export const ButtonTextBlack = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: ${Colors.midBlack};
+`;
+
+export const ButtonTextMagenta = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 18px;
+  line-height: 25px;
+  color: ${Colors.magenta};
+`;
+
+export const InputTitleText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
