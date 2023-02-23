@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
+import Colors from '../../../assets/Colors';
 
 import { useAuthContext } from './AuthContext';
 
@@ -21,6 +21,7 @@ import {
   VerticalSpacingButtonContainer,
   WhiteText,
   BackButtonContainer,
+  DarkGrayText,
 } from './styles';
 
 export default function LoginScreen({
@@ -59,9 +60,9 @@ export default function LoginScreen({
     <LoginContainer>
       <BackButtonContainer>
         <RootNavBackButton onPress={() => navigation.navigate('Start')}>
-          <Text>
-            <Icon name="left" size={14} color="#525454" /> Back
-          </Text>
+          <DarkGrayText>
+            <Icon name="left" size={14} color={Colors.darkGray} /> Back
+          </DarkGrayText>
         </RootNavBackButton>
       </BackButtonContainer>
 
