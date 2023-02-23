@@ -7,7 +7,6 @@ import {
   InputTitleText,
 } from '../../../assets/Fonts';
 import {
-  LogoContainer,
   TitleContainer,
   Header,
   BodyContainer,
@@ -17,9 +16,7 @@ import {
   FormContainer,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const v4vLogo = require('../../../assets/logo-1.png');
+import StandardLogo from '../../components/common/StandardLogo';
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
@@ -36,7 +33,7 @@ function ManualVoucherScreen() {
   return (
     <SafeArea>
       <Header>
-        <LogoContainer source={v4vLogo} />
+        <StandardLogo />
       </Header>
 
       <BodyContainer>
