@@ -57,13 +57,6 @@ export default function LoginScreen({
 
   return (
     <LoginContainer>
-      {/* logo placeholder */}
-      {/* <LogoContainer>
-        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-        </View>
-      </LogoContainer> */}
-
       <BackButtonContainer>
         <RootNavBackButton onPress={() => navigation.navigate('Start')}>
           <Text>
