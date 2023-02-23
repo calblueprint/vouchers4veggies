@@ -16,11 +16,6 @@ export const Header = styled.View`
   margin-bottom: 26px;
 `;
 
-export const LogoContainer = styled.ImageBackground`
-  width: 50px;
-  height: 60px;
-`;
-
 export const VoucherCounter = styled.View`
   width: 30px;
   height: 30px;

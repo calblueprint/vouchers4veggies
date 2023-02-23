@@ -16,7 +16,6 @@ import {
 import StandardLogo from '../../components/common/StandardLogo';
 import {
   ButtonContainer,
-  LogoContainer,
   ScannerContainer,
   TitleContainer,
   VoucherCounter,
@@ -32,9 +31,6 @@ import {
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const v4vLogo = require('../../../assets/logo-1.png');
 
 const styles = StyleSheet.create({
   container: {
@@ -93,7 +89,7 @@ export default function ScanningScreen({
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
       {scanCounter === 0 ? (
         <Header>
-          <LogoContainer source={v4vLogo} />
+          <StandardLogo />
           <AddManuallyButton
             onPress={() => navigation.navigate('ManualVoucherScreen')}
           >
