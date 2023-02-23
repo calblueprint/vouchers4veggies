@@ -13,6 +13,7 @@ import {
   MagentaText,
   ButtonTextMagenta,
 } from '../../../assets/Fonts';
+import StandardLogo from '../../components/common/StandardLogo';
 import {
   ButtonContainer,
   LogoContainer,
