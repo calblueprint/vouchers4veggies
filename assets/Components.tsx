@@ -67,3 +67,14 @@ export const LargeInputField = styled.TextInput`
   padding: 10px;
   width: 317px;
 `;
+
+export const RootNavBackButton = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  width: 20%;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  color: #525454;
+  padding: 9px;
+`;
