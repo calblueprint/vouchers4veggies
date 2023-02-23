@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import { ButtonMagenta } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
-
+import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
@@ -20,9 +21,12 @@ import {
   Styles,
   VerticalSpacingButtonContainer,
   WhiteText,
+  BackButtonContainer,
 } from './styles';
 
-export default function LoginScreen() {
+export default function LoginScreen({
+  navigation,
+}: AuthStackScreenProps<'Start'>) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -55,11 +59,15 @@ export default function LoginScreen() {
   return (
     <LoginContainer>
       {/* logo placeholder */}
-      <LogoContainer>
+      {/* <LogoContainer>
         <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
           <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
         </View>
-      </LogoContainer>
+      </LogoContainer> */}
+
+      <BackButtonContainer>
+        <Button onPress={() => navigation.navigate('Start')}>Back</Button>
+      </BackButtonContainer>
 
       <FormContainer>
         <HeadingContainer>
