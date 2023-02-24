@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
-import { ButtonMagenta } from '../../../assets/Components';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
-
+import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
+import Colors from '../../../assets/Colors';
 
 import { useAuthContext } from './AuthContext';
 
@@ -13,16 +14,19 @@ import {
   HeadingContainer,
   LeftAlignContainer,
   LoginContainer,
-  LogoContainer,
   RightAlignContainer,
   RowContainer,
   SmallTextContainer,
   Styles,
   VerticalSpacingButtonContainer,
   WhiteText,
+  BackButtonContainer,
+  DarkGrayText,
 } from './styles';
 
-export default function LoginScreen() {
+export default function LoginScreen({
+  navigation,
+}: AuthStackScreenProps<'Start'>) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -54,12 +58,13 @@ export default function LoginScreen() {
 
   return (
     <LoginContainer>
-      {/* logo placeholder */}
-      <LogoContainer>
-        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-        </View>
-      </LogoContainer>
+      <BackButtonContainer>
+        <RootNavBackButton onPress={() => navigation.navigate('Start')}>
+          <DarkGrayText>
+            <Icon name="left" size={14} color={Colors.darkGray} /> Back
+          </DarkGrayText>
+        </RootNavBackButton>
+      </BackButtonContainer>
 
       <FormContainer>
         <HeadingContainer>
