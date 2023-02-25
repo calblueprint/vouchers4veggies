@@ -57,6 +57,11 @@ export default function LoginScreen({
     emailSchema.parse(email);
   };
 
+  const validatePasswordInput = () => {
+    const passwordSchema = z.string().min(1);
+    passwordSchema.parse(password);
+  };
+
   // TODO: implement password reset functionality @selene-huang
   const resetPassword = () => {
     // password flow
@@ -100,6 +105,7 @@ export default function LoginScreen({
           value={password}
           placeholder="Enter password"
           secureTextEntry
+          onUnfocus={validatePasswordInput}
         />
         {showErrorMessage && errorMessage && (
           <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
