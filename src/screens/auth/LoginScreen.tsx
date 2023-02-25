@@ -87,6 +87,7 @@ export default function LoginScreen({
           value={email}
           placeholder="Enter email"
           onUnfocus={validateEmailInput}
+          inputMode="email-address"
         />
 
         <RowContainer>

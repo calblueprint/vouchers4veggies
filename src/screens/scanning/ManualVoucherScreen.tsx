@@ -77,6 +77,7 @@ function ManualVoucherScreen() {
               onChange={setVoucherAmount}
               value={voucherAmount}
               placeholder="Enter Amount"
+              inputMode="numeric"
             />
           </FieldContainer>
         </FormContainer>
