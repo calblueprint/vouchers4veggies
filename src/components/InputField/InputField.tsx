@@ -8,6 +8,7 @@ type InputFieldProps = {
   value: string;
   placeholder: string;
   secureTextEntry?: boolean;
+  onUnfocus?: () => void;
 };
 
 export default function InputField({
@@ -15,6 +16,7 @@ export default function InputField({
   value,
   placeholder,
   secureTextEntry = false,
+  onUnfocus,
 }: InputFieldProps) {
   const [isActive, setIsActive] = useState(false);
 
@@ -23,6 +25,7 @@ export default function InputField({
       onBlur={() => setIsActive(false)}
       onFocus={() => setIsActive(true)}
       onChangeText={onChange}
+      onEndEditing={onUnfocus}
       style={isActive ? Styles.FormFieldFocus : Styles.FormField}
       value={value}
       placeholder={placeholder}
