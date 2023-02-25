@@ -57,6 +57,11 @@ export default function LoginScreen({
     emailSchema.parse(email);
   };
 
+  const validatePasswordInput = () => {
+    const passwordSchema = z.string().min(1);
+    passwordSchema.parse(password);
+  };
+
   const resetPassword = () => {
     navigation.navigate('ForgotPassword');
   };
@@ -99,6 +104,7 @@ export default function LoginScreen({
           value={password}
           placeholder="Enter password"
           secureTextEntry
+          onUnfocus={validatePasswordInput}
         />
         {showErrorMessage && errorMessage && (
           <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
