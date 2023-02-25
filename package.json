@@ -33,7 +33,8 @@
     "react-native-web": "~0.18.7",
     "react-navigation": "^4.4.4",
     "stable": "^0.1.8",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "zod": "^3.20.6"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

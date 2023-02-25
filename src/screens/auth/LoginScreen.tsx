@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { z } from 'zod';
 import Colors from '../../../assets/Colors';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
@@ -51,6 +52,11 @@ export default function LoginScreen({
     setPassword(value);
   };
 
+  const validateEmailInput = () => {
+    const emailSchema = z.coerce.string().email();
+    emailSchema.parse(email);
+  };
+
   const resetPassword = () => {
     navigation.navigate('ForgotPassword');
   };
@@ -75,6 +81,7 @@ export default function LoginScreen({
           onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
+          onUnfocus={validateEmailInput}
         />
 
         <RowContainer>
