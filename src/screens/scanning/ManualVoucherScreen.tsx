@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { z } from 'zod';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -30,6 +31,18 @@ function ManualVoucherScreen() {
   //   { label: 'Banana', value: 'banana' },
   // ]);
 
+  const validateSerialNumberInput = () => {
+    const numInput = Number(transactionID);
+    const SNSchema = z.number().int().positive();
+    SNSchema.parse(numInput);
+  };
+
+  // const validateVoucherAmountInput = () => {
+  //   const numInput = Number(transactionID);
+  //   const SNSchema = z.number().int().positive();
+  //   SNSchema.parse(numInput);
+  // };
+
   return (
     <SafeArea>
       <Header>
@@ -49,6 +62,8 @@ function ManualVoucherScreen() {
               onChange={setID}
               value={transactionID}
               placeholder="Enter ID"
+              onUnfocus={validateSerialNumberInput}
+              inputMode="numeric"
             />
           </FieldContainer>
           <FieldContainer>

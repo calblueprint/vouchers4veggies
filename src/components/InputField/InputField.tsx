@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput } from 'react-native';
+import { KeyboardTypeOptions, TextInput } from 'react-native';
 import Colors from '../../../assets/Colors';
 import Styles from './styles';
 
@@ -9,6 +9,7 @@ type InputFieldProps = {
   placeholder: string;
   secureTextEntry?: boolean;
   onUnfocus?: () => void;
+  inputMode?: KeyboardTypeOptions;
 };
 
 export default function InputField({
@@ -17,6 +18,7 @@ export default function InputField({
   placeholder,
   secureTextEntry = false,
   onUnfocus,
+  inputMode,
 }: InputFieldProps) {
   const [isActive, setIsActive] = useState(false);
 
@@ -33,6 +35,7 @@ export default function InputField({
       secureTextEntry={secureTextEntry}
       autoCorrect={false}
       autoCapitalize="none"
+      keyboardType={inputMode}
     />
   );
 }
