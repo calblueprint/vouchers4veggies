@@ -16,8 +16,6 @@ import {
   Vendor,
   Voucher,
   VoucherCreate,
-  VoucherStatus,
-  VoucherType,
   Transaction,
   TransactionCreate,
   TransactionStatus,
@@ -67,11 +65,9 @@ export default function VendorsListDemo() {
   const onSelectVendor = async (vendor: Vendor) => setSelectedVendor(vendor);
   const onCreateVoucher = async () => {
     const voucher: VoucherCreate = {
-      type: VoucherType.GREEN,
+      serialNumber: '12481244',
       value: 10,
       vendorUuid: 'abc',
-      expirationDate: '4442',
-      status: VoucherStatus.UNPAID,
     };
     const uuid = await createVoucher(voucher);
     // eslint-disable-next-line no-console
@@ -79,35 +75,27 @@ export default function VendorsListDemo() {
   };
   const onCreateTransaction = async () => {
     const v1: VoucherCreate = {
-      type: VoucherType.GREEN,
+      serialNumber: '1248123',
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
-      expirationDate: '4442',
-      status: VoucherStatus.UNPAID,
     };
     const uuidV1 = await createVoucher(v1);
     const v2: VoucherCreate = {
-      type: VoucherType.GREEN,
+      serialNumber: '1248125',
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
-      expirationDate: '4442',
-      status: VoucherStatus.UNPAID,
     };
     const uuidV2 = await createVoucher(v2);
     const v3: VoucherCreate = {
-      type: VoucherType.GREEN,
+      serialNumber: '1248126',
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
-      expirationDate: '4442',
-      status: VoucherStatus.UNPAID,
     };
     const uuidV3 = await createVoucher(v3);
     const v4: VoucherCreate = {
-      type: VoucherType.GREEN,
+      serialNumber: '1248124',
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
-      expirationDate: '4442',
-      status: VoucherStatus.UNPAID,
     };
     const uuidV4 = await createVoucher(v4);
     const transaction: TransactionCreate = {
@@ -135,9 +123,9 @@ export default function VendorsListDemo() {
       {selectedVendor && (
         <View>
           <Text>{`Vouchers for ${selectedVendor?.name} (${vouchers.length})`}</Text>
-          {vouchers.map(({ uuid, type, value }) => (
-            <View key={uuid}>
-              <Text>{`uuid: ${uuid}`}</Text>
+          {vouchers.map(({ serialNumber, type, value }) => (
+            <View key={serialNumber}>
+              <Text>{`uuid: ${serialNumber}`}</Text>
               <Text>{`type: ${type}`}</Text>
               <Text>{`value: ${value}`}</Text>
             </View>

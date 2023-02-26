@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 export type Uuid = string;
 
 export type Vendor = {
@@ -7,17 +9,15 @@ export type Vendor = {
 };
 
 export type Voucher = {
-  uuid: Uuid;
+  serialNumber: string;
   type: VoucherType;
   value: number;
   vendorUuid: Uuid;
-  expirationDate: string;
-  status: VoucherStatus;
 };
 
 export type VoucherCreate = Pick<
   Voucher,
-  'type' | 'value' | 'vendorUuid' | 'expirationDate' | 'status'
+  'serialNumber' | 'vendorUuid' | 'value'
 >;
 
 export enum VoucherType {
@@ -26,17 +26,12 @@ export enum VoucherType {
   PURPLE = 'purple',
 }
 
-export enum VoucherStatus {
-  PAID = 'paid',
-  UNPAID = 'unpaid',
-}
-
 export type Transaction = {
   uuid: Uuid;
-  timestamp: Date;
+  timestamp: Timestamp;
   status: TransactionStatus;
   value: number;
-  voucherArray: Uuid[];
+  voucherArray: string[];
   vendorUuid: Uuid;
 };
 

@@ -1,5 +1,6 @@
 import {
   addDoc,
+  setDoc,
   collection,
   doc,
   DocumentData,
@@ -15,7 +16,6 @@ import {
   Vendor,
   Voucher,
   VoucherCreate,
-  VoucherStatus,
   Transaction,
   TransactionCreate,
   TransactionStatus,
@@ -109,11 +109,25 @@ export const getVoucher = async (uuid: Uuid): Promise<Voucher> => {
   }
 };
 
+/**
+ * Query to create a new voucher in Firebase.
+ *
+ * Parameters: a json with fields
+ *
+ *    `serialNumber`: voucher serial number
+ *
+ *    `value`: monetary value of voucher in cents
+ *
+ *    `vendorUuid`: current user's Uuid
+ */
 export const createVoucher = async (voucher: VoucherCreate): Promise<Uuid> => {
   try {
-    const docRef = await addDoc(voucherCollection, voucher);
-    await updateDoc(docRef, { uuid: docRef.id });
-    return docRef.id;
+    const docRef = doc(db, 'vouchers', voucher.serialNumber);
+    await setDoc(docRef, voucher);
+    await updateDoc(docRef, {
+      type: 'to fix',
+    });
+    return voucher.serialNumber;
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(createVoucher)', e);
@@ -126,7 +140,7 @@ export const createVoucher = async (voucher: VoucherCreate): Promise<Uuid> => {
  */
 const updateVoucher = async (voucher: Partial<Voucher>) => {
   try {
-    const docRef = doc(voucherCollection, voucher.uuid);
+    const docRef = doc(voucherCollection, voucher.serialNumber);
     await updateDoc(docRef, voucher);
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -136,16 +150,10 @@ const updateVoucher = async (voucher: Partial<Voucher>) => {
 };
 
 /**
- * Setter function to update a Voucher's status
+ * Update a Voucher's value in cents
  */
-export const setVoucherStatus = async (uuid: Uuid, status: VoucherStatus) =>
-  updateVoucher({ uuid, status });
-
-/**
- * Setter function to update a Voucher's VendorUuid
- */
-export const setVoucherVendorUuid = async (uuid: Uuid, vendorUuid: Uuid) =>
-  updateVoucher({ uuid, vendorUuid });
+export const setVoucherValue = async (serialNumber: string, value: number) =>
+  updateVoucher({ serialNumber, value });
 
 /**
  * Fetch all vouchers for a given vendor.
