@@ -5,25 +5,26 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 /**
  * Creates a clickable button
  */
-const App = () => {
+function App() {
   const [count, setCount] = useState(0);
   const onPress = () => setCount(prevCount => prevCount + 1);
 
-  return (
-    <View style={buttonWhite.container}>
-      <View style={buttonWhite.countContainer}></View>
-      <TouchableOpacity style={buttonWhite.button} onPress={onPress}>
-        <Text>Button</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={buttonGray.button} onPress={onPress}>
-        <Text>Button</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={buttonMagenta.button} onPress={onPress}>
-        <Text>Button</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+  //   return (
+  //     <View style={buttonWhite.container}>
+  //       <View style={buttonWhite.countContainer} />
+  //       <TouchableOpacity style={buttonWhite.button} onPress={onPress}>
+  //         <Text>Button</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity style={buttonGray.button} onPress={onPress}>
+  //         <Text>Button</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity style={buttonMagenta.button} onPress={onPress}>
+  //         <Text>Button</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // }
+}
 
 /**
  * Styling for white button
