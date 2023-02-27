@@ -65,7 +65,7 @@ export default function VendorsListDemo() {
   const onSelectVendor = async (vendor: Vendor) => setSelectedVendor(vendor);
   const onCreateVoucher = async () => {
     const voucher: VoucherCreate = {
-      serialNumber: '12481244',
+      serialNumber: 12481244,
       value: 10,
       vendorUuid: 'abc',
     };
@@ -75,32 +75,37 @@ export default function VendorsListDemo() {
   };
   const onCreateTransaction = async () => {
     const v1: VoucherCreate = {
-      serialNumber: '1248123',
+      serialNumber: 1248123,
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
     };
     const uuidV1 = await createVoucher(v1);
     const v2: VoucherCreate = {
-      serialNumber: '1248125',
+      serialNumber: 1248125,
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
     };
     const uuidV2 = await createVoucher(v2);
     const v3: VoucherCreate = {
-      serialNumber: '1248126',
+      serialNumber: 1248126,
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
     };
     const uuidV3 = await createVoucher(v3);
     const v4: VoucherCreate = {
-      serialNumber: '1248124',
+      serialNumber: 1248124,
       value: Math.floor(Math.random() * 2500) / 100,
       vendorUuid: 'abc',
     };
     const uuidV4 = await createVoucher(v4);
     const transaction: TransactionCreate = {
       vendorUuid: 'abc',
-      voucherArray: [uuidV1, uuidV2, uuidV3, uuidV4],
+      voucherArray: [
+        Number(uuidV1),
+        Number(uuidV2),
+        Number(uuidV3),
+        Number(uuidV4),
+      ],
       status: TransactionStatus.UNPAID,
     };
     const uuid = await createTransaction(transaction);

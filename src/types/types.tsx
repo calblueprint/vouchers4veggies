@@ -16,7 +16,7 @@ export type VoucherRange = {
 };
 
 export type Voucher = {
-  serialNumber: string;
+  serialNumber: number;
   type: string;
   value: number;
   vendorUuid: Uuid;
@@ -32,7 +32,7 @@ export type Transaction = {
   timestamp: Timestamp;
   status: TransactionStatus;
   value: number;
-  voucherArray: string[];
+  voucherArray: number[];
   vendorUuid: Uuid;
 };
 
