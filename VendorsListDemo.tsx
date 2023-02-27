@@ -63,49 +63,52 @@ export default function VendorsListDemo() {
   }, [selectedVendor]);
 
   const onSelectVendor = async (vendor: Vendor) => setSelectedVendor(vendor);
-  const onCreateVoucher = async () => {
+  const onCreateInvalidVoucher = async () => {
     const voucher: VoucherCreate = {
-      serialNumber: 12481244,
+      serialNumber: 9,
       value: 10,
       vendorUuid: 'abc',
     };
     const uuid = await createVoucher(voucher);
     // eslint-disable-next-line no-console
-    console.log('New voucher uuid: ', uuid);
+    console.log('Error code: ', uuid);
   };
+  const onCreateDuplicateVoucher = async () => {
+    const voucher: VoucherCreate = {
+      serialNumber: 100,
+      value: 10,
+      vendorUuid: 'abc',
+    };
+    const uuid = await createVoucher(voucher);
+    // eslint-disable-next-line no-console
+    console.log('Error code: ', uuid);
+  };
+  const onCreateValueTooHighVoucher = async () => {
+    const voucher: VoucherCreate = {
+      serialNumber: 110,
+      value: 10000000,
+      vendorUuid: 'abc',
+    };
+    const uuid = await createVoucher(voucher);
+    // eslint-disable-next-line no-console
+    console.log('Error code: ', uuid);
+  };
+  const onCreateVoucher = async () => {
+    const voucher: VoucherCreate = {
+      serialNumber: 104,
+      value: 91,
+      vendorUuid: 'abc',
+    };
+    const uuid = await createVoucher(voucher);
+    // eslint-disable-next-line no-console
+    console.log('Serial Number: ', uuid);
+  };
+
   const onCreateTransaction = async () => {
-    const v1: VoucherCreate = {
-      serialNumber: 1248123,
-      value: Math.floor(Math.random() * 2500) / 100,
-      vendorUuid: 'abc',
-    };
-    const uuidV1 = await createVoucher(v1);
-    const v2: VoucherCreate = {
-      serialNumber: 1248125,
-      value: Math.floor(Math.random() * 2500) / 100,
-      vendorUuid: 'abc',
-    };
-    const uuidV2 = await createVoucher(v2);
-    const v3: VoucherCreate = {
-      serialNumber: 1248126,
-      value: Math.floor(Math.random() * 2500) / 100,
-      vendorUuid: 'abc',
-    };
-    const uuidV3 = await createVoucher(v3);
-    const v4: VoucherCreate = {
-      serialNumber: 1248124,
-      value: Math.floor(Math.random() * 2500) / 100,
-      vendorUuid: 'abc',
-    };
-    const uuidV4 = await createVoucher(v4);
+    const voucherArray = [100, 101];
     const transaction: TransactionCreate = {
       vendorUuid: 'abc',
-      voucherArray: [
-        Number(uuidV1),
-        Number(uuidV2),
-        Number(uuidV3),
-        Number(uuidV4),
-      ],
+      voucherArray,
       status: TransactionStatus.UNPAID,
     };
     const uuid = await createTransaction(transaction);
@@ -116,7 +119,12 @@ export default function VendorsListDemo() {
   return (
     <View>
       <Text>{`All Vendors (${vendors.length})`}</Text>
-      <Text onPress={onCreateVoucher}>Create Vouchers</Text>
+      <Text onPress={onCreateInvalidVoucher}>Create Voucher Out of Range</Text>
+      <Text onPress={onCreateDuplicateVoucher}>Create Duplicate Voucher</Text>
+      <Text onPress={onCreateValueTooHighVoucher}>
+        Create Voucher With High Value
+      </Text>
+      <Text onPress={onCreateVoucher}>Create Voucher</Text>
       <Text onPress={onCreateTransaction}>Create Transactions</Text>
       {vendors.map(vendor => (
         <View key={vendor.uuid} onTouchEnd={() => onSelectVendor(vendor)}>

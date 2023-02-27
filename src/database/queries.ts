@@ -95,7 +95,7 @@ export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
     return querySnapshots.docs.map(document => document.data() as VoucherRange);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(getAllVouchers)', e);
+    console.warn('(getAllVoucherRanges)', e);
     throw e;
   }
 };
@@ -114,6 +114,11 @@ const getVoucherRange = async (serialNumber: number) => {
       where('startSerialNum', '<=', serialNumber),
     );
     const querySnapshot = await getDocs(dbQuery);
+
+    if (querySnapshot.docs.length === 0) {
+      return -1;
+    }
+
     const result = querySnapshot.docs[0]?.data() as VoucherRange;
 
     if (result.endSerialNum >= serialNumber) {
@@ -122,7 +127,7 @@ const getVoucherRange = async (serialNumber: number) => {
     return -1;
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(getVendor)', e);
+    console.warn('(getVoucherRange)', e);
     throw e;
   }
 };
@@ -175,7 +180,9 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
  *
  * Returns the doc id if the query executes successfully.
  *
- * Returns `-1` if the serial number is invalid for any reason.
+ * Returns `'-1'` if the serial number is invalid,
+ * `'-2'` if the serial number has already been used,
+ * or `'-3'` if the voucher's value exceeds the maximum possible value.
  */
 export const createVoucher = async (
   voucher: VoucherCreate,
@@ -184,20 +191,24 @@ export const createVoucher = async (
     const docId = voucher.serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
 
-    // check that serialNumber has not already been used
-    const voucherDoc = await getDoc(docRef);
-    if (voucherDoc.exists()) {
-      return '-1';
-    }
-
-    await setDoc(docRef, voucher);
-
     // check that serialNumber exists
     const voucherRange = await getVoucherRange(voucher.serialNumber);
     if (voucherRange === -1) {
       return '-1';
     }
 
+    // check that serialNumber has not already been used
+    const voucherDoc = await getDoc(docRef);
+    if (voucherDoc.exists()) {
+      return '-2';
+    }
+
+    // check that value does not exceed the maximum
+    if (voucherRange.maxValue < voucher.value) {
+      return '-3';
+    }
+
+    await setDoc(docRef, voucher);
     await updateDoc(docRef, { type: voucherRange.type });
     return docId;
   } catch (e) {
@@ -338,7 +349,7 @@ export const createTransaction = async (
     const value = await calculateValue(transaction.voucherArray);
     await updateDoc(docRef, {
       uuid: docRef.id,
-      timestamp: new Timestamp(Date.now(), 0),
+      timestamp: new Timestamp(Math.floor(Date.now() / 1000), 0),
       value,
     });
     return docRef.id;
