@@ -15,11 +15,6 @@ export type VoucherRange = {
   maxValue: number;
 };
 
-export type VoucherRangeCreate = Pick<
-  VoucherRange,
-  'startSerialNum' | 'endSerialNum' | 'type' | 'maxValue'
->;
-
 export type Voucher = {
   serialNumber: string;
   type: string;
