@@ -15,6 +15,8 @@ import {
 import {
   Uuid,
   Vendor,
+  VoucherRange,
+  VoucherRangeCreate,
   Voucher,
   VoucherCreate,
   Transaction,
@@ -26,6 +28,7 @@ import fbApp from './clientApp';
 const db = getFirestore(fbApp);
 const testColl = collection(db, 'test-col');
 const vendorCollection = collection(db, 'vendors');
+const voucherRangeCollection = collection(db, 'voucher-ranges');
 const voucherCollection = collection(db, 'vouchers');
 const transactionCollection = collection(db, 'transactions');
 
@@ -49,7 +52,9 @@ export const getAllTestDocs = async () => {
 };
 
 /**
- * Get all vendors from the `vendors` collection
+ * Get all vendors from the `vendors` collection.
+ *
+ * Returns an array of Vendor objects.
  */
 export const getAllVendors = async (): Promise<Vendor[]> => {
   try {
@@ -75,6 +80,54 @@ export const getVendor = async (uuid: Uuid): Promise<Vendor> => {
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVendor)', e);
+    throw e;
+  }
+};
+
+/**
+ * Get all voucher ranges from the `voucher-ranges` collection.
+ *
+ * Returns an array of VoucherRange objects.
+ */
+export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
+  try {
+    const dbQuery = query(voucherRangeCollection);
+    const querySnapshots = await getDocs(dbQuery);
+
+    return querySnapshots.docs.map(document => document.data() as VoucherRange);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getAllVouchers)', e);
+    throw e;
+  }
+};
+
+/**
+ * Query to create a new voucher range in Firebase for serial numbers in
+ * the range [startSerialNum, endSerialNum].
+ *
+ * Parameters: a json with fields
+ *
+ *    `startSerialNum`: serial number for the start of the range, inclusive
+ *
+ *    `endSerialNum`: serial number for the end of the range, inclusive
+ *
+ *    `type`: the color of vouchers in this range
+ *
+ *    `maxValue`: maximum monetary value in cents for a range in this range
+ *
+ * Returns the doc id if query is successful. If the range overlaps with a pre-existing VoucherRange, return `-1`.
+ */
+export const createVoucherRange = async (
+  voucherRange: VoucherRangeCreate,
+): Promise<Uuid> => {
+  try {
+    const docRef = await addDoc(voucherRangeCollection, voucherRange);
+    await updateDoc(docRef, voucherRange);
+    return docRef.id;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(createVoucherRange)', e);
     throw e;
   }
 };
@@ -235,6 +288,17 @@ export const calculateValue = async (voucherArray: Uuid[]) => {
   return value;
 };
 
+/**
+ * Query to create a new transaction in Firebase.
+ *
+ * Parameters: a json with fields
+ *
+ *    `status`: the payment status of a transaction
+ *
+ *    `voucherArray`: an array of strings representing voucher serial numbers
+ *
+ *    `vendorUuid`: current user's Uuid
+ */
 export const createTransaction = async (
   transaction: TransactionCreate,
 ): Promise<Uuid> => {

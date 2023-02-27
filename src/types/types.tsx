@@ -8,9 +8,21 @@ export type Vendor = {
   name: string;
 };
 
+export type VoucherRange = {
+  startSerialNum: number;
+  endSerialNum: number;
+  type: string;
+  maxValue: number;
+};
+
+export type VoucherRangeCreate = Pick<
+  VoucherRange,
+  'startSerialNum' | 'endSerialNum' | 'type' | 'maxValue'
+>;
+
 export type Voucher = {
   serialNumber: string;
-  type: VoucherType;
+  type: string;
   value: number;
   vendorUuid: Uuid;
 };
@@ -19,12 +31,6 @@ export type VoucherCreate = Pick<
   Voucher,
   'serialNumber' | 'vendorUuid' | 'value'
 >;
-
-export enum VoucherType {
-  GREEN = 'green',
-  ORANGE = 'orange',
-  PURPLE = 'purple',
-}
 
 export type Transaction = {
   uuid: Uuid;
