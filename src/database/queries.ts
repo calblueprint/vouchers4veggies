@@ -133,23 +133,6 @@ const getVoucherRange = async (serialNumber: number) => {
 };
 
 /**
- * Get all vouchers from the `vouchers` collection.
- *
- * Returns an array of Voucher objects.
- */
-export const getAllVouchers = async (): Promise<Voucher[]> => {
-  try {
-    const dbQuery = query(voucherCollection);
-    const querySnapshots = await getDocs(dbQuery);
-    return querySnapshots.docs.map(document => document.data() as Voucher);
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('(getAllVouchers)', e);
-    throw e;
-  }
-};
-
-/**
  * Query the `vouchers` collection and return a Voucher if the serialNumber is found.
  */
 export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
@@ -219,26 +202,6 @@ export const createVoucher = async (
 };
 
 /**
- * Helper for all Voucher setter functions.
- */
-const updateVoucher = async (voucher: Partial<Voucher>) => {
-  try {
-    const docRef = doc(voucherCollection, voucher.serialNumber?.toString());
-    await updateDoc(docRef, voucher);
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('(updateVoucher)', e);
-    throw e;
-  }
-};
-
-/**
- * Update a Voucher's value in cents.
- */
-export const setVoucherValue = async (serialNumber: number, value: number) =>
-  updateVoucher({ serialNumber, value });
-
-/**
  * Fetch all vouchers for a given vendor.
  *
  * Returns an array of Voucher objects.
@@ -261,23 +224,6 @@ export const getVouchersByVendorUuid = async (
 };
 
 /**
- * Get all transactions from the `transactions` collection.
- *
- * Returns an array of Transaction objects.
- */
-export const getAllTransactions = async (): Promise<Transaction[]> => {
-  try {
-    const dbQuery = query(transactionCollection);
-    const querySnapshots = await getDocs(dbQuery);
-    return querySnapshots.docs.map(document => document.data() as Transaction);
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('(getAllTransactions)', e);
-    throw e;
-  }
-};
-
-/**
  * Query the `transactions` collection and return a Transaction if the uuid is found.
  */
 export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
@@ -288,20 +234,6 @@ export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getTransaction)', e);
-    throw e;
-  }
-};
-
-/**
- * Helper for all Transaction setter functions.
- */
-const updateTransaction = async (transaction: Partial<Transaction>) => {
-  try {
-    const docRef = doc(voucherCollection, transaction.uuid);
-    await updateDoc(docRef, transaction);
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('(updateTransaction)', e);
     throw e;
   }
 };
@@ -356,6 +288,20 @@ export const createTransaction = async (
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(createTransaction)', e);
+    throw e;
+  }
+};
+
+/**
+ * Helper for all Transaction setter functions.
+ */
+const updateTransaction = async (transaction: Partial<Transaction>) => {
+  try {
+    const docRef = doc(voucherCollection, transaction.uuid);
+    await updateDoc(docRef, transaction);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(updateTransaction)', e);
     throw e;
   }
 };
