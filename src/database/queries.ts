@@ -103,36 +103,6 @@ export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
 };
 
 /**
- * Query to create a new voucher range in Firebase for serial numbers in
- * the range [startSerialNum, endSerialNum].
- *
- * Parameters: a json with fields
- *
- *    `startSerialNum`: serial number for the start of the range, inclusive
- *
- *    `endSerialNum`: serial number for the end of the range, inclusive
- *
- *    `type`: the color of vouchers in this range
- *
- *    `maxValue`: maximum monetary value in cents for a range in this range
- *
- * Returns the doc id if query is successful. If the range overlaps with a pre-existing VoucherRange, return `-1`.
- */
-export const createVoucherRange = async (
-  voucherRange: VoucherRangeCreate,
-): Promise<Uuid> => {
-  try {
-    const docRef = await addDoc(voucherRangeCollection, voucherRange);
-    await updateDoc(docRef, voucherRange);
-    return docRef.id;
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('(createVoucherRange)', e);
-    throw e;
-  }
-};
-
-/**
  * Get all vouchers from the `vouchers` collection.
  */
 export const getAllVouchers = async (): Promise<Voucher[]> => {
