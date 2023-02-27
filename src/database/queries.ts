@@ -10,6 +10,7 @@ import {
   QueryDocumentSnapshot,
   updateDoc,
   where,
+  Timestamp,
 } from 'firebase/firestore';
 import {
   Uuid,
@@ -240,7 +241,11 @@ export const createTransaction = async (
   try {
     const docRef = await addDoc(transactionCollection, transaction);
     const value = await calculateValue(transaction.voucherArray);
-    await updateDoc(docRef, { uuid: docRef.id, timestamp: Date.now(), value });
+    await updateDoc(docRef, {
+      uuid: docRef.id,
+      timestamp: new Timestamp(Date.now(), 0),
+      value,
+    });
     return docRef.id;
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -267,12 +272,6 @@ export const setTransactionVoucherArray = async (
   const value = await calculateValue(voucherArray);
   updateTransaction({ uuid, voucherArray, value });
 };
-
-/**
- * Setter function to update a Transaction's VendorUuid
- */
-export const setTransactionTimestamp = async (uuid: Uuid, vendorUuid: Uuid) =>
-  updateTransaction({ uuid, vendorUuid });
 
 /**
  * Fetch all transactions for a given vendor.
