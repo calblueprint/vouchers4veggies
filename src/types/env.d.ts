@@ -7,3 +7,5 @@ declare module 'react-native-dotenv' {
   export const FIREBASE_APP_ID: string;
   export const FIREBASE_MEASUREMENT_ID: string;
 }
+
+declare module '*.png';

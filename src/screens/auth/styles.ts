@@ -71,6 +71,14 @@ export const ButtonContainer = styled.View`
   margin-top: 5%;
 `;
 
+export const BackButtonContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+  align-items: left;
+  margin-left: 10%;
+  margin-top: 15%;
+`;
+
 export const SmallTextContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
