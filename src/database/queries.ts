@@ -215,7 +215,7 @@ export const getVouchersByVendorUuid = async (
   try {
     const dbQuery = query(
       voucherCollection,
-      where('vendor_uuid', '==', vendorUuid),
+      where('vendorUuid', '==', vendorUuid),
     );
     const querySnapshots = await getDocs(dbQuery);
     return querySnapshots.docs.map(document => document.data() as Voucher);
@@ -343,7 +343,7 @@ export const getTransactionsByVendorUuid = async (
   try {
     const dbQuery = query(
       transactionCollection,
-      where('vendor_uuid', '==', vendorUuid),
+      where('vendorUuid', '==', vendorUuid),
     );
     const querySnapshots = await getDocs(dbQuery);
     return querySnapshots.docs.map(document => document.data() as Transaction);
