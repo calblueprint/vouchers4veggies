@@ -23,7 +23,6 @@ import {
   VoucherCreateResult,
   Transaction,
   TransactionCreate,
-  TransactionStatus,
 } from '../types/types';
 import fbApp from './clientApp';
 
