@@ -28,9 +28,9 @@ export type VoucherCreate = Pick<
 >;
 
 export enum VoucherCreateError {
-  InvalidSerialNumber,
-  SerialNumberAlreadyUsed,
-  ValueExceededMaximum,
+  InvalidSerialNumber = 'InvalidSerialNumber',
+  SerialNumberAlreadyUsed = 'SerialNumberAlreadyUsed',
+  ValueExceededMaximum = 'ValueExceededMaximum',
 }
 
 export type VoucherCreateResult =
