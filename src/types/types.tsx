@@ -15,10 +15,6 @@ export type VoucherRange = {
   maxValue: number;
 };
 
-export type VoucherRangeLookupResult =
-  | { ok: true; voucherRange: VoucherRange }
-  | { ok: false; error: VoucherCreateError };
-
 export type Voucher = {
   serialNumber: number;
   type: string;
@@ -46,13 +42,13 @@ export type Transaction = {
   timestamp: Timestamp;
   status: TransactionStatus;
   value: number;
-  voucherArray: number[];
+  voucherSerialNumbers: number[];
   vendorUuid: Uuid;
 };
 
 export type TransactionCreate = Pick<
   Transaction,
-  'status' | 'voucherArray' | 'vendorUuid'
+  'status' | 'voucherSerialNumbers' | 'vendorUuid'
 >;
 
 export enum TransactionStatus {

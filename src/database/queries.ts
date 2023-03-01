@@ -17,7 +17,6 @@ import {
   Uuid,
   Vendor,
   VoucherRange,
-  VoucherRangeLookupResult,
   Voucher,
   VoucherCreate,
   VoucherCreateError,
@@ -106,16 +105,13 @@ export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
 /**
  * Query the `voucher-ranges` collection.
  *
- * Returns a json.
+ * Returns a voucherRange if the given serialNumber is in any voucher range.
  *
- * If the given serialNumber is in a voucher range, `ok` is true and `voucherRange`
- * contains the specified voucher range.
- *
- * Otherwise, `ok` is false and `error` contains an error code.
+ * Otherwise, return null.
  */
 const getVoucherRange = async (
   serialNumber: number,
-): Promise<VoucherRangeLookupResult> => {
+): Promise<VoucherRange | null> => {
   try {
     const dbQuery = query(
       voucherRangeCollection,
@@ -126,10 +122,11 @@ const getVoucherRange = async (
     if (querySnapshot.docs.length > 0) {
       const result = querySnapshot.docs[0]?.data() as VoucherRange;
       if (result.endSerialNum >= serialNumber) {
-        return { ok: true, voucherRange: result };
+        return result;
       }
     }
-    return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
+
+    return null;
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucherRange)', e);
@@ -181,8 +178,8 @@ export const createVoucher = async (
     const docRef = doc(db, 'vouchers', docId);
 
     // check that serialNumber exists
-    const lookup = await getVoucherRange(voucher.serialNumber);
-    if (!lookup.ok) {
+    const voucherRange = await getVoucherRange(voucher.serialNumber);
+    if (voucherRange === null) {
       return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
     }
 
@@ -193,12 +190,12 @@ export const createVoucher = async (
     }
 
     // check that value does not exceed the maximum
-    if (lookup.voucherRange.maxValue < voucher.value) {
+    if (voucherRange.maxValue < voucher.value) {
       return { ok: false, error: VoucherCreateError.ValueExceededMaximum };
     }
 
     await setDoc(docRef, voucher);
-    await updateDoc(docRef, { type: lookup.voucherRange.type });
+    await updateDoc(docRef, { type: voucherRange.type });
     return { ok: true, docId };
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -249,19 +246,21 @@ export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
  *
  * Returns the sum in cents of all vouchers in the given array.
  */
-export const calculateValue = async (voucherArray: number[]) => {
+export const calculateTotalVouchersValue = async (
+  voucherSerialNumbers: number[],
+) => {
   try {
-    let value = 0;
+    let totalValue = 0;
     await Promise.all(
-      voucherArray.map(async v => {
+      voucherSerialNumbers.map(async v => {
         const voucher = await getVoucher(v);
-        value += voucher.value;
+        totalValue += voucher.value;
       }),
     );
-    return value;
+    return totalValue;
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(calculateValue)', e);
+    console.warn('(calculateTotalVouchersValue)', e);
     throw e;
   }
 };
@@ -273,7 +272,7 @@ export const calculateValue = async (voucherArray: number[]) => {
  *
  *    `status`: the payment status of a transaction
  *
- *    `voucherArray`: an array of numbers representing voucher serial numbers
+ *    `voucherSerialNumbers`: an array of voucher serial numbers
  *
  *    `vendorUuid`: current user's Uuid
  *
@@ -284,7 +283,9 @@ export const createTransaction = async (
 ): Promise<Uuid> => {
   try {
     const docRef = await addDoc(transactionCollection, transaction);
-    const value = await calculateValue(transaction.voucherArray);
+    const value = await calculateTotalVouchersValue(
+      transaction.voucherSerialNumbers,
+    );
     await updateDoc(docRef, {
       uuid: docRef.id,
       timestamp: new Timestamp(Math.floor(Date.now() / 1000), 0),
@@ -321,14 +322,14 @@ export const setTransactionStatus = async (
 ) => updateTransaction({ uuid, status });
 
 /**
- * Setter function to update a Transaction's voucherArray.
+ * Setter function to update a Transaction's voucherSerialNumbers.
  */
-export const setTransactionVoucherArray = async (
+export const setTransactionVoucherSerialNumbers = async (
   uuid: Uuid,
-  voucherArray: number[],
+  voucherSerialNumbers: number[],
 ) => {
-  const value = await calculateValue(voucherArray);
-  updateTransaction({ uuid, voucherArray, value });
+  const value = await calculateTotalVouchersValue(voucherSerialNumbers);
+  updateTransaction({ uuid, voucherSerialNumbers, value });
 };
 
 /**

@@ -27,7 +27,7 @@ export default function VendorsListDemo() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [selectedVendor, setSelectedVendor] = useState<Vendor | null>(null);
 
-  /* fetch all venders on page load */
+  /* fetch all vendors on page load */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -108,7 +108,7 @@ export default function VendorsListDemo() {
     const voucherArray = [100, 101];
     const transaction: TransactionCreate = {
       vendorUuid: 'abc',
-      voucherArray,
+      voucherSerialNumbers: voucherArray,
       status: TransactionStatus.UNPAID,
     };
     const uuid = await createTransaction(transaction);
