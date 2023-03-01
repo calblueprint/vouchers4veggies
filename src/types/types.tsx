@@ -15,6 +15,10 @@ export type VoucherRange = {
   maxValue: number;
 };
 
+export type VoucherRangeLookupResult =
+  | { ok: true; voucherRange: VoucherRange }
+  | { ok: false; error: VoucherCreateError };
+
 export type Voucher = {
   serialNumber: number;
   type: string;
@@ -26,6 +30,16 @@ export type VoucherCreate = Pick<
   Voucher,
   'serialNumber' | 'vendorUuid' | 'value'
 >;
+
+export enum VoucherCreateError {
+  InvalidSerialNumber,
+  SerialNumberAlreadyUsed,
+  ValueExceededMaximum,
+}
+
+export type VoucherCreateResult =
+  | { ok: true; docId: string }
+  | { ok: false; error: VoucherCreateError };
 
 export type Transaction = {
   uuid: Uuid;

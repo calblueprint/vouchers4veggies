@@ -17,8 +17,11 @@ import {
   Uuid,
   Vendor,
   VoucherRange,
+  VoucherRangeLookupResult,
   Voucher,
   VoucherCreate,
+  VoucherCreateError,
+  VoucherCreateResult,
   Transaction,
   TransactionCreate,
   TransactionStatus,
@@ -103,11 +106,16 @@ export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
 /**
  * Query the `voucher-ranges` collection.
  *
- * Return a VoucherRange if the given serialNumber is in any voucher range.
+ * Returns a json.
  *
- * Return `-1` if no such VoucherRange is found.
+ * If the given serialNumber is in a voucher range, `ok` is true and `voucherRange`
+ * contains the specified voucher range.
+ *
+ * Otherwise, `ok` is false and `error` contains an error code.
  */
-const getVoucherRange = async (serialNumber: number) => {
+const getVoucherRange = async (
+  serialNumber: number,
+): Promise<VoucherRangeLookupResult> => {
   try {
     const dbQuery = query(
       voucherRangeCollection,
@@ -115,16 +123,13 @@ const getVoucherRange = async (serialNumber: number) => {
     );
     const querySnapshot = await getDocs(dbQuery);
 
-    if (querySnapshot.docs.length === 0) {
-      return -1;
+    if (querySnapshot.docs.length > 0) {
+      const result = querySnapshot.docs[0]?.data() as VoucherRange;
+      if (result.endSerialNum >= serialNumber) {
+        return { ok: true, voucherRange: result };
+      }
     }
-
-    const result = querySnapshot.docs[0]?.data() as VoucherRange;
-
-    if (result.endSerialNum >= serialNumber) {
-      return result;
-    }
-    return -1;
+    return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucherRange)', e);
@@ -161,39 +166,40 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
  *
  *    `vendorUuid`: current user's Uuid
  *
- * Returns the doc id if the query executes successfully.
+ * Returns a json.
  *
- * Returns `'-1'` if the serial number is invalid,
- * `'-2'` if the serial number has already been used,
- * or `'-3'` if the voucher's value exceeds the maximum possible value.
+ * If the query executes successfully, `ok` is true and `docId` contains
+ * the newly created doc id.
+ *
+ * Otherwise, `ok` is false and `error` contains an error code.
  */
 export const createVoucher = async (
   voucher: VoucherCreate,
-): Promise<string> => {
+): Promise<VoucherCreateResult> => {
   try {
     const docId = voucher.serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
 
     // check that serialNumber exists
-    const voucherRange = await getVoucherRange(voucher.serialNumber);
-    if (voucherRange === -1) {
-      return '-1';
+    const lookup = await getVoucherRange(voucher.serialNumber);
+    if (!lookup.ok) {
+      return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
     }
 
     // check that serialNumber has not already been used
     const voucherDoc = await getDoc(docRef);
     if (voucherDoc.exists()) {
-      return '-2';
+      return { ok: false, error: VoucherCreateError.SerialNumberAlreadyUsed };
     }
 
     // check that value does not exceed the maximum
-    if (voucherRange.maxValue < voucher.value) {
-      return '-3';
+    if (lookup.voucherRange.maxValue < voucher.value) {
+      return { ok: false, error: VoucherCreateError.ValueExceededMaximum };
     }
 
     await setDoc(docRef, voucher);
-    await updateDoc(docRef, { type: voucherRange.type });
-    return docId;
+    await updateDoc(docRef, { type: lookup.voucherRange.type });
+    return { ok: true, docId };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(createVoucher)', e);
