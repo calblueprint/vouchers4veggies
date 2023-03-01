@@ -314,14 +314,6 @@ const updateTransaction = async (transaction: Partial<Transaction>) => {
 };
 
 /**
- * Setter function to update a Transaction's status.
- */
-export const setTransactionStatus = async (
-  uuid: Uuid,
-  status: TransactionStatus,
-) => updateTransaction({ uuid, status });
-
-/**
  * Setter function to update a Transaction's voucherSerialNumbers.
  */
 export const setTransactionVoucherSerialNumbers = async (
