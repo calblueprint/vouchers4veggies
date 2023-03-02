@@ -17,6 +17,11 @@ export const setAuthErrorMessage = (
   errorMessage: string,
 ) => dispatch({ type: 'SET_ERROR_MESSAGE', errorMessage });
 
+export const setAuthSuccessMessage = (
+  dispatch: AuthDispatch,
+  successMessage: string,
+) => dispatch({ type: 'SET_SUCCESS_MESSAGE', successMessage });
+
 export const forgotPassword = async (
   dispatch: AuthDispatch,
   params: { email: string },
@@ -26,11 +31,12 @@ export const forgotPassword = async (
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Email Sent!');
+      setAuthSuccessMessage(dispatch, 'Success!');
     })
     .catch(error => {
       // eslint-disable-next-line no-console
       console.warn('(forgotPassword) error', error);
-      setAuthErrorMessage(dispatch, error.message);
+      setAuthErrorMessage(dispatch, "We couldn't find that email address!");
     });
 };
 
