@@ -52,7 +52,7 @@ export default function ForgotPasswordScreen() {
         </HeadingContainer>
 
         <RowContainer>
-          <Body1Text>
+          <Body1Text style={Styles.bottomMargin}>
             Enter the email associated with your account, and we will send an
             email with instructions to reset your password.
           </Body1Text>
