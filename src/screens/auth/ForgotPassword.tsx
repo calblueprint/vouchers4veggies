@@ -32,7 +32,7 @@ export default function ForgotPasswordScreen() {
     if (email) {
       await forgotPassword(dispatch, { email });
     } else {
-      setAuthErrorMessage(dispatch, 'Please enter your email and password.');
+      setAuthErrorMessage(dispatch, "We couldn't find that email address!");
     }
     setShowErrorMessage(true);
   };
