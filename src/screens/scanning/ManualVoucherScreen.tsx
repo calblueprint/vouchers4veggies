@@ -37,12 +37,6 @@ function ManualVoucherScreen() {
     SNSchema.parse(numInput);
   };
 
-  // const validateVoucherAmountInput = () => {
-  //   const numInput = Number(transactionID);
-  //   const SNSchema = z.number().int().positive();
-  //   SNSchema.parse(numInput);
-  // };
-
   return (
     <SafeArea>
       <Header>
