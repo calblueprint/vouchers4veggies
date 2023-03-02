@@ -104,4 +104,7 @@ export const Styles = StyleSheet.create({
   errorText: {
     color: Colors.alertRed,
   },
+  bottomMargin: {
+    marginBottom: 20,
+  },
 });
