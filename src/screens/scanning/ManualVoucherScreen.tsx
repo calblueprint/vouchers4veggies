@@ -32,9 +32,13 @@ function ManualVoucherScreen() {
   // ]);
 
   const validateSerialNumberInput = () => {
-    const numInput = Number(transactionID);
-    const SNSchema = z.number().int().positive();
-    SNSchema.parse(numInput);
+    const SNSchema = z.string().min(1);
+    SNSchema.parse(transactionID);
+  };
+
+  const validateVoucherAmount = () => {
+    const amountSchema = z.string().min(1);
+    amountSchema.parse(voucherAmount);
   };
 
   return (
@@ -57,7 +61,7 @@ function ManualVoucherScreen() {
               value={transactionID}
               placeholder="Enter ID"
               onUnfocus={validateSerialNumberInput}
-              inputMode="numeric"
+              inputMode="number-pad"
             />
           </FieldContainer>
           <FieldContainer>
@@ -71,7 +75,8 @@ function ManualVoucherScreen() {
               onChange={setVoucherAmount}
               value={voucherAmount}
               placeholder="Enter Amount"
-              inputMode="numeric"
+              onUnfocus={validateVoucherAmount}
+              inputMode="decimal-pad"
             />
           </FieldContainer>
         </FormContainer>

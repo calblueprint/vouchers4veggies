@@ -53,7 +53,7 @@ export default function LoginScreen({
   };
 
   const validateEmailInput = () => {
-    const emailSchema = z.coerce.string().email();
+    const emailSchema = z.string().email();
     emailSchema.parse(email);
   };
 
