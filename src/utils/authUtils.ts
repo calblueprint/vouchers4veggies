@@ -35,7 +35,7 @@ export const forgotPassword = async (
     .catch(error => {
       // eslint-disable-next-line no-console
       console.warn('(forgotPassword) error', error);
-      setAuthErrorMessage(dispatch, "We couldn't find that email address!");
+      setAuthErrorMessage(dispatch, error.message);
       setAuthSuccessMessage(dispatch, '');
     });
 };
