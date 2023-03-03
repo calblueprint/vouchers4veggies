@@ -31,12 +31,14 @@ export const forgotPassword = async (
     .then(() => {
       // eslint-disable-next-line no-console
       console.log('Email Sent!');
-      setAuthSuccessMessage(dispatch, 'Success!');
+      setAuthSuccessMessage(dispatch, 'Email sent. Check your inbox to reset.');
+      setAuthErrorMessage(dispatch, '');
     })
     .catch(error => {
       // eslint-disable-next-line no-console
       console.warn('(forgotPassword) error', error);
       setAuthErrorMessage(dispatch, "We couldn't find that email address!");
+      setAuthSuccessMessage(dispatch, '');
     });
 };
 

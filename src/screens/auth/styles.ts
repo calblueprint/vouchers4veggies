@@ -104,6 +104,9 @@ export const Styles = StyleSheet.create({
   errorText: {
     color: Colors.alertRed,
   },
+  successText: {
+    color: Colors.alertGreen,
+  },
   bottomMargin: {
     marginBottom: 20,
   },
