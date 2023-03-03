@@ -23,8 +23,8 @@ type AuthContextAction =
   | { type: 'RESTORE_USER'; user: User | null }
   | { type: 'SIGN_IN'; user: User }
   | { type: 'SIGN_OUT' }
-  | { type: 'SET_SUCCESS_MESSAGE'; successMessage: string }
-  | { type: 'SET_ERROR_MESSAGE'; errorMessage: string };
+  | { type: 'SET_ERROR_MESSAGE'; errorMessage: string }
+  | { type: 'SET_SUCCESS_MESSAGE'; successMessage: string };
 
 const useAuthReducer = () =>
   useReducer(
@@ -45,6 +45,7 @@ const useAuthReducer = () =>
             isSignout: false,
             user: action.user,
             errorMessage: null,
+            successMessage: null,
           };
         case 'SIGN_OUT':
           return {

@@ -4,7 +4,7 @@ import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
 
-import { setAuthErrorMessage, forgotPassword } from '../../utils/authUtils';
+import { forgotPassword } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
 
@@ -22,19 +22,17 @@ import {
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const { errorMessage, dispatch } = useAuthContext();
+  const { errorMessage, successMessage, dispatch } = useAuthContext();
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const onChangeEmail = (value: string) => {
     setEmail(value);
   };
 
   const handleSendEmail = async () => {
-    if (email) {
-      await forgotPassword(dispatch, { email });
-    } else {
-      setAuthErrorMessage(dispatch, "We couldn't find that email address!");
-    }
+    await forgotPassword(dispatch, { email });
     setShowErrorMessage(true);
+    setShowSuccessMessage(true);
   };
 
   return (
@@ -65,7 +63,14 @@ export default function ForgotPasswordScreen() {
           placeholder="Enter email"
         />
         {showErrorMessage && errorMessage && (
-          <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
+          <Body1Text style={Styles.errorText}>
+            We could not find that email address!
+          </Body1Text>
+        )}
+        {showSuccessMessage && successMessage && (
+          <Body1Text style={Styles.successText}>
+            Email sent! Check your inbox to reset.
+          </Body1Text>
         )}
         <VerticalSpacingButtonContainer>
           <ButtonMagenta onPress={handleSendEmail}>
