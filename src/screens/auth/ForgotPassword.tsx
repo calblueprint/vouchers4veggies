@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
+import {
+  SuccessText,
+  ErrorText,
+  Body1Text,
+  H2Heading,
+  H4CardNavTab,
+  Bold,
+} from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
 
@@ -16,7 +23,7 @@ import {
   VerticalSpacingButtonContainer,
   WhiteText,
   RowContainer,
-  Styles,
+  BottomMargin,
 } from './styles';
 
 export default function ForgotPasswordScreen() {
@@ -50,26 +57,30 @@ export default function ForgotPasswordScreen() {
         </HeadingContainer>
 
         <RowContainer>
-          <Body1Text style={Styles.bottomMargin}>
-            Enter the email associated with your account, and we will send an
-            email with instructions to reset your password.
+          <Body1Text>
+            <BottomMargin>
+              Enter the email associated with your account, and we will send an
+              email with instructions to reset your password.
+            </BottomMargin>
           </Body1Text>
         </RowContainer>
 
-        <Body1Text style={Styles.bold}>Email</Body1Text>
+        <Body1Text>
+          <Bold>Email</Bold>
+        </Body1Text>
         <InputField
           onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
         />
         {showErrorMessage && errorMessage && (
-          <Body1Text style={Styles.errorText}>
-            We could not find that email address!
+          <Body1Text>
+            <ErrorText>We could not find that email address!</ErrorText>
           </Body1Text>
         )}
         {showSuccessMessage && successMessage && (
-          <Body1Text style={Styles.successText}>
-            Email sent! Check your inbox to reset.
+          <Body1Text>
+            <SuccessText>Email sent! Check your inbox to reset.</SuccessText>
           </Body1Text>
         )}
         <VerticalSpacingButtonContainer>

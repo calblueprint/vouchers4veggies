@@ -51,9 +51,7 @@ export default function LoginScreen({
     setPassword(value);
   };
 
-  // TODO: implement password reset functionality @selene-huang
   const resetPassword = () => {
-    // password flow
     navigation.navigate('ForgotPassword');
   };
 

@@ -94,6 +94,10 @@ export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
 `;
 
+export const BottomMargin = styled.View`
+  margin-bottom: 20;
+`;
+
 export const Styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline',
