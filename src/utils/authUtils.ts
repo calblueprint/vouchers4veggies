@@ -29,8 +29,6 @@ export const forgotPassword = async (
   const auth = getAuth();
   await sendPasswordResetEmail(auth, params.email)
     .then(() => {
-      // eslint-disable-next-line no-console
-      console.log('Email Sent!');
       setAuthSuccessMessage(dispatch, 'Email sent. Check your inbox to reset.');
       setAuthErrorMessage(dispatch, '');
     })
