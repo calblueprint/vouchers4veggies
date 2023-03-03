@@ -26,7 +26,7 @@ import {
 
 export default function LoginScreen({
   navigation,
-}: AuthStackScreenProps<'Start'>) {
+}: AuthStackScreenProps<'Login'>) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
