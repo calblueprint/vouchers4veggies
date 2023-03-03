@@ -53,6 +53,18 @@ export const MagentaText = styled.Text`
   color: ${Colors.magenta};
 `;
 
+export const ErrorText = styled.Text`
+  color: ${Colors.alertRed};
+`;
+
+export const SuccessText = styled.Text`
+  color: ${Colors.alertGreen};
+`;
+
+export const Bold = styled.Text`
+  font-weight: bold;
+`;
+
 export const ButtonTextWhite = styled.Text`
   font-family: 'manrope-semiBold';
   font-style: normal;
