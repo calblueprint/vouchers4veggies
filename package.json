@@ -79,7 +79,7 @@
     "web": "expo start --web",
     "lint:check": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "npx tsc --noEmit",
     "prettier:check": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
     "prepare": "husky install"
