@@ -11,9 +11,18 @@ import {
   H2Heading,
   ButtonTextWhite,
 } from '../../../assets/Fonts';
-// import { signOut } from '../../utils/authUtils';
+import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
-import { HeadingContainer, ButtonContainer, ButtonBlank } from './styles';
+import {
+  HeadingContainer,
+  ButtonContainer,
+  ButtonBlank,
+  LogOutButton,
+  LogOutContainer,
+  MagentaButtonContainer,
+  ButtonPasswordContainer,
+  EmailText,
+} from './styles';
 import { ButtonMagenta, LogoContainer } from '../scanning/styles';
 import { AuthStackScreenProps } from '../../navigation/types';
 // import { DarkGrayText } from '../auth/styles';
@@ -26,6 +35,9 @@ export default function ProfileScreen({
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  const handleLogOut = async () => {
+    // wannie set up flow?
+  };
 
   // create left and right container for every screen
   return (
@@ -60,24 +72,31 @@ export default function ProfileScreen({
     </H3Subheading>
   </View> */}
       </View>
-      <HeadingContainer>
-        <H2Heading> Hi, Derby Food Market!</H2Heading>
-      </HeadingContainer>
-      <ButtonContainer>
+      <View>
+        <HeadingContainer>
+          <H2Heading> Hi, Derby Food Market!</H2Heading>
+        </HeadingContainer>
+        {/* <ButtonContainer> */}
         <ButtonBlank title="Email" color="black" />
+        <EmailText> Email</EmailText>
         <H4CardNavTab> email@email.com</H4CardNavTab>
-      </ButtonContainer>
-      <ButtonContainer>
+        {/* </ButtonContainer> */}
+        {/* <ButtonContainer> */}
         <ButtonBlank title="Phone Number" color="black" />
-        <H4CardNavTab> (123) 456-7890</H4CardNavTab>
-      </ButtonContainer>
-      <ButtonContainer>
+        <EmailText> Phone Number</EmailText>
+        <H4CardNavTab>(123) 456-7890</H4CardNavTab>
+        {/* </ButtonContainer> */}
+        {/* <ButtonPasswordContainer> */}
         <ButtonBlank title="Password" color="black" />
+        <EmailText> Password</EmailText>
         <H4CardNavTab> ............</H4CardNavTab>
-      </ButtonContainer>
-      <ButtonMagenta>
-        <ButtonTextWhite>Log Out</ButtonTextWhite>
-      </ButtonMagenta>
+        {/* </ButtonPasswordContainer> */}
+        <MagentaButtonContainer>
+          <ButtonMagenta onPress={signOut}>
+            <ButtonTextWhite>Log Out</ButtonTextWhite>
+          </ButtonMagenta>
+        </MagentaButtonContainer>
+      </View>
     </>
   );
 }
