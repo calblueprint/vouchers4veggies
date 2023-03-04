@@ -11,15 +11,15 @@ export const Row = styled.View`
   justify-content: flex-start;
 `;
 
-export const DateIdContainer = styled.View`
-  flex: 4;
+export const DateContainer = styled.View`
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
   padding-left: 20px;
 `;
 
-export const CountContainer = styled.View`
+export const StatusContainer = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: flex-end;
@@ -28,8 +28,8 @@ export const CountContainer = styled.View`
   margin-right: 30px;
 `;
 
-export const PriceContainer = styled.View`
-  flex: 2;
+export const ValueContainer = styled.View`
+  flex: 1;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
