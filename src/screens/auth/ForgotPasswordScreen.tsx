@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
 import {
   SuccessText,
   ErrorText,
@@ -19,7 +18,6 @@ import {
   FormContainer,
   HeadingContainer,
   LoginContainer,
-  LogoContainer,
   VerticalSpacingButtonContainer,
   WhiteText,
   RowContainer,
