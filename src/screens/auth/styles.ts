@@ -16,16 +16,17 @@ export const StartContainer = styled.View`
   align-items: center;
 `;
 
-export const LogoContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
-  margin-left: 10%;
-  margin-top: 4%;
+export const ResetPasswordContainer = styled.View`
+  background-color: ${Colors.offWhite};
+  min-height: 100%;
+  align-items: center;
+  flex: 1;
 `;
 
 export const HeadingContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
+  margin-left: 10%;
   margin-top: 14%;
   margin-bottom: 4%;
 `;
