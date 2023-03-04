@@ -74,3 +74,12 @@ export const RootNavBackButton = styled.TouchableOpacity`
   width: 70px;
   padding: 9px;
 `;
+
+// export function NavigationHeaderContainer({ backgroundColor, alignItems });
+
+// NavigationHeaderContainer.propTypes = {
+
+//   backgroundColor: PropTypes.string,
+//   alignItems: PropTypes.string,
+
+// };
