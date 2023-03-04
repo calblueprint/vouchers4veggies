@@ -44,9 +44,11 @@ export default function ForgotPasswordScreen() {
   return (
     <LoginContainer>
       {/* logo placeholder */}
-      <Header>
-        <StandardLogo />
-      </Header>
+      <HeadingContainer>
+        <Header>
+          <StandardLogo />
+        </Header>
+      </HeadingContainer>
 
       <FormContainer>
         <HeadingContainer>
