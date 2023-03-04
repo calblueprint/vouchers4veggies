@@ -17,18 +17,14 @@ export const StartContainer = styled.View`
 `;
 
 export const ResetPasswordContainer = styled.View`
-  background-color: ${Colors.offWhite};
-  min-height: 100%;
-  align-items: center;
-  flex: 1;
+  margin-top: 14%;
+  align-items: left;
 `;
 
 export const HeadingContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
-  margin-left: 10%;
   margin-top: 14%;
-  margin-bottom: 4%;
+  align-items: left;
+  margin-bottom: 10%;
 `;
 
 export const FormContainer = styled.View`
