@@ -104,7 +104,7 @@ export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
 /**
  * Query the `voucher-ranges` collection.
  *
- * Returns a voucherRange if the given serialNumber is in any voucher range.
+ * Returns a VoucherRange if the given serialNumber is in any voucher range.
  *
  * Otherwise, return null.
  */
