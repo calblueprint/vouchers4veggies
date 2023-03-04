@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 export type Uuid = string;
 
 export type Vendor = {
@@ -6,27 +8,50 @@ export type Vendor = {
   name: string;
 };
 
+export type VoucherRange = {
+  startSerialNum: number;
+  endSerialNum: number;
+  type: string;
+  maxValue: number;
+};
+
 export type Voucher = {
-  uuid: Uuid;
-  type: VoucherType;
+  serialNumber: number;
+  type: string;
   value: number;
   vendorUuid: Uuid;
-  expirationDate: string;
-  status: VoucherStatus;
 };
 
 export type VoucherCreate = Pick<
   Voucher,
-  'type' | 'value' | 'vendorUuid' | 'expirationDate' | 'status'
+  'serialNumber' | 'vendorUuid' | 'value'
 >;
 
-export enum VoucherType {
-  GREEN = 'green',
-  ORANGE = 'orange',
-  PURPLE = 'purple',
+export enum VoucherCreateError {
+  InvalidSerialNumber = 'InvalidSerialNumber',
+  SerialNumberAlreadyUsed = 'SerialNumberAlreadyUsed',
+  ValueExceededMaximum = 'ValueExceededMaximum',
 }
 
-export enum VoucherStatus {
+export type VoucherCreateResult =
+  | { ok: true; docId: string }
+  | { ok: false; error: VoucherCreateError };
+
+export type Transaction = {
+  uuid: Uuid;
+  timestamp: Timestamp;
+  status: TransactionStatus;
+  value: number;
+  voucherSerialNumbers: number[];
+  vendorUuid: Uuid;
+};
+
+export type TransactionCreate = Pick<
+  Transaction,
+  'status' | 'voucherSerialNumbers' | 'vendorUuid'
+>;
+
+export enum TransactionStatus {
   PAID = 'paid',
   UNPAID = 'unpaid',
 }
