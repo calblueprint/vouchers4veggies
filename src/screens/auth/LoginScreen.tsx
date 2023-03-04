@@ -52,7 +52,6 @@ export default function LoginScreen({
   };
 
   const resetPassword = () => {
-    // password flow
     navigation.navigate('ForgotPassword');
   };
 
