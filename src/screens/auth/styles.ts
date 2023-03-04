@@ -98,6 +98,14 @@ export const BottomMargin = styled.View`
   margin-bottom: 20;
 `;
 
+export const Header = styled.View`
+  width: 85%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 26px;
+`;
+
 export const Styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline',
@@ -107,11 +115,5 @@ export const Styles = StyleSheet.create({
   },
   errorText: {
     color: Colors.alertRed,
-  },
-  successText: {
-    color: Colors.alertGreen,
-  },
-  bottomMargin: {
-    marginBottom: 20,
   },
 });

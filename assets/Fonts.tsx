@@ -61,7 +61,7 @@ export const SuccessText = styled.Text`
   color: ${Colors.alertGreen};
 `;
 
-export const Bold = styled.Text`
+export const BoldText = styled.Text`
   font-weight: bold;
 `;
 

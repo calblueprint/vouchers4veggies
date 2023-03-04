@@ -6,11 +6,11 @@ import {
   Body1Text,
   H2Heading,
   H4CardNavTab,
-  Bold,
+  BoldText,
 } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
-
+import StandardLogo from '../../components/common/StandardLogo';
 import { forgotPassword } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
@@ -24,6 +24,7 @@ import {
   WhiteText,
   RowContainer,
   BottomMargin,
+  Header,
 } from './styles';
 
 export default function ForgotPasswordScreen() {
@@ -45,11 +46,9 @@ export default function ForgotPasswordScreen() {
   return (
     <LoginContainer>
       {/* logo placeholder */}
-      <LogoContainer>
-        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-        </View>
-      </LogoContainer>
+      <Header>
+        <StandardLogo />
+      </Header>
 
       <FormContainer>
         <HeadingContainer>
@@ -57,32 +56,32 @@ export default function ForgotPasswordScreen() {
         </HeadingContainer>
 
         <RowContainer>
-          <Body1Text>
-            <BottomMargin>
+          <BottomMargin>
+            <Body1Text>
               Enter the email associated with your account, and we will send an
               email with instructions to reset your password.
-            </BottomMargin>
-          </Body1Text>
+            </Body1Text>
+          </BottomMargin>
         </RowContainer>
 
         <Body1Text>
-          <Bold>Email</Bold>
+          <BoldText>Email</BoldText>
         </Body1Text>
         <InputField
           onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
         />
-        {showErrorMessage && errorMessage && (
+        {showErrorMessage && errorMessage ? (
           <Body1Text>
             <ErrorText>We could not find that email address!</ErrorText>
           </Body1Text>
-        )}
-        {showSuccessMessage && successMessage && (
+        ) : null}
+        {showSuccessMessage && successMessage ? (
           <Body1Text>
             <SuccessText>Email sent! Check your inbox to reset.</SuccessText>
           </Body1Text>
-        )}
+        ) : null}
         <VerticalSpacingButtonContainer>
           <ButtonMagenta onPress={handleSendEmail}>
             <WhiteText>
