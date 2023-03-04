@@ -25,7 +25,6 @@ import {
   WhiteText,
   RowContainer,
   BottomMargin,
-  Header,
   DarkGrayText,
 } from './styles';
 
