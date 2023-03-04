@@ -92,7 +92,7 @@ export const DarkGrayText = styled.Text`
 `;
 
 export const BottomMargin = styled.View`
-  margin-bottom: 20;
+  margin-bottom: 20px;
 `;
 
 export const Header = styled.View`
