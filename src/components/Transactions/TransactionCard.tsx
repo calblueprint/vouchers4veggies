@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
 import { Body1Text, Body2Subtext, H3Subheading } from '../../../assets/Fonts';
 import {
@@ -15,26 +15,34 @@ type TransactionCardProps = {
   id: string;
   price: number;
   count: number;
+  status: string;
 };
 export default function TransactionCard({
   date,
   id,
   price,
   count,
+  status,
 }: TransactionCardProps) {
   return (
     <Row>
       <DateIdContainer>
-        <Body2Subtext>{`ID ${id}`}</Body2Subtext>
-        <Body1Text>{date}</Body1Text>
+        <Body2Subtext>ID {id}</Body2Subtext>
+        <Body1Text style={Styles.bold}>{date}</Body1Text>
+        <Row>
+          <Body2Subtext>Status: </Body2Subtext>
+          <Body2Subtext style={status === 'paid' ? Styles.green : Styles.red}>
+            {status}
+          </Body2Subtext>
+        </Row>
       </DateIdContainer>
       <CountContainer>
-        <Body1Text>{`x${count}`}</Body1Text>
+        <Body1Text style={Styles.bold}>x{count}</Body1Text>
       </CountContainer>
       <PriceContainer>
-        <H3Subheading>{`$${price}`}</H3Subheading>
+        <H3Subheading style={Styles.semibold}>${price}</H3Subheading>
       </PriceContainer>
-      <Icon.Button
+      <AntDesign.Button
         name="right"
         size={25}
         style={Styles.IconButton}

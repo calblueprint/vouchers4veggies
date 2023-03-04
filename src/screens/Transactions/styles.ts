@@ -1,5 +1,12 @@
 import styled from 'styled-components/native';
 
+export const LogoContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+  margin-left: 10%;
+  margin-top: 4%;
+`;
+
 export const TransactionsContainer = styled.View`
   flex: 1;
   flex-direction: column;
@@ -8,6 +15,7 @@ export const TransactionsContainer = styled.View`
 `;
 
 export const FilterRow = styled.View`
+  display: flex;
   width: 100%;
   flex-direction: row;
 `;
@@ -22,11 +30,9 @@ export const HorizontalSpacingContainer = styled.View`
   padding-right: 15px;
 `;
 
-export const AddManuallyContainer = styled.View`
-  width: 100%;
-  flex-direction: row;
-  padding-top: 40px;
-  justify-content: flex-end;
-  margin-top: 20px;
-  margin-right: 60px;
+export const CardContainer = styled.View`
+  width: 86.77%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
