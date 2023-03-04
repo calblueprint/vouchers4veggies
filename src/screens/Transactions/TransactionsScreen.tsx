@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
+import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/Transactions/TransactionCard';
 import {
   LogoContainer,
   TransactionsContainer,
-  FilterRow,
   Title,
   HorizontalSpacingContainer,
   CardContainer,
 } from './styles';
 
 export default function TransactionsScreen() {
-  const onChange = () => {
-    const a = 2;
-  };
   const [transactions, setTransactions] = useState([
     {
       id: '123123',
@@ -67,29 +64,15 @@ export default function TransactionsScreen() {
     },
   ]);
 
-  const countMenu = [
-    { label: '1-10', value: '1' },
-    { label: '11-20', value: '2' },
-    { label: '21+', value: '3' },
-  ];
-
   return (
     <TransactionsContainer>
       <LogoContainer>
-        <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-          <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-        </View>
+        <StandardLogo />
       </LogoContainer>
 
       <Title>
         <H2Heading>Transactions</H2Heading>
       </Title>
-
-      <FilterRow>
-        <HorizontalSpacingContainer>
-          <Button title="Filter" />
-        </HorizontalSpacingContainer>
-      </FilterRow>
 
       <CardContainer>
         {transactions.map(item => (
