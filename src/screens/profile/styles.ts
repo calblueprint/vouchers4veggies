@@ -28,7 +28,7 @@ export const ButtonEmailContainer = styled.TouchableOpacity`
   margin-left: 0%;
 `;
 export const ButtonPhoneContainer = styled.TouchableOpacity`
-  margin-top: 4%;
+  margin-top: 2%;
   margin-left: 0%;
 `;
 export const EmailText = styled.Text`
@@ -37,6 +37,7 @@ export const EmailText = styled.Text`
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
+  margin-top: -10%;
 
   color: #000000;
 `;
@@ -48,7 +49,7 @@ export const ButtonBlank = styled.TouchableOpacity`
   border: 0.5px;
 `;
 export const ButtonBottomContainer = styled.TouchableOpacity`
-  margin-top: 4%;
+  margin-top: 2%;
   margin-left: 0%;
 `;
 
@@ -56,10 +57,14 @@ export const MagentaButtonContainer = styled.View`
   flex-direction: top;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 62%;
+  margin-top: 50%;
 `;
 export const LogoContainer = styled.ImageBackground`
   width: 50px;
   height: 60px;
   margin-top: 25px;
+`;
+export const IconContainer = styled.View`
+  margin-left: 90%;
+  margin-top: 10%;
 `;
