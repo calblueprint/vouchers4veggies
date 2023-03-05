@@ -1,14 +1,17 @@
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
-import { Body1Text, Body2Subtext, H3Subheading } from '../../../assets/Fonts';
+import { Body1Text, H3Subheading } from '../../../assets/Fonts';
 import {
   StatusContainer,
   DateContainer,
   ValueContainer,
   Row,
   Styles,
+  GreenText,
+  RedText,
 } from './styles';
+import StatusComponent from './StatusComponent';
 
 type TransactionCardProps = {
   date: Date;
@@ -34,11 +37,11 @@ export default function TransactionCard({
       </DateContainer>
 
       <ValueContainer>
-        <H3Subheading style={Styles.semibold}>${value / 100}</H3Subheading>
+        <H3Subheading style={Styles.bold}>${value / 100}</H3Subheading>
       </ValueContainer>
 
       <StatusContainer>
-        <Body1Text style={Styles.bold}>{status}</Body1Text>
+        <StatusComponent status={status} />
       </StatusContainer>
 
       <AntDesign.Button
