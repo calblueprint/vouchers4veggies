@@ -31,6 +31,16 @@ function ManualVoucherScreen() {
   //   { label: 'Banana', value: 'banana' },
   // ]);
 
+  const SNonChange = (text: string) => {
+    const value = text.replace(/\D/g, '');
+    setID(value);
+  };
+
+  const VAonChange = (text: string) => {
+    const value = text.replace(/[^\d.]/g, '');
+    setVoucherAmount(value);
+  };
+
   const validateSerialNumberInput = () => {
     const SNSchema = z.string().min(1);
     SNSchema.parse(transactionID);
@@ -57,7 +67,7 @@ function ManualVoucherScreen() {
           <FieldContainer>
             <InputTitleText>Transaction ID</InputTitleText>
             <InputField
-              onChange={setID}
+              onChange={SNonChange}
               value={transactionID}
               placeholder="Enter ID"
               onUnfocus={validateSerialNumberInput}
@@ -72,7 +82,7 @@ function ManualVoucherScreen() {
           <FieldContainer>
             <InputTitleText>Amount</InputTitleText>
             <InputField
-              onChange={setVoucherAmount}
+              onChange={VAonChange}
               value={voucherAmount}
               placeholder="Enter Amount"
               onUnfocus={validateVoucherAmount}
