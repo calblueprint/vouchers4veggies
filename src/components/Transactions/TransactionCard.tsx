@@ -8,8 +8,6 @@ import {
   ValueContainer,
   Row,
   Styles,
-  GreenText,
-  RedText,
 } from './styles';
 import StatusComponent from './StatusComponent';
 
@@ -25,6 +23,10 @@ export default function TransactionCard({
   value,
   status,
 }: TransactionCardProps) {
+  const onButtonPress = () => {
+    console.log(id);
+  };
+
   return (
     <Row>
       <DateContainer>
@@ -49,6 +51,7 @@ export default function TransactionCard({
         size={25}
         style={Styles.IconButton}
         color={Colors.midGray}
+        onPress={onButtonPress}
       />
     </Row>
   );
