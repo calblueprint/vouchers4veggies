@@ -3,6 +3,7 @@ import { H2Heading } from '../../../assets/Fonts';
 import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/Transactions/TransactionCard';
 import { getTransactionsByVendorUuid } from '../../database/queries';
+import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction } from '../../types/types';
 import {
   LogoContainer,
@@ -11,7 +12,9 @@ import {
   CardContainer,
 } from './styles';
 
-export default function TransactionsScreen() {
+export default function TransactionsScreen({
+  navigation,
+}: TransactionStackScreenProps<'TransactionsScreen'>) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
@@ -22,7 +25,7 @@ export default function TransactionsScreen() {
         setTransactions(transactionsArray);
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.error('(useEffect)[VendorsListDemo]', error);
+        console.error('(useEffect)[TransactionsScreen]', error);
       }
     };
     fetchData();
@@ -42,6 +45,7 @@ export default function TransactionsScreen() {
         {transactions.map(item => (
           <TransactionCard
             key={item.uuid}
+            navigation={navigation}
             id={item.uuid}
             date={item.timestamp.toDate()}
             value={item.value}

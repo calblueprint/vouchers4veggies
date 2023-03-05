@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Colors from '../../../assets/Colors';
 
 export const LogoContainer = styled.View`
   width: 100%;
@@ -35,4 +36,16 @@ export const CardContainer = styled.View`
   display: flex;
   flex-direction: column;
   flex: 1;
+`;
+
+export const BackButtonContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+  align-items: left;
+  margin-left: 10%;
+  margin-top: 15%;
+`;
+
+export const DarkGrayText = styled.Text`
+  color: ${Colors.darkGray};
 `;
