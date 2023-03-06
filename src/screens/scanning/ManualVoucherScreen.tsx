@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
+import { Logs } from 'expo';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -18,6 +19,8 @@ import {
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
+
+Logs.enableExpoCliLogging();
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
@@ -42,30 +45,34 @@ function ManualVoucherScreen() {
   };
 
   const validateSerialNumberInput = () => {
-    const SNSchema = z.coerce.number().gt(0);
-    SNSchema.parse(transactionID);
+    if (transactionID !== '') {
+      const SNSchema = z.coerce.number().gt(0);
+      SNSchema.parse(transactionID);
+    }
+  };
+
+  const validateCurrency = () => {
+    // confirms that any input has either 0 or 2 decimal digits
+    console.log(voucherAmount);
+    const inputParts = String(voucherAmount).split('.');
+    console.log(inputParts);
+    if (inputParts.length > 1 && inputParts[1].length !== 2) {
+      return true;
+    }
+    return false;
   };
 
   const validateVoucherAmount = () => {
-    const currencySchema = z.coerce
-      .number() // ensures that input is a valid number
-      .gt(0)
-      .lte(10) // less than or equal to 10 dollars
-      .refine(
-        input => {
-          // confirms that any input has either 0 or 2 decimal digits
-          const inputParts = String(input).split('.');
-
-          if (inputParts.length > 1 && inputParts[1].length !== 2) {
-            return true;
-          }
-          return false;
-        },
-        {
+    if (voucherAmount !== '') {
+      const currencySchema = z.coerce
+        .number() // ensures that input is a valid number
+        .gt(0)
+        .lte(10) // less than or equal to 10 dollars
+        .refine(validateCurrency, {
           message: 'Input must be in a valid currency format',
-        },
-      );
-    currencySchema.parse(voucherAmount);
+        });
+      currencySchema.parse(voucherAmount);
+    }
   };
 
   return (
