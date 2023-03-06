@@ -105,7 +105,7 @@ function ManualVoucherScreen() {
               value={voucherAmount}
               placeholder="Enter Amount"
               onUnfocus={validateVoucherAmount}
-              inputMode="decimal-pad"
+              inputMode="numeric"
             />
           </FieldContainer>
         </FormContainer>
