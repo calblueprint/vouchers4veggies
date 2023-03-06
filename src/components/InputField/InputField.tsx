@@ -36,6 +36,7 @@ export default function InputField({
       autoCorrect={false}
       autoCapitalize="none"
       keyboardType={inputMode}
+      returnKeyType="done"
     />
   );
 }
