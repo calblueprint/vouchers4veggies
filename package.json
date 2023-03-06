@@ -17,6 +17,7 @@
     "expo-splash-screen": "~0.17.5",
     "firebase": "^9.10.0",
     "mkdirp": "^1.0.4",
+    "moment": "^2.29.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-hook-form": "^7.36.1",

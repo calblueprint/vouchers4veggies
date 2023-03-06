@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -23,9 +24,9 @@ import {
   LeftAlignedContainer,
   DarkGrayText,
   MediumText,
-  Body1BoldText,
   BackButtonContainer,
   CardContainer,
+  Body1BoldText,
 } from './styles';
 
 export default function TransactionDetailsScreen({
@@ -43,8 +44,8 @@ export default function TransactionDetailsScreen({
         setTransactionData(data);
 
         const voucherData = await Promise.all(
-          data.voucherSerialNumbers.map(async item => {
-            const v = await getVoucher(item);
+          data.voucherSerialNumbers.map(item => {
+            const v = getVoucher(item);
             return v;
           }),
         );
@@ -56,6 +57,8 @@ export default function TransactionDetailsScreen({
     };
     fetchData();
   });
+
+  const time = moment(transactionData?.timestamp.toDate());
 
   return (
     <TransactionsContainer>
@@ -73,18 +76,8 @@ export default function TransactionDetailsScreen({
         <TransactionsContainer>
           <StatusComponent status={transactionData.status} />
           <Title>${(transactionData.value / 100).toFixed(2)}</Title>
-          <MediumText>
-            Date:
-            {` ${transactionData.timestamp
-              .toDate()
-              .toLocaleString('en-US', { dateStyle: 'short' })}`}
-          </MediumText>
-          <MediumText>
-            Time:
-            {` ${transactionData.timestamp
-              .toDate()
-              .toLocaleString('en-US', { timeStyle: 'short' })}`}
-          </MediumText>
+          <MediumText>Date: {time.format('M/D/YY')}</MediumText>
+          <MediumText>Time: {time.format('h:mmA')}</MediumText>
 
           <LeftAlignedContainer>
             <Body1BoldText>

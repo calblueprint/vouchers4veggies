@@ -14,15 +14,11 @@ type StatusComponentProps = {
 export default function StatusComponent({ status }: StatusComponentProps) {
   return status === TransactionStatus.PAID ? (
     <StatusComponentGreen>
-      <GreenText>
-        <Body2Subtext>{status.toUpperCase()}</Body2Subtext>
-      </GreenText>
+      <GreenText>{status.toUpperCase()}</GreenText>
     </StatusComponentGreen>
   ) : (
     <StatusComponentRed>
-      <RedText>
-        <Body2Subtext>{status.toUpperCase()}</Body2Subtext>
-      </RedText>
+      <RedText>{status.toUpperCase()}</RedText>
     </StatusComponentRed>
   );
 }

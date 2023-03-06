@@ -55,25 +55,32 @@ export const StatusComponentGreen = styled.View`
   border: 2px solid ${Colors.lightGreen};
 `;
 
+export const Body1SemiboldText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
+
 export const GreenText = styled.Text`
   color: ${Colors.alertGreen};
-  font-weight: 700;
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
 `;
 
 export const RedText = styled.Text`
   color: ${Colors.alertRed};
-  font-weight: 700;
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
 `;
 
 export const Styles = StyleSheet.create({
   IconButton: {
     justifyContent: 'center',
     backgroundColor: '#fff',
-  },
-  bold: {
-    fontWeight: '600',
-  },
-  semibold: {
-    fontWeight: '500',
   },
 });
