@@ -34,16 +34,16 @@ export default function TransactionCard({
   return (
     <Row>
       <DateContainer>
-        <Body1Text style={Styles.bold}>
+        <Body1Text style={Styles.semibold}>
           {date.toLocaleString('en-US', { dateStyle: 'short' })}
         </Body1Text>
-        <Body1Text style={Styles.bold}>
+        <Body1Text style={Styles.semibold}>
           {date.toLocaleString('en-US', { timeStyle: 'short' })}
         </Body1Text>
       </DateContainer>
 
       <ValueContainer>
-        <H3Subheading style={Styles.bold}>${value / 100}</H3Subheading>
+        <H3Subheading style={Styles.semibold}>${value / 100}</H3Subheading>
       </ValueContainer>
 
       <StatusContainer>

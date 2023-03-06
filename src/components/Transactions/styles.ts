@@ -71,6 +71,9 @@ export const Styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   bold: {
+    fontWeight: '600',
+  },
+  semibold: {
     fontWeight: '500',
   },
 });

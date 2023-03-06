@@ -8,7 +8,7 @@ import { Transaction } from '../../types/types';
 import {
   LogoContainer,
   TransactionsContainer,
-  Title,
+  TitleContainer,
   CardContainer,
 } from './styles';
 
@@ -37,9 +37,9 @@ export default function TransactionsScreen({
         <StandardLogo />
       </LogoContainer>
 
-      <Title>
+      <TitleContainer>
         <H2Heading>Transactions</H2Heading>
-      </Title>
+      </TitleContainer>
 
       <CardContainer>
         {transactions.map(item => (

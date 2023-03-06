@@ -9,30 +9,28 @@ export const LogoContainer = styled.View`
 `;
 
 export const TransactionsContainer = styled.View`
+  width: 100%;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-export const FilterRow = styled.View`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-`;
-
-export const Title = styled.View`
+export const TitleContainer = styled.View`
   padding-top: 20px;
   padding-bottom: 20px;
 `;
 
-export const HorizontalSpacingContainer = styled.View`
-  padding-left: 15px;
-  padding-right: 15px;
+export const Title = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 42px;
+  line-height: 57px;
+  text-align: center;
 `;
 
 export const CardContainer = styled.View`
-  width: 86.77%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -41,9 +39,31 @@ export const CardContainer = styled.View`
 export const BackButtonContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
-  align-items: left;
+  align-items: flex-start;
   margin-left: 10%;
   margin-top: 15%;
+`;
+
+export const LeftAlignedContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 10%;
+`;
+
+export const MediumText = styled.Text`
+  font-family: 'manrope-regular';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+`;
+
+export const Body1BoldText = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
 `;
 
 export const DarkGrayText = styled.Text`
