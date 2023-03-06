@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
-import { Logs } from 'expo';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -19,8 +18,6 @@ import {
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
-
-Logs.enableExpoCliLogging();
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
@@ -53,9 +50,7 @@ function ManualVoucherScreen() {
 
   const validateCurrency = () => {
     // confirms that any input has either 0 or 2 decimal digits
-    console.log(voucherAmount);
     const inputParts = String(voucherAmount).split('.');
-    console.log(inputParts);
     if (inputParts.length > 1 && inputParts[1].length !== 2) {
       return true;
     }
