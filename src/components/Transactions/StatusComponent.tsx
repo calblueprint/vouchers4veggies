@@ -1,5 +1,4 @@
 import React from 'react';
-import { Body2Subtext } from '../../../assets/Fonts';
 import { TransactionStatus } from '../../types/types';
 import {
   GreenText,

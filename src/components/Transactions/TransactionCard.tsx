@@ -10,7 +10,6 @@ import {
   ValueContainer,
   Row,
   Styles,
-  Body1SemiboldText,
 } from './styles';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';

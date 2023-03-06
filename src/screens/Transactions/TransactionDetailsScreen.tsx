@@ -1,26 +1,17 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import { RootNavBackButton } from '../../../assets/Components';
-import { H2Heading } from '../../../assets/Fonts';
-import StandardLogo from '../../components/common/StandardLogo';
 import StatusComponent from '../../components/Transactions/StatusComponent';
-import TransactionCard from '../../components/Transactions/TransactionCard';
 import VoucherCard from '../../components/Transactions/VoucherCard';
-import {
-  getTransaction,
-  getTransactionsByVendorUuid,
-  getVoucher,
-} from '../../database/queries';
+import { getTransaction, getVoucher } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, Voucher } from '../../types/types';
 import {
   Title,
-  LogoContainer,
   TransactionsContainer,
-  TitleContainer,
   LeftAlignedContainer,
   DarkGrayText,
   MediumText,

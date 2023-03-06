@@ -42,12 +42,6 @@ export default function TransactionsScreen({
         <H2Heading>Transactions</H2Heading>
       </TitleContainer>
 
-      {/* <CardContainer
-        data={transactions}
-        renderItem={renderItem}
-        keyExtractor={(item: Transaction) => item.uuid}
-        extraData={selectedId}
-      /> */}
       <CardContainer>
         <FlatList
           data={transactions}

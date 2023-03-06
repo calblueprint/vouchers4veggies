@@ -1,18 +1,6 @@
 import React from 'react';
-import { AntDesign } from '@expo/vector-icons';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import Colors from '../../../assets/Colors';
-import { Body1Text, H3Subheading } from '../../../assets/Fonts';
-import {
-  StatusContainer,
-  DateContainer,
-  ValueContainer,
-  Row,
-  Styles,
-  Body1SemiboldText,
-} from './styles';
-import StatusComponent from './StatusComponent';
-import { TransactionStackParamList } from '../../navigation/types';
+import { Body1Text } from '../../../assets/Fonts';
+import { DateContainer, Row, Body1SemiboldText } from './styles';
 
 type VoucherCardProps = {
   serialNumber: number;
