@@ -43,7 +43,9 @@ export default function TransactionCard({
       </DateContainer>
 
       <ValueContainer>
-        <H3Subheading style={Styles.semibold}>${value / 100}</H3Subheading>
+        <H3Subheading style={Styles.semibold}>
+          ${(value / 100).toFixed(2)}
+        </H3Subheading>
       </ValueContainer>
 
       <StatusContainer>

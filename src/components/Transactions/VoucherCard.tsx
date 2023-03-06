@@ -21,7 +21,7 @@ export default function VoucherCard({ serialNumber, value }: VoucherCardProps) {
   return (
     <Row>
       <DateContainer>
-        <Body1Text style={Styles.bold}>${value / 100}</Body1Text>
+        <Body1Text style={Styles.bold}>${(value / 100).toFixed(2)}</Body1Text>
         <Body1Text>SN {serialNumber}</Body1Text>
       </DateContainer>
     </Row>

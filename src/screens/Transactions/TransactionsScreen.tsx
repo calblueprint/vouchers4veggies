@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FlatList } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
 import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/Transactions/TransactionCard';
@@ -41,17 +42,26 @@ export default function TransactionsScreen({
         <H2Heading>Transactions</H2Heading>
       </TitleContainer>
 
+      {/* <CardContainer
+        data={transactions}
+        renderItem={renderItem}
+        keyExtractor={(item: Transaction) => item.uuid}
+        extraData={selectedId}
+      /> */}
       <CardContainer>
-        {transactions.map(item => (
-          <TransactionCard
-            key={item.uuid}
-            navigation={navigation}
-            id={item.uuid}
-            date={item.timestamp.toDate()}
-            value={item.value}
-            status={item.status}
-          />
-        ))}
+        <FlatList
+          data={transactions}
+          renderItem={({ item }) => (
+            <TransactionCard
+              navigation={navigation}
+              id={item.uuid}
+              date={item.timestamp.toDate()}
+              value={item.value}
+              status={item.status}
+            />
+          )}
+          keyExtractor={item => item.uuid}
+        />
       </CardContainer>
     </TransactionsContainer>
   );

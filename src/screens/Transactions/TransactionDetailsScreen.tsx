@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import { RootNavBackButton } from '../../../assets/Components';
@@ -20,12 +20,12 @@ import {
   LogoContainer,
   TransactionsContainer,
   TitleContainer,
-  CardContainer,
   LeftAlignedContainer,
   DarkGrayText,
   MediumText,
   Body1BoldText,
   BackButtonContainer,
+  CardContainer,
 } from './styles';
 
 export default function TransactionDetailsScreen({
@@ -72,7 +72,7 @@ export default function TransactionDetailsScreen({
       {transactionData ? (
         <TransactionsContainer>
           <StatusComponent status={transactionData.status} />
-          <Title>${transactionData.value / 100}</Title>
+          <Title>${(transactionData.value / 100).toFixed(2)}</Title>
           <MediumText>
             Date:
             {` ${transactionData.timestamp
@@ -93,13 +93,16 @@ export default function TransactionDetailsScreen({
           </LeftAlignedContainer>
 
           <CardContainer>
-            {voucherArray?.map(item => (
-              <VoucherCard
-                key={item.serialNumber}
-                serialNumber={item.serialNumber}
-                value={item.value}
-              />
-            ))}
+            <FlatList
+              data={voucherArray}
+              renderItem={({ item }) => (
+                <VoucherCard
+                  serialNumber={item.serialNumber}
+                  value={item.value}
+                />
+              )}
+              keyExtractor={item => item.serialNumber.toString()}
+            />
           </CardContainer>
         </TransactionsContainer>
       ) : null}
