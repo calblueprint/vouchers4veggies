@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
+import { Logs } from 'expo';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -18,6 +19,8 @@ import {
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
+
+Logs.enableExpoCliLogging();
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
@@ -48,13 +51,13 @@ function ManualVoucherScreen() {
     }
   };
 
-  const validateCurrency = () => {
+  const validateCurrencyFormat = (input: string) => {
     // confirms that any input has either 0 or 2 decimal digits
-    const inputParts = String(voucherAmount).split('.');
+    const inputParts = input.split('.');
     if (inputParts.length > 1 && inputParts[1].length !== 2) {
-      return true;
+      return false; // falsy value raises the error in zod
     }
-    return false;
+    return true;
   };
 
   const validateVoucherAmount = () => {
@@ -63,7 +66,7 @@ function ManualVoucherScreen() {
         .number() // ensures that input is a valid number
         .gt(0)
         .lte(10) // less than or equal to 10 dollars
-        .refine(validateCurrency, {
+        .refine(() => validateCurrencyFormat(voucherAmount), {
           message: 'Input must be in a valid currency format',
         });
       currencySchema.parse(voucherAmount);
