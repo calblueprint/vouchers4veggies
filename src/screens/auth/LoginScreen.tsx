@@ -53,13 +53,17 @@ export default function LoginScreen({
   };
 
   const validateEmailInput = () => {
-    const emailSchema = z.string().email();
-    emailSchema.parse(email);
+    if (email !== '') {
+      const emailSchema = z.string().email();
+      emailSchema.parse(email);
+    }
   };
 
   const validatePasswordInput = () => {
-    const passwordSchema = z.string().min(1);
-    passwordSchema.parse(password);
+    if (password !== '') {
+      const passwordSchema = z.string().min(1);
+      passwordSchema.parse(password);
+    }
   };
 
   const resetPassword = () => {
