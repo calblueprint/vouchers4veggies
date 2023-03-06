@@ -241,6 +241,27 @@ export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
 };
 
 /**
+ * Fetch all vouchers for a given transaction.
+ *
+ * Returns an array of Voucher objects.
+ */
+export const getVouchersByTransactionUuid = async (
+  transactionUuid: Uuid,
+): Promise<Voucher[]> => {
+  try {
+    const transaction = await getTransaction(transactionUuid);
+    const voucherArray = await Promise.all(
+      transaction.voucherSerialNumbers.map(item => getVoucher(item)),
+    );
+    return voucherArray;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getVouchersByVendorUuid)', e);
+    throw e;
+  }
+};
+
+/**
  * Helper for calculating a Transaction's value.
  *
  * Returns the sum in cents of all vouchers in the given array.

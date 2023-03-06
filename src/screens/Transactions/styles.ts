@@ -5,7 +5,6 @@ export const LogoContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   margin-left: 10%;
-  margin-top: 4%;
 `;
 
 export const TransactionsContainer = styled.View`
@@ -14,6 +13,7 @@ export const TransactionsContainer = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: ${Colors.offWhite};
 `;
 
 export const TitleContainer = styled.View`
@@ -36,6 +36,13 @@ export const CardContainer = styled.View`
   flex: 1;
 `;
 
+export const StartOfListView = styled.View`
+  width: 100%;
+  height: 1px;
+  border: 0px solid ${Colors.lightGray};
+  border-top-width: 1px;
+`;
+
 export const BackButtonContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
@@ -48,7 +55,7 @@ export const LeftAlignedContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 10%;
+  margin-left: 29px;
 `;
 
 export const MediumText = styled.Text`

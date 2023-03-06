@@ -11,6 +11,7 @@ import {
   TransactionsContainer,
   TitleContainer,
   CardContainer,
+  StartOfListView,
 } from './styles';
 
 export default function TransactionsScreen({
@@ -43,6 +44,7 @@ export default function TransactionsScreen({
       </TitleContainer>
 
       <CardContainer>
+        <StartOfListView />
         <FlatList
           data={transactions}
           renderItem={({ item }) => (

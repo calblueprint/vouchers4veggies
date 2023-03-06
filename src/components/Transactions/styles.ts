@@ -9,6 +9,9 @@ export const Row = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  height: 67px;
+  border: 0px solid ${Colors.lightGray};
+  border-bottom-width: 1px;
 `;
 
 export const DateContainer = styled.View`
@@ -16,7 +19,7 @@ export const DateContainer = styled.View`
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
-  padding-left: 20px;
+  padding-left: 29px;
 `;
 
 export const StatusContainer = styled.View`
@@ -31,8 +34,8 @@ export const StatusContainer = styled.View`
 export const ValueContainer = styled.View`
   flex: 1;
   flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: flex-start;
 `;
 
 export const StatusComponentRed = styled.View`

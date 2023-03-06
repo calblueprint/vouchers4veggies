@@ -6,7 +6,11 @@ import Colors from '../../../assets/Colors';
 import { RootNavBackButton } from '../../../assets/Components';
 import StatusComponent from '../../components/Transactions/StatusComponent';
 import VoucherCard from '../../components/Transactions/VoucherCard';
-import { getTransaction, getVoucher } from '../../database/queries';
+import {
+  getTransaction,
+  getVoucher,
+  getVouchersByTransactionUuid,
+} from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, Voucher } from '../../types/types';
 import {
@@ -17,6 +21,7 @@ import {
   MediumText,
   BackButtonContainer,
   CardContainer,
+  StartOfListView,
   Body1BoldText,
 } from './styles';
 
@@ -34,12 +39,7 @@ export default function TransactionDetailsScreen({
         const data = await getTransaction(transactionUuid);
         setTransactionData(data);
 
-        const voucherData = await Promise.all(
-          data.voucherSerialNumbers.map(item => {
-            const v = getVoucher(item);
-            return v;
-          }),
-        );
+        const voucherData = await getVouchersByTransactionUuid(transactionUuid);
         setVoucherArray(voucherData);
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -77,6 +77,7 @@ export default function TransactionDetailsScreen({
           </LeftAlignedContainer>
 
           <CardContainer>
+            <StartOfListView />
             <FlatList
               data={voucherArray}
               renderItem={({ item }) => (
