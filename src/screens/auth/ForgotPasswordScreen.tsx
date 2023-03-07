@@ -23,9 +23,8 @@ import {
   VerticalSpacingButtonContainer,
   BackButtonContainer,
   WhiteText,
-  RowContainer,
-  BottomMargin,
   DarkGrayText,
+  VerticalSpacingContainer,
 } from './styles';
 
 export default function ForgotPasswordScreen({
@@ -48,7 +47,6 @@ export default function ForgotPasswordScreen({
 
   return (
     <LoginContainer>
-      {/* logo placeholder */}
       <BackButtonContainer>
         <RootNavBackButton onPress={() => navigation.navigate('Login')}>
           <DarkGrayText>
@@ -62,14 +60,12 @@ export default function ForgotPasswordScreen({
           <H2Heading>Reset Password</H2Heading>
         </HeadingContainer>
 
-        <RowContainer>
-          <BottomMargin>
-            <Body1Text>
-              Enter the email associated with your account, and we will send an
-              email with instructions to reset your password.
-            </Body1Text>
-          </BottomMargin>
-        </RowContainer>
+        <VerticalSpacingContainer>
+          <Body1Text>
+            Enter the email associated with your account, and we will send an
+            email with instructions to reset your password.
+          </Body1Text>
+        </VerticalSpacingContainer>
 
         <Body1Text>
           <BoldText>Email</BoldText>

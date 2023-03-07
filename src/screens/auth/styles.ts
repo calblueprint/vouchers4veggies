@@ -16,11 +16,6 @@ export const StartContainer = styled.View`
   align-items: center;
 `;
 
-export const ResetPasswordContainer = styled.View`
-  margin-top: 14%;
-  align-items: left;
-`;
-
 export const HeadingContainer = styled.View`
   margin-top: 14%;
   align-items: left;
@@ -36,6 +31,14 @@ export const RowContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+`;
+
+export const VerticalSpacingContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 4%;
 `;
 
 export const LeftAlignContainer = styled.View`
@@ -89,18 +92,6 @@ export const WhiteText = styled.Text`
 
 export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
-`;
-
-export const BottomMargin = styled.View`
-  margin-bottom: 20px;
-`;
-
-export const Header = styled.View`
-  width: 85%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 26px;
 `;
 
 export const Styles = StyleSheet.create({
