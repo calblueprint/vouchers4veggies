@@ -7,7 +7,7 @@ import {
   ButtonContainer,
   DarkGrayText,
   LoginContainer,
-  LogoContainer,
+  HeadingContainer,
   StartContainer,
   WhiteText,
 } from './styles';
@@ -32,11 +32,11 @@ export default function StartScreen({
     <View style={styles.container}>
       <LoginContainer>
         {/* logo placeholder */}
-        <LogoContainer>
+        <HeadingContainer>
           <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
             <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
           </View>
-        </LogoContainer>
+        </HeadingContainer>
 
         <StartContainer>
           <H1Heading>{"Hello! Let's\nget started."}</H1Heading>

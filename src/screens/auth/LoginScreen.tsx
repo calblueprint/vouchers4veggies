@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Colors from '../../../assets/Colors';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
-import Colors from '../../../assets/Colors';
 
 import { useAuthContext } from './AuthContext';
 
 import {
+  BackButtonContainer,
+  DarkGrayText,
   FormContainer,
   HeadingContainer,
   LeftAlignContainer,
@@ -20,8 +22,6 @@ import {
   Styles,
   VerticalSpacingButtonContainer,
   WhiteText,
-  BackButtonContainer,
-  DarkGrayText,
 } from './styles';
 
 export default function LoginScreen({
@@ -51,9 +51,8 @@ export default function LoginScreen({
     setPassword(value);
   };
 
-  // TODO: implement password reset functionality @selene-huang
   const resetPassword = () => {
-    // password flow
+    navigation.navigate('ForgotPassword');
   };
 
   return (
