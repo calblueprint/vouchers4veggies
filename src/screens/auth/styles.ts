@@ -16,18 +16,10 @@ export const StartContainer = styled.View`
   align-items: center;
 `;
 
-export const LogoContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
-  margin-left: 10%;
-  margin-top: 4%;
-`;
-
 export const HeadingContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
   margin-top: 14%;
-  margin-bottom: 4%;
+  align-items: left;
+  margin-bottom: 10%;
 `;
 
 export const FormContainer = styled.View`
@@ -39,6 +31,14 @@ export const RowContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+`;
+
+export const VerticalSpacingContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 4%;
 `;
 
 export const LeftAlignContainer = styled.View`
