@@ -45,7 +45,7 @@ export default function TransactionDetailsScreen({
       }
     };
     fetchData();
-  });
+  }, [transactionUuid]);
 
   const time = moment(transactionData?.timestamp.toDate());
 
