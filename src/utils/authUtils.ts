@@ -33,8 +33,6 @@ export const forgotPassword = async (
       setAuthErrorMessage(dispatch, '');
     })
     .catch(error => {
-      // eslint-disable-next-line no-console
-      console.warn('(forgotPassword) error', error);
       setAuthErrorMessage(dispatch, error.message);
       setAuthSuccessMessage(dispatch, '');
     });
