@@ -72,7 +72,6 @@ export const ReviewHeader = styled.View`
 
 export const ReviewContainer = styled.ScrollView`
   display: flex;
-  min-height: inherit;
   max-height: 40%;
   border: 1px solid #ffffff;
   width: 100%;
@@ -95,8 +94,4 @@ export const AggregateContainer = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-top: 2%;
-`;
-
-export const SafeArea = styled.SafeAreaView`
-  background-color: ${Colors.offWhite};
 `;
