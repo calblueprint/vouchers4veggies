@@ -28,20 +28,17 @@ import {
   IconContainer,
 } from './styles';
 import { ButtonMagenta } from '../scanning/styles';
-import { AuthStackScreenProps } from '../../navigation/types';
+import {
+  AuthStackScreenProps,
+  ProfileStackScreenProps,
+} from '../../navigation/types';
 // import { DarkGrayText } from '../auth/styles';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
 
 export default function ProfileScreen({
   navigation,
-}: AuthStackScreenProps<'Start'>) {
-  const { dispatch } = useAuthContext();
-  const [name, setName] = useState(0);
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-
+}: ProfileStackScreenProps<'ProfileScreen'>) {
   return (
     <>
       <View>
@@ -50,18 +47,20 @@ export default function ProfileScreen({
       </View>
       <View>
         <HeadingContainer>Hi, Derby Food Market!</HeadingContainer>
-        <ButtonEmailContainer>
-          <ButtonBlank title="Email" color="black" />
+        <ButtonEmailContainer onPress={() => navigation.navigate('EditEmail')}>
+          <ButtonBlank />
           <IconContainer>
-            <Icon name="right" size={25} color={Colors.midGray} />
+            <Icon name="right" size={20} color={Colors.midGray} />
           </IconContainer>
           <EmailText> Email</EmailText>
           <H4CardNavTab> email@email.com</H4CardNavTab>
         </ButtonEmailContainer>
-        <ButtonPhoneContainer>
+        <ButtonPhoneContainer
+          onPress={() => navigation.navigate('EditPhoneNumber')}
+        >
           <ButtonBlank title="Phone Number" color="black" />
           <IconContainer>
-            <Icon name="right" size={25} color={Colors.midGray} />
+            <Icon name="right" size={20} color={Colors.midGray} />
           </IconContainer>
           <EmailText> Phone Number</EmailText>
           <H4CardNavTab>(123) 456-7890</H4CardNavTab>
@@ -69,7 +68,7 @@ export default function ProfileScreen({
         <ButtonPasswordContainer>
           <ButtonBlank title="Password" color="black" />
           <IconContainer>
-            <Icon name="right" size={25} color={Colors.midGray} />
+            <Icon name="right" size={20} color={Colors.midGray} />
           </IconContainer>
           <EmailText> Password</EmailText>
           <H4CardNavTab> ............</H4CardNavTab>
