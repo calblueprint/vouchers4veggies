@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import CurrencyInput from 'react-native-currency-input';
+import { TextInput } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -20,7 +22,7 @@ import StandardLogo from '../../components/common/StandardLogo';
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
-  const [voucherAmount, setVoucherAmount] = useState<string>('');
+  const [voucherAmount, setVoucherAmount] = useState<number | null>(0);
 
   // to be used for backend
   // const [scanCounter, incrementScanned] = useState(0);
@@ -29,6 +31,10 @@ function ManualVoucherScreen() {
   //   { label: 'Apple', value: 'apple' },
   //   { label: 'Banana', value: 'banana' },
   // ]);
+
+  const setValue = (value: number | null) => {
+    setVoucherAmount(value);
+  };
 
   return (
     <SafeArea>
@@ -58,10 +64,14 @@ function ManualVoucherScreen() {
           </FieldContainer>
           <FieldContainer>
             <InputTitleText>Amount</InputTitleText>
-            <InputField
-              onChange={setVoucherAmount}
+            <CurrencyInput
               value={voucherAmount}
-              placeholder="Enter Amount"
+              onChangeValue={e => setValue(e)}
+              renderTextInput={props => <TextInput {...props} />}
+              minValue={0}
+              maxValue={10}
+              separator="."
+              precision={2}
             />
           </FieldContainer>
         </FormContainer>

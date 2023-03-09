@@ -4,8 +4,8 @@ import Colors from '../../../assets/Colors';
 import Styles from './styles';
 
 type InputFieldProps = {
-  onChange: (text: string) => void;
-  value: string;
+  onChange?: (text: string) => void;
+  value?: string;
   placeholder: string;
   secureTextEntry?: boolean;
 };
