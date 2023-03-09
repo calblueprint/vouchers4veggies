@@ -4,7 +4,7 @@ import Colors from '../../../assets/Colors';
 export const LogoContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
-  margin-left: 10%;
+  margin-left: 15%;
 `;
 
 export const TransactionsContainer = styled.View`

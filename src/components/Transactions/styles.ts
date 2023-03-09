@@ -82,8 +82,9 @@ export const RedText = styled.Text`
 `;
 
 export const Styles = StyleSheet.create({
-  IconButton: {
+  icon: {
     justifyContent: 'center',
     backgroundColor: '#fff',
+    marginRight: 25,
   },
 });

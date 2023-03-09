@@ -1,7 +1,8 @@
 import React from 'react';
-import { AntDesign } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import moment from 'moment';
+import { TouchableOpacity } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { Body1Text, H3Subheading } from '../../../assets/Fonts';
 import {
@@ -35,31 +36,34 @@ export default function TransactionCard({
   const time = moment(date);
 
   return (
-    <Row>
-      <DateContainer>
-        <Body1Text>{time.format('M/D')}</Body1Text>
-        <Body1Text>{time.format('h:mmA')}</Body1Text>
-      </DateContainer>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('TransactionDetailsScreen', {
+          transactionUuid: id,
+        });
+      }}
+    >
+      <Row>
+        <DateContainer>
+          <Body1Text>{time.format('M/D')}</Body1Text>
+          <Body1Text>{time.format('h:mmA')}</Body1Text>
+        </DateContainer>
 
-      <ValueContainer>
-        <H3Subheading>${(value / 100).toFixed(2)}</H3Subheading>
-      </ValueContainer>
+        <ValueContainer>
+          <H3Subheading>${(value / 100).toFixed(2)}</H3Subheading>
+        </ValueContainer>
 
-      <StatusContainer>
-        <StatusComponent status={status} />
-      </StatusContainer>
+        <StatusContainer>
+          <StatusComponent status={status} />
+        </StatusContainer>
 
-      <AntDesign.Button
-        name="right"
-        size={25}
-        style={Styles.IconButton}
-        color={Colors.midGray}
-        onPress={() => {
-          navigation.navigate('TransactionDetailsScreen', {
-            transactionUuid: id,
-          });
-        }}
-      />
-    </Row>
+        <Icon
+          name="right"
+          size={25}
+          style={Styles.icon}
+          color={Colors.midGray}
+        />
+      </Row>
+    </TouchableOpacity>
   );
 }
