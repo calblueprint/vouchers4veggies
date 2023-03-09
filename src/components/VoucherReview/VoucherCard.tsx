@@ -1,11 +1,12 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { Feather } from '@expo/vector-icons';
 import { ReviewRow, PriceEditContainer, DateIdContainer } from './styles';
 import Colors from '../../../assets/Colors';
 import { Body1Text, H3Subheading } from '../../../assets/Fonts';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
 
-const VoucherCard = (props: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function VoucherCard(props: any) {
   return (
     <ReviewRow>
       <DateIdContainer>
@@ -18,6 +19,6 @@ const VoucherCard = (props: any) => {
       <Feather name="trash-2" size={25} color={Colors.midGray} />
     </ReviewRow>
   );
-};
+}
 
 export default VoucherCard;
