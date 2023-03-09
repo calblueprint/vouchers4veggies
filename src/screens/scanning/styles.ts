@@ -95,3 +95,25 @@ export const AggregateContainer = styled.View`
   align-items: center;
   margin-top: 2%;
 `;
+
+export const FormContainer = styled.View`
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+// will be used later
+export const FieldContainer = styled.View``;
+
+// TODO: refactor to use selene's dropdown component
+export const DropDownContainer = styled.View`
+  width: 277px;
+  height: 35px;
+  background: ${Colors.offWhite};
+  border: 2px solid ${Colors.lightMagenta};
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+  margin-bottom: 8px;
+`;
