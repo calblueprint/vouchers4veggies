@@ -16,13 +16,15 @@ type AuthState = {
   isSignout: boolean; // TODO: @wangannie use this to change the animation of the screen when signing out
   dispatch: AuthDispatch;
   errorMessage: string | null;
+  successMessage: string | null;
 };
 
 type AuthContextAction =
   | { type: 'RESTORE_USER'; user: User | null }
   | { type: 'SIGN_IN'; user: User }
   | { type: 'SIGN_OUT' }
-  | { type: 'SET_ERROR_MESSAGE'; errorMessage: string };
+  | { type: 'SET_ERROR_MESSAGE'; errorMessage: string }
+  | { type: 'SET_SUCCESS_MESSAGE'; successMessage: string };
 
 const useAuthReducer = () =>
   useReducer(
@@ -34,6 +36,7 @@ const useAuthReducer = () =>
             isLoading: false,
             user: action.user,
             errorMessage: null,
+            successMessage: null,
           };
         case 'SIGN_IN':
           return {
@@ -42,6 +45,7 @@ const useAuthReducer = () =>
             isSignout: false,
             user: action.user,
             errorMessage: null,
+            successMessage: null,
           };
         case 'SIGN_OUT':
           return {
@@ -50,6 +54,11 @@ const useAuthReducer = () =>
             isSignout: true,
             user: null,
             errorMessage: null,
+          };
+        case 'SET_SUCCESS_MESSAGE':
+          return {
+            ...prevState,
+            successMessage: action.successMessage,
           };
         case 'SET_ERROR_MESSAGE':
           return {
@@ -66,6 +75,7 @@ const useAuthReducer = () =>
       user: null,
       dispatch: () => null,
       errorMessage: null,
+      successMessage: null,
     },
   );
 

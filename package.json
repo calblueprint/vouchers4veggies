@@ -34,7 +34,7 @@
     "react-navigation": "^4.4.4",
     "stable": "^0.1.8",
     "styled-components": "^5.3.6",
-    "zod": "^3.20.6"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -80,6 +80,7 @@
     "web": "expo start --web",
     "lint:check": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
+    "typecheck": "npx tsc --noEmit",
     "prettier:check": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
     "prepare": "husky install"

@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { z } from 'zod';
+import Colors from '../../../assets/Colors';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
-import Colors from '../../../assets/Colors';
 
 import { useAuthContext } from './AuthContext';
 
 import {
+  BackButtonContainer,
+  DarkGrayText,
   FormContainer,
   HeadingContainer,
   LeftAlignContainer,
@@ -21,13 +23,11 @@ import {
   Styles,
   VerticalSpacingButtonContainer,
   WhiteText,
-  BackButtonContainer,
-  DarkGrayText,
 } from './styles';
 
 export default function LoginScreen({
   navigation,
-}: AuthStackScreenProps<'Start'>) {
+}: AuthStackScreenProps<'Login'>) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -66,9 +66,8 @@ export default function LoginScreen({
     }
   };
 
-  // TODO: implement password reset functionality @selene-huang
   const resetPassword = () => {
-    // password flow
+    navigation.navigate('ForgotPassword');
   };
 
   return (
