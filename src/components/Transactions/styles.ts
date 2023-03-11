@@ -12,14 +12,24 @@ export const Row = styled.View`
   height: 67px;
   border: 0px solid ${Colors.lightGray};
   border-bottom-width: 1px;
+  width: 100%;
 `;
 
-export const DateContainer = styled.View`
+export const LeftAlignContainer = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
   padding-left: 29px;
+`;
+
+export const RightAlignContainer = styled.View`
+  flex: 1;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin-right: 29px;
 `;
 
 export const StatusContainer = styled.View`
@@ -63,6 +73,13 @@ export const Body1SemiboldText = styled.Text`
   font-style: normal;
   font-size: 14px;
   line-height: 19px;
+`;
+
+export const H4Subheading = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 20px;
+  line-height: 27px;
 `;
 
 export const GreenText = styled.Text`

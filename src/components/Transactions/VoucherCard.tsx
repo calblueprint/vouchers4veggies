@@ -1,6 +1,11 @@
 import React from 'react';
 import { Body1Text } from '../../../assets/Fonts';
-import { DateContainer, Row, Body1SemiboldText } from './styles';
+import {
+  LeftAlignContainer,
+  Row,
+  RightAlignContainer,
+  H4Subheading,
+} from './styles';
 
 type VoucherCardProps = {
   serialNumber: number;
@@ -9,10 +14,12 @@ type VoucherCardProps = {
 export default function VoucherCard({ serialNumber, value }: VoucherCardProps) {
   return (
     <Row>
-      <DateContainer>
-        <Body1SemiboldText>${(value / 100).toFixed(2)}</Body1SemiboldText>
+      <LeftAlignContainer>
         <Body1Text>SN {serialNumber}</Body1Text>
-      </DateContainer>
+      </LeftAlignContainer>
+      <RightAlignContainer>
+        <H4Subheading>${(value / 100).toFixed(2)}</H4Subheading>
+      </RightAlignContainer>
     </Row>
   );
 }

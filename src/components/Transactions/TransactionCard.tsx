@@ -7,7 +7,7 @@ import Colors from '../../../assets/Colors';
 import { Body1Text, H3Subheading } from '../../../assets/Fonts';
 import {
   StatusContainer,
-  DateContainer,
+  LeftAlignContainer,
   ValueContainer,
   Row,
   Styles,
@@ -44,10 +44,10 @@ export default function TransactionCard({
       }}
     >
       <Row>
-        <DateContainer>
+        <LeftAlignContainer>
           <Body1Text>{time.format('M/D')}</Body1Text>
           <Body1Text>{time.format('h:mmA')}</Body1Text>
-        </DateContainer>
+        </LeftAlignContainer>
 
         <ValueContainer>
           <H3Subheading>${(value / 100).toFixed(2)}</H3Subheading>
