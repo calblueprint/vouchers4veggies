@@ -55,7 +55,7 @@ export const LeftAlignedContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 29px;
+  margin-left: 15%;
 `;
 
 export const MediumText = styled.Text`
