@@ -30,11 +30,14 @@ export const validateSerialNumberInput = (input: string) => {
   }
 };
 
+/**
+ * Confirms that any input has either 2 decimal digits, or 0 digits and no decimal place.
+ * Falsy value raises the custom error in zod.
+ */
 const validateCurrencyFormat = (input: string) => {
-  // confirms that any input has either 0 or 2 decimal digits
   const inputParts = input.split('.');
   if (inputParts.length > 1 && inputParts[1].length !== 2) {
-    return false; // falsy value raises the error in zod
+    return false;
   }
   return true;
 };
