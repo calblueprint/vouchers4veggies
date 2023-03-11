@@ -90,7 +90,7 @@ export default function LoginScreen({
           onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
-          onUnfocus={validateEmailInput}
+          validate={validateEmailInput}
           inputMode="email-address"
         />
 
@@ -109,7 +109,7 @@ export default function LoginScreen({
           value={password}
           placeholder="Enter password"
           secureTextEntry
-          onUnfocus={validatePasswordInput}
+          validate={validatePasswordInput}
         />
         {showErrorMessage && errorMessage && (
           <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
