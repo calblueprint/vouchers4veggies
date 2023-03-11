@@ -17,7 +17,7 @@ export const StartContainer = styled.View`
 `;
 
 export const HeadingContainer = styled.View`
-  margin-top: 14%;
+  margin-top: 10%;
   align-items: left;
   margin-bottom: 10%;
 `;
