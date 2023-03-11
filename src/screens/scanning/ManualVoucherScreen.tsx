@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
-import { Logs } from 'expo';
 import { ButtonMagenta } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -20,8 +19,6 @@ import {
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
 
-Logs.enableExpoCliLogging();
-
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
   const [voucherAmount, setVoucherAmount] = useState<string>('');
@@ -34,12 +31,12 @@ function ManualVoucherScreen() {
   //   { label: 'Banana', value: 'banana' },
   // ]);
 
-  const SNonChange = (text: string) => {
+  const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
     setID(value);
   };
 
-  const VAonChange = (text: string) => {
+  const onChangeVoucherAmount = (text: string) => {
     const value = text.replace(/[^\d.]/g, '');
     setVoucherAmount(value);
   };
@@ -95,11 +92,11 @@ function ManualVoucherScreen() {
           <FieldContainer>
             <InputTitleText>Transaction ID</InputTitleText>
             <InputField
-              onChange={SNonChange}
+              onChange={onChangeSerialNumber}
               value={transactionID}
               placeholder="Enter ID"
               validate={validateSerialNumberInput}
-              inputMode="number-pad"
+              keyboard="number-pad"
             />
           </FieldContainer>
           <FieldContainer>
@@ -110,11 +107,11 @@ function ManualVoucherScreen() {
           <FieldContainer>
             <InputTitleText>Amount</InputTitleText>
             <InputField
-              onChange={VAonChange}
+              onChange={onChangeVoucherAmount}
               value={voucherAmount}
               placeholder="Enter Amount"
               validate={validateVoucherAmount}
-              inputMode="numeric"
+              keyboard="decimal-pad"
             />
           </FieldContainer>
         </FormContainer>

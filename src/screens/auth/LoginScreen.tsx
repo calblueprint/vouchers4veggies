@@ -97,7 +97,7 @@ export default function LoginScreen({
           value={email}
           placeholder="Enter email"
           validate={validateEmailInput}
-          inputMode="email-address"
+          keyboard="email-address"
         />
 
         <RowContainer>
