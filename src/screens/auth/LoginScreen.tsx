@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { z } from 'zod';
 import Colors from '../../../assets/Colors';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
@@ -9,6 +8,10 @@ import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
+import {
+  validateEmailInput,
+  validatePasswordInput,
+} from '../../utils/validationUtils';
 
 import {
   BackButtonContainer,
@@ -50,26 +53,6 @@ export default function LoginScreen({
   const onChangePassword = (value: string) => {
     setShowErrorMessage(false);
     setPassword(value);
-  };
-
-  const validateEmailInput = (input: string) => {
-    try {
-      const emailSchema = z.string().email();
-      emailSchema.parse(input);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-  };
-
-  const validatePasswordInput = (input: string) => {
-    try {
-      const passwordSchema = z.string().min(1);
-      passwordSchema.parse(input);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
   };
 
   const resetPassword = () => {
