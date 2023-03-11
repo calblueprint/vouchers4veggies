@@ -8,6 +8,7 @@ import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
+import StandardHeader from '../../components/common/StandardHeader';
 
 import {
   BackButtonContainer,
@@ -57,13 +58,15 @@ export default function LoginScreen({
 
   return (
     <LoginContainer>
-      <BackButtonContainer>
-        <RootNavBackButton onPress={() => navigation.navigate('Start')}>
-          <DarkGrayText>
-            <Icon name="left" size={14} color={Colors.darkGray} /> Back
-          </DarkGrayText>
-        </RootNavBackButton>
-      </BackButtonContainer>
+      <StandardHeader alignment="flex-start">
+        <BackButtonContainer>
+          <RootNavBackButton onPress={() => navigation.navigate('Start')}>
+            <DarkGrayText>
+              <Icon name="left" size={14} color={Colors.darkGray} /> Back
+            </DarkGrayText>
+          </RootNavBackButton>
+        </BackButtonContainer>
+      </StandardHeader>
 
       <FormContainer>
         <HeadingContainer>

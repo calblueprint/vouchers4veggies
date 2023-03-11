@@ -1,42 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
+import StandardHeader from '../../components/common/StandardHeader';
+import StandardLogo from '../../components/common/StandardLogo';
+
 import {
   ButtonContainer,
   DarkGrayText,
   LoginContainer,
-  HeadingContainer,
+  Header,
   StartContainer,
   WhiteText,
+  SafeArea,
 } from './styles';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    width: 300,
-    margin: 10,
-  },
-});
 
 export default function StartScreen({
   navigation,
 }: AuthStackScreenProps<'Start'>) {
   return (
-    <View style={styles.container}>
+    <SafeArea>
       <LoginContainer>
         {/* logo placeholder */}
-        <HeadingContainer>
-          <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-            <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-          </View>
-        </HeadingContainer>
+        <StandardHeader alignment="center">
+          <Header>
+            <StandardLogo />
+          </Header>
+        </StandardHeader>
 
         <StartContainer>
           <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
@@ -59,6 +49,6 @@ export default function StartScreen({
           </ButtonContainer>
         </StartContainer>
       </LoginContainer>
-    </View>
+    </SafeArea>
   );
 }

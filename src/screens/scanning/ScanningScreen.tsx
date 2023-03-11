@@ -3,6 +3,8 @@ import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Toast from 'react-native-toast-message';
+import StandardHeader from '../../components/common/StandardHeader';
+
 import {
   ButtonTextBlack,
   Body1Text,
@@ -87,35 +89,37 @@ export default function ScanningScreen({
   return (
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
-      {scanCounter === 0 ? (
-        <Header>
-          <StandardLogo />
-          <AddManuallyButton
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextBlack>
-              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-              {'  '}
-              Add Manually
-            </ButtonTextBlack>
-          </AddManuallyButton>
-        </Header>
-      ) : (
-        <Header>
-          <VoucherCounter>
-            <CounterText>{scanCounter}</CounterText>
-          </VoucherCounter>
-          <AddManuallyButton
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextBlack>
-              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-              {'  '}
-              Add Manually
-            </ButtonTextBlack>
-          </AddManuallyButton>
-        </Header>
-      )}
+      <StandardHeader alignment="center">
+        {scanCounter === 0 ? (
+          <Header>
+            <StandardLogo />
+            <AddManuallyButton
+              onPress={() => navigation.navigate('ManualVoucherScreen')}
+            >
+              <ButtonTextBlack>
+                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+                {'  '}
+                Add Manually
+              </ButtonTextBlack>
+            </AddManuallyButton>
+          </Header>
+        ) : (
+          <Header>
+            <VoucherCounter>
+              <CounterText>{scanCounter}</CounterText>
+            </VoucherCounter>
+            <AddManuallyButton
+              onPress={() => navigation.navigate('ManualVoucherScreen')}
+            >
+              <ButtonTextBlack>
+                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+                {'  '}
+                Add Manually
+              </ButtonTextBlack>
+            </AddManuallyButton>
+          </Header>
+        )}
+      </StandardHeader>
 
       <BodyContainer>
         <TitleContainer>

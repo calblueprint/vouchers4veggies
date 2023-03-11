@@ -17,6 +17,7 @@ import {
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
+import StandardHeader from '../../components/common/StandardHeader';
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
@@ -32,9 +33,11 @@ function ManualVoucherScreen() {
 
   return (
     <SafeArea>
-      <Header>
-        <StandardLogo />
-      </Header>
+      <StandardHeader alignment="center">
+        <Header>
+          <StandardLogo />
+        </Header>
+      </StandardHeader>
 
       <BodyContainer>
         <TitleContainer>
