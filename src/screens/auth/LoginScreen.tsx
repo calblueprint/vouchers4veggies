@@ -52,17 +52,23 @@ export default function LoginScreen({
     setPassword(value);
   };
 
-  const validateEmailInput = () => {
-    if (email !== '') {
+  const validateEmailInput = (input: string) => {
+    try {
       const emailSchema = z.string().email();
-      emailSchema.parse(email);
+      emailSchema.parse(input);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
   };
 
-  const validatePasswordInput = () => {
-    if (password !== '') {
+  const validatePasswordInput = (input: string) => {
+    try {
       const passwordSchema = z.string().min(1);
-      passwordSchema.parse(password);
+      passwordSchema.parse(input);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
   };
 

@@ -44,10 +44,10 @@ function ManualVoucherScreen() {
     setVoucherAmount(value);
   };
 
-  const validateSerialNumberInput = () => {
+  const validateSerialNumberInput = (input: string) => {
     try {
       const SNSchema = z.coerce.number().gt(0);
-      SNSchema.parse(transactionID);
+      SNSchema.parse(input);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -63,16 +63,16 @@ function ManualVoucherScreen() {
     return true;
   };
 
-  const validateVoucherAmount = () => {
+  const validateVoucherAmount = (input: string) => {
     try {
       const currencySchema = z.coerce
         .number() // ensures that input is a valid number
         .gt(0)
         .lte(10) // less than or equal to 10 dollars
-        .refine(() => validateCurrencyFormat(voucherAmount), {
+        .refine(() => validateCurrencyFormat(input), {
           message: 'Input must be in a valid currency format',
         });
-      currencySchema.parse(voucherAmount);
+      currencySchema.parse(input);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
