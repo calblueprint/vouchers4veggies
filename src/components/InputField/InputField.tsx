@@ -9,7 +9,7 @@ type InputFieldProps = {
   placeholder: string;
   secureTextEntry?: boolean;
   validate?: (text: string) => void;
-  keyboard?: KeyboardTypeOptions;
+  keyboardType?: KeyboardTypeOptions;
 };
 
 export default function InputField({
@@ -18,7 +18,7 @@ export default function InputField({
   placeholder,
   secureTextEntry = false,
   validate,
-  keyboard,
+  keyboardType,
 }: InputFieldProps) {
   const [isActive, setIsActive] = useState(false);
 
@@ -37,7 +37,7 @@ export default function InputField({
       secureTextEntry={secureTextEntry}
       autoCorrect={false}
       autoCapitalize="none"
-      keyboardType={keyboard}
+      keyboardType={keyboardType}
       returnKeyType="done"
     />
   );

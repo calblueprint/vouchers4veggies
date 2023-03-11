@@ -64,7 +64,7 @@ function ManualVoucherScreen() {
               value={transactionID}
               placeholder="Enter ID"
               validate={validateSerialNumberInput}
-              keyboard="number-pad"
+              keyboardType="number-pad"
             />
           </FieldContainer>
           <FieldContainer>
@@ -79,7 +79,7 @@ function ManualVoucherScreen() {
               value={voucherAmount}
               placeholder="Enter Amount"
               validate={validateVoucherAmount}
-              keyboard="decimal-pad"
+              keyboardType="decimal-pad"
             />
           </FieldContainer>
         </FormContainer>
