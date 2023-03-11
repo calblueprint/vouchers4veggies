@@ -41,7 +41,7 @@ export default function TransactionsScreen({
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
 
   return (
     <TransactionsContainer>
