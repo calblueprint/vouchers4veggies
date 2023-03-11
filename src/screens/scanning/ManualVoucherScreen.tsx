@@ -45,9 +45,12 @@ function ManualVoucherScreen() {
   };
 
   const validateSerialNumberInput = () => {
-    if (transactionID !== '') {
+    try {
       const SNSchema = z.coerce.number().gt(0);
       SNSchema.parse(transactionID);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
   };
 
@@ -61,7 +64,7 @@ function ManualVoucherScreen() {
   };
 
   const validateVoucherAmount = () => {
-    if (voucherAmount !== '') {
+    try {
       const currencySchema = z.coerce
         .number() // ensures that input is a valid number
         .gt(0)
@@ -70,6 +73,9 @@ function ManualVoucherScreen() {
           message: 'Input must be in a valid currency format',
         });
       currencySchema.parse(voucherAmount);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
   };
 
@@ -92,7 +98,7 @@ function ManualVoucherScreen() {
               onChange={SNonChange}
               value={transactionID}
               placeholder="Enter ID"
-              onUnfocus={validateSerialNumberInput}
+              validate={validateSerialNumberInput}
               inputMode="number-pad"
             />
           </FieldContainer>
@@ -107,7 +113,7 @@ function ManualVoucherScreen() {
               onChange={VAonChange}
               value={voucherAmount}
               placeholder="Enter Amount"
-              onUnfocus={validateVoucherAmount}
+              validate={validateVoucherAmount}
               inputMode="numeric"
             />
           </FieldContainer>
