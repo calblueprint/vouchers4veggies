@@ -20,7 +20,7 @@ import {
   BackButtonContainer,
   CardContainer,
   StartOfListView,
-  Body1BoldText,
+  Size14BoldText,
 } from './styles';
 
 export default function TransactionDetailsScreen({
@@ -71,9 +71,9 @@ export default function TransactionDetailsScreen({
           <MediumText>Time: {time.format('h:mmA')}</MediumText>
 
           <LeftAlignedContainer>
-            <Body1BoldText>
+            <Size14BoldText>
               Count: {transactionData.voucherSerialNumbers.length}
-            </Body1BoldText>
+            </Size14BoldText>
           </LeftAlignedContainer>
 
           <CardContainer>

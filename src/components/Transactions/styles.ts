@@ -54,7 +54,7 @@ export const StatusComponentRed = styled.View`
   border-radius: 9px;
   width: 63px;
   background: ${Colors.alertLightRed};
-  padding: 9px 9px;
+  padding: 9px;
   border: 2px solid ${Colors.alertLightRed};
 `;
 
@@ -64,7 +64,7 @@ export const StatusComponentGreen = styled.View`
   border-radius: 9px;
   width: 63px;
   background: ${Colors.lightGreen};
-  padding: 9px 9px;
+  padding: 9px;
   border: 2px solid ${Colors.lightGreen};
 `;
 

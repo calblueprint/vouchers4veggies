@@ -4,7 +4,7 @@ import Colors from '../../../assets/Colors';
 export const LogoContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
-  margin-left: 15%;
+  margin-left: 29px;
 `;
 
 export const TransactionsContainer = styled.View`
@@ -39,7 +39,7 @@ export const CardContainer = styled.View`
 export const StartOfListView = styled.View`
   width: 100%;
   height: 1px;
-  border: 0px solid ${Colors.lightGray};
+  border: 1px solid ${Colors.lightGray};
   border-top-width: 1px;
 `;
 
@@ -48,14 +48,14 @@ export const BackButtonContainer = styled.View`
   justify-content: flex-start;
   align-items: flex-start;
   margin-left: 10%;
-  margin-top: 15%;
+  margin-top: 57px;
 `;
 
 export const LeftAlignedContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 15%;
+  margin-left: 29px;
   margin-bottom: 13px;
 `;
 
@@ -67,7 +67,7 @@ export const MediumText = styled.Text`
   text-align: center;
 `;
 
-export const Body1BoldText = styled.Text`
+export const Size14BoldText = styled.Text`
   font-family: 'manrope-bold';
   font-style: normal;
   font-size: 14px;
