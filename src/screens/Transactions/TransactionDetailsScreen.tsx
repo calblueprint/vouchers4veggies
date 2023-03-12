@@ -10,7 +10,10 @@ import VoucherCard from '../../components/Transactions/VoucherCard';
 import { getTransaction, getVoucher } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, Voucher } from '../../types/types';
-import { formatValueForDisplay } from '../../utils/displayUtils';
+import {
+  formatTimeForDisplay,
+  formatValueForDisplay,
+} from '../../utils/displayUtils';
 import {
   Title,
   TransactionsContainer,
@@ -68,7 +71,7 @@ export default function TransactionDetailsScreen({
           <StatusComponent status={transactionData.status} />
           <Title>${formatValueForDisplay(transactionData.value)}</Title>
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
-          <MediumText>Time: {time.format('h:mmA')}</MediumText>
+          <MediumText>Time: {formatTimeForDisplay(time)}</MediumText>
 
           <LeftAlignedContainer>
             <Size14BoldText>

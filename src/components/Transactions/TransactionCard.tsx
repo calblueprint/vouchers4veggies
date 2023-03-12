@@ -14,7 +14,10 @@ import {
 } from './styles';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';
-import { formatValueForDisplay } from '../../utils/displayUtils';
+import {
+  formatTimeForDisplay,
+  formatValueForDisplay,
+} from '../../utils/displayUtils';
 
 type TransactionCardProps = {
   navigation: NativeStackNavigationProp<
@@ -47,7 +50,7 @@ export default function TransactionCard({
       <Row>
         <LeftAlignContainer>
           <Body1Text>{time.format('M/D')}</Body1Text>
-          <Body1Text>{time.format('h:mmA')}</Body1Text>
+          <Body1Text>{formatTimeForDisplay(time)}</Body1Text>
         </LeftAlignContainer>
 
         <ValueContainer>
