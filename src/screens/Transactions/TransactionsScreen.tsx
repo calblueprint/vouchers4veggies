@@ -9,6 +9,7 @@ import {
   Title,
   TransactionsContainer,
 } from './styles';
+import StandardHeader from '../../components/common/StandardHeader';
 
 export default function TransactionsScreen() {
   const [transactions] = useState([
@@ -22,9 +23,11 @@ export default function TransactionsScreen() {
 
   return (
     <TransactionsContainer>
-      <AddManuallyContainer>
-        <Button title="Add manually" />
-      </AddManuallyContainer>
+      <StandardHeader>
+        <AddManuallyContainer>
+          <Button title="Add manually" />
+        </AddManuallyContainer>
+      </StandardHeader>
 
       <Title>
         <H2Heading>Transactions</H2Heading>

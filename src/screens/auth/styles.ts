@@ -19,21 +19,19 @@ export const LoginContainer = styled.View`
 `;
 
 export const StartContainer = styled.View`
-  top: 25%;
+  top: 15%;
   align-items: center;
 `;
 
 export const HeadingContainer = styled.View`
-  margin-top: 10%;
+  margin-top: 15%;
   align-items: left;
   margin-bottom: 10%;
 `;
 
 export const Header = styled.View`
   width: 85%;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 26px;
+  margin-top: 12%;
 `;
 
 export const FormContainer = styled.View`
@@ -75,7 +73,7 @@ export const VerticalSpacingButtonContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 12%;
+  margin-top: 15%;
 `;
 
 export const ButtonContainer = styled.View`
