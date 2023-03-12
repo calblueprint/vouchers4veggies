@@ -7,11 +7,14 @@ import React, {
   useReducer,
 } from 'react';
 import fbApp from '../../database/clientApp';
+import { Uuid } from '../../types/types';
+import { getVendorUuid } from '../../utils/authUtils';
 
 export type AuthDispatch = React.Dispatch<AuthContextAction>;
 
 type AuthState = {
   user: User | null;
+  vendorUuid: Uuid | null;
   isLoading: boolean;
   isSignout: boolean; // TODO: @wangannie use this to change the animation of the screen when signing out
   dispatch: AuthDispatch;
@@ -20,8 +23,8 @@ type AuthState = {
 };
 
 type AuthContextAction =
-  | { type: 'RESTORE_USER'; user: User | null }
-  | { type: 'SIGN_IN'; user: User }
+  | { type: 'RESTORE_USER'; user: User | null; vendorUuid: Uuid | null }
+  | { type: 'SIGN_IN'; user: User; vendorUuid: Uuid }
   | { type: 'SIGN_OUT' }
   | { type: 'SET_ERROR_MESSAGE'; errorMessage: string }
   | { type: 'SET_SUCCESS_MESSAGE'; successMessage: string };
@@ -35,6 +38,7 @@ const useAuthReducer = () =>
             ...prevState,
             isLoading: false,
             user: action.user,
+            vendorUuid: action.vendorUuid,
             errorMessage: null,
             successMessage: null,
           };
@@ -44,6 +48,7 @@ const useAuthReducer = () =>
             isLoading: false,
             isSignout: false,
             user: action.user,
+            vendorUuid: action.vendorUuid,
             errorMessage: null,
             successMessage: null,
           };
@@ -53,6 +58,7 @@ const useAuthReducer = () =>
             isLoading: false,
             isSignout: true,
             user: null,
+            vendor: null,
             errorMessage: null,
           };
         case 'SET_SUCCESS_MESSAGE':
@@ -73,6 +79,7 @@ const useAuthReducer = () =>
       isLoading: true,
       isSignout: false,
       user: null,
+      vendorUuid: null,
       dispatch: () => null,
       errorMessage: null,
       successMessage: null,
@@ -94,8 +101,12 @@ export function AuthContextProvider({
 
   // Subscribe to auth state changes and restore the user if they're already signed in
   useEffect(() => {
-    const unsubscribe = getAuth(fbApp).onAuthStateChanged(user => {
-      dispatch({ type: 'RESTORE_USER', user });
+    const unsubscribe = getAuth(fbApp).onAuthStateChanged(async user => {
+      let vendorUuid = null;
+      if (user) {
+        vendorUuid = await getVendorUuid(user);
+      }
+      dispatch({ type: 'RESTORE_USER', user, vendorUuid });
     });
     return unsubscribe;
   }, [dispatch]);

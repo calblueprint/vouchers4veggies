@@ -24,16 +24,14 @@ export default function TransactionsScreen({
 }: TransactionStackScreenProps<'TransactionsScreen'>) {
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const { user } = useAuthContext();
+  const { vendorUuid } = useAuthContext();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // todo: retrieve vendor uuid
-        if (user) {
-          const vendor = await getVendorByEmail(user.email);
+        if (vendorUuid) {
           const transactionsArray = await getTransactionsByVendorUuid(
-            vendor.uuid,
+            vendorUuid,
           );
           setTransactions(transactionsArray);
           setIsLoading(false);
@@ -44,7 +42,7 @@ export default function TransactionsScreen({
       }
     };
     fetchData();
-  }, [user]);
+  }, [vendorUuid]);
 
   return (
     <TransactionsContainer>

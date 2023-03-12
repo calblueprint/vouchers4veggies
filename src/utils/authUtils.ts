@@ -3,8 +3,10 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  User,
 } from 'firebase/auth';
 import fbApp from '../database/clientApp';
+import { getVendorByEmail } from '../database/queries';
 import { AuthDispatch } from '../screens/auth/AuthContext';
 
 /**
@@ -21,6 +23,11 @@ export const setAuthSuccessMessage = (
   dispatch: AuthDispatch,
   successMessage: string,
 ) => dispatch({ type: 'SET_SUCCESS_MESSAGE', successMessage });
+
+export const getVendorUuid = async (user: User) => {
+  const vendor = await getVendorByEmail(user.email);
+  return vendor.uuid;
+};
 
 export const forgotPassword = async (
   dispatch: AuthDispatch,
@@ -51,7 +58,8 @@ export const signIn = async (
         'Auth Success: signed in user with email',
         userCredential.user.email,
       );
-      dispatch({ type: 'SIGN_IN', user });
+      const vendorUuid = await getVendorUuid(user);
+      dispatch({ type: 'SIGN_IN', user, vendorUuid });
     })
     .catch(error => {
       // eslint-disable-next-line no-console
@@ -87,7 +95,8 @@ export const signUp = async (
         'Auth Success: created user with email',
         userCredential.user.email,
       );
-      dispatch({ type: 'SIGN_IN', user });
+      const vendorUuid = await getVendorUuid(user);
+      dispatch({ type: 'SIGN_IN', user, vendorUuid });
     })
     .catch(error => {
       // eslint-disable-next-line no-console
