@@ -22,7 +22,7 @@ export default function StartScreen({
     <SafeArea>
       <LoginContainer>
         {/* logo placeholder */}
-        <StandardHeader alignment="center">
+        <StandardHeader>
           <Header>
             <StandardLogo />
           </Header>

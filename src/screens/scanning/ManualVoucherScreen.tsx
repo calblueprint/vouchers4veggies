@@ -33,7 +33,7 @@ function ManualVoucherScreen() {
 
   return (
     <SafeArea>
-      <StandardHeader alignment="center">
+      <StandardHeader>
         <Header>
           <StandardLogo />
         </Header>
