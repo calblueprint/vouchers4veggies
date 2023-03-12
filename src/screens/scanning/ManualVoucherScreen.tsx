@@ -21,6 +21,7 @@ import {
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
+import { validateSerialNumberInput } from '../../utils/validationUtils';
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
@@ -35,7 +36,12 @@ function ManualVoucherScreen() {
   //   { label: 'Banana', value: 'banana' },
   // ]);
 
-  const setValue = (value: number | null) => {
+  const onChangeSerialNumber = (text: string) => {
+    const value = text.replace(/\D/g, '');
+    setID(value);
+  };
+
+  const onChangeVoucherAmount = (value: number | null) => {
     setVoucherAmount(value);
   };
 
@@ -55,9 +61,11 @@ function ManualVoucherScreen() {
           <FieldContainer>
             <InputTitleText>Transaction ID</InputTitleText>
             <InputField
-              onChange={setID}
+              onChange={onChangeSerialNumber}
               value={transactionID}
               placeholder="Enter ID"
+              validate={validateSerialNumberInput}
+              keyboardType="number-pad"
             />
           </FieldContainer>
           <FieldContainer>
@@ -69,7 +77,7 @@ function ManualVoucherScreen() {
             <InputTitleText>Amount</InputTitleText>
             <CurrencyInput
               value={voucherAmount}
-              onChangeValue={e => setValue(e)}
+              onChangeValue={onChangeVoucherAmount}
               renderTextInput={props => (
                 <TextInput
                   {...props}
@@ -80,6 +88,8 @@ function ManualVoucherScreen() {
                   secureTextEntry={false}
                   autoCorrect={false}
                   autoCapitalize="none"
+                  keyboardType="number-pad"
+                  returnKeyType="done"
                 />
               )}
               minValue={0}
