@@ -1,5 +1,6 @@
 import React from 'react';
 import { Body1Text } from '../../../assets/Fonts';
+import { formatValueForDisplay } from '../../utils/displayUtils';
 import {
   LeftAlignContainer,
   Row,
@@ -18,7 +19,7 @@ export default function VoucherCard({ serialNumber, value }: VoucherCardProps) {
         <Body1Text>SN {serialNumber}</Body1Text>
       </LeftAlignContainer>
       <RightAlignContainer>
-        <H4Subheading>${(value / 100).toFixed(2)}</H4Subheading>
+        <H4Subheading>${formatValueForDisplay(value)}</H4Subheading>
       </RightAlignContainer>
     </Row>
   );

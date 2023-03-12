@@ -4,11 +4,13 @@ import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import { RootNavBackButton } from '../../../assets/Components';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StatusComponent from '../../components/Transactions/StatusComponent';
 import VoucherCard from '../../components/Transactions/VoucherCard';
 import { getTransaction, getVoucher } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, Voucher } from '../../types/types';
+import { formatValueForDisplay } from '../../utils/displayUtils';
 import {
   Title,
   TransactionsContainer,
@@ -64,7 +66,7 @@ export default function TransactionDetailsScreen({
       {transactionData ? (
         <TransactionsContainer>
           <StatusComponent status={transactionData.status} />
-          <Title>${(transactionData.value / 100).toFixed(2)}</Title>
+          <Title>${formatValueForDisplay(transactionData.value)}</Title>
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
           <MediumText>Time: {time.format('h:mmA')}</MediumText>
 
@@ -88,7 +90,9 @@ export default function TransactionDetailsScreen({
             />
           </CardContainer>
         </TransactionsContainer>
-      ) : null}
+      ) : (
+        LoadingSpinner()
+      )}
     </TransactionsContainer>
   );
 }

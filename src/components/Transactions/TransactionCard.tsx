@@ -14,6 +14,7 @@ import {
 } from './styles';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';
+import { formatValueForDisplay } from '../../utils/displayUtils';
 
 type TransactionCardProps = {
   navigation: NativeStackNavigationProp<
@@ -50,7 +51,7 @@ export default function TransactionCard({
         </LeftAlignContainer>
 
         <ValueContainer>
-          <H3Subheading>${(value / 100).toFixed(2)}</H3Subheading>
+          <H3Subheading>${formatValueForDisplay(value)}</H3Subheading>
         </ValueContainer>
 
         <StatusContainer>
