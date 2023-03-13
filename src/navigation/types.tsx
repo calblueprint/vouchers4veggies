@@ -37,6 +37,7 @@ export type ScannerStackScreenProps<T extends keyof ScannerStackParamList> =
 
 export type TransactionStackParamList = {
   TransactionsScreen: undefined;
+  TransactionDetailsScreen: { transactionUuid: string };
 };
 
 export type TransactionStackScreenProps<

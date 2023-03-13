@@ -85,6 +85,23 @@ export const getVendor = async (uuid: Uuid): Promise<Vendor> => {
 };
 
 /**
+ * Query the `vendors` collection and return a Vendor if the email is found.
+ */
+export const getVendorByEmail = async (
+  email: string | null,
+): Promise<Vendor> => {
+  try {
+    const dbQuery = query(vendorCollection, where('email', '==', email));
+    const querySnapshot = await getDocs(dbQuery);
+    return querySnapshot.docs[0]?.data() as Vendor;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getVendorByEmail)', e);
+    throw e;
+  }
+};
+
+/**
  * Get all voucher ranges from the `voucher-ranges` collection.
  *
  * Returns an array of VoucherRange objects.
@@ -239,7 +256,6 @@ export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
     throw e;
   }
 };
-
 /**
  * Helper for calculating a Transaction's value.
  *

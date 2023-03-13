@@ -1,32 +1,79 @@
 import styled from 'styled-components/native';
+import Colors from '../../../assets/Colors';
+
+export const LogoContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+  margin-left: 29px;
+`;
 
 export const TransactionsContainer = styled.View`
+  width: 100%;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: ${Colors.offWhite};
 `;
 
-export const FilterRow = styled.View`
-  width: 100%;
-  flex-direction: row;
-`;
-
-export const Title = styled.View`
+export const TitleContainer = styled.View`
   padding-top: 20px;
   padding-bottom: 20px;
 `;
 
-export const HorizontalSpacingContainer = styled.View`
-  padding-left: 15px;
-  padding-right: 15px;
+export const Title = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 42px;
+  line-height: 57px;
+  text-align: center;
 `;
 
-export const AddManuallyContainer = styled.View`
+export const CardContainer = styled.View`
   width: 100%;
-  flex-direction: row;
-  padding-top: 40px;
-  justify-content: flex-end;
-  margin-top: 20px;
-  margin-right: 60px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
+export const StartOfListView = styled.View`
+  width: 100%;
+  height: 1px;
+  border: 1px solid ${Colors.lightGray};
+  border-top-width: 1px;
+`;
+
+export const BackButtonContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 10%;
+  margin-top: 57px;
+`;
+
+export const LeftAlignedContainer = styled.View`
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left: 29px;
+  margin-bottom: 13px;
+`;
+
+export const MediumText = styled.Text`
+  font-family: 'manrope-regular';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+`;
+
+export const Size14BoldText = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
+
+export const DarkGrayText = styled.Text`
+  color: ${Colors.darkGray};
 `;

@@ -1,45 +1,73 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import moment from 'moment';
+import { TouchableOpacity } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { Body1Text, Body2Subtext, H3Subheading } from '../../../assets/Fonts';
+import { Body1Text, H3Subheading } from '../../../assets/Fonts';
 import {
-  CountContainer,
-  DateIdContainer,
-  PriceContainer,
+  StatusContainer,
+  LeftAlignContainer,
+  ValueContainer,
   Row,
   Styles,
 } from './styles';
+import StatusComponent from './StatusComponent';
+import { TransactionStackParamList } from '../../navigation/types';
+import {
+  formatTimeForDisplay,
+  formatValueForDisplay,
+} from '../../utils/displayUtils';
 
 type TransactionCardProps = {
-  date: string;
+  navigation: NativeStackNavigationProp<
+    TransactionStackParamList,
+    'TransactionsScreen',
+    undefined
+  >;
+  date: Date;
   id: string;
-  price: number;
-  count: number;
+  value: number;
+  status: string;
 };
 export default function TransactionCard({
+  navigation,
   date,
   id,
-  price,
-  count,
+  value,
+  status,
 }: TransactionCardProps) {
+  const time = moment(date);
+
   return (
-    <Row>
-      <DateIdContainer>
-        <Body2Subtext>{`ID ${id}`}</Body2Subtext>
-        <Body1Text>{date}</Body1Text>
-      </DateIdContainer>
-      <CountContainer>
-        <Body1Text>{`x${count}`}</Body1Text>
-      </CountContainer>
-      <PriceContainer>
-        <H3Subheading>{`$${price}`}</H3Subheading>
-      </PriceContainer>
-      <Icon.Button
-        name="right"
-        size={25}
-        style={Styles.IconButton}
-        color={Colors.midGray}
-      />
-    </Row>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('TransactionDetailsScreen', {
+          transactionUuid: id,
+        });
+      }}
+    >
+      <Row>
+        <LeftAlignContainer>
+          <Body1Text>{time.format('M/D')}</Body1Text>
+          <Body1Text>{formatTimeForDisplay(time)}</Body1Text>
+        </LeftAlignContainer>
+
+        <ValueContainer>
+          <H3Subheading>${formatValueForDisplay(value)}</H3Subheading>
+        </ValueContainer>
+
+        <StatusContainer>
+          <StatusComponent status={status} />
+        </StatusContainer>
+
+        <Icon
+          name="right"
+          size={25}
+          style={Styles.icon}
+          color={Colors.midGray}
+        />
+      </Row>
+    </TouchableOpacity>
   );
 }
