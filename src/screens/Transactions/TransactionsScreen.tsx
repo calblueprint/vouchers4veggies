@@ -52,7 +52,7 @@ export default function TransactionsScreen({
       </TitleContainer>
 
       {isLoading ? (
-        LoadingSpinner()
+        <LoadingSpinner />
       ) : (
         <CardContainer>
           <StartOfListView />

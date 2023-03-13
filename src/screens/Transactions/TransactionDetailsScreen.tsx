@@ -94,7 +94,7 @@ export default function TransactionDetailsScreen({
           </CardContainer>
         </TransactionsContainer>
       ) : (
-        LoadingSpinner()
+        <LoadingSpinner />
       )}
     </TransactionsContainer>
   );
