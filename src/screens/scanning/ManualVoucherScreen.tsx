@@ -25,7 +25,7 @@ import { validateSerialNumberInput } from '../../utils/validationUtils';
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
-  const [voucherAmount, setVoucherAmount] = useState<number | null>(0);
+  const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
 
   // to be used for backend
@@ -41,8 +41,8 @@ function ManualVoucherScreen() {
     setID(value);
   };
 
-  const onChangeVoucherAmount = (value: number | null) => {
-    setVoucherAmount(value);
+  const onChangeVoucherAmount = (value: number) => {
+    setVoucherAmount(value ?? 0.0);
   };
 
   return (
@@ -75,7 +75,7 @@ function ManualVoucherScreen() {
           </FieldContainer>
           <FieldContainer>
             <InputTitleText>Amount</InputTitleText>
-            <CurrencyInput
+            <CurrencyInput // TODO: refactor currency input with custom text input base components
               value={voucherAmount}
               onChangeValue={onChangeVoucherAmount}
               renderTextInput={props => (
@@ -92,6 +92,7 @@ function ManualVoucherScreen() {
                   returnKeyType="done"
                 />
               )}
+              prefix="$"
               minValue={0}
               maxValue={10}
               separator="."
