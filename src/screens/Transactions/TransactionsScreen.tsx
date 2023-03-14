@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
@@ -20,8 +20,16 @@ export default function TransactionsScreen({
   navigation,
 }: TransactionStackScreenProps<'TransactionsScreen'>) {
   const [isLoading, setIsLoading] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const { vendorUuid } = useAuthContext();
+
+  const onRefresh = React.useCallback(() => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,6 +76,11 @@ export default function TransactionsScreen({
               />
             )}
             keyExtractor={item => item.uuid}
+            refreshControl={
+              <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+            }
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
           />
         </CardContainer>
       )}
