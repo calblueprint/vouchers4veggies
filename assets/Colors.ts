@@ -13,6 +13,7 @@ const Colors = {
   alertLightRed: '#FCE3E3',
   superL: '#FCE3E3',
   alertGreen: '#239E0F',
+  lightGreen: '#DFF4E1',
 };
 
 export default Colors;

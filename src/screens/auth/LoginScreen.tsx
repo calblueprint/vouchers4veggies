@@ -8,6 +8,10 @@ import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
+import {
+  validateEmailInput,
+  validatePasswordInput,
+} from '../../utils/validationUtils';
 import StandardHeader from '../../components/common/StandardHeader';
 
 import {
@@ -78,6 +82,8 @@ export default function LoginScreen({
           onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
+          validate={validateEmailInput}
+          keyboardType="email-address"
         />
 
         <RowContainer>
@@ -95,6 +101,7 @@ export default function LoginScreen({
           value={password}
           placeholder="Enter password"
           secureTextEntry
+          validate={validatePasswordInput}
         />
         {showErrorMessage && errorMessage && (
           <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>

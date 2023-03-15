@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import TransactionDetailsScreen from '../../screens/Transactions/TransactionDetailsScreen';
 import TransactionsScreen from '../../screens/Transactions/TransactionsScreen';
 import { TransactionStackParamList } from '../types';
 
@@ -19,6 +20,11 @@ export default function TransactionStackNavigator() {
       <TransactionStack.Screen
         name="TransactionsScreen"
         component={TransactionsScreen}
+      />
+
+      <TransactionStack.Screen
+        name="TransactionDetailsScreen"
+        component={TransactionDetailsScreen}
       />
     </TransactionStack.Navigator>
   );

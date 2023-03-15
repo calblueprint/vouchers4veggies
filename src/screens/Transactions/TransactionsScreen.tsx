@@ -1,64 +1,76 @@
-import React, { useState } from 'react';
-import { Button, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
+import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/Transactions/TransactionCard';
+import { getTransactionsByVendorUuid } from '../../database/queries';
+import { TransactionStackScreenProps } from '../../navigation/types';
+import { Transaction } from '../../types/types';
+import { useAuthContext } from '../auth/AuthContext';
 import {
-  AddManuallyContainer,
-  FilterRow,
-  HorizontalSpacingContainer,
-  Title,
+  LogoContainer,
   TransactionsContainer,
+  TitleContainer,
+  CardContainer,
+  StartOfListView,
 } from './styles';
-import StandardHeader from '../../components/common/StandardHeader';
 
-export default function TransactionsScreen() {
-  const [transactions] = useState([
-    { id: '123123', date: '10/22/22 8:29AM PST', count: 4, price: 10.43 },
-    { id: '473844', date: '10/19/22 3:12PM PST', count: 10, price: 37.21 },
-    { id: '123827', date: '10/10/22 4:55AM PST', count: 2, price: 5.42 },
-    { id: '234724', date: '10/07/22 2:49AM PST', count: 1, price: 11.22 },
-    { id: '198343', date: '10/05/22 6:52PM PST', count: 12, price: 3.24 },
-    { id: '127428', date: '10/01/22 1:29PM PST', count: 3, price: 7.29 },
-  ]);
+export default function TransactionsScreen({
+  navigation,
+}: TransactionStackScreenProps<'TransactionsScreen'>) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const { vendorUuid } = useAuthContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (vendorUuid) {
+          const transactionsArray = await getTransactionsByVendorUuid(
+            vendorUuid,
+          );
+          setTransactions(transactionsArray);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('(useEffect)[TransactionsScreen]', error);
+      }
+    };
+    fetchData();
+  }, [vendorUuid]);
 
   return (
     <TransactionsContainer>
-      <StandardHeader>
-        <AddManuallyContainer>
-          <Button title="Add manually" />
-        </AddManuallyContainer>
-      </StandardHeader>
+      <LogoContainer>
+        <StandardLogo />
+      </LogoContainer>
 
-      <Title>
+      <TitleContainer>
         <H2Heading>Transactions</H2Heading>
-      </Title>
+      </TitleContainer>
 
-      <FilterRow>
-        <View
-          style={{
-            backgroundColor: '#000000',
-            padding: 2,
-            justifyContent: 'center',
-          }}
-        >
-          <Text style={{ color: '#FFFFFF' }}>
-            ------ Search bar placeholder :P ------
-          </Text>
-        </View>
-        <HorizontalSpacingContainer>
-          <Button title="Filter" />
-        </HorizontalSpacingContainer>
-      </FilterRow>
-
-      {transactions.map(item => (
-        <TransactionCard
-          key={item.id}
-          id={item.id}
-          date={item.date}
-          count={item.count}
-          price={item.price}
-        />
-      ))}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <CardContainer>
+          <StartOfListView />
+          <FlatList
+            data={transactions}
+            renderItem={({ item }) => (
+              <TransactionCard
+                navigation={navigation}
+                id={item.uuid}
+                date={item.timestamp.toDate()}
+                value={item.value}
+                status={item.status}
+              />
+            )}
+            keyExtractor={item => item.uuid}
+          />
+        </CardContainer>
+      )}
     </TransactionsContainer>
   );
 }

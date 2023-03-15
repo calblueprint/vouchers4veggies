@@ -8,6 +8,7 @@ interface HeaderContainerProps {
 
 export default function HeaderContainer({
   alignment,
+  // justifycontent,
   children,
 }: HeaderContainerProps) {
   return (
@@ -16,6 +17,7 @@ export default function HeaderContainer({
         width: '100%',
         height: '12%',
         display: 'flex',
+        // flex-direction : row
         alignItems: alignment || 'center',
       }}
     >

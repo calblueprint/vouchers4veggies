@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
+import Colors from '../../../assets/Colors';
 
 export const Row = styled.View`
   display: flex;
@@ -8,38 +9,99 @@ export const Row = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  height: 67px;
+  border: 0px solid ${Colors.lightGray};
+  border-bottom-width: 1px;
+  width: 100%;
 `;
 
-export const DateIdContainer = styled.View`
-  flex: 4;
+export const LeftAlignContainer = styled.View`
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
-  padding-left: 20px;
+  padding-left: 29px;
 `;
 
-export const CountContainer = styled.View`
+export const RightAlignContainer = styled.View`
+  flex: 1;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin-right: 29px;
+`;
+
+export const StatusContainer = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
-  padding-right: 10px;
+  padding: 10px;
   margin-right: 30px;
 `;
 
-export const PriceContainer = styled.View`
-  flex: 2;
+export const ValueContainer = styled.View`
+  flex: 1;
   flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding-right: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const StatusComponentRed = styled.View`
+  text-align: center;
+  align-items: center;
+  border-radius: 9px;
+  width: 63px;
+  background: ${Colors.alertLightRed};
+  padding: 9px;
+  border: 2px solid ${Colors.alertLightRed};
+`;
+
+export const StatusComponentGreen = styled.View`
+  text-align: center;
+  align-items: center;
+  border-radius: 9px;
+  width: 63px;
+  background: ${Colors.lightGreen};
+  padding: 9px;
+  border: 2px solid ${Colors.lightGreen};
+`;
+
+export const Body1SemiboldText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
+
+export const H4Subheading = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 20px;
+  line-height: 27px;
+`;
+
+export const GreenText = styled.Text`
+  color: ${Colors.alertGreen};
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
+`;
+
+export const RedText = styled.Text`
+  color: ${Colors.alertRed};
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
 `;
 
 export const Styles = StyleSheet.create({
-  IconButton: {
+  icon: {
     justifyContent: 'center',
     backgroundColor: '#fff',
+    marginRight: 25,
   },
 });

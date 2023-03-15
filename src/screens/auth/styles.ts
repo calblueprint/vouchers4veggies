@@ -31,7 +31,17 @@ export const HeadingContainer = styled.View`
 
 export const Header = styled.View`
   width: 85%;
+<<<<<<< HEAD
+<<<<<<< HEAD
   margin-top: 12%;
+=======
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 26px;
+>>>>>>> 3a6807d (rebasing with main)
+=======
+  margin-top: 12%;
+>>>>>>> 1c806ac (rebasing with main)
 `;
 
 export const FormContainer = styled.View`
