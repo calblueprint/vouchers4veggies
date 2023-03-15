@@ -22,7 +22,7 @@ export default function ProfileStackNavigator() {
       }}
     >
       <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
-      <ProfileStack.Screen name="EditEmail" component={EditEmailScreen} />
+      <ProfileStack.Screen name="EditEmailScreen" component={EditEmailScreen} />
       <ProfileStack.Screen name="TypingEmail" component={TypingEmailScreen} />
       <ProfileStack.Screen name="EmailEntered" component={EmailEnteredScreen} />
       <ProfileStack.Screen name="EditPhoneNumber" component={EditPhoneNumber} />

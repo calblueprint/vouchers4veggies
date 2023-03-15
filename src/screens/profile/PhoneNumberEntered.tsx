@@ -22,7 +22,7 @@ import {
   HeadingContainer,
   IconBackContainer,
   IconContainer,
-  InputFieldStyling,
+  InputFieldContainer,
   PhoneHeadingContainer,
 } from './styles';
 
@@ -52,10 +52,10 @@ export default function PhoneNumberEntered({
       <PhoneHeadingContainer>
         <H2Heading> Edit Phone Number </H2Heading>
       </PhoneHeadingContainer>
-      <InputFieldStyling>
+      <InputFieldContainer>
         <Body1Text style={Styles.bold}>Email</Body1Text>
         <InputField value={email} placeholder="email@gmail.com" />
-      </InputFieldStyling>
+      </InputFieldContainer>
       <GrayButtonContainer>
         <ButtonMagenta>
           <ButtonTextWhite>Update Phone Number</ButtonTextWhite>

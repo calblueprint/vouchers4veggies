@@ -47,7 +47,9 @@ export default function ProfileScreen({
       </View>
       <View>
         <HeadingContainer>Hi, Derby Food Market!</HeadingContainer>
-        <ButtonEmailContainer onPress={() => navigation.navigate('EditEmail')}>
+        <ButtonEmailContainer
+          onPress={() => navigation.navigate('EditEmailScreen')}
+        >
           <ButtonBlank />
           <IconContainer>
             <Icon name="right" size={20} color={Colors.midGray} />

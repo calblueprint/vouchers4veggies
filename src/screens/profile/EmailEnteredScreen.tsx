@@ -22,7 +22,7 @@ import {
   HeadingContainer,
   IconBackContainer,
   IconContainer,
-  InputFieldStyling,
+  InputFieldContainer,
 } from './styles';
 
 // eslint-disable-next-line no-empty-pattern
@@ -51,10 +51,10 @@ export default function EditEmailScreen({
       <EmailHeadingContainer>
         <H2Heading> Edit Email </H2Heading>
       </EmailHeadingContainer>
-      <InputFieldStyling>
+      <InputFieldContainer>
         <Body1Text style={Styles.bold}>Email</Body1Text>
         <InputField value={email} placeholder="email@gmail.com" />
-      </InputFieldStyling>
+      </InputFieldContainer>
       <GrayButtonContainer>
         <ButtonMagenta>
           <ButtonTextWhite>Update Email</ButtonTextWhite>

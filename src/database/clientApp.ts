@@ -22,4 +22,3 @@ const firebaseConfig = {
 const fbApp = initializeApp(firebaseConfig);
 
 export default fbApp;
-console.log(firebaseConfig);

@@ -70,16 +70,16 @@ export const IconContainer = styled.View`
 `;
 
 export const EmailHeadingContainer = styled.View`
-  margin-top: 30%;
-  margin-left: 32%;
+  margin-top: 114px;
+  display: flex;
+  align-items: center;
 `;
-export const InputFieldStyling = styled.View`
-margin-top: 20%
-  margin-left: 18%;
-`;
-export const GrayButtonContainer = styled.TouchableOpacity`
-  margin-left: 21%;
-  margin-top: 35%;
+export const InputFieldContainer = styled.View`
+  margin-top: 32px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 124px;
 `;
 export const IconBackContainer = styled.View`
   margin-top: 20%;
@@ -88,4 +88,9 @@ export const IconBackContainer = styled.View`
 export const PhoneHeadingContainer = styled.View`
   margin-top: 30%;
   margin-left: 15%;
+`;
+export const FormContainer = styled.View`
+  margin-horizontal: 24px;
+  display: flex;
+  align-items: center;
 `;
