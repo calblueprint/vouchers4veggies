@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import CurrencyInput from 'react-native-currency-input';
+import { TextInput } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
+import Colors from '../../../assets/Colors';
+import Styles from '../../components/InputField/styles';
 import {
   ButtonTextWhite,
   CenterText,
@@ -17,14 +21,12 @@ import {
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
-import {
-  validateSerialNumberInput,
-  validateVoucherAmount,
-} from '../../utils/validationUtils';
+import { validateSerialNumberInput } from '../../utils/validationUtils';
 
 function ManualVoucherScreen() {
   const [transactionID, setID] = useState<string>('');
-  const [voucherAmount, setVoucherAmount] = useState<string>('');
+  const [voucherAmount, setVoucherAmount] = useState<number>(0);
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   // to be used for backend
   // const [scanCounter, incrementScanned] = useState(0);
@@ -39,9 +41,8 @@ function ManualVoucherScreen() {
     setID(value);
   };
 
-  const onChangeVoucherAmount = (text: string) => {
-    const value = text.replace(/[^\d.]/g, '');
-    setVoucherAmount(value);
+  const onChangeVoucherAmount = (value: number) => {
+    setVoucherAmount(value ?? 0.0);
   };
 
   return (
@@ -74,12 +75,28 @@ function ManualVoucherScreen() {
           </FieldContainer>
           <FieldContainer>
             <InputTitleText>Amount</InputTitleText>
-            <InputField
-              onChange={onChangeVoucherAmount}
+            <CurrencyInput // TODO: refactor currency input with custom text input base components
               value={voucherAmount}
-              placeholder="Enter Amount"
-              validate={validateVoucherAmount}
-              keyboardType="decimal-pad"
+              onChangeValue={onChangeVoucherAmount}
+              renderTextInput={props => (
+                <TextInput
+                  {...props}
+                  onBlur={() => setIsActive(false)}
+                  onFocus={() => setIsActive(true)}
+                  style={isActive ? Styles.FormFieldFocus : Styles.FormField}
+                  placeholderTextColor={Colors.midGray}
+                  secureTextEntry={false}
+                  autoCorrect={false}
+                  autoCapitalize="none"
+                  keyboardType="number-pad"
+                  returnKeyType="done"
+                />
+              )}
+              prefix="$"
+              minValue={0}
+              maxValue={10}
+              separator="."
+              precision={2}
             />
           </FieldContainer>
         </FormContainer>
