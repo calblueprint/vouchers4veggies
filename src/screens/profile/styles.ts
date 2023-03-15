@@ -1,8 +1,5 @@
-import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import Colors from '../../../assets/Colors';
 
-// eslint-disable-next-line import/prefer-default-export
 export const HeadingContainer = styled.Text`
   margin-top: 23%;
   margin-bottom: 4%;
@@ -29,16 +26,6 @@ export const ButtonEmailContainer = styled.TouchableOpacity`
 export const ButtonPhoneContainer = styled.TouchableOpacity`
   margin-top: 4%;
   margin-left: 0px;
-`;
-export const EmailText = styled.Text`
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-  margin-top: -8%;
-
-  color: #000000;
 `;
 
 export const ButtonBlank = styled.TouchableOpacity`

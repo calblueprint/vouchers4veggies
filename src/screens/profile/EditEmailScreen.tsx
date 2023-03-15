@@ -1,39 +1,24 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Colors } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { ButtonGray, ButtonMagenta } from '../../../assets/Components';
-import {
-  H1Heading,
-  Body1Text,
-  H3Subheading,
-  H4CardNavTab,
-  H2Heading,
-  ButtonTextWhite,
-} from '../../../assets/Fonts';
+import { ButtonMagenta } from '../../../assets/Components';
+import { Body1Text, H2Heading, ButtonTextWhite } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { ProfileStackScreenProps } from '../../navigation/types';
-import { Styles } from '../auth/styles';
 import {
   ButtonBlank,
   EmailHeadingContainer,
-  EmailText,
   FormContainer,
-  GrayButtonContainer,
-  HeadingContainer,
   IconBackContainer,
-  IconContainer,
   InputFieldContainer,
 } from './styles';
 
-// eslint-disable-next-line no-empty-pattern
 export default function EditEmailScreen({
   navigation,
 }: ProfileStackScreenProps<'ProfileScreen'>) {
   const [email, setEmail] = useState('');
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const onChangeEmail = (value: string) => {
-    setShowErrorMessage(false);
     setEmail(value);
   };
 
@@ -43,7 +28,7 @@ export default function EditEmailScreen({
         <IconBackContainer>
           <Icon name="right" size={60} color={Colors.black} />
         </IconBackContainer>
-        <EmailText>Back</EmailText>
+        <Body1Text>Back</Body1Text>
       </ButtonBlank>
       <FormContainer>
         <EmailHeadingContainer>
@@ -54,7 +39,7 @@ export default function EditEmailScreen({
           <InputField
             value={email}
             placeholder="email@gmail.com"
-            onChange={() => null}
+            onChange={onChangeEmail}
           />
         </InputFieldContainer>
         <ButtonMagenta>
