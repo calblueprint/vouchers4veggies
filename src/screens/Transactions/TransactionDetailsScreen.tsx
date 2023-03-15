@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import { RootNavBackButton } from '../../../assets/Components';
@@ -35,6 +35,14 @@ export default function TransactionDetailsScreen({
   const { transactionUuid } = route.params;
   const [transactionData, setTransactionData] = useState<Transaction>();
   const [voucherArray, setVoucherArray] = useState<Voucher[]>();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,6 +102,14 @@ export default function TransactionDetailsScreen({
                 />
               )}
               keyExtractor={item => item.serialNumber.toString()}
+              refreshControl={
+                <RefreshControl
+                  refreshing={isRefreshing}
+                  onRefresh={onRefresh}
+                />
+              }
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
             />
           </CardContainer>
         </TransactionsContainer>
