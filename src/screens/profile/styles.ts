@@ -27,6 +27,16 @@ export const ButtonPhoneContainer = styled.TouchableOpacity`
   margin-top: 4%;
   margin-left: 0px;
 `;
+export const EmailText = styled.Text`
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: -8%;
+
+  color: #000000;
+`;
 
 export const ButtonBlank = styled.TouchableOpacity`
   box-sizing: border-box;

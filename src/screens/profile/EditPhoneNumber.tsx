@@ -1,66 +1,51 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Colors } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { ButtonGray, InputField } from '../../../assets/Components';
-import {
-  H1Heading,
-  Body1Text,
-  H3Subheading,
-  H4CardNavTab,
-  H2Heading,
-  ButtonTextWhite,
-} from '../../../assets/Fonts';
+import { ButtonMagenta } from '../../../assets/Components';
+import { Body1Text, H2Heading, ButtonTextWhite } from '../../../assets/Fonts';
+import InputField from '../../components/InputField/InputField';
 import { ProfileStackScreenProps } from '../../navigation/types';
-import { Styles } from '../auth/styles';
-import { ButtonMagenta } from '../scanning/styles';
 import {
   ButtonBlank,
   EmailHeadingContainer,
-  EmailText,
-  GrayButtonContainer,
-  HeadingContainer,
+  FormContainer,
   IconBackContainer,
-  IconContainer,
   InputFieldContainer,
-  PhoneHeadingContainer,
 } from './styles';
 
-// eslint-disable-next-line no-empty-pattern
-export default function EditPhoneNumberScreen({
+export default function EditEmailScreen({
   navigation,
-}: ProfileStackScreenProps<'EditPhoneNumber'>) {
+}: ProfileStackScreenProps<'ProfileScreen'>) {
   const [email, setEmail] = useState('');
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const onChangeEmail = (value: string) => {
-    setShowErrorMessage(false);
     setEmail(value);
   };
 
   return (
     <View>
-      <ButtonBlank
-        title="Back"
-        color="black"
-        onPress={() => navigation.navigate('ProfileScreen')}
-      >
+      <ButtonBlank onPress={() => navigation.navigate('ProfileScreen')}>
         <IconBackContainer>
           <Icon name="right" size={60} color={Colors.black} />
         </IconBackContainer>
-        <EmailText> Back</EmailText>
+        <Body1Text>Back</Body1Text>
       </ButtonBlank>
-      <PhoneHeadingContainer>
-        <H2Heading> Edit Phone Number </H2Heading>
-      </PhoneHeadingContainer>
-      <InputFieldContainer>
-        <Body1Text style={Styles.bold}>Phone Number</Body1Text>
-        <InputField value={email} placeholder="(123) 456-7890" />
-      </InputFieldContainer>
-      <GrayButtonContainer>
-        <ButtonGray>
+      <FormContainer>
+        <EmailHeadingContainer>
+          <H2Heading>Edit Phone Number</H2Heading>
+        </EmailHeadingContainer>
+        <InputFieldContainer>
+          <Body1Text>Phone Number</Body1Text>
+          <InputField
+            value={email}
+            placeholder="email@gmail.com"
+            onChange={onChangeEmail}
+          />
+        </InputFieldContainer>
+        <ButtonMagenta>
           <ButtonTextWhite>Update Phone Number</ButtonTextWhite>
-        </ButtonGray>
-      </GrayButtonContainer>
+        </ButtonMagenta>
+      </FormContainer>
     </View>
   );
 }
