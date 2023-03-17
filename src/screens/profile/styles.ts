@@ -70,7 +70,6 @@ export const InputFieldContainer = styled.View`
   margin-top: 32px;
   display: flex;
   align-items: flex-start;
-  width: 75%;
   margin-bottom: 124px;
 `;
 export const IconBackContainer = styled.View`
@@ -87,7 +86,7 @@ export const FormContainer = styled.View`
   align-items: center;
 `;
 export const MainProfileContainer = styled.View`
-  padding-left: 0px;
+  padding-left: 32px;
   padding-right: 32px;
 `;
 
