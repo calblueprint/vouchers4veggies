@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native';
-import { ButtonMagenta, ButtonGray } from '../../../assets/Components';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
 import {
   ButtonTextWhite,
+  ButtonTextBlack,
+  H4CardNavTab,
   CenterText,
   H2Heading,
   InputTitleText,
@@ -26,6 +28,7 @@ export default function ConfirmValueScreen({
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [isEmptyMap, setEmptyMap] = useState<boolean>(true);
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
@@ -78,9 +81,11 @@ export default function ConfirmValueScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonGray>
-          <ButtonTextWhite>Review and Submit</ButtonTextWhite>
-        </ButtonGray>
+        <ButtonWhite disabled={isEmptyMap}>
+          <ButtonTextBlack>
+            <H4CardNavTab>Review and Submit</H4CardNavTab>
+          </ButtonTextBlack>
+        </ButtonWhite>
       </BodyContainer>
     </SafeArea>
   );
