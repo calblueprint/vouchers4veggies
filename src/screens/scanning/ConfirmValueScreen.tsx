@@ -49,7 +49,7 @@ export default function ConfirmValueScreen({
         </TitleContainer>
         <FormContainer>
           <FieldContainer>
-            <InputTitleText>Amount</InputTitleText>
+            <InputTitleText>Voucher Value</InputTitleText>
             <CurrencyInput // TODO: refactor currency input with custom text input base components
               value={voucherAmount}
               onChangeValue={onChangeVoucherAmount}
