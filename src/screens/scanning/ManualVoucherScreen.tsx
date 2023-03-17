@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { ButtonMagenta, ButtonGray } from '../../../assets/Components';
-import Colors from '../../../assets/Colors';
-import Styles from '../../components/InputField/styles';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {
+  ButtonMagenta,
+  ButtonGray,
+  AddManuallyButton,
+} from '../../../assets/Components';
 import {
   ButtonTextWhite,
+  ButtonTextBlack,
   CenterText,
   H2Heading,
   InputTitleText,
@@ -20,6 +24,7 @@ import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
 import { validateSerialNumberInput } from '../../utils/validationUtils';
 import { ScannerStackScreenProps } from '../../navigation/types';
+import Colors from '../../../assets/Colors';
 
 export default function ManualVoucherScreen({
   navigation,
@@ -39,6 +44,15 @@ export default function ManualVoucherScreen({
     <SafeArea>
       <Header>
         <StandardLogo />
+        <AddManuallyButton
+          onPress={() => navigation.navigate('ScanningScreen')}
+        >
+          <ButtonTextBlack>
+            <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+            {'  '}
+            Scan Voucher
+          </ButtonTextBlack>
+        </AddManuallyButton>
       </Header>
 
       <BodyContainer>
