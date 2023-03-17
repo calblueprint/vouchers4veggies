@@ -31,6 +31,10 @@ export default function ConfirmValueScreen({
     setVoucherAmount(value ?? 0.0);
   };
 
+  const handleVoucherAdd = () => {
+    navigation.navigate('ManualVoucherScreen');
+  };
+
   return (
     <SafeArea>
       <Header>
@@ -71,7 +75,7 @@ export default function ConfirmValueScreen({
             />
           </FieldContainer>
         </FormContainer>
-        <ButtonMagenta>
+        <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
       </BodyContainer>

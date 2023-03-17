@@ -22,8 +22,11 @@ import {
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
 import { validateSerialNumberInput } from '../../utils/validationUtils';
+import { ScannerStackScreenProps } from '../../navigation/types';
 
-function ManualVoucherScreen() {
+export default function ManualVoucherScreen({
+  navigation,
+}: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [transactionID, setID] = useState<string>('');
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -43,6 +46,10 @@ function ManualVoucherScreen() {
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
+  };
+
+  const handleVoucherAdd = () => {
+    navigation.navigate('ConfirmValueScreen');
   };
 
   return (
@@ -96,12 +103,10 @@ function ManualVoucherScreen() {
             />
           </FieldContainer>
         </FormContainer>
-        <ButtonMagenta>
+        <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
       </BodyContainer>
     </SafeArea>
   );
 }
-
-export default ManualVoucherScreen;
