@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
   ButtonMagenta,
-  ButtonGray,
+  ButtonWhite,
   AddManuallyButton,
 } from '../../../assets/Components';
 import {
   ButtonTextWhite,
   ButtonTextBlack,
+  H4CardNavTab,
   CenterText,
   H2Heading,
   InputTitleText,
@@ -30,6 +31,7 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [transactionID, setID] = useState<string>('');
+  const [isEmptyMap, setEmptyMap] = useState<boolean>(true);
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
@@ -76,9 +78,11 @@ export default function ManualVoucherScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonGray>
-          <ButtonTextWhite>Review and Submit</ButtonTextWhite>
-        </ButtonGray>
+        <ButtonWhite disabled={isEmptyMap}>
+          <ButtonTextBlack>
+            <H4CardNavTab>Review and Submit</H4CardNavTab>
+          </ButtonTextBlack>
+        </ButtonWhite>
       </BodyContainer>
     </SafeArea>
   );
