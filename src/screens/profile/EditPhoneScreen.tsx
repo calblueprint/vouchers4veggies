@@ -14,12 +14,12 @@ import {
   InputFieldContainer,
 } from './styles';
 
-export default function EditEmailScreen({
+export default function EditPhoneScreen({
   navigation,
 }: ProfileStackScreenProps<'ProfileScreen'>) {
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const onChangeEmail = (value: string) => {
-    setEmail(value);
+    setPhone(value);
   };
 
   return (
@@ -36,18 +36,18 @@ export default function EditEmailScreen({
       </View>
       <FormContainer>
         <EmailHeadingContainer>
-          <H2Heading>Edit Phone Number</H2Heading>
+          <H2Heading>Edit Email</H2Heading>
         </EmailHeadingContainer>
         <InputFieldContainer>
-          <Body1Text>Phone Number</Body1Text>
+          <Body1Text>Email</Body1Text>
           <InputField
-            value={email}
-            placeholder="(123) 456-7890"
+            value={phone}
+            placeholder="email@gmail.com"
             onChange={onChangeEmail}
           />
         </InputFieldContainer>
         <ButtonMagenta>
-          <ButtonTextWhite>Update Phone Number</ButtonTextWhite>
+          <ButtonTextWhite>Update Email</ButtonTextWhite>
         </ButtonMagenta>
       </FormContainer>
     </View>
