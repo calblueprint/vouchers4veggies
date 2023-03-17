@@ -1,26 +1,82 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
-import { H2Heading, H3Subheading } from '../../../assets/Fonts';
+import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Colors from '../../../assets/Colors';
+import {
+  H4CardNavTab,
+  H2Heading,
+  ButtonTextWhite,
+} from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
-import { useAuthContext } from '../auth/AuthContext';
+import {
+  HeadingContainer,
+  ButtonBlank,
+  MagentaButtonContainer,
+  ButtonPasswordContainer,
+  EmailText,
+  ButtonPhoneContainer,
+  ButtonEmailContainer,
+  ButtonBottomContainer,
+  LogoContainer,
+  IconContainer,
+  MainProfileContainer,
+} from './styles';
+import { ProfileStackScreenProps } from '../../navigation/types';
+import { ButtonMagenta } from '../../../assets/Components';
+// import { DarkGrayText } from '../auth/styles';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const v4vLogo = require('../../../assets/logo-1.png');
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-export default function ProfileScreen() {
-  const { dispatch } = useAuthContext();
-
+export default function ProfileScreen({
+  navigation,
+}: ProfileStackScreenProps<'ProfileScreen'>) {
   return (
-    <View style={styles.container}>
-      <H2Heading>Profile Screen</H2Heading>
-      <H3Subheading>To be implemented...</H3Subheading>
-      <Button onPress={() => signOut(dispatch)} title="Sign out" />
-    </View>
+    <>
+      <View>
+        {/* logo placeholder */}
+        <LogoContainer source={v4vLogo} />
+      </View>
+      <MainProfileContainer>
+        <HeadingContainer>
+          <H2Heading>Hi, Derby Food Market!</H2Heading>
+        </HeadingContainer>
+        <ButtonEmailContainer
+          onPress={() => navigation.navigate('EditPhoneNumber')}
+        >
+          <ButtonBlank />
+          <IconContainer>
+            <Icon name="right" size={20} color={Colors.midGray} />
+          </IconContainer>
+          <EmailText> Email</EmailText>
+          <H4CardNavTab> email@email.com</H4CardNavTab>
+        </ButtonEmailContainer>
+        <ButtonPhoneContainer
+          onPress={() => navigation.navigate('EditEmailScreen')}
+        >
+          <ButtonBlank title="Phone Number" color="black" />
+          <IconContainer>
+            <Icon name="right" size={20} color={Colors.midGray} />
+          </IconContainer>
+          <EmailText> Phone Number</EmailText>
+          <H4CardNavTab>(123) 456-7890</H4CardNavTab>
+        </ButtonPhoneContainer>
+        <ButtonPasswordContainer>
+          <ButtonBlank title="Password" color="black" />
+          <IconContainer>
+            <Icon name="right" size={20} color={Colors.midGray} />
+          </IconContainer>
+          <EmailText> Password</EmailText>
+          <H4CardNavTab> ............</H4CardNavTab>
+        </ButtonPasswordContainer>
+        <ButtonBottomContainer>
+          <ButtonBlank title="" color="black" />
+        </ButtonBottomContainer>
+        <MagentaButtonContainer>
+          <ButtonMagenta onPress={signOut}>
+            <ButtonTextWhite>Log Out</ButtonTextWhite>
+          </ButtonMagenta>
+        </MagentaButtonContainer>
+      </MainProfileContainer>
+    </>
   );
 }
