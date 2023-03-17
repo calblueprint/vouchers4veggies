@@ -20,7 +20,7 @@ export const ButtonGray = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
   border-radius: 5px;
-  width: 257px;
+  width: 277px;
   background: ${Colors.midGray};
   padding: 9px 9px;
   border: 2px solid ${Colors.midGray};

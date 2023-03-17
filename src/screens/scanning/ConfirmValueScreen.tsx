@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, ButtonGray } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
 import {
@@ -78,6 +78,9 @@ export default function ConfirmValueScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
+        <ButtonGray>
+          <ButtonTextWhite>Review and Submit</ButtonTextWhite>
+        </ButtonGray>
       </BodyContainer>
     </SafeArea>
   );
