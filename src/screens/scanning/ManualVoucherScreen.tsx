@@ -63,11 +63,11 @@ export default function ManualVoucherScreen({
         </TitleContainer>
         <FormContainer>
           <FieldContainer>
-            <InputTitleText>Transaction ID</InputTitleText>
+            <InputTitleText>Serial Number</InputTitleText>
             <InputField
               onChange={onChangeSerialNumber}
               value={transactionID}
-              placeholder="Enter ID"
+              placeholder="Enter Number"
               validate={validateSerialNumberInput}
               keyboardType="number-pad"
             />
