@@ -26,6 +26,7 @@ import {
   ButtonBottomContainer,
   LogoContainer,
   IconContainer,
+  MainProfileContainer,
 } from './styles';
 import { ButtonMagenta } from '../scanning/styles';
 import {
@@ -45,10 +46,12 @@ export default function ProfileScreen({
         {/* logo placeholder */}
         <LogoContainer source={v4vLogo} />
       </View>
-      <View>
-        <HeadingContainer>Hi, Derby Food Market!</HeadingContainer>
+      <MainProfileContainer>
+        <HeadingContainer>
+          <H2Heading>Hi, Derby Food Market!</H2Heading>
+        </HeadingContainer>
         <ButtonEmailContainer
-          onPress={() => navigation.navigate('EditEmailScreen')}
+          onPress={() => navigation.navigate('EditPhoneNumber')}
         >
           <ButtonBlank />
           <IconContainer>
@@ -58,7 +61,7 @@ export default function ProfileScreen({
           <H4CardNavTab> email@email.com</H4CardNavTab>
         </ButtonEmailContainer>
         <ButtonPhoneContainer
-          onPress={() => navigation.navigate('EditPhoneNumber')}
+          onPress={() => navigation.navigate('EditEmailScreen')}
         >
           <ButtonBlank title="Phone Number" color="black" />
           <IconContainer>
@@ -83,7 +86,7 @@ export default function ProfileScreen({
             <ButtonTextWhite>Log Out</ButtonTextWhite>
           </ButtonMagenta>
         </MagentaButtonContainer>
-      </View>
+      </MainProfileContainer>
     </>
   );
 }

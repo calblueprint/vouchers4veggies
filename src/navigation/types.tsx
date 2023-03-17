@@ -25,11 +25,7 @@ export type ScannerStackParamList = {
 export type ProfileStackParamList = {
   ProfileScreen: undefined;
   EditEmailScreen: undefined;
-  TypingEmailScreen: undefined;
-  EmailEnteredScreen: undefined;
   EditPhoneNumber: undefined;
-  TypingPhoneNumber: undefined;
-  PhoneNumberEntered: undefined;
 };
 
 export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =
