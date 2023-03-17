@@ -15,31 +15,17 @@ import {
   Header,
   BodyContainer,
   SafeArea,
-  DropDownContainer,
   FieldContainer,
   FormContainer,
 } from './styles';
-import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
-import { validateSerialNumberInput } from '../../utils/validationUtils';
+import { ScannerStackScreenProps } from '../../navigation/types';
 
-function ManualVoucherScreen() {
-  const [transactionID, setID] = useState<string>('');
+export default function ConfirmValueScreen({
+  navigation,
+}: ScannerStackScreenProps<'ConfirmValueScreen'>) {
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-
-  // to be used for backend
-  // const [scanCounter, incrementScanned] = useState(0);
-  // const [value, setValue] = useState(null);
-  // const [items, setItems] = useState([
-  //   { label: 'Apple', value: 'apple' },
-  //   { label: 'Banana', value: 'banana' },
-  // ]);
-
-  const onChangeSerialNumber = (text: string) => {
-    const value = text.replace(/\D/g, '');
-    setID(value);
-  };
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
@@ -58,17 +44,6 @@ function ManualVoucherScreen() {
           </CenterText>
         </TitleContainer>
         <FormContainer>
-          <FieldContainer>
-            <InputTitleText>Transaction ID</InputTitleText>
-            <InputField
-              onChange={onChangeSerialNumber}
-              value={transactionID}
-              placeholder="Enter ID"
-              validate={validateSerialNumberInput}
-              keyboardType="number-pad"
-            />
-            <DropDownContainer />
-          </FieldContainer>
           <FieldContainer>
             <InputTitleText>Amount</InputTitleText>
             <CurrencyInput // TODO: refactor currency input with custom text input base components
@@ -97,11 +72,9 @@ function ManualVoucherScreen() {
           </FieldContainer>
         </FormContainer>
         <ButtonMagenta>
-          <ButtonTextWhite>Add Voucher</ButtonTextWhite>
+          <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
       </BodyContainer>
     </SafeArea>
   );
 }
-
-export default ManualVoucherScreen;

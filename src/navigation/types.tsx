@@ -22,6 +22,7 @@ export type BottomTabScreenProps<T extends keyof BottomTabParamList> =
 export type ScannerStackParamList = {
   ScanningScreen: undefined;
   ManualVoucherScreen: undefined;
+  ConfirmValueScreen: undefined;
   ReviewScreen: undefined;
 };
 
