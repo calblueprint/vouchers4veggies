@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import { RootNavBackButton } from '../../../assets/Components';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import StatusComponent from '../../components/Transactions/StatusComponent';
-import VoucherCard from '../../components/Transactions/VoucherCard';
+import StatusComponent from '../../components/transactions/StatusComponent';
+import VoucherCard from '../../components/transactions/VoucherCard';
 import { getTransaction, getVoucher } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, Voucher } from '../../types/types';
@@ -15,15 +15,15 @@ import {
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 import {
-  Title,
-  TransactionsContainer,
-  LeftAlignedContainer,
-  DarkGrayText,
-  MediumText,
   BackButtonContainer,
   CardContainer,
-  StartOfListView,
+  DarkGrayText,
+  LeftAlignedContainer,
+  MediumText,
   Size14BoldText,
+  StartOfListView,
+  Title,
+  TransactionsContainer,
 } from './styles';
 
 export default function TransactionDetailsScreen({
