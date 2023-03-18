@@ -27,13 +27,12 @@ import { validateSerialNumberInput } from '../../utils/validationUtils';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
-import { addSerialNumber } from '../../utils/scanningUtils';
 
 export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
-  const { isEmpty, dispatch } = useScanningContext();
+  const { isEmpty } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
@@ -41,11 +40,13 @@ export default function ManualVoucherScreen({
   };
 
   const handleVoucherAdd = () => {
-    // TODO: change once we create custom base components for number inputs
-    addSerialNumber(dispatch, Number(serialNumber));
+    const serialNumberInput = Number(serialNumber);
     // clears input field if successfully added
     setSerialNumber('');
-    navigation.navigate('ConfirmValueScreen');
+    // TODO: change once we create custom base components for number inputs
+    navigation.navigate('ConfirmValueScreen', {
+      serialNumber: serialNumberInput,
+    });
   };
 
   return (

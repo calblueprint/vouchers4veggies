@@ -27,8 +27,10 @@ import { useScanningContext } from './ScanningContext';
 import { addVoucher } from '../../utils/scanningUtils';
 
 export default function ConfirmValueScreen({
+  route,
   navigation,
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
+  const { serialNumber } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
   const { isEmpty, voucherMap, dispatch } = useScanningContext();
@@ -48,13 +50,13 @@ export default function ConfirmValueScreen({
   };
 
   const handleVoucherAdd = () => {
-    addVoucher(dispatch, voucherAmount);
+    addVoucher(dispatch, serialNumber, voucherAmount);
     // eslint-disable-next-line no-console
     console.log(voucherMap);
     showToast();
     // clears input field if successfully added
     setVoucherAmount(0);
-    // navigation.navigate('ManualVoucherScreen');
+    navigation.navigate('ManualVoucherScreen');
   };
 
   return (
