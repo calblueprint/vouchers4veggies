@@ -43,6 +43,8 @@ export default function ManualVoucherScreen({
   const handleVoucherAdd = () => {
     // TODO: change once we create custom base components for number inputs
     addSerialNumber(dispatch, Number(serialNumber));
+    // clears input field if successfully added
+    setSerialNumber('');
     navigation.navigate('ConfirmValueScreen');
   };
 
