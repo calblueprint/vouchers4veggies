@@ -40,7 +40,9 @@ export default function ConfirmValueScreen({
     addVoucher(dispatch, voucherAmount);
     // eslint-disable-next-line no-console
     console.log(voucherMap);
-    // navigation.navigate('ManualVoucherScreen');
+    // clears input field if successfully added
+    setVoucherAmount(0);
+    navigation.navigate('ManualVoucherScreen');
   };
 
   return (
@@ -91,13 +93,6 @@ export default function ConfirmValueScreen({
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>
         </ButtonWhite>
-        <ul>
-          {[...voucherMap.keys()].map(k => (
-            <li key={k}>
-              {k} : {voucherMap.get(k)}
-            </li>
-          ))}
-        </ul>
       </BodyContainer>
     </SafeArea>
   );
