@@ -22,20 +22,23 @@ import {
 } from './styles';
 import StandardLogo from '../../components/common/StandardLogo';
 import { ScannerStackScreenProps } from '../../navigation/types';
+import { useScanningContext } from './ScanningContext';
+import { testContext } from '../../utils/scanningUtils';
 
 export default function ConfirmValueScreen({
   navigation,
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [isEmptyMap, setEmptyMap] = useState<boolean>(true);
+  const { isEmpty, dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
   };
 
   const handleVoucherAdd = () => {
-    navigation.navigate('ManualVoucherScreen');
+    testContext(dispatch);
+    // navigation.navigate('ManualVoucherScreen');
   };
 
   return (
@@ -81,7 +84,7 @@ export default function ConfirmValueScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonWhite disabled={isEmptyMap}>
+        <ButtonWhite disabled={isEmpty}>
           <ButtonTextBlack>
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>
