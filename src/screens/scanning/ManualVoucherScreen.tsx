@@ -31,7 +31,6 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [transactionID, setID] = useState<string>('');
-  const [isEmptyMap, setEmptyMap] = useState<boolean>(true);
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
@@ -78,7 +77,7 @@ export default function ManualVoucherScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonWhite disabled={isEmptyMap}>
+        <ButtonWhite disabled>
           <ButtonTextBlack>
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>

@@ -9,6 +9,7 @@ type ScanningState = {
 };
 
 type ScanningContextAction =
+  | { type: 'TEST' }
   | { type: 'ADD_VOUCHER'; serialNumber: number; voucherAmount: number }
   | { type: 'DELETE_VOUCHER'; serialNumber: number };
 
@@ -16,6 +17,11 @@ const useScanningReducer = () =>
   useReducer(
     (prevState: ScanningState, action: ScanningContextAction) => {
       switch (action.type) {
+        case 'TEST':
+          return {
+            ...prevState,
+            isEmpty: false,
+          };
         case 'ADD_VOUCHER':
           return {
             ...prevState,
