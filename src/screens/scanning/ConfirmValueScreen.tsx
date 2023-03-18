@@ -23,21 +23,23 @@ import {
 import StandardLogo from '../../components/common/StandardLogo';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
-import { testContext } from '../../utils/scanningUtils';
+import { addVoucher } from '../../utils/scanningUtils';
 
 export default function ConfirmValueScreen({
   navigation,
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const { isEmpty, dispatch } = useScanningContext();
+  const { isEmpty, voucherMap, dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
   };
 
   const handleVoucherAdd = () => {
-    testContext(dispatch);
+    addVoucher(dispatch, voucherAmount);
+    // eslint-disable-next-line no-console
+    console.log(voucherMap);
     // navigation.navigate('ManualVoucherScreen');
   };
 
@@ -89,6 +91,13 @@ export default function ConfirmValueScreen({
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>
         </ButtonWhite>
+        <ul>
+          {[...voucherMap.keys()].map(k => (
+            <li key={k}>
+              {k} : {voucherMap.get(k)}
+            </li>
+          ))}
+        </ul>
       </BodyContainer>
     </SafeArea>
   );

@@ -26,18 +26,23 @@ import StandardLogo from '../../components/common/StandardLogo';
 import { validateSerialNumberInput } from '../../utils/validationUtils';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
+import { useScanningContext } from './ScanningContext';
+import { addSerialNumber } from '../../utils/scanningUtils';
 
 export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
-  const [transactionID, setID] = useState<string>('');
+  const [serialNumber, setSerialNumber] = useState<string>('');
+  const { isEmpty, dispatch } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
-    setID(value);
+    setSerialNumber(value);
   };
 
   const handleVoucherAdd = () => {
+    // TODO: change once we create custom base components for number inputs
+    addSerialNumber(dispatch, Number(serialNumber));
     navigation.navigate('ConfirmValueScreen');
   };
 
@@ -67,7 +72,7 @@ export default function ManualVoucherScreen({
             <InputTitleText>Serial Number</InputTitleText>
             <InputField
               onChange={onChangeSerialNumber}
-              value={transactionID}
+              value={serialNumber}
               placeholder="Enter Number"
               validate={validateSerialNumberInput}
               keyboardType="number-pad"
@@ -77,7 +82,7 @@ export default function ManualVoucherScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonWhite disabled>
+        <ButtonWhite disabled={isEmpty}>
           <ButtonTextBlack>
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>
