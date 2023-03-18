@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
@@ -36,13 +37,24 @@ export default function ConfirmValueScreen({
     setVoucherAmount(value ?? 0.0);
   };
 
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      topOffset: 50,
+      text1: 'Voucher Scanned!',
+      visibilityTime: 2000,
+    });
+  };
+
   const handleVoucherAdd = () => {
     addVoucher(dispatch, voucherAmount);
     // eslint-disable-next-line no-console
     console.log(voucherMap);
+    showToast();
     // clears input field if successfully added
     setVoucherAmount(0);
-    navigation.navigate('ManualVoucherScreen');
+    // navigation.navigate('ManualVoucherScreen');
   };
 
   return (
@@ -94,6 +106,7 @@ export default function ConfirmValueScreen({
           </ButtonTextBlack>
         </ButtonWhite>
       </BodyContainer>
+      <Toast />
     </SafeArea>
   );
 }
