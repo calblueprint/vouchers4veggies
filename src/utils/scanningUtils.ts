@@ -1,14 +1,16 @@
 import { ScanningDispatch } from '../screens/scanning/ScanningContext';
 
-// eslint-disable-next-line import/prefer-default-export
-// export const addVoucher = (
-//   dispatch: ScanningDispatch,
-//   serialNumber: number,
-//   voucherAmount: number,
-// ) => dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherAmount });
+/** Adds the Serial Number input to a temporary variable */
+export const addSerialNumber = (
+  dispatch: ScanningDispatch,
+  serialNumber: number,
+) => dispatch({ type: 'ADD_SERIAL_NUMBER', serialNumber });
+
+/** Takes voucher amount and creates a new voucher with temporary serial number */
+export const addVoucher = (dispatch: ScanningDispatch, voucherAmount: number) =>
+  dispatch({ type: 'ADD_VOUCHER', voucherAmount });
 
 /** Tests that ScanningContext is working properly by undisabling buttons */
-// eslint-disable-next-line import/prefer-default-export
 export const testContext = (dispatch: ScanningDispatch) => {
   dispatch({ type: 'TEST' });
 };
