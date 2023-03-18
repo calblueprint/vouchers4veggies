@@ -3,7 +3,7 @@ import { FlatList, RefreshControl } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
-import TransactionCard from '../../components/Transactions/TransactionCard';
+import TransactionCard from '../../components/transactions/TransactionCard';
 import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction } from '../../types/types';
