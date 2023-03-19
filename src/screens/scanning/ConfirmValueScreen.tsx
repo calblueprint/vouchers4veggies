@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native';
-import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
+import { ButtonMagenta } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
 import {
   ButtonTextWhite,
-  ButtonTextBlack,
-  H4CardNavTab,
   CenterText,
   H2Heading,
   InputTitleText,
+  CounterText,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
@@ -20,6 +19,7 @@ import {
   SafeArea,
   FieldContainer,
   FormContainer,
+  VoucherCounter,
 } from './styles';
 import StandardLogo from '../../components/common/StandardLogo';
 import { ScannerStackScreenProps } from '../../navigation/types';
@@ -33,7 +33,8 @@ export default function ConfirmValueScreen({
   const { serialNumber } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const { isEmpty, voucherMap, dispatch } = useScanningContext();
+  const [scanCounter, setScanCounter] = useState<number>(0);
+  const { voucherMap, dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
@@ -51,24 +52,34 @@ export default function ConfirmValueScreen({
 
   const handleVoucherAdd = () => {
     addVoucher(dispatch, serialNumber, voucherAmount);
-    // eslint-disable-next-line no-console
-    console.log(voucherMap);
     showToast();
     // clears input field if successfully added
     setVoucherAmount(0);
     navigation.navigate('ManualVoucherScreen');
   };
 
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(voucherMap);
+    setScanCounter(voucherMap.size);
+  }, [voucherMap]);
+
   return (
     <SafeArea>
       <Header>
-        <StandardLogo />
+        {scanCounter === 0 ? (
+          <StandardLogo />
+        ) : (
+          <VoucherCounter>
+            <CounterText>{scanCounter}</CounterText>
+          </VoucherCounter>
+        )}
       </Header>
 
       <BodyContainer>
         <TitleContainer>
           <CenterText>
-            <H2Heading>Add a voucher</H2Heading>
+            <H2Heading>Confirm Value</H2Heading>
           </CenterText>
         </TitleContainer>
         <FormContainer>
@@ -102,11 +113,6 @@ export default function ConfirmValueScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonWhite disabled={isEmpty}>
-          <ButtonTextBlack>
-            <H4CardNavTab>Review and Submit</H4CardNavTab>
-          </ButtonTextBlack>
-        </ButtonWhite>
       </BodyContainer>
       <Toast />
     </SafeArea>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { set } from 'zod';
 import {
   ButtonMagenta,
   ButtonWhite,
@@ -12,6 +13,7 @@ import {
   CenterText,
   H2Heading,
   InputTitleText,
+  CounterText,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
@@ -20,6 +22,7 @@ import {
   SafeArea,
   FieldContainer,
   FormContainer,
+  VoucherCounter,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
@@ -32,7 +35,8 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
-  const { isEmpty } = useScanningContext();
+  const [scanCounter, setScanCounter] = useState<number>(0);
+  const { isEmpty, voucherMap } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
@@ -49,10 +53,23 @@ export default function ManualVoucherScreen({
     });
   };
 
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(voucherMap);
+    setScanCounter(voucherMap.size);
+  }, [voucherMap]);
+
   return (
     <SafeArea>
       <Header>
-        <StandardLogo />
+        {scanCounter === 0 ? (
+          <StandardLogo />
+        ) : (
+          <VoucherCounter>
+            <CounterText>{scanCounter}</CounterText>
+          </VoucherCounter>
+        )}
+
         <AddManuallyButton
           onPress={() => navigation.navigate('ScanningScreen')}
         >

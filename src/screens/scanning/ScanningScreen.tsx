@@ -87,35 +87,24 @@ export default function ScanningScreen({
   return (
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
-      {scanCounter === 0 ? (
-        <Header>
+      <Header>
+        {scanCounter === 0 ? (
           <StandardLogo />
-          <AddManuallyButton
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextBlack>
-              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-              {'  '}
-              Add Manually
-            </ButtonTextBlack>
-          </AddManuallyButton>
-        </Header>
-      ) : (
-        <Header>
+        ) : (
           <VoucherCounter>
             <CounterText>{scanCounter}</CounterText>
           </VoucherCounter>
-          <AddManuallyButton
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextBlack>
-              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-              {'  '}
-              Add Manually
-            </ButtonTextBlack>
-          </AddManuallyButton>
-        </Header>
-      )}
+        )}
+        <AddManuallyButton
+          onPress={() => navigation.navigate('ManualVoucherScreen')}
+        >
+          <ButtonTextBlack>
+            <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+            {'  '}
+            Add Manually
+          </ButtonTextBlack>
+        </AddManuallyButton>
+      </Header>
 
       <BodyContainer>
         <TitleContainer>
