@@ -79,7 +79,7 @@ export default function ProfileScreen({
         <ButtonBlank />
       </ButtonBottomContainer>
       <MagentaButtonContainer>
-        <ButtonMagenta onPress={signOut}>
+        <ButtonMagenta onPress={() => signOut}>
           <ButtonTextWhite>Log Out</ButtonTextWhite>
         </ButtonMagenta>
       </MagentaButtonContainer>
