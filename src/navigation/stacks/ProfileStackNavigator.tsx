@@ -20,7 +20,7 @@ export default function ProfileStackNavigator() {
     >
       <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
       <ProfileStack.Screen name="EditEmailScreen" component={EditEmailScreen} />
-      <ProfileStack.Screen name="EditPhoneScreen" component={EditPhoneScreen} />
+      <ProfileStack.Screen name="EditPhoneNumber" component={EditPhoneScreen} />
     </ProfileStack.Navigator>
   );
 }
