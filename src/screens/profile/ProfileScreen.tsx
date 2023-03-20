@@ -40,43 +40,49 @@ export default function ProfileScreen({
         <HeadingContainer>
           <H2Heading>Hi, Derby Food Market!</H2Heading>
         </HeadingContainer>
-        <ButtonEmailContainer
-          onPress={() => navigation.navigate('EditPhoneNumber')}
-        >
-          <ButtonBlank />
-          <IconContainer>
-            <Icon name="right" size={20} color={Colors.midGray} />
-          </IconContainer>
-          <EmailText> Email</EmailText>
-          <H4CardNavTab> email@email.com</H4CardNavTab>
-        </ButtonEmailContainer>
-        <ButtonPhoneContainer
-          onPress={() => navigation.navigate('EditEmailScreen')}
-        >
-          <ButtonBlank title="Phone Number" color="black" />
-          <IconContainer>
-            <Icon name="right" size={20} color={Colors.midGray} />
-          </IconContainer>
-          <EmailText> Phone Number</EmailText>
-          <H4CardNavTab>(123) 456-7890</H4CardNavTab>
-        </ButtonPhoneContainer>
-        <ButtonPasswordContainer>
-          <ButtonBlank title="Password" color="black" />
-          <IconContainer>
-            <Icon name="right" size={20} color={Colors.midGray} />
-          </IconContainer>
-          <EmailText> Password</EmailText>
-          <H4CardNavTab> ............</H4CardNavTab>
-        </ButtonPasswordContainer>
-        <ButtonBottomContainer>
-          <ButtonBlank title="" color="black" />
-        </ButtonBottomContainer>
-        <MagentaButtonContainer>
-          <ButtonMagenta onPress={signOut}>
-            <ButtonTextWhite>Log Out</ButtonTextWhite>
-          </ButtonMagenta>
-        </MagentaButtonContainer>
       </MainProfileContainer>
+      <ButtonEmailContainer
+        onPress={() => navigation.navigate('EditPhoneNumber')}
+      >
+        <ButtonBlank />
+        <IconContainer>
+          <Icon name="right" size={20} color={Colors.midGray} />
+        </IconContainer>
+        <MainProfileContainer>
+          <EmailText>Email</EmailText>
+          <H4CardNavTab>email@email.com</H4CardNavTab>
+        </MainProfileContainer>
+      </ButtonEmailContainer>
+      <ButtonPhoneContainer
+        onPress={() => navigation.navigate('EditEmailScreen')}
+      >
+        <ButtonBlank />
+        <IconContainer>
+          <Icon name="right" size={20} color={Colors.midGray} />
+        </IconContainer>
+        <MainProfileContainer>
+          <EmailText>Phone Number</EmailText>
+          <H4CardNavTab>(123) 456-7890</H4CardNavTab>
+        </MainProfileContainer>
+      </ButtonPhoneContainer>
+      <ButtonPasswordContainer>
+        <ButtonBlank />
+        <IconContainer>
+          <Icon name="right" size={20} color={Colors.midGray} />
+        </IconContainer>
+        <MainProfileContainer>
+          <EmailText>Password</EmailText>
+          <H4CardNavTab>............</H4CardNavTab>
+        </MainProfileContainer>
+      </ButtonPasswordContainer>
+      <ButtonBottomContainer>
+        <ButtonBlank />
+      </ButtonBottomContainer>
+      <MagentaButtonContainer>
+        <ButtonMagenta onPress={signOut}>
+          <ButtonTextWhite>Log Out</ButtonTextWhite>
+        </ButtonMagenta>
+      </MagentaButtonContainer>
     </>
   );
 }
