@@ -2,13 +2,6 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const SafeArea = styled.SafeAreaView`
-  background-color: ${Colors.offWhite};
-  min-height: 100%;
-  align-items: center;
-  flex: 1;
-`;
-
 export const LoginContainer = styled.View`
   width: 100%;
   display: flex;
@@ -19,29 +12,13 @@ export const LoginContainer = styled.View`
 `;
 
 export const StartContainer = styled.View`
-  top: 15%;
+  top: 20%;
   align-items: center;
 `;
 
 export const HeadingContainer = styled.View`
-  margin-top: 15%;
   align-items: left;
   margin-bottom: 10%;
-`;
-
-export const Header = styled.View`
-  width: 85%;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  margin-top: 12%;
-=======
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 26px;
->>>>>>> 3a6807d (rebasing with main)
-=======
-  margin-top: 12%;
->>>>>>> 1c806ac (rebasing with main)
 `;
 
 export const FormContainer = styled.View`
@@ -94,11 +71,9 @@ export const ButtonContainer = styled.View`
 `;
 
 export const BackButtonContainer = styled.View`
-  width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 5%;
-  margin-top: 15%;
+  margin-top: 10%;
 `;
 
 export const SmallTextContainer = styled.View`

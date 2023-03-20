@@ -8,8 +8,8 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
+import StandardHeader from '../../components/common/StandardHeader';
 import {
-  LogoContainer,
   TransactionsContainer,
   TitleContainer,
   CardContainer,
@@ -43,9 +43,9 @@ export default function TransactionsScreen({
 
   return (
     <TransactionsContainer>
-      <LogoContainer>
+      <StandardHeader>
         <StandardLogo />
-      </LogoContainer>
+      </StandardHeader>
 
       <TitleContainer>
         <H2Heading>Transactions</H2Heading>

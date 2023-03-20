@@ -3,21 +3,25 @@ import { FlexAlignType, View } from 'react-native';
 
 interface HeaderContainerProps {
   alignment?: FlexAlignType;
+  topMargin?: string;
   children: ReactNode;
 }
 
 export default function HeaderContainer({
   alignment,
-  // justifycontent,
+  topMargin,
   children,
 }: HeaderContainerProps) {
   return (
     <View
       style={{
-        width: '100%',
+        // backgroundColor: 'yellow',
+        width: '90%',
         height: '12%',
         display: 'flex',
-        // flex-direction : row
+        flexDirection: 'row',
+        marginTop: topMargin || '15%',
+        justifyContent: 'space-between',
         alignItems: alignment || 'center',
       }}
     >

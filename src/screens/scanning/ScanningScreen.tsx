@@ -21,7 +21,6 @@ import {
   ScannerContainer,
   TitleContainer,
   VoucherCounter,
-  Header,
   BodyContainer,
   SafeArea,
 } from './styles';
@@ -89,37 +88,35 @@ export default function ScanningScreen({
   return (
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
-      <StandardHeader alignment="center">
-        {scanCounter === 0 ? (
-          <Header>
-            <StandardLogo />
-            <AddManuallyButton
-              onPress={() => navigation.navigate('ManualVoucherScreen')}
-            >
-              <ButtonTextBlack>
-                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-                {'  '}
-                Add Manually
-              </ButtonTextBlack>
-            </AddManuallyButton>
-          </Header>
-        ) : (
-          <Header>
-            <VoucherCounter>
-              <CounterText>{scanCounter}</CounterText>
-            </VoucherCounter>
-            <AddManuallyButton
-              onPress={() => navigation.navigate('ManualVoucherScreen')}
-            >
-              <ButtonTextBlack>
-                <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-                {'  '}
-                Add Manually
-              </ButtonTextBlack>
-            </AddManuallyButton>
-          </Header>
-        )}
-      </StandardHeader>
+      {scanCounter === 0 ? (
+        <StandardHeader topMargin="4%">
+          <StandardLogo />
+          <AddManuallyButton
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
+          >
+            <ButtonTextBlack>
+              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+              {'  '}
+              Add Manually
+            </ButtonTextBlack>
+          </AddManuallyButton>
+        </StandardHeader>
+      ) : (
+        <StandardHeader>
+          <VoucherCounter>
+            <CounterText>{scanCounter}</CounterText>
+          </VoucherCounter>
+          <AddManuallyButton
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
+          >
+            <ButtonTextBlack>
+              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+              {'  '}
+              Add Manually
+            </ButtonTextBlack>
+          </AddManuallyButton>
+        </StandardHeader>
+      )}
 
       <BodyContainer>
         <TitleContainer>

@@ -8,7 +8,6 @@ import {
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
-  Header,
   BodyContainer,
   SafeArea,
   DropDownContainer,
@@ -47,10 +46,8 @@ function ManualVoucherScreen() {
 
   return (
     <SafeArea>
-      <StandardHeader>
-        <Header>
-          <StandardLogo />
-        </Header>
+      <StandardHeader topMargin="4%">
+        <StandardLogo />
       </StandardHeader>
 
       <BodyContainer>

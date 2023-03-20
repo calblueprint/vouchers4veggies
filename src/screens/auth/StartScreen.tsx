@@ -9,7 +9,6 @@ import {
   ButtonContainer,
   DarkGrayText,
   LoginContainer,
-  Header,
   StartContainer,
   WhiteText,
 } from './styles';
@@ -21,9 +20,7 @@ export default function StartScreen({
     <LoginContainer>
       {/* logo placeholder */}
       <StandardHeader>
-        <Header>
-          <StandardLogo />
-        </Header>
+        <StandardLogo />
       </StandardHeader>
 
       <StartContainer>
