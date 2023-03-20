@@ -8,6 +8,7 @@ import {
   ButtonTextWhite,
 } from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
+import { useAuthContext } from '../auth/AuthContext';
 import {
   HeadingContainer,
   ButtonBlank,
@@ -30,6 +31,9 @@ const v4vLogo = require('../../../assets/logo-1.png');
 export default function ProfileScreen({
   navigation,
 }: ProfileStackScreenProps<'ProfileScreen'>) {
+  const { dispatch } = useAuthContext();
+  const handleSignOut = async () => signOut(dispatch);
+
   return (
     <>
       <View>
@@ -79,7 +83,7 @@ export default function ProfileScreen({
         <ButtonBlank />
       </ButtonBottomContainer>
       <MagentaButtonContainer>
-        <ButtonMagenta onPress={() => signOut}>
+        <ButtonMagenta onPress={handleSignOut}>
           <ButtonTextWhite>Log Out</ButtonTextWhite>
         </ButtonMagenta>
       </MagentaButtonContainer>
