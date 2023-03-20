@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Colors } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, ButtonTextWhite } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { ProfileStackScreenProps } from '../../navigation/types';
+import { DarkGrayText } from '../Transactions/styles';
 import {
   BackButtonContainer,
   EmailHeadingContainer,
   FormContainer,
-  IconBackContainer,
   InputFieldContainer,
 } from './styles';
 
@@ -25,13 +25,14 @@ export default function EditPhoneScreen({
   return (
     <View>
       <View>
-        <BackButtonContainer
-          onPress={() => navigation.navigate('ProfileScreen')}
-        >
-          <IconBackContainer>
-            <Icon name="left" size={20} color={Colors.black} />
-            <Body1Text>Back</Body1Text>
-          </IconBackContainer>
+        <BackButtonContainer>
+          <RootNavBackButton
+            onPress={() => navigation.navigate('ProfileScreen')}
+          >
+            <DarkGrayText>
+              <Icon name="left" size={14} color={Colors.black} /> Back
+            </DarkGrayText>
+          </RootNavBackButton>
         </BackButtonContainer>
       </View>
       <FormContainer>
