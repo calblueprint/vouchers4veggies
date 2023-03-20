@@ -55,7 +55,7 @@ export const InputField = styled.TextInput`
   background: ${Colors.lightGray};
   border-radius: 5px;
   padding: 8px;
-  width: 100%;
+  width: 277px;
 `;
 
 export const LargeInputField = styled.TextInput`
