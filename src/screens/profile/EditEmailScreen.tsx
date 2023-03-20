@@ -6,7 +6,7 @@ import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, ButtonTextWhite } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { ProfileStackScreenProps } from '../../navigation/types';
-import { DarkGrayText } from '../Transactions/styles';
+import { DarkGrayText } from '../transactions/styles';
 import {
   BackButtonContainer,
   EmailHeadingContainer,
@@ -16,7 +16,7 @@ import {
 
 export default function EditEmailScreen({
   navigation,
-}: ProfileStackScreenProps<'ProfileScreen'>) {
+}: ProfileStackScreenProps<'EditEmailScreen'>) {
   const [email, setEmail] = useState('');
   const onChangeEmail = (value: string) => {
     setEmail(value);
