@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import moment from 'moment';
 import { TouchableOpacity } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { Body1Text, H2Heading, H3Subheading } from '../../../assets/Fonts';
+import { Body1Text, H3Subheading } from '../../../assets/Fonts';
 import {
   StatusContainer,
   LeftAlignContainer,
