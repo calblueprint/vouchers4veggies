@@ -73,6 +73,7 @@ export const InputFieldContainer = styled.View`
   display: flex;
   align-items: flex-start;
   margin-bottom: 124px;
+  width: 75%;
 `;
 export const IconBackContainer = styled.View`
   margin-top: 16px;
