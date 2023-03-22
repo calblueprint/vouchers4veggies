@@ -23,7 +23,6 @@ import {
 } from './styles';
 import { ProfileStackScreenProps } from '../../navigation/types';
 import { ButtonMagenta } from '../../../assets/Components';
-// import { DarkGrayText } from '../auth/styles';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v4vLogo = require('../../../assets/logo-1.png');
 
@@ -33,7 +32,6 @@ export default function ProfileScreen({
   return (
     <>
       <View>
-        {/* logo placeholder */}
         <LogoContainer source={v4vLogo} />
       </View>
       <MainProfileContainer>
