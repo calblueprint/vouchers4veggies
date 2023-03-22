@@ -23,7 +23,7 @@ export const ButtonPhoneContainer = styled.TouchableOpacity`
   margin-left: 0px;
 `;
 export const EmailText = styled.Text`
-  font-family: 'Manrope';
+  font-family: 'manrope-regular';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -45,7 +45,7 @@ export const ButtonBottomContainer = styled.TouchableOpacity`
 `;
 
 export const MagentaButtonContainer = styled.View`
-  flex-direction: top;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   margin-top: 180px;
