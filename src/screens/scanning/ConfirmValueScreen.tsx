@@ -31,7 +31,7 @@ export default function ConfirmValueScreen({
   route,
   navigation,
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
-  const { serialNumber, prevScreen } = route.params;
+  const { serialNumber } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
   const { scanCounter, dispatch } = useScanningContext();

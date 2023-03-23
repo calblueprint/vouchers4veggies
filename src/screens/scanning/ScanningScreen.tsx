@@ -74,7 +74,7 @@ export default function ScanningScreen({
       const { data } = scanningResult;
       setScanned(true);
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      // showToast();
+      showToast();
       navigation.navigate('ConfirmValueScreen', {
         serialNumber: Number(data),
       });
@@ -133,23 +133,18 @@ export default function ScanningScreen({
         />
       </ScannerContainer>
 
-      {voucherMap.size === 0 ? (
+      <ButtonContainer>
         <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>
-      ) : (
-        <ButtonContainer>
-          <ButtonWhite disabled={!scanned} onPress={() => setScanned(false)}>
-            <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
-          </ButtonWhite>
-          <ButtonMagenta
-            // onPress={() => navigation.navigate('ReviewScreen')}
-            disabled={voucherMap.size === 0}
-          >
-            <ButtonTextWhite>Review & Submit</ButtonTextWhite>
-          </ButtonMagenta>
-        </ButtonContainer>
-      )}
+
+        <ButtonWhite
+          // onPress={() => navigation.navigate('ReviewScreen')}
+          disabled={voucherMap.size === 0}
+        >
+          <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
+        </ButtonWhite>
+      </ButtonContainer>
       <Toast />
     </SafeArea>
   );
