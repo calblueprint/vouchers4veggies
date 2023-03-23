@@ -24,17 +24,14 @@ export default function EditEmailScreen({
 
   return (
     <View>
-      <View>
-        <BackButtonContainer>
-          <RootNavBackButton
-            onPress={() => navigation.navigate('ProfileScreen')}
-          >
-            <DarkGrayText>
-              <Icon name="left" size={14} color={Colors.black} /> Back
-            </DarkGrayText>
-          </RootNavBackButton>
-        </BackButtonContainer>
-      </View>
+      <BackButtonContainer>
+        <RootNavBackButton onPress={() => navigation.navigate('ProfileScreen')}>
+          <DarkGrayText>
+            <Icon name="left" size={14} color={Colors.black} /> Back
+          </DarkGrayText>
+        </RootNavBackButton>
+      </BackButtonContainer>
+
       <FormContainer>
         <EmailHeadingContainer>
           <H2Heading>Edit Phone Number</H2Heading>

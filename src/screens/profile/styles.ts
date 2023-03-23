@@ -1,37 +1,15 @@
 import styled from 'styled-components/native';
 
 export const HeadingContainer = styled.Text`
-  margin-top: 86px;
+  margin-top: 57px;
   margin-bottom: 16px;
   word-break: break-all;
   width: 100%;
 `;
-export const ButtonContainer = styled.TouchableOpacity`
-  margin-top: 30%;
-  margin-left: 30px;
-`;
-export const ButtonPasswordContainer = styled.TouchableOpacity`
+export const ButtonInfoContainer = styled.TouchableOpacity`
   margin-top: 4%;
   margin-left: 0px;
 `;
-export const ButtonEmailContainer = styled.TouchableOpacity`
-  margin-top: 4%;
-  margin-left: 0px;
-`;
-export const ButtonPhoneContainer = styled.TouchableOpacity`
-  margin-top: 4%;
-  margin-left: 0px;
-`;
-export const EmailText = styled.Text`
-  font-family: 'manrope-regular';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-  margin-top: -6.3%;
-  color: #000000;
-`;
-
 export const ButtonBlank = styled.TouchableOpacity`
   box-sizing: border-box;
   height: 0px;
@@ -50,12 +28,6 @@ export const MagentaButtonContainer = styled.View`
   align-items: center;
   margin-top: 180px;
   width: 100%;
-`;
-export const LogoContainer = styled.ImageBackground`
-  width: 50px;
-  height: 60px;
-  margin-top: 25px;
-  margin-left: 30px;
 `;
 export const IconContainer = styled.View`
   margin-top: 16px;

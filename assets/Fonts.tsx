@@ -114,3 +114,13 @@ export const WhiteText = styled.Text`
 export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
 `;
+
+export const EmailText = styled.Text`
+  font-family: 'manrope-regular';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: -6.3%;
+  color: Colors.midGray;
+`;
