@@ -38,40 +38,17 @@ import {
 import { CardContainer } from '../../components/common/styles';
 import { useScanningContext } from './ScanningContext';
 import ReviewVoucherCard from '../../components/scanning/ReviewVoucherCard';
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-    borderRadius: 10,
-  },
-});
+import { validateVoucherAmount } from '../../utils/validationUtils';
+import { editVoucher } from '../../utils/scanningUtils';
 
 export default function ReviewScreen({
   navigation,
 }: ScannerStackScreenProps<'ReviewScreen'>) {
-  const { voucherMap } = useScanningContext();
+  const { voucherMap, dispatch } = useScanningContext();
   const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
     serialNumber,
     value,
   }));
-
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      topOffset: 50,
-      text1: 'Voucher Scanned!',
-      visibilityTime: 2000,
-    });
-  };
-
-  const onEdit = () => {
-    console.log('in progress');
-  };
-
-  const onDelete = () => {
-    console.log('in progress');
-  };
 
   return (
     <SafeArea>
@@ -83,8 +60,6 @@ export default function ReviewScreen({
             <ReviewVoucherCard
               serialNumber={item.serialNumber}
               value={item.value}
-              onEdit={onEdit}
-              onDelete={onDelete}
             />
           )}
           keyExtractor={item => item.serialNumber.toString()}

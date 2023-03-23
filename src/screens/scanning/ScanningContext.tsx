@@ -9,7 +9,20 @@ type ScanningState = {
 
 type ScanningContextAction =
   | { type: 'TEST' }
-  | { type: 'ADD_VOUCHER'; serialNumber: number; voucherAmount: number };
+  | { type: 'ADD_VOUCHER'; serialNumber: number; voucherAmount: number }
+  | { type: 'EDIT_VOUCHER'; serialNumber: number; voucherAmount: number }
+  | { type: 'DELETE_VOUCHER'; serialNumber: number };
+
+const deleteVoucherHelper = (
+  prevMap: Map<number, number>,
+  serialNumber: number,
+) => {
+  prevMap.delete(serialNumber);
+  return prevMap;
+};
+
+const isEmptyAfterDelete = (prevMap: Map<number, number>) =>
+  prevMap.size - 1 > 0;
 
 const useScanningReducer = () =>
   useReducer(
@@ -27,6 +40,24 @@ const useScanningReducer = () =>
                 action.serialNumber,
                 action.voucherAmount,
               ),
+            ),
+          };
+        case 'EDIT_VOUCHER':
+          return {
+            ...prevState,
+            voucherMap: new Map(
+              prevState.voucherMap.set(
+                action.serialNumber,
+                action.voucherAmount,
+              ),
+            ),
+          };
+        case 'DELETE_VOUCHER':
+          return {
+            ...prevState,
+            isEmpty: isEmptyAfterDelete(prevState.voucherMap),
+            voucherMap: new Map(
+              deleteVoucherHelper(prevState.voucherMap, action.serialNumber),
             ),
           };
         default:
