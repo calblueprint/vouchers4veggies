@@ -16,7 +16,6 @@ import {
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
-  Header,
   BodyContainer,
   SafeArea,
   FieldContainer,
@@ -25,6 +24,7 @@ import {
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
+import StandardHeader from '../../components/common/StandardHeader';
 import { validateSerialNumberInput } from '../../utils/validationUtils';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
@@ -60,7 +60,7 @@ export default function ManualVoucherScreen({
 
   return (
     <SafeArea>
-      <Header>
+      <StandardHeader topMargin="4%">
         {scanCounter === 0 ? (
           <StandardLogo />
         ) : (
@@ -78,7 +78,7 @@ export default function ManualVoucherScreen({
             Scan Voucher
           </ButtonTextBlack>
         </AddManuallyButton>
-      </Header>
+      </StandardHeader>
 
       <BodyContainer>
         <TitleContainer>

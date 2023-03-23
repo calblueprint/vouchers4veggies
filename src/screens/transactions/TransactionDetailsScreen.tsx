@@ -10,6 +10,7 @@ import VoucherCard from '../../components/transactions/VoucherCard';
 import { getTransaction, getVoucher } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, Voucher } from '../../types/types';
+import StandardHeader from '../../components/common/StandardHeader';
 import {
   formatTimeForDisplay,
   formatValueForDisplay,
@@ -64,15 +65,17 @@ export default function TransactionDetailsScreen({
 
   return (
     <TransactionsContainer>
-      <BackButtonContainer>
-        <RootNavBackButton
-          onPress={() => navigation.navigate('TransactionsScreen')}
-        >
-          <DarkGrayText>
-            <Icon name="left" size={14} color={Colors.darkGray} /> Back
-          </DarkGrayText>
-        </RootNavBackButton>
-      </BackButtonContainer>
+      <StandardHeader>
+        <BackButtonContainer>
+          <RootNavBackButton
+            onPress={() => navigation.navigate('TransactionsScreen')}
+          >
+            <DarkGrayText>
+              <Icon name="left" size={14} color={Colors.darkGray} /> Back
+            </DarkGrayText>
+          </RootNavBackButton>
+        </BackButtonContainer>
+      </StandardHeader>
 
       {transactionData ? (
         <TransactionsContainer>
