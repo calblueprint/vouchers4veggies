@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Toast from 'react-native-toast-message';
+// import Toast from 'react-native-toast-message';
 import {
   ButtonTextBlack,
   Body1Text,
@@ -58,15 +58,15 @@ export default function ScanningScreen({
     getBarCodeScannerPermissions();
   }, []);
 
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      topOffset: 50,
-      text1: 'Voucher Scanned!',
-      visibilityTime: 2000,
-    });
-  };
+  // const showToast = () => {
+  //   Toast.show({
+  //     type: 'success',
+  //     position: 'top',
+  //     topOffset: 50,
+  //     text1: 'Voucher Scanned!',
+  //     visibilityTime: 2000,
+  //   });
+  // };
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
@@ -74,7 +74,7 @@ export default function ScanningScreen({
       const { data } = scanningResult;
       setScanned(true);
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      showToast();
+      // showToast();
       navigation.navigate('ConfirmValueScreen', {
         serialNumber: Number(data),
       });
@@ -145,7 +145,7 @@ export default function ScanningScreen({
           <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
         </ButtonWhite>
       </ButtonContainer>
-      <Toast />
+      {/* <Toast /> */}
     </SafeArea>
   );
 }
