@@ -1,13 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
+import { StyleSheet, View } from 'react-native';
+import { ButtonMagenta } from '../../../assets/Components';
 import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
+import StandardLogo from '../../components/common/StandardLogo';
 import {
   ButtonContainer,
-  DarkGrayText,
   LoginContainer,
-  HeadingContainer,
   StartContainer,
   WhiteText,
 } from './styles';
@@ -19,10 +18,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button: {
-    width: 300,
-    margin: 10,
-  },
 });
 
 export default function StartScreen({
@@ -31,29 +26,14 @@ export default function StartScreen({
   return (
     <View style={styles.container}>
       <LoginContainer>
-        {/* logo placeholder */}
-        <HeadingContainer>
-          <View style={{ backgroundColor: 'black', width: 50, height: 59.29 }}>
-            <Text style={{ color: 'white' }}>{`\n  Logo`}</Text>
-          </View>
-        </HeadingContainer>
-
         <StartContainer>
-          <H1Heading>{"Hello! Let's\nget started."}</H1Heading>
+          <StandardLogo />
+          <H1Heading>{"Hello! Let's get\nyou started."}</H1Heading>
 
           <ButtonContainer>
-            <ButtonWhite onPress={() => navigation.navigate('Login')}>
-              <DarkGrayText>
-                <H4CardNavTab>Login</H4CardNavTab>
-              </DarkGrayText>
-            </ButtonWhite>
-          </ButtonContainer>
-
-          <ButtonContainer>
-            {/* TODO: navigate to signup screen */}
-            <ButtonMagenta>
+            <ButtonMagenta onPress={() => navigation.navigate('Login')}>
               <WhiteText>
-                <H4CardNavTab>Sign Up</H4CardNavTab>
+                <H4CardNavTab>Login</H4CardNavTab>
               </WhiteText>
             </ButtonMagenta>
           </ButtonContainer>

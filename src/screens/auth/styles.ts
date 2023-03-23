@@ -12,8 +12,7 @@ export const LoginContainer = styled.View`
 `;
 
 export const StartContainer = styled.View`
-  top: 25%;
-  align-items: center;
+  top: 35%;
 `;
 
 export const HeadingContainer = styled.View`
