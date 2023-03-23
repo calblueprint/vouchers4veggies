@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
   ButtonMagenta,
@@ -34,7 +34,7 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
-  const { isEmpty, scanCounter } = useScanningContext();
+  const { scanCounter } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
@@ -94,7 +94,7 @@ export default function ManualVoucherScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonWhite disabled={isEmpty}>
+        <ButtonWhite disabled={scanCounter === 0}>
           <ButtonTextBlack>
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>
