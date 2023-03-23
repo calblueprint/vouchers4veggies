@@ -32,6 +32,7 @@ import {
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
+import { useScanningContext } from './ScanningContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,7 +47,7 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const [scanCounter, incrementScanned] = useState(0);
+  const { isEmpty, voucherMap } = useScanningContext();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -71,7 +72,6 @@ export default function ScanningScreen({
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
-      incrementScanned(scanCounter + 1);
       setScanned(true);
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
       showToast();
@@ -89,11 +89,11 @@ export default function ScanningScreen({
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
       <StandardHeader topMargin="4%">
-        {scanCounter === 0 ? (
+        {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (
           <VoucherCounter>
-            <CounterText>{scanCounter}</CounterText>
+            <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
         )}
         <AddManuallyButton
@@ -130,7 +130,7 @@ export default function ScanningScreen({
         />
       </ScannerContainer>
 
-      {scanCounter === 0 ? (
+      {voucherMap.size === 0 ? (
         <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>
@@ -140,7 +140,8 @@ export default function ScanningScreen({
             <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
           </ButtonWhite>
           <ButtonMagenta
-          // onPress={() => navigation.navigate('ReviewScreen')}
+            // onPress={() => navigation.navigate('ReviewScreen')}
+            disabled={isEmpty}
           >
             <ButtonTextWhite>Review & Submit</ButtonTextWhite>
           </ButtonMagenta>
