@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Colors from '../../../assets/Colors';
-import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
+import { ButtonMagenta } from '../../../assets/Components';
 import {
   Body1Text,
-  DarkGrayText,
   H2Heading,
   H4CardNavTab,
   WhiteText,
@@ -21,7 +18,6 @@ import {
 import StandardHeader from '../../components/common/StandardHeader';
 
 import {
-  BackButtonContainer,
   FormContainer,
   HeadingContainer,
   LeftAlignContainer,
@@ -32,6 +28,7 @@ import {
   Styles,
   VerticalSpacingButtonContainer,
 } from './styles';
+import BackButton from '../../components/common/BackButton';
 
 export default function LoginScreen({
   navigation,
@@ -66,15 +63,7 @@ export default function LoginScreen({
 
   return (
     <LoginContainer>
-      <StandardHeader alignment="flex-start">
-        <BackButtonContainer>
-          <RootNavBackButton onPress={() => navigation.navigate('Start')}>
-            <DarkGrayText>
-              <Icon name="left" size={14} color={Colors.darkGray} /> Back
-            </DarkGrayText>
-          </RootNavBackButton>
-        </BackButtonContainer>
-      </StandardHeader>
+      {BackButton(() => navigation.navigate('Start'))}
 
       <FormContainer>
         <HeadingContainer>

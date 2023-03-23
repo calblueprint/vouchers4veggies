@@ -11,7 +11,7 @@ import {
   ValueContainer,
   Styles,
 } from './styles';
-import { Row } from '../common/styles';
+import { Row } from '../../../assets/Components';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';
 import {

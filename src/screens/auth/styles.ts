@@ -69,17 +69,15 @@ export const ButtonContainer = styled.View`
   margin-top: 5%;
 `;
 
-export const BackButtonContainer = styled.View`
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-top: 10%;
-`;
-
 export const SmallTextContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   margin-top: 6%;
+`;
+
+export const WhiteText = styled.Text`
+  color: ${Colors.offWhite};
 `;
 
 export const Styles = StyleSheet.create({

@@ -28,6 +28,7 @@ import {
   AddManuallyButton,
   ButtonMagenta,
   ButtonWhite,
+  CardContainer,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
@@ -36,7 +37,6 @@ import {
   TransactionsContainer,
   StartOfListView,
 } from '../transactions/styles';
-import { CardContainer } from '../../components/common/styles';
 import { useScanningContext } from './ScanningContext';
 import ReviewVoucherCard from '../../components/scanning/ReviewVoucherCard';
 import { validateVoucherAmount } from '../../utils/validationUtils';

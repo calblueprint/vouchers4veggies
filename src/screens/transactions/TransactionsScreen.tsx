@@ -15,7 +15,7 @@ import {
   TitleContainer,
   StartOfListView,
 } from './styles';
-import { CardContainer } from '../../components/common/styles';
+import { CardContainer } from '../../../assets/Components';
 
 export default function TransactionsScreen({
   navigation,

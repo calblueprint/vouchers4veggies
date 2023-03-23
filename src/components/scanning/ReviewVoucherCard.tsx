@@ -3,7 +3,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
 import { Body1Text } from '../../../assets/Fonts';
 import { LeftAlignContainer, Styles } from '../transactions/styles';
-import { Row } from '../common/styles';
+import { Row } from '../../../assets/Components';
 import { formatValueForDisplay } from '../../utils/displayUtils';
 import MediumSemiBoldText from './styles';
 import { validateVoucherAmount } from '../../utils/validationUtils';

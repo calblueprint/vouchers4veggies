@@ -30,12 +30,6 @@ export const StartOfListView = styled.View`
   border-top-width: 1px;
 `;
 
-export const BackButtonContainer = styled.View`
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-top: 57px;
-`;
-
 export const LeftAlignedContainer = styled.View`
   width: 100%;
   justify-content: flex-start;

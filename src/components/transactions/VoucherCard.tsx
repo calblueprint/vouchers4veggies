@@ -3,10 +3,10 @@ import { Body1Text } from '../../../assets/Fonts';
 import { formatValueForDisplay } from '../../utils/displayUtils';
 import {
   LeftAlignContainer,
-  Row,
   RightAlignContainer,
   H4Subheading,
 } from './styles';
+import { Row } from '../../../assets/Components';
 
 type VoucherCardProps = {
   serialNumber: number;
