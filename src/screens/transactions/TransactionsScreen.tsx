@@ -56,7 +56,7 @@ export default function TransactionsScreen({
       </LogoContainer>
 
       <TitleContainer>
-        <H2Heading>Transactions</H2Heading>
+        <H2Heading>Invoices</H2Heading>
       </TitleContainer>
 
       {isLoading ? (
