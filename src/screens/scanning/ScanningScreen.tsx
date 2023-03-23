@@ -46,7 +46,7 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const { isEmpty, voucherMap } = useScanningContext();
+  const { isEmpty, scanCounter } = useScanningContext();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -88,11 +88,11 @@ export default function ScanningScreen({
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
       <Header>
-        {voucherMap.size === 0 ? (
+        {scanCounter === 0 ? (
           <StandardLogo />
         ) : (
           <VoucherCounter>
-            <CounterText>{voucherMap.size}</CounterText>
+            <CounterText>{scanCounter}</CounterText>
           </VoucherCounter>
         )}
         <AddManuallyButton
@@ -129,7 +129,7 @@ export default function ScanningScreen({
         />
       </ScannerContainer>
 
-      {voucherMap.size === 0 ? (
+      {isEmpty ? (
         <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>

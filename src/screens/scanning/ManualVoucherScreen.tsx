@@ -34,8 +34,7 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
-  const [scanCounter, setScanCounter] = useState<number>(0);
-  const { isEmpty, voucherMap } = useScanningContext();
+  const { isEmpty, scanCounter } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
@@ -51,12 +50,6 @@ export default function ManualVoucherScreen({
       serialNumber: serialNumberInput,
     });
   };
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(voucherMap);
-    setScanCounter(voucherMap.size);
-  }, [voucherMap]);
 
   return (
     <SafeArea>

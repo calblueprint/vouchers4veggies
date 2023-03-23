@@ -4,6 +4,7 @@ export type ScanningDispatch = React.Dispatch<ScanningContextAction>;
 
 type ScanningState = {
   isEmpty: boolean;
+  scanCounter: number;
   voucherMap: Map<number, number>;
   dispatch: ScanningDispatch;
 };
@@ -25,6 +26,7 @@ const useScanningReducer = () =>
           return {
             ...prevState,
             isEmpty: false,
+            scanCounter: prevState.scanCounter + 1,
             voucherMap: new Map(
               prevState.voucherMap.set(
                 action.serialNumber,
@@ -38,6 +40,7 @@ const useScanningReducer = () =>
     },
     {
       isEmpty: true,
+      scanCounter: 0,
       voucherMap: new Map<number, number>(),
       dispatch: () => null,
     },
