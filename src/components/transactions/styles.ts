@@ -89,6 +89,5 @@ export const Styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
     backgroundColor: '#fff',
-    marginRight: 25,
   },
 });

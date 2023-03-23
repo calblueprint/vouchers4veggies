@@ -7,6 +7,19 @@ export const addVoucher = (
   voucherAmount: number,
 ) => dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherAmount });
 
+/** Update a voucher object in the voucher map */
+export const editVoucher = (
+  dispatch: ScanningDispatch,
+  serialNumber: number,
+  voucherAmount: number,
+) => dispatch({ type: 'EDIT_VOUCHER', serialNumber, voucherAmount });
+
+/** Delete a voucher object from the voucher map */
+export const deleteVoucher = (
+  dispatch: ScanningDispatch,
+  serialNumber: number,
+) => dispatch({ type: 'DELETE_VOUCHER', serialNumber });
+
 /** Tests that ScanningContext is working properly by undisabling buttons */
 export const testContext = (dispatch: ScanningDispatch) => {
   dispatch({ type: 'TEST' });
