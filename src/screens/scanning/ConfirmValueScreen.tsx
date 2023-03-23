@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native';
@@ -33,8 +33,7 @@ export default function ConfirmValueScreen({
   const { serialNumber } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [scanCounter, setScanCounter] = useState<number>(0);
-  const { voucherMap, dispatch } = useScanningContext();
+  const { scanCounter, dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
@@ -57,12 +56,6 @@ export default function ConfirmValueScreen({
     setVoucherAmount(0);
     navigation.navigate('ManualVoucherScreen');
   };
-
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(voucherMap);
-    setScanCounter(voucherMap.size);
-  }, [voucherMap]);
 
   return (
     <SafeArea>
