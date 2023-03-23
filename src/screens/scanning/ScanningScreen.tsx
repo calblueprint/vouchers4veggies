@@ -134,7 +134,10 @@ export default function ScanningScreen({
       </ScannerContainer>
 
       <ButtonContainer>
-        <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
+        <ButtonMagenta
+          // disabled={!scanned}
+          onPress={() => setScanned(false)}
+        >
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>
 
