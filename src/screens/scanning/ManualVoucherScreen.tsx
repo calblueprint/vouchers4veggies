@@ -1,54 +1,83 @@
-import React, { useState } from 'react';
-import CurrencyInput from 'react-native-currency-input';
-import { TextInput } from 'react-native';
-import { ButtonMagenta } from '../../../assets/Components';
-import Colors from '../../../assets/Colors';
-import Styles from '../../components/InputField/styles';
+import React, { useEffect, useState } from 'react';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {
+  ButtonMagenta,
+  ButtonWhite,
+  AddManuallyButton,
+} from '../../../assets/Components';
 import {
   ButtonTextWhite,
+  ButtonTextBlack,
+  H4CardNavTab,
   CenterText,
   H2Heading,
   InputTitleText,
+  CounterText,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
   Header,
   BodyContainer,
   SafeArea,
-  DropDownContainer,
   FieldContainer,
   FormContainer,
+  VoucherCounter,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
 import { validateSerialNumberInput } from '../../utils/validationUtils';
+import { ScannerStackScreenProps } from '../../navigation/types';
+import Colors from '../../../assets/Colors';
+import { useScanningContext } from './ScanningContext';
 
-function ManualVoucherScreen() {
-  const [transactionID, setID] = useState<string>('');
-  const [voucherAmount, setVoucherAmount] = useState<number>(0);
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  // to be used for backend
-  // const [scanCounter, incrementScanned] = useState(0);
-  // const [value, setValue] = useState(null);
-  // const [items, setItems] = useState([
-  //   { label: 'Apple', value: 'apple' },
-  //   { label: 'Banana', value: 'banana' },
-  // ]);
+export default function ManualVoucherScreen({
+  navigation,
+}: ScannerStackScreenProps<'ManualVoucherScreen'>) {
+  const [serialNumber, setSerialNumber] = useState<string>('');
+  const [scanCounter, setScanCounter] = useState<number>(0);
+  const { isEmpty, voucherMap } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
-    setID(value);
+    setSerialNumber(value);
   };
 
-  const onChangeVoucherAmount = (value: number) => {
-    setVoucherAmount(value ?? 0.0);
+  const handleVoucherAdd = () => {
+    const serialNumberInput = Number(serialNumber);
+    // clears input field if successfully added
+    setSerialNumber('');
+    // TODO: change once we create custom base components for number inputs
+    navigation.navigate('ConfirmValueScreen', {
+      serialNumber: serialNumberInput,
+    });
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(voucherMap);
+    setScanCounter(voucherMap.size);
+  }, [voucherMap]);
 
   return (
     <SafeArea>
       <Header>
-        <StandardLogo />
+        {scanCounter === 0 ? (
+          <StandardLogo />
+        ) : (
+          <VoucherCounter>
+            <CounterText>{scanCounter}</CounterText>
+          </VoucherCounter>
+        )}
+
+        <AddManuallyButton
+          onPress={() => navigation.navigate('ScanningScreen')}
+        >
+          <ButtonTextBlack>
+            <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+            {'  '}
+            Scan Voucher
+          </ButtonTextBlack>
+        </AddManuallyButton>
       </Header>
 
       <BodyContainer>
@@ -59,53 +88,25 @@ function ManualVoucherScreen() {
         </TitleContainer>
         <FormContainer>
           <FieldContainer>
-            <InputTitleText>Transaction ID</InputTitleText>
+            <InputTitleText>Serial Number</InputTitleText>
             <InputField
               onChange={onChangeSerialNumber}
-              value={transactionID}
-              placeholder="Enter ID"
+              value={serialNumber}
+              placeholder="Enter Number"
               validate={validateSerialNumberInput}
               keyboardType="number-pad"
             />
           </FieldContainer>
-          <FieldContainer>
-            <InputTitleText>Voucher Color</InputTitleText>
-            {/* TODO: implement dropdown component */}
-            <DropDownContainer />
-          </FieldContainer>
-          <FieldContainer>
-            <InputTitleText>Amount</InputTitleText>
-            <CurrencyInput // TODO: refactor currency input with custom text input base components
-              value={voucherAmount}
-              onChangeValue={onChangeVoucherAmount}
-              renderTextInput={props => (
-                <TextInput
-                  {...props}
-                  onBlur={() => setIsActive(false)}
-                  onFocus={() => setIsActive(true)}
-                  style={isActive ? Styles.FormFieldFocus : Styles.FormField}
-                  placeholderTextColor={Colors.midGray}
-                  secureTextEntry={false}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="number-pad"
-                  returnKeyType="done"
-                />
-              )}
-              prefix="$"
-              minValue={0}
-              maxValue={10}
-              separator="."
-              precision={2}
-            />
-          </FieldContainer>
         </FormContainer>
-        <ButtonMagenta>
+        <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
+        <ButtonWhite disabled={isEmpty}>
+          <ButtonTextBlack>
+            <H4CardNavTab>Review and Submit</H4CardNavTab>
+          </ButtonTextBlack>
+        </ButtonWhite>
       </BodyContainer>
     </SafeArea>
   );
 }
-
-export default ManualVoucherScreen;
