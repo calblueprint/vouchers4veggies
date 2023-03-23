@@ -19,11 +19,11 @@ export default function ScannerStackNavigator() {
           headerShown: false,
         }}
       >
-        <ScannerStack.Screen name="ScanningScreen" component={ScanningScreen} />
         <ScannerStack.Screen
           name="ManualVoucherScreen"
           component={ManualVoucherScreen}
         />
+        <ScannerStack.Screen name="ScanningScreen" component={ScanningScreen} />
         <ScannerStack.Screen
           name="ConfirmValueScreen"
           component={ConfirmValueScreen}
