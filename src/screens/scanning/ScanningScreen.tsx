@@ -46,7 +46,7 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const { isEmpty, scanCounter } = useScanningContext();
+  const { scanCounter } = useScanningContext();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -129,7 +129,7 @@ export default function ScanningScreen({
         />
       </ScannerContainer>
 
-      {isEmpty ? (
+      {scanCounter === 0 ? (
         <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>
@@ -140,7 +140,7 @@ export default function ScanningScreen({
           </ButtonWhite>
           <ButtonMagenta
             // onPress={() => navigation.navigate('ReviewScreen')}
-            disabled={isEmpty}
+            disabled={scanCounter === 0}
           >
             <ButtonTextWhite>Review & Submit</ButtonTextWhite>
           </ButtonMagenta>
