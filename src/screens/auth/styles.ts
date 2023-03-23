@@ -71,14 +71,6 @@ export const ButtonContainer = styled.View`
   margin-top: 5%;
 `;
 
-export const BackButtonContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-left: 10%;
-  margin-top: 15%;
-`;
-
 export const SmallTextContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
@@ -88,10 +80,6 @@ export const SmallTextContainer = styled.View`
 
 export const WhiteText = styled.Text`
   color: ${Colors.offWhite};
-`;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
 `;
 
 export const Styles = StyleSheet.create({

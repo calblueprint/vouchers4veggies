@@ -1,9 +1,8 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Colors from '../../../assets/Colors';
-import { RootNavBackButton } from '../../../assets/Components';
+import { CardContainer } from '../../../assets/Components';
+import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StatusComponent from '../../components/transactions/StatusComponent';
 import VoucherCard from '../../components/transactions/VoucherCard';
@@ -15,8 +14,6 @@ import {
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 import {
-  BackButtonContainer,
-  DarkGrayText,
   LeftAlignedContainer,
   MediumText,
   Size14BoldText,
@@ -24,7 +21,6 @@ import {
   Title,
   TransactionsContainer,
 } from './styles';
-import { CardContainer } from '../../components/common/styles';
 
 export default function TransactionDetailsScreen({
   route,
@@ -64,15 +60,7 @@ export default function TransactionDetailsScreen({
 
   return (
     <TransactionsContainer>
-      <BackButtonContainer>
-        <RootNavBackButton
-          onPress={() => navigation.navigate('TransactionsScreen')}
-        >
-          <DarkGrayText>
-            <Icon name="left" size={14} color={Colors.darkGray} /> Back
-          </DarkGrayText>
-        </RootNavBackButton>
-      </BackButtonContainer>
+      {BackButton(() => navigation.navigate('TransactionsScreen'))}
 
       {transactionData ? (
         <TransactionsContainer>

@@ -36,14 +36,6 @@ export const StartOfListView = styled.View`
   border-top-width: 1px;
 `;
 
-export const BackButtonContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-left: 10%;
-  margin-top: 57px;
-`;
-
 export const LeftAlignedContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
@@ -65,8 +57,4 @@ export const Size14BoldText = styled.Text`
   font-style: normal;
   font-size: 14px;
   line-height: 19px;
-`;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
 `;

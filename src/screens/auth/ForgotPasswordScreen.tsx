@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Colors from '../../../assets/Colors';
 import {
   SuccessText,
   ErrorText,
@@ -9,7 +7,7 @@ import {
   H4CardNavTab,
   BoldText,
 } from '../../../assets/Fonts';
-import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
+import { ButtonMagenta } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { forgotPassword } from '../../utils/authUtils';
@@ -21,11 +19,10 @@ import {
   HeadingContainer,
   LoginContainer,
   VerticalSpacingButtonContainer,
-  BackButtonContainer,
   WhiteText,
-  DarkGrayText,
   VerticalSpacingContainer,
 } from './styles';
+import BackButton from '../../components/common/BackButton';
 
 export default function ForgotPasswordScreen({
   navigation,
@@ -47,13 +44,7 @@ export default function ForgotPasswordScreen({
 
   return (
     <LoginContainer>
-      <BackButtonContainer>
-        <RootNavBackButton onPress={() => navigation.navigate('Login')}>
-          <DarkGrayText>
-            <Icon name="left" size={14} color={Colors.darkGray} /> Back
-          </DarkGrayText>
-        </RootNavBackButton>
-      </BackButtonContainer>
+      {BackButton(() => navigation.navigate('Login'))}
 
       <FormContainer>
         <HeadingContainer>
