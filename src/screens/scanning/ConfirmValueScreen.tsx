@@ -30,7 +30,7 @@ export default function ConfirmValueScreen({
   route,
   navigation,
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
-  const { serialNumber } = route.params;
+  const { serialNumber, prevScreen } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
   const { scanCounter, dispatch } = useScanningContext();
@@ -54,7 +54,9 @@ export default function ConfirmValueScreen({
     showToast();
     // clears input field if successfully added
     setVoucherAmount(0);
-    navigation.navigate('ManualVoucherScreen');
+    // eslint-disable-next-line no-console
+    console.log(`[${serialNumber} => ${voucherAmount}]`);
+    navigation.goBack();
   };
 
   return (
