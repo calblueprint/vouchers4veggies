@@ -73,7 +73,10 @@ export default function ScanningScreen({
       const { data } = scanningResult;
       setScanned(true);
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      showToast();
+      // showToast();
+      navigation.navigate('ConfirmValueScreen', {
+        serialNumber: Number(data),
+      });
     }
   };
 
