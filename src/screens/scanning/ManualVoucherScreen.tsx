@@ -101,7 +101,10 @@ export default function ManualVoucherScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonWhite disabled={isEmpty}>
+        <ButtonWhite
+          onPress={() => navigation.navigate('ReviewScreen')}
+          disabled={isEmpty}
+        >
           <ButtonTextBlack>
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>

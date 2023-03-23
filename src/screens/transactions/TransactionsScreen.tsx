@@ -12,9 +12,9 @@ import {
   LogoContainer,
   TransactionsContainer,
   TitleContainer,
-  CardContainer,
   StartOfListView,
 } from './styles';
+import { CardContainer } from '../../components/common/styles';
 
 export default function TransactionsScreen({
   navigation,

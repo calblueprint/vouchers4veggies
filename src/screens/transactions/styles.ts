@@ -29,13 +29,6 @@ export const Title = styled.Text`
   text-align: center;
 `;
 
-export const CardContainer = styled.View`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-
 export const StartOfListView = styled.View`
   width: 100%;
   height: 1px;

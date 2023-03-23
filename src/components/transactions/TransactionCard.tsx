@@ -9,9 +9,9 @@ import {
   StatusContainer,
   LeftAlignContainer,
   ValueContainer,
-  Row,
   Styles,
 } from './styles';
+import { Row } from '../common/styles';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';
 import {
