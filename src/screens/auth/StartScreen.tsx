@@ -1,15 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ButtonMagenta } from '../../../assets/Components';
-import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
+import { H1Heading, H4CardNavTab, WhiteText } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
 import StandardLogo from '../../components/common/StandardLogo';
-import {
-  ButtonContainer,
-  LoginContainer,
-  StartContainer,
-  WhiteText,
-} from './styles';
+import { ButtonContainer, LoginContainer, StartContainer } from './styles';
 
 const styles = StyleSheet.create({
   container: {
