@@ -29,17 +29,22 @@ import { validateVoucherAmount } from '../../utils/validationUtils';
 import { deleteVoucher, editVoucher } from '../../utils/scanningUtils';
 import BackButton from '../../components/common/BackButton';
 import { formatValueForDisplay } from '../../utils/displayUtils';
+import { createTransaction, createVoucher } from '../../database/queries';
+import { TransactionStatus } from '../../types/types';
+import { useAuthContext } from '../auth/AuthContext';
 
 export default function ReviewScreen({
   navigation,
 }: ScannerStackScreenProps<'ReviewScreen'>) {
+  const { vendorUuid } = useAuthContext();
+  const { voucherMap, dispatch } = useScanningContext();
+
   const [deleteDialogIsVisible, setDeleteDialogIsVisible] = useState(false);
   const [editDialogIsVisible, setEditDialogIsVisible] = useState(false);
   const [invalidDialogIsVisible, setInvalidDialogIsVisible] = useState(false);
 
   const [editDialogText, setEditDialogText] = useState('');
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
-  const { voucherMap, dispatch } = useScanningContext();
 
   const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
     serialNumber,
@@ -85,6 +90,27 @@ export default function ReviewScreen({
   const onDeleteHelper = () => {
     deleteVoucher(dispatch, focusedSerialNumber);
     hideDeleteDialog();
+  };
+
+  const onSubmit = () => {
+    if (vendorUuid) {
+      voucherMap.forEach((serialNumber, value) => {
+        createVoucher({
+          serialNumber,
+          vendorUuid,
+          value,
+        });
+      });
+      createTransaction({
+        status: TransactionStatus.UNPAID,
+        voucherSerialNumbers: Array.from(voucherMap.keys()),
+        vendorUuid,
+      });
+    }
+
+    navigation.navigate('ConfirmationScreen', {
+      count: voucherMap.size,
+    });
   };
 
   return (
@@ -170,13 +196,7 @@ export default function ReviewScreen({
           </BorderlessRow>
 
           <ReviewButtonContainer>
-            <ButtonMagenta
-              onPress={() =>
-                navigation.navigate('ConfirmationScreen', {
-                  count: voucherMap.size,
-                })
-              }
-            >
+            <ButtonMagenta onPress={onSubmit}>
               <ButtonTextWhite>Submit</ButtonTextWhite>
             </ButtonMagenta>
           </ReviewButtonContainer>
