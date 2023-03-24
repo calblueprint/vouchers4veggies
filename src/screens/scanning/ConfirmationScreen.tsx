@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ScanningScreen({
+export default function ConfirmationScreen({
   navigation,
-}: ScannerStackScreenProps<'ScanningScreen'>) {
+}: ScannerStackScreenProps<'ConfirmationScreen'>) {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);

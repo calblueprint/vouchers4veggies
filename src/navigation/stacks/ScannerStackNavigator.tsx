@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import ConfirmationScreen from '../../screens/scanning/ConfirmationScreen';
 import ConfirmValueScreen from '../../screens/scanning/ConfirmValueScreen';
 import ManualVoucherScreen from '../../screens/scanning/ManualVoucherScreen';
 import ReviewScreen from '../../screens/scanning/ReviewScreen';
@@ -30,6 +31,10 @@ export default function ScannerStackNavigator() {
           component={ConfirmValueScreen}
         />
         <ScannerStack.Screen name="ReviewScreen" component={ReviewScreen} />
+        <ScannerStack.Screen
+          name="ConfirmationScreen"
+          component={ConfirmationScreen}
+        />
       </ScannerStack.Navigator>
     </ScanningContextProvider>
   );

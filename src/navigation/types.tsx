@@ -24,6 +24,7 @@ export type ScannerStackParamList = {
   ManualVoucherScreen: undefined;
   ConfirmValueScreen: { serialNumber: number };
   ReviewScreen: undefined;
+  ConfirmationScreen: undefined;
 };
 
 export type ProfileStackParamList = {

@@ -22,9 +22,6 @@ const deleteVoucherHelper = (
   return prevMap;
 };
 
-const isEmptyAfterDelete = (prevMap: Map<number, number>) =>
-  prevMap.size - 1 > 0;
-
 const useScanningReducer = () =>
   useReducer(
     (prevState: ScanningState, action: ScanningContextAction) => {
@@ -58,7 +55,7 @@ const useScanningReducer = () =>
         case 'DELETE_VOUCHER':
           return {
             ...prevState,
-            isEmpty: isEmptyAfterDelete(prevState.voucherMap),
+            isEmpty: prevState.voucherMap.size - 1 === 0,
             voucherMap: new Map(
               deleteVoucherHelper(prevState.voucherMap, action.serialNumber),
             ),
