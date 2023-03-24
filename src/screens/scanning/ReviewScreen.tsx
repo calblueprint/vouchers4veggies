@@ -171,7 +171,11 @@ export default function ReviewScreen({
 
           <ReviewButtonContainer>
             <ButtonMagenta
-              onPress={() => navigation.navigate('ConfirmationScreen')}
+              onPress={() =>
+                navigation.navigate('ConfirmationScreen', {
+                  count: voucherMap.size,
+                })
+              }
             >
               <ButtonTextWhite>Submit</ButtonTextWhite>
             </ButtonMagenta>
