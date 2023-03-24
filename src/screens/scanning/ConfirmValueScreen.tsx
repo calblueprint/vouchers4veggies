@@ -51,7 +51,7 @@ export default function ConfirmValueScreen({
   };
 
   const handleVoucherAdd = () => {
-    addVoucher(dispatch, serialNumber, voucherAmount);
+    addVoucher(dispatch, serialNumber, voucherAmount * 100);
     showToast();
     // clears input field if successfully added
     setVoucherAmount(0);
