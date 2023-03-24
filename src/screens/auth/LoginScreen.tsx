@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
-import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
+import {
+  Body1Text,
+  DarkGrayText,
+  H2Heading,
+  H4CardNavTab,
+  WhiteText,
+} from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
@@ -16,7 +22,6 @@ import StandardHeader from '../../components/common/StandardHeader';
 
 import {
   BackButtonContainer,
-  DarkGrayText,
   FormContainer,
   HeadingContainer,
   LeftAlignContainer,
@@ -26,7 +31,6 @@ import {
   SmallTextContainer,
   Styles,
   VerticalSpacingButtonContainer,
-  WhiteText,
 } from './styles';
 
 export default function LoginScreen({
