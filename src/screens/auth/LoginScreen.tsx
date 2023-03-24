@@ -63,7 +63,9 @@ export default function LoginScreen({
 
   return (
     <LoginContainer>
-      {BackButton(() => navigation.navigate('Start'))}
+      <StandardHeader>
+        {BackButton(() => navigation.navigate('Start'))}
+      </StandardHeader>
 
       <FormContainer>
         <HeadingContainer>
