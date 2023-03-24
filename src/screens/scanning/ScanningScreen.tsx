@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Toast from 'react-native-toast-message';
+// import Toast from 'react-native-toast-message';
 import {
   ButtonTextBlack,
   Body1Text,
@@ -32,6 +32,7 @@ import {
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
+import { useScanningContext } from './ScanningContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,7 +47,7 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const [scanCounter, incrementScanned] = useState(0);
+  const { voucherMap } = useScanningContext();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -57,24 +58,26 @@ export default function ScanningScreen({
     getBarCodeScannerPermissions();
   }, []);
 
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      topOffset: 50,
-      text1: 'Voucher Scanned!',
-      visibilityTime: 2000,
-    });
-  };
+  // const showToast = () => {
+  //   Toast.show({
+  //     type: 'success',
+  //     position: 'top',
+  //     topOffset: 50,
+  //     text1: 'Voucher Scanned!',
+  //     visibilityTime: 2000,
+  //   });
+  // };
 
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
-      incrementScanned(scanCounter + 1);
       setScanned(true);
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      showToast();
+      // showToast();
+      navigation.navigate('ConfirmValueScreen', {
+        serialNumber: Number(data),
+      });
     }
   };
 
@@ -89,11 +92,11 @@ export default function ScanningScreen({
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
       <StandardHeader topMargin="4%">
-        {scanCounter === 0 ? (
+        {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (
           <VoucherCounter>
-            <CounterText>{scanCounter}</CounterText>
+            <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
         )}
         <AddManuallyButton
@@ -130,23 +133,19 @@ export default function ScanningScreen({
         />
       </ScannerContainer>
 
-      {scanCounter === 0 ? (
+      <ButtonContainer>
         <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>
-      ) : (
-        <ButtonContainer>
-          <ButtonWhite disabled={!scanned} onPress={() => setScanned(false)}>
-            <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
-          </ButtonWhite>
-          <ButtonMagenta
+
+        <ButtonWhite
           // onPress={() => navigation.navigate('ReviewScreen')}
-          >
-            <ButtonTextWhite>Review & Submit</ButtonTextWhite>
-          </ButtonMagenta>
-        </ButtonContainer>
-      )}
-      <Toast />
+          disabled={voucherMap.size === 0}
+        >
+          <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
+        </ButtonWhite>
+      </ButtonContainer>
+      {/* <Toast /> */}
     </SafeArea>
   );
 }

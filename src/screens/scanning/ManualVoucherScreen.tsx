@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
   ButtonMagenta,
@@ -34,8 +34,7 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
-  const [scanCounter, setScanCounter] = useState<number>(0);
-  const { isEmpty, voucherMap } = useScanningContext();
+  const { voucherMap } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
     const value = text.replace(/\D/g, '');
@@ -52,20 +51,14 @@ export default function ManualVoucherScreen({
     });
   };
 
-  useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(voucherMap);
-    setScanCounter(voucherMap.size);
-  }, [voucherMap]);
-
   return (
     <SafeArea>
       <StandardHeader topMargin="4%">
-        {scanCounter === 0 ? (
+        {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (
           <VoucherCounter>
-            <CounterText>{scanCounter}</CounterText>
+            <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
         )}
 
@@ -101,7 +94,7 @@ export default function ManualVoucherScreen({
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonWhite disabled={isEmpty}>
+        <ButtonWhite disabled={voucherMap.size === 0}>
           <ButtonTextBlack>
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>

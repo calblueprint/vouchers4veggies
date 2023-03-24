@@ -53,6 +53,7 @@ export const ButtonContainer = styled.View`
 export const FormContainer = styled.View`
   margin-top: 20px;
   margin-bottom: 20px;
+  width: 277px;
 `;
 
 // will be used later
