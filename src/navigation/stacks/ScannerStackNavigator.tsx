@@ -7,6 +7,7 @@ import ReviewScreen from '../../screens/scanning/ReviewScreen';
 import { ScanningContextProvider } from '../../screens/scanning/ScanningContext';
 import ScanningScreen from '../../screens/scanning/ScanningScreen';
 import { ScannerStackParamList } from '../types';
+import TransactionStackNavigator from './TransactionStackNavigator';
 
 const ScannerStack = createNativeStackNavigator<ScannerStackParamList>();
 
@@ -34,6 +35,10 @@ export default function ScannerStackNavigator() {
         <ScannerStack.Screen
           name="ConfirmationScreen"
           component={ConfirmationScreen}
+        />
+        <ScannerStack.Screen
+          name="Transactions"
+          component={TransactionStackNavigator}
         />
       </ScannerStack.Navigator>
     </ScanningContextProvider>

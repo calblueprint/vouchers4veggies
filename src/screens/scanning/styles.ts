@@ -88,6 +88,12 @@ export const ReviewTitleContainer = styled.View`
   padding: 40px;
 `;
 
+export const ConfirmationTitleContainer = styled.View`
+  display: flex;
+  padding: 40px;
+  padding-top: 200px;
+`;
+
 export const ConstrainedHeightContainer = styled.View`
   width: 100%;
   min-height: 268px;
@@ -98,6 +104,14 @@ export const ReviewButtonContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding-top: 40px;
+`;
+
+export const WhiteText = styled.Text`
+  color: ${Colors.offWhite};
+`;
+
+export const DarkGrayText = styled.Text`
+  color: ${Colors.darkGray};
 `;
 
 // will be used later
