@@ -19,7 +19,7 @@ export default function InputField({
   placeholder,
   secureTextEntry = false,
   validate,
-  isValid,
+  isValid = true,
   keyboardType,
 }: InputFieldProps) {
   const [isActive, setIsActive] = useState(false);
