@@ -36,18 +36,6 @@ const Styles = StyleSheet.create({
     marginBottom: '4%',
     borderRadius: 5,
   },
-  FormFieldError: {
-    borderWidth: 1,
-    borderColor: Colors.alertRed,
-    backgroundColor: Colors.alertLightRed,
-    height: 35,
-    width: 277,
-    paddingVertical: 7,
-    paddingHorizontal: 10,
-    marginTop: '3%',
-    marginBottom: '4%',
-    borderRadius: 5,
-  },
 });
 
 export default Styles;
