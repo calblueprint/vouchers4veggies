@@ -14,12 +14,13 @@ import {
   ButtonTextMagenta,
 } from '../../../assets/Fonts';
 import StandardLogo from '../../components/common/StandardLogo';
+import StandardHeader from '../../components/common/StandardHeader';
+
 import {
   ButtonContainer,
   ScannerContainer,
   TitleContainer,
   VoucherCounter,
-  Header,
   BodyContainer,
   SafeArea,
 } from './styles';
@@ -87,7 +88,7 @@ export default function ScanningScreen({
   return (
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
-      <Header>
+      <StandardHeader topMargin="4%">
         {scanCounter === 0 ? (
           <StandardLogo />
         ) : (
@@ -104,7 +105,7 @@ export default function ScanningScreen({
             Add Manually
           </ButtonTextBlack>
         </AddManuallyButton>
-      </Header>
+      </StandardHeader>
 
       <BodyContainer>
         <TitleContainer>

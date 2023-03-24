@@ -99,3 +99,11 @@ export const InputTitleText = styled.Text`
   font-size: 14px;
   line-height: 19px;
 `;
+
+export const WhiteText = styled.Text`
+  color: ${Colors.offWhite};
+`;
+
+export const DarkGrayText = styled.Text`
+  color: ${Colors.darkGray};
+`;

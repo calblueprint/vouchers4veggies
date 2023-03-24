@@ -1,12 +1,6 @@
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const LogoContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
-  margin-left: 29px;
-`;
-
 export const TransactionsContainer = styled.View`
   width: 100%;
   flex: 1;
@@ -44,10 +38,8 @@ export const StartOfListView = styled.View`
 `;
 
 export const BackButtonContainer = styled.View`
-  width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 10%;
   margin-top: 57px;
 `;
 
@@ -72,8 +64,4 @@ export const Size14BoldText = styled.Text`
   font-style: normal;
   font-size: 14px;
   line-height: 19px;
-`;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
 `;

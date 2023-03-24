@@ -12,9 +12,10 @@ import {
   InputTitleText,
   CounterText,
 } from '../../../assets/Fonts';
+import StandardHeader from '../../components/common/StandardHeader';
+
 import {
   TitleContainer,
-  Header,
   BodyContainer,
   SafeArea,
   FieldContainer,
@@ -66,7 +67,7 @@ export default function ConfirmValueScreen({
 
   return (
     <SafeArea>
-      <Header>
+      <StandardHeader topMargin="4%">
         {scanCounter === 0 ? (
           <StandardLogo />
         ) : (
@@ -74,7 +75,7 @@ export default function ConfirmValueScreen({
             <CounterText>{scanCounter}</CounterText>
           </VoucherCounter>
         )}
-      </Header>
+      </StandardHeader>
 
       <BodyContainer>
         <TitleContainer>

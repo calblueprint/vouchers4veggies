@@ -8,11 +8,14 @@ import {
   H2Heading,
   H4CardNavTab,
   BoldText,
+  DarkGrayText,
+  WhiteText,
 } from '../../../assets/Fonts';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { forgotPassword } from '../../utils/authUtils';
+import StandardHeader from '../../components/common/StandardHeader';
 
 import { useAuthContext } from './AuthContext';
 
@@ -22,8 +25,6 @@ import {
   LoginContainer,
   VerticalSpacingButtonContainer,
   BackButtonContainer,
-  WhiteText,
-  DarkGrayText,
   VerticalSpacingContainer,
 } from './styles';
 
@@ -47,13 +48,15 @@ export default function ForgotPasswordScreen({
 
   return (
     <LoginContainer>
-      <BackButtonContainer>
-        <RootNavBackButton onPress={() => navigation.navigate('Login')}>
-          <DarkGrayText>
-            <Icon name="left" size={14} color={Colors.darkGray} /> Back
-          </DarkGrayText>
-        </RootNavBackButton>
-      </BackButtonContainer>
+      <StandardHeader alignment="flex-start">
+        <BackButtonContainer>
+          <RootNavBackButton onPress={() => navigation.navigate('Login')}>
+            <DarkGrayText>
+              <Icon name="left" size={14} color={Colors.darkGray} /> Back
+            </DarkGrayText>
+          </RootNavBackButton>
+        </BackButtonContainer>
+      </StandardHeader>
 
       <FormContainer>
         <HeadingContainer>

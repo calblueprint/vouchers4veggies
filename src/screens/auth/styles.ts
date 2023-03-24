@@ -16,8 +16,7 @@ export const StartContainer = styled.View`
 `;
 
 export const HeadingContainer = styled.View`
-  margin-top: 14%;
-
+  align-items: flex-start;
   margin-bottom: 10%;
 `;
 
@@ -60,7 +59,7 @@ export const VerticalSpacingButtonContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 12%;
+  margin-top: 15%;
 `;
 
 export const ButtonContainer = styled.View`
@@ -71,11 +70,9 @@ export const ButtonContainer = styled.View`
 `;
 
 export const BackButtonContainer = styled.View`
-  width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 10%;
-  margin-top: 15%;
+  margin-top: 10%;
 `;
 
 export const SmallTextContainer = styled.View`
@@ -83,14 +80,6 @@ export const SmallTextContainer = styled.View`
   justify-content: flex-start;
   align-items: center;
   margin-top: 6%;
-`;
-
-export const WhiteText = styled.Text`
-  color: ${Colors.offWhite};
-`;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
 `;
 
 export const Styles = StyleSheet.create({

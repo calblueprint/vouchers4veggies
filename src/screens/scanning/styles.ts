@@ -8,14 +8,6 @@ export const SafeArea = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const Header = styled.View`
-  width: 85%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 26px;
-`;
-
 export const VoucherCounter = styled.View`
   width: 30px;
   height: 30px;
@@ -28,6 +20,7 @@ export const VoucherCounter = styled.View`
 `;
 
 export const BodyContainer = styled.View`
+  margin-top: 10px;
   width: 277px;
   align-items: center;
   margin-bottom: 35px;
