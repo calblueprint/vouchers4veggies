@@ -32,7 +32,6 @@ const useScanningReducer = () =>
           };
         case 'NEW_INVOICE':
           return {
-            isEmpty: true,
             voucherMap: new Map<number, number>(),
             dispatch: () => null,
           };
@@ -59,7 +58,6 @@ const useScanningReducer = () =>
         case 'DELETE_VOUCHER':
           return {
             ...prevState,
-            isEmpty: prevState.voucherMap.size - 1 === 0,
             voucherMap: new Map(
               deleteVoucherHelper(prevState.voucherMap, action.serialNumber),
             ),
