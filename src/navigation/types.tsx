@@ -26,6 +26,7 @@ export type ScannerStackParamList = {
     serialNumber: number;
   };
   ReviewScreen: undefined;
+  ConfirmationScreen: undefined;
 };
 
 export type ProfileStackParamList = {

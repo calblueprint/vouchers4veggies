@@ -1,9 +1,26 @@
 import React, { useState } from 'react';
 import { FlatList, RefreshControl, View, Text } from 'react-native';
 import Dialog from 'react-native-dialog';
-import { H2Heading } from '../../../assets/Fonts';
-import { SafeArea } from './styles';
-import { CardContainer, StartOfListView } from '../../../assets/Components';
+import {
+  ButtonTextWhite,
+  H2Heading,
+  H3Subheading,
+  H5Subheading2,
+} from '../../../assets/Fonts';
+import {
+  BorderlessRow,
+  LeftAlignContainer,
+  RightAlignContainer,
+  SafeArea,
+  ConstrainedHeightContainer,
+  ReviewTitleContainer,
+  ReviewButtonContainer,
+} from './styles';
+import {
+  ButtonMagenta,
+  CardContainer,
+  StartOfListView,
+} from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
@@ -11,6 +28,7 @@ import ReviewVoucherCard from '../../components/scanning/ReviewVoucherCard';
 import { validateVoucherAmount } from '../../utils/validationUtils';
 import { deleteVoucher, editVoucher } from '../../utils/scanningUtils';
 import BackButton from '../../components/common/BackButton';
+import { formatValueForDisplay } from '../../utils/displayUtils';
 
 export default function ReviewScreen({
   navigation,
@@ -73,7 +91,9 @@ export default function ReviewScreen({
     <SafeArea>
       {BackButton(() => navigation.goBack())}
 
-      <H2Heading>Review vouchers</H2Heading>
+      <ReviewTitleContainer>
+        <H2Heading>Review vouchers</H2Heading>
+      </ReviewTitleContainer>
 
       {editDialogIsVisible ? (
         <Dialog.Container visible>
@@ -110,22 +130,52 @@ export default function ReviewScreen({
         </Dialog.Container>
       ) : null}
 
-      <CardContainer>
-        <StartOfListView />
-        <FlatList
-          data={voucherArray}
-          renderItem={({ item }) => (
-            <ReviewVoucherCard
-              serialNumber={item.serialNumber}
-              value={item.value}
-              showEditDialog={showEditDialog}
-              showDeleteDialog={showDeleteDialog}
-              setSerialNumber={setSerialNumber}
-            />
-          )}
-          keyExtractor={item => item.serialNumber.toString()}
-        />
-      </CardContainer>
+      <ConstrainedHeightContainer>
+        <CardContainer>
+          <StartOfListView />
+          <FlatList
+            data={voucherArray}
+            renderItem={({ item }) => (
+              <ReviewVoucherCard
+                serialNumber={item.serialNumber}
+                value={item.value}
+                showEditDialog={showEditDialog}
+                showDeleteDialog={showDeleteDialog}
+                setSerialNumber={setSerialNumber}
+              />
+            )}
+            keyExtractor={item => item.serialNumber.toString()}
+          />
+        </CardContainer>
+      </ConstrainedHeightContainer>
+
+      <BorderlessRow>
+        <LeftAlignContainer>
+          <H5Subheading2>Amount</H5Subheading2>
+        </LeftAlignContainer>
+        <RightAlignContainer>
+          <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
+        </RightAlignContainer>
+      </BorderlessRow>
+
+      <BorderlessRow>
+        <LeftAlignContainer>
+          <H5Subheading2>Total</H5Subheading2>
+        </LeftAlignContainer>
+        <RightAlignContainer>
+          <H3Subheading>{`$${formatValueForDisplay(
+            voucherArray.reduce((total, voucher) => total + voucher.value, 0),
+          )}`}</H3Subheading>
+        </RightAlignContainer>
+      </BorderlessRow>
+
+      <ReviewButtonContainer>
+        <ButtonMagenta
+          onPress={() => navigation.navigate('ConfirmationScreen')}
+        >
+          <ButtonTextWhite>Submit</ButtonTextWhite>
+        </ButtonMagenta>
+      </ReviewButtonContainer>
     </SafeArea>
   );
 }

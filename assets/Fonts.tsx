@@ -29,6 +29,13 @@ export const H4CardNavTab = styled.Text`
   line-height: 25px;
 `;
 
+export const H5Subheading2 = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
+
 export const Body1Text = styled.Text`
   font-family: 'manrope-regular';
   font-style: normal;
