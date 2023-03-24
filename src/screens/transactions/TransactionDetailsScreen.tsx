@@ -17,7 +17,7 @@ import {
 } from '../../utils/displayUtils';
 import {
   BackButtonContainer,
-  CardContainer,
+  DarkGrayText,
   LeftAlignedContainer,
   MediumText,
   Size14BoldText,
@@ -25,7 +25,7 @@ import {
   Title,
   TransactionsContainer,
 } from './styles';
-import { DarkGrayText } from '../../../assets/Fonts';
+import { CardContainer } from '../../components/common/styles';
 
 export default function TransactionDetailsScreen({
   route,

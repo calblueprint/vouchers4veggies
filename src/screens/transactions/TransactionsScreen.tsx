@@ -13,9 +13,9 @@ import StandardHeader from '../../components/common/StandardHeader';
 import {
   TransactionsContainer,
   TitleContainer,
-  CardContainer,
   StartOfListView,
 } from './styles';
+import { CardContainer } from '../../components/common/styles';
 
 export default function TransactionsScreen({
   navigation,
