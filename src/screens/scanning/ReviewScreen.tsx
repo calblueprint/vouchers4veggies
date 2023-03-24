@@ -68,7 +68,11 @@ export default function ReviewScreen({
         const newValue = Math.round(
           parseFloat(editDialogText.replace(',', '.')) * 100,
         );
-        editVoucher(dispatch, focusedSerialNumber, newValue);
+        if (newValue <= 10) {
+          editVoucher(dispatch, focusedSerialNumber, newValue);
+        } else {
+          throw new Error('Invalid Voucher Amount');
+        }
       }
     } catch (error) {
       setInvalidDialogIsVisible(true);
