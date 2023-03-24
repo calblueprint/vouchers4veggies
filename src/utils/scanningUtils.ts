@@ -1,5 +1,9 @@
 import { ScanningDispatch } from '../screens/scanning/ScanningContext';
 
+/** Reset all variables and start a new invoice */
+export const newInvoice = (dispatch: ScanningDispatch) =>
+  dispatch({ type: 'NEW_INVOICE' });
+
 /** Creates a voucher object and adds it to the voucher map */
 export const addVoucher = (
   dispatch: ScanningDispatch,

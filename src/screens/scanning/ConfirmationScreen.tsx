@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import {
   ButtonContainer,
@@ -10,12 +10,19 @@ import {
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import BackButton from '../../components/common/BackButton';
+import { newInvoice } from '../../utils/scanningUtils';
+import { useScanningContext } from './ScanningContext';
 
 export default function ConfirmationScreen({
   route,
   navigation,
 }: ScannerStackScreenProps<'ConfirmationScreen'>) {
   const { count } = route.params;
+  const { dispatch } = useScanningContext();
+
+  useEffect(() => {
+    newInvoice(dispatch);
+  }, [dispatch]);
 
   return (
     <SafeArea>

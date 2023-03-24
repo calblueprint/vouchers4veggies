@@ -9,6 +9,7 @@ type ScanningState = {
 
 type ScanningContextAction =
   | { type: 'TEST' }
+  | { type: 'NEW_INVOICE' }
   | { type: 'ADD_VOUCHER'; serialNumber: number; voucherAmount: number }
   | { type: 'EDIT_VOUCHER'; serialNumber: number; voucherAmount: number }
   | { type: 'DELETE_VOUCHER'; serialNumber: number };
@@ -28,6 +29,12 @@ const useScanningReducer = () =>
         case 'TEST':
           return {
             ...prevState,
+          };
+        case 'NEW_INVOICE':
+          return {
+            isEmpty: true,
+            voucherMap: new Map<number, number>(),
+            dispatch: () => null,
           };
         case 'ADD_VOUCHER':
           return {
