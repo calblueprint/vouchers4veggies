@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl, View, Text } from 'react-native';
 import Dialog from 'react-native-dialog';
 import { H2Heading } from '../../../assets/Fonts';
 import { SafeArea } from './styles';
@@ -15,21 +15,14 @@ import BackButton from '../../components/common/BackButton';
 export default function ReviewScreen({
   navigation,
 }: ScannerStackScreenProps<'ReviewScreen'>) {
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const onRefresh = React.useCallback(() => {
-    setIsRefreshing(true);
-    setTimeout(() => {
-      setIsRefreshing(false);
-    }, 1000);
-  }, []);
-
   const [deleteDialogIsVisible, setDeleteDialogIsVisible] = useState(false);
   const [editDialogIsVisible, setEditDialogIsVisible] = useState(false);
-  const [editDialogText, setEditDialogText] = useState('0');
+  const [invalidDialogIsVisible, setInvalidDialogIsVisible] = useState(false);
 
+  const [editDialogText, setEditDialogText] = useState('');
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
   const { voucherMap, dispatch } = useScanningContext();
+
   const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
     serialNumber,
     value,
@@ -41,7 +34,7 @@ export default function ReviewScreen({
 
   const showEditDialog = () => {
     setEditDialogIsVisible(true);
-    setEditDialogText('0');
+    setEditDialogText('');
   };
 
   const onSubmitVoucherAmount = () => {
@@ -55,8 +48,12 @@ export default function ReviewScreen({
         editVoucher(dispatch, focusedSerialNumber, newValue);
       }
     } catch (error) {
-      // Alert.alert('Invalid voucher amount.', undefined, [{ text: 'Close' }]);
+      setInvalidDialogIsVisible(true);
     }
+  };
+
+  const onCloseInvalidValueDialog = () => {
+    setInvalidDialogIsVisible(false);
   };
 
   const showDeleteDialog = () => {
@@ -77,7 +74,6 @@ export default function ReviewScreen({
       {BackButton(() => navigation.goBack())}
 
       <H2Heading>Review vouchers</H2Heading>
-      <H2Heading>{`Focused: ${focusedSerialNumber}`}</H2Heading>
 
       {editDialogIsVisible ? (
         <Dialog.Container visible>
@@ -85,7 +81,7 @@ export default function ReviewScreen({
           <Dialog.Description>Edit voucher amount</Dialog.Description>
           <Dialog.Input
             placeholderTextColor={Colors.midGray}
-            onChangeText={input => setEditDialogText(input)}
+            onChangeText={(input: string) => setEditDialogText(input)}
             secureTextEntry={false}
             autoCorrect={false}
             autoCapitalize="none"
@@ -94,6 +90,13 @@ export default function ReviewScreen({
             returnKeyType="done"
           />
           <Dialog.Button label="Submit" onPress={onSubmitVoucherAmount} />
+        </Dialog.Container>
+      ) : null}
+
+      {invalidDialogIsVisible ? (
+        <Dialog.Container visible>
+          <Dialog.Title>Invalid voucher amount.</Dialog.Title>
+          <Dialog.Button label="Close" onPress={onCloseInvalidValueDialog} />
         </Dialog.Container>
       ) : null}
 
@@ -121,11 +124,6 @@ export default function ReviewScreen({
             />
           )}
           keyExtractor={item => item.serialNumber.toString()}
-          refreshControl={
-            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
-          }
-          refreshing={isRefreshing}
-          onRefresh={onRefresh}
         />
       </CardContainer>
     </SafeArea>
