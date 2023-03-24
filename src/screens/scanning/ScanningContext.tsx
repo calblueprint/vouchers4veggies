@@ -3,7 +3,6 @@ import React, { createContext, useContext, useMemo, useReducer } from 'react';
 export type ScanningDispatch = React.Dispatch<ScanningContextAction>;
 
 type ScanningState = {
-  scanCounter: number;
   voucherMap: Map<number, number>;
   dispatch: ScanningDispatch;
 };
@@ -23,7 +22,6 @@ const useScanningReducer = () =>
         case 'ADD_VOUCHER':
           return {
             ...prevState,
-            scanCounter: prevState.scanCounter + 1,
             voucherMap: new Map(
               prevState.voucherMap.set(
                 action.serialNumber,
@@ -36,7 +34,6 @@ const useScanningReducer = () =>
       }
     },
     {
-      scanCounter: 0,
       voucherMap: new Map<number, number>(),
       dispatch: () => null,
     },

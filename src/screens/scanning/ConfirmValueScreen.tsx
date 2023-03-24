@@ -34,7 +34,7 @@ export default function ConfirmValueScreen({
   const { serialNumber } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const { scanCounter, dispatch } = useScanningContext();
+  const { voucherMap, dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
@@ -63,11 +63,11 @@ export default function ConfirmValueScreen({
   return (
     <SafeArea>
       <StandardHeader topMargin="4%">
-        {scanCounter === 0 ? (
+        {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (
           <VoucherCounter>
-            <CounterText>{scanCounter}</CounterText>
+            <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
         )}
       </StandardHeader>
