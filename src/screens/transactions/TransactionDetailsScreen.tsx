@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import { CardContainer } from '../../../assets/Components';
+import { CardContainer, StartOfListView } from '../../../assets/Components';
 import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StatusComponent from '../../components/transactions/StatusComponent';
@@ -18,7 +18,6 @@ import {
   LeftAlignedContainer,
   MediumText,
   Size14BoldText,
-  StartOfListView,
   Title,
   TransactionsContainer,
 } from './styles';
