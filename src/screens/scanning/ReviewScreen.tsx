@@ -64,7 +64,7 @@ export default function ReviewScreen({
     setEditDialogIsVisible(false);
     try {
       if (editDialogText) {
-        validateVoucherAmount(editDialogText);
+        validateVoucherAmount(focusedSerialNumber, editDialogText);
         const newValue = Math.round(
           parseFloat(editDialogText.replace(',', '.')) * 100,
         );

@@ -13,6 +13,7 @@ import {
   H2Heading,
   InputTitleText,
   CounterText,
+  Body2Subtext,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
@@ -21,6 +22,8 @@ import {
   FieldContainer,
   FormContainer,
   VoucherCounter,
+  ErrorContainer,
+  RedText,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
@@ -34,21 +37,32 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
+
+  const [scanCounter, setScanCounter] = useState<number>(0);
+  const [showError, setShowError] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const { voucherMap } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
+    setShowError(false);
     const value = text.replace(/\D/g, '');
     setSerialNumber(value);
   };
 
-  const handleVoucherAdd = () => {
-    const serialNumberInput = Number(serialNumber);
-    // clears input field if successfully added
-    setSerialNumber('');
-    // TODO: change once we create custom base components for number inputs
-    navigation.navigate('ConfirmValueScreen', {
-      serialNumber: serialNumberInput,
-    });
+  const handleVoucherAdd = async () => {
+    await validateSerialNumberInput(result => setIsValid(result), serialNumber);
+
+    if (isValid) {
+      const serialNumberInput = Number(serialNumber);
+      // clears input field if successfully added
+      setSerialNumber('');
+      // TODO: change once we create custom base components for number inputs
+      navigation.navigate('ConfirmValueScreen', {
+        serialNumber: serialNumberInput,
+      });
+    } else {
+      setShowError(true);
+    }
   };
 
   return (
@@ -86,17 +100,31 @@ export default function ManualVoucherScreen({
               onChange={onChangeSerialNumber}
               value={serialNumber}
               placeholder="Enter Number"
-              validate={validateSerialNumberInput}
+              validate={input =>
+                validateSerialNumberInput(
+                  result => setShowError(!result),
+                  input,
+                )
+              }
+              isValid={!showError}
               keyboardType="number-pad"
             />
           </FieldContainer>
+          <ErrorContainer>
+            {showError ? (
+              <RedText>
+                <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
+              </RedText>
+            ) : null}
+          </ErrorContainer>
         </FormContainer>
-        <ButtonMagenta onPress={handleVoucherAdd}>
+
+        <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
         <ButtonWhite
           onPress={() => navigation.navigate('ReviewScreen')}
-          disabled={isEmpty}
+          disabled={voucherMap.size === 0}
         >
           <ButtonTextBlack>
             <H4CardNavTab>Review and Submit</H4CardNavTab>

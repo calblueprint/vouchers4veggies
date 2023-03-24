@@ -51,7 +51,7 @@ export default function ConfirmValueScreen({
   };
 
   const handleVoucherAdd = () => {
-    addVoucher(dispatch, serialNumber, voucherAmount * 100);
+    addVoucher(dispatch, serialNumber, voucherAmount);
     showToast();
     // clears input field if successfully added
     setVoucherAmount(0);
@@ -81,7 +81,7 @@ export default function ConfirmValueScreen({
         <FormContainer>
           <FieldContainer>
             <InputTitleText>Voucher Value</InputTitleText>
-            <CurrencyInput // TODO: refactor currency input with custom text input base components
+            <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
               value={voucherAmount}
               onChangeValue={onChangeVoucherAmount}
               renderTextInput={props => (
