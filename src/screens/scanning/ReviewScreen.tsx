@@ -68,7 +68,7 @@ export default function ReviewScreen({
         const newValue = Math.round(
           parseFloat(editDialogText.replace(',', '.')) * 100,
         );
-        if (newValue <= 10) {
+        if (newValue <= 1000) {
           editVoucher(dispatch, focusedSerialNumber, newValue);
         } else {
           throw new Error('Invalid Voucher Amount');
@@ -96,15 +96,18 @@ export default function ReviewScreen({
     hideDeleteDialog();
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (vendorUuid) {
-      voucherMap.forEach((serialNumber, value) => {
-        createVoucher({
-          serialNumber,
-          vendorUuid,
-          value,
-        });
-      });
+      await Promise.all(
+        voucherArray.map(item =>
+          createVoucher({
+            serialNumber: item.serialNumber,
+            vendorUuid,
+            value: item.value,
+          }),
+        ),
+      );
+
       createTransaction({
         status: TransactionStatus.UNPAID,
         voucherSerialNumbers: Array.from(voucherMap.keys()),
