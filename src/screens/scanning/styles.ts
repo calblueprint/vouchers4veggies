@@ -112,12 +112,21 @@ export const ReviewButtonContainer = styled.View`
   padding-top: 40px;
 `;
 
+export const ErrorContainer = styled.View`
+  width: 100%;
+  height: 20px;
+`;
+
 export const WhiteText = styled.Text`
   color: ${Colors.offWhite};
 `;
 
 export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
+`;
+
+export const RedText = styled.Text`
+  color: ${Colors.alertRed};
 `;
 
 // will be used later
