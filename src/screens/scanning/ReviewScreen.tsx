@@ -1,53 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, Alert, FlatList } from 'react-native';
-import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Toast from 'react-native-toast-message';
+import React, { useState } from 'react';
+import { FlatList, RefreshControl } from 'react-native';
 import Dialog from 'react-native-dialog';
-import {
-  ButtonTextBlack,
-  Body1Text,
-  ButtonTextWhite,
-  CenterText,
-  CounterText,
-  H2Heading,
-  MagentaText,
-  ButtonTextMagenta,
-} from '../../../assets/Fonts';
-import StandardLogo from '../../components/common/StandardLogo';
-import {
-  ButtonContainer,
-  ScannerContainer,
-  TitleContainer,
-  VoucherCounter,
-  Header,
-  BodyContainer,
-  SafeArea,
-} from './styles';
-import {
-  AddManuallyButton,
-  ButtonMagenta,
-  ButtonWhite,
-  CardContainer,
-} from '../../../assets/Components';
+import { H2Heading } from '../../../assets/Fonts';
+import { SafeArea } from './styles';
+import { CardContainer, StartOfListView } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
-import {
-  LogoContainer,
-  TransactionsContainer,
-  StartOfListView,
-} from '../transactions/styles';
 import { useScanningContext } from './ScanningContext';
 import ReviewVoucherCard from '../../components/scanning/ReviewVoucherCard';
 import { validateVoucherAmount } from '../../utils/validationUtils';
 import { deleteVoucher, editVoucher } from '../../utils/scanningUtils';
+import BackButton from '../../components/common/BackButton';
 
 export default function ReviewScreen({
   navigation,
 }: ScannerStackScreenProps<'ReviewScreen'>) {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+  }, []);
+
   const [deleteDialogIsVisible, setDeleteDialogIsVisible] = useState(false);
   const [editDialogIsVisible, setEditDialogIsVisible] = useState(false);
   const [editDialogText, setEditDialogText] = useState('0');
+
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
   const { voucherMap, dispatch } = useScanningContext();
   const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
@@ -94,6 +74,11 @@ export default function ReviewScreen({
 
   return (
     <SafeArea>
+      {BackButton(() => navigation.goBack())}
+
+      <H2Heading>Review vouchers</H2Heading>
+      <H2Heading>{`Focused: ${focusedSerialNumber}`}</H2Heading>
+
       {editDialogIsVisible ? (
         <Dialog.Container visible>
           <Dialog.Title>Enter Number</Dialog.Title>
@@ -136,6 +121,11 @@ export default function ReviewScreen({
             />
           )}
           keyExtractor={item => item.serialNumber.toString()}
+          refreshControl={
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+          }
+          refreshing={isRefreshing}
+          onRefresh={onRefresh}
         />
       </CardContainer>
     </SafeArea>

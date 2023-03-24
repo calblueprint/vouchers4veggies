@@ -29,13 +29,6 @@ export const Title = styled.Text`
   text-align: center;
 `;
 
-export const StartOfListView = styled.View`
-  width: 100%;
-  height: 1px;
-  border: 1px solid ${Colors.lightGray};
-  border-top-width: 1px;
-`;
-
 export const LeftAlignedContainer = styled.View`
   width: 100%;
   justify-content: flex-start;

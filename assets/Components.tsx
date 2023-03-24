@@ -88,6 +88,13 @@ export const Row = styled.View`
   width: 100%;
 `;
 
+export const StartOfListView = styled.View`
+  width: 100%;
+  height: 1px;
+  border: 1px solid ${Colors.lightGray};
+  border-top-width: 1px;
+`;
+
 export const CardContainer = styled.View`
   width: 100%;
   display: flex;
