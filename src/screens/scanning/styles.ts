@@ -96,13 +96,13 @@ export const ReviewTitleContainer = styled.View`
 
 export const ConstrainedHeightContainer = styled.View`
   width: 100%;
-  height: 268px;
+  min-height: 268px;
 `;
 
 export const ReviewButtonContainer = styled.View`
   display: flex;
-  flex-direction: column;
-  align-content: space-between;
+  align-items: center;
+  justify-content: center;
   padding-top: 40px;
 `;
 
