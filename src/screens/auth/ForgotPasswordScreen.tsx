@@ -8,6 +8,8 @@ import {
   H2Heading,
   H4CardNavTab,
   BoldText,
+  DarkGrayText,
+  WhiteText,
 } from '../../../assets/Fonts';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
@@ -23,8 +25,6 @@ import {
   LoginContainer,
   VerticalSpacingButtonContainer,
   BackButtonContainer,
-  WhiteText,
-  DarkGrayText,
   VerticalSpacingContainer,
 } from './styles';
 

@@ -65,7 +65,3 @@ export const Size14BoldText = styled.Text`
   font-size: 14px;
   line-height: 19px;
 `;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
-`;
