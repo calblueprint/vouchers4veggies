@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, RefreshControl, View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import Dialog from 'react-native-dialog';
 import {
   ButtonTextWhite,
@@ -12,9 +12,9 @@ import {
   LeftAlignContainer,
   RightAlignContainer,
   SafeArea,
-  ConstrainedHeightContainer,
   ReviewTitleContainer,
   ReviewButtonContainer,
+  ConstrainedHeightContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -130,52 +130,54 @@ export default function ReviewScreen({
         </Dialog.Container>
       ) : null}
 
-      <ConstrainedHeightContainer>
-        <CardContainer>
-          <StartOfListView />
-          <FlatList
-            data={voucherArray}
-            renderItem={({ item }) => (
+      <CardContainer>
+        <StartOfListView />
+        <ScrollView>
+          <ConstrainedHeightContainer>
+            {voucherArray.map(item => (
               <ReviewVoucherCard
+                key={item.serialNumber}
                 serialNumber={item.serialNumber}
                 value={item.value}
                 showEditDialog={showEditDialog}
                 showDeleteDialog={showDeleteDialog}
                 setSerialNumber={setSerialNumber}
               />
-            )}
-            keyExtractor={item => item.serialNumber.toString()}
-          />
-        </CardContainer>
-      </ConstrainedHeightContainer>
+            ))}
+          </ConstrainedHeightContainer>
 
-      <BorderlessRow>
-        <LeftAlignContainer>
-          <H5Subheading2>Amount</H5Subheading2>
-        </LeftAlignContainer>
-        <RightAlignContainer>
-          <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
-        </RightAlignContainer>
-      </BorderlessRow>
+          <BorderlessRow>
+            <LeftAlignContainer>
+              <H5Subheading2>Amount</H5Subheading2>
+            </LeftAlignContainer>
+            <RightAlignContainer>
+              <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
+            </RightAlignContainer>
+          </BorderlessRow>
 
-      <BorderlessRow>
-        <LeftAlignContainer>
-          <H5Subheading2>Total</H5Subheading2>
-        </LeftAlignContainer>
-        <RightAlignContainer>
-          <H3Subheading>{`$${formatValueForDisplay(
-            voucherArray.reduce((total, voucher) => total + voucher.value, 0),
-          )}`}</H3Subheading>
-        </RightAlignContainer>
-      </BorderlessRow>
+          <BorderlessRow>
+            <LeftAlignContainer>
+              <H5Subheading2>Total</H5Subheading2>
+            </LeftAlignContainer>
+            <RightAlignContainer>
+              <H3Subheading>{`$${formatValueForDisplay(
+                voucherArray.reduce(
+                  (total, voucher) => total + voucher.value,
+                  0,
+                ),
+              )}`}</H3Subheading>
+            </RightAlignContainer>
+          </BorderlessRow>
 
-      <ReviewButtonContainer>
-        <ButtonMagenta
-          onPress={() => navigation.navigate('ConfirmationScreen')}
-        >
-          <ButtonTextWhite>Submit</ButtonTextWhite>
-        </ButtonMagenta>
-      </ReviewButtonContainer>
+          <ReviewButtonContainer>
+            <ButtonMagenta
+              onPress={() => navigation.navigate('ConfirmationScreen')}
+            >
+              <ButtonTextWhite>Submit</ButtonTextWhite>
+            </ButtonMagenta>
+          </ReviewButtonContainer>
+        </ScrollView>
+      </CardContainer>
     </SafeArea>
   );
 }
