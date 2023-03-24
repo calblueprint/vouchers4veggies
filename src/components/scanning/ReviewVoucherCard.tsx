@@ -6,9 +6,6 @@ import { LeftAlignContainer, Styles } from '../transactions/styles';
 import { Row } from '../../../assets/Components';
 import { formatValueForDisplay } from '../../utils/displayUtils';
 import MediumSemiBoldText from './styles';
-import { validateVoucherAmount } from '../../utils/validationUtils';
-import { editVoucher, deleteVoucher } from '../../utils/scanningUtils';
-import { useScanningContext } from '../../screens/scanning/ScanningContext';
 
 type ReviewVoucherCardProps = {
   serialNumber: number;

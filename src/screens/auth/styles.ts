@@ -82,6 +82,10 @@ export const WhiteText = styled.Text`
   color: ${Colors.offWhite};
 `;
 
+export const DarkGrayText = styled.Text`
+  color: ${Colors.darkGray};
+`;
+
 export const Styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline',

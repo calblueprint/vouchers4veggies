@@ -77,7 +77,6 @@ export const RootNavBackButton = styled.TouchableOpacity`
 
 export const Row = styled.View`
   display: flex;
-  flex: 1;
   background-color: #fff;
   flex-direction: row;
   align-items: center;
