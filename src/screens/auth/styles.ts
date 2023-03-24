@@ -16,7 +16,7 @@ export const StartContainer = styled.View`
 `;
 
 export const HeadingContainer = styled.View`
-  align-items: left;
+  align-items: flex-start;
   margin-bottom: 10%;
 `;
 
