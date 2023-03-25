@@ -60,7 +60,9 @@ export default function TransactionDetailsScreen({
 
   return (
     <TransactionsContainer>
-      {BackButton(() => navigation.navigate('TransactionsScreen'))}
+      <StandardHeader>
+        {BackButton(() => navigation.navigate('TransactionsScreen'))}
+      </StandardHeader>
 
       {transactionData ? (
         <TransactionsContainer>

@@ -32,6 +32,7 @@ import { formatValueForDisplay } from '../../utils/displayUtils';
 import { createTransaction, createVoucher } from '../../database/queries';
 import { TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
+import StandardHeader from '../../components/common/StandardHeader';
 
 export default function ReviewScreen({
   navigation,
@@ -122,7 +123,7 @@ export default function ReviewScreen({
 
   return (
     <SafeArea>
-      {BackButton(() => navigation.goBack())}
+      <StandardHeader>{BackButton(() => navigation.goBack())}</StandardHeader>
 
       <ReviewTitleContainer>
         <H2Heading>Review vouchers</H2Heading>

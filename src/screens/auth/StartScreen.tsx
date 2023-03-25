@@ -5,6 +5,7 @@ import { H1Heading, H4CardNavTab, WhiteText } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
 import StandardLogo from '../../components/common/StandardLogo';
 import { ButtonContainer, LoginContainer, StartContainer } from './styles';
+import StandardHeader from '../../components/common/StandardHeader';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +23,9 @@ export default function StartScreen({
     <View style={styles.container}>
       <LoginContainer>
         <StartContainer>
-          <StandardLogo />
+          <StandardHeader>
+            <StandardLogo />
+          </StandardHeader>
           <H1Heading>{"Hello! Let's get\nyou started."}</H1Heading>
 
           <ButtonContainer>
