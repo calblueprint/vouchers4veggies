@@ -6,7 +6,6 @@ import {
   H2Heading,
   H4CardNavTab,
   BoldText,
-  DarkGrayText,
   WhiteText,
 } from '../../../assets/Fonts';
 import { ButtonMagenta } from '../../../assets/Components';
@@ -19,7 +18,6 @@ import { useAuthContext } from './AuthContext';
 
 import {
   FormContainer,
-  HeadingContainer,
   LoginContainer,
   VerticalSpacingButtonContainer,
   VerticalSpacingContainer,
@@ -49,9 +47,9 @@ export default function ForgotPasswordScreen({
       {BackButton(() => navigation.navigate('Login'))}
 
       <FormContainer>
-        <HeadingContainer>
+        <StandardHeader>
           <H2Heading>Reset Password</H2Heading>
-        </HeadingContainer>
+        </StandardHeader>
 
         <VerticalSpacingContainer>
           <Body1Text>

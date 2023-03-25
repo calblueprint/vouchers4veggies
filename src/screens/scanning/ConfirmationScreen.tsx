@@ -12,6 +12,7 @@ import { ScannerStackScreenProps } from '../../navigation/types';
 import BackButton from '../../components/common/BackButton';
 import { newInvoice } from '../../utils/scanningUtils';
 import { useScanningContext } from './ScanningContext';
+import StandardHeader from '../../components/common/StandardHeader';
 
 export default function ConfirmationScreen({
   route,
@@ -26,7 +27,7 @@ export default function ConfirmationScreen({
 
   return (
     <SafeArea>
-      {BackButton(() => navigation.goBack())}
+      <StandardHeader>{BackButton(() => navigation.goBack())}</StandardHeader>
 
       <ConfirmationTitleContainer>
         <H1Heading
