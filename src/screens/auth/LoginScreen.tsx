@@ -63,7 +63,7 @@ export default function LoginScreen({
 
   return (
     <LoginContainer>
-      <StandardHeader>
+      <StandardHeader alignment="flex-start">
         {BackButton(() => navigation.navigate('Start'))}
       </StandardHeader>
 

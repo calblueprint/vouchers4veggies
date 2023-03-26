@@ -18,6 +18,7 @@ import { useAuthContext } from './AuthContext';
 
 import {
   FormContainer,
+  HeadingContainer,
   LoginContainer,
   VerticalSpacingButtonContainer,
   VerticalSpacingContainer,
@@ -44,12 +45,14 @@ export default function ForgotPasswordScreen({
 
   return (
     <LoginContainer>
-      {BackButton(() => navigation.navigate('Login'))}
+      <StandardHeader>
+        {BackButton(() => navigation.navigate('Login'))}
+      </StandardHeader>
 
       <FormContainer>
-        <StandardHeader>
+        <HeadingContainer>
           <H2Heading>Reset Password</H2Heading>
-        </StandardHeader>
+        </HeadingContainer>
 
         <VerticalSpacingContainer>
           <Body1Text>
