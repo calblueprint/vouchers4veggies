@@ -144,9 +144,6 @@ export default function ScanningScreen({
         >
           <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
         </ButtonWhite>
-        <ButtonMagenta onPress={() => navigation.navigate('ReviewScreen')}>
-          <ButtonTextWhite>Review & Submit</ButtonTextWhite>
-        </ButtonMagenta>
       </ButtonContainer>
       {/* <Toast /> */}
     </SafeArea>
