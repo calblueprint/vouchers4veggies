@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
-// import Toast from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
 import {
   ButtonTextBlack,
   Body1Text,
@@ -134,18 +134,14 @@ export default function ScanningScreen({
       </ScannerContainer>
 
       <ButtonContainer>
-        <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
-          <ButtonTextWhite>Scan</ButtonTextWhite>
-        </ButtonMagenta>
-
-        <ButtonWhite
-          // onPress={() => navigation.navigate('ReviewScreen')}
-          disabled={voucherMap.size === 0}
-        >
-          <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
+        <ButtonWhite disabled={!scanned} onPress={() => setScanned(false)}>
+          <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
         </ButtonWhite>
+        <ButtonMagenta onPress={() => navigation.navigate('ReviewScreen')}>
+          <ButtonTextWhite>Review & Submit</ButtonTextWhite>
+        </ButtonMagenta>
       </ButtonContainer>
-      {/* <Toast /> */}
+      <Toast />
     </SafeArea>
   );
 }

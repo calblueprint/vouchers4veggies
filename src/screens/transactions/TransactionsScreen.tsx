@@ -8,7 +8,7 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
-import { LogoContainer, TransactionsContainer, TitleContainer } from './styles';
+import { TransactionsContainer, TitleContainer } from './styles';
 import { CardContainer, StartOfListView } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
 
