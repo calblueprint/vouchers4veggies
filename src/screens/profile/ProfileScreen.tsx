@@ -38,7 +38,7 @@ export default function ProfileScreen({
         </HeadingContainer>
       </MainProfileContainer>
       <ButtonInfoContainer
-        onPress={() => navigation.navigate('EditPhoneNumber')}
+        onPress={() => navigation.navigate('EditPhoneScreen')}
       >
         <ButtonBlank />
         <IconContainer>

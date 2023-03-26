@@ -3,10 +3,14 @@ import { View } from 'react-native';
 import { Colors } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
-import { Body1Text, H2Heading, ButtonTextWhite } from '../../../assets/Fonts';
+import {
+  Body1Text,
+  H2Heading,
+  ButtonTextWhite,
+  DarkGrayText,
+} from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { ProfileStackScreenProps } from '../../navigation/types';
-import { DarkGrayText } from '../transactions/styles';
 import {
   BackButtonContainer,
   EmailHeadingContainer,
