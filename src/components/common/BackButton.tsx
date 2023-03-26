@@ -8,8 +8,6 @@ export const BackButtonContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-left: 10%;
-  margin-top: 15%;
 `;
 
 export const DarkGrayText = styled.Text`
