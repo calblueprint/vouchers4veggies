@@ -13,9 +13,7 @@ import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { forgotPassword } from '../../utils/authUtils';
 import StandardHeader from '../../components/common/StandardHeader';
-
 import { useAuthContext } from './AuthContext';
-
 import {
   FormContainer,
   HeadingContainer,
@@ -46,7 +44,7 @@ export default function ForgotPasswordScreen({
   return (
     <LoginContainer>
       <StandardHeader>
-        {BackButton(() => navigation.navigate('Login'))}
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
       <FormContainer>

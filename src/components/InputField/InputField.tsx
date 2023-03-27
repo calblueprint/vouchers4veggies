@@ -23,6 +23,14 @@ export default function InputField({
   keyboardType,
 }: InputFieldProps) {
   const [isActive, setIsActive] = useState(false);
+  let textInputStyle;
+  if (isActive) {
+    textInputStyle = Styles.FormFieldFocus;
+  } else if (isValid) {
+    textInputStyle = Styles.FormField;
+  } else {
+    textInputStyle = Styles.FormFieldError;
+  }
 
   return (
     <TextInput
@@ -34,14 +42,7 @@ export default function InputField({
       }}
       onFocus={() => setIsActive(true)}
       onChangeText={onChange}
-      style={
-        // eslint-disable-next-line no-nested-ternary
-        isActive
-          ? Styles.FormFieldFocus
-          : isValid
-          ? Styles.FormField
-          : Styles.FormFieldError
-      }
+      style={textInputStyle}
       value={value}
       placeholder={placeholder}
       placeholderTextColor={Colors.midGray}

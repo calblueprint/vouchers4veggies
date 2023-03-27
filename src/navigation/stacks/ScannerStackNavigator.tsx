@@ -37,7 +37,7 @@ export default function ScannerStackNavigator() {
           component={ConfirmationScreen}
         />
         <ScannerStack.Screen
-          name="Transactions"
+          name="TransactionsScreen"
           component={TransactionStackNavigator}
         />
       </ScannerStack.Navigator>

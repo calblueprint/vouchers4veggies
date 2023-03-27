@@ -27,7 +27,7 @@ export type ScannerStackParamList = {
   };
   ReviewScreen: undefined;
   ConfirmationScreen: { count: number };
-  Transactions: undefined;
+  TransactionsScreen: undefined;
 };
 
 export type ProfileStackParamList = {

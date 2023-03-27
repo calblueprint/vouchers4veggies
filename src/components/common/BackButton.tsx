@@ -14,7 +14,7 @@ export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
 `;
 
-export default function BackButton(onPress: () => void) {
+export default function BackButton({ onPress }: { onPress: () => void }) {
   return (
     <BackButtonContainer>
       <RootNavBackButton onPress={onPress}>

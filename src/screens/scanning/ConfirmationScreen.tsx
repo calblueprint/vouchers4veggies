@@ -27,7 +27,9 @@ export default function ConfirmationScreen({
 
   return (
     <SafeArea>
-      <StandardHeader>{BackButton(() => navigation.goBack())}</StandardHeader>
+      <StandardHeader>
+        <BackButton onPress={() => navigation.goBack()} />
+      </StandardHeader>
 
       <ConfirmationTitleContainer>
         <H1Heading
@@ -36,7 +38,7 @@ export default function ConfirmationScreen({
       </ConfirmationTitleContainer>
 
       <ButtonContainer>
-        <ButtonWhite onPress={() => navigation.navigate('Transactions')}>
+        <ButtonWhite onPress={() => navigation.navigate('TransactionsScreen')}>
           <DarkGrayText>
             <H4CardNavTab>Review Invoices</H4CardNavTab>
           </DarkGrayText>

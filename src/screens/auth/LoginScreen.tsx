@@ -64,7 +64,7 @@ export default function LoginScreen({
   return (
     <LoginContainer>
       <StandardHeader alignment="flex-start">
-        {BackButton(() => navigation.navigate('Start'))}
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
       <FormContainer>

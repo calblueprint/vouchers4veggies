@@ -123,7 +123,9 @@ export default function ReviewScreen({
 
   return (
     <SafeArea>
-      <StandardHeader>{BackButton(() => navigation.goBack())}</StandardHeader>
+      <StandardHeader>
+        <BackButton onPress={() => navigation.goBack()} />
+      </StandardHeader>
 
       <ReviewTitleContainer>
         <H2Heading>Review vouchers</H2Heading>
