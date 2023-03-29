@@ -61,7 +61,7 @@ export default function LoginScreen({
 
   return (
     <SafeArea>
-      <StandardHeader alignment="flex-start">
+      <StandardHeader>
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 

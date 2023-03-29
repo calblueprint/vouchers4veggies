@@ -51,7 +51,7 @@ export default function TransactionsScreen({
 
   return (
     <SafeArea>
-      <StandardHeader topMargin="4%">
+      <StandardHeader>
         <StandardLogo />
       </StandardHeader>
 

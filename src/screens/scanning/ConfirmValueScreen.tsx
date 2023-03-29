@@ -61,7 +61,7 @@ export default function ConfirmValueScreen({
 
   return (
     <SafeArea>
-      <StandardHeader topMargin="4%">
+      <StandardHeader>
         {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (

@@ -66,7 +66,7 @@ export default function ManualVoucherScreen({
 
   return (
     <SafeArea>
-      <StandardHeader topMargin="4%">
+      <StandardHeader>
         {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (

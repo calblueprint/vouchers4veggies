@@ -91,7 +91,7 @@ export default function ScanningScreen({
   return (
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
-      <StandardHeader topMargin="4%">
+      <StandardHeader>
         {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (

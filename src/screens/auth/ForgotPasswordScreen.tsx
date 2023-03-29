@@ -42,7 +42,7 @@ export default function ForgotPasswordScreen({
 
   return (
     <SafeArea>
-      <StandardHeader alignment="flex-start">
+      <StandardHeader>
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
