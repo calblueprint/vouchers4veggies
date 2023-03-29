@@ -19,7 +19,7 @@ export default function HeaderContainer({
         height: '12%',
         display: 'flex',
         flexDirection: 'row',
-        marginTop: topMargin || '15%',
+        marginTop: '0%',
         justifyContent: 'space-between',
         alignItems: alignment || 'center',
       }}

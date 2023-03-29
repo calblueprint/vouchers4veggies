@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import { H1Heading, H4CardNavTab, WhiteText } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
 import StandardLogo from '../../components/common/StandardLogo';
-import { ButtonContainer, LoginContainer, StartContainer } from './styles';
-import StandardHeader from '../../components/common/StandardHeader';
+import { ButtonContainer, StartContainer } from './styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,11 +20,9 @@ export default function StartScreen({
 }: AuthStackScreenProps<'Start'>) {
   return (
     <View style={styles.container}>
-      <LoginContainer>
+      <SafeArea>
         <StartContainer>
-          <StandardHeader>
-            <StandardLogo />
-          </StandardHeader>
+          <StandardLogo />
           <H1Heading>{"Hello! Let's get\nyou started."}</H1Heading>
 
           <ButtonContainer>
@@ -36,7 +33,7 @@ export default function StartScreen({
             </ButtonMagenta>
           </ButtonContainer>
         </StartContainer>
-      </LoginContainer>
+      </SafeArea>
     </View>
   );
 }

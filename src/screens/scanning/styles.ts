@@ -1,13 +1,6 @@
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const SafeArea = styled.SafeAreaView`
-  background-color: ${Colors.offWhite};
-  min-height: 100%;
-  align-items: center;
-  flex: 1;
-`;
-
 export const VoucherCounter = styled.View`
   width: 30px;
   height: 30px;

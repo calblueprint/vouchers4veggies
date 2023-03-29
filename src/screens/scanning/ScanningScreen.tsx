@@ -22,12 +22,12 @@ import {
   TitleContainer,
   VoucherCounter,
   BodyContainer,
-  SafeArea,
 } from './styles';
 import {
   AddManuallyButton,
   ButtonMagenta,
   ButtonWhite,
+  SafeArea,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';

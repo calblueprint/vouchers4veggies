@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import {
   Body1Text,
   H2Heading,
@@ -21,10 +21,8 @@ import {
   FormContainer,
   HeadingContainer,
   LeftAlignContainer,
-  LoginContainer,
   RightAlignContainer,
   RowContainer,
-  SmallTextContainer,
   Styles,
   VerticalSpacingButtonContainer,
 } from './styles';
@@ -62,7 +60,7 @@ export default function LoginScreen({
   };
 
   return (
-    <LoginContainer>
+    <SafeArea>
       <StandardHeader alignment="flex-start">
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
@@ -108,14 +106,7 @@ export default function LoginScreen({
             </WhiteText>
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
-
-        <SmallTextContainer>
-          <Body1Text>
-            {`Don't have an account? `}
-            <Body1Text style={Styles.underline}>Sign up.</Body1Text>
-          </Body1Text>
-        </SmallTextContainer>
       </FormContainer>
-    </LoginContainer>
+    </SafeArea>
   );
 }

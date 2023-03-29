@@ -11,7 +11,6 @@ import {
   BorderlessRow,
   LeftAlignContainer,
   RightAlignContainer,
-  SafeArea,
   ReviewTitleContainer,
   ReviewButtonContainer,
   ConstrainedHeightContainer,
@@ -19,6 +18,7 @@ import {
 import {
   ButtonMagenta,
   CardContainer,
+  SafeArea,
   StartOfListView,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';

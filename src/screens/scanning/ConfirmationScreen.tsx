@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import {
   ButtonContainer,
-  SafeArea,
   WhiteText,
   DarkGrayText,
   ConfirmationTitleContainer,
 } from './styles';
-import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
+import {
+  ButtonMagenta,
+  ButtonWhite,
+  SafeArea,
+} from '../../../assets/Components';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import BackButton from '../../components/common/BackButton';
 import { newInvoice } from '../../utils/scanningUtils';
