@@ -14,6 +14,7 @@ export default function HeaderContainer({ children }: HeaderContainerProps) {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
       }}
     >
       {children}
