@@ -131,13 +131,13 @@ export const getVoucherRange = async (
   try {
     const dbQuery = query(
       voucherRangeCollection,
-      where('startSerialNum', '<=', serialNumber),
+      where('endSerialNum', '>=', serialNumber),
     );
     const querySnapshot = await getDocs(dbQuery);
 
     if (querySnapshot.docs.length > 0) {
       const result = querySnapshot.docs[0]?.data() as VoucherRange;
-      if (result.endSerialNum >= serialNumber) {
+      if (result.startSerialNum <= serialNumber) {
         return result;
       }
     }

@@ -41,7 +41,7 @@ export default function ConfirmationScreen({
       </ConfirmationTitleContainer>
 
       <ButtonContainer>
-        <ButtonWhite onPress={() => navigation.navigate('TransactionsScreen')}>
+        <ButtonWhite onPress={() => navigation.navigate('InvoicesScreen')}>
           <DarkGrayText>
             <H4CardNavTab>Review Invoices</H4CardNavTab>
           </DarkGrayText>

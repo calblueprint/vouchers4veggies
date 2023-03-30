@@ -99,12 +99,12 @@ export default function ManualVoucherScreen({
               onChange={onChangeSerialNumber}
               value={serialNumber}
               placeholder="Enter Number"
-              validate={input =>
-                validateSerialNumberInput(
-                  result => setShowError(!result),
-                  input,
-                )
-              }
+              // validate={input =>
+              //   validateSerialNumberInput(
+              //     result => setShowError(!result),
+              //     input,
+              //   )
+              // }
               isValid={!showError}
               keyboardType="number-pad"
             />

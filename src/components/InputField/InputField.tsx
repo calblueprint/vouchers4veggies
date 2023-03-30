@@ -8,7 +8,7 @@ type InputFieldProps = {
   value: string;
   placeholder: string;
   secureTextEntry?: boolean;
-  validate?: (text: string) => void;
+  // validate?: (text: string) => void;
   isValid?: boolean;
   keyboardType?: KeyboardTypeOptions;
 };
@@ -18,7 +18,7 @@ export default function InputField({
   value,
   placeholder,
   secureTextEntry = false,
-  validate,
+  // validate,
   isValid = true,
   keyboardType,
 }: InputFieldProps) {
@@ -34,11 +34,11 @@ export default function InputField({
 
   return (
     <TextInput
-      onBlur={() => {
+      onEndEditing={() => {
         setIsActive(false);
-        if (validate) {
-          validate(value);
-        }
+        // if (validate) {
+        //   validate(value);
+        // }
       }}
       onFocus={() => setIsActive(true)}
       onChangeText={onChange}
