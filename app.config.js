@@ -7,7 +7,7 @@ export default {
     owner: 'vouchers4veggies',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/favicon.png',
+    icon: './assets/appstore.png',
     userInterfaceStyle: 'light',
     // splash: {
     //   image: './assets/splash.png',
@@ -19,15 +19,13 @@ export default {
     },
     assetBundlePatterns: ['**/*'],
     ios: {
-      supportsTablet: true,
+      supportsTablet: false,
       bundleIdentifier: 'org.calblueprint.vouchers4veggies',
+      icon: './assets/appstore.png',
     },
     android: {
       package: 'org.calblueprint.vouchers4veggies',
-      //   adaptiveIcon: {
-      //     foregroundImage: './assets/adaptive-icon.png',
-      //     backgroundColor: '#FFFFFF',
-      //   },
+      icon: './assets/android.png',
     },
     web: {
       favicon: './assets/favicon.png',
