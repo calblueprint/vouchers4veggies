@@ -32,15 +32,14 @@ import { validateSerialNumberInput } from '../../utils/validationUtils';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
+import { serialNumberIsValid } from '../../database/queries';
 
 export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
 
-  const [scanCounter, setScanCounter] = useState<number>(0);
   const [showError, setShowError] = useState(false);
-  const [isValid, setIsValid] = useState(false);
   const { voucherMap } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
@@ -50,7 +49,7 @@ export default function ManualVoucherScreen({
   };
 
   const handleVoucherAdd = async () => {
-    await validateSerialNumberInput(result => setIsValid(result), serialNumber);
+    const isValid = await serialNumberIsValid(Number(serialNumber));
 
     if (isValid) {
       const serialNumberInput = Number(serialNumber);
