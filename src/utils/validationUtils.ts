@@ -21,15 +21,6 @@ export const validatePasswordInput = (input: string) => {
   }
 };
 
-export const validateSerialNumberInput = async (
-  setIsValid: (result: boolean) => void,
-  input: string,
-) => {
-  const serialNumber = Number(input);
-  const isValid = await serialNumberIsValid(serialNumber);
-  setIsValid(isValid);
-};
-
 /**
  * Confirms that any input has either 2 decimal digits, or 0 digits and no decimal place.
  * Falsy value raises the custom error in zod.

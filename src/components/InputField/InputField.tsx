@@ -18,7 +18,6 @@ export default function InputField({
   value,
   placeholder,
   secureTextEntry = false,
-  // validate,
   isValid = true,
   keyboardType,
 }: InputFieldProps) {
@@ -36,9 +35,6 @@ export default function InputField({
     <TextInput
       onEndEditing={() => {
         setIsActive(false);
-        // if (validate) {
-        //   validate(value);
-        // }
       }}
       onFocus={() => setIsActive(true)}
       onChangeText={onChange}

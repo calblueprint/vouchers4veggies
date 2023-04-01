@@ -28,7 +28,6 @@ import {
 import InputField from '../../components/InputField/InputField';
 import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
-import { validateSerialNumberInput } from '../../utils/validationUtils';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
@@ -52,8 +51,11 @@ export default function ManualVoucherScreen({
 
     if (isValid) {
       const serialNumberInput = Number(serialNumber);
+
       // clears input field if successfully added
       setSerialNumber('');
+      setShowError(false);
+
       // TODO: change once we create custom base components for number inputs
       navigation.navigate('ConfirmValueScreen', {
         serialNumber: serialNumberInput,
@@ -98,12 +100,6 @@ export default function ManualVoucherScreen({
               onChange={onChangeSerialNumber}
               value={serialNumber}
               placeholder="Enter Number"
-              // validate={input =>
-              //   validateSerialNumberInput(
-              //     result => setShowError(!result),
-              //     input,
-              //   )
-              // }
               isValid={!showError}
               keyboardType="number-pad"
             />
