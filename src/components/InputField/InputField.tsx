@@ -8,7 +8,6 @@ type InputFieldProps = {
   value: string;
   placeholder: string;
   secureTextEntry?: boolean;
-  // validate?: (text: string) => void;
   isValid?: boolean;
   keyboardType?: KeyboardTypeOptions;
 };

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { getVoucherRange, serialNumberIsValid } from '../database/queries';
+import { getVoucherRange } from '../database/queries';
 
 export const validateEmailInput = (input: string) => {
   try {
