@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Keyboard } from 'react-native';
+import { Keyboard, TouchableOpacity } from 'react-native';
 import {
   ButtonMagenta,
   ButtonWhite,
@@ -27,7 +27,6 @@ import {
   RedText,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
-import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
@@ -76,13 +75,11 @@ export default function ManualVoucherScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        {voucherMap.size === 0 ? (
-          <StandardLogo />
-        ) : (
+        <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
-        )}
+        </TouchableOpacity>
 
         <AddManuallyButton
           onPress={() => navigation.navigate('ScanningScreen')}

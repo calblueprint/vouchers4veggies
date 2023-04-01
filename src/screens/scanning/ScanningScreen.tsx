@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
 // import Toast from 'react-native-toast-message';
@@ -13,7 +13,6 @@ import {
   MagentaText,
   ButtonTextMagenta,
 } from '../../../assets/Fonts';
-import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
 
 import {
@@ -92,13 +91,12 @@ export default function ScanningScreen({
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
       <StandardHeader>
-        {voucherMap.size === 0 ? (
-          <StandardLogo />
-        ) : (
+        <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
-        )}
+        </TouchableOpacity>
+
         <AddManuallyButton
           onPress={() => navigation.navigate('ManualVoucherScreen')}
         >

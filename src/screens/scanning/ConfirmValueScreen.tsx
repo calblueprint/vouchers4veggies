@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
-import { Keyboard, TextInput } from 'react-native';
+import { Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
@@ -24,7 +24,6 @@ import {
   ErrorContainer,
   RedText,
 } from './styles';
-import StandardLogo from '../../components/common/StandardLogo';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { addVoucher } from '../../utils/scanningUtils';
@@ -76,13 +75,11 @@ export default function ConfirmValueScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        {voucherMap.size === 0 ? (
-          <StandardLogo />
-        ) : (
+        <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
-        )}
+        </TouchableOpacity>
       </StandardHeader>
 
       <BodyContainer>
