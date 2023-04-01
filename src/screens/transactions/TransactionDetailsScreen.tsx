@@ -1,7 +1,12 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import { CardContainer, StartOfListView } from '../../../assets/Components';
+import {
+  CardContainer,
+  FullSizeContainer,
+  SafeArea,
+  StartOfListView,
+} from '../../../assets/Components';
 import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StatusComponent from '../../components/transactions/StatusComponent';
@@ -19,7 +24,6 @@ import {
   MediumText,
   Size14BoldText,
   Title,
-  TransactionsContainer,
 } from './styles';
 
 export default function TransactionDetailsScreen({
@@ -59,13 +63,13 @@ export default function TransactionDetailsScreen({
   const time = moment(transactionData?.timestamp.toDate());
 
   return (
-    <TransactionsContainer>
+    <SafeArea>
       <StandardHeader>
-        {BackButton(() => navigation.navigate('TransactionsScreen'))}
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
       {transactionData ? (
-        <TransactionsContainer>
+        <FullSizeContainer>
           <StatusComponent status={transactionData.status} />
           <Title>${formatValueForDisplay(transactionData.value)}</Title>
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
@@ -98,10 +102,10 @@ export default function TransactionDetailsScreen({
               onRefresh={onRefresh}
             />
           </CardContainer>
-        </TransactionsContainer>
+        </FullSizeContainer>
       ) : (
         <LoadingSpinner />
       )}
-    </TransactionsContainer>
+    </SafeArea>
   );
 }

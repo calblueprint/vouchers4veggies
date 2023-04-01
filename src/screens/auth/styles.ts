@@ -2,15 +2,6 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const LoginContainer = styled.View`
-  width: 100%;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
 export const StartContainer = styled.View`
   top: 35%;
 `;

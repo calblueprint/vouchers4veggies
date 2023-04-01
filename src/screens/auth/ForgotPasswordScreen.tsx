@@ -8,18 +8,15 @@ import {
   BoldText,
   WhiteText,
 } from '../../../assets/Fonts';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { forgotPassword } from '../../utils/authUtils';
 import StandardHeader from '../../components/common/StandardHeader';
-
 import { useAuthContext } from './AuthContext';
-
 import {
   FormContainer,
   HeadingContainer,
-  LoginContainer,
   VerticalSpacingButtonContainer,
   VerticalSpacingContainer,
 } from './styles';
@@ -44,9 +41,9 @@ export default function ForgotPasswordScreen({
   };
 
   return (
-    <LoginContainer>
+    <SafeArea>
       <StandardHeader>
-        {BackButton(() => navigation.navigate('Login'))}
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
       <FormContainer>
@@ -87,6 +84,6 @@ export default function ForgotPasswordScreen({
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
       </FormContainer>
-    </LoginContainer>
+    </SafeArea>
   );
 }

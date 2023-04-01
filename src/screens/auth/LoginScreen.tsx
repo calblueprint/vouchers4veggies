@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import {
   Body1Text,
   H2Heading,
@@ -11,20 +11,18 @@ import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
-import {
-  validateEmailInput,
-  validatePasswordInput,
-} from '../../utils/validationUtils';
+// import {
+//   validateEmailInput,
+//   validatePasswordInput,
+// } from '../../utils/validationUtils';
 import StandardHeader from '../../components/common/StandardHeader';
 
 import {
   FormContainer,
   HeadingContainer,
   LeftAlignContainer,
-  LoginContainer,
   RightAlignContainer,
   RowContainer,
-  SmallTextContainer,
   Styles,
   VerticalSpacingButtonContainer,
 } from './styles';
@@ -62,9 +60,9 @@ export default function LoginScreen({
   };
 
   return (
-    <LoginContainer>
-      <StandardHeader alignment="flex-start">
-        {BackButton(() => navigation.navigate('Start'))}
+    <SafeArea>
+      <StandardHeader>
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
       <FormContainer>
@@ -77,7 +75,7 @@ export default function LoginScreen({
           onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
-          validate={validateEmailInput}
+          // validate={validateEmailInput}
           keyboardType="email-address"
         />
 
@@ -96,7 +94,7 @@ export default function LoginScreen({
           value={password}
           placeholder="Enter password"
           secureTextEntry
-          validate={validatePasswordInput}
+          // validate={validatePasswordInput}
         />
         {showErrorMessage && errorMessage && (
           <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
@@ -108,14 +106,7 @@ export default function LoginScreen({
             </WhiteText>
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
-
-        <SmallTextContainer>
-          <Body1Text>
-            {`Don't have an account? `}
-            <Body1Text style={Styles.underline}>Sign up.</Body1Text>
-          </Body1Text>
-        </SmallTextContainer>
       </FormContainer>
-    </LoginContainer>
+    </SafeArea>
   );
 }

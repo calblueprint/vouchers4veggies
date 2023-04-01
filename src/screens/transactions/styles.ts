@@ -1,14 +1,4 @@
 import styled from 'styled-components/native';
-import Colors from '../../../assets/Colors';
-
-export const TransactionsContainer = styled.View`
-  width: 100%;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: ${Colors.offWhite};
-`;
 
 export const TitleContainer = styled.View`
   padding-top: 20px;

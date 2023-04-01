@@ -1,6 +1,22 @@
 import styled from 'styled-components/native';
 import Colors from './Colors';
 
+export const SafeArea = styled.SafeAreaView`
+  background-color: ${Colors.offWhite};
+  width: 100%;
+  min-height: 100%;
+  align-items: center;
+  flex: 1;
+`;
+
+export const FullSizeContainer = styled.View`
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 // TODO: @oahnh fix static widths
 export const ButtonMagenta = styled.TouchableOpacity`
   text-align: center;

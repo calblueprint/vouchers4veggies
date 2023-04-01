@@ -11,7 +11,6 @@ import {
   BorderlessRow,
   LeftAlignContainer,
   RightAlignContainer,
-  SafeArea,
   ReviewTitleContainer,
   ReviewButtonContainer,
   ConstrainedHeightContainer,
@@ -19,6 +18,7 @@ import {
 import {
   ButtonMagenta,
   CardContainer,
+  SafeArea,
   StartOfListView,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
@@ -123,7 +123,9 @@ export default function ReviewScreen({
 
   return (
     <SafeArea>
-      <StandardHeader>{BackButton(() => navigation.goBack())}</StandardHeader>
+      <StandardHeader>
+        <BackButton onPress={() => navigation.goBack()} />
+      </StandardHeader>
 
       <ReviewTitleContainer>
         <H2Heading>Review vouchers</H2Heading>

@@ -4,6 +4,7 @@ import {
   ButtonMagenta,
   ButtonWhite,
   AddManuallyButton,
+  SafeArea,
 } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -18,7 +19,6 @@ import {
 import {
   TitleContainer,
   BodyContainer,
-  SafeArea,
   FieldContainer,
   FormContainer,
   VoucherCounter,
@@ -38,7 +38,6 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
-
   const [showError, setShowError] = useState(false);
   const { voucherMap } = useScanningContext();
 
@@ -66,7 +65,7 @@ export default function ManualVoucherScreen({
 
   return (
     <SafeArea>
-      <StandardHeader topMargin="4%">
+      <StandardHeader>
         {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (
@@ -99,12 +98,12 @@ export default function ManualVoucherScreen({
               onChange={onChangeSerialNumber}
               value={serialNumber}
               placeholder="Enter Number"
-              validate={input =>
-                validateSerialNumberInput(
-                  result => setShowError(!result),
-                  input,
-                )
-              }
+              // validate={input =>
+              //   validateSerialNumberInput(
+              //     result => setShowError(!result),
+              //     input,
+              //   )
+              // }
               isValid={!showError}
               keyboardType="number-pad"
             />
