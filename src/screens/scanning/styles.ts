@@ -132,3 +132,12 @@ export const DropDownContainer = styled.View`
   margin-top: 6px;
   margin-bottom: 8px;
 `;
+
+export const StartContainer = styled.View`
+  top: 193px;
+  margin: 0px 49px;
+`;
+
+export const HeroContainer = styled.View`
+  margin-bottom: 40px;
+`;

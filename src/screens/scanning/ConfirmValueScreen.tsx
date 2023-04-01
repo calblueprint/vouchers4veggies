@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
-import { TextInput } from 'react-native';
+import { Keyboard, TextInput } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
@@ -66,6 +66,7 @@ export default function ConfirmValueScreen({
       setVoucherAmount(0);
       // eslint-disable-next-line no-console
       console.log(`[${serialNumber} => ${voucherAmount}]`);
+      Keyboard.dismiss();
       navigation.goBack();
     } else {
       setShowError(true);

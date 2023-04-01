@@ -50,7 +50,7 @@ export default function ConfirmationScreen({
 
       <ButtonContainer>
         <ButtonMagenta
-          onPress={() => navigation.navigate('ManualVoucherScreen')}
+          onPress={() => navigation.navigate('VoucherEntryStartScreen')}
         >
           <WhiteText>
             <H4CardNavTab>Submit More</H4CardNavTab>

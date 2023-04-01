@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { Keyboard } from 'react-native';
 import {
   ButtonMagenta,
   ButtonWhite,
