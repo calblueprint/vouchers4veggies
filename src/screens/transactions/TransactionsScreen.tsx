@@ -8,14 +8,13 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
-import StandardHeader from '../../components/common/StandardHeader';
-
+import { TitleContainer } from './styles';
 import {
-  TransactionsContainer,
-  TitleContainer,
   CardContainer,
+  SafeArea,
   StartOfListView,
-} from './styles';
+} from '../../../assets/Components';
+import StandardHeader from '../../components/common/StandardHeader';
 
 export default function TransactionsScreen({
   navigation,
@@ -51,7 +50,7 @@ export default function TransactionsScreen({
   }, [vendorUuid]);
 
   return (
-    <TransactionsContainer>
+    <SafeArea>
       <StandardHeader>
         <StandardLogo />
       </StandardHeader>
@@ -85,6 +84,6 @@ export default function TransactionsScreen({
           />
         </CardContainer>
       )}
-    </TransactionsContainer>
+    </SafeArea>
   );
 }

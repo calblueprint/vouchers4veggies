@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { getVoucherRange } from '../database/queries';
 
 export const validateEmailInput = (input: string) => {
   try {
@@ -20,16 +21,6 @@ export const validatePasswordInput = (input: string) => {
   }
 };
 
-export const validateSerialNumberInput = (input: string) => {
-  try {
-    const SNSchema = z.coerce.number().gt(0);
-    SNSchema.parse(input);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
-  }
-};
-
 /**
  * Confirms that any input has either 2 decimal digits, or 0 digits and no decimal place.
  * Falsy value raises the custom error in zod.
@@ -42,16 +33,21 @@ const validateCurrencyFormat = (input: string) => {
   return true;
 };
 
-export const validateVoucherAmount = (input: string) => {
+export const validateVoucherAmount = (serialNumber: number, input: string) => {
   try {
     const currencySchema = z.coerce
       .number() // ensures that input is a valid number
       .gt(0)
-      .lte(10) // less than or equal to 10 dollars
       .refine(() => validateCurrencyFormat(input), {
         message: 'Input must be in a valid currency format',
       });
     currencySchema.parse(input);
+
+    const value = Math.round(parseFloat(input) * 100);
+    getVoucherRange(serialNumber).then(voucherRange => {
+      if (voucherRange && voucherRange.maxValue < value)
+        throw new Error('Value exceeds maximum');
+    });
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);

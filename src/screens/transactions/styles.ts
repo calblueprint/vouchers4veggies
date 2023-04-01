@@ -1,14 +1,4 @@
 import styled from 'styled-components/native';
-import Colors from '../../../assets/Colors';
-
-export const TransactionsContainer = styled.View`
-  width: 100%;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: ${Colors.offWhite};
-`;
 
 export const TitleContainer = styled.View`
   padding-top: 20px;
@@ -21,26 +11,6 @@ export const Title = styled.Text`
   font-size: 42px;
   line-height: 57px;
   text-align: center;
-`;
-
-export const CardContainer = styled.View`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-
-export const StartOfListView = styled.View`
-  width: 100%;
-  height: 1px;
-  border: 1px solid ${Colors.lightGray};
-  border-top-width: 1px;
-`;
-
-export const BackButtonContainer = styled.View`
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-top: 57px;
 `;
 
 export const LeftAlignedContainer = styled.View`

@@ -2,15 +2,6 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const LoginContainer = styled.View`
-  width: 100%;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
 export const StartContainer = styled.View`
   top: 35%;
 `;
@@ -69,17 +60,19 @@ export const ButtonContainer = styled.View`
   margin-top: 5%;
 `;
 
-export const BackButtonContainer = styled.View`
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-top: 10%;
-`;
-
 export const SmallTextContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   margin-top: 6%;
+`;
+
+export const WhiteText = styled.Text`
+  color: ${Colors.offWhite};
+`;
+
+export const DarkGrayText = styled.Text`
+  color: ${Colors.darkGray};
 `;
 
 export const Styles = StyleSheet.create({

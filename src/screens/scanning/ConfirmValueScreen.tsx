@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
 import { TextInput } from 'react-native';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
 import {
@@ -17,7 +17,6 @@ import StandardHeader from '../../components/common/StandardHeader';
 import {
   TitleContainer,
   BodyContainer,
-  SafeArea,
   FieldContainer,
   FormContainer,
   VoucherCounter,
@@ -51,7 +50,7 @@ export default function ConfirmValueScreen({
   };
 
   const handleVoucherAdd = () => {
-    addVoucher(dispatch, serialNumber, voucherAmount);
+    addVoucher(dispatch, serialNumber, voucherAmount * 100);
     showToast();
     // clears input field if successfully added
     setVoucherAmount(0);
@@ -62,7 +61,7 @@ export default function ConfirmValueScreen({
 
   return (
     <SafeArea>
-      <StandardHeader topMargin="4%">
+      <StandardHeader>
         {voucherMap.size === 0 ? (
           <StandardLogo />
         ) : (
@@ -81,7 +80,7 @@ export default function ConfirmValueScreen({
         <FormContainer>
           <FieldContainer>
             <InputTitleText>Voucher Value</InputTitleText>
-            <CurrencyInput // TODO: refactor currency input with custom text input base components
+            <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
               value={voucherAmount}
               onChangeValue={onChangeVoucherAmount}
               renderTextInput={props => (

@@ -125,19 +125,19 @@ export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
  *
  * Otherwise, return null.
  */
-const getVoucherRange = async (
+export const getVoucherRange = async (
   serialNumber: number,
 ): Promise<VoucherRange | null> => {
   try {
     const dbQuery = query(
       voucherRangeCollection,
-      where('startSerialNum', '<=', serialNumber),
+      where('endSerialNum', '>=', serialNumber),
     );
     const querySnapshot = await getDocs(dbQuery);
 
     if (querySnapshot.docs.length > 0) {
       const result = querySnapshot.docs[0]?.data() as VoucherRange;
-      if (result.endSerialNum >= serialNumber) {
+      if (result.startSerialNum <= serialNumber) {
         return result;
       }
     }
@@ -161,6 +161,36 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
     );
     const querySnapshot = await getDocs(dbQuery);
     return querySnapshot.docs[0]?.data() as Voucher;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getVoucher)', e);
+    throw e;
+  }
+};
+
+/**
+ * Query the `vouchers` collection and check if a serialNumber is valid.
+ */
+export const serialNumberIsValid = async (
+  serialNumber: number,
+): Promise<boolean> => {
+  try {
+    const docId = serialNumber.toString();
+    const docRef = doc(db, 'vouchers', docId);
+
+    // check that serialNumber exists
+    const voucherRange = await getVoucherRange(serialNumber);
+    if (voucherRange === null) {
+      return false;
+    }
+
+    // check that serialNumber has not already been used
+    const voucherDoc = await getDoc(docRef);
+    if (voucherDoc.exists()) {
+      return false;
+    }
+
+    return true;
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucher)', e);

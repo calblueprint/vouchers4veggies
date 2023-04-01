@@ -8,7 +8,7 @@ type InputFieldProps = {
   value: string;
   placeholder: string;
   secureTextEntry?: boolean;
-  validate?: (text: string) => void;
+  isValid?: boolean;
   keyboardType?: KeyboardTypeOptions;
 };
 
@@ -17,20 +17,27 @@ export default function InputField({
   value,
   placeholder,
   secureTextEntry = false,
-  validate,
+  isValid = true,
   keyboardType,
 }: InputFieldProps) {
   const [isActive, setIsActive] = useState(false);
+  let textInputStyle;
+  if (isActive) {
+    textInputStyle = Styles.FormFieldFocus;
+  } else if (isValid) {
+    textInputStyle = Styles.FormField;
+  } else {
+    textInputStyle = Styles.FormFieldError;
+  }
 
   return (
     <TextInput
-      onBlur={() => {
+      onEndEditing={() => {
         setIsActive(false);
-        validate?.(value);
       }}
       onFocus={() => setIsActive(true)}
       onChangeText={onChange}
-      style={isActive ? Styles.FormFieldFocus : Styles.FormField}
+      style={textInputStyle}
       value={value}
       placeholder={placeholder}
       placeholderTextColor={Colors.midGray}
