@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
 import { Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
@@ -27,7 +26,11 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { voucherAmountIsValid } from '../../database/queries';
-import { addVoucher, usePreventLeave } from '../../utils/scanningUtils';
+import {
+  addVoucher,
+  showSuccessToast,
+  usePreventLeave,
+} from '../../utils/scanningUtils';
 
 export default function ConfirmValueScreen({
   route,
@@ -51,24 +54,13 @@ export default function ConfirmValueScreen({
     dispatch,
   });
 
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      topOffset: 50,
-      text1: 'Voucher Scanned!',
-      visibilityTime: 2000,
-    });
-  };
-
   const handleVoucherAdd = async () => {
     const centAmount = voucherAmount * 100;
-
     const isValid = await voucherAmountIsValid(serialNumber, centAmount);
 
     if (isValid) {
       addVoucher(dispatch, serialNumber, centAmount);
-      showToast();
+      showSuccessToast();
       // clears input field if successfully added
       setVoucherAmount(0);
       // eslint-disable-next-line no-console
@@ -78,7 +70,6 @@ export default function ConfirmValueScreen({
     } else {
       setShowError(true);
     }
-  };
 
   return (
     <SafeArea>
@@ -140,7 +131,6 @@ export default function ConfirmValueScreen({
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
       </BodyContainer>
-      <Toast />
     </SafeArea>
   );
 }

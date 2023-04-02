@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
-// import Toast from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
 import {
   ButtonTextBlack,
   Body1Text,
@@ -32,7 +32,7 @@ import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
 import { useScanningContext } from './ScanningContext';
-import { usePreventLeave } from '../../utils/scanningUtils';
+import { showSuccessToast, usePreventLeave } from '../../utils/scanningUtils';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,23 +66,13 @@ export default function ScanningScreen({
     dispatch,
   });
 
-  // const showToast = () => {
-  //   Toast.show({
-  //     type: 'success',
-  //     position: 'top',
-  //     topOffset: 50,
-  //     text1: 'Voucher Scanned!',
-  //     visibilityTime: 2000,
-  //   });
-  // };
-
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
       setScanned(true);
       // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      // showToast();
+      showSuccessToast();
       navigation.navigate('ConfirmValueScreen', {
         serialNumber: Number(data),
       });
@@ -152,7 +142,7 @@ export default function ScanningScreen({
           <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
         </ButtonWhite>
       </ButtonContainer>
-      {/* <Toast /> */}
+      <Toast />
     </SafeArea>
   );
 }

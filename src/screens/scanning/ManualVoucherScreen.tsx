@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Keyboard, TouchableOpacity } from 'react-native';
+import Toast from 'react-native-toast-message';
 import {
   ButtonMagenta,
   ButtonWhite,
@@ -146,6 +147,7 @@ export default function ManualVoucherScreen({
           </ButtonTextBlack>
         </ButtonWhite>
       </BodyContainer>
+      <Toast />
     </SafeArea>
   );
 }

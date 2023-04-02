@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Alert } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import Toast from 'react-native-toast-message';
 import { ScanningDispatch } from '../screens/scanning/ScanningContext';
 import { ScannerStackParamList } from '../navigation/types';
 
@@ -88,4 +89,15 @@ export const usePreventLeave = ({
       }),
     [hasUnsavedChanges, navigation, currentScreen, dispatch],
   );
+};
+
+/** Displays a toast on successful voucher entry */
+export const showSuccessToast = () => {
+  Toast.show({
+    type: 'success',
+    position: 'top',
+    topOffset: 50,
+    text1: 'Voucher Added!',
+    visibilityTime: 2000,
+  });
 };
