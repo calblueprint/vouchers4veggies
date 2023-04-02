@@ -32,6 +32,7 @@ import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
 import { useScanningContext } from './ScanningContext';
+import { usePreventLeave } from '../../utils/scanningUtils';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,7 +47,8 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const { voucherMap } = useScanningContext();
+  const { voucherMap, dispatch } = useScanningContext();
+  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -56,6 +58,13 @@ export default function ScanningScreen({
 
     getBarCodeScannerPermissions();
   }, []);
+
+  usePreventLeave({
+    hasUnsavedChanges,
+    navigation,
+    currentScreen: 'ScanningScreen',
+    dispatch,
+  });
 
   // const showToast = () => {
   //   Toast.show({

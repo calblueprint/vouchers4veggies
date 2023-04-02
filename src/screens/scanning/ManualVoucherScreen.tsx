@@ -32,6 +32,7 @@ import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { serialNumberIsValid } from '../../database/queries';
+import { usePreventLeave } from '../../utils/scanningUtils';
 
 export default function ManualVoucherScreen({
   navigation,
@@ -39,7 +40,15 @@ export default function ManualVoucherScreen({
   const [serialNumber, setSerialNumber] = useState<string>('');
   const [showInvalidError, setShowInvalidError] = useState(false);
   const [showDuplicateError, setShowDuplicateError] = useState(false);
-  const { voucherMap } = useScanningContext();
+  const { voucherMap, dispatch } = useScanningContext();
+  const hasUnsavedChanges = Boolean(voucherMap.size);
+
+  usePreventLeave({
+    hasUnsavedChanges,
+    navigation,
+    currentScreen: 'ManualVoucherScreen',
+    dispatch,
+  });
 
   const onChangeSerialNumber = (text: string) => {
     setShowInvalidError(false);

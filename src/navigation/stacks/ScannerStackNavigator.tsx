@@ -27,7 +27,7 @@ export default function ScannerStackNavigator() {
           name="VoucherEntryStartScreen"
           component={VoucherEntryStartScreen}
         />
-        <ScannerStack.Group screenOptions={{ presentation: 'modal' }}>
+        <ScannerStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
           <ScannerStack.Screen
             name="ManualVoucherScreen"
             component={ManualVoucherScreen}

@@ -26,8 +26,8 @@ import {
 } from './styles';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
-import { addVoucher } from '../../utils/scanningUtils';
 import { voucherAmountIsValid } from '../../database/queries';
+import { addVoucher, usePreventLeave } from '../../utils/scanningUtils';
 
 export default function ConfirmValueScreen({
   route,
@@ -38,10 +38,18 @@ export default function ConfirmValueScreen({
   const [isActive, setIsActive] = useState<boolean>(false);
   const [showError, setShowError] = useState(false);
   const { voucherMap, dispatch } = useScanningContext();
+  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const onChangeVoucherAmount = (value: number) => {
     setVoucherAmount(value ?? 0.0);
   };
+
+  usePreventLeave({
+    hasUnsavedChanges,
+    navigation,
+    currentScreen: 'ConfirmValueScreen',
+    dispatch,
+  });
 
   const showToast = () => {
     Toast.show({
