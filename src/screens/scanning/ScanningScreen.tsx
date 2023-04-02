@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Toast from 'react-native-toast-message';
@@ -32,7 +32,8 @@ import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
 import { useScanningContext } from './ScanningContext';
-import { showSuccessToast, usePreventLeave } from '../../utils/scanningUtils';
+import { usePreventLeave } from '../../utils/scanningUtils';
+import { serialNumberIsValid } from '../../database/queries';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,16 +67,26 @@ export default function ScanningScreen({
     dispatch,
   });
 
-  const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
+  const handleBarCodeScanned = async (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
+      const serialNumberInput = Number(data);
       setScanned(true);
-      // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      showSuccessToast();
-      navigation.navigate('ConfirmValueScreen', {
-        serialNumber: Number(data),
-      });
+
+      const isValid = await serialNumberIsValid(serialNumberInput);
+      if (isValid) {
+        // TODO: change once we create custom base components for number inputs
+        navigation.navigate('ConfirmValueScreen', {
+          serialNumber: serialNumberInput,
+        });
+      } else {
+        Alert.alert('Oh no! Invalid serial number.', 'Please try again', [
+          {
+            text: 'OK',
+          },
+        ]);
+      }
     }
   };
 
