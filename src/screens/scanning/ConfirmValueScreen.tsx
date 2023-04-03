@@ -95,6 +95,11 @@ export default function ConfirmValueScreen({
                   autoCapitalize="none"
                   keyboardType="number-pad"
                   returnKeyType="done"
+                  selection={{
+                    start: String(props.value).length,
+                    end: String(props.value).length,
+                  }}
+                  caretHidden
                 />
               )}
               prefix="$"
