@@ -99,8 +99,8 @@ export default function ConfirmValueScreen({
               )}
               prefix="$"
               minValue={0}
-              maxValue={10}
               separator="."
+              delimiter=","
               precision={2}
             />
           </FieldContainer>
