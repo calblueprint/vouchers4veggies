@@ -55,10 +55,12 @@ export default function ConfirmValueScreen({
   };
 
   const handleVoucherAdd = async () => {
-    const isValid = await voucherAmountIsValid(serialNumber, voucherAmount);
+    const centAmount = voucherAmount * 100;
+
+    const isValid = await voucherAmountIsValid(serialNumber, centAmount);
 
     if (isValid) {
-      addVoucher(dispatch, serialNumber, voucherAmount * 100);
+      addVoucher(dispatch, serialNumber, centAmount);
       showToast();
       // clears input field if successfully added
       setVoucherAmount(0);
