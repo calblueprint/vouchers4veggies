@@ -37,31 +37,38 @@ export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
   const [serialNumber, setSerialNumber] = useState<string>('');
-  const [showError, setShowError] = useState(false);
+  const [showInvalidError, setShowInvalidError] = useState(false);
+  const [showDuplicateError, setShowDuplicateError] = useState(false);
   const { voucherMap } = useScanningContext();
 
   const onChangeSerialNumber = (text: string) => {
-    setShowError(false);
+    setShowInvalidError(false);
+    setShowDuplicateError(false);
     const value = text.replace(/\D/g, '');
     setSerialNumber(value);
   };
 
   const handleVoucherAdd = async () => {
-    const isValid = await serialNumberIsValid(Number(serialNumber));
-
-    if (isValid) {
-      const serialNumberInput = Number(serialNumber);
-
-      // clears input field if successfully added
-      setSerialNumber('');
-      setShowError(false);
-
-      // TODO: change once we create custom base components for number inputs
-      navigation.navigate('ConfirmValueScreen', {
-        serialNumber: serialNumberInput,
-      });
+    if (voucherMap.has(Number(serialNumber))) {
+      setShowDuplicateError(true);
     } else {
-      setShowError(true);
+      const isValid = await serialNumberIsValid(Number(serialNumber));
+
+      if (isValid) {
+        const serialNumberInput = Number(serialNumber);
+
+        // clears input field if successfully added
+        setSerialNumber('');
+        setShowInvalidError(false);
+        setShowDuplicateError(false);
+
+        // TODO: change once we create custom base components for number inputs
+        navigation.navigate('ConfirmValueScreen', {
+          serialNumber: serialNumberInput,
+        });
+      } else {
+        setShowInvalidError(true);
+      }
     }
   };
 
@@ -100,20 +107,27 @@ export default function ManualVoucherScreen({
               onChange={onChangeSerialNumber}
               value={serialNumber}
               placeholder="Enter Number"
-              isValid={!showError}
+              isValid={!showInvalidError}
               keyboardType="number-pad"
             />
           </FieldContainer>
           <ErrorContainer>
-            {showError ? (
+            {showInvalidError ? (
               <RedText>
                 <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
+              </RedText>
+            ) : null}
+            {showDuplicateError ? (
+              <RedText>
+                <Body2Subtext>
+                  You&apos;ve already added this serial number!
+                </Body2Subtext>
               </RedText>
             ) : null}
           </ErrorContainer>
         </FormContainer>
 
-        <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
+        <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
         <ButtonWhite
