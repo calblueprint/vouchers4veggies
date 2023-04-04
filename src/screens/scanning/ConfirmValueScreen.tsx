@@ -11,6 +11,7 @@ import {
   H2Heading,
   InputTitleText,
   CounterText,
+  Body2Subtext,
 } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
 
@@ -20,11 +21,14 @@ import {
   FieldContainer,
   FormContainer,
   VoucherCounter,
+  ErrorContainer,
+  RedText,
 } from './styles';
 import StandardLogo from '../../components/common/StandardLogo';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { addVoucher } from '../../utils/scanningUtils';
+import { voucherAmountIsValid } from '../../database/queries';
 
 export default function ConfirmValueScreen({
   route,
@@ -33,6 +37,7 @@ export default function ConfirmValueScreen({
   const { serialNumber } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [showError, setShowError] = useState(false);
   const { voucherMap, dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
@@ -49,14 +54,20 @@ export default function ConfirmValueScreen({
     });
   };
 
-  const handleVoucherAdd = () => {
-    addVoucher(dispatch, serialNumber, voucherAmount * 100);
-    showToast();
-    // clears input field if successfully added
-    setVoucherAmount(0);
-    // eslint-disable-next-line no-console
-    console.log(`[${serialNumber} => ${voucherAmount}]`);
-    navigation.goBack();
+  const handleVoucherAdd = async () => {
+    const isValid = await voucherAmountIsValid(serialNumber, voucherAmount);
+
+    if (isValid) {
+      addVoucher(dispatch, serialNumber, voucherAmount * 100);
+      showToast();
+      // clears input field if successfully added
+      setVoucherAmount(0);
+      // eslint-disable-next-line no-console
+      console.log(`[${serialNumber} => ${voucherAmount}]`);
+      navigation.goBack();
+    } else {
+      setShowError(true);
+    }
   };
 
   return (
@@ -109,6 +120,13 @@ export default function ConfirmValueScreen({
               precision={2}
             />
           </FieldContainer>
+          <ErrorContainer>
+            {showError ? (
+              <RedText>
+                <Body2Subtext>Oh no! Invalid Voucher Amount.</Body2Subtext>
+              </RedText>
+            ) : null}
+          </ErrorContainer>
         </FormContainer>
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>

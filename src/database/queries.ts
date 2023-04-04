@@ -177,13 +177,11 @@ export const serialNumberIsValid = async (
   try {
     const docId = serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
-
     // check that serialNumber exists
     const voucherRange = await getVoucherRange(serialNumber);
     if (voucherRange === null) {
       return false;
     }
-
     // check that serialNumber has not already been used
     const voucherDoc = await getDoc(docRef);
     if (voucherDoc.exists()) {
@@ -194,6 +192,29 @@ export const serialNumberIsValid = async (
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucher)', e);
+    throw e;
+  }
+};
+
+/**
+ * Query the `vouchers` collection and check if a voucher amount is valid.
+ */
+export const voucherAmountIsValid = async (
+  serialNumber: number,
+  voucherAmount: number,
+): Promise<boolean> => {
+  try {
+    const voucherRange = await getVoucherRange(serialNumber);
+    if (voucherRange === null) {
+      return false;
+    }
+    if (voucherAmount > voucherRange.maxValue) {
+      return false;
+    }
+    return true;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn('(getVoucherRange)', e);
     throw e;
   }
 };
