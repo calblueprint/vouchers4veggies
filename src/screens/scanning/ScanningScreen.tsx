@@ -8,7 +8,7 @@ import {
   Body1Text,
   ButtonTextWhite,
   CenterText,
-  CounterText,
+  // CounterText,
   H2Heading,
   MagentaText,
   ButtonTextMagenta,
@@ -19,7 +19,7 @@ import {
   ButtonContainer,
   ScannerContainer,
   TitleContainer,
-  VoucherCounter,
+  // VoucherCounter,
   BodyContainer,
 } from './styles';
 import {
@@ -32,8 +32,8 @@ import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
 import { useScanningContext } from './ScanningContext';
-import { usePreventLeave } from '../../utils/scanningUtils';
 import { serialNumberIsValid } from '../../database/queries';
+import { handlePreventLeave } from '../../utils/scanningUtils';
 
 const styles = StyleSheet.create({
   container: {
@@ -59,13 +59,6 @@ export default function ScanningScreen({
 
     getBarCodeScannerPermissions();
   }, []);
-
-  usePreventLeave({
-    hasUnsavedChanges,
-    navigation,
-    currentScreen: 'ScanningScreen',
-    dispatch,
-  });
 
   const handleBarCodeScanned = async (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
@@ -101,10 +94,22 @@ export default function ScanningScreen({
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
       <StandardHeader>
-        <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
+        </TouchableOpacity> */}
+
+        <TouchableOpacity
+          onPress={() =>
+            handlePreventLeave({
+              hasUnsavedChanges,
+              navigation,
+              dispatch,
+            })
+          }
+        >
+          <Icon name="close" size={24} color={Colors.midBlack} />
         </TouchableOpacity>
 
         <AddManuallyButton

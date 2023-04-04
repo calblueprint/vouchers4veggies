@@ -15,7 +15,7 @@ import {
   CenterText,
   H2Heading,
   InputTitleText,
-  CounterText,
+  // CounterText,
   Body2Subtext,
 } from '../../../assets/Fonts';
 import {
@@ -23,7 +23,7 @@ import {
   BodyContainer,
   FieldContainer,
   FormContainer,
-  VoucherCounter,
+  // VoucherCounter,
   ErrorContainer,
   RedText,
 } from './styles';
@@ -33,7 +33,7 @@ import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { serialNumberIsValid } from '../../database/queries';
-import { usePreventLeave } from '../../utils/scanningUtils';
+import { handlePreventLeave } from '../../utils/scanningUtils';
 
 export default function ManualVoucherScreen({
   navigation,
@@ -43,13 +43,6 @@ export default function ManualVoucherScreen({
   const [showDuplicateError, setShowDuplicateError] = useState(false);
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
-
-  usePreventLeave({
-    hasUnsavedChanges,
-    navigation,
-    currentScreen: 'ManualVoucherScreen',
-    dispatch,
-  });
 
   const onChangeSerialNumber = (text: string) => {
     setShowInvalidError(false);
@@ -85,10 +78,22 @@ export default function ManualVoucherScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
+        </TouchableOpacity> */}
+
+        <TouchableOpacity
+          onPress={() =>
+            handlePreventLeave({
+              hasUnsavedChanges,
+              navigation,
+              dispatch,
+            })
+          }
+        >
+          <Icon name="close" size={24} color={Colors.midBlack} />
         </TouchableOpacity>
 
         <AddManuallyButton

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Alert } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Toast from 'react-native-toast-message';
@@ -43,52 +42,57 @@ type PreventLeaveProps = {
     any,
     undefined
   >;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  currentScreen: any;
   dispatch: ScanningDispatch;
 };
 
-/** Creates a custom Hook that prevents user from leaving screen if there are unsaved changes */
-export const usePreventLeave = ({
+/** Event handler that prevents user from leaving screen if there are unsaved changes */
+export const handlePreventLeave = ({
   hasUnsavedChanges,
   navigation,
-  currentScreen,
   dispatch,
 }: PreventLeaveProps) => {
-  useEffect(
-    () =>
-      navigation.addListener('beforeRemove', () => {
-        if (!hasUnsavedChanges) {
-          // If we don't have unsaved changes, then we don't need to do anything
-          return;
-        }
-
-        // Prompt the user before leaving the screen
-        Alert.alert(
-          'Discard changes?',
-          'You have unsaved changes. Are you sure to discard them and leave the screen?',
-          [
-            {
-              text: "Don't leave",
-              style: 'cancel',
-              onPress: () => {
-                navigation.navigate(currentScreen);
-              },
-            },
-            {
-              text: 'Discard',
-              style: 'destructive',
-              // If the user confirms, then we reset the Transaction
-              onPress: () => {
-                newInvoice(dispatch);
-                navigation.navigate('VoucherEntryStartScreen');
-              },
-            },
-          ],
-        );
-      }),
-    [hasUnsavedChanges, navigation, currentScreen, dispatch],
-  );
+  if (hasUnsavedChanges) {
+    // Prompt the user before leaving the screen
+    Alert.alert(
+      'Discard changes?',
+      'You have unsaved changes. Are you sure to discard them and leave the screen?',
+      [
+        {
+          text: "Don't leave",
+          style: 'cancel',
+          onPress: () => {
+            // Do nothing
+          },
+        },
+        {
+          text: 'Discard',
+          style: 'destructive',
+          // If the user confirms, then we reset the Transaction
+          onPress: () => {
+            newInvoice(dispatch);
+            navigation.navigate('VoucherEntryStartScreen');
+          },
+        },
+      ],
+    );
+  } else {
+    Alert.alert('Exit?', "Are you sure you don't want to enter any vouchers?", [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+        onPress: () => {
+          // Do nothing
+        },
+      },
+      {
+        text: 'Exit',
+        style: 'destructive',
+        onPress: () => {
+          navigation.navigate('VoucherEntryStartScreen');
+        },
+      },
+    ]);
+  }
 };
 
 /** Displays a toast on successful voucher entry */

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CurrencyInput from 'react-native-currency-input';
 import { Keyboard, TextInput, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
@@ -9,8 +10,8 @@ import {
   CenterText,
   H2Heading,
   InputTitleText,
-  CounterText,
   Body2Subtext,
+  // CounterText,
 } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
 
@@ -19,17 +20,17 @@ import {
   BodyContainer,
   FieldContainer,
   FormContainer,
-  VoucherCounter,
   ErrorContainer,
   RedText,
+  // VoucherCounter,
 } from './styles';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { voucherAmountIsValid } from '../../database/queries';
 import {
   addVoucher,
+  handlePreventLeave,
   showSuccessToast,
-  usePreventLeave,
 } from '../../utils/scanningUtils';
 
 export default function ConfirmValueScreen({
@@ -47,13 +48,6 @@ export default function ConfirmValueScreen({
     setVoucherAmount(value ?? 0.0);
   };
 
-  usePreventLeave({
-    hasUnsavedChanges,
-    navigation,
-    currentScreen: 'ConfirmValueScreen',
-    dispatch,
-  });
-
   const handleVoucherAdd = async () => {
     const centAmount = voucherAmount * 100;
     const isValid = await voucherAmountIsValid(serialNumber, centAmount);
@@ -63,8 +57,6 @@ export default function ConfirmValueScreen({
       showSuccessToast();
       // clears input field if successfully added
       setVoucherAmount(0);
-      // eslint-disable-next-line no-console
-      console.log(`[${serialNumber} => ${voucherAmount}]`);
       Keyboard.dismiss();
       navigation.goBack();
     } else {
@@ -74,10 +66,21 @@ export default function ConfirmValueScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
+        </TouchableOpacity> */}
+        <TouchableOpacity
+          onPress={() =>
+            handlePreventLeave({
+              hasUnsavedChanges,
+              navigation,
+              dispatch,
+            })
+          }
+        >
+          <Icon name="close" size={24} color={Colors.midBlack} />
         </TouchableOpacity>
       </StandardHeader>
 
