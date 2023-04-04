@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import {
   ButtonContainer,
@@ -11,11 +12,12 @@ import {
   ButtonWhite,
   SafeArea,
 } from '../../../assets/Components';
-import { ScannerStackScreenProps } from '../../navigation/types';
-import BackButton from '../../components/common/BackButton';
+import {
+  BottomTabScreenProps,
+  ScannerStackScreenProps,
+} from '../../navigation/types';
 import { newInvoice } from '../../utils/scanningUtils';
 import { useScanningContext } from './ScanningContext';
-import StandardHeader from '../../components/common/StandardHeader';
 
 export default function ConfirmationScreen({
   route,
@@ -23,6 +25,8 @@ export default function ConfirmationScreen({
 }: ScannerStackScreenProps<'ConfirmationScreen'>) {
   const { count } = route.params;
   const { dispatch } = useScanningContext();
+  const nestedNavigation =
+    useNavigation<BottomTabScreenProps<'Transactions'>>();
 
   useEffect(() => {
     newInvoice(dispatch);
@@ -30,10 +34,6 @@ export default function ConfirmationScreen({
 
   return (
     <SafeArea>
-      <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
-      </StandardHeader>
-
       <ConfirmationTitleContainer>
         <H1Heading
           style={{ textAlign: 'center' }}
@@ -41,7 +41,11 @@ export default function ConfirmationScreen({
       </ConfirmationTitleContainer>
 
       <ButtonContainer>
-        <ButtonWhite onPress={() => navigation.navigate('InvoicesScreen')}>
+        <ButtonWhite
+          onPress={() => {
+            nestedNavigation.navigate('Transactions');
+          }}
+        >
           <DarkGrayText>
             <H4CardNavTab>Review Invoices</H4CardNavTab>
           </DarkGrayText>
