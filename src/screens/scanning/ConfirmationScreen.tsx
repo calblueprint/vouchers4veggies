@@ -43,6 +43,10 @@ export default function ConfirmationScreen({
       <ButtonContainer>
         <ButtonWhite
           onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'VoucherEntryStartScreen' }],
+            });
             nestedNavigation.navigate('Transactions');
           }}
         >
