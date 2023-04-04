@@ -26,11 +26,7 @@ import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import ReviewVoucherCard from '../../components/scanning/ReviewVoucherCard';
 import { validateVoucherAmount } from '../../utils/validationUtils';
-import {
-  deleteVoucher,
-  editVoucher,
-  usePreventLeave,
-} from '../../utils/scanningUtils';
+import { deleteVoucher, editVoucher } from '../../utils/scanningUtils';
 import BackButton from '../../components/common/BackButton';
 import { formatValueForDisplay } from '../../utils/displayUtils';
 import { createTransaction, createVoucher } from '../../database/queries';
@@ -43,7 +39,6 @@ export default function ReviewScreen({
 }: ScannerStackScreenProps<'ReviewScreen'>) {
   const { vendorUuid } = useAuthContext();
   const { voucherMap, dispatch } = useScanningContext();
-  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const [deleteDialogIsVisible, setDeleteDialogIsVisible] = useState(false);
   const [editDialogIsVisible, setEditDialogIsVisible] = useState(false);
@@ -101,13 +96,6 @@ export default function ReviewScreen({
     deleteVoucher(dispatch, focusedSerialNumber);
     hideDeleteDialog();
   };
-
-  usePreventLeave({
-    hasUnsavedChanges,
-    navigation,
-    currentScreen: 'ReviewScreen',
-    dispatch,
-  });
 
   const onSubmit = async () => {
     if (vendorUuid) {
