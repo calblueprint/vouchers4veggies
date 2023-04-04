@@ -39,7 +39,7 @@ export const StatusComponentRed = styled.View`
   text-align: center;
   align-items: center;
   border-radius: 9px;
-  width: 63px;
+  min-width: 63px;
   background: ${Colors.alertLightRed};
   padding: 9px;
   border: 2px solid ${Colors.alertLightRed};
@@ -49,7 +49,7 @@ export const StatusComponentGreen = styled.View`
   text-align: center;
   align-items: center;
   border-radius: 9px;
-  width: 63px;
+  min-width: 63px;
   background: ${Colors.lightGreen};
   padding: 9px;
   border: 2px solid ${Colors.lightGreen};
@@ -89,5 +89,6 @@ export const Styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
     backgroundColor: '#fff',
+    paddingRight: 29,
   },
 });
