@@ -62,17 +62,20 @@ export default function ReviewScreen({
     setEditDialogText('');
   };
 
-  const onSubmitVoucherAmount = () => {
+  const onSubmitVoucherAmount = async () => {
     setEditDialogIsVisible(false);
     try {
       if (editDialogText) {
-        validateVoucherAmount(focusedSerialNumber, editDialogText);
+        const isValid = await validateVoucherAmount(
+          focusedSerialNumber,
+          editDialogText,
+        );
+
         const newValue = Math.round(
           parseFloat(editDialogText.replace(',', '.')) * 100,
         );
 
-        // TODO: remove hardcoded voucher amount limi
-        if (newValue <= 10) {
+        if (isValid) {
           editVoucher(dispatch, focusedSerialNumber, newValue);
         } else {
           throw new Error('Invalid Voucher Amount');
