@@ -45,6 +45,7 @@ export default function ConfirmValueScreen({
   const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const onChangeVoucherAmount = (value: number) => {
+    setShowError(false);
     setVoucherAmount(value ?? 0.0);
   };
 
