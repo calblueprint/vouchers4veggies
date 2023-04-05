@@ -62,6 +62,7 @@ export default function ConfirmValueScreen({
     } else {
       setShowError(true);
     }
+  };
 
   return (
     <SafeArea>
