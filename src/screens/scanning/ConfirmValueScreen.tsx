@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CurrencyInput from 'react-native-currency-input';
-import { Keyboard, TextInput, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { Keyboard, TextInput } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
@@ -27,11 +26,8 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { voucherAmountIsValid } from '../../database/queries';
-import {
-  addVoucher,
-  handlePreventLeave,
-  showSuccessToast,
-} from '../../utils/scanningUtils';
+import { addVoucher, showSuccessToast } from '../../utils/scanningUtils';
+import BackButton from '../../components/common/BackButton';
 
 export default function ConfirmValueScreen({
   route,
@@ -41,8 +37,7 @@ export default function ConfirmValueScreen({
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [showError, setShowError] = useState(false);
-  const { voucherMap, dispatch } = useScanningContext();
-  const hasUnsavedChanges = Boolean(voucherMap.size);
+  const { dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
     setShowError(false);
@@ -73,17 +68,7 @@ export default function ConfirmValueScreen({
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
         </TouchableOpacity> */}
-        <TouchableOpacity
-          onPress={() =>
-            handlePreventLeave({
-              hasUnsavedChanges,
-              navigation,
-              dispatch,
-            })
-          }
-        >
-          <Icon name="close" size={24} color={Colors.midBlack} />
-        </TouchableOpacity>
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
       <BodyContainer>
