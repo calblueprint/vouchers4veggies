@@ -101,7 +101,7 @@ export const showSuccessToast = () => {
     type: 'success',
     position: 'top',
     topOffset: 50,
-    text1: 'Voucher Added!',
+    text1: 'Voucher Added!', // TODO: @sauhardjain Change text styling to increase visibility
     visibilityTime: 2000,
   });
 };
