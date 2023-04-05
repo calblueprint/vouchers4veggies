@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Toast from 'react-native-toast-message';
 import CurrencyInput from 'react-native-currency-input';
-import { TextInput } from 'react-native';
+import { Keyboard, TextInput } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
@@ -10,8 +9,8 @@ import {
   CenterText,
   H2Heading,
   InputTitleText,
-  CounterText,
   Body2Subtext,
+  // CounterText,
 } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
 
@@ -20,15 +19,15 @@ import {
   BodyContainer,
   FieldContainer,
   FormContainer,
-  VoucherCounter,
   ErrorContainer,
   RedText,
+  // VoucherCounter,
 } from './styles';
-import StandardLogo from '../../components/common/StandardLogo';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
-import { addVoucher } from '../../utils/scanningUtils';
 import { voucherAmountIsValid } from '../../database/queries';
+import { addVoucher, showSuccessToast } from '../../utils/scanningUtils';
+import BackButton from '../../components/common/BackButton';
 
 export default function ConfirmValueScreen({
   route,
@@ -38,34 +37,23 @@ export default function ConfirmValueScreen({
   const [voucherAmount, setVoucherAmount] = useState<number>(0);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [showError, setShowError] = useState(false);
-  const { voucherMap, dispatch } = useScanningContext();
+  const { dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
+    setShowError(false);
     setVoucherAmount(value ?? 0.0);
-  };
-
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      topOffset: 50,
-      text1: 'Voucher Scanned!',
-      visibilityTime: 2000,
-    });
   };
 
   const handleVoucherAdd = async () => {
     const centAmount = voucherAmount * 100;
-
     const isValid = await voucherAmountIsValid(serialNumber, centAmount);
 
     if (isValid) {
       addVoucher(dispatch, serialNumber, centAmount);
-      showToast();
+      showSuccessToast();
       // clears input field if successfully added
       setVoucherAmount(0);
-      // eslint-disable-next-line no-console
-      console.log(`[${serialNumber} => ${voucherAmount}]`);
+      Keyboard.dismiss();
       navigation.goBack();
     } else {
       setShowError(true);
@@ -75,13 +63,12 @@ export default function ConfirmValueScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        {voucherMap.size === 0 ? (
-          <StandardLogo />
-        ) : (
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
-        )}
+        </TouchableOpacity> */}
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
       <BodyContainer>
@@ -134,7 +121,6 @@ export default function ConfirmValueScreen({
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>
       </BodyContainer>
-      <Toast />
     </SafeArea>
   );
 }

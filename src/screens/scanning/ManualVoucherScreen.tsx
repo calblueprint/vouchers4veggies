@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { TouchableOpacity } from 'react-native';
+import Toast from 'react-native-toast-message';
 import {
   ButtonMagenta,
   ButtonWhite,
@@ -13,7 +15,7 @@ import {
   CenterText,
   H2Heading,
   InputTitleText,
-  CounterText,
+  // CounterText,
   Body2Subtext,
 } from '../../../assets/Fonts';
 import {
@@ -21,17 +23,17 @@ import {
   BodyContainer,
   FieldContainer,
   FormContainer,
-  VoucherCounter,
+  // VoucherCounter,
   ErrorContainer,
   RedText,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
-import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { serialNumberIsValid } from '../../database/queries';
+import { handlePreventLeave } from '../../utils/scanningUtils';
 
 export default function ManualVoucherScreen({
   navigation,
@@ -39,7 +41,8 @@ export default function ManualVoucherScreen({
   const [serialNumber, setSerialNumber] = useState<string>('');
   const [showInvalidError, setShowInvalidError] = useState(false);
   const [showDuplicateError, setShowDuplicateError] = useState(false);
-  const { voucherMap } = useScanningContext();
+  const { voucherMap, dispatch } = useScanningContext();
+  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const onChangeSerialNumber = (text: string) => {
     setShowInvalidError(false);
@@ -75,23 +78,33 @@ export default function ManualVoucherScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        {voucherMap.size === 0 ? (
-          <StandardLogo />
-        ) : (
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
-        )}
+        </TouchableOpacity> */}
 
         <AddManuallyButton
           onPress={() => navigation.navigate('ScanningScreen')}
         >
           <ButtonTextBlack>
-            <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+            <Icon name="scan1" size={14} color={Colors.midBlack} />
             {'  '}
             Scan Voucher
           </ButtonTextBlack>
         </AddManuallyButton>
+
+        <TouchableOpacity
+          onPress={() =>
+            handlePreventLeave({
+              hasUnsavedChanges,
+              navigation,
+              dispatch,
+            })
+          }
+        >
+          <Icon name="close" size={24} color={Colors.midBlack} />
+        </TouchableOpacity>
       </StandardHeader>
 
       <BodyContainer>
@@ -139,6 +152,7 @@ export default function ManualVoucherScreen({
           </ButtonTextBlack>
         </ButtonWhite>
       </BodyContainer>
+      <Toast />
     </SafeArea>
   );
 }

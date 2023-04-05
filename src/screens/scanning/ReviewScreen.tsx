@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 import Dialog from 'react-native-dialog';
+import { CommonActions } from '@react-navigation/native';
 import {
   ButtonTextWhite,
   H2Heading,
@@ -69,7 +70,9 @@ export default function ReviewScreen({
         const newValue = Math.round(
           parseFloat(editDialogText.replace(',', '.')) * 100,
         );
-        if (newValue <= 1000) {
+
+        // TODO: remove hardcoded voucher amount limi
+        if (newValue <= 10) {
           editVoucher(dispatch, focusedSerialNumber, newValue);
         } else {
           throw new Error('Invalid Voucher Amount');
@@ -116,9 +119,18 @@ export default function ReviewScreen({
       });
     }
 
-    navigation.navigate('ConfirmationScreen', {
-      count: voucherMap.size,
-    });
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'VoucherEntryStartScreen' },
+          {
+            name: 'ConfirmationScreen',
+            params: { count: voucherMap.size },
+          },
+        ],
+      }),
+    );
   };
 
   return (

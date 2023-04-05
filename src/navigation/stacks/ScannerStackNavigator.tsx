@@ -8,6 +8,7 @@ import { ScanningContextProvider } from '../../screens/scanning/ScanningContext'
 import ScanningScreen from '../../screens/scanning/ScanningScreen';
 import { ScannerStackParamList } from '../types';
 import TransactionStackNavigator from './TransactionStackNavigator';
+import VoucherEntryStartScreen from '../../screens/scanning/VoucherEntryStartScreen';
 
 const ScannerStack = createNativeStackNavigator<ScannerStackParamList>();
 
@@ -23,23 +24,32 @@ export default function ScannerStackNavigator() {
         }}
       >
         <ScannerStack.Screen
-          name="ManualVoucherScreen"
-          component={ManualVoucherScreen}
-        />
-        <ScannerStack.Screen name="ScanningScreen" component={ScanningScreen} />
-        <ScannerStack.Screen
-          name="ConfirmValueScreen"
-          component={ConfirmValueScreen}
-        />
-        <ScannerStack.Screen name="ReviewScreen" component={ReviewScreen} />
-        <ScannerStack.Screen
-          name="ConfirmationScreen"
-          component={ConfirmationScreen}
+          name="VoucherEntryStartScreen"
+          component={VoucherEntryStartScreen}
         />
         <ScannerStack.Screen
           name="InvoicesScreen"
           component={TransactionStackNavigator}
         />
+        <ScannerStack.Screen
+          name="ConfirmationScreen"
+          component={ConfirmationScreen}
+        />
+        <ScannerStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+          <ScannerStack.Screen
+            name="ManualVoucherScreen"
+            component={ManualVoucherScreen}
+          />
+          <ScannerStack.Screen
+            name="ScanningScreen"
+            component={ScanningScreen}
+          />
+          <ScannerStack.Screen
+            name="ConfirmValueScreen"
+            component={ConfirmValueScreen}
+          />
+          <ScannerStack.Screen name="ReviewScreen" component={ReviewScreen} />
+        </ScannerStack.Group>
       </ScannerStack.Navigator>
     </ScanningContextProvider>
   );

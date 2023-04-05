@@ -1,26 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
-// import Toast from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
 import {
   ButtonTextBlack,
   Body1Text,
   ButtonTextWhite,
   CenterText,
-  CounterText,
+  // CounterText,
   H2Heading,
   MagentaText,
   ButtonTextMagenta,
 } from '../../../assets/Fonts';
-import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
 
 import {
   ButtonContainer,
   ScannerContainer,
   TitleContainer,
-  VoucherCounter,
+  // VoucherCounter,
   BodyContainer,
 } from './styles';
 import {
@@ -33,6 +32,8 @@ import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
 import { useScanningContext } from './ScanningContext';
+import { serialNumberIsValid } from '../../database/queries';
+import { handlePreventLeave } from '../../utils/scanningUtils';
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +48,8 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const { voucherMap } = useScanningContext();
+  const { voucherMap, dispatch } = useScanningContext();
+  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -58,26 +60,26 @@ export default function ScanningScreen({
     getBarCodeScannerPermissions();
   }, []);
 
-  // const showToast = () => {
-  //   Toast.show({
-  //     type: 'success',
-  //     position: 'top',
-  //     topOffset: 50,
-  //     text1: 'Voucher Scanned!',
-  //     visibilityTime: 2000,
-  //   });
-  // };
-
-  const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
+  const handleBarCodeScanned = async (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
+      const serialNumberInput = Number(data);
       setScanned(true);
-      // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      // showToast();
-      navigation.navigate('ConfirmValueScreen', {
-        serialNumber: Number(data),
-      });
+
+      const isValid = await serialNumberIsValid(serialNumberInput);
+      if (isValid) {
+        // TODO: change once we create custom base components for number inputs
+        navigation.navigate('ConfirmValueScreen', {
+          serialNumber: serialNumberInput,
+        });
+      } else {
+        Alert.alert('Oh no! Invalid serial number.', 'Please try again', [
+          {
+            text: 'OK',
+          },
+        ]);
+      }
     }
   };
 
@@ -92,13 +94,12 @@ export default function ScanningScreen({
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
       <StandardHeader>
-        {voucherMap.size === 0 ? (
-          <StandardLogo />
-        ) : (
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
             <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
-        )}
+        </TouchableOpacity> */}
+
         <AddManuallyButton
           onPress={() => navigation.navigate('ManualVoucherScreen')}
         >
@@ -108,6 +109,18 @@ export default function ScanningScreen({
             Add Manually
           </ButtonTextBlack>
         </AddManuallyButton>
+
+        <TouchableOpacity
+          onPress={() =>
+            handlePreventLeave({
+              hasUnsavedChanges,
+              navigation,
+              dispatch,
+            })
+          }
+        >
+          <Icon name="close" size={24} color={Colors.midBlack} />
+        </TouchableOpacity>
       </StandardHeader>
 
       <BodyContainer>
@@ -145,7 +158,7 @@ export default function ScanningScreen({
           <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
         </ButtonWhite>
       </ButtonContainer>
-      {/* <Toast /> */}
+      <Toast />
     </SafeArea>
   );
 }

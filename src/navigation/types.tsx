@@ -28,6 +28,7 @@ export type ScannerStackParamList = {
   ReviewScreen: undefined;
   ConfirmationScreen: { count: number };
   InvoicesScreen: undefined;
+  VoucherEntryStartScreen: undefined;
 };
 
 export type ProfileStackParamList = {
