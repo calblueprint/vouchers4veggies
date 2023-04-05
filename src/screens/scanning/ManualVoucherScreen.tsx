@@ -84,6 +84,16 @@ export default function ManualVoucherScreen({
           </VoucherCounter>
         </TouchableOpacity> */}
 
+        <AddManuallyButton
+          onPress={() => navigation.navigate('ScanningScreen')}
+        >
+          <ButtonTextBlack>
+            <Icon name="scan1" size={14} color={Colors.midBlack} />
+            {'  '}
+            Scan Voucher
+          </ButtonTextBlack>
+        </AddManuallyButton>
+
         <TouchableOpacity
           onPress={() =>
             handlePreventLeave({
@@ -95,16 +105,6 @@ export default function ManualVoucherScreen({
         >
           <Icon name="close" size={24} color={Colors.midBlack} />
         </TouchableOpacity>
-
-        <AddManuallyButton
-          onPress={() => navigation.navigate('ScanningScreen')}
-        >
-          <ButtonTextBlack>
-            <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-            {'  '}
-            Scan Voucher
-          </ButtonTextBlack>
-        </AddManuallyButton>
       </StandardHeader>
 
       <BodyContainer>

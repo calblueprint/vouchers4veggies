@@ -61,7 +61,7 @@ export const AddManuallyButton = styled.TouchableOpacity`
   width: 129px;
   height: 28px;
   background: ${Colors.lightMagenta};
-  border: 0.828025px solid ${Colors.lightGray};
+  border: 0.828025px solid ${Colors.midGray};
   border-radius: 17.8025px;
 `;
 
