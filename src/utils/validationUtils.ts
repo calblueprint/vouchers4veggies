@@ -33,7 +33,10 @@ const validateCurrencyFormat = (input: string) => {
   return true;
 };
 
-export const validateVoucherAmount = (serialNumber: number, input: string) => {
+export const validateVoucherAmount = async (
+  serialNumber: number,
+  input: string,
+) => {
   try {
     const currencySchema = z.coerce
       .number() // ensures that input is a valid number
@@ -43,13 +46,15 @@ export const validateVoucherAmount = (serialNumber: number, input: string) => {
       });
     currencySchema.parse(input);
 
-    const value = Math.round(parseFloat(input) * 100);
-    getVoucherRange(serialNumber).then(voucherRange => {
-      if (voucherRange && voucherRange.maxValue < value)
-        throw new Error('Value exceeds maximum');
-    });
+    const value = Math.round(parseFloat(input.replace(',', '.')) * 100);
+    const voucherRange = await getVoucherRange(serialNumber);
+    if (voucherRange && voucherRange.maxValue < value) {
+      throw new Error('Value exceeds maximum');
+    }
+    return true;
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
+    return false;
   }
 };
