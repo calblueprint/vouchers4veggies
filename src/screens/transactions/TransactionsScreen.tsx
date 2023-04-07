@@ -24,29 +24,29 @@ export default function TransactionsScreen({
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const { vendorUuid } = useAuthContext();
 
+  const fetchData = async (Uuid: string | null) => {
+    try {
+      if (Uuid) {
+        const transactionsArray = await getTransactionsByVendorUuid(Uuid);
+        setTransactions(transactionsArray);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('(useEffect)[TransactionsScreen]', error);
+    }
+  };
+
   const onRefresh = React.useCallback(() => {
     setIsRefreshing(true);
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
-  }, []);
+    fetchData(vendorUuid);
+  }, [vendorUuid]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (vendorUuid) {
-          const transactionsArray = await getTransactionsByVendorUuid(
-            vendorUuid,
-          );
-          setTransactions(transactionsArray);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('(useEffect)[TransactionsScreen]', error);
-      }
-    };
-    fetchData();
+    fetchData(vendorUuid);
   }, [vendorUuid]);
 
   return (
