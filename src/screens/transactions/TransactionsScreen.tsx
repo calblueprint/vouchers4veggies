@@ -24,30 +24,30 @@ export default function TransactionsScreen({
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const { vendorUuid } = useAuthContext();
 
+  const fetchData = async () => {
+    try {
+      if (vendorUuid) {
+        const transactionsArray = await getTransactionsByVendorUuid(vendorUuid);
+        setTransactions(transactionsArray);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('(useEffect)[TransactionsScreen]', error);
+    }
+  };
+
   const onRefresh = React.useCallback(() => {
     setIsRefreshing(true);
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
+    fetchData();
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (vendorUuid) {
-          const transactionsArray = await getTransactionsByVendorUuid(
-            vendorUuid,
-          );
-          setTransactions(transactionsArray);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('(useEffect)[TransactionsScreen]', error);
-      }
-    };
     fetchData();
-  }, [vendorUuid]);
+  }, []);
 
   return (
     <SafeArea>
