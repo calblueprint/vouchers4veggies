@@ -1,14 +1,10 @@
 import React from 'react';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
-import {
-  Body1Text,
-  H1Heading,
-  H4CardNavTab,
-  WhiteText,
-} from '../../../assets/Fonts';
+import { Body1Text, H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import StandardLogo from '../../components/common/StandardLogo';
 import { ButtonContainer, HeroContainer, StartContainer } from './styles';
+import { WhiteText } from '../auth/styles';
 
 export default function VoucherEntryStartScreen({
   navigation,

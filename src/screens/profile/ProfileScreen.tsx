@@ -37,9 +37,7 @@ export default function ProfileScreen({
           <H2Heading>Hi, Derby Food Market!</H2Heading>
         </HeadingContainer>
       </MainProfileContainer>
-      <ButtonInfoContainer
-        onPress={() => navigation.navigate('EditPhoneNumber')}
-      >
+      <ButtonInfoContainer>
         <ButtonBlank />
         <IconContainer>
           <Icon name="right" size={20} color={Colors.midGray} />
@@ -50,9 +48,7 @@ export default function ProfileScreen({
           <H4CardNavTab>email@email.com</H4CardNavTab>
         </MainProfileContainer>
       </ButtonInfoContainer>
-      <ButtonInfoContainer
-        onPress={() => navigation.navigate('EditEmailScreen')}
-      >
+      <ButtonInfoContainer>
         <ButtonBlank />
         <IconContainer>
           <Icon name="right" size={20} color={Colors.midGray} />
