@@ -1,55 +1,111 @@
 import React, { useState } from 'react';
-import CurrencyInput from 'react-native-currency-input';
-import { TextInput } from 'react-native';
-import { ButtonMagenta } from '../../../assets/Components';
-import Colors from '../../../assets/Colors';
-import Styles from '../../components/InputField/styles';
+import Icon from 'react-native-vector-icons/AntDesign';
+import { TouchableOpacity } from 'react-native';
+import Toast from 'react-native-toast-message';
+import {
+  ButtonMagenta,
+  ButtonWhite,
+  AddManuallyButton,
+  SafeArea,
+} from '../../../assets/Components';
 import {
   ButtonTextWhite,
+  ButtonTextBlack,
+  H4CardNavTab,
   CenterText,
   H2Heading,
   InputTitleText,
+  // CounterText,
+  Body2Subtext,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
-  Header,
   BodyContainer,
-  SafeArea,
-  DropDownContainer,
   FieldContainer,
   FormContainer,
+  // VoucherCounter,
+  ErrorContainer,
+  RedText,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
-import StandardLogo from '../../components/common/StandardLogo';
-import { validateSerialNumberInput } from '../../utils/validationUtils';
+import StandardHeader from '../../components/common/StandardHeader';
+import { ScannerStackScreenProps } from '../../navigation/types';
+import Colors from '../../../assets/Colors';
+import { useScanningContext } from './ScanningContext';
+import { serialNumberIsValid } from '../../database/queries';
+import { handlePreventLeave } from '../../utils/scanningUtils';
 
-function ManualVoucherScreen() {
-  const [transactionID, setID] = useState<string>('');
-  const [voucherAmount, setVoucherAmount] = useState<number>(0);
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  // to be used for backend
-  // const [scanCounter, incrementScanned] = useState(0);
-  // const [value, setValue] = useState(null);
-  // const [items, setItems] = useState([
-  //   { label: 'Apple', value: 'apple' },
-  //   { label: 'Banana', value: 'banana' },
-  // ]);
+export default function ManualVoucherScreen({
+  navigation,
+}: ScannerStackScreenProps<'ManualVoucherScreen'>) {
+  const [serialNumber, setSerialNumber] = useState<string>('');
+  const [showInvalidError, setShowInvalidError] = useState(false);
+  const [showDuplicateError, setShowDuplicateError] = useState(false);
+  const { voucherMap, dispatch } = useScanningContext();
+  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const onChangeSerialNumber = (text: string) => {
+    setShowInvalidError(false);
+    setShowDuplicateError(false);
     const value = text.replace(/\D/g, '');
-    setID(value);
+    setSerialNumber(value);
   };
 
-  const onChangeVoucherAmount = (value: number) => {
-    setVoucherAmount(value ?? 0.0);
+  const handleVoucherAdd = async () => {
+    if (voucherMap.has(Number(serialNumber))) {
+      setShowDuplicateError(true);
+    } else {
+      const isValid = await serialNumberIsValid(Number(serialNumber));
+
+      if (isValid) {
+        const serialNumberInput = Number(serialNumber);
+
+        // clears input field if successfully added
+        setSerialNumber('');
+        setShowInvalidError(false);
+        setShowDuplicateError(false);
+
+        // TODO: change once we create custom base components for number inputs
+        navigation.navigate('ConfirmValueScreen', {
+          serialNumber: serialNumberInput,
+        });
+      } else {
+        setShowInvalidError(true);
+      }
+    }
   };
 
   return (
     <SafeArea>
-      <Header>
-        <StandardLogo />
-      </Header>
+      <StandardHeader>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
+          <VoucherCounter>
+            <CounterText>{voucherMap.size}</CounterText>
+          </VoucherCounter>
+        </TouchableOpacity> */}
+
+        <AddManuallyButton
+          onPress={() => navigation.navigate('ScanningScreen')}
+        >
+          <ButtonTextBlack>
+            <Icon name="scan1" size={14} color={Colors.midBlack} />
+            {'  '}
+            Scan Voucher
+          </ButtonTextBlack>
+        </AddManuallyButton>
+
+        <TouchableOpacity
+          onPress={() =>
+            handlePreventLeave({
+              hasUnsavedChanges,
+              navigation,
+              dispatch,
+            })
+          }
+        >
+          <Icon name="close" size={24} color={Colors.midBlack} />
+        </TouchableOpacity>
+      </StandardHeader>
 
       <BodyContainer>
         <TitleContainer>
@@ -59,53 +115,44 @@ function ManualVoucherScreen() {
         </TitleContainer>
         <FormContainer>
           <FieldContainer>
-            <InputTitleText>Transaction ID</InputTitleText>
+            <InputTitleText>Serial Number</InputTitleText>
             <InputField
               onChange={onChangeSerialNumber}
-              value={transactionID}
-              placeholder="Enter ID"
-              validate={validateSerialNumberInput}
+              value={serialNumber}
+              placeholder="Enter Number"
+              isValid={!showInvalidError}
               keyboardType="number-pad"
             />
           </FieldContainer>
-          <FieldContainer>
-            <InputTitleText>Voucher Color</InputTitleText>
-            {/* TODO: implement dropdown component */}
-            <DropDownContainer />
-          </FieldContainer>
-          <FieldContainer>
-            <InputTitleText>Amount</InputTitleText>
-            <CurrencyInput // TODO: refactor currency input with custom text input base components
-              value={voucherAmount}
-              onChangeValue={onChangeVoucherAmount}
-              renderTextInput={props => (
-                <TextInput
-                  {...props}
-                  onBlur={() => setIsActive(false)}
-                  onFocus={() => setIsActive(true)}
-                  style={isActive ? Styles.FormFieldFocus : Styles.FormField}
-                  placeholderTextColor={Colors.midGray}
-                  secureTextEntry={false}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="number-pad"
-                  returnKeyType="done"
-                />
-              )}
-              prefix="$"
-              minValue={0}
-              maxValue={10}
-              separator="."
-              precision={2}
-            />
-          </FieldContainer>
+          <ErrorContainer>
+            {showInvalidError ? (
+              <RedText>
+                <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
+              </RedText>
+            ) : null}
+            {showDuplicateError ? (
+              <RedText>
+                <Body2Subtext>
+                  You&apos;ve already added this serial number!
+                </Body2Subtext>
+              </RedText>
+            ) : null}
+          </ErrorContainer>
         </FormContainer>
-        <ButtonMagenta>
+
+        <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
+        <ButtonWhite
+          onPress={() => navigation.navigate('ReviewScreen')}
+          disabled={voucherMap.size === 0}
+        >
+          <ButtonTextBlack>
+            <H4CardNavTab>Review and Submit</H4CardNavTab>
+          </ButtonTextBlack>
+        </ButtonWhite>
       </BodyContainer>
+      <Toast />
     </SafeArea>
   );
 }
-
-export default ManualVoucherScreen;

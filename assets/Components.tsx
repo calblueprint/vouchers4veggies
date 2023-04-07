@@ -1,6 +1,22 @@
 import styled from 'styled-components/native';
 import Colors from './Colors';
 
+export const SafeArea = styled.SafeAreaView`
+  background-color: ${Colors.offWhite};
+  width: 100%;
+  min-height: 100%;
+  align-items: center;
+  flex: 1;
+`;
+
+export const FullSizeContainer = styled.View`
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 // TODO: @oahnh fix static widths
 export const ButtonMagenta = styled.TouchableOpacity`
   text-align: center;
@@ -20,7 +36,7 @@ export const ButtonGray = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
   border-radius: 5px;
-  width: 257px;
+  width: 277px;
   background: ${Colors.midGray};
   padding: 9px 9px;
   border: 2px solid ${Colors.midGray};
@@ -45,7 +61,7 @@ export const AddManuallyButton = styled.TouchableOpacity`
   width: 129px;
   height: 28px;
   background: ${Colors.lightMagenta};
-  border: 0.828025px solid ${Colors.lightGray};
+  border: 0.828025px solid ${Colors.midGray};
   border-radius: 17.8025px;
 `;
 
@@ -73,4 +89,30 @@ export const RootNavBackButton = styled.TouchableOpacity`
   align-items: center;
   width: 70px;
   padding: 9px;
+`;
+
+export const Row = styled.View`
+  display: flex;
+  background-color: #fff;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 67px;
+  border: 0px solid ${Colors.lightGray};
+  border-bottom-width: 1px;
+  width: 100%;
+`;
+
+export const StartOfListView = styled.View`
+  width: 100%;
+  height: 1px;
+  border: 1px solid ${Colors.lightGray};
+  border-top-width: 1px;
+`;
+
+export const CardContainer = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;

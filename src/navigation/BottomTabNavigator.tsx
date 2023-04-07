@@ -51,7 +51,7 @@ export default function NavigationBar() {
         name="Transactions"
         component={TransactionStackNavigator}
         options={{
-          tabBarLabel: 'Transactions',
+          tabBarLabel: 'Invoices',
           tabBarIcon: TransactionIcon,
         }}
       />

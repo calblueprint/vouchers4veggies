@@ -1,29 +1,29 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Colors from '../../../assets/Colors';
-import { RootNavBackButton } from '../../../assets/Components';
+import {
+  CardContainer,
+  FullSizeContainer,
+  SafeArea,
+  StartOfListView,
+} from '../../../assets/Components';
+import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StatusComponent from '../../components/transactions/StatusComponent';
 import VoucherCard from '../../components/transactions/VoucherCard';
 import { getTransaction, getVoucher } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, Voucher } from '../../types/types';
+import StandardHeader from '../../components/common/StandardHeader';
 import {
   formatTimeForDisplay,
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 import {
-  BackButtonContainer,
-  CardContainer,
-  DarkGrayText,
   LeftAlignedContainer,
   MediumText,
   Size14BoldText,
-  StartOfListView,
   Title,
-  TransactionsContainer,
 } from './styles';
 
 export default function TransactionDetailsScreen({
@@ -63,19 +63,13 @@ export default function TransactionDetailsScreen({
   const time = moment(transactionData?.timestamp.toDate());
 
   return (
-    <TransactionsContainer>
-      <BackButtonContainer>
-        <RootNavBackButton
-          onPress={() => navigation.navigate('TransactionsScreen')}
-        >
-          <DarkGrayText>
-            <Icon name="left" size={14} color={Colors.darkGray} /> Back
-          </DarkGrayText>
-        </RootNavBackButton>
-      </BackButtonContainer>
+    <SafeArea>
+      <StandardHeader>
+        <BackButton onPress={() => navigation.goBack()} />
+      </StandardHeader>
 
       {transactionData ? (
-        <TransactionsContainer>
+        <FullSizeContainer>
           <StatusComponent status={transactionData.status} />
           <Title>${formatValueForDisplay(transactionData.value)}</Title>
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
@@ -108,10 +102,10 @@ export default function TransactionDetailsScreen({
               onRefresh={onRefresh}
             />
           </CardContainer>
-        </TransactionsContainer>
+        </FullSizeContainer>
       ) : (
         <LoadingSpinner />
       )}
-    </TransactionsContainer>
+    </SafeArea>
   );
 }

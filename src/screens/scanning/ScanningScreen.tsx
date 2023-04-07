@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Toast from 'react-native-toast-message';
@@ -8,29 +8,32 @@ import {
   Body1Text,
   ButtonTextWhite,
   CenterText,
-  CounterText,
+  // CounterText,
   H2Heading,
   MagentaText,
   ButtonTextMagenta,
 } from '../../../assets/Fonts';
-import StandardLogo from '../../components/common/StandardLogo';
+import StandardHeader from '../../components/common/StandardHeader';
+
 import {
   ButtonContainer,
   ScannerContainer,
   TitleContainer,
-  VoucherCounter,
-  Header,
+  // VoucherCounter,
   BodyContainer,
-  SafeArea,
 } from './styles';
 import {
   AddManuallyButton,
   ButtonMagenta,
   ButtonWhite,
+  SafeArea,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
+import { useScanningContext } from './ScanningContext';
+import { serialNumberIsValid } from '../../database/queries';
+import { handlePreventLeave } from '../../utils/scanningUtils';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,7 +48,8 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const [scanCounter, incrementScanned] = useState(0);
+  const { voucherMap, dispatch } = useScanningContext();
+  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -56,24 +60,26 @@ export default function ScanningScreen({
     getBarCodeScannerPermissions();
   }, []);
 
-  const showToast = () => {
-    Toast.show({
-      type: 'success',
-      position: 'top',
-      topOffset: 50,
-      text1: 'Voucher Scanned!',
-      visibilityTime: 2000,
-    });
-  };
-
-  const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
+  const handleBarCodeScanned = async (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
-      incrementScanned(scanCounter + 1);
+      const serialNumberInput = Number(data);
       setScanned(true);
-      // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-      showToast();
+
+      const isValid = await serialNumberIsValid(serialNumberInput);
+      if (isValid) {
+        // TODO: change once we create custom base components for number inputs
+        navigation.navigate('ConfirmValueScreen', {
+          serialNumber: serialNumberInput,
+        });
+      } else {
+        Alert.alert('Oh no! Invalid serial number.', 'Please try again', [
+          {
+            text: 'OK',
+          },
+        ]);
+      }
     }
   };
 
@@ -87,35 +93,35 @@ export default function ScanningScreen({
   return (
     <SafeArea>
       {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
-      {scanCounter === 0 ? (
-        <Header>
-          <StandardLogo />
-          <AddManuallyButton
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextBlack>
-              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-              {'  '}
-              Add Manually
-            </ButtonTextBlack>
-          </AddManuallyButton>
-        </Header>
-      ) : (
-        <Header>
+      <StandardHeader>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
           <VoucherCounter>
-            <CounterText>{scanCounter}</CounterText>
+            <CounterText>{voucherMap.size}</CounterText>
           </VoucherCounter>
-          <AddManuallyButton
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextBlack>
-              <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-              {'  '}
-              Add Manually
-            </ButtonTextBlack>
-          </AddManuallyButton>
-        </Header>
-      )}
+        </TouchableOpacity> */}
+
+        <AddManuallyButton
+          onPress={() => navigation.navigate('ManualVoucherScreen')}
+        >
+          <ButtonTextBlack>
+            <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
+            {'  '}
+            Add Manually
+          </ButtonTextBlack>
+        </AddManuallyButton>
+
+        <TouchableOpacity
+          onPress={() =>
+            handlePreventLeave({
+              hasUnsavedChanges,
+              navigation,
+              dispatch,
+            })
+          }
+        >
+          <Icon name="close" size={24} color={Colors.midBlack} />
+        </TouchableOpacity>
+      </StandardHeader>
 
       <BodyContainer>
         <TitleContainer>
@@ -140,22 +146,18 @@ export default function ScanningScreen({
         />
       </ScannerContainer>
 
-      {scanCounter === 0 ? (
+      <ButtonContainer>
         <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
           <ButtonTextWhite>Scan</ButtonTextWhite>
         </ButtonMagenta>
-      ) : (
-        <ButtonContainer>
-          <ButtonWhite disabled={!scanned} onPress={() => setScanned(false)}>
-            <ButtonTextMagenta>Scan Again</ButtonTextMagenta>
-          </ButtonWhite>
-          <ButtonMagenta
-          // onPress={() => navigation.navigate('ReviewScreen')}
-          >
-            <ButtonTextWhite>Review & Submit</ButtonTextWhite>
-          </ButtonMagenta>
-        </ButtonContainer>
-      )}
+
+        <ButtonWhite
+          onPress={() => navigation.navigate('ReviewScreen')}
+          disabled={voucherMap.size === 0}
+        >
+          <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
+        </ButtonWhite>
+      </ButtonContainer>
       <Toast />
     </SafeArea>
   );

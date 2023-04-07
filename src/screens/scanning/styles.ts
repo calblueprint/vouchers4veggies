@@ -1,21 +1,6 @@
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const SafeArea = styled.SafeAreaView`
-  background-color: ${Colors.offWhite};
-  min-height: 100%;
-  align-items: center;
-  flex: 1;
-`;
-
-export const Header = styled.View`
-  width: 85%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 26px;
-`;
-
 export const VoucherCounter = styled.View`
   width: 30px;
   height: 30px;
@@ -28,6 +13,7 @@ export const VoucherCounter = styled.View`
 `;
 
 export const BodyContainer = styled.View`
+  margin-top: 10px;
   width: 277px;
   align-items: center;
   margin-bottom: 35px;
@@ -60,6 +46,74 @@ export const ButtonContainer = styled.View`
 export const FormContainer = styled.View`
   margin-top: 20px;
   margin-bottom: 20px;
+  width: 277px;
+`;
+
+export const BorderlessRow = styled.View`
+  margin-top: 10px;
+  display: flex;
+  background-color: #fff;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const LeftAlignContainer = styled.View`
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding-left: 29px;
+`;
+
+export const RightAlignContainer = styled.View`
+  flex: 1;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  padding-right: 29px;
+`;
+
+export const ReviewTitleContainer = styled.View`
+  display: flex;
+  padding: 40px;
+`;
+
+export const ConfirmationTitleContainer = styled.View`
+  display: flex;
+  padding: 40px;
+  padding-top: 200px;
+`;
+
+export const ConstrainedHeightContainer = styled.View`
+  width: 100%;
+  min-height: 268px;
+`;
+
+export const ReviewButtonContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+`;
+
+export const ErrorContainer = styled.View`
+  width: 100%;
+  height: 20px;
+`;
+
+export const WhiteText = styled.Text`
+  color: ${Colors.offWhite};
+`;
+
+export const DarkGrayText = styled.Text`
+  color: ${Colors.darkGray};
+`;
+
+export const RedText = styled.Text`
+  color: ${Colors.alertRed};
 `;
 
 // will be used later
@@ -77,4 +131,13 @@ export const DropDownContainer = styled.View`
   align-items: center;
   margin-top: 6px;
   margin-bottom: 8px;
+`;
+
+export const StartContainer = styled.View`
+  top: 193px;
+  margin: 0px 49px;
+`;
+
+export const HeroContainer = styled.View`
+  margin-bottom: 40px;
 `;

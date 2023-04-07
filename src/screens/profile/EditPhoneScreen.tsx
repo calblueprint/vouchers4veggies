@@ -6,7 +6,7 @@ import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
 import { Body1Text, H2Heading, ButtonTextWhite } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { ProfileStackScreenProps } from '../../navigation/types';
-import { DarkGrayText } from '../transactions/styles';
+import { DarkGrayText } from '../auth/styles';
 import {
   BackButtonContainer,
   EmailHeadingContainer,

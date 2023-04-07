@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Colors from '../../../assets/Colors';
-import { ButtonMagenta, RootNavBackButton } from '../../../assets/Components';
-import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
+import { ButtonMagenta, SafeArea } from '../../../assets/Components';
+import {
+  Body1Text,
+  H2Heading,
+  H4CardNavTab,
+  WhiteText,
+} from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 
 import { useAuthContext } from './AuthContext';
-import {
-  validateEmailInput,
-  validatePasswordInput,
-} from '../../utils/validationUtils';
+// import {
+//   validateEmailInput,
+//   validatePasswordInput,
+// } from '../../utils/validationUtils';
+import StandardHeader from '../../components/common/StandardHeader';
 
 import {
-  BackButtonContainer,
-  DarkGrayText,
   FormContainer,
   HeadingContainer,
   LeftAlignContainer,
-  LoginContainer,
   RightAlignContainer,
   RowContainer,
-  SmallTextContainer,
   Styles,
   VerticalSpacingButtonContainer,
-  WhiteText,
 } from './styles';
+import BackButton from '../../components/common/BackButton';
 
 export default function LoginScreen({
   navigation,
@@ -60,14 +60,10 @@ export default function LoginScreen({
   };
 
   return (
-    <LoginContainer>
-      <BackButtonContainer>
-        <RootNavBackButton onPress={() => navigation.navigate('Start')}>
-          <DarkGrayText>
-            <Icon name="left" size={14} color={Colors.darkGray} /> Back
-          </DarkGrayText>
-        </RootNavBackButton>
-      </BackButtonContainer>
+    <SafeArea>
+      <StandardHeader>
+        <BackButton onPress={() => navigation.goBack()} />
+      </StandardHeader>
 
       <FormContainer>
         <HeadingContainer>
@@ -79,7 +75,7 @@ export default function LoginScreen({
           onChange={onChangeEmail}
           value={email}
           placeholder="Enter email"
-          validate={validateEmailInput}
+          // validate={validateEmailInput}
           keyboardType="email-address"
         />
 
@@ -98,7 +94,7 @@ export default function LoginScreen({
           value={password}
           placeholder="Enter password"
           secureTextEntry
-          validate={validatePasswordInput}
+          // validate={validatePasswordInput}
         />
         {showErrorMessage && errorMessage && (
           <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
@@ -110,14 +106,7 @@ export default function LoginScreen({
             </WhiteText>
           </ButtonMagenta>
         </VerticalSpacingButtonContainer>
-
-        <SmallTextContainer>
-          <Body1Text>
-            {`Don't have an account? `}
-            <Body1Text style={Styles.underline}>Sign up.</Body1Text>
-          </Body1Text>
-        </SmallTextContainer>
       </FormContainer>
-    </LoginContainer>
+    </SafeArea>
   );
 }

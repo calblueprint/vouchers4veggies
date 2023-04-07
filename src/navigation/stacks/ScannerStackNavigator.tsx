@@ -1,8 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import ConfirmationScreen from '../../screens/scanning/ConfirmationScreen';
+import ConfirmValueScreen from '../../screens/scanning/ConfirmValueScreen';
 import ManualVoucherScreen from '../../screens/scanning/ManualVoucherScreen';
+import ReviewScreen from '../../screens/scanning/ReviewScreen';
+import { ScanningContextProvider } from '../../screens/scanning/ScanningContext';
 import ScanningScreen from '../../screens/scanning/ScanningScreen';
 import { ScannerStackParamList } from '../types';
+import TransactionStackNavigator from './TransactionStackNavigator';
+import VoucherEntryStartScreen from '../../screens/scanning/VoucherEntryStartScreen';
 
 const ScannerStack = createNativeStackNavigator<ScannerStackParamList>();
 
@@ -11,16 +17,40 @@ const ScannerStack = createNativeStackNavigator<ScannerStackParamList>();
  */
 export default function ScannerStackNavigator() {
   return (
-    <ScannerStack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <ScannerStack.Screen name="ScanningScreen" component={ScanningScreen} />
-      <ScannerStack.Screen
-        name="ManualVoucherScreen"
-        component={ManualVoucherScreen}
-      />
-    </ScannerStack.Navigator>
+    <ScanningContextProvider>
+      <ScannerStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <ScannerStack.Screen
+          name="VoucherEntryStartScreen"
+          component={VoucherEntryStartScreen}
+        />
+        <ScannerStack.Screen
+          name="InvoicesScreen"
+          component={TransactionStackNavigator}
+        />
+        <ScannerStack.Screen
+          name="ConfirmationScreen"
+          component={ConfirmationScreen}
+        />
+        <ScannerStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+          <ScannerStack.Screen
+            name="ManualVoucherScreen"
+            component={ManualVoucherScreen}
+          />
+          <ScannerStack.Screen
+            name="ScanningScreen"
+            component={ScanningScreen}
+          />
+          <ScannerStack.Screen
+            name="ConfirmValueScreen"
+            component={ConfirmValueScreen}
+          />
+          <ScannerStack.Screen name="ReviewScreen" component={ReviewScreen} />
+        </ScannerStack.Group>
+      </ScannerStack.Navigator>
+    </ScanningContextProvider>
   );
 }

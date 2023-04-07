@@ -2,19 +2,6 @@ import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 
-export const Row = styled.View`
-  display: flex;
-  flex: 1;
-  background-color: #fff;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  height: 67px;
-  border: 0px solid ${Colors.lightGray};
-  border-bottom-width: 1px;
-  width: 100%;
-`;
-
 export const LeftAlignContainer = styled.View`
   flex: 1;
   flex-direction: column;
@@ -52,7 +39,7 @@ export const StatusComponentRed = styled.View`
   text-align: center;
   align-items: center;
   border-radius: 9px;
-  width: 63px;
+  min-width: 63px;
   background: ${Colors.alertLightRed};
   padding: 9px;
   border: 2px solid ${Colors.alertLightRed};
@@ -62,7 +49,7 @@ export const StatusComponentGreen = styled.View`
   text-align: center;
   align-items: center;
   border-radius: 9px;
-  width: 63px;
+  min-width: 63px;
   background: ${Colors.lightGreen};
   padding: 9px;
   border: 2px solid ${Colors.lightGreen};
@@ -102,6 +89,6 @@ export const Styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
     backgroundColor: '#fff',
-    marginRight: 25,
+    paddingRight: 29,
   },
 });

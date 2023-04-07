@@ -2,23 +2,12 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const LoginContainer = styled.View`
-  width: 100%;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
 export const StartContainer = styled.View`
-  top: 25%;
-  align-items: center;
+  top: 35%;
 `;
 
 export const HeadingContainer = styled.View`
-  margin-top: 14%;
-
+  align-items: flex-start;
   margin-bottom: 10%;
 `;
 
@@ -61,7 +50,7 @@ export const VerticalSpacingButtonContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 12%;
+  margin-top: 15%;
 `;
 
 export const ButtonContainer = styled.View`
@@ -69,14 +58,6 @@ export const ButtonContainer = styled.View`
   justify-content: flex-start;
   align-items: center;
   margin-top: 5%;
-`;
-
-export const BackButtonContainer = styled.View`
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-left: 10%;
-  margin-top: 15%;
 `;
 
 export const SmallTextContainer = styled.View`

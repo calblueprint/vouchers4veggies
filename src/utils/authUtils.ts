@@ -64,7 +64,15 @@ export const signIn = async (
     .catch(error => {
       // eslint-disable-next-line no-console
       console.warn('(signIn) error', error);
-      setAuthErrorMessage(dispatch, error.message);
+      // eslint-disable-next-line default-case
+      switch (error.code) {
+        case 'auth/invalid-email':
+          setAuthErrorMessage(dispatch, 'Invalid email.');
+          break;
+        case 'auth/wrong-password':
+          setAuthErrorMessage(dispatch, 'Invalid password.');
+          break;
+      }
     });
 };
 

@@ -22,7 +22,13 @@ export type BottomTabScreenProps<T extends keyof BottomTabParamList> =
 export type ScannerStackParamList = {
   ScanningScreen: undefined;
   ManualVoucherScreen: undefined;
+  ConfirmValueScreen: {
+    serialNumber: number;
+  };
   ReviewScreen: undefined;
+  ConfirmationScreen: { count: number };
+  InvoicesScreen: undefined;
+  VoucherEntryStartScreen: undefined;
 };
 
 export type ProfileStackParamList = {
