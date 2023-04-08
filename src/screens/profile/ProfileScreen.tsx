@@ -1,83 +1,62 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import {
   H4CardNavTab,
   H2Heading,
   ButtonTextWhite,
-  EmailText,
+  Body1Text,
 } from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
 import {
   HeadingContainer,
-  ButtonBlank,
   MagentaButtonContainer,
-  ButtonBottomContainer,
-  IconContainer,
   MainProfileContainer,
-  ButtonInfoContainer,
+  LeftAlignContainer,
 } from './styles';
 import { ProfileStackScreenProps } from '../../navigation/types';
-import { ButtonMagenta } from '../../../assets/Components';
+import { ButtonMagenta, Row, SafeArea } from '../../../assets/Components';
 import StandardLogo from '../../components/common/StandardLogo';
+import StandardHeader from '../../components/common/StandardHeader';
+import { Styles } from '../../components/transactions/styles';
+import { getVendor } from '../../database/queries';
 
 export default function ProfileScreen({
   navigation,
 }: ProfileStackScreenProps<'ProfileScreen'>) {
   const { dispatch } = useAuthContext();
   const handleSignOut = async () => signOut(dispatch);
+  const { vendorUuid } = useAuthContext();
 
   return (
-    <>
-      <StandardLogo />
+    <SafeArea>
+      <StandardHeader>
+        <StandardLogo />
+      </StandardHeader>
       <MainProfileContainer>
         <HeadingContainer>
           {/* TODO: Fetch real vendor name using AuthContext */}
           <H2Heading>Hi, Derby Food Market!</H2Heading>
         </HeadingContainer>
       </MainProfileContainer>
-      <ButtonInfoContainer>
-        <ButtonBlank />
-        <IconContainer>
-          <Icon name="right" size={20} color={Colors.midGray} />
-        </IconContainer>
-        <MainProfileContainer>
-          <EmailText>Email</EmailText>
-          {/* TODO: Fetch real vendor email using AuthContext */}
+      <Row>
+        <LeftAlignContainer>
+          <Body1Text>Email</Body1Text>
           <H4CardNavTab>email@email.com</H4CardNavTab>
-        </MainProfileContainer>
-      </ButtonInfoContainer>
-      <ButtonInfoContainer>
-        <ButtonBlank />
-        <IconContainer>
-          <Icon name="right" size={20} color={Colors.midGray} />
-        </IconContainer>
-        <MainProfileContainer>
-          {/* TODO: Fetch real vendor number using AuthContext */}
-          <EmailText>Phone Number</EmailText>
-          <H4CardNavTab>(123) 456-7890</H4CardNavTab>
-        </MainProfileContainer>
-      </ButtonInfoContainer>
-      <ButtonInfoContainer>
-        <ButtonBlank />
-        <IconContainer>
-          <Icon name="right" size={20} color={Colors.midGray} />
-        </IconContainer>
-        <MainProfileContainer>
-          <EmailText>Password</EmailText>
-          {/* TODO: Fetch real vendor password using AuthContext */}
-          <H4CardNavTab>............</H4CardNavTab>
-        </MainProfileContainer>
-      </ButtonInfoContainer>
-      <ButtonBottomContainer>
-        <ButtonBlank />
-      </ButtonBottomContainer>
+        </LeftAlignContainer>
+        <Icon
+          name="right"
+          size={25}
+          style={Styles.icon}
+          color={Colors.midGray}
+        />
+      </Row>
       <MagentaButtonContainer>
         <ButtonMagenta onPress={handleSignOut}>
           <ButtonTextWhite>Log Out</ButtonTextWhite>
         </ButtonMagenta>
       </MagentaButtonContainer>
-    </>
+    </SafeArea>
   );
 }

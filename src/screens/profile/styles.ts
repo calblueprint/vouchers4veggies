@@ -63,6 +63,7 @@ export const FormContainer = styled.View`
 export const MainProfileContainer = styled.View`
   padding-left: 32px;
   padding-right: 32px;
+  margin-bottom: 64px;
 `;
 
 export const BackButtonContainer = styled.View`
