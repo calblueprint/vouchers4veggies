@@ -171,53 +171,26 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
 /**
  * Query the `vouchers` collection and check if a serialNumber is valid.
  */
-export const serialNumberIsValid = async (
+export const getMaxVoucherValue = async (
   serialNumber: number,
-): Promise<boolean> => {
+): Promise<number> => {
   try {
     const docId = serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
     // check that serialNumber exists
     const voucherRange = await getVoucherRange(serialNumber);
     if (voucherRange === null) {
-      return false;
+      return 0;
     }
     // check that serialNumber has not already been used
     const voucherDoc = await getDoc(docRef);
     if (voucherDoc.exists()) {
-      return false;
+      return 0;
     }
-
-    return true;
+    return voucherRange.maxValue;
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucher)', e);
-    throw e;
-  }
-};
-
-/**
- * Query the `vouchers` collection and check if a voucher amount is valid.
- */
-export const voucherAmountIsValid = async (
-  serialNumber: number,
-  voucherAmount: number,
-): Promise<boolean> => {
-  try {
-    const voucherRange = await getVoucherRange(serialNumber);
-    if (voucherRange === null) {
-      return false;
-    }
-    if (voucherAmount === 0) {
-      return false;
-    }
-    if (voucherAmount > voucherRange.maxValue) {
-      return false;
-    }
-    return true;
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn('(getVoucherRange)', e);
     throw e;
   }
 };
