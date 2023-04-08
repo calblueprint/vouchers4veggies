@@ -208,6 +208,9 @@ export const voucherAmountIsValid = async (
     if (voucherRange === null) {
       return false;
     }
+    if (voucherAmount === 0) {
+      return false;
+    }
     if (voucherAmount > voucherRange.maxValue) {
       return false;
     }
