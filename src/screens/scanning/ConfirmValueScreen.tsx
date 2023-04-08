@@ -25,7 +25,6 @@ import {
 } from './styles';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
-import { voucherAmountIsValid } from '../../database/queries';
 import { addVoucher, showSuccessToast } from '../../utils/scanningUtils';
 import BackButton from '../../components/common/BackButton';
 
