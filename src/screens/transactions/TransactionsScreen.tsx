@@ -49,6 +49,30 @@ export default function TransactionsScreen({
     fetchData(vendorUuid);
   }, [vendorUuid]);
 
+  const sortTransactionsByAmountAsc = () => {
+    const sortedArray = transactions?.sort((a, b) => a.value - b.value);
+    setTransactions(sortedArray);
+  };
+
+  const sortTransactionsByAmountDesc = () => {
+    const sortedArray = transactions?.sort((a, b) => b.value - a.value);
+    setTransactions(sortedArray);
+  };
+
+  const sortTransactionsByDateAsc = () => {
+    const sortedArray = transactions?.sort(
+      (a, b) => a.timestamp.seconds - b.timestamp.seconds,
+    );
+    setTransactions(sortedArray);
+  };
+
+  const sortTransactionsByDateDesc = () => {
+    const sortedArray = transactions?.sort(
+      (a, b) => b.timestamp.seconds - a.timestamp.seconds,
+    );
+    setTransactions(sortedArray);
+  };
+
   return (
     <SafeArea>
       <StandardHeader>
