@@ -32,7 +32,7 @@ import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
 // import VoucherModal from '../../components/VoucherModal/VoucherModal';
 import { useScanningContext } from './ScanningContext';
-import { serialNumberIsValid } from '../../database/queries';
+import { getMaxVoucherValue } from '../../database/queries';
 import { handlePreventLeave } from '../../utils/scanningUtils';
 
 const styles = StyleSheet.create({
@@ -67,11 +67,12 @@ export default function ScanningScreen({
       const serialNumberInput = Number(data);
       setScanned(true);
 
-      const isValid = await serialNumberIsValid(serialNumberInput);
-      if (isValid) {
+      const maxVoucherValue = await getMaxVoucherValue(serialNumberInput);
+      if (maxVoucherValue) {
         // TODO: change once we create custom base components for number inputs
         navigation.navigate('ConfirmValueScreen', {
           serialNumber: serialNumberInput,
+          maxVoucherValue,
         });
       } else {
         Alert.alert('Oh no! Invalid serial number.', 'Please try again', [
