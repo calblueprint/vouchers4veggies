@@ -32,46 +32,50 @@ export default function TransactionDetailsScreen({
 }: TransactionStackScreenProps<'TransactionDetailsScreen'>) {
   const { transactionUuid } = route.params;
   const [transactionData, setTransactionData] = useState<Transaction>();
-  const [voucherArray, setVoucherArray] = useState<Voucher[]>();
-  const [defaultSortVoucherArray, setDefaultSortVoucherArray] =
+  const [displayedVoucherArray, setDisplayedVoucherArray] =
     useState<Voucher[]>();
+  const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>();
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const fetchData = async (Uuid: string | null) => {
+    try {
+      if (Uuid) {
+        const data = await getTransaction(Uuid);
+        setTransactionData(data);
+
+        const voucherData = await Promise.all(
+          data.voucherSerialNumbers.map(item => getVoucher(item)),
+        );
+        setDisplayedVoucherArray(voucherData);
+        setDefaultVoucherArray(voucherData);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('(useEffect)[TransactionDetailsScreen]', error);
+    }
+  };
 
   const onRefresh = React.useCallback(() => {
     setIsRefreshing(true);
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
-  }, []);
+    fetchData(transactionUuid);
+  }, [transactionUuid]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getTransaction(transactionUuid);
-        setTransactionData(data);
-
-        const voucherData = await Promise.all(
-          data.voucherSerialNumbers.map(item => getVoucher(item)),
-        );
-        setVoucherArray(voucherData);
-        setDefaultSortVoucherArray(voucherData);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('(useEffect)[TransactionDetailsScreen]', error);
-      }
-    };
-    fetchData();
+    fetchData(transactionUuid);
   }, [transactionUuid]);
 
   const sortVouchersByDefault = () => {
-    setVoucherArray(defaultSortVoucherArray);
+    setDisplayedVoucherArray(defaultVoucherArray);
   };
 
   const sortVouchersBySerialNumber = () => {
-    const sortedArray = defaultSortVoucherArray?.sort(
+    const sortedArray = defaultVoucherArray?.sort(
       (a, b) => a.serialNumber - b.serialNumber,
     );
-    setVoucherArray(sortedArray);
+    setDisplayedVoucherArray(sortedArray);
   };
 
   const time = moment(transactionData?.timestamp.toDate());
@@ -98,7 +102,7 @@ export default function TransactionDetailsScreen({
           <CardContainer>
             <StartOfListView />
             <FlatList
-              data={voucherArray}
+              data={displayedVoucherArray}
               renderItem={({ item }) => (
                 <VoucherCard
                   serialNumber={item.serialNumber}
