@@ -32,10 +32,22 @@ export default function TransactionDetailsScreen({
 }: TransactionStackScreenProps<'TransactionDetailsScreen'>) {
   const { transactionUuid } = route.params;
   const [transactionData, setTransactionData] = useState<Transaction>();
+  const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>();
   const [displayedVoucherArray, setDisplayedVoucherArray] =
     useState<Voucher[]>();
-  const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>();
+  const [sort, setSort] = useState('default');
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const sortVouchersByDefault = () => {
+    setDisplayedVoucherArray(defaultVoucherArray);
+  };
+
+  const sortVouchersBySerialNumber = () => {
+    const sortedArray = defaultVoucherArray?.sort(
+      (a, b) => a.serialNumber - b.serialNumber,
+    );
+    setDisplayedVoucherArray(sortedArray);
+  };
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -46,8 +58,13 @@ export default function TransactionDetailsScreen({
         const voucherData = await Promise.all(
           data.voucherSerialNumbers.map(item => getVoucher(item)),
         );
-        setDisplayedVoucherArray(voucherData);
         setDefaultVoucherArray(voucherData);
+
+        if (sort === 'default') {
+          sortVouchersByDefault();
+        } else {
+          sortVouchersBySerialNumber();
+        }
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -66,17 +83,6 @@ export default function TransactionDetailsScreen({
   useEffect(() => {
     fetchData(transactionUuid);
   }, [transactionUuid]);
-
-  const sortVouchersByDefault = () => {
-    setDisplayedVoucherArray(defaultVoucherArray);
-  };
-
-  const sortVouchersBySerialNumber = () => {
-    const sortedArray = defaultVoucherArray?.sort(
-      (a, b) => a.serialNumber - b.serialNumber,
-    );
-    setDisplayedVoucherArray(sortedArray);
-  };
 
   const time = moment(transactionData?.timestamp.toDate());
 

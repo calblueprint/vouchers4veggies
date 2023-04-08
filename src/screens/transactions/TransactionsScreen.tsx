@@ -22,32 +22,8 @@ export default function TransactionsScreen({
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [sort, setSort] = useState('DateDesc');
   const { vendorUuid } = useAuthContext();
-
-  const fetchData = async (Uuid: string | null) => {
-    try {
-      if (Uuid) {
-        const transactionsArray = await getTransactionsByVendorUuid(Uuid);
-        setTransactions(transactionsArray);
-        setIsLoading(false);
-      }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('(useEffect)[TransactionsScreen]', error);
-    }
-  };
-
-  const onRefresh = React.useCallback(() => {
-    setIsRefreshing(true);
-    setTimeout(() => {
-      setIsRefreshing(false);
-    }, 1000);
-    fetchData(vendorUuid);
-  }, [vendorUuid]);
-
-  useEffect(() => {
-    fetchData(vendorUuid);
-  }, [vendorUuid]);
 
   const sortTransactionsByAmountAsc = () => {
     const sortedArray = transactions?.sort((a, b) => a.value - b.value);
@@ -72,6 +48,48 @@ export default function TransactionsScreen({
     );
     setTransactions(sortedArray);
   };
+
+  const fetchData = async (Uuid: string | null) => {
+    try {
+      if (Uuid) {
+        const transactionsArray = await getTransactionsByVendorUuid(Uuid);
+        setTransactions(transactionsArray);
+        setIsLoading(false);
+
+        switch (sort) {
+          case 'AmountAsc':
+            sortTransactionsByAmountAsc();
+            break;
+          case 'AmountDesc':
+            sortTransactionsByAmountDesc();
+            break;
+          case 'DateAsc':
+            sortTransactionsByDateAsc();
+            break;
+          case 'DateDesc':
+            sortTransactionsByDateDesc();
+            break;
+          default:
+            sortTransactionsByDateAsc();
+        }
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('(useEffect)[TransactionsScreen]', error);
+    }
+  };
+
+  const onRefresh = React.useCallback(() => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setIsRefreshing(false);
+    }, 1000);
+    fetchData(vendorUuid);
+  }, [vendorUuid]);
+
+  useEffect(() => {
+    fetchData(vendorUuid);
+  }, [vendorUuid]);
 
   return (
     <SafeArea>
