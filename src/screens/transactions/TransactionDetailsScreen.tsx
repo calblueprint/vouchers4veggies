@@ -33,6 +33,8 @@ export default function TransactionDetailsScreen({
   const { transactionUuid } = route.params;
   const [transactionData, setTransactionData] = useState<Transaction>();
   const [voucherArray, setVoucherArray] = useState<Voucher[]>();
+  const [defaultSortVoucherArray, setDefaultSortVoucherArray] =
+    useState<Voucher[]>();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const onRefresh = React.useCallback(() => {
@@ -52,6 +54,7 @@ export default function TransactionDetailsScreen({
           data.voucherSerialNumbers.map(item => getVoucher(item)),
         );
         setVoucherArray(voucherData);
+        setDefaultSortVoucherArray(voucherData);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('(useEffect)[TransactionDetailsScreen]', error);
@@ -59,6 +62,17 @@ export default function TransactionDetailsScreen({
     };
     fetchData();
   }, [transactionUuid]);
+
+  const sortVouchersByDefault = () => {
+    setVoucherArray(defaultSortVoucherArray);
+  };
+
+  const sortVouchersBySerialNumber = () => {
+    const sortedArray = defaultSortVoucherArray?.sort(
+      (a, b) => a.serialNumber - b.serialNumber,
+    );
+    setVoucherArray(sortedArray);
+  };
 
   const time = moment(transactionData?.timestamp.toDate());
 
