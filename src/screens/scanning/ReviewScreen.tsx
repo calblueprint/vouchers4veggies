@@ -44,6 +44,8 @@ export default function ReviewScreen({
   const [deleteDialogIsVisible, setDeleteDialogIsVisible] = useState(false);
   const [editDialogIsVisible, setEditDialogIsVisible] = useState(false);
   const [invalidDialogIsVisible, setInvalidDialogIsVisible] = useState(false);
+  const [emptyInvoiceDialogIsVisible, setEmptyInvoiceDialogIsVisible] =
+    useState(false);
 
   const [editDialogText, setEditDialogText] = useState('');
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
@@ -99,7 +101,11 @@ export default function ReviewScreen({
   };
 
   const onDeleteHelper = () => {
+    const { size } = voucherMap;
     deleteVoucher(dispatch, focusedSerialNumber);
+    if (size <= 1) {
+      setEmptyInvoiceDialogIsVisible(true);
+    }
     hideDeleteDialog();
   };
 
@@ -178,6 +184,17 @@ export default function ReviewScreen({
           </Dialog.Title>
           <Dialog.Button label="Cancel" onPress={hideDeleteDialog} />
           <Dialog.Button label="Delete" bold onPress={onDeleteHelper} />
+        </Dialog.Container>
+      ) : null}
+
+      {emptyInvoiceDialogIsVisible ? (
+        <Dialog.Container visible>
+          <Dialog.Title>This invoice is empty.</Dialog.Title>
+          <Dialog.Button
+            label="OK"
+            bold
+            onPress={() => navigation.popToTop()}
+          />
         </Dialog.Container>
       ) : null}
 
