@@ -183,7 +183,12 @@ export default function ReviewScreen({
             Are you sure you want to delete this voucher?
           </Dialog.Title>
           <Dialog.Button label="Cancel" onPress={hideDeleteDialog} />
-          <Dialog.Button label="Delete" bold onPress={onDeleteHelper} />
+          <Dialog.Button
+            label="Delete"
+            color={Colors.alertRed}
+            bold
+            onPress={onDeleteHelper}
+          />
         </Dialog.Container>
       ) : null}
 
@@ -191,8 +196,9 @@ export default function ReviewScreen({
         <Dialog.Container visible>
           <Dialog.Title>This invoice is empty.</Dialog.Title>
           <Dialog.Button
-            label="OK"
+            label="Discard"
             bold
+            color={Colors.alertRed}
             onPress={() => navigation.popToTop()}
           />
         </Dialog.Container>
