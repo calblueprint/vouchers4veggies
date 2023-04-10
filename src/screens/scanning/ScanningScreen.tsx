@@ -64,14 +64,16 @@ export default function ScanningScreen({
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
-      const serialNumberInput = Number(data);
       setScanned(true);
 
-      const maxVoucherValue = await getMaxVoucherValue(serialNumberInput);
-      if (maxVoucherValue) {
-        // TODO: change once we create custom base components for number inputs
+      const result = await getMaxVoucherValue(Number(data));
+      const { ok } = result;
+      // `ok` is true indicates valid serial number input
+      if (ok) {
+        // provides the maxVoucherValue to the confirm value screen to autofill the text box
+        const { maxVoucherValue } = result;
         navigation.navigate('ConfirmValueScreen', {
-          serialNumber: serialNumberInput,
+          serialNumber: Number(data),
           maxVoucherValue,
         });
       } else {
