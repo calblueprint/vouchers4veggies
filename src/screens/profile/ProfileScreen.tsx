@@ -31,14 +31,12 @@ export default function ProfileScreen({
   const [vendorName, setVendorName] = useState<String>('');
   const [vendorEmail, setVendorEmail] = useState<String>('');
 
-  }
   useEffect(() => {
     const fetchData = async () => {
       if (vendorUuid) {
-        const vendorEmail = await getVendor(vendorUuid);
-        setVendorName(vendorEmail.name);
-        
-        const vendorEm = vendorEmail.email;
+        const vendor = await getVendor(vendorUuid);
+        setVendorName(vendor.name);
+        setVendorEmail(vendor.email);
       }
     };
     fetchData();
@@ -57,7 +55,7 @@ export default function ProfileScreen({
       <Row>
         <LeftAlignContainer>
           <Body1Text>Email</Body1Text>
-          <H4CardNavTab>email@email.com</H4CardNavTab>
+          <H4CardNavTab>{vendorEmail}</H4CardNavTab>
         </LeftAlignContainer>
         <Icon
           name="right"
@@ -74,7 +72,3 @@ export default function ProfileScreen({
     </SafeArea>
   );
 }
-function setVendorName(name: string) {
-  throw new Error('Function not implemented.');
-}
-
