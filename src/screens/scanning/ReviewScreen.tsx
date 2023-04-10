@@ -101,15 +101,17 @@ export default function ReviewScreen({
   };
 
   const onDeleteHelper = () => {
-    const { size } = voucherMap;
     deleteVoucher(dispatch, focusedSerialNumber);
-    if (size <= 1) {
-      setEmptyInvoiceDialogIsVisible(true);
-    }
     hideDeleteDialog();
   };
 
   const onSubmit = async () => {
+    // redirect user if the invoice is empty
+    const { size } = voucherMap;
+    if (size === 0) {
+      setEmptyInvoiceDialogIsVisible(true);
+      return;
+    }
     if (vendorUuid) {
       await Promise.all(
         voucherArray.map(item =>
