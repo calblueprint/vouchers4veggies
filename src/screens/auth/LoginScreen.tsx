@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
-import {
-  Body1Text,
-  H2Heading,
-  H4CardNavTab,
-  WhiteText,
-} from '../../../assets/Fonts';
+import { Body1Text, H2Heading, H4CardNavTab } from '../../../assets/Fonts';
 import InputField from '../../components/InputField/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
@@ -25,6 +20,7 @@ import {
   RowContainer,
   Styles,
   VerticalSpacingButtonContainer,
+  WhiteText,
 } from './styles';
 import BackButton from '../../components/common/BackButton';
 

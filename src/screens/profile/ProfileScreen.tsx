@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Colors from '../../../assets/Colors';
 import {
@@ -28,7 +28,21 @@ export default function ProfileScreen({
   const { dispatch } = useAuthContext();
   const handleSignOut = async () => signOut(dispatch);
   const { vendorUuid } = useAuthContext();
+  const [vendorName, setVendorName] = useState<String>('');
+  const [vendorEmail, setVendorEmail] = useState<String>('');
 
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      if (vendorUuid) {
+        const vendorEmail = await getVendor(vendorUuid);
+        setVendorName(vendorEmail.name);
+        
+        const vendorEm = vendorEmail.email;
+      }
+    };
+    fetchData();
+  }, [vendorUuid]);
   return (
     <SafeArea>
       <StandardHeader>
@@ -37,7 +51,7 @@ export default function ProfileScreen({
       <MainProfileContainer>
         <HeadingContainer>
           {/* TODO: Fetch real vendor name using AuthContext */}
-          <H2Heading>Hi, Derby Food Market!</H2Heading>
+          <H2Heading>{vendorName}</H2Heading>
         </HeadingContainer>
       </MainProfileContainer>
       <Row>
@@ -60,3 +74,7 @@ export default function ProfileScreen({
     </SafeArea>
   );
 }
+function setVendorName(name: string) {
+  throw new Error('Function not implemented.');
+}
+

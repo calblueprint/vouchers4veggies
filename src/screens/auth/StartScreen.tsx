@@ -1,9 +1,9 @@
 import React from 'react';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
-import { H1Heading, H4CardNavTab, WhiteText } from '../../../assets/Fonts';
+import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
 import StandardLogo from '../../components/common/StandardLogo';
-import { ButtonContainer, StartContainer } from './styles';
+import { ButtonContainer, StartContainer, WhiteText } from './styles';
 
 export default function StartScreen({
   navigation,
