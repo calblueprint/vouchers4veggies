@@ -23,6 +23,7 @@ import {
   VoucherCreateResult,
   Transaction,
   TransactionCreate,
+  SerialNumberValidationResult,
 } from '../types/types';
 import fbApp from './clientApp';
 
@@ -169,25 +170,37 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
 };
 
 /**
- * Query the `vouchers` collection and check if a serialNumber is valid.
+ * Query to validate an inputted serial number in Firebase and
+ * return the maxVoucherValue for use in the following screens.
+ *
+ * Parameters: a json with fields
+ *
+ *    `serialNumber`: voucher serial number
+ *
+ * Returns a json.
+ *
+ * If the query executes successfully, `ok` is true and `maxValue` contains
+ * the maximum dollar input allowed for the given voucher type.
+ *
+ * Otherwise, `ok` is false and `error` contains an error code.
  */
 export const getMaxVoucherValue = async (
   serialNumber: number,
-): Promise<number> => {
+): Promise<SerialNumberValidationResult> => {
   try {
     const docId = serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
-    // check that serialNumber exists
+    // check that serialNumber exists within the NPO's defined range of vouchers
     const voucherRange = await getVoucherRange(serialNumber);
     if (voucherRange === null) {
-      return 0;
+      return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
     }
     // check that serialNumber has not already been used
     const voucherDoc = await getDoc(docRef);
     if (voucherDoc.exists()) {
-      return 0;
+      return { ok: false, error: VoucherCreateError.SerialNumberAlreadyUsed };
     }
-    return voucherRange.maxValue;
+    return { ok: true, maxValue: voucherRange.maxValue };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucher)', e);
