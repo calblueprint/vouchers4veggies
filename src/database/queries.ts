@@ -200,7 +200,7 @@ export const getMaxVoucherValue = async (
     if (voucherDoc.exists()) {
       return { ok: false, error: VoucherCreateError.SerialNumberAlreadyUsed };
     }
-    return { ok: true, maxValue: voucherRange.maxValue };
+    return { ok: true, maxVoucherValue: voucherRange.maxValue };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucher)', e);

@@ -55,19 +55,18 @@ export default function ManualVoucherScreen({
     if (voucherMap.has(Number(serialNumber))) {
       setShowDuplicateError(true);
     } else {
-      const maxVoucherValue = await getMaxVoucherValue(Number(serialNumber));
-      // maxVoucherValue === 0 indicates that the query wasn't valid
-      if (maxVoucherValue) {
-        const serialNumberInput = Number(serialNumber);
-
+      const result = await getMaxVoucherValue(Number(serialNumber));
+      const { ok } = result;
+      // `ok` is true indicates valid serial number input
+      if (ok) {
         // clears input field if successfully added
         setSerialNumber('');
         setShowInvalidError(false);
         setShowDuplicateError(false);
-
-        // TODO: change once we create custom base components for number inputs
+        // provides the maxVoucherValue to the confirm value screen to autofill the text box
+        const { maxVoucherValue } = result;
         navigation.navigate('ConfirmValueScreen', {
-          serialNumber: serialNumberInput,
+          serialNumber: Number(serialNumber),
           maxVoucherValue,
         });
       } else {
