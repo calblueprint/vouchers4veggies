@@ -9,6 +9,7 @@ import ScanningScreen from '../../screens/scanning/ScanningScreen';
 import { ScannerStackParamList } from '../types';
 import TransactionStackNavigator from './TransactionStackNavigator';
 import VoucherEntryStartScreen from '../../screens/scanning/VoucherEntryStartScreen';
+import VoucherBatchScreen from '../../screens/scanning/VoucherBatchScreen';
 
 const ScannerStack = createNativeStackNavigator<ScannerStackParamList>();
 
@@ -39,6 +40,10 @@ export default function ScannerStackNavigator() {
           <ScannerStack.Screen
             name="ManualVoucherScreen"
             component={ManualVoucherScreen}
+          />
+          <ScannerStack.Screen
+            name="VoucherBatchScreen"
+            component={VoucherBatchScreen}
           />
           <ScannerStack.Screen
             name="ScanningScreen"
