@@ -222,6 +222,11 @@ export default function VoucherBatchScreen({
         >
           <ButtonTextWhite>Add Range of Vouchers</ButtonTextWhite>
         </ButtonMagenta>
+        <ButtonMagenta
+          onPress={() => navigation.navigate('ManualVoucherScreen')}
+        >
+          <ButtonTextWhite>Add Singular Vouchers</ButtonTextWhite>
+        </ButtonMagenta>
         <ButtonWhite
           onPress={() => navigation.navigate('ReviewScreen')}
           disabled={voucherMap.size === 0}
