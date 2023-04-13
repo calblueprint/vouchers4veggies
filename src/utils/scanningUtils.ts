@@ -15,6 +15,16 @@ export const addVoucher = (
   voucherAmount: number,
 ) => dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherAmount });
 
+export const addMultipleVouchers = (
+  dispatch: ScanningDispatch,
+  serialNumberArray: Array<number>,
+  voucherAmount: number,
+) => {
+  for (let i = 0; i < serialNumberArray.length; i += 1) {
+    addVoucher(dispatch, serialNumberArray[i], voucherAmount);
+  }
+};
+
 /** Update a voucher object in the voucher map */
 export const editVoucher = (
   dispatch: ScanningDispatch,
