@@ -46,7 +46,6 @@ export default function ProfileScreen() {
       </StandardHeader>
       <MainProfileContainer>
         <HeadingContainer>
-          {/* TODO: Fetch real vendor name using AuthContext */}
           <H2Heading>{vendorName}</H2Heading>
         </HeadingContainer>
       </MainProfileContainer>
