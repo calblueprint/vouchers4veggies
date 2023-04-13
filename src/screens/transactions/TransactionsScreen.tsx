@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import { H2Heading } from '../../../assets/Fonts';
+import { Colors } from 'react-native-paper';
+import { MaterialIcons, Octicons } from '@expo/vector-icons';
+import { Body2Subtext, H2Heading } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/transactions/TransactionCard';
@@ -8,7 +10,7 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
-import { TitleContainer } from './styles';
+import { OneLine, SortAndFilterButton, Styles, TitleContainer } from './styles';
 import {
   CardContainer,
   SafeArea,
@@ -26,6 +28,7 @@ export default function TransactionsScreen({
   );
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [sort, setSort] = useState('DateDesc');
+  const [filterCount, setFilterCount] = useState(0);
   const [filter, setFilter] = useState('');
   const [filterMin, setFilterMin] = useState(0);
   const [filterMax, setFilterMax] = useState(0);
@@ -153,6 +156,32 @@ export default function TransactionsScreen({
       <TitleContainer>
         <H2Heading>Invoices</H2Heading>
       </TitleContainer>
+
+      <OneLine>
+        <SortAndFilterButton>
+          <OneLine>
+            <Octicons
+              name="sort-desc"
+              size={16}
+              color={Colors.black}
+              style={Styles.icon}
+            />
+            <Body2Subtext>Sort by</Body2Subtext>
+          </OneLine>
+        </SortAndFilterButton>
+
+        <SortAndFilterButton>
+          <OneLine>
+            <MaterialIcons
+              name="tune"
+              size={16}
+              color={Colors.black}
+              style={Styles.icon}
+            />
+            <Body2Subtext>{`Filter (${filterCount})`}</Body2Subtext>
+          </OneLine>
+        </SortAndFilterButton>
+      </OneLine>
 
       {isLoading ? (
         <LoadingSpinner />
