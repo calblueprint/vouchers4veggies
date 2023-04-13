@@ -105,3 +105,26 @@ export const showSuccessToast = () => {
     visibilityTime: 2000,
   });
 };
+
+export const multipleVoucherSuccessToast = () => {
+  Toast.show({
+    type: 'success',
+    position: 'top',
+    topOffset: 50,
+    text1: 'All Vouchers Added!', // TODO: @sauhardjain Change text styling to increase visibility
+    visibilityTime: 2000,
+  });
+};
+
+export const partiallySuccessfulVoucherToast = (
+  success: number,
+  total: number,
+) => {
+  Toast.show({
+    type: 'error',
+    position: 'top',
+    topOffset: 50,
+    text1: `${success}/${total} Vouchers Successfully Added!`, // TODO: @sauhardjain Change text styling to increase visibility
+    visibilityTime: 2000,
+  });
+};
