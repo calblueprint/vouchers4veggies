@@ -35,57 +35,66 @@ import { useScanningContext } from './ScanningContext';
 import { serialNumberIsValid } from '../../database/queries';
 import { handlePreventLeave } from '../../utils/scanningUtils';
 
-export default function ManualVoucherScreen({
+export default function VoucherBatchScreen({
   navigation,
-}: ScannerStackScreenProps<'ManualVoucherScreen'>) {
+}: ScannerStackScreenProps<'VoucherBatchScreen'>) {
   const [startSerialNumber, setStartSerialNumber] = useState<string>('');
-  const [startShowInvalidStartError, setStartShowInvalidError] =
-    useState(false);
-  const [startShowDuplicateStartError, setStartShowDuplicateError] =
-    useState(false);
+  const [showStartInvalidError, setShowStartInvalidError] = useState(false);
+  const [showStartDuplicateError, setShowStartDuplicateError] = useState(false);
 
   const [endSerialNumber, setEndSerialNumber] = useState<string>('');
-  const [endShowInvalidError, setEndShowInvalidError] = useState(false);
-  const [endShowDuplicateError, setEndShowDuplicateError] = useState(false);
+  const [showEndInvalidError, setShowEndInvalidError] = useState(false);
+  const [showEndDuplicateError, setShowEndDuplicateError] = useState(false);
 
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const onChangeStartSerialNumber = (text: string) => {
+    setShowStartInvalidError(false);
+    setShowStartDuplicateError(false);
     const value = text.replace(/\D/g, '');
     setStartSerialNumber(value);
   };
 
   const onChangeEndSerialNumber = (text: string) => {
+    setShowEndInvalidError(false);
+    setShowEndDuplicateError(false);
     const value = text.replace(/\D/g, '');
     setEndSerialNumber(value);
   };
 
   const handleVoucherAdd = async () => {
     if (voucherMap.has(Number(startSerialNumber))) {
-      setStartShowDuplicateError(true);
-    } else if (voucherMap.has(Number(endSerialNumber))) {
-      setEndShowDuplicateError(true);
-    } else {
-      const isStartValid = await serialNumberIsValid(Number(startSerialNumber));
-      const isEndValid = await serialNumberIsValid(Number(endSerialNumber));
-
-      // if (isStartValid && isEndValid) {
-      //   const serialNumberInput = Number(serialNumber);
-
-      //   // clears input field if successfully added
-      //   setSerialNumber('');
-      //   setShowInvalidError(false);
-      //   setShowDuplicateError(false);
-
-      //   // TODO: change once we create custom base components for number inputs
-      //   navigation.navigate('ConfirmValueScreen', {
-      //     serialNumber: serialNumberInput,
-      //   });
-      // } else {
-      //   setShowInvalidError(true);
-      // }
+      setShowStartDuplicateError(true);
+      return;
     }
+    if (voucherMap.has(Number(endSerialNumber))) {
+      setShowEndDuplicateError(true);
+      return;
+    }
+    const isStartValid = await serialNumberIsValid(Number(startSerialNumber));
+    if (!isStartValid) {
+      setShowStartInvalidError(true);
+      return;
+    }
+    const isEndValid = await serialNumberIsValid(Number(endSerialNumber));
+    if (!isEndValid) {
+      setShowEndInvalidError(true);
+      return;
+    }
+
+    // clears input field if successfully added
+    setStartSerialNumber('');
+    setShowStartInvalidError(false);
+    setShowStartDuplicateError(false);
+
+    setEndSerialNumber('');
+    setShowEndInvalidError(false);
+    setShowEndDuplicateError(false);
+
+    // navigation.navigate('ConfirmValueScreen', {
+    //   serialNumber: serialNumberInput,
+    // });
   };
 
   return (
@@ -133,17 +142,17 @@ export default function ManualVoucherScreen({
               onChange={onChangeStartSerialNumber}
               value={startSerialNumber}
               placeholder="Enter Number"
-              isValid={!showInvalidError}
+              isValid={!showStartInvalidError}
               keyboardType="number-pad"
             />
           </FieldContainer>
           <ErrorContainer>
-            {showInvalidStartError ? (
+            {showStartInvalidError ? (
               <RedText>
                 <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
               </RedText>
             ) : null}
-            {showDuplicateStartError ? (
+            {showStartDuplicateError ? (
               <RedText>
                 <Body2Subtext>
                   You&apos;ve already added this serial number!
@@ -157,17 +166,17 @@ export default function ManualVoucherScreen({
               onChange={onChangeEndSerialNumber}
               value={endSerialNumber}
               placeholder="Enter Number"
-              isValid={!showInvalidError}
+              isValid={!showEndInvalidError}
               keyboardType="number-pad"
             />
           </FieldContainer>
           <ErrorContainer>
-            {showInvalidError ? (
+            {showEndInvalidError ? (
               <RedText>
                 <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
               </RedText>
             ) : null}
-            {showDuplicateError ? (
+            {showEndDuplicateError ? (
               <RedText>
                 <Body2Subtext>
                   You&apos;ve already added this serial number!
@@ -177,11 +186,14 @@ export default function ManualVoucherScreen({
           </ErrorContainer>
         </FormContainer>
 
-        <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
-          <ButtonTextWhite>Add Voucher</ButtonTextWhite>
+        <ButtonMagenta
+          disabled={showStartInvalidError || showEndInvalidError}
+          onPress={handleVoucherAdd}
+        >
+          <ButtonTextWhite>Add Range of Vouchers</ButtonTextWhite>
         </ButtonMagenta>
         <ButtonWhite
-          onPress={() => navigation.navigate('ReviewScreen')}
+          // onPress={() => navigation.navigate('ReviewScreen')}
           disabled={voucherMap.size === 0}
         >
           <ButtonTextBlack>
