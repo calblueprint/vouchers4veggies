@@ -114,3 +114,7 @@ export const WhiteText = styled.Text`
 export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
 `;
+
+export const BlueText = styled.Text`
+  color: #007aff;
+`;

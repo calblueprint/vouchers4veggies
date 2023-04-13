@@ -60,6 +60,31 @@ export const OneLine = styled.View`
   width: 100%;
 `;
 
+export const RightAlignContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin-top: 19px;
+`;
+
+export const ModalTextContainer = styled.View`
+  margin-right: 29px;
+  margin-left: 29px;
+`;
+
+export const VerticalSpaceContainer = styled.View`
+  height: 21px;
+`;
+
+export const CenteredText = styled.Text`
+  textalign: center;
+`;
+
+export const SortAndFilterModal = styled.Modal`
+  height: 395px;
+`;
+
 export const Styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
