@@ -143,6 +143,11 @@ export default function ManualVoucherScreen({
         <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
+        <ButtonMagenta
+          onPress={() => navigation.navigate('VoucherBatchScreen')}
+        >
+          <ButtonTextWhite>Add Multiple Vouchers</ButtonTextWhite>
+        </ButtonMagenta>
         <ButtonWhite
           onPress={() => navigation.navigate('ReviewScreen')}
           disabled={voucherMap.size === 0}
