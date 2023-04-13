@@ -15,6 +15,7 @@ export const addVoucher = (
   voucherAmount: number,
 ) => dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherAmount });
 
+/** Creates multiple voucher objects given a list of serial numbers */
 export const addMultipleVouchers = (
   dispatch: ScanningDispatch,
   serialNumberArray: Array<number>,
@@ -116,16 +117,18 @@ export const showSuccessToast = () => {
   });
 };
 
+/** Displays a toast when all vouchers in a range are added successfully */
 export const multipleVoucherSuccessToast = () => {
   Toast.show({
     type: 'success',
     position: 'top',
     topOffset: 50,
-    text1: 'All Vouchers Added!', // TODO: @sauhardjain Change text styling to increase visibility
+    text1: 'All Vouchers Added!',
     visibilityTime: 2000,
   });
 };
 
+/** Displays an error toast if not all vouchers are added successfully */
 export const partialSuccessVoucherToast = (success: number, total: number) => {
   Toast.show({
     type: 'error',

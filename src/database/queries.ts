@@ -239,50 +239,6 @@ export const validateMultipleVouchers = async (
   return validSerialNumbers;
 };
 
-export const validateMultipleVouchers = async (
-  startSerialNumber: number,
-  endSerialNumber: number,
-) => {
-  // const voucherRange = await getVoucherRange(serialNumber);
-
-  // for (
-  //   let serialNumber = startSerialNumber;
-  //   serialNumber <= endSerialNumber;
-  //   serialNumber += 1
-  // ) {
-  //   unfilteredSerialNumbers.push(serialNumber);
-  // }
-
-  // const mappedWithPromises = unfilteredSerialNumbers.map(async serialNumber => {
-  //   const numFruit = await serialNumberIsValid(serialNumber);
-  //   return numFruit;
-  // });
-
-  // const serialNumberObjects = await Promise.all(mappedWithPromises);
-
-  // const validSerialNumbers = serialNumberObjects.filter((fruit, index) => {
-  //   const numFruit = numFruits[index];
-  //   return numFruit > 20;
-  // });
-
-  const validSerialNumbers = [];
-  for (
-    let serialNumber = startSerialNumber;
-    serialNumber <= endSerialNumber;
-    serialNumber += 1
-  ) {
-    const docId = serialNumber.toString();
-    const docRef = doc(db, 'vouchers', docId);
-    // check that serialNumber has not already been used
-    // eslint-disable-next-line no-await-in-loop
-    const voucherDoc = await getDoc(docRef);
-    if (!voucherDoc.exists()) {
-      validSerialNumbers.push(serialNumber);
-    }
-  }
-  return validSerialNumbers;
-};
-
 /**
  * Query to create a new voucher in Firebase.
  *
