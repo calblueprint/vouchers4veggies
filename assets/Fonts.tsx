@@ -13,6 +13,7 @@ export const H2Heading = styled.Text`
   font-style: normal;
   font-size: 30px;
   line-height: 41px;
+  flex-wrap: wrap;
 `;
 
 export const H3Subheading = styled.Text`

@@ -1,10 +1,9 @@
 import styled from 'styled-components/native';
 
 export const HeadingContainer = styled.Text`
-  margin-top: 57px;
-  margin-bottom: 16px;
-  word-break: break-all;
-  width: 100%;
+  margin-top: 34px;
+  margin-bottom: 31px;
+  text-align: center;
 `;
 export const MagentaButtonContainer = styled.View`
   flex-direction: column;
@@ -14,9 +13,8 @@ export const MagentaButtonContainer = styled.View`
   width: 100%;
 `;
 export const MainProfileContainer = styled.View`
-  padding-left: 32px;
-  padding-right: 32px;
-  margin-bottom: 64px;
+  margin-left: 32px;
+  margin-right: 32px;
 `;
 export const LeftAlignContainer = styled.View`
   flex: 1;
