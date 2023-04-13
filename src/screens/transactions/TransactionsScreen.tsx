@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import {
   FlatList,
   Modal,
@@ -91,29 +91,77 @@ export default function TransactionsScreen({
     setTransactions(filteredArray);
   };
 
-  const sortTransactionsByAmountAsc = () => {
-    const sortedArray = defaultTransactions?.sort((a, b) => a.value - b.value);
-    setTransactions(sortedArray);
+  const sortTransactionsByAmountDesc = (data: Transaction[]) => {
+    const sortedArray = data.sort((a, b) => b.value - a.value);
+    return sortedArray;
   };
 
-  const sortTransactionsByAmountDesc = () => {
-    const sortedArray = defaultTransactions?.sort((a, b) => b.value - a.value);
-    setTransactions(sortedArray);
+  const sortTransactionsByAmountAsc = (data: Transaction[]) => {
+    const sortedArray = data.sort((a, b) => a.value - b.value);
+    return sortedArray;
   };
 
-  const sortTransactionsByDateAsc = () => {
-    const sortedArray = defaultTransactions?.sort(
-      (a, b) => a.timestamp.seconds - b.timestamp.seconds,
-    );
-    setTransactions(sortedArray);
-  };
-
-  const sortTransactionsByDateDesc = () => {
-    const sortedArray = defaultTransactions?.sort(
+  const sortTransactionsByDateDesc = (data: Transaction[]) => {
+    const sortedArray = data.sort(
       (a, b) => b.timestamp.seconds - a.timestamp.seconds,
     );
-    setTransactions(sortedArray);
+    return sortedArray;
   };
+
+  const sortTransactionsByDateAsc = (data: Transaction[]) => {
+    const sortedArray = data.sort(
+      (a, b) => a.timestamp.seconds - b.timestamp.seconds,
+    );
+    return sortedArray;
+  };
+
+  type SortDispatch = React.Dispatch<number>;
+
+  type SortState = {
+    dispatch: SortDispatch;
+    sortedArray: Transaction[];
+  };
+
+  const useSortReducer = () =>
+    useReducer(
+      (prevState: SortState, sort: number) => {
+        switch (sort) {
+          case -1:
+            return { ...prevState, sortedArray: transactions };
+          case 0:
+            return {
+              ...prevState,
+              sortedArray: sortTransactionsByAmountDesc(prevState.sortedArray),
+            };
+          case 1:
+            return {
+              ...prevState,
+              sortedArray: sortTransactionsByAmountAsc(prevState.sortedArray),
+            };
+          case 2:
+            return {
+              ...prevState,
+              sortedArray: sortTransactionsByDateDesc(prevState.sortedArray),
+            };
+          case 3:
+            return {
+              ...prevState,
+              sortedArray: sortTransactionsByDateAsc(prevState.sortedArray),
+            };
+          default:
+            return {
+              ...prevState,
+              sortedArray: sortTransactionsByAmountDesc(prevState.sortedArray),
+            };
+        }
+      },
+      {
+        sortedArray: defaultTransactions,
+        dispatch: () => null,
+      },
+    );
+
+  const [sortState, sortDispatch] = useSortReducer();
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -121,40 +169,6 @@ export default function TransactionsScreen({
         const transactionsArray = await getTransactionsByVendorUuid(Uuid);
         setDefaultTransactions(transactionsArray);
         setIsLoading(false);
-
-        switch (filter) {
-          case 'Date':
-            filterByDate();
-            break;
-          case 'Paid':
-            filterByPaid();
-            break;
-          case 'Unpaid':
-            filterByUnpaid();
-            break;
-          case 'Amount':
-            filterByAmount();
-            break;
-          default:
-            break;
-        }
-
-        switch (sortType) {
-          case 0:
-            sortTransactionsByAmountAsc();
-            break;
-          case 1:
-            sortTransactionsByAmountDesc();
-            break;
-          case 2:
-            sortTransactionsByDateAsc();
-            break;
-          case 3:
-            sortTransactionsByDateDesc();
-            break;
-          default:
-            sortTransactionsByDateAsc();
-        }
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -172,7 +186,31 @@ export default function TransactionsScreen({
 
   useEffect(() => {
     fetchData(vendorUuid);
-  }, [vendorUuid]);
+    // switch (filter) {
+    //   case 'Date':
+    //     filterByDate();
+    //     break;
+    //   case 'Paid':
+    //     filterByPaid();
+    //     break;
+    //   case 'Unpaid':
+    //     filterByUnpaid();
+    //     break;
+    //   case 'Amount':
+    //     filterByAmount();
+    //     break;
+    //   default:
+    //     break;
+    // }
+    setTransactions(defaultTransactions);
+    sortDispatch(sortType);
+  }, [
+    vendorUuid,
+    defaultTransactions,
+    sortType,
+    sortDispatch,
+    sortState.sortedArray,
+  ]);
 
   return (
     <SafeArea>
