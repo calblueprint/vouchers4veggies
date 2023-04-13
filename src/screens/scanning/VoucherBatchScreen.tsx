@@ -32,17 +32,20 @@ import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
-import { serialNumberIsValid } from '../../database/queries';
+import {
+  getMaxVoucherValue,
+  validateMultipleVouchers,
+} from '../../database/queries';
 import { handlePreventLeave } from '../../utils/scanningUtils';
 
 export default function VoucherBatchScreen({
   navigation,
 }: ScannerStackScreenProps<'VoucherBatchScreen'>) {
-  const [startSerialNumber, setStartSerialNumber] = useState<string>('');
+  const [startSerialNumberInput, setStartSerialNumber] = useState<string>('');
   const [showStartInvalidError, setShowStartInvalidError] = useState(false);
   const [showStartDuplicateError, setShowStartDuplicateError] = useState(false);
 
-  const [endSerialNumber, setEndSerialNumber] = useState<string>('');
+  const [endSerialNumberInput, setEndSerialNumber] = useState<string>('');
   const [showEndInvalidError, setShowEndInvalidError] = useState(false);
   const [showEndDuplicateError, setShowEndDuplicateError] = useState(false);
 
@@ -64,24 +67,36 @@ export default function VoucherBatchScreen({
   };
 
   const handleVoucherAdd = async () => {
-    if (voucherMap.has(Number(startSerialNumber))) {
+    // validates the starting serial number
+    const startSerialNumber = Number(startSerialNumberInput);
+    if (voucherMap.has(startSerialNumber)) {
       setShowStartDuplicateError(true);
       return;
     }
-    if (voucherMap.has(Number(endSerialNumber))) {
-      setShowEndDuplicateError(true);
-      return;
-    }
-    const isStartValid = await serialNumberIsValid(Number(startSerialNumber));
-    if (!isStartValid) {
+    const startResult = await getMaxVoucherValue(Number(startSerialNumber));
+    if (!startResult.ok) {
       setShowStartInvalidError(true);
       return;
     }
-    const isEndValid = await serialNumberIsValid(Number(endSerialNumber));
-    if (!isEndValid) {
+    // validates the starting serial number
+    const endSerialNumber = Number(endSerialNumberInput);
+    if (voucherMap.has(endSerialNumber)) {
+      setShowEndDuplicateError(true);
+      return;
+    }
+    const endResult = await getMaxVoucherValue(Number(endSerialNumber));
+    if (!endResult.ok) {
       setShowEndInvalidError(true);
       return;
     }
+
+    const validSerialNumbers = await validateMultipleVouchers(
+      startSerialNumber,
+      endSerialNumber,
+    );
+
+    // eslint-disable-next-line no-console
+    console.log(validSerialNumbers);
 
     // clears input field if successfully added
     setStartSerialNumber('');
@@ -91,10 +106,6 @@ export default function VoucherBatchScreen({
     setEndSerialNumber('');
     setShowEndInvalidError(false);
     setShowEndDuplicateError(false);
-
-    // navigation.navigate('ConfirmValueScreen', {
-    //   serialNumber: serialNumberInput,
-    // });
   };
 
   return (
@@ -140,7 +151,7 @@ export default function VoucherBatchScreen({
             <InputTitleText>Starting Serial Number</InputTitleText>
             <InputField
               onChange={onChangeStartSerialNumber}
-              value={startSerialNumber}
+              value={startSerialNumberInput}
               placeholder="Enter Number"
               isValid={!showStartInvalidError}
               keyboardType="number-pad"
@@ -164,7 +175,7 @@ export default function VoucherBatchScreen({
             <InputTitleText>End Serial Number</InputTitleText>
             <InputField
               onChange={onChangeEndSerialNumber}
-              value={endSerialNumber}
+              value={endSerialNumberInput}
               placeholder="Enter Number"
               isValid={!showEndInvalidError}
               keyboardType="number-pad"
