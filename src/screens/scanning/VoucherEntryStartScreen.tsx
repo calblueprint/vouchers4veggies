@@ -26,7 +26,7 @@ export default function VoucherEntryStartScreen({
         </HeroContainer>
         <ButtonContainer>
           <ButtonMagenta
-            onPress={() => navigation.navigate('VoucherBatchScreen')}
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
           >
             <WhiteText>
               <H4CardNavTab>Start submitting</H4CardNavTab>
