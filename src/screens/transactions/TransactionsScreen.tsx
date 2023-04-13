@@ -1,8 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  FlatList,
+  Modal,
+  RefreshControl,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Colors } from 'react-native-paper';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import { Body2Subtext, H2Heading } from '../../../assets/Fonts';
+import { Modalize, useModalize } from 'react-native-modalize';
+import {
+  BlueText,
+  Body1Text,
+  Body2Subtext,
+  H2Heading,
+  H4CardNavTab,
+} from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/transactions/TransactionCard';
@@ -10,13 +23,23 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
-import { OneLine, SortAndFilterButton, Styles, TitleContainer } from './styles';
+import {
+  CenteredText,
+  ModalTextContainer,
+  OneLine,
+  RightAlignContainer,
+  SortAndFilterButton,
+  Styles,
+  TitleContainer,
+  VerticalSpaceContainer,
+} from './styles';
 import {
   CardContainer,
   SafeArea,
   StartOfListView,
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
+import RadioButton from '../../components/common/RadioButton';
 
 export default function TransactionsScreen({
   navigation,
@@ -27,12 +50,16 @@ export default function TransactionsScreen({
     [],
   );
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [sort, setSort] = useState('DateDesc');
+
+  const [sortType, setSortType] = useState(-1);
   const [filterCount, setFilterCount] = useState(0);
   const [filter, setFilter] = useState('');
   const [filterMin, setFilterMin] = useState(0);
   const [filterMax, setFilterMax] = useState(0);
   const { vendorUuid } = useAuthContext();
+
+  const sortModalRef = useRef<Modalize>(null);
+  const filterModalRef = useRef<Modalize>(null);
 
   const filterByDate = () => {
     const filteredArray = defaultTransactions?.filter(
@@ -112,17 +139,17 @@ export default function TransactionsScreen({
             break;
         }
 
-        switch (sort) {
-          case 'AmountAsc':
+        switch (sortType) {
+          case 0:
             sortTransactionsByAmountAsc();
             break;
-          case 'AmountDesc':
+          case 1:
             sortTransactionsByAmountDesc();
             break;
-          case 'DateAsc':
+          case 2:
             sortTransactionsByDateAsc();
             break;
-          case 'DateDesc':
+          case 3:
             sortTransactionsByDateDesc();
             break;
           default:
@@ -158,7 +185,13 @@ export default function TransactionsScreen({
       </TitleContainer>
 
       <OneLine>
-        <SortAndFilterButton>
+        <SortAndFilterButton
+          onPress={() => {
+            if (sortModalRef) {
+              sortModalRef.current?.open();
+            }
+          }}
+        >
           <OneLine>
             <Octicons
               name="sort-desc"
@@ -170,7 +203,13 @@ export default function TransactionsScreen({
           </OneLine>
         </SortAndFilterButton>
 
-        <SortAndFilterButton>
+        <SortAndFilterButton
+          onPress={() => {
+            if (filterModalRef) {
+              filterModalRef.current?.open();
+            }
+          }}
+        >
           <OneLine>
             <MaterialIcons
               name="tune"
@@ -208,6 +247,62 @@ export default function TransactionsScreen({
           />
         </CardContainer>
       )}
+
+      <Modalize ref={sortModalRef} snapPoint={395}>
+        <ModalTextContainer>
+          <RightAlignContainer>
+            <TouchableOpacity
+              onPress={() => {
+                if (sortModalRef) {
+                  sortModalRef.current?.close();
+                }
+              }}
+            >
+              <BlueText>
+                <Body1Text>Close</Body1Text>
+              </BlueText>
+            </TouchableOpacity>
+          </RightAlignContainer>
+
+          <VerticalSpaceContainer />
+          <H4CardNavTab>Sort invoices by</H4CardNavTab>
+          <VerticalSpaceContainer />
+          <RadioButton
+            data={[
+              'Amount: High to Low',
+              'Amount: Low to High',
+              'Date: Newest',
+              'Date: Oldest',
+            ]}
+            selected={sortType}
+            setSelected={setSortType}
+          />
+        </ModalTextContainer>
+      </Modalize>
+
+      <Modalize ref={filterModalRef} snapPoint={510}>
+        <ModalTextContainer>
+          <RightAlignContainer>
+            <TouchableOpacity
+              onPress={() => {
+                if (filterModalRef) {
+                  filterModalRef.current?.close();
+                }
+              }}
+            >
+              <BlueText>
+                <Body1Text>Close</Body1Text>
+              </BlueText>
+            </TouchableOpacity>
+          </RightAlignContainer>
+
+          <VerticalSpaceContainer />
+          <CenteredText>
+            <H4CardNavTab>Filter invoices</H4CardNavTab>
+          </CenteredText>
+          <VerticalSpaceContainer />
+        </ModalTextContainer>
+      </Modalize>
     </SafeArea>
   );
 }
