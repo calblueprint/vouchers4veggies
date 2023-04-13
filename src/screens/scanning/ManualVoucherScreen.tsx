@@ -32,7 +32,7 @@ import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
-import { serialNumberIsValid } from '../../database/queries';
+import { getMaxVoucherValue } from '../../database/queries';
 import { handlePreventLeave } from '../../utils/scanningUtils';
 
 export default function ManualVoucherScreen({
@@ -55,19 +55,19 @@ export default function ManualVoucherScreen({
     if (voucherMap.has(Number(serialNumber))) {
       setShowDuplicateError(true);
     } else {
-      const isValid = await serialNumberIsValid(Number(serialNumber));
-
-      if (isValid) {
-        const serialNumberInput = Number(serialNumber);
-
+      const result = await getMaxVoucherValue(Number(serialNumber));
+      const { ok } = result;
+      // `ok` is true indicates valid serial number input
+      if (ok) {
         // clears input field if successfully added
         setSerialNumber('');
         setShowInvalidError(false);
         setShowDuplicateError(false);
-
-        // TODO: change once we create custom base components for number inputs
+        // provides the maxVoucherValue to the confirm value screen to autofill the text box
+        const { maxVoucherValue } = result;
         navigation.navigate('ConfirmValueScreen', {
-          serialNumber: serialNumberInput,
+          serialNumber: Number(serialNumber),
+          maxVoucherValue,
         });
       } else {
         setShowInvalidError(true);

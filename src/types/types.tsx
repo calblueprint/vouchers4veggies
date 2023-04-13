@@ -33,6 +33,10 @@ export enum VoucherCreateError {
   ValueExceededMaximum = 'ValueExceededMaximum',
 }
 
+export type SerialNumberValidationResult =
+  | { ok: false; error: VoucherCreateError }
+  | { ok: true; maxVoucherValue: number };
+
 export type VoucherCreateResult =
   | { ok: true; docId: string }
   | { ok: false; error: VoucherCreateError };

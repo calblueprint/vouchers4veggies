@@ -24,6 +24,7 @@ export type ScannerStackParamList = {
   ManualVoucherScreen: undefined;
   ConfirmValueScreen: {
     serialNumber: number;
+    maxVoucherValue: number;
   };
   ReviewScreen: undefined;
   ConfirmationScreen: { count: number };
