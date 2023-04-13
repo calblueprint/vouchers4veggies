@@ -37,6 +37,7 @@ import {
   validateMultipleVouchers,
 } from '../../database/queries';
 import {
+  addMultipleVouchers,
   handlePreventLeave,
   multipleVoucherSuccessToast,
   partialSuccessVoucherToast,
@@ -71,21 +72,24 @@ export default function VoucherBatchScreen({
   };
 
   const handleVoucherAdd = async () => {
-    // validates the starting serial number
     const startSerialNumber = Number(startSerialNumberInput);
-    if (voucherMap.has(startSerialNumber)) {
-      setShowStartDuplicateError(true);
+    const endSerialNumber = Number(endSerialNumberInput);
+    // checks if either input is a duplicate and returns 1-2 errors if so
+    const isStartDuplicate = voucherMap.has(startSerialNumber);
+    const isEndDuplicate = voucherMap.has(endSerialNumber);
+    if (isStartDuplicate || isEndDuplicate) {
+      if (isStartDuplicate) {
+        setShowStartDuplicateError(true);
+      }
+      if (isEndDuplicate) {
+        setShowEndDuplicateError(true);
+      }
       return;
     }
+
     const startResult = await getMaxVoucherValue(Number(startSerialNumber));
     if (!startResult.ok) {
       setShowStartInvalidError(true);
-      return;
-    }
-    // validates the starting serial number
-    const endSerialNumber = Number(endSerialNumberInput);
-    if (voucherMap.has(endSerialNumber)) {
-      setShowEndDuplicateError(true);
       return;
     }
     const endResult = await getMaxVoucherValue(Number(endSerialNumber));
@@ -99,15 +103,14 @@ export default function VoucherBatchScreen({
       endSerialNumber,
     );
 
-    // eslint-disable-next-line no-console
-    console.log(validSerialNumbers);
-
     const rangeLength = endSerialNumber - startSerialNumber + 1;
     if (validSerialNumbers.length === rangeLength) {
       multipleVoucherSuccessToast();
     } else {
       partialSuccessVoucherToast(validSerialNumbers.length, rangeLength);
     }
+
+    addMultipleVouchers(dispatch, validSerialNumbers, 10);
 
     // clears input field if successfully added
     setStartSerialNumber('');
@@ -213,6 +216,14 @@ export default function VoucherBatchScreen({
           onPress={handleVoucherAdd}
         >
           <ButtonTextWhite>Add Range of Vouchers</ButtonTextWhite>
+        </ButtonMagenta>
+        <ButtonMagenta
+          onPress={() => {
+            // eslint-disable-next-line no-console
+            console.log(voucherMap);
+          }}
+        >
+          <ButtonTextWhite>See VoucherMap</ButtonTextWhite>
         </ButtonMagenta>
         <ButtonWhite
           // onPress={() => navigation.navigate('ReviewScreen')}
