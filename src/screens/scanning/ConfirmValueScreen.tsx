@@ -25,7 +25,6 @@ import {
 } from './styles';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
-import { voucherAmountIsValid } from '../../database/queries';
 import { addVoucher, showSuccessToast } from '../../utils/scanningUtils';
 import BackButton from '../../components/common/BackButton';
 
@@ -33,8 +32,10 @@ export default function ConfirmValueScreen({
   route,
   navigation,
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
-  const { serialNumber } = route.params;
-  const [voucherAmount, setVoucherAmount] = useState<number>(0);
+  const { serialNumber, maxVoucherValue } = route.params;
+  const [voucherAmount, setVoucherAmount] = useState<number>(
+    maxVoucherValue / 100,
+  );
   const [isActive, setIsActive] = useState<boolean>(false);
   const [showError, setShowError] = useState(false);
   const { dispatch } = useScanningContext();
@@ -46,7 +47,13 @@ export default function ConfirmValueScreen({
 
   const handleVoucherAdd = async () => {
     const centAmount = voucherAmount * 100;
-    const isValid = await voucherAmountIsValid(serialNumber, centAmount);
+    // ensures that voucher amount falls between constraints
+    let isValid;
+    if (voucherAmount === 0 || centAmount > maxVoucherValue) {
+      isValid = false;
+    } else {
+      isValid = true;
+    }
 
     if (isValid) {
       addVoucher(dispatch, serialNumber, centAmount);
