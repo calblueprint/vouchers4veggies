@@ -74,6 +74,7 @@ export default function VoucherBatchScreen({
   const handleVoucherAdd = async () => {
     const startSerialNumber = Number(startSerialNumberInput);
     const endSerialNumber = Number(endSerialNumberInput);
+
     // checks if either input is a duplicate and returns 1-2 errors if so
     const isStartDuplicate = voucherMap.has(startSerialNumber);
     const isEndDuplicate = voucherMap.has(endSerialNumber);
@@ -86,7 +87,7 @@ export default function VoucherBatchScreen({
       }
       return;
     }
-
+    // validates that both inputs are valid serialNumbers
     const startResult = await getMaxVoucherValue(Number(startSerialNumber));
     if (!startResult.ok) {
       setShowStartInvalidError(true);
@@ -97,20 +98,24 @@ export default function VoucherBatchScreen({
       setShowEndInvalidError(true);
       return;
     }
-
+    // validates the entire range of serialNumbers
     const validSerialNumbers = await validateMultipleVouchers(
       startSerialNumber,
       endSerialNumber,
     );
-
+    // if fewer serialNumbers are returned than expected, show a specific error
     const rangeLength = endSerialNumber - startSerialNumber + 1;
     if (validSerialNumbers.length === rangeLength) {
       multipleVoucherSuccessToast();
     } else {
       partialSuccessVoucherToast(validSerialNumbers.length, rangeLength);
     }
-
-    addMultipleVouchers(dispatch, validSerialNumbers, 10);
+    // dispatch multiple vouchers to the scanning context
+    addMultipleVouchers(
+      dispatch,
+      validSerialNumbers,
+      startResult.maxVoucherValue,
+    );
 
     // clears input field if successfully added
     setStartSerialNumber('');
@@ -217,16 +222,8 @@ export default function VoucherBatchScreen({
         >
           <ButtonTextWhite>Add Range of Vouchers</ButtonTextWhite>
         </ButtonMagenta>
-        <ButtonMagenta
-          onPress={() => {
-            // eslint-disable-next-line no-console
-            console.log(voucherMap);
-          }}
-        >
-          <ButtonTextWhite>See VoucherMap</ButtonTextWhite>
-        </ButtonMagenta>
         <ButtonWhite
-          // onPress={() => navigation.navigate('ReviewScreen')}
+          onPress={() => navigation.navigate('ReviewScreen')}
           disabled={voucherMap.size === 0}
         >
           <ButtonTextBlack>
