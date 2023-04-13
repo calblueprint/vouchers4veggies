@@ -1,4 +1,6 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
+import Colors from '../../../assets/Colors';
 
 export const TitleContainer = styled.View`
   padding-top: 20px;
@@ -35,3 +37,33 @@ export const Size14BoldText = styled.Text`
   font-size: 14px;
   line-height: 19px;
 `;
+
+export const SortAndFilterButton = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 146px;
+  background: white;
+  padding: 11px;
+  margin: 12px;
+  border: 1px solid ${Colors.midGray};
+  margin-bottom: 28px;
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+`;
+
+export const OneLine = styled.View`
+  display: flex;
+  background-color: #fff;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const Styles = StyleSheet.create({
+  icon: {
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 6,
+  },
+});
