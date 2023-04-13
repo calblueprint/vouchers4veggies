@@ -36,7 +36,11 @@ import {
   getMaxVoucherValue,
   validateMultipleVouchers,
 } from '../../database/queries';
-import { handlePreventLeave } from '../../utils/scanningUtils';
+import {
+  handlePreventLeave,
+  multipleVoucherSuccessToast,
+  partialSuccessVoucherToast,
+} from '../../utils/scanningUtils';
 
 export default function VoucherBatchScreen({
   navigation,
@@ -97,6 +101,13 @@ export default function VoucherBatchScreen({
 
     // eslint-disable-next-line no-console
     console.log(validSerialNumbers);
+
+    const rangeLength = endSerialNumber - startSerialNumber + 1;
+    if (validSerialNumbers.length === rangeLength) {
+      multipleVoucherSuccessToast();
+    } else {
+      partialSuccessVoucherToast(validSerialNumbers.length, rangeLength);
+    }
 
     // clears input field if successfully added
     setStartSerialNumber('');
