@@ -116,10 +116,7 @@ export const multipleVoucherSuccessToast = () => {
   });
 };
 
-export const partiallySuccessfulVoucherToast = (
-  success: number,
-  total: number,
-) => {
+export const partialSuccessVoucherToast = (success: number, total: number) => {
   Toast.show({
     type: 'error',
     position: 'top',
