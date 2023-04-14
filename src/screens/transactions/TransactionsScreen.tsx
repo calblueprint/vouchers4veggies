@@ -21,7 +21,7 @@ import { FilterState, useFilterReducer } from '../../utils/filterUtils';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
-import { SortState } from '../../utils/sortUtils';
+import { SortOption, SortState, useSortReducer } from '../../utils/sortUtils';
 
 export default function TransactionsScreen({
   navigation,
@@ -33,12 +33,12 @@ export default function TransactionsScreen({
   );
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  const [sortType, setSortType] = useState(-1);
-  const sortOptions = [
-    'Amount: High to Low',
-    'Amount: Low to High',
-    'Date: Newest',
-    'Date: Oldest',
+  const sortButtonText = ['Amount', 'Amount', 'Date', 'Date'];
+  const sortDescriptionText = [
+    ' Amount: High to Low',
+    ' Amount: Low to High',
+    ' Date: Newest',
+    ' Date: Oldest',
   ];
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
@@ -48,71 +48,10 @@ export default function TransactionsScreen({
 
   const { vendorUuid } = useAuthContext();
 
-  const sortTransactionsByAmountDesc = (data: Transaction[]) => {
-    const sortedArray = data.sort((a, b) => b.value - a.value);
-    return sortedArray;
-  };
-
-  const sortTransactionsByAmountAsc = (data: Transaction[]) => {
-    const sortedArray = data.sort((a, b) => a.value - b.value);
-    return sortedArray;
-  };
-
-  const sortTransactionsByDateDesc = (data: Transaction[]) => {
-    const sortedArray = data.sort(
-      (a, b) => b.timestamp.seconds - a.timestamp.seconds,
-    );
-    return sortedArray;
-  };
-
-  const sortTransactionsByDateAsc = (data: Transaction[]) => {
-    const sortedArray = data.sort(
-      (a, b) => a.timestamp.seconds - b.timestamp.seconds,
-    );
-    return sortedArray;
-  };
-
-  const useSortReducer = () =>
-    useReducer(
-      (prevState: SortState, sort: number): SortState => {
-        switch (sort) {
-          case -2:
-            // return { ...prevState, sortedArray: transactions };
-            return { ...prevState, sortedArray: defaultTransactions };
-          case 0:
-            return {
-              ...prevState,
-              sortedArray: sortTransactionsByAmountDesc(prevState.sortedArray),
-            };
-          case 1:
-            return {
-              ...prevState,
-              sortedArray: sortTransactionsByAmountAsc(prevState.sortedArray),
-            };
-          case 2:
-            return {
-              ...prevState,
-              sortedArray: sortTransactionsByDateDesc(prevState.sortedArray),
-            };
-          case 3:
-            return {
-              ...prevState,
-              sortedArray: sortTransactionsByDateAsc(prevState.sortedArray),
-            };
-          default:
-            return {
-              ...prevState,
-              sortedArray: sortTransactionsByAmountDesc(prevState.sortedArray),
-            };
-        }
-      },
-      {
-        sortedArray: defaultTransactions,
-        dispatch: () => null,
-      },
-    );
-
-  const [sortState, sortDispatch] = useSortReducer();
+  const { sortState, sortDispatch } = useSortReducer(
+    transactions,
+    setTransactions,
+  );
   const { filterState, filterDispatch } = useFilterReducer(
     defaultTransactions,
     setTransactions,
@@ -142,9 +81,9 @@ export default function TransactionsScreen({
 
   useEffect(() => {
     fetchData(vendorUuid);
-    sortDispatch(sortType);
-    console.log(sortType);
-  }, [vendorUuid, sortType, sortDispatch]);
+    sortDispatch({ type: 'ON_RELOAD' });
+    console.log(sortState.sortType);
+  }, [vendorUuid, sortState.sortType, sortDispatch]);
 
   return (
     <SafeArea>
@@ -158,15 +97,17 @@ export default function TransactionsScreen({
 
       <CenteredOneLine>
         <SortAndFilterButton
+          modalIsVisible={sortModalIsVisible}
           setModalIsVisible={setSortModalIsVisible}
-          isSelected={sortModalIsVisible || sortType >= 0}
+          isSelected={sortState.sortType !== SortOption.NO_SORT}
           type="sort"
-          text={`Sort by${sortType >= 0 ? ` ${sortOptions[sortType]}` : ''}`}
+          text={`Sort by: ${sortButtonText[sortState.sortType]}`}
         />
 
         <SortAndFilterButton
+          modalIsVisible={filterModalIsVisible}
           setModalIsVisible={setFilterModalIsVisible}
-          isSelected={filterModalIsVisible || filterState.filterCount > 0}
+          isSelected={filterState.filterCount > 0}
           type="filter"
           text={`Filter (${filterState.filterCount})`}
         />
@@ -201,9 +142,9 @@ export default function TransactionsScreen({
       <SortModal
         isVisible={sortModalIsVisible}
         setIsVisible={setSortModalIsVisible}
-        sortType={sortType}
-        setSortType={setSortType}
-        sortOptions={sortOptions}
+        sortDescriptions={sortDescriptionText}
+        sortState={sortState}
+        sortDispatch={sortDispatch}
       />
 
       <FilterModal

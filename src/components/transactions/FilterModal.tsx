@@ -7,11 +7,11 @@ import {
   CenteredContainer,
   CloseButtonContainer,
   FilterModalTextContainer,
-  HorizontalSpaceContainer,
+  HorizontalSpacing,
   RightAlignContainer,
   Styles,
   SubheadingContainer,
-  VerticalSpaceContainer,
+  FilterVerticalSpacing,
 } from './styles';
 import {
   BlueText,
@@ -200,7 +200,7 @@ export default function FilterModal({
               </CenteredContainer>
             </View>
           </FilterField>
-          <HorizontalSpaceContainer />
+          <HorizontalSpacing />
           <FilterField
             isSelected={
               filterState.inProgressStatusFilter === TransactionStatus.PAID
@@ -290,7 +290,7 @@ export default function FilterModal({
           </RightAlignContainer>
         </OneLine>
 
-        <VerticalSpaceContainer />
+        <FilterVerticalSpacing />
         <CenteredContainer>
           <ButtonMagenta
             onPress={() => {

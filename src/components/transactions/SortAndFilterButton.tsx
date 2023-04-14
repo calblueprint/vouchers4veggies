@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import {
@@ -20,12 +20,14 @@ import { OneLine } from '../common/styles';
 import Colors from '../../../assets/Colors';
 
 type SortAndFilterButtonProps = {
+  modalIsVisible: boolean;
   setModalIsVisible: (visibility: boolean) => void;
   isSelected: boolean;
   type: 'sort' | 'filter';
   text: string;
 };
 export default function SortAndFilterButton({
+  modalIsVisible,
   setModalIsVisible,
   isSelected,
   type,
@@ -55,7 +57,7 @@ export default function SortAndFilterButton({
     );
   }
 
-  if (isSelected) {
+  if (isSelected || modalIsVisible) {
     return (
       <SelectedSortAndFilterBase onPress={() => setModalIsVisible(true)}>
         <CenteredContainer>
