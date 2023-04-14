@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { Transaction } from '../../types/types';
+import { Transaction, TransactionStatus } from '../../types/types';
 
 const now = new Date();
 
@@ -8,6 +8,8 @@ export type FilterDispatch = React.Dispatch<FilterAction>;
 type FilterAction =
   | { type: 'SET_MIN_DATE'; date: Date }
   | { type: 'SET_MAX_DATE'; date: Date }
+  | { type: 'SET_STATUS_FILTER'; status: TransactionStatus }
+  | { type: 'CLEAR_STATUS_FILTER' }
   | { type: 'CLEAR_DATE_FILTERS' };
 
 export type FilterState = {
@@ -17,12 +19,14 @@ export type FilterState = {
   maxDate: Date;
   minDateIsSet: boolean;
   maxDateIsSet: boolean;
+  statusFilter: string;
 };
 
 export const useFilterReducer = () =>
   useReducer(
     (prevState: FilterState, action: FilterAction) => {
       let count = prevState.filterCount;
+      let status = 'none';
       switch (action.type) {
         case 'SET_MIN_DATE':
           if (!(prevState.minDateIsSet || prevState.maxDateIsSet)) {
@@ -56,6 +60,29 @@ export const useFilterReducer = () =>
             minDate: now,
             maxDate: now,
           };
+        case 'SET_STATUS_FILTER':
+          if (prevState.statusFilter === 'none') {
+            count += 1;
+          }
+          if (prevState.statusFilter !== action.status) {
+            status = action.status;
+          } else {
+            count -= 1;
+          }
+          return {
+            ...prevState,
+            filterCount: count,
+            statusFilter: status,
+          };
+        case 'CLEAR_STATUS_FILTER':
+          if (prevState.statusFilter !== 'none') {
+            count -= 1;
+          }
+          return {
+            ...prevState,
+            filterCount: count,
+            statusFilter: 'none',
+          };
         default:
           return prevState;
       }
@@ -66,6 +93,7 @@ export const useFilterReducer = () =>
       maxDate: now,
       minDateIsSet: false,
       maxDateIsSet: false,
+      statusFilter: 'none',
       dispatch: () => null,
     },
   );

@@ -17,6 +17,7 @@ type FilterFieldProps = {
   width?: number | string;
   minWidth?: number | string;
   useCalendarIcon?: boolean;
+  centerText?: boolean;
 };
 export default function FilterField({
   isSelected,
@@ -25,12 +26,17 @@ export default function FilterField({
   width = 'auto',
   minWidth = 'auto',
   useCalendarIcon = false,
+  centerText = false,
 }: FilterFieldProps) {
   if (isSelected) {
     return (
       <SelectedFilterField onPress={onPress} style={{ width, minWidth }}>
         <OneLine>
-          <View>{children}</View>
+          {centerText ? (
+            <View style={{ width: '100%' }}>{children}</View>
+          ) : (
+            <View>{children}</View>
+          )}
           {useCalendarIcon ? (
             <RightAlignContainer>
               <MaterialIcons
@@ -48,7 +54,11 @@ export default function FilterField({
   return (
     <UnselectedFilterField onPress={onPress} style={{ width, minWidth }}>
       <OneLine>
-        <View>{children}</View>
+        {centerText ? (
+          <View style={{ width: '100%' }}>{children}</View>
+        ) : (
+          <View>{children}</View>
+        )}
         {useCalendarIcon ? (
           <RightAlignContainer>
             <MaterialIcons
