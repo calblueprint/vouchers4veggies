@@ -28,8 +28,12 @@ import StandardHeader from '../../components/common/StandardHeader';
 import { getVendor } from '../../database/queries';
 import Colors from '../../../assets/Colors';
 import { Styles } from '../../components/transactions/styles';
+import BackButton from '../../components/common/BackButton';
+import { ProfileStackScreenProps } from '../../navigation/types';
 
-export default function ContactUsScreen() {
+export default function ContactUsScreen({
+  navigation,
+}: ProfileStackScreenProps<'ContactUsScreen'>) {
   const { dispatch } = useAuthContext();
   const handleSignOut = async () => signOut(dispatch);
   const { vendorUuid } = useAuthContext();
@@ -48,46 +52,31 @@ export default function ContactUsScreen() {
   return (
     <SafeArea>
       <StandardHeader>
-        <StandardLogo />
+        <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
       <MainProfileContainer>
         <HeadingContainer>
-          <H2Heading>Hi, {vendorName}!</H2Heading>
+          <H2Heading>Contact Us</H2Heading>
         </HeadingContainer>
       </MainProfileContainer>
       <StartOfListView />
       <Row>
         <LeftAlignContainer>
-          <Body1Text>Email</Body1Text>
-          <H4CardNavTab>{vendorEmail}</H4CardNavTab>
+          <Body1Text>Phone Number</Body1Text>
+          <H4CardNavTab>1-833-VEG4YOU</H4CardNavTab>
         </LeftAlignContainer>
       </Row>
       <TouchableOpacity>
         <Row>
           <LeftAlignContainer>
-            <Icon2
-              name="phone"
-              size={25}
-              style={Styles.icon}
-              color={Colors.darkGray}
-            />
+            <Body1Text>Location</Body1Text>
+            <H4CardNavTab>put address here lol</H4CardNavTab>
           </LeftAlignContainer>
-          <LeftAlignContainer>
-            <ContactUsContainer>
-              <H4CardNavTab>Contact Us</H4CardNavTab>
-            </ContactUsContainer>
-          </LeftAlignContainer>
-          <Icon
-            name="right"
-            size={25}
-            style={Styles.icon}
-            color={Colors.midGray}
-          />
         </Row>
       </TouchableOpacity>
       <MagentaButtonContainer>
         <ButtonMagenta onPress={handleSignOut}>
-          <ButtonTextWhite>Log Out</ButtonTextWhite>
+          <ButtonTextWhite>Email Us</ButtonTextWhite>
         </ButtonMagenta>
       </MagentaButtonContainer>
     </SafeArea>
