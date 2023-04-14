@@ -75,9 +75,8 @@ export default function TransactionsScreen({
       setIsRefreshing(false);
     }, 1000);
     fetchData(vendorUuid);
-    filterDispatch({ type: 'ON_RELOAD' });
     sortTransactionDispatch({ type: 'ON_RELOAD' });
-  }, [vendorUuid, filterDispatch, sortTransactionDispatch]);
+  }, [vendorUuid, sortTransactionDispatch]);
 
   useEffect(() => {
     fetchData(vendorUuid);
@@ -161,6 +160,7 @@ export default function TransactionsScreen({
       <FilterModal
         filterState={filterState}
         filterDispatch={filterDispatch}
+        sortDispatch={sortTransactionDispatch}
         isVisible={filterModalIsVisible}
         setIsVisible={setFilterModalIsVisible}
         minDatePickerIsVisible={minDatePickerIsVisible}

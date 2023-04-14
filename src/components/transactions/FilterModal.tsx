@@ -23,7 +23,11 @@ import {
 } from '../../../assets/Fonts';
 import { LeftAlignContainer, OneLine } from '../common/styles';
 import ClearButton from './ClearButton';
-import { FilterDispatch, FilterState } from '../../utils/transactionUtils';
+import {
+  FilterDispatch,
+  FilterState,
+  SortTransactionDispatch,
+} from '../../utils/transactionUtils';
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
 import { TransactionStatus } from '../../types/types';
@@ -31,6 +35,7 @@ import { TransactionStatus } from '../../types/types';
 type FilterModalProps = {
   filterState: FilterState;
   filterDispatch: FilterDispatch;
+  sortDispatch: SortTransactionDispatch;
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
   minDatePickerIsVisible: boolean;
@@ -42,6 +47,7 @@ type FilterModalProps = {
 export default function FilterModal({
   filterState,
   filterDispatch,
+  sortDispatch,
   isVisible,
   setIsVisible,
   minDatePickerIsVisible,
@@ -296,6 +302,7 @@ export default function FilterModal({
             onPress={() => {
               setIsVisible(false);
               filterDispatch({ type: 'ON_SUBMIT' });
+              sortDispatch({ type: 'ON_RELOAD' });
             }}
           >
             <ButtonTextWhite>{`Apply${
