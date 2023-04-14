@@ -2,12 +2,21 @@ import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 
-export const LeftAlignContainer = styled.View`
+export const LeftAlignContainerWithMargin = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
   padding-left: 29px;
+`;
+
+export const RightAlignContainerWithMargin = styled.View`
+  flex: 1;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin-right: 29px;
 `;
 
 export const RightAlignContainer = styled.View`
@@ -16,7 +25,6 @@ export const RightAlignContainer = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   align-content: center;
-  margin-right: 29px;
 `;
 
 export const StatusContainer = styled.View`
@@ -55,13 +63,6 @@ export const StatusComponentGreen = styled.View`
   border: 2px solid ${Colors.lightGreen};
 `;
 
-export const Body1SemiboldText = styled.Text`
-  font-family: 'manrope-semiBold';
-  font-style: normal;
-  font-size: 14px;
-  line-height: 19px;
-`;
-
 export const H4Subheading = styled.Text`
   font-family: 'manrope-bold';
   font-style: normal;
@@ -83,6 +84,30 @@ export const RedText = styled.Text`
   font-style: normal;
   font-size: 12px;
   line-height: 14px;
+`;
+
+export const UnselectedFilterField = styled.TouchableOpacity`
+  align-items: flex-start;
+  border-radius: 8px;
+  background: white;
+  padding-vertical: 8px;
+  padding-horizontal: 12px;
+  border: 1px solid ${Colors.unselectedGray};
+`;
+
+export const SelectedFilterField = styled.TouchableOpacity`
+  align-items: flex-start;
+  border-radius: 8px;
+  background: white;
+  padding-vertical: 8px;
+  padding-horizontal: 15px;
+  border: 1px solid ${Colors.midBlack};
+`;
+
+export const ClearButtonContainer = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  background: white;
 `;
 
 export const Styles = StyleSheet.create({

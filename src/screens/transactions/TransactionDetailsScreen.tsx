@@ -20,7 +20,7 @@ import {
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 import {
-  LeftAlignedContainer,
+  LeftAlignContainerWithMargins,
   MediumText,
   Size14BoldText,
   Title,
@@ -99,11 +99,11 @@ export default function TransactionDetailsScreen({
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
           <MediumText>Time: {formatTimeForDisplay(time)}</MediumText>
 
-          <LeftAlignedContainer>
+          <LeftAlignContainerWithMargins>
             <Size14BoldText>
               Count: {transactionData.voucherSerialNumbers.length}
             </Size14BoldText>
-          </LeftAlignedContainer>
+          </LeftAlignContainerWithMargins>
 
           <CardContainer>
             <StartOfListView />

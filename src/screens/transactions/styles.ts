@@ -15,7 +15,7 @@ export const Title = styled.Text`
   text-align: center;
 `;
 
-export const LeftAlignedContainer = styled.View`
+export const LeftAlignContainerWithMargins = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
@@ -60,12 +60,28 @@ export const OneLine = styled.View`
   width: 100%;
 `;
 
-export const RightAlignContainer = styled.View`
+export const CloseButtonContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-content: center;
   margin-top: 19px;
+`;
+
+export const LeftAlignContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+`;
+
+export const RightAlignContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
 `;
 
 export const SortModalTextContainer = styled.View`
@@ -93,19 +109,6 @@ export const CenteredContainer = styled.Text`
   text-align: center;
   align-content: center;
   justify-content: center;
-`;
-
-export const DatePickerButton = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  border-radius: 5px;
-  width: 146px;
-  background: white;
-  padding: 11px;
-  margin: 12px;
-  border: 1px solid ${Colors.midGray};
-  margin-bottom: 28px;
-  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 `;
 
 export const Styles = StyleSheet.create({
