@@ -64,7 +64,7 @@ export default function TransactionCard({
         <Icon
           name="right"
           size={25}
-          style={Styles.icon}
+          style={Styles.iconWithPadding}
           color={Colors.midGray}
         />
       </Row>

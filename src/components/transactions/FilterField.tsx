@@ -43,7 +43,7 @@ export default function FilterField({
                 name="calendar-today"
                 size={16}
                 color={Colors.darkGray}
-                style={Styles.filterFieldIcon}
+                style={Styles.icon}
               />
             </RightAlignContainer>
           ) : null}
@@ -65,7 +65,7 @@ export default function FilterField({
               name="calendar-today"
               size={16}
               color={Colors.darkGray}
-              style={Styles.filterFieldIcon}
+              style={Styles.icon}
             />
           </RightAlignContainer>
         ) : null}

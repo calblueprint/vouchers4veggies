@@ -3,7 +3,6 @@ import Colors from '../../../assets/Colors';
 
 export const OneLine = styled.View`
   display: flex;
-  background-color: #fff;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -12,7 +11,6 @@ export const OneLine = styled.View`
 
 export const SelectableOneLine = styled.TouchableOpacity`
   display: flex;
-  background-color: #fff;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;

@@ -56,7 +56,12 @@ export default function FilterModal({
     <Modal isVisible={isVisible} coverScreen={false} style={Styles.modal}>
       <FilterModalTextContainer>
         <CloseButtonContainer>
-          <TouchableOpacity onPress={() => setIsVisible(false)}>
+          <TouchableOpacity
+            onPress={() => {
+              setIsVisible(false);
+              filterDispatch({ type: 'RESET_IN_PROGRESS' });
+            }}
+          >
             <BlueText>
               <Body1Text>Close</Body1Text>
             </BlueText>
@@ -72,7 +77,10 @@ export default function FilterModal({
             <Body1SemiboldText>Filter by date</Body1SemiboldText>
             <ClearButton
               isDisabled={
-                !(filterState.minDateIsSet || filterState.maxDateIsSet)
+                !(
+                  filterState.inProgressMinDateIsSet ||
+                  filterState.inProgressMaxDateIsSet
+                )
               }
               onPress={() => {
                 filterDispatch({
@@ -86,15 +94,15 @@ export default function FilterModal({
         <OneLine>
           <LeftAlignContainer>
             <FilterField
-              isSelected={filterState.minDateIsSet}
+              isSelected={filterState.inProgressMinDateIsSet}
               onPress={() => setMinDatePickerIsVisible(true)}
               width="93%"
               minWidth={148}
               useCalendarIcon
             >
               <Body1Text>
-                {filterState.minDateIsSet ? (
-                  moment(filterState.minDate).format('M/DD/YYYY')
+                {filterState.inProgressMinDateIsSet ? (
+                  moment(filterState.inProgressMinDate).format('M/DD/YYYY')
                 ) : (
                   <MidGrayText>From</MidGrayText>
                 )}
@@ -103,15 +111,15 @@ export default function FilterModal({
           </LeftAlignContainer>
           <RightAlignContainer>
             <FilterField
-              isSelected={filterState.maxDateIsSet}
+              isSelected={filterState.inProgressMaxDateIsSet}
               onPress={() => setMaxDatePickerIsVisible(true)}
               width="93%"
               minWidth={148}
               useCalendarIcon
             >
               <Body1Text>
-                {filterState.maxDateIsSet ? (
-                  moment(filterState.maxDate).format('M/D/YY')
+                {filterState.inProgressMaxDateIsSet ? (
+                  moment(filterState.inProgressMaxDate).format('M/D/YY')
                 ) : (
                   <MidGrayText>To</MidGrayText>
                 )}
@@ -121,7 +129,7 @@ export default function FilterModal({
         </OneLine>
         {minDatePickerIsVisible ? (
           <RNDateTimePicker
-            value={filterState.minDate}
+            value={filterState.inProgressMinDate}
             onChange={e => {
               if (e.type === 'set' && e.nativeEvent.timestamp) {
                 filterDispatch({
@@ -135,7 +143,7 @@ export default function FilterModal({
         ) : null}
         {maxDatePickerIsVisible ? (
           <RNDateTimePicker
-            value={filterState.maxDate}
+            value={filterState.inProgressMaxDate}
             onChange={e => {
               if (e.type === 'set' && e.nativeEvent.timestamp) {
                 filterDispatch({
@@ -152,7 +160,7 @@ export default function FilterModal({
           <OneLine>
             <Body1SemiboldText>Filter by status</Body1SemiboldText>
             <ClearButton
-              isDisabled={filterState.statusFilter === 'none'}
+              isDisabled={filterState.inProgressStatusFilter === 'none'}
               onPress={() => {
                 filterDispatch({
                   type: 'CLEAR_STATUS_FILTER',
@@ -164,7 +172,9 @@ export default function FilterModal({
 
         <OneLine>
           <FilterField
-            isSelected={filterState.statusFilter === TransactionStatus.UNPAID}
+            isSelected={
+              filterState.inProgressStatusFilter === TransactionStatus.UNPAID
+            }
             onPress={() =>
               filterDispatch({
                 type: 'SET_STATUS_FILTER',
@@ -183,7 +193,8 @@ export default function FilterModal({
             >
               <CenteredContainer>
                 <Body1Text>
-                  {filterState.statusFilter !== TransactionStatus.UNPAID ? (
+                  {filterState.inProgressStatusFilter !==
+                  TransactionStatus.UNPAID ? (
                     <MidGrayText>UNPAID</MidGrayText>
                   ) : (
                     'UNPAID'
@@ -194,7 +205,9 @@ export default function FilterModal({
           </FilterField>
           <HorizontalSpaceContainer />
           <FilterField
-            isSelected={filterState.statusFilter === TransactionStatus.PAID}
+            isSelected={
+              filterState.inProgressStatusFilter === TransactionStatus.PAID
+            }
             onPress={() =>
               filterDispatch({
                 type: 'SET_STATUS_FILTER',
@@ -206,7 +219,8 @@ export default function FilterModal({
           >
             <CenteredContainer>
               <Body1Text>
-                {filterState.statusFilter !== TransactionStatus.PAID ? (
+                {filterState.inProgressStatusFilter !==
+                TransactionStatus.PAID ? (
                   <MidGrayText>PAID</MidGrayText>
                 ) : (
                   'PAID'
@@ -221,7 +235,10 @@ export default function FilterModal({
             <Body1SemiboldText>Filter by amount</Body1SemiboldText>
             <ClearButton
               isDisabled={
-                !(filterState.minAmountIsSet || filterState.maxAmountIsSet)
+                !(
+                  filterState.inProgressMinAmountIsSet ||
+                  filterState.inProgressMaxAmountIsSet
+                )
               }
               onPress={() => {
                 filterDispatch({
@@ -235,34 +252,39 @@ export default function FilterModal({
         <OneLine>
           <LeftAlignContainer>
             <FilterField
-              isSelected={filterState.minAmountIsSet}
+              isSelected={filterState.inProgressMinAmountIsSet}
               onPress={() => {
                 /* TODO: implement amount picker */
               }}
-              width="93%"
               minWidth={148}
             >
               <Body1Text>
-                {filterState.minAmountIsSet ? (
-                  `$${filterState.minAmount}`
+                {filterState.inProgressMinAmountIsSet ? (
+                  `$${filterState.inProgressMinAmount}`
                 ) : (
                   <MidGrayText>$ Min</MidGrayText>
                 )}
               </Body1Text>
             </FilterField>
           </LeftAlignContainer>
+
+          <CenteredContainer>
+            <Body1Text>
+              <MidGrayText>-</MidGrayText>
+            </Body1Text>
+          </CenteredContainer>
+
           <RightAlignContainer>
             <FilterField
-              isSelected={filterState.maxDateIsSet}
+              isSelected={filterState.inProgressMaxDateIsSet}
               onPress={() => {
                 /* TODO: implement amount picker */
               }}
-              width="93%"
               minWidth={148}
             >
               <Body1Text>
-                {filterState.maxAmountIsSet ? (
-                  `$${filterState.maxAmount}`
+                {filterState.inProgressMaxAmountIsSet ? (
+                  `$${filterState.inProgressMaxAmount}`
                 ) : (
                   <MidGrayText>$ Max</MidGrayText>
                 )}
@@ -273,8 +295,17 @@ export default function FilterModal({
 
         <VerticalSpaceContainer />
         <CenteredContainer>
-          <ButtonMagenta>
-            <ButtonTextWhite>{`Apply (${filterState.filterCount})`}</ButtonTextWhite>
+          <ButtonMagenta
+            onPress={() => {
+              setIsVisible(false);
+              filterDispatch({ type: 'ON_SUBMIT' });
+            }}
+          >
+            <ButtonTextWhite>{`Apply${
+              filterState.inProgressFilterCount > 0
+                ? ` (${filterState.inProgressFilterCount})`
+                : ''
+            }`}</ButtonTextWhite>
           </ButtonMagenta>
         </CenteredContainer>
       </FilterModalTextContainer>

@@ -156,15 +156,39 @@ export const CenteredContainer = styled.Text`
   width: 100%;
 `;
 
+export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 146px;
+  background: white;
+  padding: 11px;
+  margin: 12px;
+  border: 1px solid ${Colors.midGray};
+  margin-bottom: 28px;
+`;
+
+export const SelectedSortAndFilterBase = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 146px;
+  background: ${Colors.lightMagenta};
+  padding: 11px;
+  margin: 12px;
+  border: 1px solid ${Colors.magenta};
+  margin-bottom: 28px;
+`;
+
 export const Styles = StyleSheet.create({
-  icon: {
+  iconWithPadding: {
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingRight: 29,
   },
-  filterFieldIcon: {
+  icon: {
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    paddingHorizontal: 6,
   },
   modal: {
     justifyContent: 'flex-end',
