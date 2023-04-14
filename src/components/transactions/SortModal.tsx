@@ -6,7 +6,6 @@ import {
   CloseButtonContainer,
   SortModalTextContainer,
   Styles,
-  FilterVerticalSpacing,
   SortVerticalSpacing,
 } from './styles';
 import {
@@ -16,7 +15,7 @@ import {
   H4CardNavTab,
 } from '../../../assets/Fonts';
 import RadioButton from '../common/RadioButton';
-import { SortDispatch, SortState } from '../../utils/sortUtils';
+import { SortDispatch, SortState } from '../../utils/transactionUtils';
 import { ButtonMagenta } from '../../../assets/Components';
 
 type SortModalProps = {
