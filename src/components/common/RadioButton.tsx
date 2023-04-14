@@ -7,6 +7,7 @@ import {
   RadioButtonSelected,
   RadioButtonUnselected,
   RightAlignContainer,
+  RowWithBottomMargin,
 } from './styles';
 import { Body1Text } from '../../../assets/Fonts';
 
@@ -24,20 +25,22 @@ export default function RadioButtons({
   return (
     <View>
       {data.map((item, index) => (
-        <OneLine key={item} onPress={() => setSelected(index)}>
-          <LeftAlignContainer>
-            <Body1Text>{item}</Body1Text>
-          </LeftAlignContainer>
-          <RightAlignContainer>
-            {selected === index ? (
-              <RadioButtonSelected>
-                <RadioButtonFill />
-              </RadioButtonSelected>
-            ) : (
-              <RadioButtonUnselected />
-            )}
-          </RightAlignContainer>
-        </OneLine>
+        <RowWithBottomMargin key={item}>
+          <OneLine onPress={() => setSelected(index)}>
+            <LeftAlignContainer>
+              <Body1Text>{item}</Body1Text>
+            </LeftAlignContainer>
+            <RightAlignContainer>
+              {selected === index ? (
+                <RadioButtonSelected>
+                  <RadioButtonFill />
+                </RadioButtonSelected>
+              ) : (
+                <RadioButtonUnselected />
+              )}
+            </RightAlignContainer>
+          </OneLine>
+        </RowWithBottomMargin>
       ))}
     </View>
   );

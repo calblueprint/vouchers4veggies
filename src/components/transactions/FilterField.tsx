@@ -1,5 +1,14 @@
 import React, { ReactElement } from 'react';
-import { SelectedFilterField, UnselectedFilterField } from './styles';
+import { MaterialIcons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import {
+  RightAlignContainer,
+  SelectedFilterField,
+  Styles,
+  UnselectedFilterField,
+} from './styles';
+import { OneLine } from '../common/styles';
+import Colors from '../../../assets/Colors';
 
 type FilterFieldProps = {
   isSelected: boolean;
@@ -7,6 +16,7 @@ type FilterFieldProps = {
   onPress: () => void;
   width?: number | string;
   minWidth?: number | string;
+  useCalendarIcon?: boolean;
 };
 export default function FilterField({
   isSelected,
@@ -14,17 +24,42 @@ export default function FilterField({
   onPress,
   width = 'auto',
   minWidth = 'auto',
+  useCalendarIcon = false,
 }: FilterFieldProps) {
   if (isSelected) {
     return (
       <SelectedFilterField onPress={onPress} style={{ width, minWidth }}>
-        {children}
+        <OneLine>
+          <View>{children}</View>
+          {useCalendarIcon ? (
+            <RightAlignContainer>
+              <MaterialIcons
+                name="calendar-today"
+                size={16}
+                color={Colors.darkGray}
+                style={Styles.filterFieldIcon}
+              />
+            </RightAlignContainer>
+          ) : null}
+        </OneLine>
       </SelectedFilterField>
     );
   }
   return (
     <UnselectedFilterField onPress={onPress} style={{ width, minWidth }}>
-      {children}
+      <OneLine>
+        <View>{children}</View>
+        {useCalendarIcon ? (
+          <RightAlignContainer>
+            <MaterialIcons
+              name="calendar-today"
+              size={16}
+              color={Colors.darkGray}
+              style={Styles.filterFieldIcon}
+            />
+          </RightAlignContainer>
+        ) : null}
+      </OneLine>
     </UnselectedFilterField>
   );
 }

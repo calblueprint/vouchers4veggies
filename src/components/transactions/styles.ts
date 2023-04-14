@@ -27,6 +27,27 @@ export const RightAlignContainer = styled.View`
   align-content: center;
 `;
 
+export const SubheadingContainer = styled.View`
+  margin-top: 26px;
+  margin-bottom: 9px;
+`;
+
+export const Test2 = styled.View`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+`;
+
+export const Test = styled.View`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+`;
+
 export const StatusContainer = styled.View`
   flex: 1;
   flex-direction: row;
@@ -137,6 +158,7 @@ export const CloseButtonContainer = styled.View`
   justify-content: flex-end;
   align-content: center;
   margin-top: 19px;
+  margin-bottom: 9px;
 `;
 
 export const CenteredContainer = styled.Text`
@@ -150,6 +172,10 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingRight: 29,
+  },
+  filterFieldIcon: {
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
   modal: {
     justifyContent: 'flex-end',

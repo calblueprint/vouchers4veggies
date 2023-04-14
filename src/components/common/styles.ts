@@ -8,7 +8,6 @@ export const OneLine = styled.TouchableOpacity`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 21px;
 `;
 
 export const LeftAlignContainer = styled.View`
@@ -51,4 +50,8 @@ export const RadioButtonFill = styled.View`
   width: 14px;
   border-radius: 7px;
   background-color: ${Colors.magenta};
+`;
+
+export const RowWithBottomMargin = styled.View`
+  margin-bottom: 21px;
 `;
