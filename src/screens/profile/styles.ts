@@ -23,3 +23,6 @@ export const LeftAlignContainer = styled.View`
   align-content: flex-start;
   padding-left: 29px;
 `;
+export const ContactUsContainer = styled.View`
+  margin-left: -156px;
+`;

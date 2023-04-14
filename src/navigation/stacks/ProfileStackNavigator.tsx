@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import ProfileScreen from '../../screens/profile/ProfileScreen';
+// import ContactUsScreen from '../../screens/profile/ContactUsScreen';
 import { ProfileStackParamList } from '../types';
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
@@ -16,6 +17,10 @@ export default function ProfileStackNavigator() {
       }}
     >
       <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
+      {/* <ProfileStack.Screen
+        name="ContanctUsScreen"
+        // component={ContactUsScreen}
+      /> */}
     </ProfileStack.Navigator>
   );
 }

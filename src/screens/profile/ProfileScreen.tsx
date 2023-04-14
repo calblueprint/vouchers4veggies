@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Icon from 'react-native-vector-icons/AntDesign';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
+import { TouchableOpacity } from 'react-native';
 import {
   H4CardNavTab,
   H2Heading,
@@ -12,6 +15,7 @@ import {
   MagentaButtonContainer,
   MainProfileContainer,
   LeftAlignContainer,
+  ContactUsContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -22,6 +26,8 @@ import {
 import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
 import { getVendor } from '../../database/queries';
+import Colors from '../../../assets/Colors';
+import { Styles } from '../../components/transactions/styles';
 
 export default function ProfileScreen() {
   const { dispatch } = useAuthContext();
@@ -56,6 +62,29 @@ export default function ProfileScreen() {
           <H4CardNavTab>{vendorEmail}</H4CardNavTab>
         </LeftAlignContainer>
       </Row>
+      <TouchableOpacity>
+        <Row>
+          <LeftAlignContainer>
+            <Icon2
+              name="phone"
+              size={25}
+              style={Styles.icon}
+              color={Colors.darkGray}
+            />
+          </LeftAlignContainer>
+          <LeftAlignContainer>
+            <ContactUsContainer>
+              <H4CardNavTab>Contact Us</H4CardNavTab>
+            </ContactUsContainer>
+          </LeftAlignContainer>
+          <Icon
+            name="right"
+            size={25}
+            style={Styles.icon}
+            color={Colors.midGray}
+          />
+        </Row>
+      </TouchableOpacity>
       <MagentaButtonContainer>
         <ButtonMagenta onPress={handleSignOut}>
           <ButtonTextWhite>Log Out</ButtonTextWhite>
