@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import { View } from 'react-native';
 import {
   CenteredContainer,
-  ClearButtonContainer,
-  RightAlignContainer,
   SelectedSortAndFilterBase,
   Styles,
   UnselectedSortAndFilterBase,
 } from './styles';
-import {
-  BlueText,
-  Body1Text,
-  Body2Subtext,
-  MagentaText,
-  MidGrayText,
-} from '../../../assets/Fonts';
+import { Body2Subtext, MagentaText } from '../../../assets/Fonts';
 import { OneLine } from '../common/styles';
 import Colors from '../../../assets/Colors';
 
