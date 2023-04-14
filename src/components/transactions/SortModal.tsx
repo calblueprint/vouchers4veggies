@@ -6,46 +6,71 @@ import {
   CloseButtonContainer,
   SortModalTextContainer,
   Styles,
-  VerticalSpaceContainer,
+  FilterVerticalSpacing,
+  SortVerticalSpacing,
 } from './styles';
-import { BlueText, Body1Text, H4CardNavTab } from '../../../assets/Fonts';
+import {
+  BlueText,
+  Body1Text,
+  ButtonTextWhite,
+  H4CardNavTab,
+} from '../../../assets/Fonts';
 import RadioButton from '../common/RadioButton';
+import { SortDispatch, SortState } from '../../utils/sortUtils';
+import { ButtonMagenta } from '../../../assets/Components';
 
 type SortModalProps = {
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
-  sortType: number;
-  setSortType: (n: number) => void;
-  sortOptions: string[];
+  sortState: SortState;
+  sortDispatch: SortDispatch;
+  sortDescriptions: string[];
 };
 export default function SortModal({
   isVisible,
   setIsVisible,
-  sortType,
-  setSortType,
-  sortOptions,
+  sortState,
+  sortDispatch,
+  sortDescriptions,
 }: SortModalProps) {
+  const sortButtonText = ['Amount', 'Amount', 'Date', 'Date'];
   return (
     <Modal isVisible={isVisible} coverScreen={false} style={Styles.modal}>
       <SortModalTextContainer>
         <CloseButtonContainer>
-          <TouchableOpacity onPress={() => setIsVisible(false)}>
+          <TouchableOpacity
+            onPress={() => {
+              setIsVisible(false);
+              sortDispatch({ type: 'RESET_IN_PROGRESS' });
+            }}
+          >
             <BlueText>
               <Body1Text>Close</Body1Text>
             </BlueText>
           </TouchableOpacity>
         </CloseButtonContainer>
 
-        <VerticalSpaceContainer />
-        <CenteredContainer>
-          <H4CardNavTab>Sort invoices by</H4CardNavTab>
-        </CenteredContainer>
-        <VerticalSpaceContainer />
+        <H4CardNavTab>Sort invoices by</H4CardNavTab>
+        <SortVerticalSpacing />
         <RadioButton
-          data={sortOptions}
-          selected={sortType}
-          setSelected={setSortType}
+          data={sortDescriptions}
+          selected={sortState.inProgressSortType}
+          setSelected={(index: number) =>
+            sortDispatch({ type: 'SORT_BY', option: index })
+          }
         />
+
+        <SortVerticalSpacing />
+        <CenteredContainer>
+          <ButtonMagenta
+            onPress={() => {
+              setIsVisible(false);
+              sortDispatch({ type: 'ON_SUBMIT' });
+            }}
+          >
+            <ButtonTextWhite>Apply</ButtonTextWhite>
+          </ButtonMagenta>
+        </CenteredContainer>
       </SortModalTextContainer>
     </Modal>
   );

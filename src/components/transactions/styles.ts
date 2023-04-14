@@ -132,11 +132,15 @@ export const FilterModalTextContainer = styled.View`
   height: 510px;
 `;
 
-export const VerticalSpaceContainer = styled.View`
+export const SortVerticalSpacing = styled.View`
+  height: 22px;
+`;
+
+export const FilterVerticalSpacing = styled.View`
   height: 48px;
 `;
 
-export const HorizontalSpaceContainer = styled.View`
+export const HorizontalSpacing = styled.View`
   width: 20px;
 `;
 
