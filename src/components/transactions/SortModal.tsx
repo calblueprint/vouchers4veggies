@@ -15,14 +15,17 @@ import {
   H4CardNavTab,
 } from '../../../assets/Fonts';
 import RadioButton from '../common/RadioButton';
-import { SortDispatch, SortState } from '../../utils/transactionUtils';
+import {
+  SortTransactionDispatch,
+  SortTransactionState,
+} from '../../utils/transactionUtils';
 import { ButtonMagenta } from '../../../assets/Components';
 
 type SortModalProps = {
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
-  sortState: SortState;
-  sortDispatch: SortDispatch;
+  sortState: SortTransactionState;
+  sortDispatch: SortTransactionDispatch;
   sortDescriptions: string[];
 };
 export default function SortModal({
@@ -32,7 +35,6 @@ export default function SortModal({
   sortDispatch,
   sortDescriptions,
 }: SortModalProps) {
-  const sortButtonText = ['Amount', 'Amount', 'Date', 'Date'];
   return (
     <Modal isVisible={isVisible} coverScreen={false} style={Styles.modal}>
       <SortModalTextContainer>
@@ -54,9 +56,9 @@ export default function SortModal({
         <RadioButton
           data={sortDescriptions}
           selected={sortState.inProgressSortType}
-          setSelected={(index: number) =>
-            sortDispatch({ type: 'SORT_BY', option: index })
-          }
+          setSelected={(index: number) => {
+            sortDispatch({ type: 'SORT_BY', option: index });
+          }}
         />
 
         <SortVerticalSpacing />

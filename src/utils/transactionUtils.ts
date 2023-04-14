@@ -1,15 +1,5 @@
 import { useReducer } from 'react';
-import { TransactionStatus, Transaction } from '../types/types';
-
-export type SortDispatch = React.Dispatch<SortAction>;
-
-export enum SortOption {
-  NO_SORT = -1,
-  SELECT_DATE_ASC,
-  SELECT_DATE_DESC,
-  SELECT_AMOUNT_ASC,
-  SELECT_AMOUNT_DESC,
-}
+import { TransactionStatus, Transaction, Voucher } from '../types/types';
 
 type SortAction =
   | { type: 'SORT_BY'; option: number }
@@ -17,43 +7,159 @@ type SortAction =
   | { type: 'ON_RELOAD' }
   | { type: 'RESET_IN_PROGRESS' };
 
-export type SortState = {
-  dispatch: SortDispatch;
-  isActive: boolean;
-  sortType: SortOption;
-  inProgressSortType: SortOption;
+export type SortVoucherDispatch = React.Dispatch<SortAction>;
+
+export enum SortVoucherOption {
+  NO_SORT = -1,
+  SERIAL_NUMBER_DESC,
+  SERIAL_NUMBER_ASC,
+  DATE_DESC,
+  DATE_ASC,
+}
+
+export type SortVoucherState = {
+  dispatch: SortVoucherDispatch;
+  sortType: SortVoucherOption;
+  inProgressSortType: SortVoucherOption;
 };
 
-export const useSortReducer = (
+export const useSortVoucherReducer = (
+  vouchers: Voucher[],
+  defaultVouchers: Voucher[],
+  setVouchers: (array: Voucher[]) => void,
+) => {
+  const sortVouchersBySerialNumberAsc = (data: Voucher[]) => {
+    const sortedArray = data.sort((a, b) => a.serialNumber - b.serialNumber);
+    return sortedArray;
+  };
+
+  const sortVouchersBySerialNumberDesc = (data: Voucher[]) => {
+    const sortedArray = data.sort((a, b) => b.serialNumber - a.serialNumber);
+    return sortedArray;
+  };
+
+  const sortVouchersByDateDesc = (data: Voucher[]) => [...defaultVouchers];
+
+  const sortVouchersByDateAsc = (data: Voucher[]) =>
+    [...defaultVouchers].reverse();
+
+  const [sortVoucherState, sortVoucherDispatch] = useReducer(
+    (prevState: SortVoucherState, action: SortAction) => {
+      let sortedArray = vouchers;
+      switch (action.type) {
+        case 'SORT_BY':
+          return {
+            ...prevState,
+            inProgressSortType: action.option,
+          };
+        case 'ON_SUBMIT':
+          switch (prevState.inProgressSortType) {
+            case SortVoucherOption.DATE_ASC:
+              sortedArray = sortVouchersByDateAsc(vouchers);
+              break;
+            case SortVoucherOption.SERIAL_NUMBER_DESC:
+              sortedArray = sortVouchersBySerialNumberDesc(vouchers);
+              break;
+            case SortVoucherOption.SERIAL_NUMBER_ASC:
+              sortedArray = sortVouchersBySerialNumberAsc(vouchers);
+              break;
+            default:
+              sortedArray = sortVouchersByDateDesc(vouchers);
+          }
+          setVouchers(sortedArray);
+          return {
+            ...prevState,
+            sortType: prevState.inProgressSortType,
+          };
+        case 'ON_RELOAD':
+          switch (prevState.sortType) {
+            case SortVoucherOption.DATE_ASC:
+              sortedArray = sortVouchersByDateAsc(vouchers);
+              break;
+            case SortVoucherOption.SERIAL_NUMBER_DESC:
+              sortedArray = sortVouchersBySerialNumberDesc(vouchers);
+              break;
+            case SortVoucherOption.SERIAL_NUMBER_ASC:
+              sortedArray = sortVouchersBySerialNumberAsc(vouchers);
+              break;
+            default:
+              sortedArray = sortVouchersByDateDesc(vouchers);
+          }
+          setVouchers(sortedArray);
+          return {
+            ...prevState,
+          };
+        case 'RESET_IN_PROGRESS':
+          return {
+            ...prevState,
+            inProgressSortType: prevState.sortType,
+          };
+        default:
+          return {
+            ...prevState,
+          };
+      }
+    },
+    {
+      sortType: SortVoucherOption.NO_SORT,
+      inProgressSortType: SortVoucherOption.NO_SORT,
+      dispatch: () => null,
+    },
+  );
+
+  return {
+    sortState: sortVoucherState,
+    sortDispatch: sortVoucherDispatch,
+  };
+};
+
+export type SortTransactionDispatch = React.Dispatch<SortAction>;
+
+export enum SortTransactionOption {
+  NO_SORT = -1,
+  AMOUNT_DESC,
+  AMOUNT_ASC,
+  DATE_DESC,
+  DATE_ASC,
+}
+
+export type SortTransactionState = {
+  dispatch: SortTransactionDispatch;
+  isActive: boolean;
+  sortType: SortTransactionOption;
+  inProgressSortType: SortTransactionOption;
+};
+
+export const useSortTransactionReducer = (
   transactions: Transaction[],
   setTransactions: (array: Transaction[]) => void,
 ) => {
-  const sortByAmountDesc = (data: Transaction[]) => {
+  const sortTransactionsByAmountDesc = (data: Transaction[]) => {
     const sortedArray = data.sort((a, b) => b.value - a.value);
     return sortedArray;
   };
 
-  const sortByAmountAsc = (data: Transaction[]) => {
+  const sortTransactionsByAmountAsc = (data: Transaction[]) => {
     const sortedArray = data.sort((a, b) => a.value - b.value);
     return sortedArray;
   };
 
-  const sortByDateDesc = (data: Transaction[]) => {
+  const sortTransactionsByDateDesc = (data: Transaction[]) => {
     const sortedArray = data.sort(
       (a, b) => b.timestamp.seconds - a.timestamp.seconds,
     );
     return sortedArray;
   };
 
-  const sortByDateAsc = (data: Transaction[]) => {
+  const sortTransactionsByDateAsc = (data: Transaction[]) => {
     const sortedArray = data.sort(
       (a, b) => a.timestamp.seconds - b.timestamp.seconds,
     );
     return sortedArray;
   };
 
-  const [sortState, sortDispatch] = useReducer(
-    (prevState: SortState, action: SortAction) => {
+  const [sortTransactionState, sortTransactionDispatch] = useReducer(
+    (prevState: SortTransactionState, action: SortAction) => {
       let sortedArray = transactions;
       switch (action.type) {
         case 'SORT_BY':
@@ -63,17 +169,17 @@ export const useSortReducer = (
           };
         case 'ON_SUBMIT':
           switch (prevState.inProgressSortType) {
-            case SortOption.SELECT_DATE_ASC:
-              sortedArray = sortByDateAsc(transactions);
+            case SortTransactionOption.DATE_ASC:
+              sortedArray = sortTransactionsByDateAsc(transactions);
               break;
-            case SortOption.SELECT_AMOUNT_ASC:
-              sortedArray = sortByAmountAsc(transactions);
+            case SortTransactionOption.AMOUNT_ASC:
+              sortedArray = sortTransactionsByAmountAsc(transactions);
               break;
-            case SortOption.SELECT_AMOUNT_DESC:
-              sortedArray = sortByAmountDesc(transactions);
+            case SortTransactionOption.AMOUNT_DESC:
+              sortedArray = sortTransactionsByAmountDesc(transactions);
               break;
             default:
-              sortedArray = sortByDateDesc(transactions);
+              sortedArray = sortTransactionsByDateDesc(transactions);
           }
           setTransactions(sortedArray);
           return {
@@ -83,17 +189,17 @@ export const useSortReducer = (
           };
         case 'ON_RELOAD':
           switch (prevState.sortType) {
-            case SortOption.SELECT_DATE_ASC:
-              sortedArray = sortByDateAsc(transactions);
+            case SortTransactionOption.DATE_ASC:
+              sortedArray = sortTransactionsByDateAsc(transactions);
               break;
-            case SortOption.SELECT_AMOUNT_ASC:
-              sortedArray = sortByAmountAsc(transactions);
+            case SortTransactionOption.AMOUNT_ASC:
+              sortedArray = sortTransactionsByAmountAsc(transactions);
               break;
-            case SortOption.SELECT_AMOUNT_DESC:
-              sortedArray = sortByAmountDesc(transactions);
+            case SortTransactionOption.AMOUNT_DESC:
+              sortedArray = sortTransactionsByAmountDesc(transactions);
               break;
             default:
-              sortedArray = sortByDateDesc(transactions);
+              sortedArray = sortTransactionsByDateDesc(transactions);
           }
           setTransactions(sortedArray);
           return {
@@ -112,13 +218,16 @@ export const useSortReducer = (
     },
     {
       isActive: false,
-      sortType: SortOption.NO_SORT,
-      inProgressSortType: SortOption.NO_SORT,
+      sortType: SortTransactionOption.NO_SORT,
+      inProgressSortType: SortTransactionOption.NO_SORT,
       dispatch: () => null,
     },
   );
 
-  return { sortState, sortDispatch };
+  return {
+    sortTransactionState,
+    sortTransactionDispatch,
+  };
 };
 
 const now = new Date();
@@ -135,6 +244,7 @@ type FilterAction =
   | { type: 'CLEAR_STATUS_FILTER' }
   | { type: 'CLEAR_AMOUNT_FILTERS' }
   | { type: 'ON_SUBMIT' }
+  | { type: 'ON_RELOAD' }
   | { type: 'RESET_IN_PROGRESS' };
 
 export type FilterState = {
@@ -322,6 +432,18 @@ export const useFilterReducer = (
             inProgressMinAmount: 0,
             inProgressMaxAmount: 0,
           };
+        case 'ON_RELOAD':
+          if (prevState.minDateIsSet || prevState.maxDateIsSet) {
+            transactions = filterByDate(prevState, transactions);
+          }
+          if (prevState.statusFilter !== 'none') {
+            transactions = filterByStatus(prevState, transactions);
+          }
+          if (prevState.minAmountIsSet || prevState.maxAmountIsSet) {
+            transactions = filterByAmount(prevState, transactions);
+          }
+          setTransactions(transactions);
+          return prevState;
         case 'ON_SUBMIT':
           newState = {
             ...prevState,
