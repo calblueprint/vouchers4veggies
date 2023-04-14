@@ -273,10 +273,3 @@ export const useFilterReducer = (
 
   return { filterState, filterDispatch };
 };
-
-export type SortDispatch = React.Dispatch<number>;
-
-export type SortState = {
-  dispatch: SortDispatch;
-  sortedArray: Transaction[];
-};

@@ -17,14 +17,11 @@ import {
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
 import Colors from '../../../assets/Colors';
-import {
-  FilterState,
-  SortState,
-  useFilterReducer,
-} from '../../utils/filterUtils';
+import { FilterState, useFilterReducer } from '../../utils/filterUtils';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
+import { SortState } from '../../utils/sortUtils';
 
 export default function TransactionsScreen({
   navigation,
@@ -126,6 +123,7 @@ export default function TransactionsScreen({
       if (Uuid) {
         const transactionsArray = await getTransactionsByVendorUuid(Uuid);
         setDefaultTransactions(transactionsArray);
+        setTransactions(transactionsArray);
         setIsLoading(false);
       }
     } catch (error) {
@@ -144,31 +142,9 @@ export default function TransactionsScreen({
 
   useEffect(() => {
     fetchData(vendorUuid);
-    // switch (filter) {
-    //   case 'Date':
-    //     filterByDate();
-    //     break;
-    //   case 'Paid':
-    //     filterByPaid();
-    //     break;
-    //   case 'Unpaid':
-    //     filterByUnpaid();
-    //     break;
-    //   case 'Amount':
-    //     filterByAmount();
-    //     break;
-    //   default:
-    //     break;
-    // }
-
-    // sortDispatch(sortType);
-    // setTransactions(defaultTransactions);
-    // sortDispatch(-2);
-    sortDispatch(-2);
     sortDispatch(sortType);
-    setTransactions(sortState.sortedArray);
     console.log(sortType);
-  }, [vendorUuid, sortType, sortDispatch, sortState.sortedArray]);
+  }, [vendorUuid, sortType, sortDispatch]);
 
   return (
     <SafeArea>
