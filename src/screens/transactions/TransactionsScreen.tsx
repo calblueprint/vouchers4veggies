@@ -21,7 +21,7 @@ import {
   FilterState,
   SortState,
   useFilterReducer,
-} from './TransactionsContext';
+} from '../../utils/filterUtils';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';

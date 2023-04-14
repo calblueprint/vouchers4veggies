@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { Transaction, TransactionStatus } from '../../types/types';
+import { Transaction, TransactionStatus } from '../types/types';
 
 const now = new Date();
 
