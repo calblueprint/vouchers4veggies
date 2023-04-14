@@ -60,14 +60,6 @@ export const OneLine = styled.View`
   width: 100%;
 `;
 
-export const CloseButtonContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-  margin-top: 19px;
-`;
-
 export const LeftAlignContainer = styled.View`
   display: flex;
   flex: 1;
@@ -84,31 +76,8 @@ export const RightAlignContainer = styled.View`
   align-content: center;
 `;
 
-export const SortModalTextContainer = styled.View`
-  padding-right: 29px;
-  padding-left: 29px;
-  background: ${Colors.offWhite};
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  height: 395px;
-`;
-export const FilterModalTextContainer = styled.View`
-  padding-right: 29px;
-  padding-left: 29px;
-  background: ${Colors.offWhite};
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  height: 510px;
-`;
-
 export const VerticalSpaceContainer = styled.View`
   height: 21px;
-`;
-
-export const CenteredContainer = styled.Text`
-  text-align: center;
-  align-content: center;
-  justify-content: center;
 `;
 
 export const Styles = StyleSheet.create({
@@ -116,10 +85,5 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingHorizontal: 6,
-  },
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-    width: '100%',
   },
 });

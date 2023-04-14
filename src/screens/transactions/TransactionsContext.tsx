@@ -11,7 +11,7 @@ type FilterAction =
   | { type: 'SET_MAX_DATE'; date: Date }
   | { type: 'CLEAR_MAX_DATE' };
 
-type FilterState = {
+export type FilterState = {
   dispatch: FilterDispatch;
   filterCount: number;
   minDate: Date;
