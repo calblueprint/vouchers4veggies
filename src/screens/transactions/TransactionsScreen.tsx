@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import Modal from 'react-native-modal';
+
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import {
   BlueText,
@@ -27,17 +27,13 @@ import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import {
-  CenteredContainer,
-  SortModalTextContainer,
-  OneLine,
-  CloseButtonContainer,
   SortAndFilterButton,
   Styles,
   TitleContainer,
   VerticalSpaceContainer,
-  FilterModalTextContainer,
   LeftAlignContainer,
   RightAlignContainer,
+  OneLine,
 } from './styles';
 import {
   ButtonMagenta,
@@ -51,6 +47,8 @@ import Colors from '../../../assets/Colors';
 import { SortState, useFilterReducer } from './TransactionsContext';
 import FilterField from '../../components/transactions/FilterField';
 import ClearButton from '../../components/transactions/ClearButton';
+import FilterModal from '../../components/transactions/FilterModal';
+import SortModal from '../../components/transactions/SortModal';
 
 export default function TransactionsScreen({
   navigation,
@@ -72,8 +70,8 @@ export default function TransactionsScreen({
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
   const [filterModalIsVisible, setFilterModalIsVisible] = useState(false);
-  const [minDatePickerIsVisible, setMinDateFilterIsVisible] = useState(false);
-  const [maxDatePickerIsVisible, setMaxDateFilterIsVisible] = useState(false);
+  const [minDatePickerIsVisible, setMinDatePickerIsVisible] = useState(false);
+  const [maxDatePickerIsVisible, setMaxDatePickerIsVisible] = useState(false);
 
   const [filter, setFilter] = useState('');
   const [filterMin, setFilterMin] = useState(0);
@@ -176,7 +174,6 @@ export default function TransactionsScreen({
 
   const [sortState, sortDispatch] = useSortReducer();
   const [filterState, filterDispatch] = useFilterReducer();
-  const now = new Date();
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -317,135 +314,24 @@ export default function TransactionsScreen({
         </CardContainer>
       )}
 
-      <Modal
+      <SortModal
         isVisible={sortModalIsVisible}
-        coverScreen={false}
-        style={Styles.modal}
-      >
-        <SortModalTextContainer>
-          <CloseButtonContainer>
-            <TouchableOpacity onPress={() => setSortModalIsVisible(false)}>
-              <BlueText>
-                <Body1Text>Close</Body1Text>
-              </BlueText>
-            </TouchableOpacity>
-          </CloseButtonContainer>
+        setIsVisible={setSortModalIsVisible}
+        sortType={sortType}
+        setSortType={setSortType}
+        sortOptions={sortOptions}
+      />
 
-          <VerticalSpaceContainer />
-          <CenteredContainer>
-            <H4CardNavTab>Sort invoices by</H4CardNavTab>
-          </CenteredContainer>
-          <VerticalSpaceContainer />
-          <RadioButton
-            data={sortOptions}
-            selected={sortType}
-            setSelected={setSortType}
-          />
-        </SortModalTextContainer>
-      </Modal>
-
-      <Modal
+      <FilterModal
+        filterState={filterState}
+        filterDispatch={filterDispatch}
         isVisible={filterModalIsVisible}
-        coverScreen={false}
-        style={Styles.modal}
-      >
-        <FilterModalTextContainer>
-          <CloseButtonContainer>
-            <TouchableOpacity onPress={() => setFilterModalIsVisible(false)}>
-              <BlueText>
-                <Body1Text>Close</Body1Text>
-              </BlueText>
-            </TouchableOpacity>
-          </CloseButtonContainer>
-
-          <VerticalSpaceContainer />
-
-          <CenteredContainer>
-            <H4CardNavTab>Filter Invoices</H4CardNavTab>
-          </CenteredContainer>
-
-          <VerticalSpaceContainer />
-
-          <OneLine>
-            <Body1SemiboldText>Filter by date</Body1SemiboldText>
-            <ClearButton
-              isDisabled={
-                !(filterState.minDateIsSet || filterState.maxDateIsSet)
-              }
-            />
-          </OneLine>
-          <OneLine>
-            <LeftAlignContainer>
-              <FilterField
-                isSelected={filterState.minDateIsSet}
-                onPress={() => setMinDateFilterIsVisible(true)}
-                width="93%"
-                minWidth={148}
-              >
-                <Body1Text>
-                  {filterState.minDateIsSet
-                    ? filterState.minDate.toDateString()
-                    : now.toDateString()}
-                </Body1Text>
-              </FilterField>
-            </LeftAlignContainer>
-            <RightAlignContainer>
-              <FilterField
-                isSelected={filterState.maxDateIsSet}
-                onPress={() => setMaxDateFilterIsVisible(true)}
-                width="93%"
-                minWidth={148}
-              >
-                <Body1Text>
-                  {filterState.maxDateIsSet
-                    ? filterState.maxDate.toDateString()
-                    : now.toDateString()}
-                </Body1Text>
-              </FilterField>
-            </RightAlignContainer>
-          </OneLine>
-          {minDatePickerIsVisible ? (
-            <RNDateTimePicker
-              value={filterState.minDate}
-              onChange={e => {
-                if (e.nativeEvent.timestamp) {
-                  filterDispatch({
-                    type: 'SET_MIN_DATE',
-                    date: new Date(e.nativeEvent.timestamp),
-                  });
-                }
-                setMinDateFilterIsVisible(false);
-              }}
-            />
-          ) : null}
-          {maxDatePickerIsVisible ? (
-            <RNDateTimePicker
-              value={filterState.maxDate}
-              onChange={e => {
-                if (e.nativeEvent.timestamp) {
-                  filterDispatch({
-                    type: 'SET_MAX_DATE',
-                    date: new Date(e.nativeEvent.timestamp),
-                  });
-                }
-                setMaxDateFilterIsVisible(false);
-              }}
-            />
-          ) : null}
-          <VerticalSpaceContainer />
-
-          <Body1SemiboldText>Filter by status</Body1SemiboldText>
-          <VerticalSpaceContainer />
-          <Body1SemiboldText>Filter by amount</Body1SemiboldText>
-          <VerticalSpaceContainer />
-          <VerticalSpaceContainer />
-          <CenteredContainer>
-            <ButtonMagenta>
-              <ButtonTextWhite>Apply</ButtonTextWhite>
-            </ButtonMagenta>
-          </CenteredContainer>
-        </FilterModalTextContainer>
-      </Modal>
+        setIsVisible={setFilterModalIsVisible}
+        minDatePickerIsVisible={minDatePickerIsVisible}
+        setMinDatePickerIsVisible={setMinDatePickerIsVisible}
+        maxDatePickerIsVisible={maxDatePickerIsVisible}
+        setMaxDatePickerIsVisible={setMaxDatePickerIsVisible}
+      />
     </SafeArea>
   );
 }
