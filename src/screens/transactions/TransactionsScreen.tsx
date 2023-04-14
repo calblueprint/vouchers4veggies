@@ -17,11 +17,16 @@ import {
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
 import Colors from '../../../assets/Colors';
-import { FilterState, useFilterReducer } from '../../utils/filterUtils';
+import {
+  FilterState,
+  useFilterReducer,
+  SortOption,
+  SortState,
+  useSortReducer,
+} from '../../utils/transactionUtils';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
-import { SortOption, SortState, useSortReducer } from '../../utils/sortUtils';
 
 export default function TransactionsScreen({
   navigation,
