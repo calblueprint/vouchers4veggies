@@ -28,8 +28,12 @@ import StandardHeader from '../../components/common/StandardHeader';
 import { getVendor } from '../../database/queries';
 import Colors from '../../../assets/Colors';
 import { Styles } from '../../components/transactions/styles';
+import ContactUsScreen from './ContactUsScreen';
+import { ProfileStackScreenProps } from '../../navigation/types';
 
-export default function ProfileScreen() {
+export default function ProfileScreen({
+  navigation,
+}: ProfileStackScreenProps<'ProfileScreen'>) {
   const { dispatch } = useAuthContext();
   const handleSignOut = async () => signOut(dispatch);
   const { vendorUuid } = useAuthContext();
@@ -62,7 +66,7 @@ export default function ProfileScreen() {
           <H4CardNavTab>{vendorEmail}</H4CardNavTab>
         </LeftAlignContainer>
       </Row>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('ContactUsScreen')}>
         <Row>
           <LeftAlignContainer>
             <Icon2
