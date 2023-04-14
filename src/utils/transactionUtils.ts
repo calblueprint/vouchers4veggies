@@ -175,12 +175,9 @@ export const useSortTransactionReducer = (
               sortedArray = sortTransactionsByAmountDesc(transactions);
               break;
             default:
-              sortedArray = sortTransactionsByDateDesc(transactions);
+              sortedArray = sortTransactionsByAmountDesc(transactions);
           }
-          console.log(sortedArray);
           setTransactions(sortedArray);
-          console.log('---------');
-          console.log(transactions);
           return {
             ...prevState,
             isActive: true,
