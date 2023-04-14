@@ -26,7 +26,7 @@ import ClearButton from './ClearButton';
 import { FilterDispatch, FilterState } from '../../utils/transactionUtils';
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
-import { Transaction, TransactionStatus } from '../../types/types';
+import { TransactionStatus } from '../../types/types';
 
 type FilterModalProps = {
   filterState: FilterState;
