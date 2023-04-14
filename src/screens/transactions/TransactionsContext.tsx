@@ -8,9 +8,12 @@ export type FilterDispatch = React.Dispatch<FilterAction>;
 type FilterAction =
   | { type: 'SET_MIN_DATE'; date: Date }
   | { type: 'SET_MAX_DATE'; date: Date }
+  | { type: 'SET_MIN_AMOUNT'; amount: number }
+  | { type: 'SET_MAX_AMOUNT'; amount: number }
   | { type: 'SET_STATUS_FILTER'; status: TransactionStatus }
+  | { type: 'CLEAR_DATE_FILTERS' }
   | { type: 'CLEAR_STATUS_FILTER' }
-  | { type: 'CLEAR_DATE_FILTERS' };
+  | { type: 'CLEAR_AMOUNT_FILTERS' };
 
 export type FilterState = {
   dispatch: FilterDispatch;
@@ -20,6 +23,10 @@ export type FilterState = {
   minDateIsSet: boolean;
   maxDateIsSet: boolean;
   statusFilter: string;
+  minAmount: number;
+  maxAmount: number;
+  minAmountIsSet: boolean;
+  maxAmountIsSet: boolean;
 };
 
 export const useFilterReducer = () =>
@@ -83,6 +90,38 @@ export const useFilterReducer = () =>
             filterCount: count,
             statusFilter: 'none',
           };
+        case 'SET_MIN_AMOUNT':
+          if (!(prevState.minAmountIsSet || prevState.maxAmountIsSet)) {
+            count += 1;
+          }
+          return {
+            ...prevState,
+            filterCount: count,
+            minAmountIsSet: true,
+            minAmount: action.amount,
+          };
+        case 'SET_MAX_AMOUNT':
+          if (!(prevState.minAmountIsSet || prevState.maxAmountIsSet)) {
+            count += 1;
+          }
+          return {
+            ...prevState,
+            filterCount: count,
+            maxAmountIsSet: true,
+            maxAmount: action.amount,
+          };
+        case 'CLEAR_AMOUNT_FILTERS':
+          if (prevState.minAmountIsSet || prevState.maxAmountIsSet) {
+            count -= 1;
+          }
+          return {
+            ...prevState,
+            filterCount: count,
+            minAmountIsSet: false,
+            maxAmountIsSet: false,
+            minAmount: 0,
+            maxAmount: 0,
+          };
         default:
           return prevState;
       }
@@ -94,6 +133,10 @@ export const useFilterReducer = () =>
       minDateIsSet: false,
       maxDateIsSet: false,
       statusFilter: 'none',
+      minAmount: 0,
+      maxAmount: 0,
+      minAmountIsSet: false,
+      maxAmountIsSet: false,
       dispatch: () => null,
     },
   );
