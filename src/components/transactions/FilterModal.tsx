@@ -149,7 +149,17 @@ export default function FilterModal({
         ) : null}
 
         <SubheadingContainer>
-          <Body1SemiboldText>Filter by status</Body1SemiboldText>
+          <OneLine>
+            <Body1SemiboldText>Filter by status</Body1SemiboldText>
+            <ClearButton
+              isDisabled={filterState.statusFilter === 'none'}
+              onPress={() => {
+                filterDispatch({
+                  type: 'CLEAR_STATUS_FILTER',
+                });
+              }}
+            />
+          </OneLine>
         </SubheadingContainer>
 
         <OneLine>
@@ -207,14 +217,64 @@ export default function FilterModal({
         </OneLine>
 
         <SubheadingContainer>
-          <Body1SemiboldText>Filter by amount</Body1SemiboldText>
+          <OneLine>
+            <Body1SemiboldText>Filter by amount</Body1SemiboldText>
+            <ClearButton
+              isDisabled={
+                !(filterState.minAmountIsSet || filterState.maxAmountIsSet)
+              }
+              onPress={() => {
+                filterDispatch({
+                  type: 'CLEAR_AMOUNT_FILTERS',
+                });
+              }}
+            />
+          </OneLine>
         </SubheadingContainer>
 
-        <VerticalSpaceContainer />
+        <OneLine>
+          <LeftAlignContainer>
+            <FilterField
+              isSelected={filterState.minAmountIsSet}
+              onPress={() => {
+                /* TODO: implement amount picker */
+              }}
+              width="93%"
+              minWidth={148}
+            >
+              <Body1Text>
+                {filterState.minAmountIsSet ? (
+                  `$${filterState.minAmount}`
+                ) : (
+                  <MidGrayText>$ Min</MidGrayText>
+                )}
+              </Body1Text>
+            </FilterField>
+          </LeftAlignContainer>
+          <RightAlignContainer>
+            <FilterField
+              isSelected={filterState.maxDateIsSet}
+              onPress={() => {
+                /* TODO: implement amount picker */
+              }}
+              width="93%"
+              minWidth={148}
+            >
+              <Body1Text>
+                {filterState.maxAmountIsSet ? (
+                  `$${filterState.maxAmount}`
+                ) : (
+                  <MidGrayText>$ Max</MidGrayText>
+                )}
+              </Body1Text>
+            </FilterField>
+          </RightAlignContainer>
+        </OneLine>
+
         <VerticalSpaceContainer />
         <CenteredContainer>
           <ButtonMagenta>
-            <ButtonTextWhite>Apply</ButtonTextWhite>
+            <ButtonTextWhite>{`Apply (${filterState.filterCount})`}</ButtonTextWhite>
           </ButtonMagenta>
         </CenteredContainer>
       </FilterModalTextContainer>

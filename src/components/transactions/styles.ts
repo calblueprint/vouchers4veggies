@@ -28,7 +28,7 @@ export const RightAlignContainer = styled.View`
 `;
 
 export const SubheadingContainer = styled.View`
-  margin-top: 26px;
+  margin-top: 38px;
   margin-bottom: 9px;
 `;
 
@@ -133,7 +133,7 @@ export const FilterModalTextContainer = styled.View`
 `;
 
 export const VerticalSpaceContainer = styled.View`
-  height: 21px;
+  height: 48px;
 `;
 
 export const HorizontalSpaceContainer = styled.View`
