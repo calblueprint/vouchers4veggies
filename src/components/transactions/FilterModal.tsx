@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import { TouchableOpacity } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 import {
   CenteredContainer,
   CloseButtonContainer,
@@ -17,6 +18,7 @@ import {
   Body1Text,
   ButtonTextWhite,
   H4CardNavTab,
+  MidGrayText,
 } from '../../../assets/Fonts';
 import { LeftAlignContainer, OneLine } from '../common/styles';
 import ClearButton from './ClearButton';
@@ -84,13 +86,13 @@ export default function FilterModal({
               minWidth={148}
               useCalendarIcon
             >
-              <OneLine>
-                <Body1Text>
-                  {filterState.minDateIsSet
-                    ? filterState.minDate.toDateString()
-                    : now.toDateString()}
-                </Body1Text>
-              </OneLine>
+              <Body1Text>
+                {filterState.minDateIsSet ? (
+                  moment(filterState.minDate).format('M/DD/YYYY')
+                ) : (
+                  <MidGrayText>From</MidGrayText>
+                )}
+              </Body1Text>
             </FilterField>
           </LeftAlignContainer>
           <RightAlignContainer>
@@ -102,9 +104,11 @@ export default function FilterModal({
               useCalendarIcon
             >
               <Body1Text>
-                {filterState.maxDateIsSet
-                  ? filterState.maxDate.toDateString()
-                  : now.toDateString()}
+                {filterState.maxDateIsSet ? (
+                  moment(filterState.maxDate).format('M/D/YY')
+                ) : (
+                  <MidGrayText>To</MidGrayText>
+                )}
               </Body1Text>
             </FilterField>
           </RightAlignContainer>

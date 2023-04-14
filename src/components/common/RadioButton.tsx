@@ -1,13 +1,13 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import {
   LeftAlignContainer,
-  OneLine,
   RadioButtonFill,
   RadioButtonSelected,
   RadioButtonUnselected,
   RightAlignContainer,
   RowWithBottomMargin,
+  SelectableOneLine,
 } from './styles';
 import { Body1Text } from '../../../assets/Fonts';
 
@@ -26,7 +26,7 @@ export default function RadioButtons({
     <View>
       {data.map((item, index) => (
         <RowWithBottomMargin key={item}>
-          <OneLine onPress={() => setSelected(index)}>
+          <SelectableOneLine onPress={() => setSelected(index)}>
             <LeftAlignContainer>
               <Body1Text>{item}</Body1Text>
             </LeftAlignContainer>
@@ -39,7 +39,7 @@ export default function RadioButtons({
                 <RadioButtonUnselected />
               )}
             </RightAlignContainer>
-          </OneLine>
+          </SelectableOneLine>
         </RowWithBottomMargin>
       ))}
     </View>

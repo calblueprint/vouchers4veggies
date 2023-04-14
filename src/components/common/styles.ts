@@ -1,7 +1,16 @@
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
-export const OneLine = styled.TouchableOpacity`
+export const OneLine = styled.View`
+  display: flex;
+  background-color: #fff;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const SelectableOneLine = styled.TouchableOpacity`
   display: flex;
   background-color: #fff;
   flex-direction: row;

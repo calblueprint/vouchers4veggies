@@ -22,7 +22,11 @@ import {
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
 import Colors from '../../../assets/Colors';
-import { SortState, useFilterReducer } from './TransactionsContext';
+import {
+  FilterState,
+  SortState,
+  useFilterReducer,
+} from './TransactionsContext';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 
@@ -54,11 +58,15 @@ export default function TransactionsScreen({
   const [filterMax, setFilterMax] = useState(0);
   const { vendorUuid } = useAuthContext();
 
-  const filterByDate = () => {
+  const filterByDate = (filterState: FilterState) => {
+    let minTime = 0;
+    if (filterState.minDateIsSet) {
+      minTime = filterState.minDate.getTime();
+    }
     const filteredArray = defaultTransactions?.filter(
       t =>
-        t.timestamp.seconds * 10 ** 6 >= filterMin &&
-        t.timestamp.seconds * 10 ** 6 <= filterMax,
+        t.timestamp.seconds * 1000 >= minTime &&
+        t.timestamp.seconds * 1000 <= filterState.maxDate.getTime(),
     );
     setTransactions(filteredArray);
   };
