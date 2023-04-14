@@ -51,12 +51,16 @@ export default function TransactionsScreen({
 
   const { vendorUuid } = useAuthContext();
 
+  const resetTransactionsToDefault = () => {
+    setTransactions(defaultTransactions);
+  };
+
   const filterByDate = (filterState: FilterState) => {
     let minTime = 0;
     if (filterState.inProgressMinDateIsSet) {
       minTime = filterState.inProgressMinDate.getTime();
     }
-    const filteredArray = defaultTransactions?.filter(
+    const filteredArray = transactions?.filter(
       t =>
         t.timestamp.seconds * 1000 >= minTime &&
         t.timestamp.seconds * 1000 <= filterState.inProgressMaxDate.getTime(),
@@ -64,25 +68,28 @@ export default function TransactionsScreen({
     setTransactions(filteredArray);
   };
 
-  const filterByPaid = () => {
-    const filteredArray = defaultTransactions?.filter(
-      t => t.status === TransactionStatus.PAID,
+  const filterByStatus = (filterState: FilterState) => {
+    const filteredArray = transactions?.filter(
+      t => t.status === filterState.statusFilter,
     );
+    console.log(filteredArray);
     setTransactions(filteredArray);
   };
 
-  const filterByUnpaid = () => {
-    const filteredArray = defaultTransactions?.filter(
-      t => t.status === TransactionStatus.UNPAID,
-    );
+  const filterByAmount = (filterState: FilterState) => {
+    let filteredArray = null;
+    if (filterState.maxAmountIsSet) {
+      filteredArray = transactions?.filter(
+        t =>
+          t.value >= filterState.minAmount * 100 &&
+          t.value <= filterState.maxAmount * 100,
+      );
+    } else {
+      filteredArray = transactions?.filter(
+        t => t.value >= filterState.minAmount * 100,
+      );
+    }
     setTransactions(filteredArray);
-  };
-
-  const filterByAmount = () => {
-    // const filteredArray = defaultTransactions?.filter(
-    //   t => t.value >= filterMin && t.value <= filterMax,
-    // );
-    // setTransactions(filteredArray);
   };
 
   const sortTransactionsByAmountDesc = (data: Transaction[]) => {
@@ -270,6 +277,10 @@ export default function TransactionsScreen({
         setMinDatePickerIsVisible={setMinDatePickerIsVisible}
         maxDatePickerIsVisible={maxDatePickerIsVisible}
         setMaxDatePickerIsVisible={setMaxDatePickerIsVisible}
+        filterByDate={filterByDate}
+        filterByStatus={filterByStatus}
+        filterByAmount={filterByAmount}
+        resetData={resetTransactionsToDefault}
       />
     </SafeArea>
   );
