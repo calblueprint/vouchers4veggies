@@ -43,6 +43,13 @@ export const Body1Text = styled.Text`
   line-height: 19px;
 `;
 
+export const Body1SemiboldText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
+
 export const Body2Subtext = styled.Text`
   font-family: 'manrope-regular';
   font-style: normal;
@@ -113,6 +120,10 @@ export const WhiteText = styled.Text`
 
 export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
+`;
+
+export const MidGrayText = styled.Text`
+  color: ${Colors.midGray};
 `;
 
 export const BlueText = styled.Text`

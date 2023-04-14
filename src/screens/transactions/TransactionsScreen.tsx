@@ -6,17 +6,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Colors } from 'react-native-paper';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import {
   BlueText,
+  Body1SemiboldText,
   Body1Text,
   Body2Subtext,
   ButtonTextWhite,
   H2Heading,
   H4CardNavTab,
+  MagentaText,
 } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
@@ -29,13 +30,14 @@ import {
   CenteredContainer,
   SortModalTextContainer,
   OneLine,
-  RightAlignContainer,
+  CloseButtonContainer,
   SortAndFilterButton,
   Styles,
   TitleContainer,
   VerticalSpaceContainer,
   FilterModalTextContainer,
-  DatePickerButton,
+  LeftAlignContainer,
+  RightAlignContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -45,6 +47,10 @@ import {
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
 import RadioButton from '../../components/common/RadioButton';
+import Colors from '../../../assets/Colors';
+import { SortState, useFilterReducer } from './TransactionsContext';
+import FilterField from '../../components/transactions/FilterField';
+import ClearButton from '../../components/transactions/ClearButton';
 
 export default function TransactionsScreen({
   navigation,
@@ -57,14 +63,17 @@ export default function TransactionsScreen({
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const [sortType, setSortType] = useState(-1);
-  const [filterCount, setFilterCount] = useState(0);
+  const sortOptions = [
+    'Amount: High to Low',
+    'Amount: Low to High',
+    'Date: Newest',
+    'Date: Oldest',
+  ];
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
   const [filterModalIsVisible, setFilterModalIsVisible] = useState(false);
   const [minDatePickerIsVisible, setMinDateFilterIsVisible] = useState(false);
   const [maxDatePickerIsVisible, setMaxDateFilterIsVisible] = useState(false);
-  const [minDate, setMinDate] = useState(new Date());
-  const [maxDate, setMaxDate] = useState(new Date());
 
   const [filter, setFilter] = useState('');
   const [filterMin, setFilterMin] = useState(0);
@@ -125,19 +134,13 @@ export default function TransactionsScreen({
     return sortedArray;
   };
 
-  type SortDispatch = React.Dispatch<number>;
-
-  type SortState = {
-    dispatch: SortDispatch;
-    sortedArray: Transaction[];
-  };
-
   const useSortReducer = () =>
     useReducer(
-      (prevState: SortState, sort: number) => {
+      (prevState: SortState, sort: number): SortState => {
         switch (sort) {
           case -2:
-            return { ...prevState, sortedArray: transactions };
+            // return { ...prevState, sortedArray: transactions };
+            return { ...prevState, sortedArray: defaultTransactions };
           case 0:
             return {
               ...prevState,
@@ -172,6 +175,8 @@ export default function TransactionsScreen({
     );
 
   const [sortState, sortDispatch] = useSortReducer();
+  const [filterState, filterDispatch] = useFilterReducer();
+  const now = new Date();
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -212,9 +217,13 @@ export default function TransactionsScreen({
     //   default:
     //     break;
     // }
-    sortDispatch(sortType);
-    setTransactions(defaultTransactions);
+
+    // sortDispatch(sortType);
+    // setTransactions(defaultTransactions);
+    // sortDispatch(-2);
     sortDispatch(-2);
+    sortDispatch(sortType);
+    setTransactions(sortState.sortedArray);
     console.log(sortType);
   }, [vendorUuid, sortType, sortDispatch, sortState.sortedArray]);
 
@@ -230,27 +239,55 @@ export default function TransactionsScreen({
 
       <OneLine>
         <SortAndFilterButton onPress={() => setSortModalIsVisible(true)}>
-          <OneLine>
-            <Octicons
-              name="sort-desc"
-              size={16}
-              color={Colors.black}
-              style={Styles.icon}
-            />
-            <Body2Subtext>Sort by</Body2Subtext>
-          </OneLine>
+          {sortType >= 0 ? (
+            <OneLine>
+              <Octicons
+                name="sort-desc"
+                size={16}
+                color={Colors.magenta}
+                style={Styles.icon}
+              />
+              <MagentaText>
+                <Body2Subtext>{`Sort by ${sortOptions[sortType]}`}</Body2Subtext>
+              </MagentaText>
+            </OneLine>
+          ) : (
+            <OneLine>
+              <Octicons
+                name="sort-desc"
+                size={16}
+                color={Colors.midBlack}
+                style={Styles.icon}
+              />
+              <Body2Subtext>Sort by</Body2Subtext>
+            </OneLine>
+          )}
         </SortAndFilterButton>
 
         <SortAndFilterButton onPress={() => setFilterModalIsVisible(true)}>
-          <OneLine>
-            <MaterialIcons
-              name="tune"
-              size={16}
-              color={Colors.black}
-              style={Styles.icon}
-            />
-            <Body2Subtext>{`Filter (${filterCount})`}</Body2Subtext>
-          </OneLine>
+          {filterState.filterCount > 0 ? (
+            <OneLine>
+              <MaterialIcons
+                name="tune"
+                size={16}
+                color={Colors.magenta}
+                style={Styles.icon}
+              />
+              <MagentaText>
+                <Body2Subtext>{`Filter (${filterState.filterCount})`}</Body2Subtext>
+              </MagentaText>
+            </OneLine>
+          ) : (
+            <OneLine>
+              <MaterialIcons
+                name="tune"
+                size={16}
+                color={Colors.midBlack}
+                style={Styles.icon}
+              />
+              <Body2Subtext>{`Filter (${filterState.filterCount})`}</Body2Subtext>
+            </OneLine>
+          )}
         </SortAndFilterButton>
       </OneLine>
 
@@ -286,13 +323,13 @@ export default function TransactionsScreen({
         style={Styles.modal}
       >
         <SortModalTextContainer>
-          <RightAlignContainer>
+          <CloseButtonContainer>
             <TouchableOpacity onPress={() => setSortModalIsVisible(false)}>
               <BlueText>
                 <Body1Text>Close</Body1Text>
               </BlueText>
             </TouchableOpacity>
-          </RightAlignContainer>
+          </CloseButtonContainer>
 
           <VerticalSpaceContainer />
           <CenteredContainer>
@@ -300,12 +337,7 @@ export default function TransactionsScreen({
           </CenteredContainer>
           <VerticalSpaceContainer />
           <RadioButton
-            data={[
-              'Amount: High to Low',
-              'Amount: Low to High',
-              'Date: Newest',
-              'Date: Oldest',
-            ]}
+            data={sortOptions}
             selected={sortType}
             setSelected={setSortType}
           />
@@ -318,13 +350,13 @@ export default function TransactionsScreen({
         style={Styles.modal}
       >
         <FilterModalTextContainer>
-          <RightAlignContainer>
+          <CloseButtonContainer>
             <TouchableOpacity onPress={() => setFilterModalIsVisible(false)}>
               <BlueText>
                 <Body1Text>Close</Body1Text>
               </BlueText>
             </TouchableOpacity>
-          </RightAlignContainer>
+          </CloseButtonContainer>
 
           <VerticalSpaceContainer />
 
@@ -334,21 +366,53 @@ export default function TransactionsScreen({
 
           <VerticalSpaceContainer />
 
-          <Body1Text>Filter by date</Body1Text>
           <OneLine>
-            <DatePickerButton onPress={() => setMinDateFilterIsVisible(true)}>
-              <Body1Text>{minDate.toDateString()}</Body1Text>
-            </DatePickerButton>
-            <DatePickerButton onPress={() => setMaxDateFilterIsVisible(true)}>
-              <Body1Text>{maxDate.toDateString()}</Body1Text>
-            </DatePickerButton>
+            <Body1SemiboldText>Filter by date</Body1SemiboldText>
+            <ClearButton
+              isDisabled={
+                !(filterState.minDateIsSet || filterState.maxDateIsSet)
+              }
+            />
+          </OneLine>
+          <OneLine>
+            <LeftAlignContainer>
+              <FilterField
+                isSelected={filterState.minDateIsSet}
+                onPress={() => setMinDateFilterIsVisible(true)}
+                width="93%"
+                minWidth={148}
+              >
+                <Body1Text>
+                  {filterState.minDateIsSet
+                    ? filterState.minDate.toDateString()
+                    : now.toDateString()}
+                </Body1Text>
+              </FilterField>
+            </LeftAlignContainer>
+            <RightAlignContainer>
+              <FilterField
+                isSelected={filterState.maxDateIsSet}
+                onPress={() => setMaxDateFilterIsVisible(true)}
+                width="93%"
+                minWidth={148}
+              >
+                <Body1Text>
+                  {filterState.maxDateIsSet
+                    ? filterState.maxDate.toDateString()
+                    : now.toDateString()}
+                </Body1Text>
+              </FilterField>
+            </RightAlignContainer>
           </OneLine>
           {minDatePickerIsVisible ? (
             <RNDateTimePicker
-              value={minDate}
+              value={filterState.minDate}
               onChange={e => {
                 if (e.nativeEvent.timestamp) {
-                  setMinDate(new Date(e.nativeEvent.timestamp));
+                  filterDispatch({
+                    type: 'SET_MIN_DATE',
+                    date: new Date(e.nativeEvent.timestamp),
+                  });
                 }
                 setMinDateFilterIsVisible(false);
               }}
@@ -356,10 +420,13 @@ export default function TransactionsScreen({
           ) : null}
           {maxDatePickerIsVisible ? (
             <RNDateTimePicker
-              value={maxDate}
+              value={filterState.maxDate}
               onChange={e => {
                 if (e.nativeEvent.timestamp) {
-                  setMaxDate(new Date(e.nativeEvent.timestamp));
+                  filterDispatch({
+                    type: 'SET_MAX_DATE',
+                    date: new Date(e.nativeEvent.timestamp),
+                  });
                 }
                 setMaxDateFilterIsVisible(false);
               }}
@@ -367,9 +434,9 @@ export default function TransactionsScreen({
           ) : null}
           <VerticalSpaceContainer />
 
-          <Body1Text>Filter by status</Body1Text>
+          <Body1SemiboldText>Filter by status</Body1SemiboldText>
           <VerticalSpaceContainer />
-          <Body1Text>Filter by amount</Body1Text>
+          <Body1SemiboldText>Filter by amount</Body1SemiboldText>
           <VerticalSpaceContainer />
           <VerticalSpaceContainer />
           <CenteredContainer>
