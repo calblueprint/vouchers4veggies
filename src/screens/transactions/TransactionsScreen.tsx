@@ -83,7 +83,6 @@ export default function TransactionsScreen({
   useEffect(() => {
     fetchData(vendorUuid);
     sortDispatch({ type: 'ON_RELOAD' });
-    console.log(sortState.sortType);
   }, [vendorUuid, sortState.sortType, sortDispatch]);
 
   return (
