@@ -1,13 +1,12 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import { Body2Subtext, H2Heading, MagentaText } from '../../../assets/Fonts';
+import { H2Heading } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/transactions/TransactionCard';
 import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
-import { Transaction, TransactionStatus } from '../../types/types';
+import { Transaction } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import { CenteredOneLine, TitleContainer } from './styles';
 import {
@@ -16,12 +15,9 @@ import {
   StartOfListView,
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
-import Colors from '../../../assets/Colors';
 import {
-  FilterState,
   useFilterReducer,
   SortOption,
-  SortState,
   useSortReducer,
 } from '../../utils/transactionUtils';
 import FilterModal from '../../components/transactions/FilterModal';
