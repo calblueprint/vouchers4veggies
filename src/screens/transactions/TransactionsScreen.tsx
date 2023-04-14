@@ -1,24 +1,7 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import {
-  FlatList,
-  Platform,
-  RefreshControl,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-import {
-  BlueText,
-  Body1SemiboldText,
-  Body1Text,
-  Body2Subtext,
-  ButtonTextWhite,
-  H2Heading,
-  H4CardNavTab,
-  MagentaText,
-} from '../../../assets/Fonts';
+import { Body2Subtext, H2Heading, MagentaText } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
 import TransactionCard from '../../components/transactions/TransactionCard';
@@ -27,26 +10,19 @@ import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import {
+  CenteredOneLine,
   SortAndFilterButton,
   Styles,
   TitleContainer,
-  VerticalSpaceContainer,
-  LeftAlignContainer,
-  RightAlignContainer,
-  OneLine,
 } from './styles';
 import {
-  ButtonMagenta,
   CardContainer,
   SafeArea,
   StartOfListView,
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
-import RadioButton from '../../components/common/RadioButton';
 import Colors from '../../../assets/Colors';
 import { SortState, useFilterReducer } from './TransactionsContext';
-import FilterField from '../../components/transactions/FilterField';
-import ClearButton from '../../components/transactions/ClearButton';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 
@@ -234,10 +210,10 @@ export default function TransactionsScreen({
         <H2Heading>Invoices</H2Heading>
       </TitleContainer>
 
-      <OneLine>
+      <CenteredOneLine>
         <SortAndFilterButton onPress={() => setSortModalIsVisible(true)}>
           {sortType >= 0 ? (
-            <OneLine>
+            <CenteredOneLine>
               <Octicons
                 name="sort-desc"
                 size={16}
@@ -247,9 +223,9 @@ export default function TransactionsScreen({
               <MagentaText>
                 <Body2Subtext>{`Sort by ${sortOptions[sortType]}`}</Body2Subtext>
               </MagentaText>
-            </OneLine>
+            </CenteredOneLine>
           ) : (
-            <OneLine>
+            <CenteredOneLine>
               <Octicons
                 name="sort-desc"
                 size={16}
@@ -257,13 +233,13 @@ export default function TransactionsScreen({
                 style={Styles.icon}
               />
               <Body2Subtext>Sort by</Body2Subtext>
-            </OneLine>
+            </CenteredOneLine>
           )}
         </SortAndFilterButton>
 
         <SortAndFilterButton onPress={() => setFilterModalIsVisible(true)}>
           {filterState.filterCount > 0 ? (
-            <OneLine>
+            <CenteredOneLine>
               <MaterialIcons
                 name="tune"
                 size={16}
@@ -273,9 +249,9 @@ export default function TransactionsScreen({
               <MagentaText>
                 <Body2Subtext>{`Filter (${filterState.filterCount})`}</Body2Subtext>
               </MagentaText>
-            </OneLine>
+            </CenteredOneLine>
           ) : (
-            <OneLine>
+            <CenteredOneLine>
               <MaterialIcons
                 name="tune"
                 size={16}
@@ -283,10 +259,10 @@ export default function TransactionsScreen({
                 style={Styles.icon}
               />
               <Body2Subtext>{`Filter (${filterState.filterCount})`}</Body2Subtext>
-            </OneLine>
+            </CenteredOneLine>
           )}
         </SortAndFilterButton>
-      </OneLine>
+      </CenteredOneLine>
 
       {isLoading ? (
         <LoadingSpinner />

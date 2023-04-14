@@ -51,7 +51,7 @@ export const SortAndFilterButton = styled.TouchableOpacity`
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 `;
 
-export const OneLine = styled.View`
+export const CenteredOneLine = styled.View`
   display: flex;
   background-color: #fff;
   flex-direction: row;

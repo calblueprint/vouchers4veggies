@@ -8,6 +8,7 @@ import {
   FilterModalTextContainer,
   RightAlignContainer,
   Styles,
+  SubheadingContainer,
   VerticalSpaceContainer,
 } from './styles';
 import {
@@ -58,17 +59,22 @@ export default function FilterModal({
             </BlueText>
           </TouchableOpacity>
         </CloseButtonContainer>
-        <VerticalSpaceContainer />
+
         <CenteredContainer>
           <H4CardNavTab>Filter Invoices</H4CardNavTab>
         </CenteredContainer>
-        <VerticalSpaceContainer />
-        <OneLine>
-          <Body1SemiboldText>Filter by date</Body1SemiboldText>
-          <ClearButton
-            isDisabled={!(filterState.minDateIsSet || filterState.maxDateIsSet)}
-          />
-        </OneLine>
+
+        <SubheadingContainer>
+          <OneLine>
+            <Body1SemiboldText>Filter by date</Body1SemiboldText>
+            <ClearButton
+              isDisabled={
+                !(filterState.minDateIsSet || filterState.maxDateIsSet)
+              }
+            />
+          </OneLine>
+        </SubheadingContainer>
+
         <OneLine>
           <LeftAlignContainer>
             <FilterField
@@ -76,12 +82,15 @@ export default function FilterModal({
               onPress={() => setMinDatePickerIsVisible(true)}
               width="93%"
               minWidth={148}
+              useCalendarIcon
             >
-              <Body1Text>
-                {filterState.minDateIsSet
-                  ? filterState.minDate.toDateString()
-                  : now.toDateString()}
-              </Body1Text>
+              <OneLine>
+                <Body1Text>
+                  {filterState.minDateIsSet
+                    ? filterState.minDate.toDateString()
+                    : now.toDateString()}
+                </Body1Text>
+              </OneLine>
             </FilterField>
           </LeftAlignContainer>
           <RightAlignContainer>
@@ -90,6 +99,7 @@ export default function FilterModal({
               onPress={() => setMaxDatePickerIsVisible(true)}
               width="93%"
               minWidth={148}
+              useCalendarIcon
             >
               <Body1Text>
                 {filterState.maxDateIsSet
@@ -127,10 +137,15 @@ export default function FilterModal({
             }}
           />
         ) : null}
-        <VerticalSpaceContainer />
-        <Body1SemiboldText>Filter by status</Body1SemiboldText>
-        <VerticalSpaceContainer />
-        <Body1SemiboldText>Filter by amount</Body1SemiboldText>
+
+        <SubheadingContainer>
+          <Body1SemiboldText>Filter by status</Body1SemiboldText>
+        </SubheadingContainer>
+
+        <SubheadingContainer>
+          <Body1SemiboldText>Filter by amount</Body1SemiboldText>
+        </SubheadingContainer>
+
         <VerticalSpaceContainer />
         <VerticalSpaceContainer />
         <CenteredContainer>
