@@ -38,10 +38,9 @@ export const useSortVoucherReducer = (
     return sortedArray;
   };
 
-  const sortVouchersByDateDesc = (data: Voucher[]) => [...defaultVouchers];
+  const sortVouchersByDateDesc = () => [...defaultVouchers];
 
-  const sortVouchersByDateAsc = (data: Voucher[]) =>
-    [...defaultVouchers].reverse();
+  const sortVouchersByDateAsc = () => [...defaultVouchers].reverse();
 
   const [sortVoucherState, sortVoucherDispatch] = useReducer(
     (prevState: SortVoucherState, action: SortAction) => {
@@ -55,7 +54,7 @@ export const useSortVoucherReducer = (
         case 'ON_SUBMIT':
           switch (prevState.inProgressSortType) {
             case SortVoucherOption.DATE_ASC:
-              sortedArray = sortVouchersByDateAsc(vouchers);
+              sortedArray = sortVouchersByDateAsc();
               break;
             case SortVoucherOption.SERIAL_NUMBER_DESC:
               sortedArray = sortVouchersBySerialNumberDesc(vouchers);
@@ -64,7 +63,7 @@ export const useSortVoucherReducer = (
               sortedArray = sortVouchersBySerialNumberAsc(vouchers);
               break;
             default:
-              sortedArray = sortVouchersByDateDesc(vouchers);
+              sortedArray = sortVouchersByDateDesc();
           }
           setVouchers(sortedArray);
           return {
@@ -74,7 +73,7 @@ export const useSortVoucherReducer = (
         case 'ON_RELOAD':
           switch (prevState.sortType) {
             case SortVoucherOption.DATE_ASC:
-              sortedArray = sortVouchersByDateAsc(vouchers);
+              sortedArray = sortVouchersByDateAsc();
               break;
             case SortVoucherOption.SERIAL_NUMBER_DESC:
               sortedArray = sortVouchersBySerialNumberDesc(vouchers);
@@ -83,7 +82,7 @@ export const useSortVoucherReducer = (
               sortedArray = sortVouchersBySerialNumberAsc(vouchers);
               break;
             default:
-              sortedArray = sortVouchersByDateDesc(vouchers);
+              sortedArray = sortVouchersByDateDesc();
           }
           setVouchers(sortedArray);
           return {
@@ -107,10 +106,7 @@ export const useSortVoucherReducer = (
     },
   );
 
-  return {
-    sortState: sortVoucherState,
-    sortDispatch: sortVoucherDispatch,
-  };
+  return { sortVoucherState, sortVoucherDispatch };
 };
 
 export type SortTransactionDispatch = React.Dispatch<SortAction>;
@@ -181,7 +177,10 @@ export const useSortTransactionReducer = (
             default:
               sortedArray = sortTransactionsByDateDesc(transactions);
           }
+          console.log(sortedArray);
           setTransactions(sortedArray);
+          console.log('---------');
+          console.log(transactions);
           return {
             ...prevState,
             isActive: true,
@@ -202,9 +201,7 @@ export const useSortTransactionReducer = (
               sortedArray = sortTransactionsByDateDesc(transactions);
           }
           setTransactions(sortedArray);
-          return {
-            ...prevState,
-          };
+          return prevState;
         case 'RESET_IN_PROGRESS':
           return {
             ...prevState,

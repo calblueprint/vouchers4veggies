@@ -25,6 +25,7 @@ import {
   Size14BoldText,
   Title,
 } from './styles';
+import { useSortVoucherReducer } from '../../utils/transactionUtils';
 
 export default function TransactionDetailsScreen({
   route,
@@ -32,22 +33,17 @@ export default function TransactionDetailsScreen({
 }: TransactionStackScreenProps<'TransactionDetailsScreen'>) {
   const { transactionUuid } = route.params;
   const [transactionData, setTransactionData] = useState<Transaction>();
-  const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>();
-  const [displayedVoucherArray, setDisplayedVoucherArray] =
-    useState<Voucher[]>();
-  const [sort, setSort] = useState('default');
+  const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>([]);
+  const [displayedVoucherArray, setDisplayedVoucherArray] = useState<Voucher[]>(
+    [],
+  );
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  const sortVouchersByDefault = () => {
-    setDisplayedVoucherArray(defaultVoucherArray);
-  };
-
-  const sortVouchersBySerialNumber = () => {
-    const sortedArray = defaultVoucherArray?.sort(
-      (a, b) => a.serialNumber - b.serialNumber,
-    );
-    setDisplayedVoucherArray(sortedArray);
-  };
+  const { sortVoucherState, sortVoucherDispatch } = useSortVoucherReducer(
+    displayedVoucherArray,
+    defaultVoucherArray,
+    setDisplayedVoucherArray,
+  );
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -59,12 +55,7 @@ export default function TransactionDetailsScreen({
           data.voucherSerialNumbers.map(item => getVoucher(item)),
         );
         setDefaultVoucherArray(voucherData);
-
-        if (sort === 'default') {
-          sortVouchersByDefault();
-        } else {
-          sortVouchersBySerialNumber();
-        }
+        setDisplayedVoucherArray(voucherData);
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -78,11 +69,13 @@ export default function TransactionDetailsScreen({
       setIsRefreshing(false);
     }, 1000);
     fetchData(transactionUuid);
-  }, [transactionUuid]);
+    sortVoucherDispatch({ type: 'ON_RELOAD' });
+  }, [transactionUuid, sortVoucherDispatch]);
 
   useEffect(() => {
     fetchData(transactionUuid);
-  }, [transactionUuid]);
+    sortVoucherDispatch({ type: 'ON_RELOAD' });
+  }, [transactionUuid, sortVoucherDispatch]);
 
   const time = moment(transactionData?.timestamp.toDate());
 
