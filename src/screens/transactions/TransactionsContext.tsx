@@ -41,11 +41,53 @@ export type FilterState = {
   inProgressMaxAmountIsSet: boolean;
 };
 
-export const useFilterReducer = () =>
-  useReducer(
+export const useFilterReducer = (
+  defaultTransactions: Transaction[],
+  setTransactions: (array: Transaction[]) => void,
+) => {
+  const filterByDate = (filterState: FilterState, array: Transaction[]) => {
+    let minTime = 0;
+    if (filterState.inProgressMinDateIsSet) {
+      minTime = filterState.inProgressMinDate.getTime();
+    }
+    const filteredArray = array?.filter(
+      t =>
+        t.timestamp.seconds * 1000 >= minTime &&
+        t.timestamp.seconds * 1000 <= filterState.inProgressMaxDate.getTime(),
+    );
+    return filteredArray;
+  };
+
+  const filterByStatus = (filterState: FilterState, array: Transaction[]) => {
+    const filteredArray = array?.filter(
+      t => t.status === filterState.statusFilter,
+    );
+    return filteredArray;
+  };
+
+  const filterByAmount = (filterState: FilterState, array: Transaction[]) => {
+    let filteredArray = null;
+    if (filterState.maxAmountIsSet) {
+      filteredArray = array?.filter(
+        t =>
+          t.value >= filterState.minAmount * 100 &&
+          t.value <= filterState.maxAmount * 100,
+      );
+    } else {
+      filteredArray = array?.filter(
+        t => t.value >= filterState.minAmount * 100,
+      );
+    }
+    return filteredArray;
+  };
+
+  const [filterState, filterDispatch] = useReducer(
     (prevState: FilterState, action: FilterAction) => {
       let count = prevState.inProgressFilterCount;
       let status = 'none';
+      let newState = { ...prevState };
+      let transactions = [...defaultTransactions];
+
       switch (action.type) {
         case 'SET_MIN_DATE':
           if (
@@ -161,7 +203,7 @@ export const useFilterReducer = () =>
             inProgressMaxAmount: 0,
           };
         case 'ON_SUBMIT':
-          return {
+          newState = {
             ...prevState,
             filterCount: prevState.inProgressFilterCount,
             minDate: prevState.inProgressMinDate,
@@ -174,6 +216,18 @@ export const useFilterReducer = () =>
             minAmountIsSet: prevState.inProgressMinAmountIsSet,
             maxAmountIsSet: prevState.inProgressMaxAmountIsSet,
           };
+
+          if (newState.minDateIsSet || newState.maxDateIsSet) {
+            transactions = filterByDate(newState, transactions);
+          }
+          if (newState.statusFilter !== 'none') {
+            transactions = filterByStatus(newState, transactions);
+          }
+          if (newState.minAmountIsSet || newState.maxAmountIsSet) {
+            transactions = filterByAmount(newState, transactions);
+          }
+          setTransactions(transactions);
+          return newState;
         case 'RESET_IN_PROGRESS':
           return {
             ...prevState,
@@ -216,6 +270,9 @@ export const useFilterReducer = () =>
       dispatch: () => null,
     },
   );
+
+  return { filterState, filterDispatch };
+};
 
 export type SortDispatch = React.Dispatch<number>;
 

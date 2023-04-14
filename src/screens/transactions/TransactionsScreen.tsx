@@ -51,47 +51,6 @@ export default function TransactionsScreen({
 
   const { vendorUuid } = useAuthContext();
 
-  const resetTransactionsToDefault = () => {
-    setTransactions(defaultTransactions);
-  };
-
-  const filterByDate = (filterState: FilterState) => {
-    let minTime = 0;
-    if (filterState.inProgressMinDateIsSet) {
-      minTime = filterState.inProgressMinDate.getTime();
-    }
-    const filteredArray = transactions?.filter(
-      t =>
-        t.timestamp.seconds * 1000 >= minTime &&
-        t.timestamp.seconds * 1000 <= filterState.inProgressMaxDate.getTime(),
-    );
-    setTransactions(filteredArray);
-  };
-
-  const filterByStatus = (filterState: FilterState) => {
-    const filteredArray = transactions?.filter(
-      t => t.status === filterState.statusFilter,
-    );
-    console.log(filteredArray);
-    setTransactions(filteredArray);
-  };
-
-  const filterByAmount = (filterState: FilterState) => {
-    let filteredArray = null;
-    if (filterState.maxAmountIsSet) {
-      filteredArray = transactions?.filter(
-        t =>
-          t.value >= filterState.minAmount * 100 &&
-          t.value <= filterState.maxAmount * 100,
-      );
-    } else {
-      filteredArray = transactions?.filter(
-        t => t.value >= filterState.minAmount * 100,
-      );
-    }
-    setTransactions(filteredArray);
-  };
-
   const sortTransactionsByAmountDesc = (data: Transaction[]) => {
     const sortedArray = data.sort((a, b) => b.value - a.value);
     return sortedArray;
@@ -157,7 +116,10 @@ export default function TransactionsScreen({
     );
 
   const [sortState, sortDispatch] = useSortReducer();
-  const [filterState, filterDispatch] = useFilterReducer();
+  const { filterState, filterDispatch } = useFilterReducer(
+    defaultTransactions,
+    setTransactions,
+  );
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -277,10 +239,6 @@ export default function TransactionsScreen({
         setMinDatePickerIsVisible={setMinDatePickerIsVisible}
         maxDatePickerIsVisible={maxDatePickerIsVisible}
         setMaxDatePickerIsVisible={setMaxDatePickerIsVisible}
-        filterByDate={filterByDate}
-        filterByStatus={filterByStatus}
-        filterByAmount={filterByAmount}
-        resetData={resetTransactionsToDefault}
       />
     </SafeArea>
   );
