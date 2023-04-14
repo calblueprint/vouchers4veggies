@@ -73,6 +73,11 @@ export default function FilterModal({
               isDisabled={
                 !(filterState.minDateIsSet || filterState.maxDateIsSet)
               }
+              onPress={() => {
+                filterDispatch({
+                  type: 'CLEAR_DATE_FILTERS',
+                });
+              }}
             />
           </OneLine>
         </SubheadingContainer>
@@ -117,7 +122,7 @@ export default function FilterModal({
           <RNDateTimePicker
             value={filterState.minDate}
             onChange={e => {
-              if (e.nativeEvent.timestamp) {
+              if (e.type === 'set' && e.nativeEvent.timestamp) {
                 filterDispatch({
                   type: 'SET_MIN_DATE',
                   date: new Date(e.nativeEvent.timestamp),
@@ -131,7 +136,7 @@ export default function FilterModal({
           <RNDateTimePicker
             value={filterState.maxDate}
             onChange={e => {
-              if (e.nativeEvent.timestamp) {
+              if (e.type === 'set' && e.nativeEvent.timestamp) {
                 filterDispatch({
                   type: 'SET_MAX_DATE',
                   date: new Date(e.nativeEvent.timestamp),

@@ -53,9 +53,6 @@ export default function TransactionsScreen({
   const [minDatePickerIsVisible, setMinDatePickerIsVisible] = useState(false);
   const [maxDatePickerIsVisible, setMaxDatePickerIsVisible] = useState(false);
 
-  const [filter, setFilter] = useState('');
-  const [filterMin, setFilterMin] = useState(0);
-  const [filterMax, setFilterMax] = useState(0);
   const { vendorUuid } = useAuthContext();
 
   const filterByDate = (filterState: FilterState) => {
@@ -86,10 +83,10 @@ export default function TransactionsScreen({
   };
 
   const filterByAmount = () => {
-    const filteredArray = defaultTransactions?.filter(
-      t => t.value >= filterMin && t.value <= filterMax,
-    );
-    setTransactions(filteredArray);
+    // const filteredArray = defaultTransactions?.filter(
+    //   t => t.value >= filterMin && t.value <= filterMax,
+    // );
+    // setTransactions(filteredArray);
   };
 
   const sortTransactionsByAmountDesc = (data: Transaction[]) => {

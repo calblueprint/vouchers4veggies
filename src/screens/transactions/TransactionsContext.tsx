@@ -7,9 +7,8 @@ export type FilterDispatch = React.Dispatch<FilterAction>;
 
 type FilterAction =
   | { type: 'SET_MIN_DATE'; date: Date }
-  | { type: 'CLEAR_MIN_DATE' }
   | { type: 'SET_MAX_DATE'; date: Date }
-  | { type: 'CLEAR_MAX_DATE' };
+  | { type: 'CLEAR_DATE_FILTERS' };
 
 export type FilterState = {
   dispatch: FilterDispatch;
@@ -26,7 +25,7 @@ export const useFilterReducer = () =>
       let count = prevState.filterCount;
       switch (action.type) {
         case 'SET_MIN_DATE':
-          if (!prevState.minDateIsSet) {
+          if (!(prevState.minDateIsSet || prevState.maxDateIsSet)) {
             count += 1;
           }
           return {
@@ -35,14 +34,8 @@ export const useFilterReducer = () =>
             minDateIsSet: true,
             minDate: action.date,
           };
-        case 'CLEAR_MIN_DATE':
-          return {
-            ...prevState,
-            minDateIsSet: false,
-            minDate: now,
-          };
         case 'SET_MAX_DATE':
-          if (!prevState.minDateIsSet) {
+          if (!(prevState.minDateIsSet || prevState.maxDateIsSet)) {
             count += 1;
           }
           return {
@@ -51,10 +44,16 @@ export const useFilterReducer = () =>
             maxDateIsSet: true,
             maxDate: action.date,
           };
-        case 'CLEAR_MAX_DATE':
+        case 'CLEAR_DATE_FILTERS':
+          if (prevState.maxDateIsSet || prevState.minDateIsSet) {
+            count -= 1;
+          }
           return {
             ...prevState,
+            filterCount: count,
+            minDateIsSet: false,
             maxDateIsSet: false,
+            minDate: now,
             maxDate: now,
           };
         default:
