@@ -88,13 +88,13 @@ export default function VoucherBatchScreen({
       return;
     }
     // validates that both inputs are valid serialNumbers
-    const startResult = await getMaxVoucherValue(Number(startSerialNumber));
+    const startResult = await getMaxVoucherValue(startSerialNumber);
     if (!startResult.ok) {
       setShowStartInvalidError(true);
       return;
     }
-    const endResult = await getMaxVoucherValue(Number(endSerialNumber));
-    if (!endResult.ok) {
+    const endResult = await getMaxVoucherValue(endSerialNumber);
+    if (!endResult.ok || startSerialNumber >= endSerialNumber) {
       setShowEndInvalidError(true);
       return;
     }
