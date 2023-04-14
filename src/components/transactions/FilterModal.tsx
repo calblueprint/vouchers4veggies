@@ -29,7 +29,7 @@ import {
 } from '../../screens/transactions/TransactionsContext';
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
-import { TransactionStatus } from '../../types/types';
+import { Transaction, TransactionStatus } from '../../types/types';
 
 type FilterModalProps = {
   filterState: FilterState;
@@ -40,6 +40,10 @@ type FilterModalProps = {
   setMinDatePickerIsVisible: (visibility: boolean) => void;
   maxDatePickerIsVisible: boolean;
   setMaxDatePickerIsVisible: (visibility: boolean) => void;
+  resetData: () => void;
+  filterByDate: (filterState: FilterState) => void;
+  filterByStatus: (filterState: FilterState) => void;
+  filterByAmount: (filterState: FilterState) => void;
 };
 
 export default function FilterModal({
@@ -51,6 +55,10 @@ export default function FilterModal({
   setMinDatePickerIsVisible,
   maxDatePickerIsVisible,
   setMaxDatePickerIsVisible,
+  resetData,
+  filterByDate,
+  filterByStatus,
+  filterByAmount,
 }: FilterModalProps) {
   return (
     <Modal isVisible={isVisible} coverScreen={false} style={Styles.modal}>
@@ -299,6 +307,18 @@ export default function FilterModal({
             onPress={() => {
               setIsVisible(false);
               filterDispatch({ type: 'ON_SUBMIT' });
+              resetData();
+              console.log(filterState);
+              if (filterState.minDateIsSet || filterState.maxDateIsSet) {
+                filterByDate(filterState);
+              }
+              if (filterState.statusFilter !== 'none') {
+                console.log('filtering');
+                filterByStatus(filterState);
+              }
+              if (filterState.minAmountIsSet || filterState.maxAmountIsSet) {
+                filterByAmount(filterState);
+              }
             }}
           >
             <ButtonTextWhite>{`Apply${
