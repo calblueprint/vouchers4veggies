@@ -9,12 +9,7 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
-import {
-  CenteredOneLine,
-  SortAndFilterButton,
-  Styles,
-  TitleContainer,
-} from './styles';
+import { CenteredOneLine, TitleContainer } from './styles';
 import {
   CardContainer,
   SafeArea,
@@ -29,6 +24,7 @@ import {
 } from './TransactionsContext';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
+import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
 
 export default function TransactionsScreen({
   navigation,
@@ -57,13 +53,13 @@ export default function TransactionsScreen({
 
   const filterByDate = (filterState: FilterState) => {
     let minTime = 0;
-    if (filterState.minDateIsSet) {
-      minTime = filterState.minDate.getTime();
+    if (filterState.inProgressMinDateIsSet) {
+      minTime = filterState.inProgressMinDate.getTime();
     }
     const filteredArray = defaultTransactions?.filter(
       t =>
         t.timestamp.seconds * 1000 >= minTime &&
-        t.timestamp.seconds * 1000 <= filterState.maxDate.getTime(),
+        t.timestamp.seconds * 1000 <= filterState.inProgressMaxDate.getTime(),
     );
     setTransactions(filteredArray);
   };
@@ -216,57 +212,19 @@ export default function TransactionsScreen({
       </TitleContainer>
 
       <CenteredOneLine>
-        <SortAndFilterButton onPress={() => setSortModalIsVisible(true)}>
-          {sortType >= 0 ? (
-            <CenteredOneLine>
-              <Octicons
-                name="sort-desc"
-                size={16}
-                color={Colors.magenta}
-                style={Styles.icon}
-              />
-              <MagentaText>
-                <Body2Subtext>{`Sort by ${sortOptions[sortType]}`}</Body2Subtext>
-              </MagentaText>
-            </CenteredOneLine>
-          ) : (
-            <CenteredOneLine>
-              <Octicons
-                name="sort-desc"
-                size={16}
-                color={Colors.midBlack}
-                style={Styles.icon}
-              />
-              <Body2Subtext>Sort by</Body2Subtext>
-            </CenteredOneLine>
-          )}
-        </SortAndFilterButton>
+        <SortAndFilterButton
+          setModalIsVisible={setSortModalIsVisible}
+          isSelected={sortModalIsVisible || sortType >= 0}
+          type="sort"
+          text={`Sort by${sortType >= 0 ? ` ${sortOptions[sortType]}` : ''}`}
+        />
 
-        <SortAndFilterButton onPress={() => setFilterModalIsVisible(true)}>
-          {filterState.filterCount > 0 ? (
-            <CenteredOneLine>
-              <MaterialIcons
-                name="tune"
-                size={16}
-                color={Colors.magenta}
-                style={Styles.icon}
-              />
-              <MagentaText>
-                <Body2Subtext>{`Filter (${filterState.filterCount})`}</Body2Subtext>
-              </MagentaText>
-            </CenteredOneLine>
-          ) : (
-            <CenteredOneLine>
-              <MaterialIcons
-                name="tune"
-                size={16}
-                color={Colors.midBlack}
-                style={Styles.icon}
-              />
-              <Body2Subtext>{`Filter (${filterState.filterCount})`}</Body2Subtext>
-            </CenteredOneLine>
-          )}
-        </SortAndFilterButton>
+        <SortAndFilterButton
+          setModalIsVisible={setFilterModalIsVisible}
+          isSelected={filterModalIsVisible || filterState.filterCount > 0}
+          type="filter"
+          text={`Filter (${filterState.filterCount})`}
+        />
       </CenteredOneLine>
 
       {isLoading ? (

@@ -43,7 +43,7 @@ export default function ReviewVoucherCard({
       <AntDesign.Button
         name="edit"
         size={25}
-        style={Styles.icon}
+        style={Styles.iconWithPadding}
         color={Colors.midGray}
         onPress={onEdit}
       />
@@ -51,7 +51,7 @@ export default function ReviewVoucherCard({
       <AntDesign.Button
         name="delete"
         size={25}
-        style={Styles.icon}
+        style={Styles.iconWithPadding}
         color={Colors.midGray}
         onPress={onDelete}
       />

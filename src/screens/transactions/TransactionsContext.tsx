@@ -13,7 +13,9 @@ type FilterAction =
   | { type: 'SET_STATUS_FILTER'; status: TransactionStatus }
   | { type: 'CLEAR_DATE_FILTERS' }
   | { type: 'CLEAR_STATUS_FILTER' }
-  | { type: 'CLEAR_AMOUNT_FILTERS' };
+  | { type: 'CLEAR_AMOUNT_FILTERS' }
+  | { type: 'ON_SUBMIT' }
+  | { type: 'RESET_IN_PROGRESS' };
 
 export type FilterState = {
   dispatch: FilterDispatch;
@@ -27,100 +29,164 @@ export type FilterState = {
   maxAmount: number;
   minAmountIsSet: boolean;
   maxAmountIsSet: boolean;
+  inProgressFilterCount: number;
+  inProgressMinDate: Date;
+  inProgressMaxDate: Date;
+  inProgressMinDateIsSet: boolean;
+  inProgressMaxDateIsSet: boolean;
+  inProgressStatusFilter: string;
+  inProgressMinAmount: number;
+  inProgressMaxAmount: number;
+  inProgressMinAmountIsSet: boolean;
+  inProgressMaxAmountIsSet: boolean;
 };
 
 export const useFilterReducer = () =>
   useReducer(
     (prevState: FilterState, action: FilterAction) => {
-      let count = prevState.filterCount;
+      let count = prevState.inProgressFilterCount;
       let status = 'none';
       switch (action.type) {
         case 'SET_MIN_DATE':
-          if (!(prevState.minDateIsSet || prevState.maxDateIsSet)) {
+          if (
+            !(
+              prevState.inProgressMinDateIsSet ||
+              prevState.inProgressMaxDateIsSet
+            )
+          ) {
             count += 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            minDateIsSet: true,
-            minDate: action.date,
+            inProgressFilterCount: count,
+            inProgressMinDateIsSet: true,
+            inProgressMinDate: action.date,
           };
         case 'SET_MAX_DATE':
-          if (!(prevState.minDateIsSet || prevState.maxDateIsSet)) {
+          if (
+            !(
+              prevState.inProgressMinDateIsSet ||
+              prevState.inProgressMaxDateIsSet
+            )
+          ) {
             count += 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            maxDateIsSet: true,
-            maxDate: action.date,
+            inProgressFilterCount: count,
+            inProgressMaxDateIsSet: true,
+            inProgressMaxDate: action.date,
           };
         case 'CLEAR_DATE_FILTERS':
-          if (prevState.maxDateIsSet || prevState.minDateIsSet) {
+          if (
+            prevState.inProgressMaxDateIsSet ||
+            prevState.inProgressMinDateIsSet
+          ) {
             count -= 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            minDateIsSet: false,
-            maxDateIsSet: false,
-            minDate: now,
-            maxDate: now,
+            inProgressFilterCount: count,
+            inProgressMinDateIsSet: false,
+            inProgressMaxDateIsSet: false,
+            inProgressMinDate: now,
+            inProgressMaxDate: now,
           };
         case 'SET_STATUS_FILTER':
-          if (prevState.statusFilter === 'none') {
+          if (prevState.inProgressStatusFilter === 'none') {
             count += 1;
           }
-          if (prevState.statusFilter !== action.status) {
+          if (prevState.inProgressStatusFilter !== action.status) {
             status = action.status;
           } else {
             count -= 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            statusFilter: status,
+            inProgressFilterCount: count,
+            inProgressStatusFilter: status,
           };
         case 'CLEAR_STATUS_FILTER':
-          if (prevState.statusFilter !== 'none') {
+          if (prevState.inProgressStatusFilter !== 'none') {
             count -= 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            statusFilter: 'none',
+            inProgressFilterCount: count,
+            inProgressStatusFilter: 'none',
           };
         case 'SET_MIN_AMOUNT':
-          if (!(prevState.minAmountIsSet || prevState.maxAmountIsSet)) {
+          if (
+            !(
+              prevState.inProgressMinAmountIsSet ||
+              prevState.inProgressMaxAmountIsSet
+            )
+          ) {
             count += 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            minAmountIsSet: true,
-            minAmount: action.amount,
+            inProgressFilterCount: count,
+            inProgressMinAmountIsSet: true,
+            inProgressMinAmount: action.amount,
           };
         case 'SET_MAX_AMOUNT':
-          if (!(prevState.minAmountIsSet || prevState.maxAmountIsSet)) {
+          if (
+            !(
+              prevState.inProgressMinAmountIsSet ||
+              prevState.inProgressMaxAmountIsSet
+            )
+          ) {
             count += 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            maxAmountIsSet: true,
-            maxAmount: action.amount,
+            inProgressFilterCount: count,
+            inProgressMaxAmountIsSet: true,
+            inProgressMaxAmount: action.amount,
           };
         case 'CLEAR_AMOUNT_FILTERS':
-          if (prevState.minAmountIsSet || prevState.maxAmountIsSet) {
+          if (
+            prevState.inProgressMinAmountIsSet ||
+            prevState.inProgressMaxAmountIsSet
+          ) {
             count -= 1;
           }
           return {
             ...prevState,
-            filterCount: count,
-            minAmountIsSet: false,
-            maxAmountIsSet: false,
-            minAmount: 0,
-            maxAmount: 0,
+            inProgressFilterCount: count,
+            inProgressMinAmountIsSet: false,
+            inProgressMaxAmountIsSet: false,
+            inProgressMinAmount: 0,
+            inProgressMaxAmount: 0,
+          };
+        case 'ON_SUBMIT':
+          return {
+            ...prevState,
+            filterCount: prevState.inProgressFilterCount,
+            minDate: prevState.inProgressMinDate,
+            maxDate: prevState.inProgressMaxDate,
+            minDateIsSet: prevState.inProgressMinDateIsSet,
+            maxDateIsSet: prevState.inProgressMaxDateIsSet,
+            statusFilter: prevState.inProgressStatusFilter,
+            minAmount: prevState.inProgressMinAmount,
+            maxAmount: prevState.inProgressMaxAmount,
+            minAmountIsSet: prevState.inProgressMinAmountIsSet,
+            maxAmountIsSet: prevState.inProgressMaxAmountIsSet,
+          };
+        case 'RESET_IN_PROGRESS':
+          return {
+            ...prevState,
+            inProgressFilterCount: prevState.filterCount,
+            inProgressMinDate: prevState.minDate,
+            inProgressMaxDate: prevState.maxDate,
+            inProgressMinDateIsSet: prevState.minDateIsSet,
+            inProgressMaxDateIsSet: prevState.maxDateIsSet,
+            inProgressStatusFilter: prevState.statusFilter,
+            inProgressMinAmount: prevState.minAmount,
+            inProgressMaxAmount: prevState.maxAmount,
+            inProgressMinAmountIsSet: prevState.minAmountIsSet,
+            inProgressMaxAmountIsSet: prevState.maxAmountIsSet,
           };
         default:
           return prevState;
@@ -137,6 +203,16 @@ export const useFilterReducer = () =>
       maxAmount: 0,
       minAmountIsSet: false,
       maxAmountIsSet: false,
+      inProgressFilterCount: 0,
+      inProgressMinDate: now,
+      inProgressMaxDate: now,
+      inProgressMinDateIsSet: false,
+      inProgressMaxDateIsSet: false,
+      inProgressStatusFilter: 'none',
+      inProgressMinAmount: 0,
+      inProgressMaxAmount: 0,
+      inProgressMinAmountIsSet: false,
+      inProgressMaxAmountIsSet: false,
       dispatch: () => null,
     },
   );

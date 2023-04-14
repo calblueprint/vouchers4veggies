@@ -38,19 +38,6 @@ export const Size14BoldText = styled.Text`
   line-height: 19px;
 `;
 
-export const SortAndFilterButton = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  border-radius: 5px;
-  width: 146px;
-  background: white;
-  padding: 11px;
-  margin: 12px;
-  border: 1px solid ${Colors.midGray};
-  margin-bottom: 28px;
-  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
-`;
-
 export const CenteredOneLine = styled.View`
   display: flex;
   background-color: #fff;
@@ -79,11 +66,3 @@ export const RightAlignContainer = styled.View`
 export const VerticalSpaceContainer = styled.View`
   height: 21px;
 `;
-
-export const Styles = StyleSheet.create({
-  icon: {
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    paddingHorizontal: 6,
-  },
-});
