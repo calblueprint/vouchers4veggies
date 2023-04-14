@@ -1,12 +1,13 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
   CenteredContainer,
   CloseButtonContainer,
   FilterModalTextContainer,
+  HorizontalSpaceContainer,
   RightAlignContainer,
   Styles,
   SubheadingContainer,
@@ -28,6 +29,7 @@ import {
 } from '../../screens/transactions/TransactionsContext';
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
+import { TransactionStatus } from '../../types/types';
 
 type FilterModalProps = {
   filterState: FilterState;
@@ -50,7 +52,6 @@ export default function FilterModal({
   maxDatePickerIsVisible,
   setMaxDatePickerIsVisible,
 }: FilterModalProps) {
-  const now = new Date();
   return (
     <Modal isVisible={isVisible} coverScreen={false} style={Styles.modal}>
       <FilterModalTextContainer>
@@ -150,6 +151,60 @@ export default function FilterModal({
         <SubheadingContainer>
           <Body1SemiboldText>Filter by status</Body1SemiboldText>
         </SubheadingContainer>
+
+        <OneLine>
+          <FilterField
+            isSelected={filterState.statusFilter === TransactionStatus.UNPAID}
+            onPress={() =>
+              filterDispatch({
+                type: 'SET_STATUS_FILTER',
+                status: TransactionStatus.UNPAID,
+              })
+            }
+            width={91}
+            centerText
+          >
+            <View
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignContent: 'center',
+              }}
+            >
+              <CenteredContainer>
+                <Body1Text>
+                  {filterState.statusFilter !== TransactionStatus.UNPAID ? (
+                    <MidGrayText>UNPAID</MidGrayText>
+                  ) : (
+                    'UNPAID'
+                  )}
+                </Body1Text>
+              </CenteredContainer>
+            </View>
+          </FilterField>
+          <HorizontalSpaceContainer />
+          <FilterField
+            isSelected={filterState.statusFilter === TransactionStatus.PAID}
+            onPress={() =>
+              filterDispatch({
+                type: 'SET_STATUS_FILTER',
+                status: TransactionStatus.PAID,
+              })
+            }
+            width={91}
+            centerText
+          >
+            <CenteredContainer>
+              <Body1Text>
+                {filterState.statusFilter !== TransactionStatus.PAID ? (
+                  <MidGrayText>PAID</MidGrayText>
+                ) : (
+                  'PAID'
+                )}
+              </Body1Text>
+            </CenteredContainer>
+          </FilterField>
+        </OneLine>
 
         <SubheadingContainer>
           <Body1SemiboldText>Filter by amount</Body1SemiboldText>

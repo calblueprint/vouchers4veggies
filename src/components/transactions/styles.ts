@@ -32,22 +32,6 @@ export const SubheadingContainer = styled.View`
   margin-bottom: 9px;
 `;
 
-export const Test2 = styled.View`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-content: center;
-`;
-
-export const Test = styled.View`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-`;
-
 export const StatusContainer = styled.View`
   flex: 1;
   flex-direction: row;
@@ -112,7 +96,7 @@ export const UnselectedFilterField = styled.TouchableOpacity`
   border-radius: 8px;
   background: white;
   padding-vertical: 8px;
-  padding-horizontal: 12px;
+  padding-horizontal: 15px;
   border: 1px solid ${Colors.unselectedGray};
 `;
 
@@ -152,6 +136,10 @@ export const VerticalSpaceContainer = styled.View`
   height: 21px;
 `;
 
+export const HorizontalSpaceContainer = styled.View`
+  width: 20px;
+`;
+
 export const CloseButtonContainer = styled.View`
   display: flex;
   flex-direction: row;
@@ -165,6 +153,7 @@ export const CenteredContainer = styled.Text`
   text-align: center;
   align-content: center;
   justify-content: center;
+  width: 100%;
 `;
 
 export const Styles = StyleSheet.create({
