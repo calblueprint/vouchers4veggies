@@ -1,18 +1,20 @@
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import {
   FlatList,
-  Modal,
+  Platform,
   RefreshControl,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Colors } from 'react-native-paper';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import { Modalize, useModalize } from 'react-native-modalize';
+import Modal from 'react-native-modal';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import {
   BlueText,
   Body1Text,
   Body2Subtext,
+  ButtonTextWhite,
   H2Heading,
   H4CardNavTab,
 } from '../../../assets/Fonts';
@@ -24,16 +26,19 @@ import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction, TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import {
-  CenteredText,
-  ModalTextContainer,
+  CenteredContainer,
+  SortModalTextContainer,
   OneLine,
   RightAlignContainer,
   SortAndFilterButton,
   Styles,
   TitleContainer,
   VerticalSpaceContainer,
+  FilterModalTextContainer,
+  DatePickerButton,
 } from './styles';
 import {
+  ButtonMagenta,
   CardContainer,
   SafeArea,
   StartOfListView,
@@ -53,13 +58,18 @@ export default function TransactionsScreen({
 
   const [sortType, setSortType] = useState(-1);
   const [filterCount, setFilterCount] = useState(0);
+
+  const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
+  const [filterModalIsVisible, setFilterModalIsVisible] = useState(false);
+  const [minDatePickerIsVisible, setMinDateFilterIsVisible] = useState(false);
+  const [maxDatePickerIsVisible, setMaxDateFilterIsVisible] = useState(false);
+  const [minDate, setMinDate] = useState(new Date());
+  const [maxDate, setMaxDate] = useState(new Date());
+
   const [filter, setFilter] = useState('');
   const [filterMin, setFilterMin] = useState(0);
   const [filterMax, setFilterMax] = useState(0);
   const { vendorUuid } = useAuthContext();
-
-  const sortModalRef = useRef<Modalize>(null);
-  const filterModalRef = useRef<Modalize>(null);
 
   const filterByDate = () => {
     const filteredArray = defaultTransactions?.filter(
@@ -126,7 +136,7 @@ export default function TransactionsScreen({
     useReducer(
       (prevState: SortState, sort: number) => {
         switch (sort) {
-          case -1:
+          case -2:
             return { ...prevState, sortedArray: transactions };
           case 0:
             return {
@@ -202,15 +212,11 @@ export default function TransactionsScreen({
     //   default:
     //     break;
     // }
-    setTransactions(defaultTransactions);
     sortDispatch(sortType);
-  }, [
-    vendorUuid,
-    defaultTransactions,
-    sortType,
-    sortDispatch,
-    sortState.sortedArray,
-  ]);
+    setTransactions(defaultTransactions);
+    sortDispatch(-2);
+    console.log(sortType);
+  }, [vendorUuid, sortType, sortDispatch, sortState.sortedArray]);
 
   return (
     <SafeArea>
@@ -223,13 +229,7 @@ export default function TransactionsScreen({
       </TitleContainer>
 
       <OneLine>
-        <SortAndFilterButton
-          onPress={() => {
-            if (sortModalRef) {
-              sortModalRef.current?.open();
-            }
-          }}
-        >
+        <SortAndFilterButton onPress={() => setSortModalIsVisible(true)}>
           <OneLine>
             <Octicons
               name="sort-desc"
@@ -241,13 +241,7 @@ export default function TransactionsScreen({
           </OneLine>
         </SortAndFilterButton>
 
-        <SortAndFilterButton
-          onPress={() => {
-            if (filterModalRef) {
-              filterModalRef.current?.open();
-            }
-          }}
-        >
+        <SortAndFilterButton onPress={() => setFilterModalIsVisible(true)}>
           <OneLine>
             <MaterialIcons
               name="tune"
@@ -286,16 +280,14 @@ export default function TransactionsScreen({
         </CardContainer>
       )}
 
-      <Modalize ref={sortModalRef} snapPoint={395}>
-        <ModalTextContainer>
+      <Modal
+        isVisible={sortModalIsVisible}
+        coverScreen={false}
+        style={Styles.modal}
+      >
+        <SortModalTextContainer>
           <RightAlignContainer>
-            <TouchableOpacity
-              onPress={() => {
-                if (sortModalRef) {
-                  sortModalRef.current?.close();
-                }
-              }}
-            >
+            <TouchableOpacity onPress={() => setSortModalIsVisible(false)}>
               <BlueText>
                 <Body1Text>Close</Body1Text>
               </BlueText>
@@ -303,7 +295,9 @@ export default function TransactionsScreen({
           </RightAlignContainer>
 
           <VerticalSpaceContainer />
-          <H4CardNavTab>Sort invoices by</H4CardNavTab>
+          <CenteredContainer>
+            <H4CardNavTab>Sort invoices by</H4CardNavTab>
+          </CenteredContainer>
           <VerticalSpaceContainer />
           <RadioButton
             data={[
@@ -315,19 +309,17 @@ export default function TransactionsScreen({
             selected={sortType}
             setSelected={setSortType}
           />
-        </ModalTextContainer>
-      </Modalize>
+        </SortModalTextContainer>
+      </Modal>
 
-      <Modalize ref={filterModalRef} snapPoint={510}>
-        <ModalTextContainer>
+      <Modal
+        isVisible={filterModalIsVisible}
+        coverScreen={false}
+        style={Styles.modal}
+      >
+        <FilterModalTextContainer>
           <RightAlignContainer>
-            <TouchableOpacity
-              onPress={() => {
-                if (filterModalRef) {
-                  filterModalRef.current?.close();
-                }
-              }}
-            >
+            <TouchableOpacity onPress={() => setFilterModalIsVisible(false)}>
               <BlueText>
                 <Body1Text>Close</Body1Text>
               </BlueText>
@@ -335,12 +327,58 @@ export default function TransactionsScreen({
           </RightAlignContainer>
 
           <VerticalSpaceContainer />
-          <CenteredText>
-            <H4CardNavTab>Filter invoices</H4CardNavTab>
-          </CenteredText>
+
+          <CenteredContainer>
+            <H4CardNavTab>Filter Invoices</H4CardNavTab>
+          </CenteredContainer>
+
           <VerticalSpaceContainer />
-        </ModalTextContainer>
-      </Modalize>
+
+          <Body1Text>Filter by date</Body1Text>
+          <OneLine>
+            <DatePickerButton onPress={() => setMinDateFilterIsVisible(true)}>
+              <Body1Text>{minDate.toDateString()}</Body1Text>
+            </DatePickerButton>
+            <DatePickerButton onPress={() => setMaxDateFilterIsVisible(true)}>
+              <Body1Text>{maxDate.toDateString()}</Body1Text>
+            </DatePickerButton>
+          </OneLine>
+          {minDatePickerIsVisible ? (
+            <RNDateTimePicker
+              value={minDate}
+              onChange={e => {
+                if (e.nativeEvent.timestamp) {
+                  setMinDate(new Date(e.nativeEvent.timestamp));
+                }
+                setMinDateFilterIsVisible(false);
+              }}
+            />
+          ) : null}
+          {maxDatePickerIsVisible ? (
+            <RNDateTimePicker
+              value={maxDate}
+              onChange={e => {
+                if (e.nativeEvent.timestamp) {
+                  setMaxDate(new Date(e.nativeEvent.timestamp));
+                }
+                setMaxDateFilterIsVisible(false);
+              }}
+            />
+          ) : null}
+          <VerticalSpaceContainer />
+
+          <Body1Text>Filter by status</Body1Text>
+          <VerticalSpaceContainer />
+          <Body1Text>Filter by amount</Body1Text>
+          <VerticalSpaceContainer />
+          <VerticalSpaceContainer />
+          <CenteredContainer>
+            <ButtonMagenta>
+              <ButtonTextWhite>Apply</ButtonTextWhite>
+            </ButtonMagenta>
+          </CenteredContainer>
+        </FilterModalTextContainer>
+      </Modal>
     </SafeArea>
   );
 }

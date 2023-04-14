@@ -68,21 +68,44 @@ export const RightAlignContainer = styled.View`
   margin-top: 19px;
 `;
 
-export const ModalTextContainer = styled.View`
-  margin-right: 29px;
-  margin-left: 29px;
+export const SortModalTextContainer = styled.View`
+  padding-right: 29px;
+  padding-left: 29px;
+  background: ${Colors.offWhite};
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 395px;
+`;
+export const FilterModalTextContainer = styled.View`
+  padding-right: 29px;
+  padding-left: 29px;
+  background: ${Colors.offWhite};
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  height: 510px;
 `;
 
 export const VerticalSpaceContainer = styled.View`
   height: 21px;
 `;
 
-export const CenteredText = styled.Text`
-  textalign: center;
+export const CenteredContainer = styled.Text`
+  text-align: center;
+  align-content: center;
+  justify-content: center;
 `;
 
-export const SortAndFilterModal = styled.Modal`
-  height: 395px;
+export const DatePickerButton = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 146px;
+  background: white;
+  padding: 11px;
+  margin: 12px;
+  border: 1px solid ${Colors.midGray};
+  margin-bottom: 28px;
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 `;
 
 export const Styles = StyleSheet.create({
@@ -90,5 +113,10 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingHorizontal: 6,
+  },
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0,
+    width: '100%',
   },
 });
