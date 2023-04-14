@@ -23,7 +23,7 @@ import {
 } from '../../../assets/Fonts';
 import { LeftAlignContainer, OneLine } from '../common/styles';
 import ClearButton from './ClearButton';
-import { FilterDispatch, FilterState } from '../../utils/filterUtils';
+import { FilterDispatch, FilterState } from '../../utils/transactionUtils';
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
 import { Transaction, TransactionStatus } from '../../types/types';
