@@ -134,13 +134,13 @@ export default function FilterModal({
           <RNDateTimePicker
             value={filterState.inProgressMinDate}
             onChange={e => {
+              setMinDatePickerIsVisible(false);
               if (e.type === 'set' && e.nativeEvent.timestamp) {
                 filterDispatch({
                   type: 'SET_MIN_DATE',
                   date: new Date(e.nativeEvent.timestamp),
                 });
               }
-              setMinDatePickerIsVisible(false);
             }}
           />
         ) : null}
@@ -148,13 +148,13 @@ export default function FilterModal({
           <RNDateTimePicker
             value={filterState.inProgressMaxDate}
             onChange={e => {
+              setMaxDatePickerIsVisible(false);
               if (e.type === 'set' && e.nativeEvent.timestamp) {
                 filterDispatch({
                   type: 'SET_MAX_DATE',
                   date: new Date(e.nativeEvent.timestamp),
                 });
               }
-              setMaxDatePickerIsVisible(false);
             }}
           />
         ) : null}
