@@ -1,7 +1,7 @@
 import React from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import {
-  CenteredContainer,
+  CenteredTextContainer,
   SelectedSortAndFilterBase,
   Styles,
   UnselectedSortAndFilterBase,
@@ -51,25 +51,25 @@ export default function SortAndFilterButton({
   if (isSelected || modalIsVisible) {
     return (
       <SelectedSortAndFilterBase onPress={() => setModalIsVisible(true)}>
-        <CenteredContainer>
+        <CenteredTextContainer>
           <OneLine>
             {icon}
             <MagentaText>
               <Body2Subtext>{text}</Body2Subtext>
             </MagentaText>
           </OneLine>
-        </CenteredContainer>
+        </CenteredTextContainer>
       </SelectedSortAndFilterBase>
     );
   }
   return (
     <UnselectedSortAndFilterBase onPress={() => setModalIsVisible(true)}>
-      <CenteredContainer>
+      <CenteredTextContainer>
         <OneLine>
           {icon}
           <Body2Subtext>{text}</Body2Subtext>
         </OneLine>
-      </CenteredContainer>
+      </CenteredTextContainer>
     </UnselectedSortAndFilterBase>
   );
 }

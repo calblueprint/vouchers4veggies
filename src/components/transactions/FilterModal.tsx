@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
-  CenteredContainer,
+  CenteredTextContainer,
   CloseButtonContainer,
   FilterModalTextContainer,
   HorizontalSpacing,
@@ -13,6 +13,7 @@ import {
   SubheadingContainer,
   FilterVerticalSpacing,
   DatePickerContainer,
+  CenteredContainer,
 } from './styles';
 import {
   BlueText,
@@ -72,9 +73,9 @@ export default function FilterModal({
           </TouchableOpacity>
         </CloseButtonContainer>
 
-        <CenteredContainer>
+        <CenteredTextContainer>
           <H4CardNavTab>Filter Invoices</H4CardNavTab>
-        </CenteredContainer>
+        </CenteredTextContainer>
 
         <SubheadingContainer>
           <OneLine>
@@ -203,7 +204,7 @@ export default function FilterModal({
                 alignContent: 'center',
               }}
             >
-              <CenteredContainer>
+              <CenteredTextContainer>
                 <Body1Text>
                   {filterState.inProgressStatusFilter !==
                   TransactionStatus.UNPAID ? (
@@ -212,7 +213,7 @@ export default function FilterModal({
                     'UNPAID'
                   )}
                 </Body1Text>
-              </CenteredContainer>
+              </CenteredTextContainer>
             </View>
           </FilterField>
           <HorizontalSpacing />
@@ -229,7 +230,7 @@ export default function FilterModal({
             width={91}
             centerText
           >
-            <CenteredContainer>
+            <CenteredTextContainer>
               <Body1Text>
                 {filterState.inProgressStatusFilter !==
                 TransactionStatus.PAID ? (
@@ -238,7 +239,7 @@ export default function FilterModal({
                   'PAID'
                 )}
               </Body1Text>
-            </CenteredContainer>
+            </CenteredTextContainer>
           </FilterField>
         </OneLine>
 
@@ -280,11 +281,11 @@ export default function FilterModal({
             </FilterField>
           </LeftAlignContainer>
 
-          <CenteredContainer>
+          <CenteredTextContainer>
             <Body1Text>
               <MidGrayText>-</MidGrayText>
             </Body1Text>
-          </CenteredContainer>
+          </CenteredTextContainer>
 
           <RightAlignContainer>
             <FilterField

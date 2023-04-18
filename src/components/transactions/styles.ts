@@ -153,11 +153,16 @@ export const CloseButtonContainer = styled.View`
   margin-bottom: 9px;
 `;
 
-export const CenteredContainer = styled.Text`
+export const CenteredTextContainer = styled.Text`
   text-align: center;
   align-content: center;
   justify-content: center;
+`;
+
+export const CenteredContainer = styled.View`
   width: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
