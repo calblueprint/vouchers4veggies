@@ -82,12 +82,7 @@ export default function TransactionsScreen({
     fetchData(vendorUuid);
     filterDispatch({ type: 'ON_RELOAD' });
     sortTransactionDispatch({ type: 'ON_RELOAD' });
-  }, [
-    vendorUuid,
-    sortTransactionState.sortType,
-    sortTransactionDispatch,
-    filterDispatch,
-  ]);
+  }, [vendorUuid, sortTransactionDispatch, filterDispatch]);
 
   return (
     <SafeArea>
