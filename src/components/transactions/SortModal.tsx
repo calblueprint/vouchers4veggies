@@ -2,11 +2,12 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import { TouchableOpacity } from 'react-native';
 import {
-  CenteredContainer,
+  CenteredTextContainer,
   CloseButtonContainer,
   SortModalTextContainer,
   Styles,
   SortVerticalSpacing,
+  CenteredContainer,
 } from './styles';
 import {
   BlueText,
