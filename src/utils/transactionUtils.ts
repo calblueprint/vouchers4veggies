@@ -29,12 +29,18 @@ export const useSortVoucherReducer = (
   setVouchers: (array: Voucher[]) => void,
 ) => {
   const sortVouchersBySerialNumberAsc = (data: Voucher[]) => {
-    const sortedArray = data.sort((a, b) => a.serialNumber - b.serialNumber);
+    const dataCopy = [...data];
+    const sortedArray = dataCopy.sort(
+      (a, b) => a.serialNumber - b.serialNumber,
+    );
     return sortedArray;
   };
 
   const sortVouchersBySerialNumberDesc = (data: Voucher[]) => {
-    const sortedArray = data.sort((a, b) => b.serialNumber - a.serialNumber);
+    const dataCopy = [...data];
+    const sortedArray = dataCopy.sort(
+      (a, b) => b.serialNumber - a.serialNumber,
+    );
     return sortedArray;
   };
 
@@ -131,24 +137,28 @@ export const useSortTransactionReducer = (
   setTransactions: (array: Transaction[]) => void,
 ) => {
   const sortTransactionsByAmountDesc = (data: Transaction[]) => {
-    const sortedArray = data.sort((a, b) => b.value - a.value);
+    const dataCopy = [...data];
+    const sortedArray = dataCopy.sort((a, b) => b.value - a.value);
     return sortedArray;
   };
 
   const sortTransactionsByAmountAsc = (data: Transaction[]) => {
-    const sortedArray = data.sort((a, b) => a.value - b.value);
+    const dataCopy = [...data];
+    const sortedArray = dataCopy.sort((a, b) => a.value - b.value);
     return sortedArray;
   };
 
   const sortTransactionsByDateDesc = (data: Transaction[]) => {
-    const sortedArray = data.sort(
+    const dataCopy = [...data];
+    const sortedArray = dataCopy.sort(
       (a, b) => b.timestamp.seconds - a.timestamp.seconds,
     );
     return sortedArray;
   };
 
   const sortTransactionsByDateAsc = (data: Transaction[]) => {
-    const sortedArray = data.sort(
+    const dataCopy = [...data];
+    const sortedArray = dataCopy.sort(
       (a, b) => a.timestamp.seconds - b.timestamp.seconds,
     );
     return sortedArray;
