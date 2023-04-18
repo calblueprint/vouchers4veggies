@@ -184,6 +184,15 @@ export const SelectedSortAndFilterBase = styled.TouchableOpacity`
   margin-bottom: 28px;
 `;
 
+export const DatePickerContainer = styled.View`
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  background-color: ${Colors.offWhite};
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Styles = StyleSheet.create({
   iconWithPadding: {
     justifyContent: 'center',

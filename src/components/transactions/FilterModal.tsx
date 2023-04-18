@@ -12,6 +12,7 @@ import {
   Styles,
   SubheadingContainer,
   FilterVerticalSpacing,
+  DatePickerContainer,
 } from './styles';
 import {
   BlueText,
@@ -111,6 +112,24 @@ export default function FilterModal({
                 )}
               </Body1Text>
             </FilterField>
+
+            <DatePickerContainer>
+              {minDatePickerIsVisible ? (
+                <RNDateTimePicker
+                  mode="date"
+                  value={filterState.inProgressMinDate}
+                  onChange={e => {
+                    setMinDatePickerIsVisible(false);
+                    if (e.type === 'set' && e.nativeEvent.timestamp) {
+                      filterDispatch({
+                        type: 'SET_MIN_DATE',
+                        date: new Date(e.nativeEvent.timestamp),
+                      });
+                    }
+                  }}
+                />
+              ) : null}
+            </DatePickerContainer>
           </LeftAlignContainer>
           <RightAlignContainer>
             <FilterField
@@ -128,36 +147,26 @@ export default function FilterModal({
                 )}
               </Body1Text>
             </FilterField>
+
+            <DatePickerContainer>
+              {maxDatePickerIsVisible ? (
+                <RNDateTimePicker
+                  mode="date"
+                  value={filterState.inProgressMaxDate}
+                  onChange={e => {
+                    setMaxDatePickerIsVisible(false);
+                    if (e.type === 'set' && e.nativeEvent.timestamp) {
+                      filterDispatch({
+                        type: 'SET_MAX_DATE',
+                        date: new Date(e.nativeEvent.timestamp),
+                      });
+                    }
+                  }}
+                />
+              ) : null}
+            </DatePickerContainer>
           </RightAlignContainer>
         </OneLine>
-        {minDatePickerIsVisible ? (
-          <RNDateTimePicker
-            value={filterState.inProgressMinDate}
-            onChange={e => {
-              setMinDatePickerIsVisible(false);
-              if (e.type === 'set' && e.nativeEvent.timestamp) {
-                filterDispatch({
-                  type: 'SET_MIN_DATE',
-                  date: new Date(e.nativeEvent.timestamp),
-                });
-              }
-            }}
-          />
-        ) : null}
-        {maxDatePickerIsVisible ? (
-          <RNDateTimePicker
-            value={filterState.inProgressMaxDate}
-            onChange={e => {
-              setMaxDatePickerIsVisible(false);
-              if (e.type === 'set' && e.nativeEvent.timestamp) {
-                filterDispatch({
-                  type: 'SET_MAX_DATE',
-                  date: new Date(e.nativeEvent.timestamp),
-                });
-              }
-            }}
-          />
-        ) : null}
 
         <SubheadingContainer>
           <OneLine>
@@ -301,8 +310,10 @@ export default function FilterModal({
           <ButtonMagenta
             onPress={() => {
               setIsVisible(false);
-              filterDispatch({ type: 'ON_SUBMIT' });
-              sortDispatch({ type: 'ON_RELOAD' });
+              Promise.resolve().then(() => {
+                filterDispatch({ type: 'ON_SUBMIT' });
+                sortDispatch({ type: 'ON_RELOAD' });
+              });
             }}
           >
             <ButtonTextWhite>{`Apply${
