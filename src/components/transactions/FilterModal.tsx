@@ -34,7 +34,6 @@ import {
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
 import { TransactionStatus } from '../../types/types';
-import Colors from '../../../assets/Colors';
 
 type FilterModalProps = {
   filterState: FilterState;
