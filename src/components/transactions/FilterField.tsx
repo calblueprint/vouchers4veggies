@@ -26,17 +26,17 @@ export default function FilterField({
   useCalendarIcon = false,
   centerText = false,
 }: FilterFieldProps) {
-  const style = { width: 'auto', minWidth };
-  if (minWidth === 0) {
-    style.width = '100%';
-  }
-
   if (isSelected) {
     return (
-      <SelectedFilterField onPress={onPress} style={style}>
+      <SelectedFilterField
+        onPress={onPress}
+        style={minWidth > 0 ? { minWidth } : { width: '100%' }}
+      >
         <OneLine>
           {centerText ? (
-            <View style={{ width: '100%' }}>{children}</View>
+            <View style={minWidth > 0 ? { minWidth } : { width: '100%' }}>
+              {children}
+            </View>
           ) : (
             <View>{children}</View>
           )}
@@ -55,10 +55,15 @@ export default function FilterField({
     );
   }
   return (
-    <UnselectedFilterField onPress={onPress} style={style}>
+    <UnselectedFilterField
+      onPress={onPress}
+      style={minWidth > 0 ? { minWidth } : { width: '100%' }}
+    >
       <OneLine>
         {centerText ? (
-          <View style={{ width: '100%' }}>{children}</View>
+          <View style={minWidth > 0 ? { minWidth } : { width: '100%' }}>
+            {children}
+          </View>
         ) : (
           <View>{children}</View>
         )}

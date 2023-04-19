@@ -1,12 +1,12 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { Platform, TouchableOpacity, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
   CenteredTextContainer,
   CloseButtonContainer,
-  FilterModalTextContainer,
+  FilterModalContainer,
   HorizontalSpacing,
   RightAlignContainer,
   Styles,
@@ -14,6 +14,7 @@ import {
   FilterVerticalSpacing,
   DatePickerContainer,
   CenteredContainer,
+  PaddedScrollView,
 } from './styles';
 import {
   BlueText,
@@ -33,6 +34,7 @@ import {
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
 import { TransactionStatus } from '../../types/types';
+import Colors from '../../../assets/Colors';
 
 type FilterModalProps = {
   filterState: FilterState;
@@ -64,21 +66,21 @@ export default function FilterModal({
       style={Styles.modal}
       backdropTransitionOutTiming={0}
     >
-      <FilterModalTextContainer>
-        <ScrollView>
-          <CloseButtonContainer>
-            <TouchableOpacity
-              onPress={() => {
-                setIsVisible(false);
-                filterDispatch({ type: 'RESET_IN_PROGRESS' });
-              }}
-            >
-              <BlueText>
-                <Body1Text>Close</Body1Text>
-              </BlueText>
-            </TouchableOpacity>
-          </CloseButtonContainer>
+      <FilterModalContainer>
+        <CloseButtonContainer>
+          <TouchableOpacity
+            onPress={() => {
+              setIsVisible(false);
+              filterDispatch({ type: 'RESET_IN_PROGRESS' });
+            }}
+          >
+            <BlueText>
+              <Body1Text>Close</Body1Text>
+            </BlueText>
+          </TouchableOpacity>
+        </CloseButtonContainer>
 
+        <PaddedScrollView alwaysBounceVertical={false}>
           <CenteredTextContainer>
             <H4CardNavTab>Filter Invoices</H4CardNavTab>
           </CenteredTextContainer>
@@ -102,11 +104,16 @@ export default function FilterModal({
             </OneLine>
           </SubheadingContainer>
 
-          <OneLine>
+          <OneLine style={{ zIndex: 5 }}>
             <LeftAlignContainer>
               <FilterField
                 isSelected={filterState.inProgressMinDateIsSet}
-                onPress={() => setMinDatePickerIsVisible(true)}
+                onPress={() => {
+                  if (maxDatePickerIsVisible) {
+                    setMaxDatePickerIsVisible(false);
+                  }
+                  setMinDatePickerIsVisible(true);
+                }}
                 useCalendarIcon
               >
                 <Body1Text>
@@ -117,30 +124,17 @@ export default function FilterModal({
                   )}
                 </Body1Text>
               </FilterField>
-
-              <DatePickerContainer>
-                {minDatePickerIsVisible ? (
-                  <RNDateTimePicker
-                    mode="date"
-                    value={filterState.inProgressMinDate}
-                    onChange={e => {
-                      setMinDatePickerIsVisible(false);
-                      if (e.type === 'set' && e.nativeEvent.timestamp) {
-                        filterDispatch({
-                          type: 'SET_MIN_DATE',
-                          date: new Date(e.nativeEvent.timestamp),
-                        });
-                      }
-                    }}
-                  />
-                ) : null}
-              </DatePickerContainer>
             </LeftAlignContainer>
             <HorizontalSpacing />
             <RightAlignContainer>
               <FilterField
                 isSelected={filterState.inProgressMaxDateIsSet}
-                onPress={() => setMaxDatePickerIsVisible(true)}
+                onPress={() => {
+                  if (minDatePickerIsVisible) {
+                    setMinDatePickerIsVisible(false);
+                  }
+                  setMaxDatePickerIsVisible(true);
+                }}
                 useCalendarIcon
               >
                 <Body1Text>
@@ -151,25 +145,44 @@ export default function FilterModal({
                   )}
                 </Body1Text>
               </FilterField>
-
-              <DatePickerContainer>
-                {maxDatePickerIsVisible ? (
-                  <RNDateTimePicker
-                    mode="date"
-                    value={filterState.inProgressMaxDate}
-                    onChange={e => {
-                      setMaxDatePickerIsVisible(false);
-                      if (e.type === 'set' && e.nativeEvent.timestamp) {
-                        filterDispatch({
-                          type: 'SET_MAX_DATE',
-                          date: new Date(e.nativeEvent.timestamp),
-                        });
-                      }
-                    }}
-                  />
-                ) : null}
-              </DatePickerContainer>
             </RightAlignContainer>
+            {minDatePickerIsVisible && (
+              <DatePickerContainer>
+                <RNDateTimePicker
+                  mode="date"
+                  value={filterState.inProgressMinDate}
+                  display={Platform.OS === 'ios' ? 'inline' : 'default'}
+                  onChange={e => {
+                    setMinDatePickerIsVisible(false);
+                    if (e.type === 'set' && e.nativeEvent.timestamp) {
+                      filterDispatch({
+                        type: 'SET_MIN_DATE',
+                        date: new Date(e.nativeEvent.timestamp),
+                      });
+                    }
+                  }}
+                />
+              </DatePickerContainer>
+            )}
+
+            {maxDatePickerIsVisible && (
+              <DatePickerContainer>
+                <RNDateTimePicker
+                  mode="date"
+                  value={filterState.inProgressMaxDate}
+                  display={Platform.OS === 'ios' ? 'inline' : 'default'}
+                  onChange={e => {
+                    setMaxDatePickerIsVisible(false);
+                    if (e.type === 'set' && e.nativeEvent.timestamp) {
+                      filterDispatch({
+                        type: 'SET_MAX_DATE',
+                        date: new Date(e.nativeEvent.timestamp),
+                      });
+                    }
+                  }}
+                />
+              </DatePickerContainer>
+            )}
           </OneLine>
 
           <SubheadingContainer>
@@ -293,7 +306,7 @@ export default function FilterModal({
 
             <RightAlignContainer>
               <FilterField
-                isSelected={filterState.inProgressMaxDateIsSet}
+                isSelected={filterState.inProgressMaxAmountIsSet}
                 onPress={() => {
                   /* TODO: implement amount picker */
                 }}
@@ -327,8 +340,8 @@ export default function FilterModal({
               }`}</ButtonTextWhite>
             </ButtonMagenta>
           </CenteredContainer>
-        </ScrollView>
-      </FilterModalTextContainer>
+        </PaddedScrollView>
+      </FilterModalContainer>
     </Modal>
   );
 }

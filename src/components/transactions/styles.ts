@@ -115,21 +115,23 @@ export const ClearButtonContainer = styled.TouchableOpacity`
   background: white;
 `;
 
-export const SortModalTextContainer = styled.View`
-  padding-right: 29px;
-  padding-left: 29px;
+export const SortModalContainer = styled.View`
   background: ${Colors.offWhite};
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  height: 395px;
+  max-height: 50%;
 `;
-export const FilterModalTextContainer = styled.View`
+
+export const PaddedScrollView = styled.ScrollView`
   padding-right: 29px;
   padding-left: 29px;
+`;
+
+export const FilterModalContainer = styled.View`
   background: ${Colors.offWhite};
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  height: 510px;
+  max-height: 75%;
 `;
 
 export const SortVerticalSpacing = styled.View`
@@ -151,6 +153,7 @@ export const CloseButtonContainer = styled.View`
   align-content: center;
   margin-top: 19px;
   margin-bottom: 9px;
+  margin-right: 29px;
 `;
 
 export const CenteredTextContainer = styled.Text`
@@ -191,9 +194,10 @@ export const SelectedSortAndFilterBase = styled.TouchableOpacity`
 
 export const DatePickerContainer = styled.View`
   position: absolute;
-  width: 100%;
-  z-index: 5;
-  background-color: ${Colors.offWhite};
+  top: 40px;
+  right: 0;
+  left: 0;
+  background-color: ${Colors.midGray};
   align-items: center;
   justify-content: center;
 `;
