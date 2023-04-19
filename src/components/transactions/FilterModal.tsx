@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { TouchableOpacity, View } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
@@ -58,272 +58,276 @@ export default function FilterModal({
   setMaxDatePickerIsVisible,
 }: FilterModalProps) {
   return (
-    <Modal isVisible={isVisible} coverScreen={false} style={Styles.modal}>
+    <Modal
+      isVisible={isVisible}
+      coverScreen={false}
+      style={Styles.modal}
+      backdropTransitionOutTiming={0}
+    >
       <FilterModalTextContainer>
-        <CloseButtonContainer>
-          <TouchableOpacity
-            onPress={() => {
-              setIsVisible(false);
-              filterDispatch({ type: 'RESET_IN_PROGRESS' });
-            }}
-          >
-            <BlueText>
-              <Body1Text>Close</Body1Text>
-            </BlueText>
-          </TouchableOpacity>
-        </CloseButtonContainer>
+        <ScrollView>
+          <CloseButtonContainer>
+            <TouchableOpacity
+              onPress={() => {
+                setIsVisible(false);
+                filterDispatch({ type: 'RESET_IN_PROGRESS' });
+              }}
+            >
+              <BlueText>
+                <Body1Text>Close</Body1Text>
+              </BlueText>
+            </TouchableOpacity>
+          </CloseButtonContainer>
 
-        <CenteredTextContainer>
-          <H4CardNavTab>Filter Invoices</H4CardNavTab>
-        </CenteredTextContainer>
+          <CenteredTextContainer>
+            <H4CardNavTab>Filter Invoices</H4CardNavTab>
+          </CenteredTextContainer>
 
-        <SubheadingContainer>
+          <SubheadingContainer>
+            <OneLine>
+              <Body1SemiboldText>Filter by date</Body1SemiboldText>
+              <ClearButton
+                isDisabled={
+                  !(
+                    filterState.inProgressMinDateIsSet ||
+                    filterState.inProgressMaxDateIsSet
+                  )
+                }
+                onPress={() => {
+                  filterDispatch({
+                    type: 'CLEAR_DATE_FILTERS',
+                  });
+                }}
+              />
+            </OneLine>
+          </SubheadingContainer>
+
           <OneLine>
-            <Body1SemiboldText>Filter by date</Body1SemiboldText>
-            <ClearButton
-              isDisabled={
-                !(
-                  filterState.inProgressMinDateIsSet ||
-                  filterState.inProgressMaxDateIsSet
-                )
+            <LeftAlignContainer>
+              <FilterField
+                isSelected={filterState.inProgressMinDateIsSet}
+                onPress={() => setMinDatePickerIsVisible(true)}
+                useCalendarIcon
+              >
+                <Body1Text>
+                  {filterState.inProgressMinDateIsSet ? (
+                    moment(filterState.inProgressMinDate).format('M/DD/YYYY')
+                  ) : (
+                    <MidGrayText>From</MidGrayText>
+                  )}
+                </Body1Text>
+              </FilterField>
+
+              <DatePickerContainer>
+                {minDatePickerIsVisible ? (
+                  <RNDateTimePicker
+                    mode="date"
+                    value={filterState.inProgressMinDate}
+                    onChange={e => {
+                      setMinDatePickerIsVisible(false);
+                      if (e.type === 'set' && e.nativeEvent.timestamp) {
+                        filterDispatch({
+                          type: 'SET_MIN_DATE',
+                          date: new Date(e.nativeEvent.timestamp),
+                        });
+                      }
+                    }}
+                  />
+                ) : null}
+              </DatePickerContainer>
+            </LeftAlignContainer>
+            <HorizontalSpacing />
+            <RightAlignContainer>
+              <FilterField
+                isSelected={filterState.inProgressMaxDateIsSet}
+                onPress={() => setMaxDatePickerIsVisible(true)}
+                useCalendarIcon
+              >
+                <Body1Text>
+                  {filterState.inProgressMaxDateIsSet ? (
+                    moment(filterState.inProgressMaxDate).format('M/D/YY')
+                  ) : (
+                    <MidGrayText>To</MidGrayText>
+                  )}
+                </Body1Text>
+              </FilterField>
+
+              <DatePickerContainer>
+                {maxDatePickerIsVisible ? (
+                  <RNDateTimePicker
+                    mode="date"
+                    value={filterState.inProgressMaxDate}
+                    onChange={e => {
+                      setMaxDatePickerIsVisible(false);
+                      if (e.type === 'set' && e.nativeEvent.timestamp) {
+                        filterDispatch({
+                          type: 'SET_MAX_DATE',
+                          date: new Date(e.nativeEvent.timestamp),
+                        });
+                      }
+                    }}
+                  />
+                ) : null}
+              </DatePickerContainer>
+            </RightAlignContainer>
+          </OneLine>
+
+          <SubheadingContainer>
+            <OneLine>
+              <Body1SemiboldText>Filter by status</Body1SemiboldText>
+              <ClearButton
+                isDisabled={filterState.inProgressStatusFilter === 'none'}
+                onPress={() => {
+                  filterDispatch({
+                    type: 'CLEAR_STATUS_FILTER',
+                  });
+                }}
+              />
+            </OneLine>
+          </SubheadingContainer>
+
+          <OneLine>
+            <FilterField
+              isSelected={
+                filterState.inProgressStatusFilter === TransactionStatus.UNPAID
               }
-              onPress={() => {
+              onPress={() =>
                 filterDispatch({
-                  type: 'CLEAR_DATE_FILTERS',
-                });
-              }}
-            />
-          </OneLine>
-        </SubheadingContainer>
-
-        <OneLine>
-          <LeftAlignContainer>
-            <FilterField
-              isSelected={filterState.inProgressMinDateIsSet}
-              onPress={() => setMinDatePickerIsVisible(true)}
-              width="93%"
-              minWidth={148}
-              useCalendarIcon
+                  type: 'SET_STATUS_FILTER',
+                  status: TransactionStatus.UNPAID,
+                })
+              }
+              minWidth={91}
+              centerText
             >
-              <Body1Text>
-                {filterState.inProgressMinDateIsSet ? (
-                  moment(filterState.inProgressMinDate).format('M/DD/YYYY')
-                ) : (
-                  <MidGrayText>From</MidGrayText>
-                )}
-              </Body1Text>
+              <View
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                }}
+              >
+                <CenteredTextContainer>
+                  <Body1Text>
+                    {filterState.inProgressStatusFilter !==
+                    TransactionStatus.UNPAID ? (
+                      <MidGrayText>UNPAID</MidGrayText>
+                    ) : (
+                      'UNPAID'
+                    )}
+                  </Body1Text>
+                </CenteredTextContainer>
+              </View>
             </FilterField>
-
-            <DatePickerContainer>
-              {minDatePickerIsVisible ? (
-                <RNDateTimePicker
-                  mode="date"
-                  value={filterState.inProgressMinDate}
-                  onChange={e => {
-                    setMinDatePickerIsVisible(false);
-                    if (e.type === 'set' && e.nativeEvent.timestamp) {
-                      filterDispatch({
-                        type: 'SET_MIN_DATE',
-                        date: new Date(e.nativeEvent.timestamp),
-                      });
-                    }
-                  }}
-                />
-              ) : null}
-            </DatePickerContainer>
-          </LeftAlignContainer>
-          <RightAlignContainer>
+            <HorizontalSpacing />
             <FilterField
-              isSelected={filterState.inProgressMaxDateIsSet}
-              onPress={() => setMaxDatePickerIsVisible(true)}
-              width="93%"
-              minWidth={148}
-              useCalendarIcon
-            >
-              <Body1Text>
-                {filterState.inProgressMaxDateIsSet ? (
-                  moment(filterState.inProgressMaxDate).format('M/D/YY')
-                ) : (
-                  <MidGrayText>To</MidGrayText>
-                )}
-              </Body1Text>
-            </FilterField>
-
-            <DatePickerContainer>
-              {maxDatePickerIsVisible ? (
-                <RNDateTimePicker
-                  mode="date"
-                  value={filterState.inProgressMaxDate}
-                  onChange={e => {
-                    setMaxDatePickerIsVisible(false);
-                    if (e.type === 'set' && e.nativeEvent.timestamp) {
-                      filterDispatch({
-                        type: 'SET_MAX_DATE',
-                        date: new Date(e.nativeEvent.timestamp),
-                      });
-                    }
-                  }}
-                />
-              ) : null}
-            </DatePickerContainer>
-          </RightAlignContainer>
-        </OneLine>
-
-        <SubheadingContainer>
-          <OneLine>
-            <Body1SemiboldText>Filter by status</Body1SemiboldText>
-            <ClearButton
-              isDisabled={filterState.inProgressStatusFilter === 'none'}
-              onPress={() => {
+              isSelected={
+                filterState.inProgressStatusFilter === TransactionStatus.PAID
+              }
+              onPress={() =>
                 filterDispatch({
-                  type: 'CLEAR_STATUS_FILTER',
-                });
-              }}
-            />
-          </OneLine>
-        </SubheadingContainer>
-
-        <OneLine>
-          <FilterField
-            isSelected={
-              filterState.inProgressStatusFilter === TransactionStatus.UNPAID
-            }
-            onPress={() =>
-              filterDispatch({
-                type: 'SET_STATUS_FILTER',
-                status: TransactionStatus.UNPAID,
-              })
-            }
-            width={91}
-            centerText
-          >
-            <View
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignContent: 'center',
-              }}
+                  type: 'SET_STATUS_FILTER',
+                  status: TransactionStatus.PAID,
+                })
+              }
+              minWidth={91}
+              centerText
             >
               <CenteredTextContainer>
                 <Body1Text>
                   {filterState.inProgressStatusFilter !==
-                  TransactionStatus.UNPAID ? (
-                    <MidGrayText>UNPAID</MidGrayText>
+                  TransactionStatus.PAID ? (
+                    <MidGrayText>PAID</MidGrayText>
                   ) : (
-                    'UNPAID'
+                    'PAID'
                   )}
                 </Body1Text>
               </CenteredTextContainer>
-            </View>
-          </FilterField>
-          <HorizontalSpacing />
-          <FilterField
-            isSelected={
-              filterState.inProgressStatusFilter === TransactionStatus.PAID
-            }
-            onPress={() =>
-              filterDispatch({
-                type: 'SET_STATUS_FILTER',
-                status: TransactionStatus.PAID,
-              })
-            }
-            width={91}
-            centerText
-          >
-            <CenteredTextContainer>
-              <Body1Text>
-                {filterState.inProgressStatusFilter !==
-                TransactionStatus.PAID ? (
-                  <MidGrayText>PAID</MidGrayText>
-                ) : (
-                  'PAID'
-                )}
-              </Body1Text>
-            </CenteredTextContainer>
-          </FilterField>
-        </OneLine>
+            </FilterField>
+          </OneLine>
 
-        <SubheadingContainer>
+          <SubheadingContainer>
+            <OneLine>
+              <Body1SemiboldText>Filter by amount</Body1SemiboldText>
+              <ClearButton
+                isDisabled={
+                  !(
+                    filterState.inProgressMinAmountIsSet ||
+                    filterState.inProgressMaxAmountIsSet
+                  )
+                }
+                onPress={() => {
+                  filterDispatch({
+                    type: 'CLEAR_AMOUNT_FILTERS',
+                  });
+                }}
+              />
+            </OneLine>
+          </SubheadingContainer>
+
           <OneLine>
-            <Body1SemiboldText>Filter by amount</Body1SemiboldText>
-            <ClearButton
-              isDisabled={
-                !(
-                  filterState.inProgressMinAmountIsSet ||
-                  filterState.inProgressMaxAmountIsSet
-                )
-              }
+            <LeftAlignContainer>
+              <FilterField
+                isSelected={filterState.inProgressMinAmountIsSet}
+                onPress={() => {
+                  /* TODO: implement amount picker */
+                }}
+              >
+                <Body1Text>
+                  {filterState.inProgressMinAmountIsSet ? (
+                    `$${filterState.inProgressMinAmount}`
+                  ) : (
+                    <MidGrayText>$ Min</MidGrayText>
+                  )}
+                </Body1Text>
+              </FilterField>
+            </LeftAlignContainer>
+
+            <HorizontalSpacing>
+              <CenteredTextContainer>
+                <Body1Text>
+                  <MidGrayText>-</MidGrayText>
+                </Body1Text>
+              </CenteredTextContainer>
+            </HorizontalSpacing>
+
+            <RightAlignContainer>
+              <FilterField
+                isSelected={filterState.inProgressMaxDateIsSet}
+                onPress={() => {
+                  /* TODO: implement amount picker */
+                }}
+              >
+                <Body1Text>
+                  {filterState.inProgressMaxAmountIsSet ? (
+                    `$${filterState.inProgressMaxAmount}`
+                  ) : (
+                    <MidGrayText>$ Max</MidGrayText>
+                  )}
+                </Body1Text>
+              </FilterField>
+            </RightAlignContainer>
+          </OneLine>
+
+          <FilterVerticalSpacing />
+          <CenteredContainer>
+            <ButtonMagenta
               onPress={() => {
-                filterDispatch({
-                  type: 'CLEAR_AMOUNT_FILTERS',
+                setIsVisible(false);
+                Promise.resolve().then(() => {
+                  filterDispatch({ type: 'ON_SUBMIT' });
+                  sortDispatch({ type: 'ON_RELOAD' });
                 });
               }}
-            />
-          </OneLine>
-        </SubheadingContainer>
-
-        <OneLine>
-          <LeftAlignContainer>
-            <FilterField
-              isSelected={filterState.inProgressMinAmountIsSet}
-              onPress={() => {
-                /* TODO: implement amount picker */
-              }}
-              minWidth={148}
             >
-              <Body1Text>
-                {filterState.inProgressMinAmountIsSet ? (
-                  `$${filterState.inProgressMinAmount}`
-                ) : (
-                  <MidGrayText>$ Min</MidGrayText>
-                )}
-              </Body1Text>
-            </FilterField>
-          </LeftAlignContainer>
-
-          <CenteredTextContainer>
-            <Body1Text>
-              <MidGrayText>-</MidGrayText>
-            </Body1Text>
-          </CenteredTextContainer>
-
-          <RightAlignContainer>
-            <FilterField
-              isSelected={filterState.inProgressMaxDateIsSet}
-              onPress={() => {
-                /* TODO: implement amount picker */
-              }}
-              minWidth={148}
-            >
-              <Body1Text>
-                {filterState.inProgressMaxAmountIsSet ? (
-                  `$${filterState.inProgressMaxAmount}`
-                ) : (
-                  <MidGrayText>$ Max</MidGrayText>
-                )}
-              </Body1Text>
-            </FilterField>
-          </RightAlignContainer>
-        </OneLine>
-
-        <FilterVerticalSpacing />
-        <CenteredContainer>
-          <ButtonMagenta
-            onPress={() => {
-              setIsVisible(false);
-              Promise.resolve().then(() => {
-                filterDispatch({ type: 'ON_SUBMIT' });
-                sortDispatch({ type: 'ON_RELOAD' });
-              });
-            }}
-          >
-            <ButtonTextWhite>{`Apply${
-              filterState.inProgressFilterCount > 0
-                ? ` (${filterState.inProgressFilterCount})`
-                : ''
-            }`}</ButtonTextWhite>
-          </ButtonMagenta>
-        </CenteredContainer>
+              <ButtonTextWhite>{`Apply${
+                filterState.inProgressFilterCount > 0
+                  ? ` (${filterState.inProgressFilterCount})`
+                  : ''
+              }`}</ButtonTextWhite>
+            </ButtonMagenta>
+          </CenteredContainer>
+        </ScrollView>
       </FilterModalTextContainer>
     </Modal>
   );
