@@ -155,7 +155,6 @@ export const CloseButtonContainer = styled.View`
 
 export const CenteredTextContainer = styled.Text`
   text-align: center;
-  background-color: green;
 `;
 
 export const CenteredContainer = styled.View`

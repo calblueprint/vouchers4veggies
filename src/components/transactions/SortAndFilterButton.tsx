@@ -1,14 +1,12 @@
 import React from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import {
-  CenteredContainer,
-  CenteredTextContainer,
   SelectedSortAndFilterBase,
   Styles,
   UnselectedSortAndFilterBase,
 } from './styles';
 import { Body2Subtext, MagentaText } from '../../../assets/Fonts';
-import { OneLine } from '../common/styles';
+import { CenteredOneLine } from '../common/styles';
 import Colors from '../../../assets/Colors';
 
 type SortAndFilterButtonProps = {
@@ -52,29 +50,21 @@ export default function SortAndFilterButton({
   if (isSelected || modalIsVisible) {
     return (
       <SelectedSortAndFilterBase onPress={() => setModalIsVisible(true)}>
-        <CenteredContainer>
-          <CenteredTextContainer>
-            <OneLine>
-              {icon}
-              <MagentaText>
-                <Body2Subtext>{text}</Body2Subtext>
-              </MagentaText>
-            </OneLine>
-          </CenteredTextContainer>
-        </CenteredContainer>
+        <CenteredOneLine>
+          {icon}
+          <MagentaText>
+            <Body2Subtext>{text}</Body2Subtext>
+          </MagentaText>
+        </CenteredOneLine>
       </SelectedSortAndFilterBase>
     );
   }
   return (
     <UnselectedSortAndFilterBase onPress={() => setModalIsVisible(true)}>
-      <CenteredContainer>
-        <CenteredTextContainer>
-          <OneLine>
-            {icon}
-            <Body2Subtext>{text}</Body2Subtext>
-          </OneLine>
-        </CenteredTextContainer>
-      </CenteredContainer>
+      <CenteredOneLine>
+        {icon}
+        <Body2Subtext>{text}</Body2Subtext>
+      </CenteredOneLine>
     </UnselectedSortAndFilterBase>
   );
 }
