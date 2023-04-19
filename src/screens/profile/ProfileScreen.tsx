@@ -78,7 +78,7 @@ export default function ProfileScreen({
           </LeftAlignContainer>
           <LeftAlignContainer>
             <ContactUsContainer>
-              <H4CardNavTab>Contact Us</H4CardNavTab>
+              <H4CardNavTab> Contact Us</H4CardNavTab>
             </ContactUsContainer>
           </LeftAlignContainer>
           <Icon
