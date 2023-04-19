@@ -1,12 +1,13 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import {
   CloseButtonContainer,
-  SortModalTextContainer,
+  SortModalContainer,
   Styles,
   SortVerticalSpacing,
   CenteredContainer,
+  PaddedScrollView,
 } from './styles';
 import {
   BlueText,
@@ -42,21 +43,21 @@ export default function SortModal({
       style={Styles.modal}
       backdropTransitionOutTiming={0}
     >
-      <SortModalTextContainer>
-        <ScrollView>
-          <CloseButtonContainer>
-            <TouchableOpacity
-              onPress={() => {
-                setIsVisible(false);
-                sortDispatch({ type: 'RESET_IN_PROGRESS' });
-              }}
-            >
-              <BlueText>
-                <Body1Text>Close</Body1Text>
-              </BlueText>
-            </TouchableOpacity>
-          </CloseButtonContainer>
+      <SortModalContainer>
+        <CloseButtonContainer>
+          <TouchableOpacity
+            onPress={() => {
+              setIsVisible(false);
+              sortDispatch({ type: 'RESET_IN_PROGRESS' });
+            }}
+          >
+            <BlueText>
+              <Body1Text>Close</Body1Text>
+            </BlueText>
+          </TouchableOpacity>
+        </CloseButtonContainer>
 
+        <PaddedScrollView alwaysBounceVertical={false}>
           <H4CardNavTab>Sort invoices by</H4CardNavTab>
           <SortVerticalSpacing />
           <RadioButton
@@ -78,8 +79,8 @@ export default function SortModal({
               <ButtonTextWhite>Apply</ButtonTextWhite>
             </ButtonMagenta>
           </CenteredContainer>
-        </ScrollView>
-      </SortModalTextContainer>
+        </PaddedScrollView>
+      </SortModalContainer>
     </Modal>
   );
 }
