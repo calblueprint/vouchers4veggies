@@ -7,6 +7,7 @@ export const OneLine = styled.View`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  background-color: red;
 `;
 
 export const SelectableOneLine = styled.TouchableOpacity`

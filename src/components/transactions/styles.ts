@@ -155,8 +155,7 @@ export const CloseButtonContainer = styled.View`
 
 export const CenteredTextContainer = styled.Text`
   text-align: center;
-  align-content: center;
-  justify-content: center;
+  background-color: green;
 `;
 
 export const CenteredContainer = styled.View`
@@ -168,6 +167,7 @@ export const CenteredContainer = styled.View`
 export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
+  justify-content: center;
   border-radius: 5px;
   width: 146px;
   background: white;
@@ -180,6 +180,7 @@ export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
 export const SelectedSortAndFilterBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
+  justify-content: center;
   border-radius: 5px;
   width: 146px;
   background: ${Colors.lightMagenta};
