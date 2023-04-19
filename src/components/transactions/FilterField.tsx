@@ -14,8 +14,7 @@ type FilterFieldProps = {
   isSelected: boolean;
   children: ReactElement;
   onPress: () => void;
-  width?: number | string;
-  minWidth?: number | string;
+  minWidth?: number;
   useCalendarIcon?: boolean;
   centerText?: boolean;
 };
@@ -23,14 +22,18 @@ export default function FilterField({
   isSelected,
   children,
   onPress,
-  width = 'auto',
-  minWidth = 'auto',
+  minWidth = 0,
   useCalendarIcon = false,
   centerText = false,
 }: FilterFieldProps) {
+  const style = { width: 'auto', minWidth };
+  if (minWidth === 0) {
+    style.width = '100%';
+  }
+
   if (isSelected) {
     return (
-      <SelectedFilterField onPress={onPress} style={{ width, minWidth }}>
+      <SelectedFilterField onPress={onPress} style={style}>
         <OneLine>
           {centerText ? (
             <View style={{ width: '100%' }}>{children}</View>
@@ -52,7 +55,7 @@ export default function FilterField({
     );
   }
   return (
-    <UnselectedFilterField onPress={onPress} style={{ width, minWidth }}>
+    <UnselectedFilterField onPress={onPress} style={style}>
       <OneLine>
         {centerText ? (
           <View style={{ width: '100%' }}>{children}</View>

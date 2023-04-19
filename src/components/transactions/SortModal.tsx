@@ -1,8 +1,7 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { TouchableOpacity } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import {
-  CenteredTextContainer,
   CloseButtonContainer,
   SortModalTextContainer,
   Styles,
@@ -37,42 +36,49 @@ export default function SortModal({
   sortDescriptions,
 }: SortModalProps) {
   return (
-    <Modal isVisible={isVisible} coverScreen={false} style={Styles.modal}>
+    <Modal
+      isVisible={isVisible}
+      coverScreen={false}
+      style={Styles.modal}
+      backdropTransitionOutTiming={0}
+    >
       <SortModalTextContainer>
-        <CloseButtonContainer>
-          <TouchableOpacity
-            onPress={() => {
-              setIsVisible(false);
-              sortDispatch({ type: 'RESET_IN_PROGRESS' });
-            }}
-          >
-            <BlueText>
-              <Body1Text>Close</Body1Text>
-            </BlueText>
-          </TouchableOpacity>
-        </CloseButtonContainer>
+        <ScrollView>
+          <CloseButtonContainer>
+            <TouchableOpacity
+              onPress={() => {
+                setIsVisible(false);
+                sortDispatch({ type: 'RESET_IN_PROGRESS' });
+              }}
+            >
+              <BlueText>
+                <Body1Text>Close</Body1Text>
+              </BlueText>
+            </TouchableOpacity>
+          </CloseButtonContainer>
 
-        <H4CardNavTab>Sort invoices by</H4CardNavTab>
-        <SortVerticalSpacing />
-        <RadioButton
-          data={sortDescriptions}
-          selected={sortState.inProgressSortType}
-          setSelected={(index: number) => {
-            sortDispatch({ type: 'SORT_BY', option: index });
-          }}
-        />
-
-        <SortVerticalSpacing />
-        <CenteredContainer>
-          <ButtonMagenta
-            onPress={() => {
-              setIsVisible(false);
-              sortDispatch({ type: 'ON_SUBMIT' });
+          <H4CardNavTab>Sort invoices by</H4CardNavTab>
+          <SortVerticalSpacing />
+          <RadioButton
+            data={sortDescriptions}
+            selected={sortState.inProgressSortType}
+            setSelected={(index: number) => {
+              sortDispatch({ type: 'SORT_BY', option: index });
             }}
-          >
-            <ButtonTextWhite>Apply</ButtonTextWhite>
-          </ButtonMagenta>
-        </CenteredContainer>
+          />
+
+          <SortVerticalSpacing />
+          <CenteredContainer>
+            <ButtonMagenta
+              onPress={() => {
+                setIsVisible(false);
+                sortDispatch({ type: 'ON_SUBMIT' });
+              }}
+            >
+              <ButtonTextWhite>Apply</ButtonTextWhite>
+            </ButtonMagenta>
+          </CenteredContainer>
+        </ScrollView>
       </SortModalTextContainer>
     </Modal>
   );
