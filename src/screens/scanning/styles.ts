@@ -116,15 +116,17 @@ export const RedText = styled.Text`
   color: ${Colors.alertRed};
 `;
 
-export const RangeInputContainer = styled.View`
+export const FieldContainer = styled.View`
   width: 120px;
 `;
 
-export const VoucherRangeContainer = styled.View`
+export const RangeFieldContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 277px;
 `;
 
 // TODO: refactor to use selene's dropdown component
@@ -148,20 +150,4 @@ export const StartContainer = styled.View`
 
 export const HeroContainer = styled.View`
   margin-bottom: 40px;
-`;
-
-export const VoucherCountContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  width: 277px;
-`;
-
-export const LoadingContainer = styled.View`
-  margin-top: 80px;
-  height: 100px;
-  display: flex;
-  flex-drection: row;
-  justify-content: flex-start;
-  align-items: center;
 `;
