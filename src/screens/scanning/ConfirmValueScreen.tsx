@@ -85,37 +85,35 @@ export default function ConfirmValueScreen({
           </CenterText>
         </TitleContainer>
         <FormContainer>
-          <FieldContainer>
-            <InputTitleText>Voucher Value</InputTitleText>
-            <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
-              value={voucherAmount}
-              onChangeValue={onChangeVoucherAmount}
-              renderTextInput={props => (
-                <TextInput
-                  {...props}
-                  onBlur={() => setIsActive(false)}
-                  onFocus={() => setIsActive(true)}
-                  style={isActive ? Styles.FormFieldFocus : Styles.FormField}
-                  placeholderTextColor={Colors.midGray}
-                  secureTextEntry={false}
-                  autoCorrect={false}
-                  autoCapitalize="none"
-                  keyboardType="number-pad"
-                  returnKeyType="done"
-                  selection={{
-                    start: String(props.value).length,
-                    end: String(props.value).length,
-                  }}
-                  caretHidden
-                />
-              )}
-              prefix="$"
-              minValue={0}
-              separator="."
-              delimiter=","
-              precision={2}
-            />
-          </FieldContainer>
+          <InputTitleText>Voucher Value</InputTitleText>
+          <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
+            value={voucherAmount}
+            onChangeValue={onChangeVoucherAmount}
+            renderTextInput={props => (
+              <TextInput
+                {...props}
+                onBlur={() => setIsActive(false)}
+                onFocus={() => setIsActive(true)}
+                style={isActive ? Styles.FormFieldFocus : Styles.FormField}
+                placeholderTextColor={Colors.midGray}
+                secureTextEntry={false}
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="number-pad"
+                returnKeyType="done"
+                selection={{
+                  start: String(props.value).length,
+                  end: String(props.value).length,
+                }}
+                caretHidden
+              />
+            )}
+            prefix="$"
+            minValue={0}
+            separator="."
+            delimiter=","
+            precision={2}
+          />
           <ErrorContainer>
             {showError ? (
               <RedText>
