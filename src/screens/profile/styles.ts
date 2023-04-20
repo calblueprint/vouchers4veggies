@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 
 export const HeadingContainer = styled.Text`
   margin-top: 34px;
@@ -24,6 +25,16 @@ export const LeftAlignContainer = styled.View`
   padding-left: 29px;
 `;
 export const IconContainer = styled.View`
-  flex: 0.008;
-  margin-left: 32px;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  padding-left: 29px;
 `;
+
+export const Styles = StyleSheet.create({
+  icon: {
+    justifyContent: 'center',
+    paddingRight: 12,
+  },
+});

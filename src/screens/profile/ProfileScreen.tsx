@@ -16,6 +16,7 @@ import {
   MainProfileContainer,
   LeftAlignContainer,
   IconContainer,
+  Styles,
 } from './styles';
 import {
   ButtonMagenta,
@@ -27,7 +28,6 @@ import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
 import { getVendor } from '../../database/queries';
 import Colors from '../../../assets/Colors';
-import { Styles } from '../../components/transactions/styles';
 import { ProfileStackScreenProps } from '../../navigation/types';
 
 export default function ProfileScreen({
@@ -74,10 +74,8 @@ export default function ProfileScreen({
               style={Styles.icon}
               color={Colors.darkGray}
             />
-          </IconContainer>
-          <LeftAlignContainer>
             <H4CardNavTab>Contact Us</H4CardNavTab>
-          </LeftAlignContainer>
+          </IconContainer>
           <Icon
             name="right"
             size={25}
