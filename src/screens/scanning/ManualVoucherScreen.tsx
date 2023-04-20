@@ -21,7 +21,6 @@ import {
 import {
   TitleContainer,
   BodyContainer,
-  FieldContainer,
   FormContainer,
   // VoucherCounter,
   ErrorContainer,
@@ -114,16 +113,14 @@ export default function ManualVoucherScreen({
           </CenterText>
         </TitleContainer>
         <FormContainer>
-          <FieldContainer>
-            <InputTitleText>Serial Number</InputTitleText>
-            <InputField
-              onChange={onChangeSerialNumber}
-              value={serialNumber}
-              placeholder="Enter Number"
-              isValid={!showInvalidError}
-              keyboardType="number-pad"
-            />
-          </FieldContainer>
+          <InputTitleText>Serial Number</InputTitleText>
+          <InputField
+            onChange={onChangeSerialNumber}
+            value={serialNumber}
+            placeholder="Enter Number"
+            isValid={!showInvalidError}
+            keyboardType="number-pad"
+          />
           <ErrorContainer>
             {showInvalidError ? (
               <RedText>
