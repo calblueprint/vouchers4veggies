@@ -3,7 +3,6 @@ import React from 'react';
 import ProfileScreen from '../../screens/profile/ProfileScreen';
 import ContactUsScreen from '../../screens/profile/ContactUsScreen';
 import { ProfileStackParamList } from '../types';
-import { ContactUsContainer } from '../../screens/profile/styles';
 
 const ProfileStack = createNativeStackNavigator<ProfileStackParamList>();
 

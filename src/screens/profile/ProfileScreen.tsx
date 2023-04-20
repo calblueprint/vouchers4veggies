@@ -15,7 +15,7 @@ import {
   MagentaButtonContainer,
   MainProfileContainer,
   LeftAlignContainer,
-  ContactUsContainer,
+  IconContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -28,7 +28,6 @@ import StandardHeader from '../../components/common/StandardHeader';
 import { getVendor } from '../../database/queries';
 import Colors from '../../../assets/Colors';
 import { Styles } from '../../components/transactions/styles';
-import ContactUsScreen from './ContactUsScreen';
 import { ProfileStackScreenProps } from '../../navigation/types';
 
 export default function ProfileScreen({
@@ -68,18 +67,16 @@ export default function ProfileScreen({
       </Row>
       <TouchableOpacity onPress={() => navigation.navigate('ContactUsScreen')}>
         <Row>
-          <LeftAlignContainer>
+          <IconContainer>
             <Icon2
               name="phone"
               size={25}
               style={Styles.icon}
               color={Colors.darkGray}
             />
-          </LeftAlignContainer>
+          </IconContainer>
           <LeftAlignContainer>
-            <ContactUsContainer>
-              <H4CardNavTab> Contact Us</H4CardNavTab>
-            </ContactUsContainer>
+            <H4CardNavTab>Contact Us</H4CardNavTab>
           </LeftAlignContainer>
           <Icon
             name="right"
