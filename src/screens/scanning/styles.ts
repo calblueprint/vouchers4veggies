@@ -151,3 +151,10 @@ export const StartContainer = styled.View`
 export const HeroContainer = styled.View`
   margin-bottom: 40px;
 `;
+
+export const VoucherCountContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 277px;
+`;

@@ -17,6 +17,7 @@ import {
   InputTitleText,
   // CounterText,
   Body2Subtext,
+  Body1Text,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
@@ -25,6 +26,7 @@ import {
   // VoucherCounter,
   ErrorContainer,
   RedText,
+  VoucherCountContainer,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardHeader from '../../components/common/StandardHeader';
@@ -153,7 +155,11 @@ export default function ManualVoucherScreen({
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>
         </ButtonWhite>
+        <VoucherCountContainer>
+          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
+        </VoucherCountContainer>
       </BodyContainer>
+
       <Toast />
     </SafeArea>
   );

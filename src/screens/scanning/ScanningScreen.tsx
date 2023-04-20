@@ -21,6 +21,7 @@ import {
   TitleContainer,
   // VoucherCounter,
   BodyContainer,
+  VoucherCountContainer,
 } from './styles';
 import {
   AddManuallyButton,
@@ -160,6 +161,9 @@ export default function ScanningScreen({
         >
           <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
         </ButtonWhite>
+        <VoucherCountContainer>
+          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
+        </VoucherCountContainer>
       </ButtonContainer>
       <Toast />
     </SafeArea>
