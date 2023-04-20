@@ -116,8 +116,18 @@ export const RedText = styled.Text`
   color: ${Colors.alertRed};
 `;
 
-// will be used later
-export const FieldContainer = styled.View``;
+export const FieldContainer = styled.View`
+  width: 120px;
+`;
+
+export const RangeFieldContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 277px;
+`;
 
 // TODO: refactor to use selene's dropdown component
 export const DropDownContainer = styled.View`

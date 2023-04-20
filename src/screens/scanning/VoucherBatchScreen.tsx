@@ -26,6 +26,7 @@ import {
   // VoucherCounter,
   ErrorContainer,
   RedText,
+  RangeFieldContainer,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardHeader from '../../components/common/StandardHeader';
@@ -160,14 +161,14 @@ export default function VoucherBatchScreen({
       </StandardHeader>
 
       <BodyContainer>
-        <TitleContainer>
+        {/* <TitleContainer>
           <CenterText>
             <H2Heading>Add a range of vouchers</H2Heading>
           </CenterText>
-        </TitleContainer>
-        <FormContainer>
+        </TitleContainer> */}
+        <RangeFieldContainer>
           <FieldContainer>
-            <InputTitleText>Starting Serial Number</InputTitleText>
+            <InputTitleText>From</InputTitleText>
             <InputField
               onChange={onChangeStartSerialNumber}
               value={startSerialNumberInput}
@@ -175,23 +176,23 @@ export default function VoucherBatchScreen({
               isValid={!showStartInvalidError}
               keyboardType="number-pad"
             />
+            <ErrorContainer>
+              {showStartInvalidError ? (
+                <RedText>
+                  <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
+                </RedText>
+              ) : null}
+              {showStartDuplicateError ? (
+                <RedText>
+                  <Body2Subtext>
+                    You&apos;ve already added this serial number!
+                  </Body2Subtext>
+                </RedText>
+              ) : null}
+            </ErrorContainer>
           </FieldContainer>
-          <ErrorContainer>
-            {showStartInvalidError ? (
-              <RedText>
-                <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
-              </RedText>
-            ) : null}
-            {showStartDuplicateError ? (
-              <RedText>
-                <Body2Subtext>
-                  You&apos;ve already added this serial number!
-                </Body2Subtext>
-              </RedText>
-            ) : null}
-          </ErrorContainer>
           <FieldContainer>
-            <InputTitleText>End Serial Number</InputTitleText>
+            <InputTitleText>To</InputTitleText>
             <InputField
               onChange={onChangeEndSerialNumber}
               value={endSerialNumberInput}
@@ -199,28 +200,28 @@ export default function VoucherBatchScreen({
               isValid={!showEndInvalidError}
               keyboardType="number-pad"
             />
+            <ErrorContainer>
+              {showEndInvalidError ? (
+                <RedText>
+                  <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
+                </RedText>
+              ) : null}
+              {showEndDuplicateError ? (
+                <RedText>
+                  <Body2Subtext>
+                    You&apos;ve already added this serial number!
+                  </Body2Subtext>
+                </RedText>
+              ) : null}
+            </ErrorContainer>
           </FieldContainer>
-          <ErrorContainer>
-            {showEndInvalidError ? (
-              <RedText>
-                <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
-              </RedText>
-            ) : null}
-            {showEndDuplicateError ? (
-              <RedText>
-                <Body2Subtext>
-                  You&apos;ve already added this serial number!
-                </Body2Subtext>
-              </RedText>
-            ) : null}
-          </ErrorContainer>
-        </FormContainer>
+        </RangeFieldContainer>
 
         <ButtonMagenta
           disabled={showStartInvalidError || showEndInvalidError}
           onPress={handleVoucherAdd}
         >
-          <ButtonTextWhite>Add Range of Vouchers</ButtonTextWhite>
+          <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
         </ButtonMagenta>
         <ButtonMagenta
           onPress={() => navigation.navigate('ManualVoucherScreen')}
