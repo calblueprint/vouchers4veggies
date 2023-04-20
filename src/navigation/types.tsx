@@ -35,6 +35,7 @@ export type ScannerStackParamList = {
 
 export type ProfileStackParamList = {
   ProfileScreen: undefined;
+  ContactUsScreen: undefined;
 };
 
 export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =
