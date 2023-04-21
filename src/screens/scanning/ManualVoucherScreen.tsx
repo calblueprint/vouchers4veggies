@@ -42,6 +42,7 @@ export default function ManualVoucherScreen({
   const [serialNumber, setSerialNumber] = useState<string>('');
   const [showInvalidError, setShowInvalidError] = useState(false);
   const [showDuplicateError, setShowDuplicateError] = useState(false);
+
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
 
