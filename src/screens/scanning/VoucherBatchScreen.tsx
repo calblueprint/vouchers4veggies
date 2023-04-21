@@ -51,25 +51,23 @@ export default function VoucherBatchScreen({
 }: ScannerStackScreenProps<'VoucherBatchScreen'>) {
   const [startSerialNumberInput, setStartSerialNumber] = useState<string>('');
   const [showStartInvalidError, setShowStartInvalidError] = useState(false);
-  const [showStartDuplicateError, setShowStartDuplicateError] = useState(false);
 
   const [endSerialNumberInput, setEndSerialNumber] = useState<string>('');
   const [showEndInvalidError, setShowEndInvalidError] = useState(false);
-  const [showEndDuplicateError, setShowEndDuplicateError] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const onChangeStartSerialNumber = (text: string) => {
     setShowStartInvalidError(false);
-    setShowStartDuplicateError(false);
     const value = text.replace(/\D/g, '');
     setStartSerialNumber(value);
   };
 
   const onChangeEndSerialNumber = (text: string) => {
     setShowEndInvalidError(false);
-    setShowEndDuplicateError(false);
     const value = text.replace(/\D/g, '');
     setEndSerialNumber(value);
   };
@@ -81,24 +79,39 @@ export default function VoucherBatchScreen({
     // checks if either input is a duplicate and returns 1-2 errors if so
     const isStartDuplicate = voucherMap.has(startSerialNumber);
     const isEndDuplicate = voucherMap.has(endSerialNumber);
-    if (isStartDuplicate || isEndDuplicate) {
-      if (isStartDuplicate) {
-        setShowStartDuplicateError(true);
-      }
-      if (isEndDuplicate) {
-        setShowEndDuplicateError(true);
-      }
+    if (isStartDuplicate && isEndDuplicate) {
+      setShowStartInvalidError(true);
+      setShowEndInvalidError(true);
+      setErrorMessage("You've already added these serial numbers!");
+      return;
+    }
+    if (isStartDuplicate) {
+      setShowStartInvalidError(true);
+      setErrorMessage("You've already added the starting serial number!");
+      return;
+    }
+    if (isEndDuplicate) {
+      setShowEndInvalidError(true);
+      setErrorMessage("You've already added the ending serial number!");
       return;
     }
     // validates that both inputs are valid serialNumbers
     const startResult = await getMaxVoucherValue(startSerialNumber);
-    if (!startResult.ok) {
+    const endResult = await getMaxVoucherValue(endSerialNumber);
+    if (!startResult.ok && !endResult.ok) {
       setShowStartInvalidError(true);
+      setShowEndInvalidError(true);
+      setErrorMessage('Both serial numbers are invalid!');
       return;
     }
-    const endResult = await getMaxVoucherValue(endSerialNumber);
+    if (!startResult.ok) {
+      setShowStartInvalidError(true);
+      setErrorMessage('Start serial number is invalid!');
+      return;
+    }
     if (!endResult.ok || startSerialNumber >= endSerialNumber) {
       setShowEndInvalidError(true);
+      setErrorMessage('End serial number is invalid!');
       return;
     }
     // validates the entire range of serialNumbers
@@ -122,12 +135,10 @@ export default function VoucherBatchScreen({
 
     // clears input field if successfully added
     setStartSerialNumber('');
-    setShowStartInvalidError(false);
-    setShowStartDuplicateError(false);
-
     setEndSerialNumber('');
+    setShowStartInvalidError(false);
     setShowEndInvalidError(false);
-    setShowEndDuplicateError(false);
+    setErrorMessage('');
   };
 
   return (
@@ -192,16 +203,9 @@ export default function VoucherBatchScreen({
             </RangeInputContainer>
           </VoucherRangeContainer>
           <ErrorContainer>
-            {showEndInvalidError ? (
+            {showStartInvalidError || showEndInvalidError ? (
               <RedText>
-                <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
-              </RedText>
-            ) : null}
-            {showEndDuplicateError ? (
-              <RedText>
-                <Body2Subtext>
-                  You&apos;ve already added this serial number!
-                </Body2Subtext>
+                <Body2Subtext>{errorMessage}</Body2Subtext>
               </RedText>
             ) : null}
           </ErrorContainer>
