@@ -18,6 +18,7 @@ import {
   // CounterText,
   Body2Subtext,
   Body1Text,
+  LoadingText,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
@@ -29,6 +30,7 @@ import {
   RedText,
   VoucherRangeContainer,
   VoucherCountContainer,
+  LoadingContainer,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardHeader from '../../components/common/StandardHeader';
@@ -45,10 +47,13 @@ import {
   multipleVoucherSuccessToast,
   partialSuccessVoucherToast,
 } from '../../utils/scanningUtils';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 export default function VoucherBatchScreen({
   navigation,
 }: ScannerStackScreenProps<'VoucherBatchScreen'>) {
+  const [isProcessing, setProcessingVouchers] = useState(false);
+
   const [startSerialNumberInput, setStartSerialNumber] = useState<string>('');
   const [showStartInvalidError, setShowStartInvalidError] = useState(false);
 
@@ -73,6 +78,8 @@ export default function VoucherBatchScreen({
   };
 
   const handleVoucherAdd = async () => {
+    setProcessingVouchers(true);
+
     const startSerialNumber = Number(startSerialNumberInput);
     const endSerialNumber = Number(endSerialNumberInput);
 
@@ -80,17 +87,20 @@ export default function VoucherBatchScreen({
     const isStartDuplicate = voucherMap.has(startSerialNumber);
     const isEndDuplicate = voucherMap.has(endSerialNumber);
     if (isStartDuplicate && isEndDuplicate) {
+      setProcessingVouchers(false);
       setShowStartInvalidError(true);
       setShowEndInvalidError(true);
       setErrorMessage("You've already added these serial numbers!");
       return;
     }
     if (isStartDuplicate) {
+      setProcessingVouchers(false);
       setShowStartInvalidError(true);
       setErrorMessage("You've already added the starting serial number!");
       return;
     }
     if (isEndDuplicate) {
+      setProcessingVouchers(false);
       setShowEndInvalidError(true);
       setErrorMessage("You've already added the ending serial number!");
       return;
@@ -99,17 +109,20 @@ export default function VoucherBatchScreen({
     const startResult = await getMaxVoucherValue(startSerialNumber);
     const endResult = await getMaxVoucherValue(endSerialNumber);
     if (!startResult.ok && !endResult.ok) {
+      setProcessingVouchers(false);
       setShowStartInvalidError(true);
       setShowEndInvalidError(true);
       setErrorMessage('Both serial numbers are invalid!');
       return;
     }
     if (!startResult.ok) {
+      setProcessingVouchers(false);
       setShowStartInvalidError(true);
       setErrorMessage('Start serial number is invalid!');
       return;
     }
     if (!endResult.ok || startSerialNumber >= endSerialNumber) {
+      setProcessingVouchers(false);
       setShowEndInvalidError(true);
       setErrorMessage('End serial number is invalid!');
       return;
@@ -119,6 +132,7 @@ export default function VoucherBatchScreen({
       startSerialNumber,
       endSerialNumber,
     );
+    setProcessingVouchers(false);
     // if fewer serialNumbers are returned than expected, show a specific error
     const rangeLength = endSerialNumber - startSerialNumber + 1;
     if (validSerialNumbers.length === rangeLength) {
@@ -173,67 +187,75 @@ export default function VoucherBatchScreen({
         </TouchableOpacity>
       </StandardHeader>
 
-      <BodyContainer>
-        <TitleContainer>
-          <CenterText>
-            <H2Heading>Add a voucher</H2Heading>
-          </CenterText>
-        </TitleContainer>
-        <FormContainer>
-          <VoucherRangeContainer>
-            <RangeInputContainer>
-              <InputTitleText>From</InputTitleText>
-              <InputField
-                onChange={onChangeStartSerialNumber}
-                value={startSerialNumberInput}
-                placeholder="Enter Number"
-                isValid={!showStartInvalidError}
-                keyboardType="number-pad"
-              />
-            </RangeInputContainer>
-            <RangeInputContainer>
-              <InputTitleText>To</InputTitleText>
-              <InputField
-                onChange={onChangeEndSerialNumber}
-                value={endSerialNumberInput}
-                placeholder="Enter Number"
-                isValid={!showEndInvalidError}
-                keyboardType="number-pad"
-              />
-            </RangeInputContainer>
-          </VoucherRangeContainer>
-          <ErrorContainer>
-            {showStartInvalidError || showEndInvalidError ? (
-              <RedText>
-                <Body2Subtext>{errorMessage}</Body2Subtext>
-              </RedText>
-            ) : null}
-          </ErrorContainer>
-        </FormContainer>
+      <TitleContainer>
+        <CenterText>
+          <H2Heading>Add a voucher</H2Heading>
+        </CenterText>
+      </TitleContainer>
 
-        <ButtonMagenta
-          disabled={showStartInvalidError || showEndInvalidError}
-          onPress={handleVoucherAdd}
-        >
-          <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
-        </ButtonMagenta>
-        <ButtonMagenta
-          onPress={() => navigation.navigate('ManualVoucherScreen')}
-        >
-          <ButtonTextWhite>Add Singular Vouchers</ButtonTextWhite>
-        </ButtonMagenta>
-        <ButtonWhite
-          onPress={() => navigation.navigate('ReviewScreen')}
-          disabled={voucherMap.size === 0}
-        >
-          <ButtonTextBlack>
-            <H4CardNavTab>Review and Submit</H4CardNavTab>
-          </ButtonTextBlack>
-        </ButtonWhite>
-        <VoucherCountContainer>
-          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
-        </VoucherCountContainer>
-      </BodyContainer>
+      {isProcessing ? (
+        <LoadingContainer>
+          <LoadingSpinner />
+          <LoadingText>Processing Voucher Range</LoadingText>
+        </LoadingContainer>
+      ) : (
+        <BodyContainer>
+          <FormContainer>
+            <VoucherRangeContainer>
+              <RangeInputContainer>
+                <InputTitleText>From</InputTitleText>
+                <InputField
+                  onChange={onChangeStartSerialNumber}
+                  value={startSerialNumberInput}
+                  placeholder="Enter Number"
+                  isValid={!showStartInvalidError}
+                  keyboardType="number-pad"
+                />
+              </RangeInputContainer>
+              <RangeInputContainer>
+                <InputTitleText>To</InputTitleText>
+                <InputField
+                  onChange={onChangeEndSerialNumber}
+                  value={endSerialNumberInput}
+                  placeholder="Enter Number"
+                  isValid={!showEndInvalidError}
+                  keyboardType="number-pad"
+                />
+              </RangeInputContainer>
+            </VoucherRangeContainer>
+            <ErrorContainer>
+              {showStartInvalidError || showEndInvalidError ? (
+                <RedText>
+                  <Body2Subtext>{errorMessage}</Body2Subtext>
+                </RedText>
+              ) : null}
+            </ErrorContainer>
+          </FormContainer>
+
+          <ButtonMagenta
+            disabled={showStartInvalidError || showEndInvalidError}
+            onPress={handleVoucherAdd}
+          >
+            <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
+          </ButtonMagenta>
+          <ButtonMagenta
+            onPress={() => navigation.navigate('ManualVoucherScreen')}
+          >
+            <ButtonTextWhite>Add Singular Vouchers</ButtonTextWhite>
+          </ButtonMagenta>
+          <ButtonWhite
+            onPress={() => navigation.navigate('ReviewScreen')}
+            disabled={voucherMap.size === 0}
+          >
+            <ButtonTextBlack>
+              <H4CardNavTab>Review and Submit</H4CardNavTab>
+            </ButtonTextBlack>
+          </ButtonWhite>
+          <VoucherCountContainer>
+            <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
+          </VoucherCountContainer>
+        </BodyContainer>
+      )}
       <Toast />
     </SafeArea>
   );
