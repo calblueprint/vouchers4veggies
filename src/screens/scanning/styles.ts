@@ -156,3 +156,12 @@ export const VoucherCountContainer = styled.View`
   justify-content: start;
   width: 277px;
 `;
+
+export const LoadingContainer = styled.View`
+  margin-top: 80px;
+  height: 100px;
+  display: flex;
+  flex-drection: row;
+  justify-content: flex-start;
+  align-items: center;
+`;

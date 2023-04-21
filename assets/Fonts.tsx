@@ -115,3 +115,11 @@ export const WhiteText = styled.Text`
 export const DarkGrayText = styled.Text`
   color: ${Colors.darkGray};
 `;
+
+export const LoadingText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 18px;
+  line-height: 25px;
+  color: ${Colors.magenta};
+`;
