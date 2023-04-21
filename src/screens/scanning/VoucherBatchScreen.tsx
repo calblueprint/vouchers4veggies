@@ -12,22 +12,22 @@ import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  // CenterText,
-  // H2Heading,
+  CenterText,
+  H2Heading,
   InputTitleText,
   // CounterText,
   Body2Subtext,
   Body1Text,
 } from '../../../assets/Fonts';
 import {
-  // TitleContainer,
+  TitleContainer,
   BodyContainer,
-  FieldContainer,
-  // FormContainer,
+  RangeInputContainer,
+  FormContainer,
   // VoucherCounter,
   ErrorContainer,
   RedText,
-  RangeFieldContainer,
+  VoucherRangeContainer,
   VoucherCountContainer,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
@@ -163,61 +163,49 @@ export default function VoucherBatchScreen({
       </StandardHeader>
 
       <BodyContainer>
-        {/* <TitleContainer>
+        <TitleContainer>
           <CenterText>
-            <H2Heading>Add a range of vouchers</H2Heading>
+            <H2Heading>Add a voucher</H2Heading>
           </CenterText>
-        </TitleContainer> */}
-        <RangeFieldContainer>
-          <FieldContainer>
-            <InputTitleText>From</InputTitleText>
-            <InputField
-              onChange={onChangeStartSerialNumber}
-              value={startSerialNumberInput}
-              placeholder="Enter Number"
-              isValid={!showStartInvalidError}
-              keyboardType="number-pad"
-            />
-            <ErrorContainer>
-              {showStartInvalidError ? (
-                <RedText>
-                  <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
-                </RedText>
-              ) : null}
-              {showStartDuplicateError ? (
-                <RedText>
-                  <Body2Subtext>
-                    You&apos;ve already added this serial number!
-                  </Body2Subtext>
-                </RedText>
-              ) : null}
-            </ErrorContainer>
-          </FieldContainer>
-          <FieldContainer>
-            <InputTitleText>To</InputTitleText>
-            <InputField
-              onChange={onChangeEndSerialNumber}
-              value={endSerialNumberInput}
-              placeholder="Enter Number"
-              isValid={!showEndInvalidError}
-              keyboardType="number-pad"
-            />
-            <ErrorContainer>
-              {showEndInvalidError ? (
-                <RedText>
-                  <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
-                </RedText>
-              ) : null}
-              {showEndDuplicateError ? (
-                <RedText>
-                  <Body2Subtext>
-                    You&apos;ve already added this serial number!
-                  </Body2Subtext>
-                </RedText>
-              ) : null}
-            </ErrorContainer>
-          </FieldContainer>
-        </RangeFieldContainer>
+        </TitleContainer>
+        <FormContainer>
+          <VoucherRangeContainer>
+            <RangeInputContainer>
+              <InputTitleText>From</InputTitleText>
+              <InputField
+                onChange={onChangeStartSerialNumber}
+                value={startSerialNumberInput}
+                placeholder="Enter Number"
+                isValid={!showStartInvalidError}
+                keyboardType="number-pad"
+              />
+            </RangeInputContainer>
+            <RangeInputContainer>
+              <InputTitleText>To</InputTitleText>
+              <InputField
+                onChange={onChangeEndSerialNumber}
+                value={endSerialNumberInput}
+                placeholder="Enter Number"
+                isValid={!showEndInvalidError}
+                keyboardType="number-pad"
+              />
+            </RangeInputContainer>
+          </VoucherRangeContainer>
+          <ErrorContainer>
+            {showEndInvalidError ? (
+              <RedText>
+                <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
+              </RedText>
+            ) : null}
+            {showEndDuplicateError ? (
+              <RedText>
+                <Body2Subtext>
+                  You&apos;ve already added this serial number!
+                </Body2Subtext>
+              </RedText>
+            ) : null}
+          </ErrorContainer>
+        </FormContainer>
 
         <ButtonMagenta
           disabled={showStartInvalidError || showEndInvalidError}
