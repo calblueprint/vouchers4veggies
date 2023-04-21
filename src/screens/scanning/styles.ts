@@ -116,17 +116,15 @@ export const RedText = styled.Text`
   color: ${Colors.alertRed};
 `;
 
-export const FieldContainer = styled.View`
+export const RangeInputContainer = styled.View`
   width: 120px;
 `;
 
-export const RangeFieldContainer = styled.View`
+export const VoucherRangeContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 277px;
+  margin-bottom: 6px;
 `;
 
 // TODO: refactor to use selene's dropdown component
