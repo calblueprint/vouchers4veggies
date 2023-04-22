@@ -48,7 +48,7 @@ export default function ManualVoucherScreen({
   let otpInput = useRef(null);
 
   const clearText = () => {
-    otpInput.current?.clear();
+    otpInput.clear();
   };
 
   const onChangeSerialNumber = (text: string) => {
@@ -67,8 +67,8 @@ export default function ManualVoucherScreen({
       // `ok` is true indicates valid serial number input
       if (ok) {
         // clears input field if successfully added
-        setSerialNumber('');
         clearText();
+        setSerialNumber('');
         setShowInvalidError(false);
         setShowDuplicateError(false);
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
