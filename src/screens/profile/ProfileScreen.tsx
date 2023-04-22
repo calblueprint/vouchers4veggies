@@ -17,6 +17,7 @@ import {
   LeftAlignContainer,
   IconContainer,
   Styles,
+  TitleContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -53,11 +54,9 @@ export default function ProfileScreen({
       <StandardHeader>
         <StandardLogo />
       </StandardHeader>
-      <MainProfileContainer>
-        <HeadingContainer>
-          <H2Heading>Hi, {vendorName}!</H2Heading>
-        </HeadingContainer>
-      </MainProfileContainer>
+      <TitleContainer>
+        <H2Heading>Hi, {vendorName}!</H2Heading>
+      </TitleContainer>
       <StartOfListView />
       <Row>
         <LeftAlignContainer>
