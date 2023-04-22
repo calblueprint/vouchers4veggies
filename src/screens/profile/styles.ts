@@ -21,6 +21,9 @@ export const MainProfileContainer = styled.View`
 export const TitleContainer = styled.View`
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-left: 32px;
+  margin-right: 32px;
+  margin-bottom: 32px;
 `;
 
 export const LeftAlignContainer = styled.View`
