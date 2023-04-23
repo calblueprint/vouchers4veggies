@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { View } from 'react-native';
 import { SelectedFilterTag, UnselectedFilterTag } from './styles';
 import { OneLine } from '../common/styles';
-import { CenterText, MidGrayText } from '../../../assets/Fonts';
+import { CenterText, MidGrayText, WhiteText } from '../../../assets/Fonts';
 
 type FilterTagProps = {
   isSelected: boolean;
@@ -23,7 +23,9 @@ export default function FilterTag({
       <View style={{ marginRight: margin }}>
         <SelectedFilterTag onPress={onPress}>
           <OneLine>
-            <CenterText style={{ minWidth }}>{children}</CenterText>
+            <CenterText style={{ minWidth }}>
+              <WhiteText>{children}</WhiteText>
+            </CenterText>
           </OneLine>
         </SelectedFilterTag>
       </View>

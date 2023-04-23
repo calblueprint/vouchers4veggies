@@ -120,7 +120,7 @@ export const UnselectedFilterTag = styled.TouchableOpacity`
 export const SelectedFilterTag = styled.TouchableOpacity`
   align-items: flex-start;
   border-radius: 24px;
-  background: white;
+  background: ${Colors.midBlack};
   padding-vertical: 8px;
   border: 1px solid ${Colors.midBlack};
 `;

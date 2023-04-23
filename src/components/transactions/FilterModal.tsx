@@ -213,23 +213,9 @@ export default function FilterModal({
               minWidth={90}
               margin={10}
             >
-              <View
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignContent: 'center',
-                }}
-              >
-                <Body1Text>
-                  {filterState.inProgressStatusFilter !==
-                  TransactionStatus.UNPAID ? (
-                    <MidGrayText>UNPAID</MidGrayText>
-                  ) : (
-                    'UNPAID'
-                  )}
-                </Body1Text>
-              </View>
+              <Body1Text>UNPAID</Body1Text>
             </FilterTag>
+
             <FilterTag
               isSelected={
                 filterState.inProgressStatusFilter === TransactionStatus.PAID
@@ -242,14 +228,7 @@ export default function FilterModal({
               }
               minWidth={90}
             >
-              <Body1Text>
-                {filterState.inProgressStatusFilter !==
-                TransactionStatus.PAID ? (
-                  <MidGrayText>PAID</MidGrayText>
-                ) : (
-                  'PAID'
-                )}
-              </Body1Text>
+              <Body1Text>PAID</Body1Text>
             </FilterTag>
           </OneLine>
 
