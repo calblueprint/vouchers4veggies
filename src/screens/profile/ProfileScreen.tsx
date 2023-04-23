@@ -11,19 +11,17 @@ import {
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
 import {
-  HeadingContainer,
   MagentaButtonContainer,
-  MainProfileContainer,
   LeftAlignContainer,
   IconContainer,
   Styles,
-  TitleContainer,
 } from './styles';
 import {
   ButtonMagenta,
   Row,
   SafeArea,
   StartOfListView,
+  TitleContainer,
 } from '../../../assets/Components';
 import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';

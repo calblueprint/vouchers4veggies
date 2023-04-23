@@ -8,11 +8,11 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
-import { TitleContainer } from './styles';
 import {
   CardContainer,
   SafeArea,
   StartOfListView,
+  TitleContainer,
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
 
