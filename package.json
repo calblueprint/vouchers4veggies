@@ -28,8 +28,6 @@
     "react-native-dotenv": "^3.3.1",
     "react-native-dropdown-picker": "^5.4.3",
     "react-native-element-dropdown": "^2.5.0",
-    "react-native-otp-form": "^1.1.2",
-    "react-native-otp-inputs": "^7.4.0",
     "react-native-otp-textinput": "^1.0.0",
     "react-native-paper": "^4.12.5",
     "react-native-safe-area-context": "4.4.1",
