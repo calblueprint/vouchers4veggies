@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { Alert, Platform, TouchableOpacity, View } from 'react-native';
+import { Alert, Platform, TouchableOpacity } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
