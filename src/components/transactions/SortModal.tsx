@@ -25,7 +25,7 @@ import {
 import { ButtonMagenta } from '../../../assets/Components';
 
 type SortModalProps = {
-  type: 'invoices' | 'vouchers';
+  name: 'invoices' | 'vouchers';
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
   sortState: SortTransactionState | SortVoucherState;
@@ -33,7 +33,7 @@ type SortModalProps = {
   sortDescriptions: string[];
 };
 export default function SortModal({
-  type,
+  name,
   isVisible,
   setIsVisible,
   sortState,
@@ -62,7 +62,7 @@ export default function SortModal({
         </CloseButtonContainer>
 
         <PaddedScrollView alwaysBounceVertical={false}>
-          <H4CardNavTab>{`Sort ${type} by`}</H4CardNavTab>
+          <H4CardNavTab>{`Sort ${name} by`}</H4CardNavTab>
           <SortVerticalSpacing />
           <RadioButton
             data={sortDescriptions}

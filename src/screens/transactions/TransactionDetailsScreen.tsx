@@ -159,7 +159,7 @@ export default function TransactionDetailsScreen({
       )}
 
       <SortModal
-        type="vouchers"
+        name="vouchers"
         isVisible={sortModalIsVisible}
         setIsVisible={setSortModalIsVisible}
         sortDescriptions={sortDescriptionText}
