@@ -78,12 +78,14 @@ export default function VoucherBatchScreen({
   };
 
   const handleVoucherAdd = async () => {
+    // prevents user from adding vouchers while processing and displays loading spinner
     setProcessingVouchers(true);
 
+    // cast input values to Numbers
     const startSerialNumber = Number(startSerialNumberInput);
     const endSerialNumber = Number(endSerialNumberInput);
 
-    // checks if either input is a duplicate and returns 1-2 errors if so
+    // checks if either input is a duplicate (within the current invoice) and returns 1-2 errors if so
     const isStartDuplicate = voucherMap.has(startSerialNumber);
     const isEndDuplicate = voucherMap.has(endSerialNumber);
     if (isStartDuplicate && isEndDuplicate) {
@@ -105,7 +107,8 @@ export default function VoucherBatchScreen({
       setErrorMessage("You've already added the ending serial number!");
       return;
     }
-    // validates that both inputs are valid serialNumbers
+
+    // validates both the start and end serial numbers individually
     const startResult = await getMaxVoucherValue(startSerialNumber);
     const endResult = await getMaxVoucherValue(endSerialNumber);
     if (!startResult.ok && !endResult.ok) {
@@ -127,12 +130,15 @@ export default function VoucherBatchScreen({
       setErrorMessage('End serial number is invalid!');
       return;
     }
+
     // validates the entire range of serialNumbers
     const validSerialNumbers = await validateMultipleVouchers(
       startSerialNumber,
       endSerialNumber,
     );
+
     setProcessingVouchers(false);
+
     // if fewer serialNumbers are returned than expected, show a specific error
     const rangeLength = endSerialNumber - startSerialNumber + 1;
     if (validSerialNumbers.length === rangeLength) {
@@ -140,6 +146,7 @@ export default function VoucherBatchScreen({
     } else {
       partialSuccessVoucherToast(validSerialNumbers.length, rangeLength);
     }
+
     // dispatch multiple vouchers to the scanning context
     addMultipleVouchers(
       dispatch,
@@ -158,12 +165,6 @@ export default function VoucherBatchScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
-          <VoucherCounter>
-            <CounterText>{voucherMap.size}</CounterText>
-          </VoucherCounter>
-        </TouchableOpacity> */}
-
         <AddManuallyButton
           onPress={() => navigation.navigate('ScanningScreen')}
         >
