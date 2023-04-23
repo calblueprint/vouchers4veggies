@@ -130,3 +130,11 @@ export const MidGrayText = styled.Text`
 export const BlueText = styled.Text`
   color: #007aff;
 `;
+
+export const LoadingText = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 18px;
+  line-height: 25px;
+  color: ${Colors.magenta};
+`;

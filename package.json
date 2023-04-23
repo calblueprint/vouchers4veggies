@@ -23,7 +23,7 @@
     "react-dom": "18.1.0",
     "react-hook-form": "^7.36.1",
     "react-hook-form-resolvers": "0.0.1",
-    "react-native": "0.70.5",
+    "react-native": "0.70.8",
     "react-native-currency-input": "^1.1.0",
     "react-native-dialog": "^9.3.0",
     "react-native-dotenv": "^3.3.1",

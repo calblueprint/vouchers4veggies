@@ -17,15 +17,16 @@ import {
   InputTitleText,
   // CounterText,
   Body2Subtext,
+  Body1Text,
 } from '../../../assets/Fonts';
 import {
   TitleContainer,
   BodyContainer,
-  FieldContainer,
   FormContainer,
   // VoucherCounter,
   ErrorContainer,
   RedText,
+  VoucherCountContainer,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
 import StandardHeader from '../../components/common/StandardHeader';
@@ -41,6 +42,7 @@ export default function ManualVoucherScreen({
   const [serialNumber, setSerialNumber] = useState<string>('');
   const [showInvalidError, setShowInvalidError] = useState(false);
   const [showDuplicateError, setShowDuplicateError] = useState(false);
+
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
 
@@ -114,16 +116,14 @@ export default function ManualVoucherScreen({
           </CenterText>
         </TitleContainer>
         <FormContainer>
-          <FieldContainer>
-            <InputTitleText>Serial Number</InputTitleText>
-            <InputField
-              onChange={onChangeSerialNumber}
-              value={serialNumber}
-              placeholder="Enter Number"
-              isValid={!showInvalidError}
-              keyboardType="number-pad"
-            />
-          </FieldContainer>
+          <InputTitleText>Serial Number</InputTitleText>
+          <InputField
+            onChange={onChangeSerialNumber}
+            value={serialNumber}
+            placeholder="Enter Number"
+            isValid={!showInvalidError}
+            keyboardType="number-pad"
+          />
           <ErrorContainer>
             {showInvalidError ? (
               <RedText>
@@ -143,6 +143,11 @@ export default function ManualVoucherScreen({
         <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
           <ButtonTextWhite>Add Voucher</ButtonTextWhite>
         </ButtonMagenta>
+        <ButtonMagenta
+          onPress={() => navigation.navigate('VoucherBatchScreen')}
+        >
+          <ButtonTextWhite>Add Multiple Vouchers</ButtonTextWhite>
+        </ButtonMagenta>
         <ButtonWhite
           onPress={() => navigation.navigate('ReviewScreen')}
           disabled={voucherMap.size === 0}
@@ -151,7 +156,11 @@ export default function ManualVoucherScreen({
             <H4CardNavTab>Review and Submit</H4CardNavTab>
           </ButtonTextBlack>
         </ButtonWhite>
+        <VoucherCountContainer>
+          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
+        </VoucherCountContainer>
       </BodyContainer>
+
       <Toast />
     </SafeArea>
   );

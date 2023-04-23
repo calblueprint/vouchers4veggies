@@ -1,10 +1,5 @@
 import styled from 'styled-components/native';
 
-export const TitleContainer = styled.View`
-  padding-top: 20px;
-  padding-bottom: 20px;
-`;
-
 export const Title = styled.Text`
   font-family: 'manrope-bold';
   font-style: normal;

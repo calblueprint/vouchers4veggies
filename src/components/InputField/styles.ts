@@ -29,7 +29,6 @@ const Styles = StyleSheet.create({
     borderColor: Colors.alertRed,
     backgroundColor: Colors.alertLightRed,
     height: 35,
-    width: 277,
     paddingVertical: 7,
     paddingHorizontal: 10,
     marginTop: '3%',

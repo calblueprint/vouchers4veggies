@@ -11,9 +11,7 @@ import {
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
 import {
-  HeadingContainer,
   MagentaButtonContainer,
-  MainProfileContainer,
   LeftAlignContainer,
   IconContainer,
   Styles,
@@ -23,6 +21,7 @@ import {
   Row,
   SafeArea,
   StartOfListView,
+  TitleContainer,
 } from '../../../assets/Components';
 import StandardLogo from '../../components/common/StandardLogo';
 import StandardHeader from '../../components/common/StandardHeader';
@@ -53,11 +52,9 @@ export default function ProfileScreen({
       <StandardHeader>
         <StandardLogo />
       </StandardHeader>
-      <MainProfileContainer>
-        <HeadingContainer>
-          <H2Heading>Hi, {vendorName}!</H2Heading>
-        </HeadingContainer>
-      </MainProfileContainer>
+      <TitleContainer>
+        <H2Heading>Hi, {vendorName}!</H2Heading>
+      </TitleContainer>
       <StartOfListView />
       <Row>
         <LeftAlignContainer>

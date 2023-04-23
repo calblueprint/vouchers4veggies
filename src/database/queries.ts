@@ -207,6 +207,37 @@ export const getMaxVoucherValue = async (
     throw e;
   }
 };
+/**
+ * Query to filter through a range of serial numbers in Firebase.
+ *
+ * Parameters: a json with fields
+ *
+ *    `startSerialNumber`: starting serial number in the range
+ *    `endSerialNumber`: ending serial number in the range
+ *
+ * Returns a list of serial numbers not already stored in the database.
+ */
+export const validateMultipleVouchers = async (
+  startSerialNumber: number,
+  endSerialNumber: number,
+) => {
+  const validSerialNumbers = [];
+  for (
+    let serialNumber = startSerialNumber;
+    serialNumber <= endSerialNumber;
+    serialNumber += 1
+  ) {
+    // check that serialNumber has not already been used
+    const docId = serialNumber.toString();
+    const docRef = doc(db, 'vouchers', docId);
+    // eslint-disable-next-line no-await-in-loop
+    const voucherDoc = await getDoc(docRef);
+    if (!voucherDoc.exists()) {
+      validSerialNumbers.push(serialNumber);
+    }
+  }
+  return validSerialNumbers;
+};
 
 /**
  * Query to create a new voucher in Firebase.
