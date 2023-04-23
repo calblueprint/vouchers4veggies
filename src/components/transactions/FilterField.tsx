@@ -4,7 +4,6 @@ import { View } from 'react-native';
 import {
   RightAlignContainer,
   SelectedFilterField,
-  Styles,
   UnselectedFilterField,
 } from './styles';
 import { OneLine } from '../common/styles';
@@ -14,40 +13,22 @@ type FilterFieldProps = {
   isSelected: boolean;
   children: ReactElement;
   onPress: () => void;
-  minWidth?: number;
-  useCalendarIcon?: boolean;
-  centerText?: boolean;
+  icon?: 'calendar-today' | null;
 };
 export default function FilterField({
   isSelected,
   children,
   onPress,
-  minWidth = 0,
-  useCalendarIcon = false,
-  centerText = false,
+  icon = null,
 }: FilterFieldProps) {
   if (isSelected) {
     return (
-      <SelectedFilterField
-        onPress={onPress}
-        style={minWidth > 0 ? { minWidth } : { width: '100%' }}
-      >
+      <SelectedFilterField onPress={onPress} style={{ width: '100%' }}>
         <OneLine>
-          {centerText ? (
-            <View style={minWidth > 0 ? { minWidth } : { width: '100%' }}>
-              {children}
-            </View>
-          ) : (
-            <View>{children}</View>
-          )}
-          {useCalendarIcon ? (
+          <View>{children}</View>
+          {icon ? (
             <RightAlignContainer>
-              <MaterialIcons
-                name="calendar-today"
-                size={16}
-                color={Colors.darkGray}
-                style={Styles.icon}
-              />
+              <MaterialIcons name={icon} size={16} color={Colors.darkGray} />
             </RightAlignContainer>
           ) : null}
         </OneLine>
@@ -55,26 +36,12 @@ export default function FilterField({
     );
   }
   return (
-    <UnselectedFilterField
-      onPress={onPress}
-      style={minWidth > 0 ? { minWidth } : { width: '100%' }}
-    >
+    <UnselectedFilterField onPress={onPress} style={{ width: '100%' }}>
       <OneLine>
-        {centerText ? (
-          <View style={minWidth > 0 ? { minWidth } : { width: '100%' }}>
-            {children}
-          </View>
-        ) : (
-          <View>{children}</View>
-        )}
-        {useCalendarIcon ? (
+        <View>{children}</View>
+        {icon ? (
           <RightAlignContainer>
-            <MaterialIcons
-              name="calendar-today"
-              size={16}
-              color={Colors.darkGray}
-              style={Styles.icon}
-            />
+            <MaterialIcons name={icon} size={16} color={Colors.darkGray} />
           </RightAlignContainer>
         ) : null}
       </OneLine>

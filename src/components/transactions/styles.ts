@@ -109,6 +109,22 @@ export const SelectedFilterField = styled.TouchableOpacity`
   border: 1px solid ${Colors.midBlack};
 `;
 
+export const UnselectedFilterTag = styled.TouchableOpacity`
+  align-items: flex-start;
+  border-radius: 24px;
+  background: white;
+  padding-vertical: 8px;
+  border: 1px solid ${Colors.unselectedGray};
+`;
+
+export const SelectedFilterTag = styled.TouchableOpacity`
+  align-items: flex-start;
+  border-radius: 24px;
+  background: white;
+  padding-vertical: 8px;
+  border: 1px solid ${Colors.midBlack};
+`;
+
 export const ClearButtonContainer = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
@@ -207,10 +223,6 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingRight: 29,
-  },
-  icon: {
-    justifyContent: 'center',
-    paddingHorizontal: 6,
   },
   modal: {
     justifyContent: 'flex-end',

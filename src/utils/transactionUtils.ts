@@ -241,8 +241,7 @@ export type FilterDispatch = React.Dispatch<FilterAction>;
 type FilterAction =
   | { type: 'SET_MIN_DATE'; date: Date }
   | { type: 'SET_MAX_DATE'; date: Date }
-  | { type: 'SET_MIN_AMOUNT'; amount: number }
-  | { type: 'SET_MAX_AMOUNT'; amount: number }
+  | { type: 'SET_AMOUNT'; minAmount: number; maxAmount: number | null }
   | { type: 'SET_STATUS_FILTER'; status: TransactionStatus }
   | { type: 'CLEAR_DATE_FILTERS' }
   | { type: 'CLEAR_STATUS_FILTER' }
@@ -391,7 +390,7 @@ export const useFilterReducer = (
             inProgressFilterCount: count,
             inProgressStatusFilter: 'none',
           };
-        case 'SET_MIN_AMOUNT':
+        case 'SET_AMOUNT':
           if (
             !(
               prevState.inProgressMinAmountIsSet ||
@@ -400,26 +399,17 @@ export const useFilterReducer = (
           ) {
             count += 1;
           }
+          if (action.maxAmount) {
+            newState.inProgressMaxAmountIsSet = true;
+            newState.inProgressMaxAmount = action.maxAmount;
+          } else {
+            newState.inProgressMaxAmountIsSet = false;
+          }
           return {
-            ...prevState,
+            ...newState,
             inProgressFilterCount: count,
             inProgressMinAmountIsSet: true,
-            inProgressMinAmount: action.amount,
-          };
-        case 'SET_MAX_AMOUNT':
-          if (
-            !(
-              prevState.inProgressMinAmountIsSet ||
-              prevState.inProgressMaxAmountIsSet
-            )
-          ) {
-            count += 1;
-          }
-          return {
-            ...prevState,
-            inProgressFilterCount: count,
-            inProgressMaxAmountIsSet: true,
-            inProgressMaxAmount: action.amount,
+            inProgressMinAmount: action.minAmount,
           };
         case 'CLEAR_AMOUNT_FILTERS':
           if (

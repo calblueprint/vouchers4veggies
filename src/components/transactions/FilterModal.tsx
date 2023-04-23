@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import { Platform, TouchableOpacity, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
-import { Picker } from '@react-native-picker/picker';
 import moment from 'moment';
 import {
   CenteredTextContainer,
@@ -35,6 +34,7 @@ import {
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
 import { TransactionStatus } from '../../types/types';
+import FilterTag from './FilterTag';
 
 type FilterModalProps = {
   filterState: FilterState;
@@ -114,7 +114,7 @@ export default function FilterModal({
                   }
                   setMinDatePickerIsVisible(true);
                 }}
-                useCalendarIcon
+                icon="calendar-today"
               >
                 <Body1Text>
                   {filterState.inProgressMinDateIsSet ? (
@@ -135,7 +135,7 @@ export default function FilterModal({
                   }
                   setMaxDatePickerIsVisible(true);
                 }}
-                useCalendarIcon
+                icon="calendar-today"
               >
                 <Body1Text>
                   {filterState.inProgressMaxDateIsSet ? (
@@ -200,7 +200,7 @@ export default function FilterModal({
           </SubheadingContainer>
 
           <OneLine>
-            <FilterField
+            <FilterTag
               isSelected={
                 filterState.inProgressStatusFilter === TransactionStatus.UNPAID
               }
@@ -210,8 +210,7 @@ export default function FilterModal({
                   status: TransactionStatus.UNPAID,
                 })
               }
-              minWidth={91}
-              centerText
+              minWidth={90}
             >
               <View
                 style={{
@@ -220,20 +219,18 @@ export default function FilterModal({
                   alignContent: 'center',
                 }}
               >
-                <CenteredTextContainer>
-                  <Body1Text>
-                    {filterState.inProgressStatusFilter !==
-                    TransactionStatus.UNPAID ? (
-                      <MidGrayText>UNPAID</MidGrayText>
-                    ) : (
-                      'UNPAID'
-                    )}
-                  </Body1Text>
-                </CenteredTextContainer>
+                <Body1Text>
+                  {filterState.inProgressStatusFilter !==
+                  TransactionStatus.UNPAID ? (
+                    <MidGrayText>UNPAID</MidGrayText>
+                  ) : (
+                    'UNPAID'
+                  )}
+                </Body1Text>
               </View>
-            </FilterField>
+            </FilterTag>
             <HorizontalSpacing />
-            <FilterField
+            <FilterTag
               isSelected={
                 filterState.inProgressStatusFilter === TransactionStatus.PAID
               }
@@ -243,20 +240,17 @@ export default function FilterModal({
                   status: TransactionStatus.PAID,
                 })
               }
-              minWidth={91}
-              centerText
+              minWidth={90}
             >
-              <CenteredTextContainer>
-                <Body1Text>
-                  {filterState.inProgressStatusFilter !==
-                  TransactionStatus.PAID ? (
-                    <MidGrayText>PAID</MidGrayText>
-                  ) : (
-                    'PAID'
-                  )}
-                </Body1Text>
-              </CenteredTextContainer>
-            </FilterField>
+              <Body1Text>
+                {filterState.inProgressStatusFilter !==
+                TransactionStatus.PAID ? (
+                  <MidGrayText>PAID</MidGrayText>
+                ) : (
+                  'PAID'
+                )}
+              </Body1Text>
+            </FilterTag>
           </OneLine>
 
           <SubheadingContainer>
@@ -279,57 +273,101 @@ export default function FilterModal({
           </SubheadingContainer>
 
           <OneLine>
-            <LeftAlignContainer>
-              <FilterField
-                isSelected={filterState.inProgressMinAmountIsSet}
-                onPress={() => {
-                  /* TODO: implement amount picker */
-                }}
-              >
-                <Body1Text>
-                  {filterState.inProgressMinAmountIsSet ? (
-                    `$${filterState.inProgressMinAmount}`
-                  ) : (
-                    <MidGrayText>$ Min</MidGrayText>
-                  )}
-                </Body1Text>
-              </FilterField>
-            </LeftAlignContainer>
+            <FilterTag
+              isSelected={
+                filterState.inProgressMinAmount === 0 &&
+                filterState.inProgressMaxAmount === 10
+              }
+              onPress={() => {
+                if (
+                  filterState.inProgressMinAmount === 0 &&
+                  filterState.inProgressMaxAmount === 10
+                ) {
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                } else {
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 0,
+                    maxAmount: 10,
+                  });
+                }
+              }}
+              minWidth={73}
+            >
+              <Body1Text>0-10</Body1Text>
+            </FilterTag>
 
-            <HorizontalSpacing>
-              <CenteredTextContainer>
-                <Body1Text>
-                  <MidGrayText>-</MidGrayText>
-                </Body1Text>
-              </CenteredTextContainer>
-            </HorizontalSpacing>
+            <FilterTag
+              isSelected={
+                filterState.inProgressMinAmount === 11 &&
+                filterState.inProgressMaxAmount === 20
+              }
+              onPress={() => {
+                if (
+                  filterState.inProgressMinAmount === 11 &&
+                  filterState.inProgressMaxAmount === 20
+                ) {
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                } else {
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 11,
+                    maxAmount: 20,
+                  });
+                }
+              }}
+              minWidth={73}
+            >
+              <Body1Text>11-20</Body1Text>
+            </FilterTag>
 
-            <RightAlignContainer>
-              <FilterField
-                isSelected={filterState.inProgressMaxAmountIsSet}
-                onPress={() => {
-                  /* TODO: implement amount picker */
-                }}
-              >
-                {/* <Body1Text>
-                  {filterState.inProgressMaxAmountIsSet ? (
-                    `$${filterState.inProgressMaxAmount}`
-                  ) : (
-                    <MidGrayText>$ Max</MidGrayText>
-                  )}
-                </Body1Text> */}
-                <Picker
-                  selectedValue={filterState.inProgressMinAmount}
-                  onValueChange={(item: number) =>
-                    filterDispatch({ type: 'SET_MIN_AMOUNT', amount: item })
-                  }
-                  enabled
-                >
-                  <Picker.Item label="5" value={5} />
-                  <Picker.Item label="10" value={10} />
-                </Picker>
-              </FilterField>
-            </RightAlignContainer>
+            <FilterTag
+              isSelected={
+                filterState.inProgressMinAmount === 21 &&
+                filterState.inProgressMaxAmount === 50
+              }
+              onPress={() => {
+                if (
+                  filterState.inProgressMinAmount === 21 &&
+                  filterState.inProgressMaxAmount === 50
+                ) {
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                } else {
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 21,
+                    maxAmount: 50,
+                  });
+                }
+              }}
+              minWidth={73}
+            >
+              <Body1Text>21-50</Body1Text>
+            </FilterTag>
+
+            <FilterTag
+              isSelected={
+                filterState.inProgressMinAmount === 51 &&
+                !filterState.inProgressMaxAmountIsSet
+              }
+              onPress={() => {
+                if (
+                  filterState.inProgressMinAmount === 51 &&
+                  !filterState.inProgressMaxAmountIsSet
+                ) {
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                } else {
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 51,
+                    maxAmount: null,
+                  });
+                }
+              }}
+              minWidth={73}
+            >
+              <Body1Text>50+</Body1Text>
+            </FilterTag>
           </OneLine>
 
           <FilterVerticalSpacing />
