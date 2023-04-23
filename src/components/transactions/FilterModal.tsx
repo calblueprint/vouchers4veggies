@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import { Platform, TouchableOpacity, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import { Picker } from '@react-native-picker/picker';
 import moment from 'moment';
 import {
   CenteredTextContainer,
@@ -310,13 +311,23 @@ export default function FilterModal({
                   /* TODO: implement amount picker */
                 }}
               >
-                <Body1Text>
+                {/* <Body1Text>
                   {filterState.inProgressMaxAmountIsSet ? (
                     `$${filterState.inProgressMaxAmount}`
                   ) : (
                     <MidGrayText>$ Max</MidGrayText>
                   )}
-                </Body1Text>
+                </Body1Text> */}
+                <Picker
+                  selectedValue={filterState.inProgressMinAmount}
+                  onValueChange={(item: number) =>
+                    filterDispatch({ type: 'SET_MIN_AMOUNT', amount: item })
+                  }
+                  enabled
+                >
+                  <Picker.Item label="5" value={5} />
+                  <Picker.Item label="10" value={10} />
+                </Picker>
               </FilterField>
             </RightAlignContainer>
           </OneLine>
