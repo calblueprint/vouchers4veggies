@@ -116,8 +116,16 @@ export const RedText = styled.Text`
   color: ${Colors.alertRed};
 `;
 
-// will be used later
-export const FieldContainer = styled.View``;
+export const RangeInputContainer = styled.View`
+  width: 120px;
+`;
+
+export const VoucherRangeContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 6px;
+`;
 
 // TODO: refactor to use selene's dropdown component
 export const DropDownContainer = styled.View`
@@ -140,4 +148,20 @@ export const StartContainer = styled.View`
 
 export const HeroContainer = styled.View`
   margin-bottom: 40px;
+`;
+
+export const VoucherCountContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 277px;
+`;
+
+export const LoadingContainer = styled.View`
+  margin-top: 80px;
+  height: 100px;
+  display: flex;
+  flex-drection: row;
+  justify-content: flex-start;
+  align-items: center;
 `;
