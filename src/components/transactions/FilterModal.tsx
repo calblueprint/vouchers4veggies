@@ -211,6 +211,7 @@ export default function FilterModal({
                 })
               }
               minWidth={90}
+              margin={10}
             >
               <View
                 style={{
@@ -229,7 +230,6 @@ export default function FilterModal({
                 </Body1Text>
               </View>
             </FilterTag>
-            <HorizontalSpacing />
             <FilterTag
               isSelected={
                 filterState.inProgressStatusFilter === TransactionStatus.PAID
@@ -293,6 +293,7 @@ export default function FilterModal({
                 }
               }}
               minWidth={73}
+              margin={10}
             >
               <Body1Text>0-10</Body1Text>
             </FilterTag>
@@ -317,6 +318,7 @@ export default function FilterModal({
                 }
               }}
               minWidth={73}
+              margin={10}
             >
               <Body1Text>11-20</Body1Text>
             </FilterTag>
@@ -341,6 +343,7 @@ export default function FilterModal({
                 }
               }}
               minWidth={73}
+              margin={10}
             >
               <Body1Text>21-50</Body1Text>
             </FilterTag>
