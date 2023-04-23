@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, TextInput } from 'react-native';
 import Toast from 'react-native-toast-message';
 import OTPTextInput from 'react-native-otp-textinput';
 import {
@@ -45,10 +45,10 @@ export default function ManualVoucherScreen({
 
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
-  let otpInput = useRef(null);
+  const otpInput = useRef<TextInput>(null);
 
   const clearText = () => {
-    otpInput.clear();
+    otpInput.current?.clear();
   };
 
   const onChangeSerialNumber = (text: string) => {
@@ -66,11 +66,6 @@ export default function ManualVoucherScreen({
       const { ok } = result;
       // `ok` is true indicates valid serial number input
       if (ok) {
-        // clears input field if successfully added
-        // clearing works but it clears the screen before
-        // navigating to Confirm screen which is wrong.
-        // if clear text goes after navigation call, text does not clear
-        clearText();
         setSerialNumber('');
         setShowInvalidError(false);
         setShowDuplicateError(false);
@@ -80,6 +75,10 @@ export default function ManualVoucherScreen({
           serialNumber: Number(serialNumber),
           maxVoucherValue,
         });
+        // timeout to ensure that serial input is cleared after navigation
+        setTimeout(() => {
+          clearText();
+        }, 50);
       } else {
         setShowInvalidError(true);
       }
@@ -127,9 +126,7 @@ export default function ManualVoucherScreen({
         <FormContainer>
           <InputTitleText>Serial Number</InputTitleText>
           <OTPTextInput
-            ref={(e: React.MutableRefObject<null>) => {
-              otpInput = e;
-            }}
+            ref={otpInput}
             inputCount={7}
             tintColor={Colors.magenta}
             defaultValue={serialNumber}
