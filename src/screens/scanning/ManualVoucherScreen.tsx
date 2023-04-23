@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { TouchableOpacity } from 'react-native';
 import Toast from 'react-native-toast-message';
@@ -45,6 +45,11 @@ export default function ManualVoucherScreen({
 
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
+  let otpInput = useRef(null);
+
+  const clearText = () => {
+    otpInput.current?.clear();
+  };
 
   const onChangeSerialNumber = (text: string) => {
     setShowInvalidError(false);
@@ -63,6 +68,7 @@ export default function ManualVoucherScreen({
       if (ok) {
         // clears input field if successfully added
         setSerialNumber('');
+        clearText();
         setShowInvalidError(false);
         setShowDuplicateError(false);
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
@@ -118,9 +124,13 @@ export default function ManualVoucherScreen({
         <FormContainer>
           <InputTitleText>Serial Number</InputTitleText>
           <OTPTextInput
+            ref={(e: React.MutableRefObject<null>) => {
+              otpInput = e;
+            }}
             inputCount={7}
             tintColor={Colors.magenta}
             defaultValue={serialNumber}
+            inputCellLength={1}
             handleTextChange={onChangeSerialNumber}
             containerStyle={{ marginTop: 10 }}
             textInputStyle={{
@@ -129,9 +139,7 @@ export default function ManualVoucherScreen({
               width: 30,
             }}
             isValid={!showInvalidError}
-          >
-            {}
-          </OTPTextInput>
+          />
           <ErrorContainer>
             {showInvalidError ? (
               <RedText>
