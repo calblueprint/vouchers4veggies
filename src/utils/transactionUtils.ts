@@ -284,7 +284,8 @@ export const useFilterReducer = (
   const filterByDate = (filterState: FilterState, array: Transaction[]) => {
     let minTime = 0;
     if (filterState.inProgressMinDateIsSet) {
-      minTime = filterState.inProgressMinDate.getTime();
+      const oneDay = 24 * 3600 * 1000;
+      minTime = filterState.inProgressMinDate.getTime() - oneDay;
     }
     const filteredArray = array?.filter(
       t =>
