@@ -89,6 +89,12 @@ export default function TransactionsScreen({
     });
   }, [vendorUuid, sortTransactionDispatch, filterDispatch]);
 
+  const sortedByDate = transactions.sort((a, b) => {
+    const aTime = a.timestamp.toDate().toLocaleString();
+    const bTime = b.timestamp.toDate().toLocaleString();
+    return aTime.localeCompare(bTime);
+  });
+
   return (
     <SafeArea>
       <StandardHeader>
@@ -129,7 +135,7 @@ export default function TransactionsScreen({
         <CardContainer>
           <StartOfListView />
           <FlatList
-            data={transactions}
+            data={sortedByDate}
             renderItem={({ item }) => (
               <TransactionCard
                 navigation={navigation}
