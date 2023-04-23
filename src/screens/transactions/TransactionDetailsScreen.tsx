@@ -20,12 +20,19 @@ import {
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 import {
+  CenteredOneLine,
   LeftAlignContainerWithMargins,
   MediumText,
   Size14BoldText,
   Title,
 } from './styles';
-import { useSortVoucherReducer } from '../../utils/transactionUtils';
+import {
+  SortVoucherOption,
+  useSortVoucherReducer,
+} from '../../utils/transactionUtils';
+import SortModal from '../../components/transactions/SortModal';
+import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
+import { SortAndFilterDummy } from '../../components/transactions/styles';
 
 export default function TransactionDetailsScreen({
   route,
@@ -39,11 +46,20 @@ export default function TransactionDetailsScreen({
   );
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
   const { sortVoucherState, sortVoucherDispatch } = useSortVoucherReducer(
     displayedVoucherArray,
     defaultVoucherArray,
     setDisplayedVoucherArray,
   );
+
+  const sortButtonText = ['SN', 'SN', 'Date', 'Date'];
+  const sortDescriptionText = [
+    'Serial Number: High to Low',
+    'Serial Number: Low to High',
+    'Date: Newest',
+    'Date: Oldest',
+  ];
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -55,7 +71,6 @@ export default function TransactionDetailsScreen({
           data.voucherSerialNumbers.map(item => getVoucher(item)),
         );
         setDefaultVoucherArray(voucherData);
-        setDisplayedVoucherArray(voucherData);
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -68,13 +83,15 @@ export default function TransactionDetailsScreen({
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
-    fetchData(transactionUuid);
-    sortVoucherDispatch({ type: 'ON_RELOAD' });
+    fetchData(transactionUuid).then(() => {
+      sortVoucherDispatch({ type: 'ON_RELOAD' });
+    });
   }, [transactionUuid, sortVoucherDispatch]);
 
   useEffect(() => {
-    fetchData(transactionUuid);
-    sortVoucherDispatch({ type: 'ON_RELOAD' });
+    fetchData(transactionUuid).then(() => {
+      sortVoucherDispatch({ type: 'ON_RELOAD' });
+    });
   }, [transactionUuid, sortVoucherDispatch]);
 
   const time = moment(transactionData?.timestamp.toDate());
@@ -97,6 +114,23 @@ export default function TransactionDetailsScreen({
               Count: {transactionData.voucherSerialNumbers.length}
             </Size14BoldText>
           </LeftAlignContainerWithMargins>
+
+          <CenteredOneLine>
+            <SortAndFilterButton
+              modalIsVisible={sortModalIsVisible}
+              setModalIsVisible={setSortModalIsVisible}
+              isSelected={
+                sortVoucherState.sortType !== SortVoucherOption.NO_SORT
+              }
+              type="sort"
+              text={
+                sortVoucherState.isActive
+                  ? `Sort by: ${sortButtonText[sortVoucherState.sortType]}`
+                  : 'Sort by'
+              }
+            />
+            <SortAndFilterDummy />
+          </CenteredOneLine>
 
           <CardContainer>
             <StartOfListView />
@@ -123,6 +157,15 @@ export default function TransactionDetailsScreen({
       ) : (
         <LoadingSpinner />
       )}
+
+      <SortModal
+        type="vouchers"
+        isVisible={sortModalIsVisible}
+        setIsVisible={setSortModalIsVisible}
+        sortDescriptions={sortDescriptionText}
+        sortState={sortVoucherState}
+        sortDispatch={sortVoucherDispatch}
+      />
     </SafeArea>
   );
 }

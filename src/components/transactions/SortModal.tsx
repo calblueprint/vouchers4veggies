@@ -19,17 +19,21 @@ import RadioButton from '../common/RadioButton';
 import {
   SortTransactionDispatch,
   SortTransactionState,
+  SortVoucherDispatch,
+  SortVoucherState,
 } from '../../utils/transactionUtils';
 import { ButtonMagenta } from '../../../assets/Components';
 
 type SortModalProps = {
+  type: 'invoices' | 'vouchers';
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
-  sortState: SortTransactionState;
-  sortDispatch: SortTransactionDispatch;
+  sortState: SortTransactionState | SortVoucherState;
+  sortDispatch: SortTransactionDispatch | SortVoucherDispatch;
   sortDescriptions: string[];
 };
 export default function SortModal({
+  type,
   isVisible,
   setIsVisible,
   sortState,
@@ -58,7 +62,7 @@ export default function SortModal({
         </CloseButtonContainer>
 
         <PaddedScrollView alwaysBounceVertical={false}>
-          <H4CardNavTab>Sort invoices by</H4CardNavTab>
+          <H4CardNavTab>{`Sort ${type} by`}</H4CardNavTab>
           <SortVerticalSpacing />
           <RadioButton
             data={sortDescriptions}

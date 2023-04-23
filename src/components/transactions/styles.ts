@@ -195,6 +195,10 @@ export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
   margin-bottom: 28px;
 `;
 
+export const SortAndFilterDummy = styled.View`
+  width: 146px;
+`;
+
 export const SelectedSortAndFilterBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
@@ -223,6 +227,10 @@ export const Styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingRight: 29,
+  },
+  icon: {
+    justifyContent: 'center',
+    paddingHorizontal: 6,
   },
   modal: {
     justifyContent: 'flex-end',

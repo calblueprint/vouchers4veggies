@@ -19,6 +19,7 @@ export enum SortVoucherOption {
 
 export type SortVoucherState = {
   dispatch: SortVoucherDispatch;
+  isActive: boolean;
   sortType: SortVoucherOption;
   inProgressSortType: SortVoucherOption;
 };
@@ -74,6 +75,7 @@ export const useSortVoucherReducer = (
           setVouchers(sortedArray);
           return {
             ...prevState,
+            isActive: true,
             sortType: prevState.inProgressSortType,
           };
         case 'ON_RELOAD':
@@ -106,6 +108,7 @@ export const useSortVoucherReducer = (
       }
     },
     {
+      isActive: false,
       sortType: SortVoucherOption.NO_SORT,
       inProgressSortType: SortVoucherOption.NO_SORT,
       dispatch: () => null,
