@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { Platform, TouchableOpacity, View } from 'react-native';
+import { Alert, Platform, TouchableOpacity, View } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
@@ -377,11 +377,27 @@ export default function FilterModal({
           <CenteredContainer>
             <ButtonMagenta
               onPress={() => {
-                setIsVisible(false);
-                Promise.resolve().then(() => {
-                  filterDispatch({ type: 'ON_SUBMIT' });
-                  sortDispatch({ type: 'ON_RELOAD' });
-                });
+                if (
+                  filterState.inProgressMinDateIsSet &&
+                  filterState.inProgressMaxDateIsSet &&
+                  filterState.inProgressMaxDate < filterState.inProgressMinDate
+                ) {
+                  Alert.alert(
+                    'Oh no! Invalid date filter.',
+                    'Please try again',
+                    [
+                      {
+                        text: 'OK',
+                      },
+                    ],
+                  );
+                } else {
+                  setIsVisible(false);
+                  Promise.resolve().then(() => {
+                    filterDispatch({ type: 'ON_SUBMIT' });
+                    sortDispatch({ type: 'ON_RELOAD' });
+                  });
+                }
               }}
             >
               <ButtonTextWhite>{`Apply${
