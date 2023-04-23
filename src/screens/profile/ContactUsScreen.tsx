@@ -6,17 +6,13 @@ import {
   ButtonTextWhite,
   Body1Text,
 } from '../../../assets/Fonts';
-import {
-  HeadingContainer,
-  MagentaButtonContainer,
-  MainProfileContainer,
-  LeftAlignContainer,
-} from './styles';
+import { MagentaButtonContainer, LeftAlignContainer } from './styles';
 import {
   ButtonMagenta,
   Row,
   SafeArea,
   StartOfListView,
+  TitleContainer,
 } from '../../../assets/Components';
 import StandardHeader from '../../components/common/StandardHeader';
 import BackButton from '../../components/common/BackButton';
@@ -30,11 +26,9 @@ export default function ContactUsScreen({
       <StandardHeader>
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
-      <MainProfileContainer>
-        <HeadingContainer>
-          <H2Heading>Contact Us</H2Heading>
-        </HeadingContainer>
-      </MainProfileContainer>
+      <TitleContainer>
+        <H2Heading>Contact Us</H2Heading>
+      </TitleContainer>
       <StartOfListView />
       <Row>
         <LeftAlignContainer>

@@ -29,7 +29,7 @@ export const StatusContainer = styled.View`
 `;
 
 export const ValueContainer = styled.View`
-  flex: 1;
+  flex: 1.5;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
@@ -41,7 +41,7 @@ export const StatusComponentRed = styled.View`
   border-radius: 9px;
   min-width: 63px;
   background: ${Colors.alertLightRed};
-  padding: 9px;
+  padding: 6px;
   border: 2px solid ${Colors.alertLightRed};
 `;
 

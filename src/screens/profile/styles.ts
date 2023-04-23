@@ -17,6 +17,7 @@ export const MainProfileContainer = styled.View`
   margin-left: 32px;
   margin-right: 32px;
 `;
+
 export const LeftAlignContainer = styled.View`
   flex: 1;
   flex-direction: column;
