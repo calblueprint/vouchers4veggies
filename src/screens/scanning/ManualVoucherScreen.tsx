@@ -67,6 +67,9 @@ export default function ManualVoucherScreen({
       // `ok` is true indicates valid serial number input
       if (ok) {
         // clears input field if successfully added
+        // clearing works but it clears the screen before
+        // navigating to Confirm screen which is wrong.
+        // if clear text goes after navigation call, text does not clear
         clearText();
         setSerialNumber('');
         setShowInvalidError(false);
