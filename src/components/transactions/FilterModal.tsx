@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { Alert, Platform, TouchableOpacity } from 'react-native';
+import { Alert, Platform, ScrollView, TouchableOpacity } from 'react-native';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
@@ -250,104 +250,106 @@ export default function FilterModal({
           </SubheadingContainer>
 
           <OneLine>
-            <FilterTag
-              isSelected={
-                filterState.inProgressMinAmount === 0 &&
-                filterState.inProgressMaxAmount === 10
-              }
-              onPress={() => {
-                if (
+            <ScrollView horizontal alwaysBounceHorizontal={false}>
+              <FilterTag
+                isSelected={
                   filterState.inProgressMinAmount === 0 &&
                   filterState.inProgressMaxAmount === 10
-                ) {
-                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                } else {
-                  filterDispatch({
-                    type: 'SET_AMOUNT',
-                    minAmount: 0,
-                    maxAmount: 10,
-                  });
                 }
-              }}
-              minWidth={73}
-              margin={10}
-            >
-              <Body1Text>0-10</Body1Text>
-            </FilterTag>
+                onPress={() => {
+                  if (
+                    filterState.inProgressMinAmount === 0 &&
+                    filterState.inProgressMaxAmount === 10
+                  ) {
+                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                  } else {
+                    filterDispatch({
+                      type: 'SET_AMOUNT',
+                      minAmount: 0,
+                      maxAmount: 10,
+                    });
+                  }
+                }}
+                minWidth={73}
+                margin={10}
+              >
+                <Body1Text>0-10</Body1Text>
+              </FilterTag>
 
-            <FilterTag
-              isSelected={
-                filterState.inProgressMinAmount === 11 &&
-                filterState.inProgressMaxAmount === 20
-              }
-              onPress={() => {
-                if (
+              <FilterTag
+                isSelected={
                   filterState.inProgressMinAmount === 11 &&
                   filterState.inProgressMaxAmount === 20
-                ) {
-                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                } else {
-                  filterDispatch({
-                    type: 'SET_AMOUNT',
-                    minAmount: 11,
-                    maxAmount: 20,
-                  });
                 }
-              }}
-              minWidth={73}
-              margin={10}
-            >
-              <Body1Text>11-20</Body1Text>
-            </FilterTag>
+                onPress={() => {
+                  if (
+                    filterState.inProgressMinAmount === 11 &&
+                    filterState.inProgressMaxAmount === 20
+                  ) {
+                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                  } else {
+                    filterDispatch({
+                      type: 'SET_AMOUNT',
+                      minAmount: 11,
+                      maxAmount: 20,
+                    });
+                  }
+                }}
+                minWidth={73}
+                margin={10}
+              >
+                <Body1Text>11-20</Body1Text>
+              </FilterTag>
 
-            <FilterTag
-              isSelected={
-                filterState.inProgressMinAmount === 21 &&
-                filterState.inProgressMaxAmount === 50
-              }
-              onPress={() => {
-                if (
+              <FilterTag
+                isSelected={
                   filterState.inProgressMinAmount === 21 &&
                   filterState.inProgressMaxAmount === 50
-                ) {
-                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                } else {
-                  filterDispatch({
-                    type: 'SET_AMOUNT',
-                    minAmount: 21,
-                    maxAmount: 50,
-                  });
                 }
-              }}
-              minWidth={73}
-              margin={10}
-            >
-              <Body1Text>21-50</Body1Text>
-            </FilterTag>
+                onPress={() => {
+                  if (
+                    filterState.inProgressMinAmount === 21 &&
+                    filterState.inProgressMaxAmount === 50
+                  ) {
+                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                  } else {
+                    filterDispatch({
+                      type: 'SET_AMOUNT',
+                      minAmount: 21,
+                      maxAmount: 50,
+                    });
+                  }
+                }}
+                minWidth={73}
+                margin={10}
+              >
+                <Body1Text>21-50</Body1Text>
+              </FilterTag>
 
-            <FilterTag
-              isSelected={
-                filterState.inProgressMinAmount === 51 &&
-                !filterState.inProgressMaxAmountIsSet
-              }
-              onPress={() => {
-                if (
+              <FilterTag
+                isSelected={
                   filterState.inProgressMinAmount === 51 &&
                   !filterState.inProgressMaxAmountIsSet
-                ) {
-                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                } else {
-                  filterDispatch({
-                    type: 'SET_AMOUNT',
-                    minAmount: 51,
-                    maxAmount: null,
-                  });
                 }
-              }}
-              minWidth={73}
-            >
-              <Body1Text>50+</Body1Text>
-            </FilterTag>
+                onPress={() => {
+                  if (
+                    filterState.inProgressMinAmount === 51 &&
+                    !filterState.inProgressMaxAmountIsSet
+                  ) {
+                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
+                  } else {
+                    filterDispatch({
+                      type: 'SET_AMOUNT',
+                      minAmount: 51,
+                      maxAmount: null,
+                    });
+                  }
+                }}
+                minWidth={73}
+              >
+                <Body1Text>50+</Body1Text>
+              </FilterTag>
+            </ScrollView>
           </OneLine>
 
           <FilterVerticalSpacing />
