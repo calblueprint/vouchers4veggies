@@ -57,14 +57,12 @@ export default function TransactionsScreen({
     setTransactions,
   );
 
-  const fetchData = async (Uuid: string | null, isFirstLoad: boolean) => {
+  const fetchData = async (Uuid: string | null) => {
     try {
       if (Uuid) {
         const transactionsArray = await getTransactionsByVendorUuid(Uuid);
         setDefaultTransactions(transactionsArray);
-        if (isFirstLoad) {
-          setTransactions(transactionsArray);
-        }
+        setTransactions(transactionsArray);
         setIsLoading(false);
       }
     } catch (error) {
@@ -78,13 +76,14 @@ export default function TransactionsScreen({
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
-    fetchData(vendorUuid, false).then(() => {
+    fetchData(vendorUuid).then(() => {
+      filterDispatch({ type: 'ON_RELOAD' });
       sortTransactionDispatch({ type: 'ON_RELOAD' });
     });
-  }, [vendorUuid, sortTransactionDispatch]);
+  }, [vendorUuid, sortTransactionDispatch, filterDispatch]);
 
   useEffect(() => {
-    fetchData(vendorUuid, true).then(() => {
+    fetchData(vendorUuid).then(() => {
       filterDispatch({ type: 'ON_RELOAD' });
       sortTransactionDispatch({ type: 'ON_RELOAD' });
     });
