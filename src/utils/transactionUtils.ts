@@ -323,7 +323,6 @@ export const useFilterReducer = (
   const [filterState, filterDispatch] = useReducer(
     (prevState: FilterState, action: FilterAction) => {
       let count = prevState.inProgressFilterCount;
-      const status = 'none';
       let newState = { ...prevState };
       let transactions = [...defaultTransactions];
 
