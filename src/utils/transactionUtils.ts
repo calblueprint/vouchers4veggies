@@ -188,7 +188,7 @@ export const useSortTransactionReducer = (
               sortedArray = sortTransactionsByAmountDesc(transactions);
               break;
             default:
-              sortedArray = sortTransactionsByAmountDesc(transactions);
+              sortedArray = sortTransactionsByDateDesc(transactions);
           }
           setTransactions(sortedArray);
           return {
