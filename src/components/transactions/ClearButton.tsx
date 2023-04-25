@@ -1,6 +1,7 @@
 import React from 'react';
-import { ClearButtonContainer, RightAlignContainer } from './styles';
+import { ClearButtonContainer } from './styles';
 import { BlueText, Body1Text, MidGrayText } from '../../../assets/Fonts';
+import { RightAlignContainer } from '../common/styles';
 
 type ClearButtonProps = {
   isDisabled: boolean;

@@ -31,6 +31,7 @@ export const LeftAlignContainer = styled.View`
 
 export const RightAlignContainer = styled.View`
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: flex-end;
   align-content: center;

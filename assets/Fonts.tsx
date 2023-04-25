@@ -128,7 +128,7 @@ export const MidGrayText = styled.Text`
 `;
 
 export const BlueText = styled.Text`
-  color: #007aff;
+  color: ${Colors.blue};
 `;
 
 export const LoadingText = styled.Text`

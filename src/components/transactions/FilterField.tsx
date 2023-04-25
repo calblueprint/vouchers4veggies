@@ -1,12 +1,8 @@
 import React, { ReactElement } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
-import {
-  RightAlignContainer,
-  SelectedFilterField,
-  UnselectedFilterField,
-} from './styles';
-import { OneLine } from '../common/styles';
+import { SelectedFilterField, UnselectedFilterField } from './styles';
+import { OneLine, RightAlignContainer } from '../common/styles';
 import Colors from '../../../assets/Colors';
 
 type FilterFieldProps = {

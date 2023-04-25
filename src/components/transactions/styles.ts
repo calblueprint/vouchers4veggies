@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
+import { LeftAlignContainer, RightAlignContainer } from '../common/styles';
 
-export const LeftAlignContainerWithMargin = styled.View`
+export const LeftAlignColumnWithLeftMargin = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: center;
@@ -10,21 +11,12 @@ export const LeftAlignContainerWithMargin = styled.View`
   padding-left: 29px;
 `;
 
-export const RightAlignContainerWithMargin = styled.View`
-  flex: 1;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-  margin-right: 29px;
+export const LeftAlignContainerWithRightMargin = styled(LeftAlignContainer)`
+  margin-right: 20px;
 `;
 
-export const RightAlignContainer = styled.View`
-  flex: 1;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
+export const RightAlignContainerWithRightMargin = styled(RightAlignContainer)`
+  margin-right: 29px;
 `;
 
 export const SubheadingContainer = styled.View`
@@ -156,10 +148,6 @@ export const SortVerticalSpacing = styled.View`
 
 export const FilterVerticalSpacing = styled.View`
   height: 48px;
-`;
-
-export const HorizontalSpacing = styled.View`
-  width: 20px;
 `;
 
 export const CloseButtonContainer = styled.View`

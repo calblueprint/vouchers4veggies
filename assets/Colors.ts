@@ -15,6 +15,7 @@ const Colors = {
   alertGreen: '#239E0F',
   lightGreen: '#DFF4E1',
   unselectedGray: '#E3E3E5',
+  blue: '#007AFF',
 };
 
 export default Colors;
