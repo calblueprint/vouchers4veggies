@@ -7,21 +7,23 @@ import { CenterText, MidGrayText, WhiteText } from '../../../assets/Fonts';
 type FilterTagProps = {
   isSelected: boolean;
   children: ReactElement;
-  onPress: () => void;
+  onSelectedPress: () => void;
+  onUnselectedPress: () => void;
   minWidth?: number | string;
   margin?: number;
 };
 export default function FilterTag({
   isSelected,
   children,
-  onPress,
+  onSelectedPress,
+  onUnselectedPress,
   minWidth = 'auto',
   margin = 0,
 }: FilterTagProps) {
   if (isSelected) {
     return (
       <View style={{ marginRight: margin }}>
-        <SelectedFilterTag onPress={onPress}>
+        <SelectedFilterTag onPress={onSelectedPress}>
           <OneLine>
             <CenterText style={{ minWidth }}>
               <WhiteText>{children}</WhiteText>
@@ -33,7 +35,7 @@ export default function FilterTag({
   }
   return (
     <View style={{ marginRight: margin }}>
-      <UnselectedFilterTag onPress={onPress}>
+      <UnselectedFilterTag onPress={onUnselectedPress}>
         <OneLine>
           <CenterText style={{ minWidth }}>
             <MidGrayText>{children}</MidGrayText>

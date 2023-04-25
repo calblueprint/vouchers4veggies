@@ -202,11 +202,14 @@ export default function FilterModal({
               isSelected={
                 filterState.inProgressStatusFilter === TransactionStatus.UNPAID
               }
-              onPress={() =>
+              onUnselectedPress={() =>
                 filterDispatch({
                   type: 'SET_STATUS_FILTER',
                   status: TransactionStatus.UNPAID,
                 })
+              }
+              onSelectedPress={() =>
+                filterDispatch({ type: 'CLEAR_STATUS_FILTER' })
               }
               minWidth={90}
               margin={10}
@@ -218,11 +221,14 @@ export default function FilterModal({
               isSelected={
                 filterState.inProgressStatusFilter === TransactionStatus.PAID
               }
-              onPress={() =>
+              onUnselectedPress={() =>
                 filterDispatch({
                   type: 'SET_STATUS_FILTER',
                   status: TransactionStatus.PAID,
                 })
+              }
+              onSelectedPress={() =>
+                filterDispatch({ type: 'CLEAR_STATUS_FILTER' })
               }
               minWidth={90}
             >
@@ -256,20 +262,16 @@ export default function FilterModal({
                   filterState.inProgressMinAmount === 0 &&
                   filterState.inProgressMaxAmount === 10
                 }
-                onPress={() => {
-                  if (
-                    filterState.inProgressMinAmount === 0 &&
-                    filterState.inProgressMaxAmount === 10
-                  ) {
-                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                  } else {
-                    filterDispatch({
-                      type: 'SET_AMOUNT',
-                      minAmount: 0,
-                      maxAmount: 10,
-                    });
-                  }
-                }}
+                onSelectedPress={() =>
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' })
+                }
+                onUnselectedPress={() =>
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 0,
+                    maxAmount: 10,
+                  })
+                }
                 minWidth={73}
                 margin={10}
               >
@@ -281,20 +283,16 @@ export default function FilterModal({
                   filterState.inProgressMinAmount === 11 &&
                   filterState.inProgressMaxAmount === 20
                 }
-                onPress={() => {
-                  if (
-                    filterState.inProgressMinAmount === 11 &&
-                    filterState.inProgressMaxAmount === 20
-                  ) {
-                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                  } else {
-                    filterDispatch({
-                      type: 'SET_AMOUNT',
-                      minAmount: 11,
-                      maxAmount: 20,
-                    });
-                  }
-                }}
+                onSelectedPress={() =>
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' })
+                }
+                onUnselectedPress={() =>
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 11,
+                    maxAmount: 20,
+                  })
+                }
                 minWidth={73}
                 margin={10}
               >
@@ -306,20 +304,16 @@ export default function FilterModal({
                   filterState.inProgressMinAmount === 21 &&
                   filterState.inProgressMaxAmount === 50
                 }
-                onPress={() => {
-                  if (
-                    filterState.inProgressMinAmount === 21 &&
-                    filterState.inProgressMaxAmount === 50
-                  ) {
-                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                  } else {
-                    filterDispatch({
-                      type: 'SET_AMOUNT',
-                      minAmount: 21,
-                      maxAmount: 50,
-                    });
-                  }
-                }}
+                onSelectedPress={() =>
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' })
+                }
+                onUnselectedPress={() =>
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 21,
+                    maxAmount: 50,
+                  })
+                }
                 minWidth={73}
                 margin={10}
               >
@@ -331,20 +325,16 @@ export default function FilterModal({
                   filterState.inProgressMinAmount === 51 &&
                   !filterState.inProgressMaxAmountIsSet
                 }
-                onPress={() => {
-                  if (
-                    filterState.inProgressMinAmount === 51 &&
-                    !filterState.inProgressMaxAmountIsSet
-                  ) {
-                    filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' });
-                  } else {
-                    filterDispatch({
-                      type: 'SET_AMOUNT',
-                      minAmount: 51,
-                      maxAmount: null,
-                    });
-                  }
-                }}
+                onSelectedPress={() =>
+                  filterDispatch({ type: 'CLEAR_AMOUNT_FILTERS' })
+                }
+                onUnselectedPress={() =>
+                  filterDispatch({
+                    type: 'SET_AMOUNT',
+                    minAmount: 51,
+                    maxAmount: null,
+                  })
+                }
                 minWidth={73}
               >
                 <Body1Text>50+</Body1Text>
