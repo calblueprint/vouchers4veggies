@@ -9,3 +9,4 @@ declare module 'react-native-dotenv' {
 }
 
 declare module '*.png';
+declare module 'react-native-otp-textinput';

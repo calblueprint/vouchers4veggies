@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 
 export const StartContainer = styled.View`
-  top: 35%;
+  top: 26%;
 `;
 
 export const HeadingContainer = styled.View`
@@ -86,3 +86,14 @@ export const Styles = StyleSheet.create({
     color: Colors.alertRed,
   },
 });
+
+export const ButtonSpacing = styled.View`
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 40px;
+`;
+export const StartLogoContainer = styled.ImageBackground`
+  width: 100px;
+  height: 100px;
+`;

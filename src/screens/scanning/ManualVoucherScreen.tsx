@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, TextInput } from 'react-native';
 import Toast from 'react-native-toast-message';
+import OTPTextInput from 'react-native-otp-textinput';
 import {
   ButtonMagenta,
   ButtonWhite,
@@ -28,7 +29,6 @@ import {
   RedText,
   VoucherCountContainer,
 } from './styles';
-import InputField from '../../components/InputField/InputField';
 import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
@@ -45,6 +45,11 @@ export default function ManualVoucherScreen({
 
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
+  const otpInput = useRef<TextInput>(null);
+
+  const clearText = () => {
+    otpInput.current?.clear();
+  };
 
   const onChangeSerialNumber = (text: string) => {
     setShowInvalidError(false);
@@ -61,7 +66,6 @@ export default function ManualVoucherScreen({
       const { ok } = result;
       // `ok` is true indicates valid serial number input
       if (ok) {
-        // clears input field if successfully added
         setSerialNumber('');
         setShowInvalidError(false);
         setShowDuplicateError(false);
@@ -71,6 +75,10 @@ export default function ManualVoucherScreen({
           serialNumber: Number(serialNumber),
           maxVoucherValue,
         });
+        // timeout to ensure that serial input is cleared after navigation
+        setTimeout(() => {
+          clearText();
+        }, 50);
       } else {
         setShowInvalidError(true);
       }
@@ -117,12 +125,20 @@ export default function ManualVoucherScreen({
         </TitleContainer>
         <FormContainer>
           <InputTitleText>Serial Number</InputTitleText>
-          <InputField
-            onChange={onChangeSerialNumber}
-            value={serialNumber}
-            placeholder="Enter Number"
+          <OTPTextInput
+            ref={otpInput}
+            inputCount={7}
+            tintColor={Colors.magenta}
+            defaultValue={serialNumber}
+            inputCellLength={1}
+            handleTextChange={onChangeSerialNumber}
+            containerStyle={{ marginTop: 10 }}
+            textInputStyle={{
+              borderWidth: 1,
+              borderRadius: 2,
+              width: 30,
+            }}
             isValid={!showInvalidError}
-            keyboardType="number-pad"
           />
           <ErrorContainer>
             {showInvalidError ? (
