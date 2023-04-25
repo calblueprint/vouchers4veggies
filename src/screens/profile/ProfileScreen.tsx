@@ -7,6 +7,7 @@ import {
   H2Heading,
   ButtonTextWhite,
   Body1Text,
+  CenterText,
 } from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
@@ -53,7 +54,9 @@ export default function ProfileScreen({
         <StandardLogo />
       </StandardHeader>
       <TitleContainer>
-        <H2Heading>Hi, {vendorName}!</H2Heading>
+        <CenterText>
+          <H2Heading>Hi, {vendorName}!</H2Heading>
+        </CenterText>
       </TitleContainer>
       <StartOfListView />
       <Row>
