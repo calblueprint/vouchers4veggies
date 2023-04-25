@@ -122,4 +122,5 @@ export const TitleContainer = styled.View`
   padding-bottom: 20px;
   margin-left: 32px;
   margin-right: 32px;
+  align-items: center;
 `;
