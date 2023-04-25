@@ -178,6 +178,8 @@ export const useSortTransactionReducer = (
           };
         case 'ON_SUBMIT':
           switch (prevState.inProgressSortType) {
+            case SortTransactionOption.NO_SORT:
+              return { ...prevState };
             case SortTransactionOption.DATE_ASC:
               sortedArray = sortTransactionsByDateAsc(transactions);
               break;
