@@ -153,7 +153,7 @@ export const HeroContainer = styled.View`
 export const VoucherCountContainer = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   width: 277px;
 `;
 

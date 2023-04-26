@@ -2,7 +2,7 @@ import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
 import { Body1Text } from '../../../assets/Fonts';
-import { LeftAlignContainer, Styles } from '../transactions/styles';
+import { LeftAlignColumnWithLeftMargin, Styles } from '../transactions/styles';
 import { Row } from '../../../assets/Components';
 import { formatValueForDisplay } from '../../utils/displayUtils';
 import MediumSemiBoldText from './styles';
@@ -33,17 +33,17 @@ export default function ReviewVoucherCard({
 
   return (
     <Row>
-      <LeftAlignContainer>
+      <LeftAlignColumnWithLeftMargin>
         <Body1Text>{`SN ${serialNumber}`}</Body1Text>
         <MediumSemiBoldText>{`$${formatValueForDisplay(
           value,
         )}`}</MediumSemiBoldText>
-      </LeftAlignContainer>
+      </LeftAlignColumnWithLeftMargin>
 
       <AntDesign.Button
         name="edit"
         size={25}
-        style={Styles.icon}
+        style={Styles.iconWithPadding}
         color={Colors.midGray}
         onPress={onEdit}
       />
@@ -51,7 +51,7 @@ export default function ReviewVoucherCard({
       <AntDesign.Button
         name="delete"
         size={25}
-        style={Styles.icon}
+        style={Styles.iconWithPadding}
         color={Colors.midGray}
         onPress={onDelete}
       />

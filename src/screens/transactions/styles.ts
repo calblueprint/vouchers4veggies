@@ -8,7 +8,7 @@ export const Title = styled.Text`
   text-align: center;
 `;
 
-export const LeftAlignedContainer = styled.View`
+export const LeftAlignContainerWithMargins = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
@@ -29,4 +29,33 @@ export const Size14BoldText = styled.Text`
   font-style: normal;
   font-size: 14px;
   line-height: 19px;
+`;
+
+export const CenteredOneLine = styled.View`
+  display: flex;
+  background-color: #fff;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const LeftAlignContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+`;
+
+export const RightAlignContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+`;
+
+export const VerticalSpaceContainer = styled.View`
+  height: 21px;
 `;

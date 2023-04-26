@@ -20,11 +20,19 @@ import {
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 import {
-  LeftAlignedContainer,
+  CenteredOneLine,
+  LeftAlignContainerWithMargins,
   MediumText,
   Size14BoldText,
   Title,
 } from './styles';
+import {
+  SortVoucherOption,
+  useSortVoucherReducer,
+} from '../../utils/transactionUtils';
+import SortModal from '../../components/transactions/SortModal';
+import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
+import { SortAndFilterDummy } from '../../components/transactions/styles';
 
 export default function TransactionDetailsScreen({
   route,
@@ -32,33 +40,59 @@ export default function TransactionDetailsScreen({
 }: TransactionStackScreenProps<'TransactionDetailsScreen'>) {
   const { transactionUuid } = route.params;
   const [transactionData, setTransactionData] = useState<Transaction>();
-  const [voucherArray, setVoucherArray] = useState<Voucher[]>();
+  const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>([]);
+  const [displayedVoucherArray, setDisplayedVoucherArray] = useState<Voucher[]>(
+    [],
+  );
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
+  const { sortVoucherState, sortVoucherDispatch } = useSortVoucherReducer(
+    displayedVoucherArray,
+    defaultVoucherArray,
+    setDisplayedVoucherArray,
+  );
+
+  const sortButtonText = ['SN', 'SN', 'Date', 'Date'];
+  const sortDescriptionText = [
+    'Serial Number: High to Low',
+    'Serial Number: Low to High',
+    'Date: Newest',
+    'Date: Oldest',
+  ];
+
+  const fetchData = async (Uuid: string | null) => {
+    try {
+      if (Uuid) {
+        const data = await getTransaction(Uuid);
+        setTransactionData(data);
+
+        const voucherData = await Promise.all(
+          data.voucherSerialNumbers.map(item => getVoucher(item)),
+        );
+        setDefaultVoucherArray(voucherData);
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('(useEffect)[TransactionDetailsScreen]', error);
+    }
+  };
 
   const onRefresh = React.useCallback(() => {
     setIsRefreshing(true);
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
-  }, []);
+    fetchData(transactionUuid).then(() => {
+      sortVoucherDispatch({ type: 'ON_RELOAD' });
+    });
+  }, [transactionUuid, sortVoucherDispatch]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getTransaction(transactionUuid);
-        setTransactionData(data);
-
-        const voucherData = await Promise.all(
-          data.voucherSerialNumbers.map(item => getVoucher(item)),
-        );
-        setVoucherArray(voucherData);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('(useEffect)[TransactionDetailsScreen]', error);
-      }
-    };
-    fetchData();
-  }, [transactionUuid]);
+    fetchData(transactionUuid).then(() => {
+      sortVoucherDispatch({ type: 'ON_RELOAD' });
+    });
+  }, [transactionUuid, sortVoucherDispatch]);
 
   const time = moment(transactionData?.timestamp.toDate());
 
@@ -75,16 +109,33 @@ export default function TransactionDetailsScreen({
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
           <MediumText>Time: {formatTimeForDisplay(time)}</MediumText>
 
-          <LeftAlignedContainer>
+          <LeftAlignContainerWithMargins>
             <Size14BoldText>
               Count: {transactionData.voucherSerialNumbers.length}
             </Size14BoldText>
-          </LeftAlignedContainer>
+          </LeftAlignContainerWithMargins>
+
+          <CenteredOneLine>
+            <SortAndFilterButton
+              modalIsVisible={sortModalIsVisible}
+              setModalIsVisible={setSortModalIsVisible}
+              isSelected={
+                sortVoucherState.sortType !== SortVoucherOption.NO_SORT
+              }
+              type="sort"
+              text={
+                sortVoucherState.isActive
+                  ? `Sort by: ${sortButtonText[sortVoucherState.sortType]}`
+                  : 'Sort by'
+              }
+            />
+            <SortAndFilterDummy />
+          </CenteredOneLine>
 
           <CardContainer>
             <StartOfListView />
             <FlatList
-              data={voucherArray}
+              data={displayedVoucherArray}
               renderItem={({ item }) => (
                 <VoucherCard
                   serialNumber={item.serialNumber}
@@ -106,6 +157,15 @@ export default function TransactionDetailsScreen({
       ) : (
         <LoadingSpinner />
       )}
+
+      <SortModal
+        name="vouchers"
+        isVisible={sortModalIsVisible}
+        setIsVisible={setSortModalIsVisible}
+        sortDescriptions={sortDescriptionText}
+        sortState={sortVoucherState}
+        sortDispatch={sortVoucherDispatch}
+      />
     </SafeArea>
   );
 }
