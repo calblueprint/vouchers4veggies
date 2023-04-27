@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 import Dialog from 'react-native-dialog';
+import { CommonActions } from '@react-navigation/native';
 import {
   ButtonTextWhite,
   H2Heading,
   H3Subheading,
   H5Subheading2,
   LoadingText,
+  CenterText,
 } from '../../../assets/Fonts';
 import {
   BorderlessRow,
   LeftAlignContainer,
   RightAlignContainer,
-  ReviewTitleContainer,
   ReviewButtonContainer,
   ConstrainedHeightContainer,
   LoadingContainer,
+  TitleContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -51,7 +53,7 @@ export default function ReviewScreen({
 
   const [editDialogText, setEditDialogText] = useState('');
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
-  const [isProcessing, setProcessingInvoice] = useState(false);
+  const [isProcessing, setProcessingInvoice] = useState(true);
 
   const voucherArray = Array.from(
     voucherMap,
@@ -118,7 +120,7 @@ export default function ReviewScreen({
       setEmptyInvoiceDialogIsVisible(true);
       return;
     }
-
+    setProcessingInvoice(true);
     if (vendorUuid) {
       setProcessingInvoice(true);
       await Promise.all(
@@ -139,9 +141,18 @@ export default function ReviewScreen({
       });
     }
     setProcessingInvoice(false);
-    navigation.navigate('ConfirmationScreen', {
-      count: voucherMap.size,
-    });
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          { name: 'VoucherEntryStartScreen' },
+          {
+            name: 'ConfirmationScreen',
+            params: { count: voucherMap.size },
+          },
+        ],
+      }),
+    );
   };
 
   return (
@@ -150,9 +161,11 @@ export default function ReviewScreen({
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
-      <ReviewTitleContainer>
-        <H2Heading>Review vouchers</H2Heading>
-      </ReviewTitleContainer>
+      <TitleContainer>
+        <CenterText>
+          <H2Heading>Review vouchers</H2Heading>
+        </CenterText>
+      </TitleContainer>
 
       {editDialogIsVisible ? (
         <Dialog.Container visible>
