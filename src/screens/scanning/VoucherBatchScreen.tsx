@@ -74,6 +74,14 @@ export default function VoucherBatchScreen({
     const startSerialNumber = Number(startSerialNumberInput);
     const endSerialNumber = Number(endSerialNumberInput);
 
+    // ensures there aren't more than 20 vouchers in voucher batch
+    if (endSerialNumber - startSerialNumber >= 20) {
+      setProcessingVouchers(false);
+      setShowEndInvalidError(true);
+      setErrorMessage('You may only add up to 20 vouchers at once!');
+      return;
+    }
+
     // checks if either input is a duplicate (within the current invoice) and returns 1-2 errors if so
     const isStartDuplicate = voucherMap.has(startSerialNumber);
     const isEndDuplicate = voucherMap.has(endSerialNumber);
