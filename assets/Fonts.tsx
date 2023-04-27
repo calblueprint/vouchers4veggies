@@ -138,3 +138,18 @@ export const LoadingText = styled.Text`
   line-height: 25px;
   color: ${Colors.magenta};
 `;
+
+export const TitleText = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 28px;
+  line-height: 38px;
+`;
+
+export const NavButtonText = styled.Text`
+  text-align: center;
+  padding-vertical: 11px;
+  font-size: 14px;
+  color: #272929;
+  font-family: manrope-bold;
+`;

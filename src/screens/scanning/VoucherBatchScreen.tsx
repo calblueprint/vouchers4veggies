@@ -1,31 +1,19 @@
 import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { TouchableOpacity } from 'react-native';
 import Toast from 'react-native-toast-message';
-import {
-  ButtonMagenta,
-  ButtonWhite,
-  AddManuallyButton,
-  SafeArea,
-} from '../../../assets/Components';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  CenterText,
-  H2Heading,
   InputTitleText,
-  // CounterText,
   Body2Subtext,
   Body1Text,
   LoadingText,
 } from '../../../assets/Fonts';
 import {
-  TitleContainer,
   BodyContainer,
   RangeInputContainer,
   FormContainer,
-  // VoucherCounter,
   ErrorContainer,
   RedText,
   VoucherRangeContainer,
@@ -33,9 +21,7 @@ import {
   LoadingContainer,
 } from './styles';
 import InputField from '../../components/InputField/InputField';
-import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
-import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import {
   getMaxVoucherValue,
@@ -43,7 +29,6 @@ import {
 } from '../../database/queries';
 import {
   addMultipleVouchers,
-  handlePreventLeave,
   multipleVoucherSuccessToast,
   partialSuccessVoucherToast,
 } from '../../utils/scanningUtils';
@@ -63,7 +48,6 @@ export default function VoucherBatchScreen({
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap, dispatch } = useScanningContext();
-  const hasUnsavedChanges = Boolean(voucherMap.size);
 
   const onChangeStartSerialNumber = (text: string) => {
     setShowStartInvalidError(false);
@@ -163,37 +147,7 @@ export default function VoucherBatchScreen({
   };
 
   return (
-    <SafeArea>
-      <StandardHeader>
-        <AddManuallyButton
-          onPress={() => navigation.navigate('ScanningScreen')}
-        >
-          <ButtonTextBlack>
-            <Icon name="scan1" size={14} color={Colors.midBlack} />
-            {'  '}
-            Scan Voucher
-          </ButtonTextBlack>
-        </AddManuallyButton>
-
-        <TouchableOpacity
-          onPress={() =>
-            handlePreventLeave({
-              hasUnsavedChanges,
-              navigation,
-              dispatch,
-            })
-          }
-        >
-          <Icon name="close" size={24} color={Colors.midBlack} />
-        </TouchableOpacity>
-      </StandardHeader>
-
-      <TitleContainer>
-        <CenterText>
-          <H2Heading>Add a voucher</H2Heading>
-        </CenterText>
-      </TitleContainer>
-
+    <>
       {isProcessing ? (
         <LoadingContainer>
           <LoadingSpinner />
@@ -239,11 +193,6 @@ export default function VoucherBatchScreen({
           >
             <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
           </ButtonMagenta>
-          {/* <ButtonMagenta
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextWhite>Add Singular Vouchers</ButtonTextWhite>
-          </ButtonMagenta> */}
           <ButtonWhite
             onPress={() => navigation.navigate('ReviewScreen')}
             disabled={voucherMap.size === 0}
@@ -258,6 +207,6 @@ export default function VoucherBatchScreen({
         </BodyContainer>
       )}
       <Toast />
-    </SafeArea>
+    </>
   );
 }

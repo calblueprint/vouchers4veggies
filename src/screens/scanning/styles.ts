@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 
 export const VoucherCounter = styled.View`
@@ -13,10 +14,9 @@ export const VoucherCounter = styled.View`
 `;
 
 export const BodyContainer = styled.View`
-  margin-top: 10px;
+  margin: 20px 0px;
   width: 277px;
   align-items: center;
-  margin-bottom: 35px;
 `;
 
 export const TitleContainer = styled.View`
@@ -44,8 +44,6 @@ export const ButtonContainer = styled.View`
 `;
 
 export const FormContainer = styled.View`
-  margin-top: 20px;
-  margin-bottom: 20px;
   width: 277px;
 `;
 
@@ -101,7 +99,7 @@ export const ReviewButtonContainer = styled.View`
 
 export const ErrorContainer = styled.View`
   width: 100%;
-  height: 20px;
+  height: 15px;
 `;
 
 export const WhiteText = styled.Text`
@@ -165,3 +163,25 @@ export const LoadingContainer = styled.View`
   justify-content: flex-start;
   align-items: center;
 `;
+
+export const NavButtonContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+`;
+
+export const NavButton = styled.Pressable`
+  width: 33.333%;
+`;
+
+export default StyleSheet.create({
+  selectedBtn: {
+    borderBottomWidth: 3,
+    borderColor: '#962E8A',
+  },
+  unselectedBtn: {
+    borderBottomWidth: 3,
+    borderColor: '#F2F2F2',
+  },
+});

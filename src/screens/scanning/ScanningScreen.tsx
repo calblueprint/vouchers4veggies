@@ -1,40 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Text, StyleSheet, Alert } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Toast from 'react-native-toast-message';
 import {
-  ButtonTextBlack,
   Body1Text,
   ButtonTextWhite,
   CenterText,
-  // CounterText,
-  H2Heading,
   MagentaText,
   ButtonTextMagenta,
 } from '../../../assets/Fonts';
-import StandardHeader from '../../components/common/StandardHeader';
-
 import {
   ButtonContainer,
   ScannerContainer,
-  TitleContainer,
-  // VoucherCounter,
   BodyContainer,
   VoucherCountContainer,
+  FormContainer,
 } from './styles';
 import {
-  AddManuallyButton,
   ButtonMagenta,
   ButtonWhite,
   SafeArea,
 } from '../../../assets/Components';
-import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
-// import VoucherModal from '../../components/VoucherModal/VoucherModal';
 import { useScanningContext } from './ScanningContext';
 import { getMaxVoucherValue } from '../../database/queries';
-import { handlePreventLeave } from '../../utils/scanningUtils';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,8 +38,7 @@ export default function ScanningScreen({
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
-  const { voucherMap, dispatch } = useScanningContext();
-  const hasUnsavedChanges = Boolean(voucherMap.size);
+  const { voucherMap } = useScanningContext();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -96,43 +84,7 @@ export default function ScanningScreen({
 
   return (
     <SafeArea>
-      {/* <VoucherModal modalVisible setModalVisible={undefined} /> */}
-      <StandardHeader>
-        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
-          <VoucherCounter>
-            <CounterText>{voucherMap.size}</CounterText>
-          </VoucherCounter>
-        </TouchableOpacity> */}
-
-        <AddManuallyButton
-          onPress={() => navigation.navigate('ManualVoucherScreen')}
-        >
-          <ButtonTextBlack>
-            <Icon name="pluscircleo" size={14} color={Colors.midBlack} />
-            {'  '}
-            Add Manually
-          </ButtonTextBlack>
-        </AddManuallyButton>
-
-        <TouchableOpacity
-          onPress={() =>
-            handlePreventLeave({
-              hasUnsavedChanges,
-              navigation,
-              dispatch,
-            })
-          }
-        >
-          <Icon name="close" size={24} color={Colors.midBlack} />
-        </TouchableOpacity>
-      </StandardHeader>
-
       <BodyContainer>
-        <TitleContainer>
-          <CenterText>
-            <H2Heading>Scan your voucher(s).</H2Heading>
-          </CenterText>
-        </TitleContainer>
         <Body1Text>
           <CenterText>
             Point your camera at the barcode and line it up with the{' '}

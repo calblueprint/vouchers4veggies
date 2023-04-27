@@ -1,40 +1,26 @@
 import React, { useRef, useState } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { TouchableOpacity, TextInput } from 'react-native';
-import Toast from 'react-native-toast-message';
+import { TextInput } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
-import {
-  ButtonMagenta,
-  ButtonWhite,
-  AddManuallyButton,
-  SafeArea,
-} from '../../../assets/Components';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  CenterText,
-  H2Heading,
   InputTitleText,
-  // CounterText,
   Body2Subtext,
   Body1Text,
 } from '../../../assets/Fonts';
 import {
-  TitleContainer,
   BodyContainer,
   FormContainer,
-  // VoucherCounter,
   ErrorContainer,
   RedText,
   VoucherCountContainer,
 } from './styles';
-import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { getMaxVoucherValue } from '../../database/queries';
-import { handlePreventLeave } from '../../utils/scanningUtils';
 
 export default function ManualVoucherScreen({
   navigation,
@@ -43,8 +29,7 @@ export default function ManualVoucherScreen({
   const [showInvalidError, setShowInvalidError] = useState(false);
   const [showDuplicateError, setShowDuplicateError] = useState(false);
 
-  const { voucherMap, dispatch } = useScanningContext();
-  const hasUnsavedChanges = Boolean(voucherMap.size);
+  const { voucherMap } = useScanningContext();
   const otpInput = useRef<TextInput>(null);
 
   const clearText = () => {
@@ -86,98 +71,58 @@ export default function ManualVoucherScreen({
   };
 
   return (
-    <SafeArea>
-      <StandardHeader>
-        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
-          <VoucherCounter>
-            <CounterText>{voucherMap.size}</CounterText>
-          </VoucherCounter>
-        </TouchableOpacity> */}
+    <BodyContainer>
+      <FormContainer>
+        <InputTitleText>Serial Number</InputTitleText>
+        <OTPTextInput
+          ref={otpInput}
+          inputCount={7}
+          tintColor={Colors.magenta}
+          defaultValue={serialNumber}
+          inputCellLength={1}
+          handleTextChange={onChangeSerialNumber}
+          containerStyle={{ marginVertical: 10 }}
+          textInputStyle={{
+            borderWidth: 1,
+            borderRadius: 2,
+            width: 30,
+            height: 45,
+          }}
+          isValid={!showInvalidError}
+          keyboardType="number-pad"
+          returnKeyType="done"
+          autoFocus={false}
+        />
+        <ErrorContainer>
+          {showInvalidError ? (
+            <RedText>
+              <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
+            </RedText>
+          ) : null}
+          {showDuplicateError ? (
+            <RedText>
+              <Body2Subtext>
+                You&apos;ve already added this serial number!
+              </Body2Subtext>
+            </RedText>
+          ) : null}
+        </ErrorContainer>
+      </FormContainer>
 
-        <AddManuallyButton
-          onPress={() => navigation.navigate('ScanningScreen')}
-        >
-          <ButtonTextBlack>
-            <Icon name="scan1" size={14} color={Colors.midBlack} />
-            {'  '}
-            Scan Voucher
-          </ButtonTextBlack>
-        </AddManuallyButton>
-
-        <TouchableOpacity
-          onPress={() =>
-            handlePreventLeave({
-              hasUnsavedChanges,
-              navigation,
-              dispatch,
-            })
-          }
-        >
-          <Icon name="close" size={24} color={Colors.midBlack} />
-        </TouchableOpacity>
-      </StandardHeader>
-
-      <BodyContainer>
-        <TitleContainer>
-          <CenterText>
-            <H2Heading>Add a voucher</H2Heading>
-          </CenterText>
-        </TitleContainer>
-        <FormContainer>
-          <InputTitleText>Serial Number</InputTitleText>
-          <OTPTextInput
-            ref={otpInput}
-            inputCount={7}
-            tintColor={Colors.magenta}
-            defaultValue={serialNumber}
-            inputCellLength={1}
-            handleTextChange={onChangeSerialNumber}
-            containerStyle={{ marginTop: 10 }}
-            textInputStyle={{
-              borderWidth: 1,
-              borderRadius: 2,
-              width: 30,
-            }}
-            isValid={!showInvalidError}
-          />
-          <ErrorContainer>
-            {showInvalidError ? (
-              <RedText>
-                <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
-              </RedText>
-            ) : null}
-            {showDuplicateError ? (
-              <RedText>
-                <Body2Subtext>
-                  You&apos;ve already added this serial number!
-                </Body2Subtext>
-              </RedText>
-            ) : null}
-          </ErrorContainer>
-        </FormContainer>
-
-        <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
-          <ButtonTextWhite>Add Voucher</ButtonTextWhite>
-        </ButtonMagenta>
-        <ButtonMagenta
-          onPress={() => navigation.navigate('VoucherBatchScreen')}
-        >
-          <ButtonTextWhite>Add Multiple Vouchers</ButtonTextWhite>
-        </ButtonMagenta>
-        <ButtonWhite
-          onPress={() => navigation.navigate('ReviewScreen')}
-          disabled={voucherMap.size === 0}
-        >
-          <ButtonTextBlack>
-            <H4CardNavTab>Review and Submit</H4CardNavTab>
-          </ButtonTextBlack>
-        </ButtonWhite>
-        <VoucherCountContainer>
-          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
-        </VoucherCountContainer>
-      </BodyContainer>
-
-      <Toast />
-    </SafeArea>
+      <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
+        <ButtonTextWhite>Add Voucher</ButtonTextWhite>
+      </ButtonMagenta>
+      <ButtonWhite
+        onPress={() => navigation.navigate('ReviewScreen')}
+        disabled={voucherMap.size === 0}
+      >
+        <ButtonTextBlack>
+          <H4CardNavTab>Review and Submit</H4CardNavTab>
+        </ButtonTextBlack>
+      </ButtonWhite>
+      <VoucherCountContainer>
+        <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
+      </VoucherCountContainer>
+    </BodyContainer>
   );
 }
