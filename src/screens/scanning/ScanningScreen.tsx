@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, Alert } from 'react-native';
 import { BarCodeScanner, BarCodeScannerResult } from 'expo-barcode-scanner';
-import Toast from 'react-native-toast-message';
 import {
   Body1Text,
   ButtonTextWhite,
@@ -116,7 +115,6 @@ export default function ScanningScreen({
           <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
         </VoucherCountContainer>
       </ButtonContainer>
-      <Toast />
     </SafeArea>
   );
 }

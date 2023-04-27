@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Toast from 'react-native-toast-message';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -147,45 +146,43 @@ export default function VoucherBatchScreen({
   };
 
   return (
-    <>
+    <BodyContainer>
       {isProcessing ? (
         <LoadingContainer>
           <LoadingSpinner />
           <LoadingText>Processing Voucher Range</LoadingText>
         </LoadingContainer>
       ) : (
-        <BodyContainer>
-          <FormContainer>
-            <VoucherRangeContainer>
-              <RangeInputContainer>
-                <InputTitleText>From</InputTitleText>
-                <InputField
-                  onChange={onChangeStartSerialNumber}
-                  value={startSerialNumberInput}
-                  placeholder="Enter Number"
-                  isValid={!showStartInvalidError}
-                  keyboardType="number-pad"
-                />
-              </RangeInputContainer>
-              <RangeInputContainer>
-                <InputTitleText>To</InputTitleText>
-                <InputField
-                  onChange={onChangeEndSerialNumber}
-                  value={endSerialNumberInput}
-                  placeholder="Enter Number"
-                  isValid={!showEndInvalidError}
-                  keyboardType="number-pad"
-                />
-              </RangeInputContainer>
-            </VoucherRangeContainer>
-            <ErrorContainer>
-              {showStartInvalidError || showEndInvalidError ? (
-                <RedText>
-                  <Body2Subtext>{errorMessage}</Body2Subtext>
-                </RedText>
-              ) : null}
-            </ErrorContainer>
-          </FormContainer>
+        <FormContainer>
+          <VoucherRangeContainer>
+            <RangeInputContainer>
+              <InputTitleText>From</InputTitleText>
+              <InputField
+                onChange={onChangeStartSerialNumber}
+                value={startSerialNumberInput}
+                placeholder="Enter Number"
+                isValid={!showStartInvalidError}
+                keyboardType="number-pad"
+              />
+            </RangeInputContainer>
+            <RangeInputContainer>
+              <InputTitleText>To</InputTitleText>
+              <InputField
+                onChange={onChangeEndSerialNumber}
+                value={endSerialNumberInput}
+                placeholder="Enter Number"
+                isValid={!showEndInvalidError}
+                keyboardType="number-pad"
+              />
+            </RangeInputContainer>
+          </VoucherRangeContainer>
+          <ErrorContainer>
+            {showStartInvalidError || showEndInvalidError ? (
+              <RedText>
+                <Body2Subtext>{errorMessage}</Body2Subtext>
+              </RedText>
+            ) : null}
+          </ErrorContainer>
 
           <ButtonMagenta
             disabled={showStartInvalidError || showEndInvalidError}
@@ -204,9 +201,8 @@ export default function VoucherBatchScreen({
           <VoucherCountContainer>
             <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
           </VoucherCountContainer>
-        </BodyContainer>
+        </FormContainer>
       )}
-      <Toast />
-    </>
+    </BodyContainer>
   );
 }
