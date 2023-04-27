@@ -76,6 +76,7 @@ export const RightAlignContainer = styled.View`
 
 export const ReviewTitleContainer = styled.View`
   display: flex;
+  padding-top: 12px;
   padding-bottom: 40px;
 `;
 

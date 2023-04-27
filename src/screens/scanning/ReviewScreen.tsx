@@ -54,7 +54,7 @@ export default function ReviewScreen({
 
   const [editDialogText, setEditDialogText] = useState('');
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
-  const [isProcessing, setProcessingInvoice] = useState(true);
+  const [isProcessing, setProcessingInvoice] = useState(false);
 
   const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
     serialNumber,
@@ -118,7 +118,7 @@ export default function ReviewScreen({
       setEmptyInvoiceDialogIsVisible(true);
       return;
     }
-    setProcessingInvoice(true);
+
     if (vendorUuid) {
       setProcessingInvoice(true);
       await Promise.all(
@@ -158,11 +158,9 @@ export default function ReviewScreen({
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
-      <TitleContainer>
-        <CenterText>
-          <H2Heading>Review vouchers</H2Heading>
-        </CenterText>
-      </TitleContainer>
+      <ReviewTitleContainer>
+        <H2Heading>Review vouchers</H2Heading>
+      </ReviewTitleContainer>
 
       {editDialogIsVisible ? (
         <Dialog.Container visible>
