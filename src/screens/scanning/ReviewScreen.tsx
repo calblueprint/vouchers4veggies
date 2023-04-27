@@ -8,7 +8,6 @@ import {
   H3Subheading,
   H5Subheading2,
   LoadingText,
-  CenterText,
 } from '../../../assets/Fonts';
 import {
   BorderlessRow,
@@ -17,7 +16,6 @@ import {
   ReviewButtonContainer,
   ConstrainedHeightContainer,
   LoadingContainer,
-  TitleContainer,
 } from './styles';
 import {
   ButtonMagenta,
