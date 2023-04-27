@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 import Dialog from 'react-native-dialog';
-import { CommonActions } from '@react-navigation/native';
 import {
   ButtonTextWhite,
   H2Heading,
