@@ -150,6 +150,6 @@ export const NavButtonText = styled.Text`
   text-align: center;
   padding-vertical: 11px;
   font-size: 14px;
-  color: #272929;
+  color: $Colors.darkGray;
   font-family: manrope-bold;
 `;

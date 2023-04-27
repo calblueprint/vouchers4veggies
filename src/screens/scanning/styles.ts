@@ -178,10 +178,10 @@ export const NavButton = styled.Pressable`
 export default StyleSheet.create({
   selectedBtn: {
     borderBottomWidth: 3,
-    borderColor: '#962E8A',
+    borderColor: 'Colors.magenta',
   },
   unselectedBtn: {
     borderBottomWidth: 3,
-    borderColor: '#F2F2F2',
+    borderColor: 'Colors.lightGray',
   },
 });
