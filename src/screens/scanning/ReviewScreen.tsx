@@ -139,18 +139,9 @@ export default function ReviewScreen({
       });
     }
     setProcessingInvoice(false);
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          { name: 'VoucherEntryStartScreen' },
-          {
-            name: 'ConfirmationScreen',
-            params: { count: voucherMap.size },
-          },
-        ],
-      }),
-    );
+    navigation.navigate('ConfirmationScreen', {
+      count: voucherMap.size,
+    });
   };
 
   return (
