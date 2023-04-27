@@ -14,7 +14,6 @@ import {
   ScannerContainer,
   BodyContainer,
   VoucherCountContainer,
-  FormContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -111,7 +110,7 @@ export default function ScanningScreen({
           onPress={() => navigation.navigate('ReviewScreen')}
           disabled={voucherMap.size === 0}
         >
-          <ButtonTextMagenta>Review & Submit</ButtonTextMagenta>
+          <ButtonTextMagenta>Review and Submit</ButtonTextMagenta>
         </ButtonWhite>
         <VoucherCountContainer>
           <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
