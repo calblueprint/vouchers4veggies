@@ -7,6 +7,8 @@ import {
   H2Heading,
   H3Subheading,
   H5Subheading2,
+  LoadingText,
+  CenterText,
 } from '../../../assets/Fonts';
 import {
   BorderlessRow,
@@ -15,6 +17,8 @@ import {
   ReviewTitleContainer,
   ReviewButtonContainer,
   ConstrainedHeightContainer,
+  LoadingContainer,
+  TitleContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -34,6 +38,7 @@ import { createTransaction, createVoucher } from '../../database/queries';
 import { TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import StandardHeader from '../../components/common/StandardHeader';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 export default function ReviewScreen({
   navigation,
@@ -49,6 +54,7 @@ export default function ReviewScreen({
 
   const [editDialogText, setEditDialogText] = useState('');
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
+  const [isProcessing, setProcessingInvoice] = useState(true);
 
   const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
     serialNumber,
@@ -112,7 +118,9 @@ export default function ReviewScreen({
       setEmptyInvoiceDialogIsVisible(true);
       return;
     }
+    setProcessingInvoice(true);
     if (vendorUuid) {
+      setProcessingInvoice(true);
       await Promise.all(
         voucherArray.map(item =>
           createVoucher({
@@ -129,7 +137,7 @@ export default function ReviewScreen({
         vendorUuid,
       });
     }
-
+    setProcessingInvoice(false);
     navigation.dispatch(
       CommonActions.reset({
         index: 1,
@@ -150,9 +158,11 @@ export default function ReviewScreen({
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
-      <ReviewTitleContainer>
-        <H2Heading>Review vouchers</H2Heading>
-      </ReviewTitleContainer>
+      <TitleContainer>
+        <CenterText>
+          <H2Heading>Review vouchers</H2Heading>
+        </CenterText>
+      </TitleContainer>
 
       {editDialogIsVisible ? (
         <Dialog.Container visible>
@@ -206,52 +216,59 @@ export default function ReviewScreen({
         </Dialog.Container>
       ) : null}
 
-      <CardContainer>
-        <StartOfListView />
-        <ScrollView>
-          <ConstrainedHeightContainer>
-            {voucherArray.map(item => (
-              <ReviewVoucherCard
-                key={item.serialNumber}
-                serialNumber={item.serialNumber}
-                value={item.value}
-                showEditDialog={showEditDialog}
-                showDeleteDialog={showDeleteDialog}
-                setSerialNumber={setSerialNumber}
-              />
-            ))}
-          </ConstrainedHeightContainer>
+      {isProcessing ? (
+        <LoadingContainer>
+          <LoadingSpinner />
+          <LoadingText>Submitting Invoice</LoadingText>
+        </LoadingContainer>
+      ) : (
+        <CardContainer>
+          <StartOfListView />
+          <ScrollView>
+            <ConstrainedHeightContainer>
+              {voucherArray.map(item => (
+                <ReviewVoucherCard
+                  key={item.serialNumber}
+                  serialNumber={item.serialNumber}
+                  value={item.value}
+                  showEditDialog={showEditDialog}
+                  showDeleteDialog={showDeleteDialog}
+                  setSerialNumber={setSerialNumber}
+                />
+              ))}
+            </ConstrainedHeightContainer>
 
-          <BorderlessRow>
-            <LeftAlignContainer>
-              <H5Subheading2>Amount</H5Subheading2>
-            </LeftAlignContainer>
-            <RightAlignContainer>
-              <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
-            </RightAlignContainer>
-          </BorderlessRow>
+            <BorderlessRow>
+              <LeftAlignContainer>
+                <H5Subheading2>Amount</H5Subheading2>
+              </LeftAlignContainer>
+              <RightAlignContainer>
+                <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
+              </RightAlignContainer>
+            </BorderlessRow>
 
-          <BorderlessRow>
-            <LeftAlignContainer>
-              <H5Subheading2>Total</H5Subheading2>
-            </LeftAlignContainer>
-            <RightAlignContainer>
-              <H3Subheading>{`$${formatValueForDisplay(
-                voucherArray.reduce(
-                  (total, voucher) => total + voucher.value,
-                  0,
-                ),
-              )}`}</H3Subheading>
-            </RightAlignContainer>
-          </BorderlessRow>
+            <BorderlessRow>
+              <LeftAlignContainer>
+                <H5Subheading2>Total</H5Subheading2>
+              </LeftAlignContainer>
+              <RightAlignContainer>
+                <H3Subheading>{`$${formatValueForDisplay(
+                  voucherArray.reduce(
+                    (total, voucher) => total + voucher.value,
+                    0,
+                  ),
+                )}`}</H3Subheading>
+              </RightAlignContainer>
+            </BorderlessRow>
 
-          <ReviewButtonContainer>
-            <ButtonMagenta onPress={onSubmit}>
-              <ButtonTextWhite>Submit</ButtonTextWhite>
-            </ButtonMagenta>
-          </ReviewButtonContainer>
-        </ScrollView>
-      </CardContainer>
+            <ReviewButtonContainer>
+              <ButtonMagenta onPress={onSubmit}>
+                <ButtonTextWhite>Submit</ButtonTextWhite>
+              </ButtonMagenta>
+            </ReviewButtonContainer>
+          </ScrollView>
+        </CardContainer>
+      )}
     </SafeArea>
   );
 }
