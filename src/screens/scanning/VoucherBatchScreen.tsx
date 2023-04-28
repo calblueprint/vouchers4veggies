@@ -75,7 +75,7 @@ export default function VoucherBatchScreen({
     const endSerialNumber = Number(endSerialNumberInput);
 
     // ensures there aren't more than 20 vouchers in voucher batch
-    if (endSerialNumber - startSerialNumber >= 20) {
+    if (endSerialNumber - startSerialNumber >= 24) {
       setProcessingVouchers(false);
       setShowEndInvalidError(true);
       setErrorMessage('You may only add up to 20 vouchers at once!');
