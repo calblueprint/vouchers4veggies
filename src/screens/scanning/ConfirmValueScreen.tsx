@@ -36,11 +36,13 @@ export default function ConfirmValueScreen({
     maxVoucherValue / 100,
   );
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [showError, setShowError] = useState(false);
+  const [showZeroError, setShowZeroError] = useState(false);
+  const [showExceedError, setShowExceedError] = useState(false);
   const { dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
-    setShowError(false);
+    setShowZeroError(false);
+    setShowExceedError(false);
     setVoucherAmount(value ?? 0.0);
   };
 
@@ -48,7 +50,13 @@ export default function ConfirmValueScreen({
     const centAmount = voucherAmount * 100;
     // ensures that voucher amount falls between constraints
     let isValid;
-    if (voucherAmount === 0 || centAmount > maxVoucherValue) {
+    let isZero = false;
+    let isExceeded = false;
+    if (voucherAmount === 0) {
+      isZero = true;
+      isValid = false;
+    } else if (centAmount > maxVoucherValue) {
+      isExceeded = true;
       isValid = false;
     } else {
       isValid = true;
@@ -61,8 +69,10 @@ export default function ConfirmValueScreen({
       setVoucherAmount(0);
       Keyboard.dismiss();
       navigation.goBack();
-    } else {
-      setShowError(true);
+    } else if (isZero) {
+      setShowZeroError(true);
+    } else if (isExceeded) {
+      setShowExceedError(true);
     }
   };
 
@@ -114,9 +124,18 @@ export default function ConfirmValueScreen({
             precision={2}
           />
           <ErrorContainer>
-            {showError ? (
+            {showZeroError ? (
               <RedText>
-                <Body2Subtext>Oh no! Invalid Voucher Amount.</Body2Subtext>
+                <Body2Subtext>
+                  Voucher must be redeemed for more than $0.
+                </Body2Subtext>
+              </RedText>
+            ) : null}
+            {showExceedError ? (
+              <RedText>
+                <Body2Subtext>
+                  Voucher value exceeds maximum redemption limit.
+                </Body2Subtext>
               </RedText>
             ) : null}
           </ErrorContainer>
