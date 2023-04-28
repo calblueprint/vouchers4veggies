@@ -10,7 +10,12 @@ type ScanningState = {
 type ScanningContextAction =
   | { type: 'TEST' }
   | { type: 'NEW_INVOICE' }
-  | { type: 'ADD_VOUCHER'; serialNumber: number; voucherAmount: number }
+  | {
+      type: 'ADD_VOUCHER';
+      serialNumber: number;
+      voucherAmount: number;
+      voucherType: string;
+    }
   | { type: 'EDIT_VOUCHER'; serialNumber: number; voucherAmount: number }
   | { type: 'DELETE_VOUCHER'; serialNumber: number };
 
@@ -42,6 +47,7 @@ const useScanningReducer = () =>
               prevState.voucherMap.set(
                 action.serialNumber,
                 action.voucherAmount,
+                action.voucherType,
               ),
             ),
           };

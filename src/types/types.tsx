@@ -35,7 +35,7 @@ export enum VoucherCreateError {
 
 export type SerialNumberValidationResult =
   | { ok: false; error: VoucherCreateError }
-  | { ok: true; maxVoucherValue: number };
+  | { ok: true; voucherRange: VoucherRange };
 
 export type VoucherCreateResult =
   | { ok: true; docId: string }

@@ -13,16 +13,19 @@ export const addVoucher = (
   dispatch: ScanningDispatch,
   serialNumber: number,
   voucherAmount: number,
-) => dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherAmount });
+  voucherType: string,
+) =>
+  dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherAmount, voucherType });
 
 /** Creates multiple voucher objects given a list of serial numbers */
 export const addMultipleVouchers = (
   dispatch: ScanningDispatch,
   serialNumberArray: Array<number>,
   voucherAmount: number,
+  voucherType: string,
 ) => {
   for (let i = 0; i < serialNumberArray.length; i += 1) {
-    addVoucher(dispatch, serialNumberArray[i], voucherAmount);
+    addVoucher(dispatch, serialNumberArray[i], voucherAmount, voucherType);
   }
 };
 

@@ -23,8 +23,8 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import {
-  getMaxVoucherValue,
-  validateMultipleVouchers,
+  validateVoucher,
+  validateEntireVoucherRange,
 } from '../../database/queries';
 import {
   addMultipleVouchers,
@@ -106,8 +106,8 @@ export default function VoucherBatchScreen({
     }
 
     // validates both the start and end serial numbers individually
-    const startResult = await getMaxVoucherValue(startSerialNumber);
-    const endResult = await getMaxVoucherValue(endSerialNumber);
+    const startResult = await validateVoucher(startSerialNumber);
+    const endResult = await validateVoucher(endSerialNumber);
     if (!startResult.ok && !endResult.ok) {
       setProcessingVouchers(false);
       setShowStartInvalidError(true);
@@ -129,9 +129,17 @@ export default function VoucherBatchScreen({
     }
 
     // validates the entire range of serialNumbers
-    const validSerialNumbers = await validateMultipleVouchers(
+    const validSerialNumbers = await validateEntireVoucherRange(
       startSerialNumber,
       endSerialNumber,
+    );
+
+    // dispatch multiple vouchers to the scanning context
+    addMultipleVouchers(
+      dispatch,
+      validSerialNumbers,
+      startResult.voucherRange.maxValue,
+      startResult.voucherRange.type,
     );
 
     setProcessingVouchers(false);
@@ -143,13 +151,6 @@ export default function VoucherBatchScreen({
     } else {
       partialSuccessVoucherToast(validSerialNumbers.length, rangeLength);
     }
-
-    // dispatch multiple vouchers to the scanning context
-    addMultipleVouchers(
-      dispatch,
-      validSerialNumbers,
-      startResult.maxVoucherValue,
-    );
 
     // clears input field if successfully added
     // timeout to ensure that serial input is cleared after navigation
