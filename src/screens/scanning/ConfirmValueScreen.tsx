@@ -4,6 +4,7 @@ import { Keyboard, TextInput } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
+import { VoucherValueError, VoucherValueResult } from '../../types/types';
 import {
   ButtonTextWhite,
   CenterText,
@@ -36,33 +37,48 @@ export default function ConfirmValueScreen({
     maxVoucherValue / 100,
   );
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [showError, setShowError] = useState(false);
+  const [showZeroError, setShowZeroError] = useState(false);
+  const [showExceedError, setShowExceedError] = useState(false);
   const { dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
-    setShowError(false);
+    setShowZeroError(false);
+    setShowExceedError(false);
     setVoucherAmount(value ?? 0.0);
   };
 
-  const handleVoucherAdd = async () => {
-    const centAmount = voucherAmount * 100;
-    // ensures that voucher amount falls between constraints
-    let isValid;
-    if (voucherAmount === 0 || centAmount > maxVoucherValue) {
-      isValid = false;
-    } else {
-      isValid = true;
+  const handleVoucherAddError = (centAmount: number): VoucherValueResult => {
+    if (voucherAmount === 0) {
+      return { ok: false, error: VoucherValueError.ZeroValue };
     }
 
-    if (isValid) {
+    if (centAmount > maxVoucherValue) {
+      return { ok: false, error: VoucherValueError.ExceedMax };
+    }
+
+    return { ok: true, error: null };
+  };
+
+  const handleVoucherAdd = () => {
+    const centAmount = voucherAmount * 100;
+    // ensures that voucher amount falls between constraints
+    const result = handleVoucherAddError(centAmount);
+    const { ok, error } = result;
+    if (error === VoucherValueError.ZeroValue) {
+      setShowZeroError(true);
+    }
+
+    if (error === VoucherValueError.ExceedMax) {
+      setShowExceedError(true);
+    }
+
+    if (ok) {
       addVoucher(dispatch, serialNumber, centAmount);
       showSuccessToast();
       // clears input field if successfully added
       setVoucherAmount(0);
       Keyboard.dismiss();
       navigation.goBack();
-    } else {
-      setShowError(true);
     }
   };
 
@@ -114,9 +130,18 @@ export default function ConfirmValueScreen({
             precision={2}
           />
           <ErrorContainer>
-            {showError ? (
+            {showZeroError ? (
               <RedText>
-                <Body2Subtext>Oh no! Invalid Voucher Amount.</Body2Subtext>
+                <Body2Subtext>
+                  Voucher must be redeemed for more than $0.
+                </Body2Subtext>
+              </RedText>
+            ) : null}
+            {showExceedError ? (
+              <RedText>
+                <Body2Subtext>
+                  Voucher value exceeds maximum redemption limit.
+                </Body2Subtext>
               </RedText>
             ) : null}
           </ErrorContainer>
