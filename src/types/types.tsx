@@ -41,6 +41,15 @@ export type VoucherCreateResult =
   | { ok: true; docId: string }
   | { ok: false; error: VoucherCreateError };
 
+export enum VoucherValueError {
+  ZeroValue = 'Zero Value',
+  ExceedMax = 'ValueExceededMaximum',
+}
+
+export type VoucherValueResult =
+  | { ok: true; error: null }
+  | { ok: false; error: VoucherValueError };
+
 export type Transaction = {
   uuid: Uuid;
   timestamp: Timestamp;

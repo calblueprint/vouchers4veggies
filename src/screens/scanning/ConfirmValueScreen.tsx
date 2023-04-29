@@ -4,6 +4,7 @@ import { Keyboard, TextInput } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import Styles from '../../components/InputField/styles';
+import { VoucherValueError, VoucherValueResult } from '../../types/types';
 import {
   ButtonTextWhite,
   CenterText,
@@ -46,33 +47,38 @@ export default function ConfirmValueScreen({
     setVoucherAmount(value ?? 0.0);
   };
 
-  const handleVoucherAdd = async () => {
-    const centAmount = voucherAmount * 100;
-    // ensures that voucher amount falls between constraints
-    let isValid;
-    let isZero = false;
-    let isExceeded = false;
+  const handleVoucherAddError = (centAmount: number): VoucherValueResult => {
     if (voucherAmount === 0) {
-      isZero = true;
-      isValid = false;
-    } else if (centAmount > maxVoucherValue) {
-      isExceeded = true;
-      isValid = false;
-    } else {
-      isValid = true;
+      return { ok: false, error: VoucherValueError.ZeroValue };
     }
 
-    if (isValid) {
+    if (centAmount > maxVoucherValue) {
+      return { ok: false, error: VoucherValueError.ExceedMax };
+    }
+
+    return { ok: true, error: null };
+  };
+
+  const handleVoucherAdd = () => {
+    const centAmount = voucherAmount * 100;
+    // ensures that voucher amount falls between constraints
+    const result = handleVoucherAddError(centAmount);
+    const { ok, error } = result;
+    if (error === VoucherValueError.ZeroValue) {
+      setShowZeroError(true);
+    }
+
+    if (error === VoucherValueError.ExceedMax) {
+      setShowExceedError(true);
+    }
+
+    if (ok) {
       addVoucher(dispatch, serialNumber, centAmount);
       showSuccessToast();
       // clears input field if successfully added
       setVoucherAmount(0);
       Keyboard.dismiss();
       navigation.goBack();
-    } else if (isZero) {
-      setShowZeroError(true);
-    } else if (isExceeded) {
-      setShowExceedError(true);
     }
   };
 
