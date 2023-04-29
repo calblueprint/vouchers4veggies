@@ -9,11 +9,9 @@ import {
   FilterModalContainer,
   Styles,
   SubheadingContainer,
-  FilterVerticalSpacing,
   DatePickerContainer,
   CenteredContainer,
   PaddedScrollView,
-  LeftAlignContainerWithRightMargin,
 } from './styles';
 import {
   BlueText,
@@ -23,7 +21,11 @@ import {
   H4CardNavTab,
   MidGrayText,
 } from '../../../assets/Fonts';
-import { OneLine, RightAlignContainer } from '../common/styles';
+import {
+  LeftAlignContainer,
+  OneLine,
+  RightAlignContainer,
+} from '../common/styles';
 import ClearButton from './ClearButton';
 import {
   FilterDispatch,
@@ -106,7 +108,7 @@ export default function FilterModal({
           </SubheadingContainer>
 
           <OneLine style={{ zIndex: 5 }}>
-            <LeftAlignContainerWithRightMargin>
+            <LeftAlignContainer style={{ marginRight: 20 }}>
               <FilterField
                 isSelected={filterState.inProgressMinDateIsSet}
                 onPress={() => {
@@ -125,7 +127,7 @@ export default function FilterModal({
                   )}
                 </Body1Text>
               </FilterField>
-            </LeftAlignContainerWithRightMargin>
+            </LeftAlignContainer>
             <RightAlignContainer>
               <FilterField
                 isSelected={filterState.inProgressMaxDateIsSet}
@@ -261,7 +263,7 @@ export default function FilterModal({
             </OneLine>
           </SubheadingContainer>
 
-          <OneLine>
+          <OneLine style={{ marginBottom: 48 }}>
             <ScrollView horizontal alwaysBounceHorizontal={false}>
               <FilterTag
                 isSelected={
@@ -348,7 +350,6 @@ export default function FilterModal({
             </ScrollView>
           </OneLine>
 
-          <FilterVerticalSpacing />
           <CenteredContainer>
             <ButtonMagenta
               onPress={() => {

@@ -1,22 +1,14 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { LeftAlignContainer, RightAlignContainer } from '../common/styles';
+import { LeftAlignContainer } from '../common/styles';
 
-export const LeftAlignColumnWithLeftMargin = styled.View`
+export const LeftAlignColumn = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
-  padding-left: 29px;
-`;
-
-export const LeftAlignContainerWithRightMargin = styled(LeftAlignContainer)`
-  margin-right: 20px;
-`;
-
-export const RightAlignContainerWithRightMargin = styled(RightAlignContainer)`
-  margin-right: 29px;
+  margin-left: 29px;
 `;
 
 export const SubheadingContainer = styled.View`
@@ -140,14 +132,6 @@ export const FilterModalContainer = styled.View`
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   max-height: 75%;
-`;
-
-export const SortVerticalSpacing = styled.View`
-  height: 22px;
-`;
-
-export const FilterVerticalSpacing = styled.View`
-  height: 48px;
 `;
 
 export const CloseButtonContainer = styled.View`

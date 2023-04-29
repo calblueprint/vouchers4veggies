@@ -15,6 +15,7 @@ type SortAndFilterButtonProps = {
   isSelected: boolean;
   type: 'sort' | 'filter';
   text: string;
+  style?: object;
 };
 export default function SortAndFilterButton({
   modalIsVisible,
@@ -22,6 +23,7 @@ export default function SortAndFilterButton({
   isSelected,
   type,
   text,
+  style = {},
 }: SortAndFilterButtonProps) {
   let iconColor = Colors.midBlack;
   if (isSelected) {
@@ -49,7 +51,10 @@ export default function SortAndFilterButton({
 
   if (isSelected || modalIsVisible) {
     return (
-      <SelectedSortAndFilterBase onPress={() => setModalIsVisible(true)}>
+      <SelectedSortAndFilterBase
+        onPress={() => setModalIsVisible(true)}
+        style={style}
+      >
         <CenteredOneLine>
           {icon}
           <MagentaText>
@@ -60,7 +65,10 @@ export default function SortAndFilterButton({
     );
   }
   return (
-    <UnselectedSortAndFilterBase onPress={() => setModalIsVisible(true)}>
+    <UnselectedSortAndFilterBase
+      onPress={() => setModalIsVisible(true)}
+      style={style}
+    >
       <CenteredOneLine>
         {icon}
         <Body2Subtext>{text}</Body2Subtext>

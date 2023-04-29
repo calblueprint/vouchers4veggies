@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { FlatList, RefreshControl } from 'react-native';
+import { FlatList, RefreshControl, View } from 'react-native';
 import {
   CardContainer,
   FullSizeContainer,
@@ -21,7 +21,7 @@ import {
 } from '../../utils/displayUtils';
 import {
   CenteredOneLine,
-  LeftAlignContainerWithMargins,
+  CountContainer,
   MediumText,
   Size14BoldText,
   Title,
@@ -110,13 +110,13 @@ export default function TransactionDetailsScreen({
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
           <MediumText>Time: {formatTimeForDisplay(time)}</MediumText>
 
-          <LeftAlignContainerWithMargins>
+          <CountContainer>
             <Size14BoldText>
               Count: {transactionData.voucherSerialNumbers.length}
             </Size14BoldText>
-          </LeftAlignContainerWithMargins>
+          </CountContainer>
 
-          <CenteredOneLine>
+          <CenteredOneLine style={{ paddingHorizontal: 22 }}>
             <SortAndFilterButton
               modalIsVisible={sortModalIsVisible}
               setModalIsVisible={setSortModalIsVisible}
@@ -127,8 +127,8 @@ export default function TransactionDetailsScreen({
                   ? `Sort by: ${sortButtonText[sortState.sortType]}`
                   : 'Sort by'
               }
+              style={{ width: '100%' }}
             />
-            <SortAndFilterDummy />
           </CenteredOneLine>
 
           <CardContainer>

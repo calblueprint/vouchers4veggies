@@ -1,11 +1,10 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import {
   CloseButtonContainer,
   SortModalContainer,
   Styles,
-  SortVerticalSpacing,
   CenteredContainer,
   PaddedScrollView,
   ClearButtonContainer,
@@ -70,17 +69,19 @@ export default function SortModal({
         </OneLine>
 
         <PaddedScrollView alwaysBounceVertical={false}>
-          <H4CardNavTab>{`Sort ${name} by`}</H4CardNavTab>
-          <SortVerticalSpacing />
-          <RadioButton
-            data={sortDescriptions}
-            selected={sortState.inProgressSortType}
-            setSelected={(index: number) => {
-              sortDispatch({ type: 'SORT_BY', option: index });
-            }}
-          />
+          <H4CardNavTab
+            style={{ marginBottom: 22 }}
+          >{`Sort ${name} by`}</H4CardNavTab>
+          <View style={{ marginBottom: 22 }}>
+            <RadioButton
+              data={sortDescriptions}
+              selected={sortState.inProgressSortType}
+              setSelected={(index: number) => {
+                sortDispatch({ type: 'SORT_BY', option: index });
+              }}
+            />
+          </View>
 
-          <SortVerticalSpacing />
           <CenteredContainer>
             <ButtonMagenta
               onPress={() => {
