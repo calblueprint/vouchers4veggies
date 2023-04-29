@@ -21,12 +21,12 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
-import { getMaxVoucherValue } from '../../database/queries';
+import { validateSerialNumber } from '../../database/queries';
 
 export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
-  const [serialNumber, setSerialNumber] = useState<string>('');
+  const [serialNumberInput, setSerialNumberInput] = useState<string>('');
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -40,26 +40,28 @@ export default function ManualVoucherScreen({
   const onChangeSerialNumber = (text: string) => {
     setShowError(false);
     const value = text.replace(/\D/g, '');
-    setSerialNumber(value);
+    setSerialNumberInput(value);
   };
 
   const handleVoucherAdd = async () => {
+    const serialNumber = Number(serialNumberInput);
     // checks for duplicates within the current invoice draft
-    if (voucherMap.has(Number(serialNumber))) {
+    if (voucherMap.has(serialNumber)) {
       setErrorMessage("You've already added this serial number!");
       setShowError(true);
     } else {
-      const result = await getMaxVoucherValue(Number(serialNumber));
+      const result = await validateSerialNumber(serialNumber);
       const { ok } = result;
       // `ok` is true indicates valid serial number input
       if (ok) {
-        setSerialNumber('');
+        setSerialNumberInput('');
         setShowError(false);
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
-        const { maxVoucherValue } = result;
+        const { maxValue, type } = result.voucherRange;
         navigation.navigate('ConfirmValueScreen', {
-          serialNumber: Number(serialNumber),
-          maxVoucherValue,
+          serialNumber,
+          maxValue,
+          type,
         });
         // timeout to ensure that serial input is cleared after navigation
         setTimeout(() => {
@@ -85,7 +87,7 @@ export default function ManualVoucherScreen({
           ref={otpInput}
           inputCount={7}
           tintColor={Colors.magenta}
-          defaultValue={serialNumber}
+          defaultValue={serialNumberInput}
           inputCellLength={1}
           handleTextChange={onChangeSerialNumber}
           containerStyle={{ marginVertical: 3 }}

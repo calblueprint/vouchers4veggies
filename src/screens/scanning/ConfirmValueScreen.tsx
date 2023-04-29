@@ -32,10 +32,8 @@ export default function ConfirmValueScreen({
   route,
   navigation,
 }: ScannerStackScreenProps<'ConfirmValueScreen'>) {
-  const { serialNumber, maxVoucherValue } = route.params;
-  const [voucherAmount, setVoucherAmount] = useState<number>(
-    maxVoucherValue / 100,
-  );
+  const { serialNumber, maxValue, type } = route.params;
+  const [voucherAmount, setVoucherAmount] = useState<number>(maxValue / 100);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [showZeroError, setShowZeroError] = useState(false);
   const [showExceedError, setShowExceedError] = useState(false);
@@ -52,7 +50,7 @@ export default function ConfirmValueScreen({
       return { ok: false, error: VoucherValueError.ZeroValue };
     }
 
-    if (centAmount > maxVoucherValue) {
+    if (centAmount > maxValue) {
       return { ok: false, error: VoucherValueError.ExceedMax };
     }
 
@@ -73,7 +71,7 @@ export default function ConfirmValueScreen({
     }
 
     if (ok) {
-      addVoucher(dispatch, serialNumber, centAmount);
+      addVoucher(dispatch, serialNumber, centAmount, type);
       showSuccessToast();
       // clears input field if successfully added
       setVoucherAmount(0);

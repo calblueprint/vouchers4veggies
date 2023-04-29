@@ -24,7 +24,7 @@ export type Voucher = {
 
 export type VoucherCreate = Pick<
   Voucher,
-  'serialNumber' | 'vendorUuid' | 'value'
+  'serialNumber' | 'vendorUuid' | 'value' | 'type'
 >;
 
 export enum VoucherCreateError {

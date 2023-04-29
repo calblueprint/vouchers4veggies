@@ -185,7 +185,7 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
  *
  * Otherwise, `ok` is false and `error` contains an error code.
  */
-export const validateVoucher = async (
+export const validateSerialNumber = async (
   serialNumber: number,
 ): Promise<SerialNumberValidationResult> => {
   try {
@@ -265,14 +265,7 @@ export const createVoucher = async (
     const docId = voucher.serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
 
-    // check that serialNumber exists
-    const voucherRange = await getVoucherRange(voucher.serialNumber);
-    if (voucherRange === null) {
-      return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
-    }
-
     await setDoc(docRef, voucher);
-    await updateDoc(docRef, { type: voucherRange.type });
     return { ok: true, docId };
   } catch (e) {
     // eslint-disable-next-line no-console

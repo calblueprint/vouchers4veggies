@@ -127,6 +127,7 @@ export default function ReviewScreen({
             serialNumber: item.serialNumber,
             vendorUuid,
             value: item.voucherData.value,
+            type: item.voucherData.type,
           }),
         ),
       );
@@ -219,7 +220,7 @@ export default function ReviewScreen({
                 <ReviewVoucherCard
                   key={item.serialNumber}
                   serialNumber={item.serialNumber}
-                  value={item.value}
+                  value={item.voucherData.value}
                   showEditDialog={showEditDialog}
                   showDeleteDialog={showDeleteDialog}
                   setSerialNumber={setSerialNumber}
@@ -243,7 +244,7 @@ export default function ReviewScreen({
               <RightAlignContainer>
                 <H3Subheading>{`$${formatValueForDisplay(
                   voucherArray.reduce(
-                    (total, voucher) => total + voucher.value,
+                    (total, voucher) => total + voucher.voucherData.value,
                     0,
                   ),
                 )}`}</H3Subheading>

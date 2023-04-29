@@ -23,7 +23,7 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import {
-  validateVoucher,
+  validateSerialNumber,
   validateEntireVoucherRange,
 } from '../../database/queries';
 import {
@@ -106,8 +106,8 @@ export default function VoucherBatchScreen({
     }
 
     // validates both the start and end serial numbers individually
-    const startResult = await validateVoucher(startSerialNumber);
-    const endResult = await validateVoucher(endSerialNumber);
+    const startResult = await validateSerialNumber(startSerialNumber);
+    const endResult = await validateSerialNumber(endSerialNumber);
     if (!startResult.ok && !endResult.ok) {
       setProcessingVouchers(false);
       setShowStartInvalidError(true);
