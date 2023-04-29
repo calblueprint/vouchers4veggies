@@ -117,7 +117,7 @@ export const SelectedFilterTag = styled.TouchableOpacity`
   border: 1px solid ${Colors.midBlack};
 `;
 
-export const ClearButtonContainer = styled.TouchableOpacity`
+export const ClearButtonBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
   background: white;
@@ -154,9 +154,8 @@ export const CloseButtonContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  align-content: center;
   margin-top: 19px;
-  margin-bottom: 9px;
+  margin-bottom: 21px;
   margin-right: 29px;
 `;
 
@@ -208,6 +207,16 @@ export const DatePickerContainer = styled.View`
   background-color: ${Colors.midGray};
   align-items: center;
   justify-content: center;
+`;
+
+export const ClearButtonContainer = styled(LeftAlignContainer)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  margin-top: 19px;
+  margin-bottom: 21px;
+  margin-left: 29px;
 `;
 
 export const Styles = StyleSheet.create({

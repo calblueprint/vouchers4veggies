@@ -87,19 +87,21 @@ export default function FilterModal({
           <SubheadingContainer>
             <OneLine>
               <Body1SemiboldText>Filter by date</Body1SemiboldText>
-              <ClearButton
-                isDisabled={
-                  !(
-                    filterState.inProgressMinDateIsSet ||
-                    filterState.inProgressMaxDateIsSet
-                  )
-                }
-                onPress={() => {
-                  filterDispatch({
-                    type: 'CLEAR_DATE_FILTERS',
-                  });
-                }}
-              />
+              <RightAlignContainer>
+                <ClearButton
+                  isDisabled={
+                    !(
+                      filterState.inProgressMinDateIsSet ||
+                      filterState.inProgressMaxDateIsSet
+                    )
+                  }
+                  onPress={() => {
+                    filterDispatch({
+                      type: 'CLEAR_DATE_FILTERS',
+                    });
+                  }}
+                />
+              </RightAlignContainer>
             </OneLine>
           </SubheadingContainer>
 
@@ -186,14 +188,16 @@ export default function FilterModal({
           <SubheadingContainer>
             <OneLine>
               <Body1SemiboldText>Filter by status</Body1SemiboldText>
-              <ClearButton
-                isDisabled={filterState.inProgressStatusFilter === 'none'}
-                onPress={() => {
-                  filterDispatch({
-                    type: 'CLEAR_STATUS_FILTER',
-                  });
-                }}
-              />
+              <RightAlignContainer>
+                <ClearButton
+                  isDisabled={filterState.inProgressStatusFilter === 'none'}
+                  onPress={() => {
+                    filterDispatch({
+                      type: 'CLEAR_STATUS_FILTER',
+                    });
+                  }}
+                />
+              </RightAlignContainer>
             </OneLine>
           </SubheadingContainer>
 
@@ -239,19 +243,21 @@ export default function FilterModal({
           <SubheadingContainer>
             <OneLine>
               <Body1SemiboldText>Filter by amount</Body1SemiboldText>
-              <ClearButton
-                isDisabled={
-                  !(
-                    filterState.inProgressMinAmountIsSet ||
-                    filterState.inProgressMaxAmountIsSet
-                  )
-                }
-                onPress={() => {
-                  filterDispatch({
-                    type: 'CLEAR_AMOUNT_FILTERS',
-                  });
-                }}
-              />
+              <RightAlignContainer>
+                <ClearButton
+                  isDisabled={
+                    !(
+                      filterState.inProgressMinAmountIsSet ||
+                      filterState.inProgressMaxAmountIsSet
+                    )
+                  }
+                  onPress={() => {
+                    filterDispatch({
+                      type: 'CLEAR_AMOUNT_FILTERS',
+                    });
+                  }}
+                />
+              </RightAlignContainer>
             </OneLine>
           </SubheadingContainer>
 

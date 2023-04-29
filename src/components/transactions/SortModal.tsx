@@ -8,6 +8,7 @@ import {
   SortVerticalSpacing,
   CenteredContainer,
   PaddedScrollView,
+  ClearButtonContainer,
 } from './styles';
 import {
   BlueText,
@@ -18,6 +19,8 @@ import {
 import RadioButton from '../common/RadioButton';
 import { SortDispatch, SortState } from '../../utils/transactionUtils';
 import { ButtonMagenta } from '../../../assets/Components';
+import { OneLine, LeftAlignContainer } from '../common/styles';
+import ClearButton from './ClearButton';
 
 type SortModalProps = {
   name: 'invoices' | 'vouchers';
@@ -43,18 +46,28 @@ export default function SortModal({
       backdropTransitionOutTiming={0}
     >
       <SortModalContainer>
-        <CloseButtonContainer>
-          <TouchableOpacity
-            onPress={() => {
-              setIsVisible(false);
-              sortDispatch({ type: 'RESET_IN_PROGRESS' });
-            }}
-          >
-            <BlueText>
-              <Body1Text>Close</Body1Text>
-            </BlueText>
-          </TouchableOpacity>
-        </CloseButtonContainer>
+        <OneLine>
+          <ClearButtonContainer>
+            <ClearButton
+              isDisabled={
+                !sortState.isActive && sortState.inProgressSortType === -1
+              }
+              onPress={() => sortDispatch({ type: 'CLEAR_SORT' })}
+            />
+          </ClearButtonContainer>
+          <CloseButtonContainer>
+            <TouchableOpacity
+              onPress={() => {
+                setIsVisible(false);
+                sortDispatch({ type: 'RESET_IN_PROGRESS' });
+              }}
+            >
+              <BlueText>
+                <Body1Text>Close</Body1Text>
+              </BlueText>
+            </TouchableOpacity>
+          </CloseButtonContainer>
+        </OneLine>
 
         <PaddedScrollView alwaysBounceVertical={false}>
           <H4CardNavTab>{`Sort ${name} by`}</H4CardNavTab>

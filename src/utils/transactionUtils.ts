@@ -3,6 +3,7 @@ import { TransactionStatus, Transaction, Voucher } from '../types/types';
 
 type SortAction =
   | { type: 'SORT_BY'; option: number }
+  | { type: 'CLEAR_SORT' }
   | { type: 'ON_SUBMIT' }
   | { type: 'ON_RELOAD' }
   | { type: 'RESET_IN_PROGRESS' };
@@ -92,10 +93,19 @@ export const useSortReducer = (
             ...prevState,
             inProgressSortType: action.option,
           };
+        case 'CLEAR_SORT':
+          return {
+            ...prevState,
+            isActive: false,
+            sortType: SortVoucherOption.NO_SORT,
+            inProgressSortType: SortVoucherOption.NO_SORT,
+          };
         case 'ON_SUBMIT':
           if (type === 'vouchers' && voucherArray && setVoucherArray) {
             let sortedArray = voucherArray;
             switch (prevState.inProgressSortType) {
+              case SortTransactionOption.NO_SORT:
+                return { ...prevState };
               case SortVoucherOption.DATE_ASC:
                 if (defaultVoucherArray)
                   sortedArray = sortVouchersByDateAsc(defaultVoucherArray);
