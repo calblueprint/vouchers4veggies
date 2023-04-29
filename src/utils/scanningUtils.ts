@@ -12,20 +12,19 @@ export const newInvoice = (dispatch: ScanningDispatch) =>
 export const addVoucher = (
   dispatch: ScanningDispatch,
   serialNumber: number,
-  voucherAmount: number,
+  voucherValue: number,
   voucherType: string,
-) =>
-  dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherAmount, voucherType });
+) => dispatch({ type: 'ADD_VOUCHER', serialNumber, voucherValue, voucherType });
 
 /** Creates multiple voucher objects given a list of serial numbers */
 export const addMultipleVouchers = (
   dispatch: ScanningDispatch,
   serialNumberArray: Array<number>,
-  voucherAmount: number,
+  voucherValue: number,
   voucherType: string,
 ) => {
   for (let i = 0; i < serialNumberArray.length; i += 1) {
-    addVoucher(dispatch, serialNumberArray[i], voucherAmount, voucherType);
+    addVoucher(dispatch, serialNumberArray[i], voucherValue, voucherType);
   }
 };
 
@@ -33,8 +32,8 @@ export const addMultipleVouchers = (
 export const editVoucher = (
   dispatch: ScanningDispatch,
   serialNumber: number,
-  voucherAmount: number,
-) => dispatch({ type: 'EDIT_VOUCHER', serialNumber, voucherAmount });
+  voucherValue: number,
+) => dispatch({ type: 'EDIT_VOUCHER', serialNumber, voucherValue });
 
 /** Delete a voucher object from the voucher map */
 export const deleteVoucher = (

@@ -2,8 +2,13 @@ import React, { createContext, useContext, useMemo, useReducer } from 'react';
 
 export type ScanningDispatch = React.Dispatch<ScanningContextAction>;
 
+type t = {
+  type: string;
+  value: number;
+};
+
 type ScanningState = {
-  voucherMap: Map<number, number>;
+  voucherMap: Map<number, t>;
   dispatch: ScanningDispatch;
 };
 
@@ -13,17 +18,29 @@ type ScanningContextAction =
   | {
       type: 'ADD_VOUCHER';
       serialNumber: number;
-      voucherAmount: number;
+      voucherValue: number;
       voucherType: string;
     }
-  | { type: 'EDIT_VOUCHER'; serialNumber: number; voucherAmount: number }
+  | { type: 'EDIT_VOUCHER'; serialNumber: number; voucherValue: number }
   | { type: 'DELETE_VOUCHER'; serialNumber: number };
 
-const deleteVoucherHelper = (
-  prevMap: Map<number, number>,
-  serialNumber: number,
-) => {
+const deleteVoucherHelper = (prevMap: Map<number, t>, serialNumber: number) => {
   prevMap.delete(serialNumber);
+  return prevMap;
+};
+
+const editVoucherHelper = (
+  prevMap: Map<number, t>,
+  serialNumber: number,
+  newValue: number,
+) => {
+  const type = prevMap.get(serialNumber)?.type;
+  if (prevMap !== undefined && type !== undefined) {
+    prevMap.set(serialNumber, {
+      value: newValue,
+      type,
+    });
+  }
   return prevMap;
 };
 
@@ -37,27 +54,27 @@ const useScanningReducer = () =>
           };
         case 'NEW_INVOICE':
           return {
-            voucherMap: new Map<number, number>(),
+            voucherMap: new Map<number, t>(),
             dispatch: () => null,
           };
         case 'ADD_VOUCHER':
           return {
             ...prevState,
             voucherMap: new Map(
-              prevState.voucherMap.set(
-                action.serialNumber,
-                action.voucherAmount,
-                action.voucherType,
-              ),
+              prevState.voucherMap.set(action.serialNumber, {
+                value: action.voucherValue,
+                type: action.voucherType,
+              }),
             ),
           };
         case 'EDIT_VOUCHER':
           return {
             ...prevState,
             voucherMap: new Map(
-              prevState.voucherMap.set(
+              editVoucherHelper(
+                prevState.voucherMap,
                 action.serialNumber,
-                action.voucherAmount,
+                action.voucherValue,
               ),
             ),
           };
@@ -73,7 +90,7 @@ const useScanningReducer = () =>
       }
     },
     {
-      voucherMap: new Map<number, number>(),
+      voucherMap: new Map<number, t>(),
       dispatch: () => null,
     },
   );
