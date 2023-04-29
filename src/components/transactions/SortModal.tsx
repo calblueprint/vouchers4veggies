@@ -16,20 +16,15 @@ import {
   H4CardNavTab,
 } from '../../../assets/Fonts';
 import RadioButton from '../common/RadioButton';
-import {
-  SortTransactionDispatch,
-  SortTransactionState,
-  SortVoucherDispatch,
-  SortVoucherState,
-} from '../../utils/transactionUtils';
+import { SortDispatch, SortState } from '../../utils/transactionUtils';
 import { ButtonMagenta } from '../../../assets/Components';
 
 type SortModalProps = {
   name: 'invoices' | 'vouchers';
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
-  sortState: SortTransactionState | SortVoucherState;
-  sortDispatch: SortTransactionDispatch | SortVoucherDispatch;
+  sortState: SortState;
+  sortDispatch: SortDispatch;
   sortDescriptions: string[];
 };
 export default function SortModal({

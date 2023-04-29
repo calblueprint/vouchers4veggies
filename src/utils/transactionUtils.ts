@@ -7,7 +7,7 @@ type SortAction =
   | { type: 'ON_RELOAD' }
   | { type: 'RESET_IN_PROGRESS' };
 
-export type SortVoucherDispatch = React.Dispatch<SortAction>;
+export type SortDispatch = React.Dispatch<SortAction>;
 
 export enum SortVoucherOption {
   NO_SORT = -1,
@@ -17,41 +17,75 @@ export enum SortVoucherOption {
   DATE_ASC,
 }
 
-export type SortVoucherState = {
-  dispatch: SortVoucherDispatch;
+export type SortState = {
+  dispatch: SortDispatch;
   isActive: boolean;
-  sortType: SortVoucherOption;
-  inProgressSortType: SortVoucherOption;
+  sortType: SortVoucherOption | SortTransactionOption;
+  inProgressSortType: SortVoucherOption | SortTransactionOption;
 };
 
-export const useSortVoucherReducer = (
-  vouchers: Voucher[],
-  defaultVouchers: Voucher[],
-  setVouchers: (array: Voucher[]) => void,
+export enum SortTransactionOption {
+  NO_SORT = -1,
+  AMOUNT_DESC,
+  AMOUNT_ASC,
+  DATE_DESC,
+  DATE_ASC,
+}
+
+const sortVouchersBySerialNumberAsc = (data: Voucher[]) => {
+  const dataCopy = [...data];
+  const sortedArray = dataCopy.sort((a, b) => a.serialNumber - b.serialNumber);
+  return sortedArray;
+};
+
+const sortVouchersBySerialNumberDesc = (data: Voucher[]) => {
+  const dataCopy = [...data];
+  const sortedArray = dataCopy.sort((a, b) => b.serialNumber - a.serialNumber);
+  return sortedArray;
+};
+
+const sortVouchersByDateDesc = (data: Voucher[]) => [...data];
+
+const sortVouchersByDateAsc = (data: Voucher[]) => [...data].reverse();
+
+const sortTransactionsByAmountDesc = (data: Transaction[]) => {
+  const dataCopy = [...data];
+  const sortedArray = dataCopy.sort((a, b) => b.value - a.value);
+  return sortedArray;
+};
+
+const sortTransactionsByAmountAsc = (data: Transaction[]) => {
+  const dataCopy = [...data];
+  const sortedArray = dataCopy.sort((a, b) => a.value - b.value);
+  return sortedArray;
+};
+
+const sortTransactionsByDateDesc = (data: Transaction[]) => {
+  const dataCopy = [...data];
+  const sortedArray = dataCopy.sort(
+    (a, b) => b.timestamp.seconds - a.timestamp.seconds,
+  );
+  return sortedArray;
+};
+
+const sortTransactionsByDateAsc = (data: Transaction[]) => {
+  const dataCopy = [...data];
+  const sortedArray = dataCopy.sort(
+    (a, b) => a.timestamp.seconds - b.timestamp.seconds,
+  );
+  return sortedArray;
+};
+
+export const useSortReducer = (
+  type: 'vouchers' | 'transactions',
+  voucherArray?: Voucher[],
+  defaultVoucherArray?: Voucher[],
+  setVoucherArray?: (array: Voucher[]) => void,
+  transactionArray?: Transaction[],
+  setTransactionArray?: (array: Transaction[]) => void,
 ) => {
-  const sortVouchersBySerialNumberAsc = (data: Voucher[]) => {
-    const dataCopy = [...data];
-    const sortedArray = dataCopy.sort(
-      (a, b) => a.serialNumber - b.serialNumber,
-    );
-    return sortedArray;
-  };
-
-  const sortVouchersBySerialNumberDesc = (data: Voucher[]) => {
-    const dataCopy = [...data];
-    const sortedArray = dataCopy.sort(
-      (a, b) => b.serialNumber - a.serialNumber,
-    );
-    return sortedArray;
-  };
-
-  const sortVouchersByDateDesc = () => [...defaultVouchers];
-
-  const sortVouchersByDateAsc = () => [...defaultVouchers].reverse();
-
-  const [sortVoucherState, sortVoucherDispatch] = useReducer(
-    (prevState: SortVoucherState, action: SortAction) => {
-      let sortedArray = vouchers;
+  const [sortState, sortDispatch] = useReducer(
+    (prevState: SortState, action: SortAction) => {
       switch (action.type) {
         case 'SORT_BY':
           return {
@@ -59,40 +93,93 @@ export const useSortVoucherReducer = (
             inProgressSortType: action.option,
           };
         case 'ON_SUBMIT':
-          switch (prevState.inProgressSortType) {
-            case SortVoucherOption.DATE_ASC:
-              sortedArray = sortVouchersByDateAsc();
-              break;
-            case SortVoucherOption.SERIAL_NUMBER_DESC:
-              sortedArray = sortVouchersBySerialNumberDesc(vouchers);
-              break;
-            case SortVoucherOption.SERIAL_NUMBER_ASC:
-              sortedArray = sortVouchersBySerialNumberAsc(vouchers);
-              break;
-            default:
-              sortedArray = sortVouchersByDateDesc();
+          if (type === 'vouchers' && voucherArray && setVoucherArray) {
+            let sortedArray = voucherArray;
+            switch (prevState.inProgressSortType) {
+              case SortVoucherOption.DATE_ASC:
+                if (defaultVoucherArray)
+                  sortedArray = sortVouchersByDateAsc(defaultVoucherArray);
+                break;
+              case SortVoucherOption.SERIAL_NUMBER_DESC:
+                sortedArray = sortVouchersBySerialNumberDesc(voucherArray);
+                break;
+              case SortVoucherOption.SERIAL_NUMBER_ASC:
+                sortedArray = sortVouchersBySerialNumberAsc(voucherArray);
+                break;
+              default:
+                if (defaultVoucherArray)
+                  sortedArray = sortVouchersByDateDesc(defaultVoucherArray);
+            }
+            setVoucherArray(sortedArray);
+          } else if (
+            type === 'transactions' &&
+            setTransactionArray &&
+            transactionArray
+          ) {
+            let sortedArray = transactionArray;
+            switch (prevState.inProgressSortType) {
+              case SortTransactionOption.NO_SORT:
+                return { ...prevState };
+              case SortTransactionOption.DATE_ASC:
+                sortedArray = sortTransactionsByDateAsc(transactionArray);
+                break;
+              case SortTransactionOption.AMOUNT_ASC:
+                sortedArray = sortTransactionsByAmountAsc(transactionArray);
+                break;
+              case SortTransactionOption.AMOUNT_DESC:
+                sortedArray = sortTransactionsByAmountDesc(transactionArray);
+                break;
+              default:
+                sortedArray = sortTransactionsByDateDesc(transactionArray);
+            }
+            setTransactionArray(sortedArray);
           }
-          setVouchers(sortedArray);
           return {
             ...prevState,
             isActive: true,
             sortType: prevState.inProgressSortType,
           };
         case 'ON_RELOAD':
-          switch (prevState.sortType) {
-            case SortVoucherOption.DATE_ASC:
-              sortedArray = sortVouchersByDateAsc();
-              break;
-            case SortVoucherOption.SERIAL_NUMBER_DESC:
-              sortedArray = sortVouchersBySerialNumberDesc(vouchers);
-              break;
-            case SortVoucherOption.SERIAL_NUMBER_ASC:
-              sortedArray = sortVouchersBySerialNumberAsc(vouchers);
-              break;
-            default:
-              sortedArray = sortVouchersByDateDesc();
+          if (type === 'vouchers' && voucherArray && setVoucherArray) {
+            let sortedArray = voucherArray;
+            switch (prevState.sortType) {
+              case SortVoucherOption.DATE_ASC:
+                if (defaultVoucherArray)
+                  sortedArray = sortVouchersByDateAsc(defaultVoucherArray);
+                break;
+              case SortVoucherOption.SERIAL_NUMBER_DESC:
+                sortedArray = sortVouchersBySerialNumberDesc(voucherArray);
+                break;
+              case SortVoucherOption.SERIAL_NUMBER_ASC:
+                sortedArray = sortVouchersBySerialNumberAsc(voucherArray);
+                break;
+              default:
+                if (defaultVoucherArray)
+                  sortedArray = sortVouchersByDateDesc(defaultVoucherArray);
+            }
+            setVoucherArray(sortedArray);
+          } else if (
+            type === 'transactions' &&
+            setTransactionArray &&
+            transactionArray
+          ) {
+            let sortedArray = transactionArray;
+            switch (prevState.sortType) {
+              case SortTransactionOption.DATE_ASC:
+                sortedArray = sortTransactionsByDateAsc(transactionArray);
+                break;
+              case SortTransactionOption.AMOUNT_ASC:
+                sortedArray = sortTransactionsByAmountAsc(transactionArray);
+                break;
+              case SortTransactionOption.AMOUNT_DESC:
+                sortedArray = sortTransactionsByAmountDesc(transactionArray);
+                break;
+              default:
+                sortedArray = sortTransactionsByDateDesc(transactionArray);
+            }
+            setTransactionArray(sortedArray);
+            return prevState;
           }
-          setVouchers(sortedArray);
           return {
             ...prevState,
           };
@@ -115,128 +202,7 @@ export const useSortVoucherReducer = (
     },
   );
 
-  return { sortVoucherState, sortVoucherDispatch };
-};
-
-export type SortTransactionDispatch = React.Dispatch<SortAction>;
-
-export enum SortTransactionOption {
-  NO_SORT = -1,
-  AMOUNT_DESC,
-  AMOUNT_ASC,
-  DATE_DESC,
-  DATE_ASC,
-}
-
-export type SortTransactionState = {
-  dispatch: SortTransactionDispatch;
-  isActive: boolean;
-  sortType: SortTransactionOption;
-  inProgressSortType: SortTransactionOption;
-};
-
-export const useSortTransactionReducer = (
-  transactions: Transaction[],
-  setTransactions: (array: Transaction[]) => void,
-) => {
-  const sortTransactionsByAmountDesc = (data: Transaction[]) => {
-    const dataCopy = [...data];
-    const sortedArray = dataCopy.sort((a, b) => b.value - a.value);
-    return sortedArray;
-  };
-
-  const sortTransactionsByAmountAsc = (data: Transaction[]) => {
-    const dataCopy = [...data];
-    const sortedArray = dataCopy.sort((a, b) => a.value - b.value);
-    return sortedArray;
-  };
-
-  const sortTransactionsByDateDesc = (data: Transaction[]) => {
-    const dataCopy = [...data];
-    const sortedArray = dataCopy.sort(
-      (a, b) => b.timestamp.seconds - a.timestamp.seconds,
-    );
-    return sortedArray;
-  };
-
-  const sortTransactionsByDateAsc = (data: Transaction[]) => {
-    const dataCopy = [...data];
-    const sortedArray = dataCopy.sort(
-      (a, b) => a.timestamp.seconds - b.timestamp.seconds,
-    );
-    return sortedArray;
-  };
-
-  const [sortTransactionState, sortTransactionDispatch] = useReducer(
-    (prevState: SortTransactionState, action: SortAction) => {
-      let sortedArray = transactions;
-      switch (action.type) {
-        case 'SORT_BY':
-          return {
-            ...prevState,
-            inProgressSortType: action.option,
-          };
-        case 'ON_SUBMIT':
-          switch (prevState.inProgressSortType) {
-            case SortTransactionOption.NO_SORT:
-              return { ...prevState };
-            case SortTransactionOption.DATE_ASC:
-              sortedArray = sortTransactionsByDateAsc(transactions);
-              break;
-            case SortTransactionOption.AMOUNT_ASC:
-              sortedArray = sortTransactionsByAmountAsc(transactions);
-              break;
-            case SortTransactionOption.AMOUNT_DESC:
-              sortedArray = sortTransactionsByAmountDesc(transactions);
-              break;
-            default:
-              sortedArray = sortTransactionsByDateDesc(transactions);
-          }
-          setTransactions(sortedArray);
-          return {
-            ...prevState,
-            isActive: true,
-            sortType: prevState.inProgressSortType,
-          };
-        case 'ON_RELOAD':
-          switch (prevState.sortType) {
-            case SortTransactionOption.DATE_ASC:
-              sortedArray = sortTransactionsByDateAsc(transactions);
-              break;
-            case SortTransactionOption.AMOUNT_ASC:
-              sortedArray = sortTransactionsByAmountAsc(transactions);
-              break;
-            case SortTransactionOption.AMOUNT_DESC:
-              sortedArray = sortTransactionsByAmountDesc(transactions);
-              break;
-            default:
-              sortedArray = sortTransactionsByDateDesc(transactions);
-          }
-          setTransactions(sortedArray);
-          return prevState;
-        case 'RESET_IN_PROGRESS':
-          return {
-            ...prevState,
-            inProgressSortType: prevState.sortType,
-          };
-        default:
-          return {
-            ...prevState,
-          };
-      }
-    },
-    {
-      isActive: false,
-      sortType: SortTransactionOption.NO_SORT,
-      inProgressSortType: SortTransactionOption.NO_SORT,
-      dispatch: () => null,
-    },
-  );
-
-  return {
-    sortTransactionState,
-    sortTransactionDispatch,
-  };
+  return { sortState, sortDispatch };
 };
 
 const now = new Date();

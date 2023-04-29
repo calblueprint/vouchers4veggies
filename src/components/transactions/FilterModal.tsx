@@ -28,7 +28,7 @@ import ClearButton from './ClearButton';
 import {
   FilterDispatch,
   FilterState,
-  SortTransactionDispatch,
+  SortDispatch,
 } from '../../utils/transactionUtils';
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
@@ -38,7 +38,7 @@ import FilterTag from './FilterTag';
 type FilterModalProps = {
   filterState: FilterState;
   filterDispatch: FilterDispatch;
-  sortDispatch: SortTransactionDispatch;
+  sortDispatch: SortDispatch;
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
   minDatePickerIsVisible: boolean;

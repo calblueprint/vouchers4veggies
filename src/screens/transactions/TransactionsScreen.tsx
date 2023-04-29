@@ -19,7 +19,7 @@ import StandardHeader from '../../components/common/StandardHeader';
 import {
   useFilterReducer,
   SortTransactionOption,
-  useSortTransactionReducer,
+  useSortReducer,
 } from '../../utils/transactionUtils';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
@@ -50,8 +50,14 @@ export default function TransactionsScreen({
 
   const { vendorUuid } = useAuthContext();
 
-  const { sortTransactionState, sortTransactionDispatch } =
-    useSortTransactionReducer(transactions, setTransactions);
+  const { sortState, sortDispatch } = useSortReducer(
+    'transactions',
+    undefined,
+    undefined,
+    undefined,
+    transactions,
+    setTransactions,
+  );
   const { filterState, filterDispatch } = useFilterReducer(
     defaultTransactions,
     setTransactions,
@@ -78,16 +84,16 @@ export default function TransactionsScreen({
     }, 1000);
     fetchData(vendorUuid).then(() => {
       filterDispatch({ type: 'ON_RELOAD' });
-      sortTransactionDispatch({ type: 'ON_RELOAD' });
+      sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [vendorUuid, sortTransactionDispatch, filterDispatch]);
+  }, [vendorUuid, sortDispatch, filterDispatch]);
 
   useEffect(() => {
     fetchData(vendorUuid).then(() => {
       filterDispatch({ type: 'ON_RELOAD' });
-      sortTransactionDispatch({ type: 'ON_RELOAD' });
+      sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [vendorUuid, sortTransactionDispatch, filterDispatch]);
+  }, [vendorUuid, sortDispatch, filterDispatch]);
 
   return (
     <SafeArea>
@@ -103,13 +109,11 @@ export default function TransactionsScreen({
         <SortAndFilterButton
           modalIsVisible={sortModalIsVisible}
           setModalIsVisible={setSortModalIsVisible}
-          isSelected={
-            sortTransactionState.sortType !== SortTransactionOption.NO_SORT
-          }
+          isSelected={sortState.sortType !== SortTransactionOption.NO_SORT}
           type="sort"
           text={
-            sortTransactionState.isActive
-              ? `Sort by: ${sortButtonText[sortTransactionState.sortType]}`
+            sortState.isActive
+              ? `Sort by: ${sortButtonText[sortState.sortType]}`
               : 'Sort by'
           }
         />
@@ -154,14 +158,14 @@ export default function TransactionsScreen({
         isVisible={sortModalIsVisible}
         setIsVisible={setSortModalIsVisible}
         sortDescriptions={sortDescriptionText}
-        sortState={sortTransactionState}
-        sortDispatch={sortTransactionDispatch}
+        sortState={sortState}
+        sortDispatch={sortDispatch}
       />
 
       <FilterModal
         filterState={filterState}
         filterDispatch={filterDispatch}
-        sortDispatch={sortTransactionDispatch}
+        sortDispatch={sortDispatch}
         isVisible={filterModalIsVisible}
         setIsVisible={setFilterModalIsVisible}
         minDatePickerIsVisible={minDatePickerIsVisible}
