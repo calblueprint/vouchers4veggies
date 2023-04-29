@@ -76,7 +76,7 @@ export const RightAlignContainer = styled.View`
 
 export const ReviewTitleContainer = styled.View`
   display: flex;
-  padding: 40px;
+  padding-bottom: 40px;
 `;
 
 export const ConfirmationTitleContainer = styled.View`
@@ -100,6 +100,7 @@ export const ReviewButtonContainer = styled.View`
 export const ErrorContainer = styled.View`
   width: 100%;
   height: 15px;
+  margin-bottom: 10px;
 `;
 
 export const WhiteText = styled.Text`
@@ -120,7 +121,7 @@ export const RangeInputContainer = styled.View`
 
 export const VoucherRangeContainer = styled.View`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 6px;
 `;

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { TextInput } from 'react-native';
+import OTPTextInput from 'react-native-otp-textinput';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -11,7 +13,6 @@ import {
 } from '../../../assets/Fonts';
 import {
   BodyContainer,
-  RangeInputContainer,
   FormContainer,
   ErrorContainer,
   RedText,
@@ -19,7 +20,6 @@ import {
   VoucherCountContainer,
   LoadingContainer,
 } from './styles';
-import InputField from '../../components/InputField/InputField';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import {
@@ -32,6 +32,7 @@ import {
   partialSuccessVoucherToast,
 } from '../../utils/scanningUtils';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
+import Colors from '../../../assets/Colors';
 
 export default function VoucherBatchScreen({
   navigation,
@@ -47,6 +48,13 @@ export default function VoucherBatchScreen({
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap, dispatch } = useScanningContext();
+  const otpInput1 = useRef<TextInput>(null);
+  const otpInput2 = useRef<TextInput>(null);
+
+  const clearText = () => {
+    otpInput1.current?.clear();
+    otpInput2.current?.clear();
+  };
 
   const onChangeStartSerialNumber = (text: string) => {
     setShowStartInvalidError(false);
@@ -138,11 +146,15 @@ export default function VoucherBatchScreen({
     );
 
     // clears input field if successfully added
+    // timeout to ensure that serial input is cleared after navigation
     setStartSerialNumber('');
     setEndSerialNumber('');
     setShowStartInvalidError(false);
     setShowEndInvalidError(false);
     setErrorMessage('');
+    setTimeout(() => {
+      clearText();
+    }, 50);
   };
 
   return (
@@ -155,26 +167,46 @@ export default function VoucherBatchScreen({
       ) : (
         <FormContainer>
           <VoucherRangeContainer>
-            <RangeInputContainer>
-              <InputTitleText>From</InputTitleText>
-              <InputField
-                onChange={onChangeStartSerialNumber}
-                value={startSerialNumberInput}
-                placeholder="Enter Number"
-                isValid={!showStartInvalidError}
-                keyboardType="number-pad"
-              />
-            </RangeInputContainer>
-            <RangeInputContainer>
-              <InputTitleText>To</InputTitleText>
-              <InputField
-                onChange={onChangeEndSerialNumber}
-                value={endSerialNumberInput}
-                placeholder="Enter Number"
-                isValid={!showEndInvalidError}
-                keyboardType="number-pad"
-              />
-            </RangeInputContainer>
+            <InputTitleText>From</InputTitleText>
+            <OTPTextInput
+              ref={otpInput1}
+              inputCount={7}
+              tintColor={Colors.magenta}
+              defaultValue={startSerialNumberInput}
+              inputCellLength={1}
+              handleTextChange={onChangeStartSerialNumber}
+              containerStyle={{ marginVertical: 10 }}
+              textInputStyle={{
+                borderWidth: 1,
+                borderRadius: 2,
+                width: 30,
+                height: 45,
+              }}
+              isValid={!showStartInvalidError}
+              keyboardType="number-pad"
+              returnKeyType="done"
+              autoFocus={false}
+            />
+            <InputTitleText>To</InputTitleText>
+            <OTPTextInput
+              ref={otpInput2}
+              inputCount={7}
+              tintColor={Colors.magenta}
+              defaultValue={endSerialNumberInput}
+              inputCellLength={1}
+              handleTextChange={onChangeEndSerialNumber}
+              containerStyle={{ marginVertical: 10 }}
+              textInputStyle={{
+                borderWidth: 1,
+                borderRadius: 2,
+                width: 30,
+                height: 45,
+              }}
+              isValid={!showEndInvalidError}
+              keyboardType="number-pad"
+              returnKeyType="done"
+              autoFocus={false}
+            />
           </VoucherRangeContainer>
           <ErrorContainer>
             {showStartInvalidError || showEndInvalidError ? (

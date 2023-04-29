@@ -8,12 +8,12 @@ interface HeaderContainerProps {
 
 export default function HeaderContainer({
   children,
-  width,
+  width = '90%',
 }: HeaderContainerProps) {
   return (
     <View
       style={{
-        width: width || '90%',
+        width,
         height: '12%',
         display: 'flex',
         flexDirection: 'row',
