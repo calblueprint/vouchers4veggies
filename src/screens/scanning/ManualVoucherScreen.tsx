@@ -81,7 +81,7 @@ export default function ManualVoucherScreen({
           defaultValue={serialNumber}
           inputCellLength={1}
           handleTextChange={onChangeSerialNumber}
-          containerStyle={{ marginVertical: 10 }}
+          containerStyle={{ marginVertical: 3 }}
           textInputStyle={{
             borderWidth: 1,
             borderRadius: 2,

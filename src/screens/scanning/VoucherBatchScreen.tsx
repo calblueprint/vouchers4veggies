@@ -175,7 +175,7 @@ export default function VoucherBatchScreen({
               defaultValue={startSerialNumberInput}
               inputCellLength={1}
               handleTextChange={onChangeStartSerialNumber}
-              containerStyle={{ marginVertical: 10 }}
+              containerStyle={{ marginVertical: 3 }}
               textInputStyle={{
                 borderWidth: 1,
                 borderRadius: 2,
@@ -195,7 +195,7 @@ export default function VoucherBatchScreen({
               defaultValue={endSerialNumberInput}
               inputCellLength={1}
               handleTextChange={onChangeEndSerialNumber}
-              containerStyle={{ marginVertical: 10 }}
+              containerStyle={{ marginVertical: 3 }}
               textInputStyle={{
                 borderWidth: 1,
                 borderRadius: 2,
