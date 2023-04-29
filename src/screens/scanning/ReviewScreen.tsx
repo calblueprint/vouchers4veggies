@@ -15,6 +15,7 @@ import {
   ReviewButtonContainer,
   ConstrainedHeightContainer,
   LoadingContainer,
+  ReviewTitleContainer,
 } from './styles';
 import {
   ButtonMagenta,
