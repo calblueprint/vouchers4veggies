@@ -19,7 +19,7 @@ import {
 import RadioButton from '../common/RadioButton';
 import { SortDispatch, SortState } from '../../utils/transactionUtils';
 import { ButtonMagenta } from '../../../assets/Components';
-import { OneLine, LeftAlignContainer } from '../common/styles';
+import { OneLine } from '../common/styles';
 import ClearButton from './ClearButton';
 
 type SortModalProps = {
