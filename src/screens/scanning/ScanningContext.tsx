@@ -2,13 +2,13 @@ import React, { createContext, useContext, useMemo, useReducer } from 'react';
 
 export type ScanningDispatch = React.Dispatch<ScanningContextAction>;
 
-type t = {
+type voucherData = {
   type: string;
   value: number;
 };
 
 type ScanningState = {
-  voucherMap: Map<number, t>;
+  voucherMap: Map<number, voucherData>;
   dispatch: ScanningDispatch;
 };
 
@@ -24,13 +24,16 @@ type ScanningContextAction =
   | { type: 'EDIT_VOUCHER'; serialNumber: number; voucherValue: number }
   | { type: 'DELETE_VOUCHER'; serialNumber: number };
 
-const deleteVoucherHelper = (prevMap: Map<number, t>, serialNumber: number) => {
+const deleteVoucherHelper = (
+  prevMap: Map<number, voucherData>,
+  serialNumber: number,
+) => {
   prevMap.delete(serialNumber);
   return prevMap;
 };
 
 const editVoucherHelper = (
-  prevMap: Map<number, t>,
+  prevMap: Map<number, voucherData>,
   serialNumber: number,
   newValue: number,
 ) => {
@@ -54,7 +57,7 @@ const useScanningReducer = () =>
           };
         case 'NEW_INVOICE':
           return {
-            voucherMap: new Map<number, t>(),
+            voucherMap: new Map<number, voucherData>(),
             dispatch: () => null,
           };
         case 'ADD_VOUCHER':
@@ -90,7 +93,7 @@ const useScanningReducer = () =>
       }
     },
     {
-      voucherMap: new Map<number, t>(),
+      voucherMap: new Map<number, voucherData>(),
       dispatch: () => null,
     },
   );

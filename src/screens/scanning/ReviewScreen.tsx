@@ -53,10 +53,13 @@ export default function ReviewScreen({
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
   const [isProcessing, setProcessingInvoice] = useState(false);
 
-  const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
-    serialNumber,
-    value,
-  }));
+  const voucherArray = Array.from(
+    voucherMap,
+    ([serialNumber, voucherData]) => ({
+      serialNumber,
+      voucherData,
+    }),
+  );
 
   const setSerialNumber = (serialNumber: number) => {
     setFocusedSerialNumber(serialNumber);
@@ -123,7 +126,7 @@ export default function ReviewScreen({
           createVoucher({
             serialNumber: item.serialNumber,
             vendorUuid,
-            value: item.value,
+            value: item.voucherData.value,
           }),
         ),
       );
