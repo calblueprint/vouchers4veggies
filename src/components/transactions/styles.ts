@@ -166,10 +166,6 @@ export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
   margin-bottom: 28px;
 `;
 
-export const SortAndFilterDummy = styled.View`
-  width: 146px;
-`;
-
 export const SelectedSortAndFilterBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;

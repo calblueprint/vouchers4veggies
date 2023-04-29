@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { FlatList, RefreshControl, View } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import {
   CardContainer,
   FullSizeContainer,
@@ -32,7 +32,6 @@ import {
 } from '../../utils/transactionUtils';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
-import { SortAndFilterDummy } from '../../components/transactions/styles';
 
 export default function TransactionDetailsScreen({
   route,
