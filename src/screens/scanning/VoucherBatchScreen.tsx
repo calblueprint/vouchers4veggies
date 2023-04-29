@@ -180,14 +180,14 @@ export default function VoucherBatchScreen({
                 borderWidth: 1,
                 borderRadius: 2,
                 width: 30,
-                height: 45,
+                height: '95%',
               }}
               isValid={!showStartInvalidError}
               keyboardType="number-pad"
               returnKeyType="done"
               autoFocus={false}
             />
-            <InputTitleText>To</InputTitleText>
+            <InputTitleText> {'\n'} To</InputTitleText>
             <OTPTextInput
               ref={otpInput2}
               inputCount={7}
@@ -200,7 +200,7 @@ export default function VoucherBatchScreen({
                 borderWidth: 1,
                 borderRadius: 2,
                 width: 30,
-                height: 45,
+                height: '95%',
               }}
               isValid={!showEndInvalidError}
               keyboardType="number-pad"

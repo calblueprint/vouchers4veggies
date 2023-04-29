@@ -86,7 +86,7 @@ export default function ManualVoucherScreen({
             borderWidth: 1,
             borderRadius: 2,
             width: 30,
-            height: 45,
+            height: '95%',
           }}
           isValid={!showInvalidError}
           keyboardType="number-pad"
