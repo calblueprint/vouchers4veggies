@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import { Alert, Platform, ScrollView, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
@@ -14,7 +15,6 @@ import {
   PaddedScrollView,
 } from './styles';
 import {
-  BlueText,
   Body1SemiboldText,
   Body1Text,
   ButtonTextWhite,
@@ -36,6 +36,7 @@ import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
 import { TransactionStatus } from '../../types/types';
 import FilterTag from './FilterTag';
+import Colors from '../../../assets/Colors';
 
 type FilterModalProps = {
   filterState: FilterState;
@@ -75,9 +76,7 @@ export default function FilterModal({
               filterDispatch({ type: 'RESET_IN_PROGRESS' });
             }}
           >
-            <BlueText>
-              <Body1Text>Close</Body1Text>
-            </BlueText>
+            <Icon name="close" size={24} color={Colors.midBlack} />
           </TouchableOpacity>
         </CloseButtonContainer>
 

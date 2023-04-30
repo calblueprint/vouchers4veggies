@@ -23,7 +23,7 @@ export const SelectableOneLine = styled.TouchableOpacity`
 
 export const LeftAlignContainer = styled.View`
   display: flex;
-  flex: 1;
+  flex: 2;
   flex-direction: row;
   justify-content: flex-start;
   align-content: center;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import { TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {
   CloseButtonContainer,
   SortModalContainer,
@@ -9,17 +10,13 @@ import {
   PaddedScrollView,
   ClearButtonContainer,
 } from './styles';
-import {
-  BlueText,
-  Body1Text,
-  ButtonTextWhite,
-  H4CardNavTab,
-} from '../../../assets/Fonts';
+import { ButtonTextWhite, H4CardNavTab } from '../../../assets/Fonts';
 import RadioButton from '../common/RadioButton';
 import { SortDispatch, SortState } from '../../utils/transactionUtils';
 import { ButtonMagenta } from '../../../assets/Components';
 import { OneLine } from '../common/styles';
 import ClearButton from './ClearButton';
+import Colors from '../../../assets/Colors';
 
 type SortModalProps = {
   name: 'invoices' | 'vouchers';
@@ -61,9 +58,7 @@ export default function SortModal({
                 sortDispatch({ type: 'RESET_IN_PROGRESS' });
               }}
             >
-              <BlueText>
-                <Body1Text>Close</Body1Text>
-              </BlueText>
+              <Icon name="close" size={24} color={Colors.midBlack} />
             </TouchableOpacity>
           </CloseButtonContainer>
         </OneLine>
