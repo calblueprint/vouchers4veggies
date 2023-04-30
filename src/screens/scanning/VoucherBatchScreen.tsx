@@ -58,14 +58,12 @@ export default function VoucherBatchScreen({
 
   const onChangeStartSerialNumber = (text: string) => {
     setShowStartInvalidError(false);
-    const value = text.replace(/\D/g, '');
-    setStartSerialNumber(value);
+    setStartSerialNumber(text);
   };
 
   const onChangeEndSerialNumber = (text: string) => {
     setShowEndInvalidError(false);
-    const value = text.replace(/\D/g, '');
-    setEndSerialNumber(value);
+    setEndSerialNumber(text);
   };
 
   const handleVoucherAdd = async () => {
