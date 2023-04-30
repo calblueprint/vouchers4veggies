@@ -2,35 +2,35 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'vouchers4veggies',
+    name: 'Vouchers 4 Veggies',
     slug: 'vouchers4veggies',
     owner: 'vouchers4veggies',
     version: '1.0.0',
     orientation: 'portrait',
-    icon: './assets/appstore.png',
+    icon: './assets/images/appstore.png',
     userInterfaceStyle: 'light',
-    // splash: {
-    //   image: './assets/splash.png',
-    //   resizeMode: 'contain',
-    //   backgroundColor: '#ffffff',
-    // },
-    updates: {
-      fallbackToCacheTimeout: 0,
+    splash: {
+      image: './assets/images/splash.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff',
     },
-    assetBundlePatterns: ['**/*'],
+    updates: {
+      fallbackToCacheTimeout: 3000,
+    },
+    assetBundlePatterns: ['assets/images/*'],
     ios: {
       supportsTablet: false,
       bundleIdentifier: 'org.calblueprint.vouchers4veggies',
-      icon: './assets/appstore.png',
+      icon: './assets/images/appstore.png',
       buildNumber: '8',
     },
     android: {
       package: 'org.calblueprint.vouchers4veggies',
       versionCode: 3,
-      icon: './assets/playstore.png',
+      icon: './assets/images/playstore.png',
     },
     web: {
-      favicon: './assets/favicon.png',
+      favicon: './assets/images/favicon.png',
     },
     extra: {
       firebaseApiKey: process.env.FIREBASE_API_KEY,

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import v4vLogo from '../../../assets/top-bar-logo.png';
+import v4vLogo from '../../../assets/images/top-bar-logo.png';
 
 const LogoContainer = styled.ImageBackground`
   width: 90px;
