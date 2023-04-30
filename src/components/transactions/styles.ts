@@ -1,22 +1,14 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { LeftAlignContainer, RightAlignContainer } from '../common/styles';
+import { LeftAlignContainer } from '../common/styles';
 
-export const LeftAlignColumnWithLeftMargin = styled.View`
+export const LeftAlignColumn = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: center;
   align-content: flex-start;
-  padding-left: 29px;
-`;
-
-export const LeftAlignContainerWithRightMargin = styled(LeftAlignContainer)`
-  margin-right: 20px;
-`;
-
-export const RightAlignContainerWithRightMargin = styled(RightAlignContainer)`
-  margin-right: 29px;
+  margin-left: 29px;
 `;
 
 export const SubheadingContainer = styled.View`
@@ -117,7 +109,7 @@ export const SelectedFilterTag = styled.TouchableOpacity`
   border: 1px solid ${Colors.midBlack};
 `;
 
-export const ClearButtonContainer = styled.TouchableOpacity`
+export const ClearButtonBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
   background: white;
@@ -142,21 +134,12 @@ export const FilterModalContainer = styled.View`
   max-height: 75%;
 `;
 
-export const SortVerticalSpacing = styled.View`
-  height: 22px;
-`;
-
-export const FilterVerticalSpacing = styled.View`
-  height: 48px;
-`;
-
 export const CloseButtonContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  align-content: center;
   margin-top: 19px;
-  margin-bottom: 9px;
+  margin-bottom: 21px;
   margin-right: 29px;
 `;
 
@@ -183,10 +166,6 @@ export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
   margin-bottom: 28px;
 `;
 
-export const SortAndFilterDummy = styled.View`
-  width: 146px;
-`;
-
 export const SelectedSortAndFilterBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
@@ -208,6 +187,16 @@ export const DatePickerContainer = styled.View`
   background-color: ${Colors.midGray};
   align-items: center;
   justify-content: center;
+`;
+
+export const ClearButtonContainer = styled(LeftAlignContainer)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  margin-top: 19px;
+  margin-bottom: 21px;
+  margin-left: 29px;
 `;
 
 export const Styles = StyleSheet.create({

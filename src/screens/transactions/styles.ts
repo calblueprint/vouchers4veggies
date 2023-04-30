@@ -8,11 +8,10 @@ export const Title = styled.Text`
   text-align: center;
 `;
 
-export const LeftAlignContainerWithMargins = styled.View`
+export const CountContainer = styled.View`
+  display: flex;
   width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-left: 29px;
+  padding-left: 29px;
   margin-bottom: 13px;
 `;
 
@@ -38,24 +37,4 @@ export const CenteredOneLine = styled.View`
   align-items: center;
   justify-content: center;
   width: 100%;
-`;
-
-export const LeftAlignContainer = styled.View`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-content: center;
-`;
-
-export const RightAlignContainer = styled.View`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-`;
-
-export const VerticalSpaceContainer = styled.View`
-  height: 21px;
 `;

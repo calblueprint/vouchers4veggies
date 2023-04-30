@@ -1,12 +1,9 @@
 import React from 'react';
 import { Body1Text } from '../../../assets/Fonts';
 import { formatValueForDisplay } from '../../utils/displayUtils';
-import {
-  LeftAlignColumnWithLeftMargin,
-  RightAlignContainerWithRightMargin,
-  H4Subheading,
-} from './styles';
+import { LeftAlignColumn, H4Subheading } from './styles';
 import { Row } from '../../../assets/Components';
+import { RightAlignContainer } from '../common/styles';
 
 type VoucherCardProps = {
   serialNumber: number;
@@ -15,12 +12,12 @@ type VoucherCardProps = {
 export default function VoucherCard({ serialNumber, value }: VoucherCardProps) {
   return (
     <Row>
-      <LeftAlignColumnWithLeftMargin>
+      <LeftAlignColumn>
         <Body1Text>SN {serialNumber}</Body1Text>
-      </LeftAlignColumnWithLeftMargin>
-      <RightAlignContainerWithRightMargin>
+      </LeftAlignColumn>
+      <RightAlignContainer style={{ marginRight: 29 }}>
         <H4Subheading>${formatValueForDisplay(value)}</H4Subheading>
-      </RightAlignContainerWithRightMargin>
+      </RightAlignContainer>
     </Row>
   );
 }

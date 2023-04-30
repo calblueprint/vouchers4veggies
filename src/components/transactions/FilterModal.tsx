@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import { Alert, Platform, ScrollView, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
@@ -9,36 +10,38 @@ import {
   FilterModalContainer,
   Styles,
   SubheadingContainer,
-  FilterVerticalSpacing,
   DatePickerContainer,
   CenteredContainer,
   PaddedScrollView,
-  LeftAlignContainerWithRightMargin,
 } from './styles';
 import {
-  BlueText,
   Body1SemiboldText,
   Body1Text,
   ButtonTextWhite,
   H4CardNavTab,
   MidGrayText,
 } from '../../../assets/Fonts';
-import { OneLine, RightAlignContainer } from '../common/styles';
+import {
+  LeftAlignContainer,
+  OneLine,
+  RightAlignContainer,
+} from '../common/styles';
 import ClearButton from './ClearButton';
 import {
   FilterDispatch,
   FilterState,
-  SortTransactionDispatch,
+  SortDispatch,
 } from '../../utils/transactionUtils';
 import FilterField from './FilterField';
 import { ButtonMagenta } from '../../../assets/Components';
 import { TransactionStatus } from '../../types/types';
 import FilterTag from './FilterTag';
+import Colors from '../../../assets/Colors';
 
 type FilterModalProps = {
   filterState: FilterState;
   filterDispatch: FilterDispatch;
-  sortDispatch: SortTransactionDispatch;
+  sortDispatch: SortDispatch;
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
   minDatePickerIsVisible: boolean;
@@ -73,9 +76,7 @@ export default function FilterModal({
               filterDispatch({ type: 'RESET_IN_PROGRESS' });
             }}
           >
-            <BlueText>
-              <Body1Text>Close</Body1Text>
-            </BlueText>
+            <Icon name="close" size={24} color={Colors.midBlack} />
           </TouchableOpacity>
         </CloseButtonContainer>
 
@@ -87,24 +88,26 @@ export default function FilterModal({
           <SubheadingContainer>
             <OneLine>
               <Body1SemiboldText>Filter by date</Body1SemiboldText>
-              <ClearButton
-                isDisabled={
-                  !(
-                    filterState.inProgressMinDateIsSet ||
-                    filterState.inProgressMaxDateIsSet
-                  )
-                }
-                onPress={() => {
-                  filterDispatch({
-                    type: 'CLEAR_DATE_FILTERS',
-                  });
-                }}
-              />
+              <RightAlignContainer>
+                <ClearButton
+                  isDisabled={
+                    !(
+                      filterState.inProgressMinDateIsSet ||
+                      filterState.inProgressMaxDateIsSet
+                    )
+                  }
+                  onPress={() => {
+                    filterDispatch({
+                      type: 'CLEAR_DATE_FILTERS',
+                    });
+                  }}
+                />
+              </RightAlignContainer>
             </OneLine>
           </SubheadingContainer>
 
           <OneLine style={{ zIndex: 5 }}>
-            <LeftAlignContainerWithRightMargin>
+            <LeftAlignContainer style={{ marginRight: 20 }}>
               <FilterField
                 isSelected={filterState.inProgressMinDateIsSet}
                 onPress={() => {
@@ -123,7 +126,7 @@ export default function FilterModal({
                   )}
                 </Body1Text>
               </FilterField>
-            </LeftAlignContainerWithRightMargin>
+            </LeftAlignContainer>
             <RightAlignContainer>
               <FilterField
                 isSelected={filterState.inProgressMaxDateIsSet}
@@ -186,14 +189,16 @@ export default function FilterModal({
           <SubheadingContainer>
             <OneLine>
               <Body1SemiboldText>Filter by status</Body1SemiboldText>
-              <ClearButton
-                isDisabled={filterState.inProgressStatusFilter === 'none'}
-                onPress={() => {
-                  filterDispatch({
-                    type: 'CLEAR_STATUS_FILTER',
-                  });
-                }}
-              />
+              <RightAlignContainer>
+                <ClearButton
+                  isDisabled={filterState.inProgressStatusFilter === 'none'}
+                  onPress={() => {
+                    filterDispatch({
+                      type: 'CLEAR_STATUS_FILTER',
+                    });
+                  }}
+                />
+              </RightAlignContainer>
             </OneLine>
           </SubheadingContainer>
 
@@ -239,23 +244,25 @@ export default function FilterModal({
           <SubheadingContainer>
             <OneLine>
               <Body1SemiboldText>Filter by amount</Body1SemiboldText>
-              <ClearButton
-                isDisabled={
-                  !(
-                    filterState.inProgressMinAmountIsSet ||
-                    filterState.inProgressMaxAmountIsSet
-                  )
-                }
-                onPress={() => {
-                  filterDispatch({
-                    type: 'CLEAR_AMOUNT_FILTERS',
-                  });
-                }}
-              />
+              <RightAlignContainer>
+                <ClearButton
+                  isDisabled={
+                    !(
+                      filterState.inProgressMinAmountIsSet ||
+                      filterState.inProgressMaxAmountIsSet
+                    )
+                  }
+                  onPress={() => {
+                    filterDispatch({
+                      type: 'CLEAR_AMOUNT_FILTERS',
+                    });
+                  }}
+                />
+              </RightAlignContainer>
             </OneLine>
           </SubheadingContainer>
 
-          <OneLine>
+          <OneLine style={{ marginBottom: 48 }}>
             <ScrollView horizontal alwaysBounceHorizontal={false}>
               <FilterTag
                 isSelected={
@@ -342,7 +349,6 @@ export default function FilterModal({
             </ScrollView>
           </OneLine>
 
-          <FilterVerticalSpacing />
           <CenteredContainer>
             <ButtonMagenta
               onPress={() => {

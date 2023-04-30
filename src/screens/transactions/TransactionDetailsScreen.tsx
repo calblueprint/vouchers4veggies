@@ -21,18 +21,17 @@ import {
 } from '../../utils/displayUtils';
 import {
   CenteredOneLine,
-  LeftAlignContainerWithMargins,
+  CountContainer,
   MediumText,
   Size14BoldText,
   Title,
 } from './styles';
 import {
   SortVoucherOption,
-  useSortVoucherReducer,
+  useSortReducer,
 } from '../../utils/transactionUtils';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
-import { SortAndFilterDummy } from '../../components/transactions/styles';
 
 export default function TransactionDetailsScreen({
   route,
@@ -47,7 +46,8 @@ export default function TransactionDetailsScreen({
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
-  const { sortVoucherState, sortVoucherDispatch } = useSortVoucherReducer(
+  const { sortState, sortDispatch } = useSortReducer(
+    'vouchers',
     displayedVoucherArray,
     defaultVoucherArray,
     setDisplayedVoucherArray,
@@ -84,15 +84,15 @@ export default function TransactionDetailsScreen({
       setIsRefreshing(false);
     }, 1000);
     fetchData(transactionUuid).then(() => {
-      sortVoucherDispatch({ type: 'ON_RELOAD' });
+      sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [transactionUuid, sortVoucherDispatch]);
+  }, [transactionUuid, sortDispatch]);
 
   useEffect(() => {
     fetchData(transactionUuid).then(() => {
-      sortVoucherDispatch({ type: 'ON_RELOAD' });
+      sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [transactionUuid, sortVoucherDispatch]);
+  }, [transactionUuid, sortDispatch]);
 
   const time = moment(transactionData?.timestamp.toDate());
 
@@ -109,27 +109,25 @@ export default function TransactionDetailsScreen({
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
           <MediumText>Time: {formatTimeForDisplay(time)}</MediumText>
 
-          <LeftAlignContainerWithMargins>
+          <CountContainer>
             <Size14BoldText>
               Count: {transactionData.voucherSerialNumbers.length}
             </Size14BoldText>
-          </LeftAlignContainerWithMargins>
+          </CountContainer>
 
-          <CenteredOneLine>
+          <CenteredOneLine style={{ paddingHorizontal: 22 }}>
             <SortAndFilterButton
               modalIsVisible={sortModalIsVisible}
               setModalIsVisible={setSortModalIsVisible}
-              isSelected={
-                sortVoucherState.sortType !== SortVoucherOption.NO_SORT
-              }
+              isSelected={sortState.sortType !== SortVoucherOption.NO_SORT}
               type="sort"
               text={
-                sortVoucherState.isActive
-                  ? `Sort by: ${sortButtonText[sortVoucherState.sortType]}`
+                sortState.isActive
+                  ? `Sort by: ${sortButtonText[sortState.sortType]}`
                   : 'Sort by'
               }
+              style={{ width: '100%' }}
             />
-            <SortAndFilterDummy />
           </CenteredOneLine>
 
           <CardContainer>
@@ -163,8 +161,8 @@ export default function TransactionDetailsScreen({
         isVisible={sortModalIsVisible}
         setIsVisible={setSortModalIsVisible}
         sortDescriptions={sortDescriptionText}
-        sortState={sortVoucherState}
-        sortDispatch={sortVoucherDispatch}
+        sortState={sortState}
+        sortDispatch={sortDispatch}
       />
     </SafeArea>
   );
