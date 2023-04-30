@@ -22,11 +22,11 @@ export default {
       supportsTablet: false,
       bundleIdentifier: 'org.calblueprint.vouchers4veggies',
       icon: './assets/appstore.png',
-      buildNumber: '6',
+      buildNumber: '8',
     },
     android: {
       package: 'org.calblueprint.vouchers4veggies',
-      versionCode: 2,
+      versionCode: 3,
       icon: './assets/playstore.png',
     },
     web: {
