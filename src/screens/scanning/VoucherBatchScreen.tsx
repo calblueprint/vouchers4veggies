@@ -1,41 +1,26 @@
-import React, { useState } from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { TouchableOpacity } from 'react-native';
-import Toast from 'react-native-toast-message';
-import {
-  ButtonMagenta,
-  ButtonWhite,
-  AddManuallyButton,
-  SafeArea,
-} from '../../../assets/Components';
+import React, { useRef, useState } from 'react';
+import { TextInput } from 'react-native';
+import OTPTextInput from 'react-native-otp-textinput';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  CenterText,
-  H2Heading,
   InputTitleText,
-  // CounterText,
   Body2Subtext,
   Body1Text,
   LoadingText,
 } from '../../../assets/Fonts';
 import {
-  TitleContainer,
   BodyContainer,
-  RangeInputContainer,
   FormContainer,
-  // VoucherCounter,
   ErrorContainer,
   RedText,
   VoucherRangeContainer,
   VoucherCountContainer,
   LoadingContainer,
 } from './styles';
-import InputField from '../../components/InputField/InputField';
-import StandardHeader from '../../components/common/StandardHeader';
 import { ScannerStackScreenProps } from '../../navigation/types';
-import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import {
   getMaxVoucherValue,
@@ -43,11 +28,11 @@ import {
 } from '../../database/queries';
 import {
   addMultipleVouchers,
-  handlePreventLeave,
   multipleVoucherSuccessToast,
   partialSuccessVoucherToast,
 } from '../../utils/scanningUtils';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
+import Colors from '../../../assets/Colors';
 
 export default function VoucherBatchScreen({
   navigation,
@@ -63,18 +48,22 @@ export default function VoucherBatchScreen({
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap, dispatch } = useScanningContext();
-  const hasUnsavedChanges = Boolean(voucherMap.size);
+  const otpInput1 = useRef<TextInput>(null);
+  const otpInput2 = useRef<TextInput>(null);
+
+  const clearText = () => {
+    otpInput1.current?.clear();
+    otpInput2.current?.clear();
+  };
 
   const onChangeStartSerialNumber = (text: string) => {
     setShowStartInvalidError(false);
-    const value = text.replace(/\D/g, '');
-    setStartSerialNumber(value);
+    setStartSerialNumber(text);
   };
 
   const onChangeEndSerialNumber = (text: string) => {
     setShowEndInvalidError(false);
-    const value = text.replace(/\D/g, '');
-    setEndSerialNumber(value);
+    setEndSerialNumber(text);
   };
 
   const handleVoucherAdd = async () => {
@@ -155,83 +144,75 @@ export default function VoucherBatchScreen({
     );
 
     // clears input field if successfully added
+    // timeout to ensure that serial input is cleared after navigation
     setStartSerialNumber('');
     setEndSerialNumber('');
     setShowStartInvalidError(false);
     setShowEndInvalidError(false);
     setErrorMessage('');
+    setTimeout(() => {
+      clearText();
+    }, 50);
   };
 
   return (
-    <SafeArea>
-      <StandardHeader>
-        <AddManuallyButton
-          onPress={() => navigation.navigate('ScanningScreen')}
-        >
-          <ButtonTextBlack>
-            <Icon name="scan1" size={14} color={Colors.midBlack} />
-            {'  '}
-            Scan Voucher
-          </ButtonTextBlack>
-        </AddManuallyButton>
-
-        <TouchableOpacity
-          onPress={() =>
-            handlePreventLeave({
-              hasUnsavedChanges,
-              navigation,
-              dispatch,
-            })
-          }
-        >
-          <Icon name="close" size={24} color={Colors.midBlack} />
-        </TouchableOpacity>
-      </StandardHeader>
-
-      <TitleContainer>
-        <CenterText>
-          <H2Heading>Add a voucher</H2Heading>
-        </CenterText>
-      </TitleContainer>
-
+    <BodyContainer>
       {isProcessing ? (
         <LoadingContainer>
           <LoadingSpinner />
           <LoadingText>Processing Voucher Range</LoadingText>
         </LoadingContainer>
       ) : (
-        <BodyContainer>
-          <FormContainer>
-            <VoucherRangeContainer>
-              <RangeInputContainer>
-                <InputTitleText>From</InputTitleText>
-                <InputField
-                  onChange={onChangeStartSerialNumber}
-                  value={startSerialNumberInput}
-                  placeholder="Enter Number"
-                  isValid={!showStartInvalidError}
-                  keyboardType="number-pad"
-                />
-              </RangeInputContainer>
-              <RangeInputContainer>
-                <InputTitleText>To</InputTitleText>
-                <InputField
-                  onChange={onChangeEndSerialNumber}
-                  value={endSerialNumberInput}
-                  placeholder="Enter Number"
-                  isValid={!showEndInvalidError}
-                  keyboardType="number-pad"
-                />
-              </RangeInputContainer>
-            </VoucherRangeContainer>
-            <ErrorContainer>
-              {showStartInvalidError || showEndInvalidError ? (
-                <RedText>
-                  <Body2Subtext>{errorMessage}</Body2Subtext>
-                </RedText>
-              ) : null}
-            </ErrorContainer>
-          </FormContainer>
+        <FormContainer>
+          <VoucherRangeContainer>
+            <InputTitleText>From</InputTitleText>
+            <OTPTextInput
+              ref={otpInput1}
+              inputCount={7}
+              tintColor={Colors.magenta}
+              defaultValue={startSerialNumberInput}
+              inputCellLength={1}
+              handleTextChange={onChangeStartSerialNumber}
+              containerStyle={{ marginVertical: 3 }}
+              textInputStyle={{
+                borderWidth: 1,
+                borderRadius: 2,
+                width: 30,
+                height: '95%',
+              }}
+              isValid={!showStartInvalidError}
+              keyboardType="number-pad"
+              returnKeyType="done"
+              autoFocus={false}
+            />
+            <InputTitleText> {'\n'} To</InputTitleText>
+            <OTPTextInput
+              ref={otpInput2}
+              inputCount={7}
+              tintColor={Colors.magenta}
+              defaultValue={endSerialNumberInput}
+              inputCellLength={1}
+              handleTextChange={onChangeEndSerialNumber}
+              containerStyle={{ marginVertical: 3 }}
+              textInputStyle={{
+                borderWidth: 1,
+                borderRadius: 2,
+                width: 30,
+                height: '95%',
+              }}
+              isValid={!showEndInvalidError}
+              keyboardType="number-pad"
+              returnKeyType="done"
+              autoFocus={false}
+            />
+          </VoucherRangeContainer>
+          <ErrorContainer>
+            {showStartInvalidError || showEndInvalidError ? (
+              <RedText>
+                <Body2Subtext>{errorMessage}</Body2Subtext>
+              </RedText>
+            ) : null}
+          </ErrorContainer>
 
           <ButtonMagenta
             disabled={showStartInvalidError || showEndInvalidError}
@@ -239,11 +220,6 @@ export default function VoucherBatchScreen({
           >
             <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
           </ButtonMagenta>
-          {/* <ButtonMagenta
-            onPress={() => navigation.navigate('ManualVoucherScreen')}
-          >
-            <ButtonTextWhite>Add Singular Vouchers</ButtonTextWhite>
-          </ButtonMagenta> */}
           <ButtonWhite
             onPress={() => navigation.navigate('ReviewScreen')}
             disabled={voucherMap.size === 0}
@@ -255,9 +231,8 @@ export default function VoucherBatchScreen({
           <VoucherCountContainer>
             <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
           </VoucherCountContainer>
-        </BodyContainer>
+        </FormContainer>
       )}
-      <Toast />
-    </SafeArea>
+    </BodyContainer>
   );
 }
