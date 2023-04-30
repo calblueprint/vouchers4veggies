@@ -171,7 +171,7 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
 
 /**
  * Query to validate an inputted serial number in Firebase and
- * return the maxVoucherValue for use in the following screens.
+ * return the voucherRange object for use in the following screens.
  *
  * Parameters: a json with fields
  *
@@ -179,12 +179,13 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
  *
  * Returns a json.
  *
- * If the query executes successfully, `ok` is true and `maxValue` contains
- * the maximum dollar input allowed for the given voucher type.
+ * If the query executes successfully, `ok` is true and the `voucherRange` object
+ * contains the maximum dollar input allowed for the given voucher type, as well
+ * as the type of voucher.
  *
  * Otherwise, `ok` is false and `error` contains an error code.
  */
-export const getMaxVoucherValue = async (
+export const validateSerialNumber = async (
   serialNumber: number,
 ): Promise<SerialNumberValidationResult> => {
   try {
@@ -200,7 +201,7 @@ export const getMaxVoucherValue = async (
     if (voucherDoc.exists()) {
       return { ok: false, error: VoucherCreateError.SerialNumberAlreadyUsed };
     }
-    return { ok: true, maxVoucherValue: voucherRange.maxValue };
+    return { ok: true, voucherRange };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucher)', e);
@@ -217,7 +218,7 @@ export const getMaxVoucherValue = async (
  *
  * Returns a list of serial numbers not already stored in the database.
  */
-export const validateMultipleVouchers = async (
+export const validateEntireVoucherRange = async (
   startSerialNumber: number,
   endSerialNumber: number,
 ) => {
@@ -264,25 +265,7 @@ export const createVoucher = async (
     const docId = voucher.serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
 
-    // check that serialNumber exists
-    const voucherRange = await getVoucherRange(voucher.serialNumber);
-    if (voucherRange === null) {
-      return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
-    }
-
-    // check that serialNumber has not already been used
-    const voucherDoc = await getDoc(docRef);
-    if (voucherDoc.exists()) {
-      return { ok: false, error: VoucherCreateError.SerialNumberAlreadyUsed };
-    }
-
-    // check that value does not exceed the maximum
-    if (voucherRange.maxValue < voucher.value) {
-      return { ok: false, error: VoucherCreateError.ValueExceededMaximum };
-    }
-
     await setDoc(docRef, voucher);
-    await updateDoc(docRef, { type: voucherRange.type });
     return { ok: true, docId };
   } catch (e) {
     // eslint-disable-next-line no-console

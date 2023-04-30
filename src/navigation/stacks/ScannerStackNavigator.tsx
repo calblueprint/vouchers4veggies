@@ -33,10 +33,6 @@ export default function ScannerStackNavigator() {
           name="InvoicesScreen"
           component={TransactionStackNavigator}
         />
-        <ScannerStack.Screen
-          name="ConfirmationScreen"
-          component={ConfirmationScreen}
-        />
         <ScannerStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
           <ScannerStack.Screen
             name="VoucherEntryNavigator"
@@ -57,6 +53,10 @@ export default function ScannerStackNavigator() {
           <ScannerStack.Screen
             name="ConfirmValueScreen"
             component={ConfirmValueScreen}
+          />
+          <ScannerStack.Screen
+            name="ConfirmationScreen"
+            component={ConfirmationScreen}
           />
           <ScannerStack.Screen name="ReviewScreen" component={ReviewScreen} />
         </ScannerStack.Group>

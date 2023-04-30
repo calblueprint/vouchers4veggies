@@ -21,7 +21,7 @@ import {
 } from '../../../assets/Components';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
-import { getMaxVoucherValue } from '../../database/queries';
+import { validateSerialNumber } from '../../database/queries';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,17 +51,18 @@ export default function ScanningScreen({
     if (!scanned) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
+      const serialNumber = Number(data);
       setScanned(true);
 
-      const result = await getMaxVoucherValue(Number(data));
+      const result = await validateSerialNumber(serialNumber);
       const { ok } = result;
       // `ok` is true indicates valid serial number input
       if (ok) {
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
-        const { maxVoucherValue } = result;
         navigation.navigate('ConfirmValueScreen', {
-          serialNumber: Number(data),
-          maxVoucherValue,
+          serialNumber,
+          maxValue: result.voucherRange.maxValue,
+          type: result.voucherRange.type,
         });
       } else {
         Alert.alert('Oh no! Invalid serial number.', 'Please try again', [

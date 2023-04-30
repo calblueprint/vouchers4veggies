@@ -23,8 +23,8 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import {
-  getMaxVoucherValue,
-  validateMultipleVouchers,
+  validateSerialNumber,
+  validateEntireVoucherRange,
 } from '../../database/queries';
 import {
   addMultipleVouchers,
@@ -74,6 +74,14 @@ export default function VoucherBatchScreen({
     const startSerialNumber = Number(startSerialNumberInput);
     const endSerialNumber = Number(endSerialNumberInput);
 
+    // ensures there aren't more than 20 vouchers in voucher batch
+    if (endSerialNumber - startSerialNumber >= 24) {
+      setProcessingVouchers(false);
+      setShowEndInvalidError(true);
+      setErrorMessage('You may only add up to 24 vouchers at once!');
+      return;
+    }
+
     // checks if either input is a duplicate (within the current invoice) and returns 1-2 errors if so
     const isStartDuplicate = voucherMap.has(startSerialNumber);
     const isEndDuplicate = voucherMap.has(endSerialNumber);
@@ -98,8 +106,8 @@ export default function VoucherBatchScreen({
     }
 
     // validates both the start and end serial numbers individually
-    const startResult = await getMaxVoucherValue(startSerialNumber);
-    const endResult = await getMaxVoucherValue(endSerialNumber);
+    const startResult = await validateSerialNumber(startSerialNumber);
+    const endResult = await validateSerialNumber(endSerialNumber);
     if (!startResult.ok && !endResult.ok) {
       setProcessingVouchers(false);
       setShowStartInvalidError(true);
@@ -121,9 +129,17 @@ export default function VoucherBatchScreen({
     }
 
     // validates the entire range of serialNumbers
-    const validSerialNumbers = await validateMultipleVouchers(
+    const validSerialNumbers = await validateEntireVoucherRange(
       startSerialNumber,
       endSerialNumber,
+    );
+
+    // dispatch multiple vouchers to the scanning context
+    addMultipleVouchers(
+      dispatch,
+      validSerialNumbers,
+      startResult.voucherRange.maxValue,
+      startResult.voucherRange.type,
     );
 
     setProcessingVouchers(false);
@@ -135,13 +151,6 @@ export default function VoucherBatchScreen({
     } else {
       partialSuccessVoucherToast(validSerialNumbers.length, rangeLength);
     }
-
-    // dispatch multiple vouchers to the scanning context
-    addMultipleVouchers(
-      dispatch,
-      validSerialNumbers,
-      startResult.maxVoucherValue,
-    );
 
     // clears input field if successfully added
     // timeout to ensure that serial input is cleared after navigation

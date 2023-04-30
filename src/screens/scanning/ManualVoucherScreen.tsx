@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { TextInput } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
+import { VoucherCreateError } from '../../types/types';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import {
   ButtonTextWhite,
@@ -20,14 +21,14 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
-import { getMaxVoucherValue } from '../../database/queries';
+import { validateSerialNumber } from '../../database/queries';
 
 export default function ManualVoucherScreen({
   navigation,
 }: ScannerStackScreenProps<'ManualVoucherScreen'>) {
-  const [serialNumber, setSerialNumber] = useState<string>('');
-  const [showInvalidError, setShowInvalidError] = useState(false);
-  const [showDuplicateError, setShowDuplicateError] = useState(false);
+  const [serialNumberInput, setSerialNumberInput] = useState<string>('');
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap } = useScanningContext();
   const otpInput = useRef<TextInput>(null);
@@ -37,35 +38,43 @@ export default function ManualVoucherScreen({
   };
 
   const onChangeSerialNumber = (text: string) => {
-    setShowInvalidError(false);
-    setShowDuplicateError(false);
+    setShowError(false);
     const value = text.replace(/\D/g, '');
-    setSerialNumber(value);
+    setSerialNumberInput(value);
   };
 
   const handleVoucherAdd = async () => {
-    if (voucherMap.has(Number(serialNumber))) {
-      setShowDuplicateError(true);
+    const serialNumber = Number(serialNumberInput);
+    // checks for duplicates within the current invoice draft
+    if (voucherMap.has(serialNumber)) {
+      setErrorMessage("You've already added this serial number!");
+      setShowError(true);
     } else {
-      const result = await getMaxVoucherValue(Number(serialNumber));
+      const result = await validateSerialNumber(serialNumber);
       const { ok } = result;
       // `ok` is true indicates valid serial number input
       if (ok) {
-        setSerialNumber('');
-        setShowInvalidError(false);
-        setShowDuplicateError(false);
+        setSerialNumberInput('');
+        setShowError(false);
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
-        const { maxVoucherValue } = result;
+        const { maxValue, type } = result.voucherRange;
         navigation.navigate('ConfirmValueScreen', {
-          serialNumber: Number(serialNumber),
-          maxVoucherValue,
+          serialNumber,
+          maxValue,
+          type,
         });
         // timeout to ensure that serial input is cleared after navigation
         setTimeout(() => {
           clearText();
         }, 50);
       } else {
-        setShowInvalidError(true);
+        const { error } = result;
+        if (error === VoucherCreateError.SerialNumberAlreadyUsed) {
+          setErrorMessage('This serial number has already been processed.');
+        } else {
+          setErrorMessage('Oh no! Invalid serial number.');
+        }
+        setShowError(true);
       }
     }
   };
@@ -78,7 +87,7 @@ export default function ManualVoucherScreen({
           ref={otpInput}
           inputCount={7}
           tintColor={Colors.magenta}
-          defaultValue={serialNumber}
+          defaultValue={serialNumberInput}
           inputCellLength={1}
           handleTextChange={onChangeSerialNumber}
           containerStyle={{ marginVertical: 3 }}
@@ -88,28 +97,21 @@ export default function ManualVoucherScreen({
             width: 30,
             height: '95%',
           }}
-          isValid={!showInvalidError}
+          isValid={!showError}
           keyboardType="number-pad"
           returnKeyType="done"
           autoFocus={false}
         />
         <ErrorContainer>
-          {showInvalidError ? (
+          {showError ? (
             <RedText>
-              <Body2Subtext>Oh no! Invalid serial number.</Body2Subtext>
-            </RedText>
-          ) : null}
-          {showDuplicateError ? (
-            <RedText>
-              <Body2Subtext>
-                You&apos;ve already added this serial number!
-              </Body2Subtext>
+              <Body2Subtext>{errorMessage}</Body2Subtext>
             </RedText>
           ) : null}
         </ErrorContainer>
       </FormContainer>
 
-      <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
+      <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
         <ButtonTextWhite>Add Voucher</ButtonTextWhite>
       </ButtonMagenta>
       <ButtonWhite

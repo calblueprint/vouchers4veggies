@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 import Dialog from 'react-native-dialog';
-import { CommonActions } from '@react-navigation/native';
 import {
   ButtonTextWhite,
   H2Heading,
   H3Subheading,
   H5Subheading2,
+  LoadingText,
 } from '../../../assets/Fonts';
 import {
   BorderlessRow,
   LeftAlignContainer,
   RightAlignContainer,
-  ReviewTitleContainer,
   ReviewButtonContainer,
   ConstrainedHeightContainer,
+  LoadingContainer,
+  ReviewTitleContainer,
 } from './styles';
 import {
   ButtonMagenta,
@@ -34,6 +35,7 @@ import { createTransaction, createVoucher } from '../../database/queries';
 import { TransactionStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import StandardHeader from '../../components/common/StandardHeader';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 export default function ReviewScreen({
   navigation,
@@ -49,11 +51,15 @@ export default function ReviewScreen({
 
   const [editDialogText, setEditDialogText] = useState('');
   const [focusedSerialNumber, setFocusedSerialNumber] = useState(0);
+  const [isProcessing, setProcessingInvoice] = useState(false);
 
-  const voucherArray = Array.from(voucherMap, ([serialNumber, value]) => ({
-    serialNumber,
-    value,
-  }));
+  const voucherArray = Array.from(
+    voucherMap,
+    ([serialNumber, voucherData]) => ({
+      serialNumber,
+      voucherData,
+    }),
+  );
 
   const setSerialNumber = (serialNumber: number) => {
     setFocusedSerialNumber(serialNumber);
@@ -112,13 +118,16 @@ export default function ReviewScreen({
       setEmptyInvoiceDialogIsVisible(true);
       return;
     }
+
     if (vendorUuid) {
+      setProcessingInvoice(true);
       await Promise.all(
         voucherArray.map(item =>
           createVoucher({
             serialNumber: item.serialNumber,
             vendorUuid,
-            value: item.value,
+            value: item.voucherData.value,
+            type: item.voucherData.type,
           }),
         ),
       );
@@ -129,19 +138,10 @@ export default function ReviewScreen({
         vendorUuid,
       });
     }
-
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          { name: 'VoucherEntryStartScreen' },
-          {
-            name: 'ConfirmationScreen',
-            params: { count: voucherMap.size },
-          },
-        ],
-      }),
-    );
+    setProcessingInvoice(false);
+    navigation.navigate('ConfirmationScreen', {
+      count: voucherMap.size,
+    });
   };
 
   return (
@@ -206,52 +206,59 @@ export default function ReviewScreen({
         </Dialog.Container>
       ) : null}
 
-      <CardContainer>
-        <StartOfListView />
-        <ScrollView>
-          <ConstrainedHeightContainer>
-            {voucherArray.map(item => (
-              <ReviewVoucherCard
-                key={item.serialNumber}
-                serialNumber={item.serialNumber}
-                value={item.value}
-                showEditDialog={showEditDialog}
-                showDeleteDialog={showDeleteDialog}
-                setSerialNumber={setSerialNumber}
-              />
-            ))}
-          </ConstrainedHeightContainer>
+      {isProcessing ? (
+        <LoadingContainer>
+          <LoadingSpinner />
+          <LoadingText>Submitting Invoice</LoadingText>
+        </LoadingContainer>
+      ) : (
+        <CardContainer>
+          <StartOfListView />
+          <ScrollView>
+            <ConstrainedHeightContainer>
+              {voucherArray.map(item => (
+                <ReviewVoucherCard
+                  key={item.serialNumber}
+                  serialNumber={item.serialNumber}
+                  value={item.voucherData.value}
+                  showEditDialog={showEditDialog}
+                  showDeleteDialog={showDeleteDialog}
+                  setSerialNumber={setSerialNumber}
+                />
+              ))}
+            </ConstrainedHeightContainer>
 
-          <BorderlessRow>
-            <LeftAlignContainer>
-              <H5Subheading2>Amount</H5Subheading2>
-            </LeftAlignContainer>
-            <RightAlignContainer>
-              <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
-            </RightAlignContainer>
-          </BorderlessRow>
+            <BorderlessRow>
+              <LeftAlignContainer>
+                <H5Subheading2>Amount</H5Subheading2>
+              </LeftAlignContainer>
+              <RightAlignContainer>
+                <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
+              </RightAlignContainer>
+            </BorderlessRow>
 
-          <BorderlessRow>
-            <LeftAlignContainer>
-              <H5Subheading2>Total</H5Subheading2>
-            </LeftAlignContainer>
-            <RightAlignContainer>
-              <H3Subheading>{`$${formatValueForDisplay(
-                voucherArray.reduce(
-                  (total, voucher) => total + voucher.value,
-                  0,
-                ),
-              )}`}</H3Subheading>
-            </RightAlignContainer>
-          </BorderlessRow>
+            <BorderlessRow>
+              <LeftAlignContainer>
+                <H5Subheading2>Total</H5Subheading2>
+              </LeftAlignContainer>
+              <RightAlignContainer>
+                <H3Subheading>{`$${formatValueForDisplay(
+                  voucherArray.reduce(
+                    (total, voucher) => total + voucher.voucherData.value,
+                    0,
+                  ),
+                )}`}</H3Subheading>
+              </RightAlignContainer>
+            </BorderlessRow>
 
-          <ReviewButtonContainer>
-            <ButtonMagenta onPress={onSubmit}>
-              <ButtonTextWhite>Submit</ButtonTextWhite>
-            </ButtonMagenta>
-          </ReviewButtonContainer>
-        </ScrollView>
-      </CardContainer>
+            <ReviewButtonContainer>
+              <ButtonMagenta onPress={onSubmit}>
+                <ButtonTextWhite>Submit</ButtonTextWhite>
+              </ButtonMagenta>
+            </ReviewButtonContainer>
+          </ScrollView>
+        </CardContainer>
+      )}
     </SafeArea>
   );
 }
