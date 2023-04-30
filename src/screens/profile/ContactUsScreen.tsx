@@ -40,7 +40,7 @@ export default function ContactUsScreen({
         <Row>
           <LeftAlignContainer>
             <Body1Text>Location</Body1Text>
-            <H4CardNavTab>put address here lol</H4CardNavTab>
+            <H4CardNavTab>1001 Potrero Ave, San Francisco</H4CardNavTab>
           </LeftAlignContainer>
         </Row>
       </TouchableOpacity>
