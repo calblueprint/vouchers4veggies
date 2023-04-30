@@ -78,7 +78,7 @@ export default function VoucherBatchScreen({
     if (endSerialNumber - startSerialNumber >= 24) {
       setProcessingVouchers(false);
       setShowEndInvalidError(true);
-      setErrorMessage('You may only add up to 20 vouchers at once!');
+      setErrorMessage('You may only add up to 24 vouchers at once!');
       return;
     }
 
