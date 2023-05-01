@@ -82,24 +82,20 @@ export const FilterFieldBase = styled.TouchableOpacity`
   background: white;
   padding-vertical: 8px;
   padding-horizontal: 15px;
-  border: 1px solid ${(props: CustomProps) =>
-    props.isSelected ? Colors.midBlack : Colors.unselectedGray};};
+  border: 1px solid
+    ${(props: CustomProps) =>
+      props.isSelected ? Colors.midBlack : Colors.unselectedGray};
 `;
 
-export const UnselectedFilterTag = styled.TouchableOpacity`
+export const FilterTagBase = styled.TouchableOpacity`
   align-items: flex-start;
   border-radius: 24px;
-  background: white;
+  background: ${(props: CustomProps) =>
+    props.isSelected ? Colors.midBlack : Colors.offWhite};
   padding-vertical: 8px;
-  border: 1px solid ${Colors.unselectedGray};
-`;
-
-export const SelectedFilterTag = styled.TouchableOpacity`
-  align-items: flex-start;
-  border-radius: 24px;
-  background: ${Colors.midBlack};
-  padding-vertical: 8px;
-  border: 1px solid ${Colors.midBlack};
+  border: 1px solid
+    ${(props: CustomProps) =>
+      props.isSelected ? Colors.midBlack : Colors.unselectedGray};
 `;
 
 export const ClearButtonBase = styled.TouchableOpacity`
