@@ -142,8 +142,6 @@ export default function VoucherBatchScreen({
       startResult.voucherRange.type,
     );
 
-    setProcessingVouchers(false);
-
     // if fewer serialNumbers are returned than expected, show a specific error
     const rangeLength = endSerialNumber - startSerialNumber + 1;
     if (validSerialNumbers.length === rangeLength) {
@@ -162,6 +160,8 @@ export default function VoucherBatchScreen({
     setTimeout(() => {
       clearText();
     }, 50);
+
+    setProcessingVouchers(false);
   };
 
   return (
