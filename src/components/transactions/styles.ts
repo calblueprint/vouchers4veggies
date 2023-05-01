@@ -180,7 +180,7 @@ export const ClearButtonContainer = styled(LeftAlignContainer)`
 export const Styles = StyleSheet.create({
   iconWithPadding: {
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.offWhite,
     paddingRight: 29,
   },
   icon: {
