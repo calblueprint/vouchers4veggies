@@ -1,10 +1,6 @@
 import React, { ReactElement } from 'react';
 import { View } from 'react-native';
-import {
-  FilterTagBase,
-  SelectedFilterTag,
-  UnselectedFilterTag,
-} from './styles';
+import { FilterTagBase } from './styles';
 import { OneLine } from '../common/styles';
 import { CenterText, MidGrayText, WhiteText } from '../../../assets/Fonts';
 
