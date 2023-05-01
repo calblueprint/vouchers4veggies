@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
+import { CustomProps } from '../../components/common/styles';
 
 export const VoucherCounter = styled.View`
   width: 30px;
@@ -167,15 +168,7 @@ export const NavButtonContainer = styled.View`
 
 export const NavButton = styled.Pressable`
   width: 33.333%;
+  border-bottom-width: 3px;
+  border-color: ${(props: CustomProps) =>
+    props.isSelected ? Colors.magenta : Colors.lightGray};
 `;
-
-export default StyleSheet.create({
-  selectedBtn: {
-    borderBottomWidth: 3,
-    borderColor: Colors.magenta,
-  },
-  unselectedBtn: {
-    borderBottomWidth: 3,
-    borderColor: Colors.lightGray,
-  },
-});
