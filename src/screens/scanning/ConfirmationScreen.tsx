@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { H1Heading, H4CardNavTab } from '../../../assets/Fonts';
 import {
-  ButtonContainer,
+  H1Heading,
+  H4CardNavTab,
   WhiteText,
   DarkGrayText,
-  ConfirmationTitleContainer,
-} from './styles';
+} from '../../../assets/Fonts';
+import { ButtonContainer, ConfirmationTitleContainer } from './styles';
 import {
   ButtonMagenta,
   ButtonWhite,

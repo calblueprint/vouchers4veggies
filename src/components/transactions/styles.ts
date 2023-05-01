@@ -79,7 +79,7 @@ export const FilterFieldBase = styled.TouchableOpacity`
   width: 100%;
   align-items: flex-start;
   border-radius: 8px;
-  background: white;
+  background: ${Colors.offWhite};
   padding-vertical: 8px;
   padding-horizontal: 15px;
   border: 1px solid
@@ -101,7 +101,6 @@ export const FilterTagBase = styled.TouchableOpacity`
 export const ClearButtonBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
-  background: white;
 `;
 
 export const SortModalContainer = styled.View`
@@ -148,7 +147,7 @@ export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 5px;
   width: 146px;
-  background: white;
+  background: ${Colors.offWhite};
   padding: 11px;
   margin: 12px;
   border: 1px solid ${Colors.midGray};
