@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { LeftAlignContainer } from '../common/styles';
+import { CustomProps, LeftAlignContainer } from '../common/styles';
 
 export const LeftAlignColumn = styled.View`
   flex: 1;
@@ -75,22 +75,15 @@ export const RedText = styled.Text`
   line-height: 14px;
 `;
 
-export const UnselectedFilterField = styled.TouchableOpacity`
+export const FilterFieldBase = styled.TouchableOpacity`
+  width: 100%;
   align-items: flex-start;
   border-radius: 8px;
   background: white;
   padding-vertical: 8px;
   padding-horizontal: 15px;
-  border: 1px solid ${Colors.unselectedGray};
-`;
-
-export const SelectedFilterField = styled.TouchableOpacity`
-  align-items: flex-start;
-  border-radius: 8px;
-  background: white;
-  padding-vertical: 8px;
-  padding-horizontal: 15px;
-  border: 1px solid ${Colors.midBlack};
+  border: 1px solid ${(props: CustomProps) =>
+    props.isSelected ? Colors.midBlack : Colors.unselectedGray};};
 `;
 
 export const UnselectedFilterTag = styled.TouchableOpacity`
