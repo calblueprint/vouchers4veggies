@@ -1,10 +1,6 @@
 import React from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import {
-  SelectedSortAndFilterBase,
-  Styles,
-  UnselectedSortAndFilterBase,
-} from './styles';
+import { SortAndFilterBase, Styles } from './styles';
 import { Body2Subtext, MagentaText } from '../../../assets/Fonts';
 import { CenteredOneLine } from '../common/styles';
 import Colors from '../../../assets/Colors';
@@ -25,6 +21,8 @@ export default function SortAndFilterButton({
   text,
   style = {},
 }: SortAndFilterButtonProps) {
+  const handleOnPress = () => setModalIsVisible(true);
+
   let iconColor = Colors.midBlack;
   if (isSelected) {
     iconColor = Colors.magenta;
@@ -49,30 +47,22 @@ export default function SortAndFilterButton({
     );
   }
 
-  if (isSelected || modalIsVisible) {
-    return (
-      <SelectedSortAndFilterBase
-        onPress={() => setModalIsVisible(true)}
-        style={style}
-      >
-        <CenteredOneLine>
-          {icon}
-          <MagentaText>
-            <Body2Subtext>{text}</Body2Subtext>
-          </MagentaText>
-        </CenteredOneLine>
-      </SelectedSortAndFilterBase>
-    );
-  }
   return (
-    <UnselectedSortAndFilterBase
-      onPress={() => setModalIsVisible(true)}
+    <SortAndFilterBase
+      isSelected={isSelected || modalIsVisible}
+      onPress={handleOnPress}
       style={style}
     >
       <CenteredOneLine>
         {icon}
-        <Body2Subtext>{text}</Body2Subtext>
+        {isSelected || modalIsVisible ? (
+          <MagentaText>
+            <Body2Subtext>{text}</Body2Subtext>
+          </MagentaText>
+        ) : (
+          <Body2Subtext>{text}</Body2Subtext>
+        )}
       </CenteredOneLine>
-    </UnselectedSortAndFilterBase>
+    </SortAndFilterBase>
   );
 }
