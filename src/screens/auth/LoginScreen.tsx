@@ -20,13 +20,15 @@ import StandardHeader from '../../components/common/StandardHeader';
 import {
   FormContainer,
   HeadingContainer,
-  LeftAlignContainer,
-  RightAlignContainer,
   RowContainer,
   Styles,
   VerticalSpacingButtonContainer,
 } from './styles';
 import BackButton from '../../components/common/BackButton';
+import {
+  LeftAlignContainer,
+  RightAlignContainer,
+} from '../../components/common/styles';
 
 export default function LoginScreen({
   navigation,
