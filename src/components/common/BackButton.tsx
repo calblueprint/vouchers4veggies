@@ -2,8 +2,8 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
-import { RootNavBackButton } from '../../../assets/Components';
 import { DarkGrayText } from '../../../assets/Fonts';
+import { RootNavBackButton } from './styles';
 
 export const BackButtonContainer = styled.View`
   width: 100%;

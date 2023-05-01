@@ -2,7 +2,7 @@ import React from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import { SortAndFilterBase, Styles } from './styles';
 import { Body2Subtext, MagentaText } from '../../../assets/Fonts';
-import { CenteredOneLine } from '../common/styles';
+import { CenteredRow } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 
 type SortAndFilterButtonProps = {
@@ -53,7 +53,7 @@ export default function SortAndFilterButton({
       onPress={handleOnPress}
       style={style}
     >
-      <CenteredOneLine>
+      <CenteredRow>
         {icon}
         {isSelected || modalIsVisible ? (
           <MagentaText>
@@ -62,7 +62,7 @@ export default function SortAndFilterButton({
         ) : (
           <Body2Subtext>{text}</Body2Subtext>
         )}
-      </CenteredOneLine>
+      </CenteredRow>
     </SortAndFilterBase>
   );
 }
