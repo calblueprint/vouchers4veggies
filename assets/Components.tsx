@@ -17,7 +17,6 @@ export const FullSizeContainer = styled.View`
   align-items: center;
 `;
 
-// TODO: @oahnh fix static widths
 export const ButtonMagenta = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
@@ -25,7 +24,7 @@ export const ButtonMagenta = styled.TouchableOpacity`
   border-radius: 5px;
   width: 277px;
   background: ${Colors.magenta};
-  text-color: white;
+  text-color: ${Colors.offWhite};
   padding: 9px 9px;
   border-color: ${Colors.magenta};
   margin-bottom: 16px;
@@ -47,7 +46,7 @@ export const ButtonWhite = styled.TouchableOpacity`
   align-items: center;
   border-radius: 5px;
   width: 277px;
-  background: white;
+  background: ${Colors.offWhite};
   padding: 9px 9px;
   border: 2px solid ${Colors.magenta};
   margin-bottom: 16px;

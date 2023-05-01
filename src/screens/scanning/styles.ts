@@ -104,14 +104,6 @@ export const ErrorContainer = styled.View`
   margin: 10px 0px;
 `;
 
-export const WhiteText = styled.Text`
-  color: ${Colors.offWhite};
-`;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
-`;
-
 export const RedText = styled.Text`
   color: ${Colors.alertRed};
 `;
