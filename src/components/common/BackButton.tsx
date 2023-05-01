@@ -3,15 +3,12 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 import { RootNavBackButton } from '../../../assets/Components';
+import { DarkGrayText } from '../../../assets/Fonts';
 
 export const BackButtonContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
-`;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
 `;
 
 export default function BackButton({ onPress }: { onPress: () => void }) {
