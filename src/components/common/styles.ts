@@ -42,6 +42,7 @@ export const RadioButtonContainer = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   align-content: center;
+  margin-horizontal: 10px;
 `;
 
 export const RadioButtonUnselected = styled.View`
