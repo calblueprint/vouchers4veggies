@@ -141,29 +141,19 @@ export const CenteredContainer = styled.View`
   justify-content: center;
 `;
 
-export const UnselectedSortAndFilterBase = styled.TouchableOpacity`
+export const SortAndFilterBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
   width: 146px;
-  background: ${Colors.offWhite};
+  background: ${(props: CustomProps) =>
+    props.isSelected ? Colors.lightMagenta : Colors.offWhite};
   padding: 11px;
   margin: 12px;
-  border: 1px solid ${Colors.midGray};
-  margin-bottom: 28px;
-`;
-
-export const SelectedSortAndFilterBase = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  width: 146px;
-  background: ${Colors.lightMagenta};
-  padding: 11px;
-  margin: 12px;
-  border: 1px solid ${Colors.magenta};
+  border: 1px solid
+    ${(props: CustomProps) =>
+      props.isSelected ? Colors.magenta : Colors.midGray};
   margin-bottom: 28px;
 `;
 
