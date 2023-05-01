@@ -2,10 +2,10 @@ import React from 'react';
 import { View } from 'react-native';
 import {
   LeftAlignContainer,
+  RadioButtonContainer,
   RadioButtonFill,
   RadioButtonSelected,
   RadioButtonUnselected,
-  RightAlignContainer,
   RowWithBottomMargin,
   SelectableOneLine,
 } from './styles';
@@ -30,7 +30,7 @@ export default function RadioButtons({
             <LeftAlignContainer>
               <Body1Text>{item}</Body1Text>
             </LeftAlignContainer>
-            <RightAlignContainer>
+            <RadioButtonContainer>
               {selected === index ? (
                 <RadioButtonSelected>
                   <RadioButtonFill />
@@ -38,7 +38,7 @@ export default function RadioButtons({
               ) : (
                 <RadioButtonUnselected />
               )}
-            </RightAlignContainer>
+            </RadioButtonContainer>
           </SelectableOneLine>
         </RowWithBottomMargin>
       ))}
