@@ -1,6 +1,10 @@
 import React, { ReactElement } from 'react';
 import { View } from 'react-native';
-import { SelectedFilterTag, UnselectedFilterTag } from './styles';
+import {
+  FilterTagBase,
+  SelectedFilterTag,
+  UnselectedFilterTag,
+} from './styles';
 import { OneLine } from '../common/styles';
 import { CenterText, MidGrayText, WhiteText } from '../../../assets/Fonts';
 
@@ -12,6 +16,7 @@ type FilterTagProps = {
   minWidth?: number | string;
   margin?: number;
 };
+
 export default function FilterTag({
   isSelected,
   children,
@@ -20,28 +25,27 @@ export default function FilterTag({
   minWidth = 'auto',
   margin = 0,
 }: FilterTagProps) {
-  if (isSelected) {
-    return (
-      <View style={{ marginRight: margin }}>
-        <SelectedFilterTag onPress={onSelectedPress}>
-          <OneLine>
-            <CenterText style={{ minWidth }}>
-              <WhiteText>{children}</WhiteText>
-            </CenterText>
-          </OneLine>
-        </SelectedFilterTag>
-      </View>
-    );
-  }
+  const handleOnPress = () => {
+    if (isSelected) {
+      onSelectedPress();
+    } else {
+      onUnselectedPress();
+    }
+  };
+
   return (
     <View style={{ marginRight: margin }}>
-      <UnselectedFilterTag onPress={onUnselectedPress}>
+      <FilterTagBase isSelected={isSelected} onPress={handleOnPress}>
         <OneLine>
           <CenterText style={{ minWidth }}>
-            <MidGrayText>{children}</MidGrayText>
+            {isSelected ? (
+              <WhiteText>{children}</WhiteText>
+            ) : (
+              <MidGrayText>{children}</MidGrayText>
+            )}
           </CenterText>
         </OneLine>
-      </UnselectedFilterTag>
+      </FilterTagBase>
     </View>
   );
 }
