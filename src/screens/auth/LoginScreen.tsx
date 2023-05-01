@@ -6,7 +6,7 @@ import {
   H4CardNavTab,
   WhiteText,
 } from '../../../assets/Fonts';
-import InputField from '../../components/InputField/InputField';
+import InputField from '../../components/auth/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { setAuthErrorMessage, signIn } from '../../utils/authUtils';
 

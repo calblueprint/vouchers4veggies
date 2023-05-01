@@ -30,22 +30,6 @@ export const VerticalSpacingContainer = styled.View`
   margin-bottom: 4%;
 `;
 
-export const LeftAlignContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  justify-content: flex-start;
-  align-content: center;
-`;
-
-export const RightAlignContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  justify-content: flex-end;
-  align-content: center;
-`;
-
 export const VerticalSpacingButtonContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;

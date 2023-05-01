@@ -9,7 +9,7 @@ import {
   WhiteText,
 } from '../../../assets/Fonts';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
-import InputField from '../../components/InputField/InputField';
+import InputField from '../../components/auth/InputField';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { forgotPassword } from '../../utils/authUtils';
 import StandardHeader from '../../components/common/StandardHeader';
