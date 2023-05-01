@@ -16,15 +16,21 @@ import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { handlePreventLeave } from '../../utils/scanningUtils';
-import styles, { NavButton, NavButtonContainer } from './styles';
+import { NavButton, NavButtonContainer } from './styles';
 import ManualVoucherScreen from './ManualVoucherScreen';
 import ScanningScreen from './ScanningScreen';
 import VoucherBatchScreen from './VoucherBatchScreen';
 
+enum tabs {
+  SERIAL,
+  RANGE,
+  BARCODE,
+}
+
 export default function VoucherEntryNavigator({
   navigation,
 }: ScannerStackScreenProps<'VoucherEntryNavigator'>) {
-  const [selection, setSelection] = useState(1);
+  const [selection, setSelection] = useState(tabs.SERIAL);
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);
 
@@ -49,16 +55,14 @@ export default function VoucherEntryNavigator({
         <View>
           <NavButtonContainer>
             <NavButton
-              style={
-                selection === 1 ? styles.selectedBtn : styles.unselectedBtn
-              }
+              isSelected={selection === tabs.SERIAL}
               onPress={() => {
-                setSelection(1);
+                setSelection(tabs.SERIAL);
               }}
             >
               <NavButtonText
                 style={
-                  selection === 1
+                  selection === tabs.SERIAL
                     ? { color: Colors.magenta }
                     : { color: Colors.midGray }
                 }
@@ -67,16 +71,14 @@ export default function VoucherEntryNavigator({
               </NavButtonText>
             </NavButton>
             <NavButton
-              style={
-                selection === 2 ? styles.selectedBtn : styles.unselectedBtn
-              }
+              isSelected={selection === tabs.RANGE}
               onPress={() => {
-                setSelection(2);
+                setSelection(tabs.RANGE);
               }}
             >
               <NavButtonText
                 style={
-                  selection === 2
+                  selection === tabs.RANGE
                     ? { color: Colors.magenta }
                     : { color: Colors.midGray }
                 }
@@ -85,16 +87,14 @@ export default function VoucherEntryNavigator({
               </NavButtonText>
             </NavButton>
             <NavButton
-              style={
-                selection === 3 ? styles.selectedBtn : styles.unselectedBtn
-              }
+              isSelected={selection === tabs.BARCODE}
               onPress={() => {
-                setSelection(3);
+                setSelection(tabs.BARCODE);
               }}
             >
               <NavButtonText
                 style={
-                  selection === 3
+                  selection === tabs.BARCODE
                     ? { color: Colors.magenta }
                     : { color: Colors.midGray }
                 }
@@ -110,11 +110,11 @@ export default function VoucherEntryNavigator({
           {/* TODO @sauhardjain: Fix typing of navigation attributes */}
           {(() => {
             switch (selection) {
-              case 1:
+              case tabs.SERIAL:
                 return <ManualVoucherScreen navigation={navigation} />;
-              case 2:
+              case tabs.RANGE:
                 return <VoucherBatchScreen navigation={navigation} />;
-              case 3:
+              case tabs.BARCODE:
                 return <ScanningScreen navigation={navigation} />;
               default:
                 return <ManualVoucherScreen navigation={navigation} />;
