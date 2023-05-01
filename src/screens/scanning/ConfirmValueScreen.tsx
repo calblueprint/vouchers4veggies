@@ -3,7 +3,7 @@ import CurrencyInput from 'react-native-currency-input';
 import { Keyboard, TextInput } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
-import Styles from '../../components/InputField/styles';
+import Styles from '../../components/auth/styles';
 import { VoucherValueError, VoucherValueResult } from '../../types/types';
 import {
   ButtonTextWhite,

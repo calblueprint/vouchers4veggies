@@ -3,7 +3,7 @@ import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import { H1Heading, H4CardNavTab, WhiteText } from '../../../assets/Fonts';
 import { AuthStackScreenProps } from '../../navigation/types';
 import { ButtonSpacing, StartContainer } from './styles';
-import StartLogo from '../../components/common/StartLogo';
+import StartLogo from '../../components/auth/StartLogo';
 
 export default function StartScreen({
   navigation,
