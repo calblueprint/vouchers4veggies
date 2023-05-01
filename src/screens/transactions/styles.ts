@@ -32,7 +32,6 @@ export const Size14BoldText = styled.Text`
 
 export const CenteredOneLine = styled.View`
   display: flex;
-  background-color: #fff;
   flex-direction: row;
   align-items: center;
   justify-content: center;
