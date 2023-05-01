@@ -35,9 +35,11 @@ export default function ConfirmationScreen({
   return (
     <SafeArea>
       <ConfirmationTitleContainer>
-        <H1Heading
-          style={{ textAlign: 'center' }}
-        >{`You submitted ${count}\n invoices!`}</H1Heading>
+        <H1Heading style={{ textAlign: 'center' }}>
+          {count === 1
+            ? `You submitted ${count}\n voucher!`
+            : `You submitted ${count}\n vouchers!`}
+        </H1Heading>
       </ConfirmationTitleContainer>
 
       <ButtonContainer>
