@@ -13,7 +13,6 @@ import {
 } from '../../../assets/Fonts';
 import {
   BodyContainer,
-  FormContainer,
   ErrorContainer,
   RedText,
   VoucherCountContainer,
@@ -81,35 +80,33 @@ export default function ManualVoucherScreen({
 
   return (
     <BodyContainer>
-      <FormContainer>
-        <InputTitleText>Serial Number</InputTitleText>
-        <OTPTextInput
-          ref={otpInput}
-          inputCount={7}
-          tintColor={Colors.magenta}
-          defaultValue={serialNumberInput}
-          inputCellLength={1}
-          handleTextChange={onChangeSerialNumber}
-          containerStyle={{ marginVertical: 3 }}
-          textInputStyle={{
-            borderWidth: 1,
-            borderRadius: 2,
-            width: 30,
-            height: '95%',
-          }}
-          isValid={!showError}
-          keyboardType="number-pad"
-          returnKeyType="done"
-          autoFocus={false}
-        />
-        <ErrorContainer>
-          {showError ? (
-            <RedText>
-              <Body2Subtext>{errorMessage}</Body2Subtext>
-            </RedText>
-          ) : null}
-        </ErrorContainer>
-      </FormContainer>
+      <InputTitleText>Serial Number</InputTitleText>
+      <OTPTextInput
+        ref={otpInput}
+        inputCount={7}
+        tintColor={Colors.magenta}
+        defaultValue={serialNumberInput}
+        inputCellLength={1}
+        handleTextChange={onChangeSerialNumber}
+        containerStyle={{ marginVertical: 3 }}
+        textInputStyle={{
+          borderWidth: 1,
+          borderRadius: 2,
+          width: 30,
+          height: '95%',
+        }}
+        isValid={!showError}
+        keyboardType="number-pad"
+        returnKeyType="done"
+        autoFocus={false}
+      />
+      <ErrorContainer>
+        {showError ? (
+          <RedText>
+            <Body2Subtext>{errorMessage}</Body2Subtext>
+          </RedText>
+        ) : null}
+      </ErrorContainer>
 
       <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
         <ButtonTextWhite>Add Voucher</ButtonTextWhite>

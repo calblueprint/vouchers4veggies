@@ -13,7 +13,6 @@ import {
 } from '../../../assets/Fonts';
 import {
   BodyContainer,
-  FormContainer,
   ErrorContainer,
   RedText,
   VoucherRangeContainer,
@@ -172,7 +171,7 @@ export default function VoucherBatchScreen({
           <LoadingText>Processing Voucher Range</LoadingText>
         </LoadingContainer>
       ) : (
-        <FormContainer>
+        <>
           <VoucherRangeContainer>
             <InputTitleText>From</InputTitleText>
             <OTPTextInput
@@ -240,7 +239,7 @@ export default function VoucherBatchScreen({
           <VoucherCountContainer>
             <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
           </VoucherCountContainer>
-        </FormContainer>
+        </>
       )}
     </BodyContainer>
   );
