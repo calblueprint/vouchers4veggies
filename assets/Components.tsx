@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ViewProps, ViewStyle } from 'react-native';
 import Colors from './Colors';
 
 export const SafeArea = styled(SafeAreaView)`
