@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 import { CustomProps } from '../../components/common/styles';
+import { Row } from '../../../assets/Components';
 
 export const VoucherCounter = styled.View`
   width: 30px;
@@ -47,36 +48,15 @@ export const FormContainer = styled.View`
   width: 277px;
 `;
 
-export const BorderlessRow = styled.View`
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-`;
-
-export const LeftAlignContainer = styled.View`
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  padding-left: 29px;
-`;
-
-export const RightAlignContainer = styled.View`
-  flex: 1;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-  padding-right: 29px;
-`;
-
 export const ReviewTitleContainer = styled.View`
   display: flex;
   padding-top: 12px;
   padding-bottom: 40px;
+`;
+
+export const SummaryRow = styled(Row)`
+  padding-horizontal: 29px;
+  padding-top: 10px;
 `;
 
 export const ConfirmationTitleContainer = styled.View`
