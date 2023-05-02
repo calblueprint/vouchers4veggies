@@ -2,8 +2,7 @@ import React from 'react';
 import { Body1Text } from '../../../assets/Fonts';
 import { formatValueForDisplay } from '../../utils/displayUtils';
 import { LeftAlignColumn, H4Subheading } from './styles';
-import { Card } from '../../../assets/Components';
-import { RightAlignContainer } from '../common/styles';
+import { Card, RightAlignContainer } from '../../../assets/Components';
 
 type VoucherCardProps = {
   serialNumber: number;
