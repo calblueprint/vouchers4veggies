@@ -23,9 +23,10 @@ import {
 } from '../../../assets/Fonts';
 import {
   LeftAlignContainer,
-  OneLine,
+  Row,
   RightAlignContainer,
-} from '../common/styles';
+  ButtonMagenta,
+} from '../../../assets/Components';
 import ClearButton from './ClearButton';
 import {
   FilterDispatch,
@@ -33,7 +34,7 @@ import {
   SortDispatch,
 } from '../../utils/transactionUtils';
 import FilterField from './FilterField';
-import { ButtonMagenta } from '../../../assets/Components';
+
 import { TransactionStatus } from '../../types/types';
 import FilterTag from './FilterTag';
 import Colors from '../../../assets/Colors';
@@ -86,7 +87,7 @@ export default function FilterModal({
           </CenteredTextContainer>
 
           <SubheadingContainer>
-            <OneLine>
+            <Row>
               <Body1SemiboldText>Filter by date</Body1SemiboldText>
               <RightAlignContainer>
                 <ClearButton
@@ -103,10 +104,10 @@ export default function FilterModal({
                   }}
                 />
               </RightAlignContainer>
-            </OneLine>
+            </Row>
           </SubheadingContainer>
 
-          <OneLine style={{ zIndex: 5 }}>
+          <Row style={{ zIndex: 5 }}>
             <LeftAlignContainer style={{ marginRight: 20 }}>
               <FilterField
                 isSelected={filterState.inProgressMinDateIsSet}
@@ -184,10 +185,10 @@ export default function FilterModal({
                 />
               </DatePickerContainer>
             )}
-          </OneLine>
+          </Row>
 
           <SubheadingContainer>
-            <OneLine>
+            <Row>
               <Body1SemiboldText>Filter by status</Body1SemiboldText>
               <RightAlignContainer>
                 <ClearButton
@@ -199,10 +200,10 @@ export default function FilterModal({
                   }}
                 />
               </RightAlignContainer>
-            </OneLine>
+            </Row>
           </SubheadingContainer>
 
-          <OneLine>
+          <Row>
             <FilterTag
               isSelected={
                 filterState.inProgressStatusFilter === TransactionStatus.UNPAID
@@ -239,10 +240,10 @@ export default function FilterModal({
             >
               <Body1Text>PAID</Body1Text>
             </FilterTag>
-          </OneLine>
+          </Row>
 
           <SubheadingContainer>
-            <OneLine>
+            <Row>
               <Body1SemiboldText>Filter by amount</Body1SemiboldText>
               <RightAlignContainer>
                 <ClearButton
@@ -259,10 +260,10 @@ export default function FilterModal({
                   }}
                 />
               </RightAlignContainer>
-            </OneLine>
+            </Row>
           </SubheadingContainer>
 
-          <OneLine style={{ marginBottom: 48 }}>
+          <Row style={{ marginBottom: 48 }}>
             <ScrollView horizontal alwaysBounceHorizontal={false}>
               <FilterTag
                 isSelected={
@@ -347,7 +348,7 @@ export default function FilterModal({
                 <Body1Text>50+</Body1Text>
               </FilterTag>
             </ScrollView>
-          </OneLine>
+          </Row>
 
           <CenteredContainer>
             <ButtonMagenta
