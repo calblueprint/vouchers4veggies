@@ -14,11 +14,7 @@ import {
   BodyContainer,
   VoucherCountContainer,
 } from './styles';
-import {
-  ButtonMagenta,
-  ButtonWhite,
-  SafeArea,
-} from '../../../assets/Components';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
@@ -82,7 +78,7 @@ export default function ScanningScreen({
   }
 
   return (
-    <SafeArea>
+    <>
       <BodyContainer>
         <Body1Text>
           <CenterText>
@@ -116,6 +112,6 @@ export default function ScanningScreen({
           <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
         </VoucherCountContainer>
       </ButtonContainer>
-    </SafeArea>
+    </>
   );
 }
