@@ -13,8 +13,7 @@ import {
 import { ButtonTextWhite, H4CardNavTab } from '../../../assets/Fonts';
 import RadioButton from '../common/RadioButton';
 import { SortDispatch, SortState } from '../../utils/transactionUtils';
-import { ButtonMagenta } from '../../../assets/Components';
-import { OneLine } from '../common/styles';
+import { Row, ButtonMagenta } from '../../../assets/Components';
 import ClearButton from './ClearButton';
 import Colors from '../../../assets/Colors';
 
@@ -42,7 +41,7 @@ export default function SortModal({
       backdropTransitionOutTiming={0}
     >
       <SortModalContainer>
-        <OneLine>
+        <Row>
           <ClearButtonContainer>
             <ClearButton
               isDisabled={
@@ -61,7 +60,7 @@ export default function SortModal({
               <Icon name="close" size={24} color={Colors.midBlack} />
             </TouchableOpacity>
           </CloseButtonContainer>
-        </OneLine>
+        </Row>
 
         <PaddedScrollView alwaysBounceVertical={false}>
           <H4CardNavTab
