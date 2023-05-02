@@ -22,6 +22,7 @@ import {
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,10 +31,16 @@ const styles = StyleSheet.create({
   },
 });
 
+enum permissions {
+  LOADING,
+  DENIED,
+  GRANTED,
+}
+
 export default function ScanningScreen({
   navigation,
 }: ScannerStackScreenProps<'ScanningScreen'>) {
-  const [hasPermission, setHasPermission] = useState<boolean>(false);
+  const [hasPermission, setHasPermission] = useState(permissions.LOADING);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
   const { voucherMap } = useScanningContext();
@@ -41,7 +48,9 @@ export default function ScanningScreen({
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(
+        status === 'granted' ? permissions.GRANTED : permissions.DENIED,
+      );
     };
 
     getBarCodeScannerPermissions();
@@ -74,10 +83,14 @@ export default function ScanningScreen({
     }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+  if (hasPermission === permissions.LOADING) {
+    return (
+      <BodyContainer>
+        <LoadingSpinner />
+      </BodyContainer>
+    );
   }
-  if (hasPermission === false) {
+  if (hasPermission === permissions.DENIED) {
     return <Text>No access to camera</Text>;
   }
 
