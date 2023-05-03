@@ -1,11 +1,11 @@
 import React from 'react';
 import { TransactionStatus } from '../../types/types';
+import { StatusComponentGreen, StatusComponentRed } from './styles';
 import {
+  Body2SemiboldSubtext,
   GreenText,
   RedText,
-  StatusComponentGreen,
-  StatusComponentRed,
-} from './styles';
+} from '../../../assets/Fonts';
 
 type StatusComponentProps = {
   status: string;
@@ -13,11 +13,15 @@ type StatusComponentProps = {
 export default function StatusComponent({ status }: StatusComponentProps) {
   return status === TransactionStatus.PAID ? (
     <StatusComponentGreen>
-      <GreenText>{status.toUpperCase()}</GreenText>
+      <GreenText>
+        <Body2SemiboldSubtext>{status.toUpperCase()}</Body2SemiboldSubtext>
+      </GreenText>
     </StatusComponentGreen>
   ) : (
     <StatusComponentRed>
-      <RedText>{status.toUpperCase()}</RedText>
+      <RedText>
+        <Body2SemiboldSubtext>{status.toUpperCase()}</Body2SemiboldSubtext>
+      </RedText>
     </StatusComponentRed>
   );
 }

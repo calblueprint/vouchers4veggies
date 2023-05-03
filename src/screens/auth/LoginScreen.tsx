@@ -6,9 +6,11 @@ import {
   RightAlignContainer,
 } from '../../../assets/Components';
 import {
+  Body1SemiboldText,
   Body1Text,
   H2Heading,
   H4CardNavTab,
+  RedText,
   WhiteText,
 } from '../../../assets/Fonts';
 import InputField from '../../components/auth/InputField';
@@ -73,7 +75,7 @@ export default function LoginScreen({
           <H2Heading>Welcome back!</H2Heading>
         </HeadingContainer>
 
-        <Body1Text style={Styles.bold}>Email</Body1Text>
+        <Body1SemiboldText>Email</Body1SemiboldText>
         <InputField
           onChange={onChangeEmail}
           value={email}
@@ -84,7 +86,7 @@ export default function LoginScreen({
 
         <RowContainer>
           <LeftAlignContainer>
-            <Body1Text style={Styles.bold}>Password</Body1Text>
+            <Body1SemiboldText>Password</Body1SemiboldText>
           </LeftAlignContainer>
           <RightAlignContainer>
             <Body1Text style={Styles.underline} onPress={resetPassword}>
@@ -100,7 +102,9 @@ export default function LoginScreen({
           // validate={validatePasswordInput}
         />
         {showErrorMessage && errorMessage && (
-          <Body1Text style={Styles.errorText}>{errorMessage}</Body1Text>
+          <RedText>
+            <Body1Text>{errorMessage}</Body1Text>
+          </RedText>
         )}
         <VerticalSpacingButtonContainer>
           <ButtonMagenta onPress={handleSignIn}>

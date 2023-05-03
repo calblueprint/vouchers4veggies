@@ -79,10 +79,6 @@ export const ErrorContainer = styled.View`
   margin: 10px 0px;
 `;
 
-export const RedText = styled.Text`
-  color: ${Colors.alertRed};
-`;
-
 export const RangeInputContainer = styled.View`
   width: 120px;
 `;

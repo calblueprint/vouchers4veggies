@@ -11,7 +11,7 @@ import {
   ClearButtonContainer,
 } from './styles';
 import { ButtonTextWhite, H4CardNavTab } from '../../../assets/Fonts';
-import RadioButton from '../common/RadioButton';
+import RadioButton from './RadioButton';
 import { SortDispatch, SortState } from '../../utils/transactionUtils';
 import { Row, ButtonMagenta } from '../../../assets/Components';
 import ClearButton from './ClearButton';

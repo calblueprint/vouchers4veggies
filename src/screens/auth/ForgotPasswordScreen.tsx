@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
-  SuccessText,
-  ErrorText,
+  GreenText,
+  RedText,
   Body1Text,
   H2Heading,
   H4CardNavTab,
@@ -68,12 +68,12 @@ export default function ForgotPasswordScreen({
         />
         {showErrorMessage && errorMessage ? (
           <Body1Text>
-            <ErrorText>We could not find that email address!</ErrorText>
+            <RedText>We could not find that email address!</RedText>
           </Body1Text>
         ) : null}
         {showSuccessMessage && successMessage ? (
           <Body1Text>
-            <SuccessText>Email sent! Check your inbox to reset.</SuccessText>
+            <GreenText>Email sent! Check your inbox to reset.</GreenText>
           </Body1Text>
         ) : null}
         <VerticalSpacingButtonContainer>
