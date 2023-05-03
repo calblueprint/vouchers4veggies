@@ -7,16 +7,12 @@ import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  InputTitleText,
+  Body1SemiboldText,
   Body2Subtext,
   Body1Text,
-} from '../../../assets/Fonts';
-import {
-  BodyContainer,
-  ErrorContainer,
   RedText,
-  VoucherCountContainer,
-} from './styles';
+} from '../../../assets/Fonts';
+import { BodyContainer, ErrorContainer, VoucherCountContainer } from './styles';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
@@ -80,7 +76,7 @@ export default function ManualVoucherScreen({
 
   return (
     <BodyContainer>
-      <InputTitleText>Serial Number</InputTitleText>
+      <Body1SemiboldText>Serial Number</Body1SemiboldText>
       <OTPTextInput
         ref={otpInput}
         inputCount={7}
