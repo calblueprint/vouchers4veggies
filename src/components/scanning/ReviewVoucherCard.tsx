@@ -3,7 +3,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
 import { Body1Text } from '../../../assets/Fonts';
 import { LeftAlignColumn, Styles } from '../transactions/styles';
-import { Row } from '../../../assets/Components';
+import { Card } from '../../../assets/Components';
 import { formatValueForDisplay } from '../../utils/displayUtils';
 import MediumSemiBoldText from './styles';
 
@@ -32,7 +32,7 @@ export default function ReviewVoucherCard({
   };
 
   return (
-    <Row>
+    <Card>
       <LeftAlignColumn>
         <Body1Text>{`SN ${serialNumber}`}</Body1Text>
         <MediumSemiBoldText>{`$${formatValueForDisplay(
@@ -55,6 +55,6 @@ export default function ReviewVoucherCard({
         color={Colors.midGray}
         onPress={onDelete}
       />
-    </Row>
+    </Card>
   );
 }

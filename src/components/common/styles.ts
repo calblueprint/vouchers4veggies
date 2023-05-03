@@ -5,40 +5,11 @@ export type CustomProps = {
   isSelected: boolean;
 };
 
-export const OneLine = styled.View`
-  display: flex;
-  flex-direction: row;
+export const RootNavBackButton = styled.TouchableOpacity`
+  text-align: center;
   align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-`;
-
-export const CenteredOneLine = styled(OneLine)`
-  justify-content: center;
-`;
-
-export const SelectableOneLine = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-`;
-
-export const LeftAlignContainer = styled.View`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-content: center;
-`;
-
-export const RightAlignContainer = styled.View`
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
+  width: 70px;
+  padding: 9px;
 `;
 
 export const RadioButtonContainer = styled.View`

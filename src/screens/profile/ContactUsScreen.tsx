@@ -9,7 +9,7 @@ import {
 import { MagentaButtonContainer, LeftAlignContainer } from './styles';
 import {
   ButtonMagenta,
-  Row,
+  Card,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -30,19 +30,19 @@ export default function ContactUsScreen({
         <H2Heading>Contact Us</H2Heading>
       </TitleContainer>
       <StartOfListView />
-      <Row>
+      <Card>
         <LeftAlignContainer>
           <Body1Text>Phone Number</Body1Text>
           <H4CardNavTab>1-833-VEG4YOU</H4CardNavTab>
         </LeftAlignContainer>
-      </Row>
+      </Card>
       <TouchableOpacity>
-        <Row>
+        <Card>
           <LeftAlignContainer>
             <Body1Text>Location</Body1Text>
             <H4CardNavTab>1001 Potrero Ave, San Francisco</H4CardNavTab>
           </LeftAlignContainer>
-        </Row>
+        </Card>
       </TouchableOpacity>
       <MagentaButtonContainer>
         <ButtonMagenta

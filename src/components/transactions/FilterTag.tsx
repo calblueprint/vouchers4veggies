@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { View } from 'react-native';
 import { FilterTagBase } from './styles';
-import { OneLine } from '../common/styles';
+import { Row } from '../../../assets/Components';
 import { CenterText, MidGrayText, WhiteText } from '../../../assets/Fonts';
 
 type FilterTagProps = {
@@ -32,7 +32,7 @@ export default function FilterTag({
   return (
     <View style={{ marginRight: margin }}>
       <FilterTagBase isSelected={isSelected} onPress={handleOnPress}>
-        <OneLine>
+        <Row>
           <CenterText style={{ minWidth }}>
             {isSelected ? (
               <WhiteText>{children}</WhiteText>
@@ -40,7 +40,7 @@ export default function FilterTag({
               <MidGrayText>{children}</MidGrayText>
             )}
           </CenterText>
-        </OneLine>
+        </Row>
       </FilterTagBase>
     </View>
   );
