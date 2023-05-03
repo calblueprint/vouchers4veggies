@@ -20,22 +20,13 @@ export const RadioButtonContainer = styled.View`
   margin-horizontal: 10px;
 `;
 
-export const RadioButtonUnselected = styled.View`
+export const RadioButtonBase = styled.View`
   height: 22px;
   width: 22px;
   border-radius: 12px;
   border-width: 1px;
-  border-color: ${Colors.midGray};
-  align-items: center;
-  justify-content: center;
-`;
-
-export const RadioButtonSelected = styled.View`
-  height: 22px;
-  width: 22px;
-  border-radius: 12px;
-  border-width: 1px;
-  border-color: ${Colors.magenta};
+  border-color: ${(props: CustomProps) =>
+    props.isSelected ? Colors.magenta : Colors.midGray};
   align-items: center;
   justify-content: center;
 `;
