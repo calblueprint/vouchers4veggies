@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import Colors from '../../../assets/Colors';
 
 export const StartContainer = styled.View`
   top: 26%;

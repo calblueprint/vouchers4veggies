@@ -10,11 +10,11 @@ import {
   Body2Subtext,
   Body1Text,
   LoadingText,
+  RedText,
 } from '../../../assets/Fonts';
 import {
   BodyContainer,
   ErrorContainer,
-  RedText,
   VoucherRangeContainer,
   VoucherCountContainer,
   LoadingContainer,
