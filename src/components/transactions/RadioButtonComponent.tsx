@@ -9,17 +9,17 @@ import {
 import { Body1Text } from '../../../assets/Fonts';
 import { LeftAlignContainer, SelectableRow } from '../../../assets/Components';
 
-type RadioButtonProps = {
+type RadioButtonComponentProps = {
   data: string[];
   selected: number;
   setSelected: (index: number) => void;
 };
 
-export default function RadioButtons({
+export default function RadioButtonComponent({
   data,
   selected,
   setSelected,
-}: RadioButtonProps) {
+}: RadioButtonComponentProps) {
   return (
     <View>
       {data.map((item, index) => (
