@@ -1,7 +1,7 @@
 import React from 'react';
-import { Body1Text } from '../../../assets/Fonts';
+import { Body1Text, H4Subheading } from '../../../assets/Fonts';
 import { formatValueForDisplay } from '../../utils/displayUtils';
-import { LeftAlignColumn, H4Subheading } from './styles';
+import { LeftAlignColumn } from './styles';
 import { Card, RightAlignContainer } from '../../../assets/Components';
 
 type VoucherCardProps = {

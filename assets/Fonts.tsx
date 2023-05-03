@@ -37,6 +37,10 @@ export const H4Subheading = styled.Text`
   line-height: 27px;
 `;
 
+export const H4SubheadingSemibold = styled(H4Subheading)`
+  font-family: 'manrope-semiBold';
+`;
+
 export const H4CardNavTab = styled.Text`
   font-family: 'manrope-semiBold';
   font-style: normal;
@@ -58,7 +62,7 @@ export const Body1Text = styled.Text`
   line-height: 19px;
 `;
 
-export const Body1SemiboldText = styled(Body1Text)`
+export const Body1TextSemibold = styled(Body1Text)`
   font-family: 'manrope-semiBold';
 `;
 
@@ -69,7 +73,7 @@ export const Body2Subtext = styled.Text`
   line-height: 14px;
 `;
 
-export const Body2SemiboldSubtext = styled(Body2Subtext)`
+export const Body2SubtextSemibold = styled(Body2Subtext)`
   font-family: 'manrope-semiBold';
 `;
 

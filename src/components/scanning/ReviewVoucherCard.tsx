@@ -1,11 +1,10 @@
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
-import { Body1Text } from '../../../assets/Fonts';
+import { H4SubheadingSemibold, Body1Text } from '../../../assets/Fonts';
 import { LeftAlignColumn, Styles } from '../transactions/styles';
 import { Card } from '../../../assets/Components';
 import { formatValueForDisplay } from '../../utils/displayUtils';
-import MediumSemiBoldText from './styles';
 
 type ReviewVoucherCardProps = {
   serialNumber: number;
@@ -35,9 +34,9 @@ export default function ReviewVoucherCard({
     <Card>
       <LeftAlignColumn>
         <Body1Text>{`SN ${serialNumber}`}</Body1Text>
-        <MediumSemiBoldText>{`$${formatValueForDisplay(
+        <H4SubheadingSemibold>{`$${formatValueForDisplay(
           value,
-        )}`}</MediumSemiBoldText>
+        )}`}</H4SubheadingSemibold>
       </LeftAlignColumn>
 
       <AntDesign.Button

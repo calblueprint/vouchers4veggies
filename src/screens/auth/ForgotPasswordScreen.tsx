@@ -6,7 +6,7 @@ import {
   H2Heading,
   H4CardNavTab,
   WhiteText,
-  Body1SemiboldText,
+  Body1TextSemibold,
 } from '../../../assets/Fonts';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import InputField from '../../components/auth/InputField';
@@ -58,7 +58,7 @@ export default function ForgotPasswordScreen({
           </Body1Text>
         </VerticalSpacingContainer>
 
-        <Body1SemiboldText>Email</Body1SemiboldText>
+        <Body1TextSemibold>Email</Body1TextSemibold>
         <InputField
           onChange={onChangeEmail}
           value={email}

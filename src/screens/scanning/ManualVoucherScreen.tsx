@@ -7,7 +7,7 @@ import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  Body1SemiboldText,
+  Body1TextSemibold,
   Body2Subtext,
   Body1Text,
   RedText,
@@ -76,7 +76,7 @@ export default function ManualVoucherScreen({
 
   return (
     <BodyContainer>
-      <Body1SemiboldText>Serial Number</Body1SemiboldText>
+      <Body1TextSemibold>Serial Number</Body1TextSemibold>
       <OTPTextInput
         ref={otpInput}
         inputCount={7}
