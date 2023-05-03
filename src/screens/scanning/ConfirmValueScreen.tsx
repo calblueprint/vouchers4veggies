@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import CurrencyInput from 'react-native-currency-input';
 import { Keyboard, TextInput } from 'react-native';
-import { ButtonMagenta, SafeArea } from '../../../assets/Components';
+import {
+  ButtonMagenta,
+  SafeArea,
+  styles,
+  fieldFocused,
+} from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
-import { styles, fieldFocused } from '../../components/common/styles';
 import { VoucherValueError, VoucherValueResult } from '../../types/types';
 import {
   ButtonTextWhite,

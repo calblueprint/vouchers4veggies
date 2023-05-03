@@ -1,5 +1,9 @@
 import { Timestamp } from 'firebase/firestore';
 
+export type CustomProps = {
+  isSelected: boolean;
+};
+
 export type Uuid = string;
 
 export type Vendor = {

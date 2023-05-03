@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { CustomProps } from '../../components/common/styles';
+import { CustomProps } from '../../types/types';
 import { Row } from '../../../assets/Components';
 
 export const VoucherCounter = styled.View`

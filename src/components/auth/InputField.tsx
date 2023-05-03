@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { KeyboardTypeOptions, TextInput } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { styles, fieldIsInvalid, fieldFocused } from '../common/styles';
+import {
+  styles,
+  fieldIsInvalid,
+  fieldFocused,
+} from '../../../assets/Components';
 
 type InputFieldProps = {
   onChange: (text: string) => void;

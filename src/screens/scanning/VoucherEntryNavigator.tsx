@@ -38,7 +38,7 @@ export default function VoucherEntryNavigator({
     // this line enables the keyboard to be dismissed when the user taps anywhere on the screen
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeArea>
-        <StandardHeader width="80%">
+        <StandardHeader>
           <TitleText>Add a voucher</TitleText>
           <TouchableOpacity
             onPress={() =>

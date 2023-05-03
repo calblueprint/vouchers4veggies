@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { CustomProps } from '../common/styles';
+import { CustomProps } from '../../types/types';
 import { LeftAlignContainer } from '../../../assets/Components';
 
 export const LeftAlignColumn = styled.View`
