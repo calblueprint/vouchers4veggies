@@ -17,7 +17,6 @@ import {
 } from './styles';
 import {
   ButtonMagenta,
-  CardContainer,
   LeftAlignContainer,
   RightAlignContainer,
   SafeArea,
@@ -204,7 +203,7 @@ export default function ReviewScreen({
           <LoadingText>Submitting Invoice</LoadingText>
         </LoadingContainer>
       ) : (
-        <CardContainer>
+        <>
           <StartOfListView />
           <ScrollView>
             <ConstrainedHeightContainer>
@@ -249,7 +248,7 @@ export default function ReviewScreen({
               </ButtonMagenta>
             </ReviewButtonContainer>
           </ScrollView>
-        </CardContainer>
+        </>
       )}
     </SafeArea>
   );

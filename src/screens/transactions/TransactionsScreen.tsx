@@ -10,7 +10,6 @@ import { Transaction } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import { CenteredOneLine } from './styles';
 import {
-  CardContainer,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -130,7 +129,7 @@ export default function TransactionsScreen({
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <CardContainer>
+        <>
           <StartOfListView />
           <FlatList
             data={transactions}
@@ -150,7 +149,7 @@ export default function TransactionsScreen({
             refreshing={isRefreshing}
             onRefresh={onRefresh}
           />
-        </CardContainer>
+        </>
       )}
 
       <SortModal
