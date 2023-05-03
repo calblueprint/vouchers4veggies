@@ -3,12 +3,17 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
 import { DarkGrayText } from '../../../assets/Fonts';
-import { RootNavBackButton } from './styles';
 
-export const BackButtonContainer = styled.View`
+const BackButtonContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
+`;
+
+const RootNavBackButton = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  padding: 9px 18px 9px 0px;
 `;
 
 export default function BackButton({ onPress }: { onPress: () => void }) {

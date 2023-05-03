@@ -1,27 +1,20 @@
 import React, { ReactNode } from 'react';
-import { View } from 'react-native';
+import styled from 'styled-components/native';
 
-interface HeaderContainerProps {
+const HeaderContainer = styled.View`
+  width: 100%;
+  height: 80px;
+  padding-horizontal: 29px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  alignitems: center;
+`;
+
+type StandardHeaderProps = {
   children: ReactNode;
-  width?: string;
-}
+};
 
-export default function HeaderContainer({
-  children,
-  width = '90%',
-}: HeaderContainerProps) {
-  return (
-    <View
-      style={{
-        width,
-        height: '12%',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-      {children}
-    </View>
-  );
+export default function StandardHeader({ children }: StandardHeaderProps) {
+  return <HeaderContainer>{children}</HeaderContainer>;
 }
