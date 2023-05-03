@@ -41,7 +41,6 @@ export default function TransactionsScreen({
     'Amount: Low to High',
     'Date: Newest',
     'Date: Oldest',
-    'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
   ];
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
