@@ -23,7 +23,7 @@ export const SelectableOneLine = styled.TouchableOpacity`
 
 export const LeftAlignContainer = styled.View`
   display: flex;
-  flex: 2;
+  flex: 1;
   flex-direction: row;
   justify-content: flex-start;
   align-content: center;
@@ -35,6 +35,14 @@ export const RightAlignContainer = styled.View`
   flex-direction: row;
   justify-content: flex-end;
   align-content: center;
+`;
+
+export const RadioButtonContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin-horizontal: 10px;
 `;
 
 export const RadioButtonUnselected = styled.View`
