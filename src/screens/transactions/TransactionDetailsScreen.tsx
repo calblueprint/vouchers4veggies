@@ -1,11 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
-import {
-  CardContainer,
-  SafeArea,
-  StartOfListView,
-} from '../../../assets/Components';
+import { SafeArea, StartOfListView } from '../../../assets/Components';
 import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StatusComponent from '../../components/transactions/StatusComponent';
@@ -129,7 +125,7 @@ export default function TransactionDetailsScreen({
             />
           </CenteredOneLine>
 
-          <CardContainer>
+          <>
             <StartOfListView />
             <FlatList
               data={displayedVoucherArray}
@@ -149,7 +145,7 @@ export default function TransactionDetailsScreen({
               refreshing={isRefreshing}
               onRefresh={onRefresh}
             />
-          </CardContainer>
+          </>
         </>
       ) : (
         <LoadingSpinner />
