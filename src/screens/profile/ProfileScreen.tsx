@@ -19,7 +19,7 @@ import {
 } from './styles';
 import {
   ButtonMagenta,
-  Row,
+  Card,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -59,14 +59,14 @@ export default function ProfileScreen({
         </CenterText>
       </TitleContainer>
       <StartOfListView />
-      <Row>
+      <Card>
         <LeftAlignContainer>
           <Body1Text>Email</Body1Text>
           <H4CardNavTab>{vendorEmail}</H4CardNavTab>
         </LeftAlignContainer>
-      </Row>
+      </Card>
       <TouchableOpacity onPress={() => navigation.navigate('ContactUsScreen')}>
-        <Row>
+        <Card>
           <IconContainer>
             <Icon2
               name="phone"
@@ -82,7 +82,7 @@ export default function ProfileScreen({
             style={Styles.icon}
             color={Colors.midGray}
           />
-        </Row>
+        </Card>
       </TouchableOpacity>
       <MagentaButtonContainer>
         <ButtonMagenta onPress={handleSignOut}>

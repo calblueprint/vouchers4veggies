@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Colors from './Colors';
 
-export const SafeArea = styled.SafeAreaView`
+export const SafeArea = styled(SafeAreaView)`
   background-color: ${Colors.offWhite};
   width: 100%;
   min-height: 100%;
@@ -9,88 +10,71 @@ export const SafeArea = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const FullSizeContainer = styled.View`
-  width: 100%;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ButtonMagenta = styled.TouchableOpacity`
+const ButtonBase = styled.TouchableOpacity`
   text-align: center;
   align-items: center;
   border-width: 2px;
   border-radius: 5px;
   width: 277px;
-  background: ${Colors.magenta};
-  text-color: ${Colors.offWhite};
-  padding: 9px 9px;
-  border-color: ${Colors.magenta};
-  margin-bottom: 16px;
-  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
-`;
-
-export const ButtonGray = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  border-radius: 5px;
-  width: 277px;
-  background: ${Colors.midGray};
-  padding: 9px 9px;
-  border: 2px solid ${Colors.midGray};
-`;
-
-export const ButtonWhite = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  border-radius: 5px;
-  width: 277px;
-  background: ${Colors.offWhite};
-  padding: 9px 9px;
-  border: 2px solid ${Colors.magenta};
-  margin-bottom: 16px;
-  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
-`;
-
-export const AddManuallyButton = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  width: 129px;
-  height: 28px;
-  background: ${Colors.lightMagenta};
-  border: 0.828025px solid ${Colors.midGray};
-  border-radius: 17.8025px;
-`;
-
-export const InputField = styled.TextInput`
-  font-style: 'normal';
-  border: 1px solid ${Colors.midGray};
-  background: ${Colors.lightGray};
-  border-radius: 5px;
-  padding: 8px;
-  width: 277px;
-`;
-
-export const LargeInputField = styled.TextInput`
-  font-size: 18px;
-  font-style: 'normal';
-  border: 1px solid ${Colors.midGray};
-  background: ${Colors.offWhite};
-  border-radius: 5px;
-  padding: 10px;
-  width: 317px;
-`;
-
-export const RootNavBackButton = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-  width: 70px;
   padding: 9px;
+  margin-bottom: 16px;
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
+`;
+
+export const ButtonMagenta = styled(ButtonBase)`
+  background: ${Colors.magenta};
+  border-color: ${Colors.magenta};
+`;
+
+export const ButtonWhite = styled(ButtonBase)`
+  background: ${Colors.offWhite};
+  border-color: ${Colors.magenta};
 `;
 
 export const Row = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const CenteredRow = styled(Row)`
+  justify-content: center;
+`;
+
+export const SelectableRow = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
+export const LeftAlignContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+`;
+
+export const RightAlignContainer = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+`;
+
+export const StartOfListView = styled.View`
+  width: 100%;
+  height: 1px;
+  border: 1px solid ${Colors.lightGray};
+  border-top-width: 1px;
+`;
+
+export const Card = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -99,13 +83,6 @@ export const Row = styled.View`
   border: 0px solid ${Colors.lightGray};
   border-bottom-width: 1px;
   width: 100%;
-`;
-
-export const StartOfListView = styled.View`
-  width: 100%;
-  height: 1px;
-  border: 1px solid ${Colors.lightGray};
-  border-top-width: 1px;
 `;
 
 export const CardContainer = styled.View`

@@ -11,7 +11,7 @@ import {
   ValueContainer,
   Styles,
 } from './styles';
-import { Row } from '../../../assets/Components';
+import { Card } from '../../../assets/Components';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';
 import {
@@ -47,7 +47,7 @@ export default function TransactionCard({
         });
       }}
     >
-      <Row>
+      <Card>
         <LeftAlignColumn>
           <Body1Text>{time.format('M/D')}</Body1Text>
           <Body1Text>{formatTimeForDisplay(time)}</Body1Text>
@@ -67,7 +67,7 @@ export default function TransactionCard({
           style={Styles.iconWithPadding}
           color={Colors.midGray}
         />
-      </Row>
+      </Card>
     </TouchableOpacity>
   );
 }

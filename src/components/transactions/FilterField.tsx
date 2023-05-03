@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import { FilterFieldBase } from './styles';
-import { OneLine, RightAlignContainer } from '../common/styles';
+import { Row, RightAlignContainer } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 
 type FilterFieldProps = {
@@ -19,14 +19,14 @@ export default function FilterField({
 }: FilterFieldProps) {
   return (
     <FilterFieldBase isSelected={isSelected} onPress={onPress}>
-      <OneLine>
+      <Row>
         <View>{children}</View>
         {icon ? (
           <RightAlignContainer>
             <MaterialIcons name={icon} size={16} color={Colors.darkGray} />
           </RightAlignContainer>
         ) : null}
-      </OneLine>
+      </Row>
     </FilterFieldBase>
   );
 }

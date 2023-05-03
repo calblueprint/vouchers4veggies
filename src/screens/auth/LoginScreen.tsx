@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { ButtonMagenta, SafeArea } from '../../../assets/Components';
+import {
+  ButtonMagenta,
+  SafeArea,
+  LeftAlignContainer,
+  RightAlignContainer,
+} from '../../../assets/Components';
 import {
   Body1Text,
   H2Heading,
@@ -25,10 +30,6 @@ import {
   VerticalSpacingButtonContainer,
 } from './styles';
 import BackButton from '../../components/common/BackButton';
-import {
-  LeftAlignContainer,
-  RightAlignContainer,
-} from '../../components/common/styles';
 
 export default function LoginScreen({
   navigation,

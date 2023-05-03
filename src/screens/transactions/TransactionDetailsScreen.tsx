@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import {
   CardContainer,
-  FullSizeContainer,
   SafeArea,
   StartOfListView,
 } from '../../../assets/Components';
@@ -103,7 +102,7 @@ export default function TransactionDetailsScreen({
       </StandardHeader>
 
       {transactionData ? (
-        <FullSizeContainer>
+        <>
           <StatusComponent status={transactionData.status} />
           <Title>${formatValueForDisplay(transactionData.value)}</Title>
           <MediumText>Date: {time.format('M/D/YY')}</MediumText>
@@ -151,7 +150,7 @@ export default function TransactionDetailsScreen({
               onRefresh={onRefresh}
             />
           </CardContainer>
-        </FullSizeContainer>
+        </>
       ) : (
         <LoadingSpinner />
       )}
