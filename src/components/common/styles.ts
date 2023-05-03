@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Colors from '../../../assets/Colors';
 
 export type CustomProps = {
   isSelected: boolean;
