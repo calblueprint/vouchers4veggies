@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { CustomProps } from '../../components/common/styles';
 import { Row } from '../../../assets/Components';
@@ -145,3 +146,10 @@ export const NavButton = styled.Pressable`
   border-color: ${(props: CustomProps) =>
     props.isSelected ? Colors.magenta : Colors.lightGray};
 `;
+
+export const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+    borderRadius: 10,
+  },
+});
