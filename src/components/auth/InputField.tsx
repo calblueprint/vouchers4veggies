@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { KeyboardTypeOptions, TextInput } from 'react-native';
 import Colors from '../../../assets/Colors';
-import Styles from './styles';
+import { styles, fieldIsInvalid, fieldFocused } from './styles';
 
 type InputFieldProps = {
   onChange: (text: string) => void;
@@ -23,11 +23,11 @@ export default function InputField({
   const [isActive, setIsActive] = useState(false);
   let textInputStyle;
   if (isActive) {
-    textInputStyle = Styles.FormFieldFocus;
+    textInputStyle = fieldFocused;
   } else if (isValid) {
-    textInputStyle = Styles.FormField;
+    textInputStyle = styles.fieldDefault;
   } else {
-    textInputStyle = Styles.FormFieldError;
+    textInputStyle = fieldIsInvalid;
   }
 
   return (

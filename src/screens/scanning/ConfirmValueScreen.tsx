@@ -105,7 +105,7 @@ export default function ConfirmValueScreen({
               {...props}
               onBlur={() => setIsActive(false)}
               onFocus={() => setIsActive(true)}
-              style={isActive ? Styles.FormFieldFocus : Styles.FormField}
+              style={isActive ? Styles.formFieldFocus : Styles.formField}
               placeholderTextColor={Colors.midGray}
               secureTextEntry={false}
               autoCorrect={false}
