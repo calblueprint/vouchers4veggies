@@ -13,19 +13,13 @@ import {
   ScannerContainer,
   BodyContainer,
   VoucherCountContainer,
+  styles,
 } from './styles';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-    borderRadius: 10,
-  },
-});
 
 enum permissions {
   LOADING,
