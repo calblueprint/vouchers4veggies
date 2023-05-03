@@ -1,10 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import {
+  RadioButtonBase,
   RadioButtonContainer,
   RadioButtonFill,
-  RadioButtonSelected,
-  RadioButtonUnselected,
   RowWithBottomMargin,
 } from './styles';
 import { Body1Text } from '../../../assets/Fonts';
@@ -30,13 +29,9 @@ export default function RadioButtons({
               <Body1Text>{item}</Body1Text>
             </LeftAlignContainer>
             <RadioButtonContainer>
-              {selected === index ? (
-                <RadioButtonSelected>
-                  <RadioButtonFill />
-                </RadioButtonSelected>
-              ) : (
-                <RadioButtonUnselected />
-              )}
+              <RadioButtonBase isSelected={selected === index}>
+                {selected === index ? <RadioButtonFill /> : null}
+              </RadioButtonBase>
             </RadioButtonContainer>
           </SelectableRow>
         </RowWithBottomMargin>
