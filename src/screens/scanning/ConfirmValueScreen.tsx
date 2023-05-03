@@ -11,6 +11,7 @@ import {
   H2Heading,
   InputTitleText,
   Body2Subtext,
+  RedText,
   // CounterText,
 } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
@@ -19,7 +20,6 @@ import {
   TitleContainer,
   BodyContainer,
   ErrorContainer,
-  RedText,
   // VoucherCounter,
 } from './styles';
 import { ScannerStackScreenProps } from '../../navigation/types';

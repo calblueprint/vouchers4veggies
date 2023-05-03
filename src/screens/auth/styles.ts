@@ -55,12 +55,6 @@ export const Styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline',
   },
-  bold: {
-    fontWeight: '600',
-  },
-  errorText: {
-    color: Colors.alertRed,
-  },
 });
 
 export const ButtonSpacing = styled.View`

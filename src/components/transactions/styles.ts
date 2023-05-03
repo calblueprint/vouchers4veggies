@@ -53,27 +53,34 @@ export const StatusComponentGreen = styled.View`
   border: 2px solid ${Colors.lightGreen};
 `;
 
-export const H4Subheading = styled.Text`
-  font-family: 'manrope-bold';
-  font-style: normal;
-  font-size: 20px;
-  line-height: 27px;
+export const RadioButtonContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin-horizontal: 10px;
 `;
 
-export const GreenText = styled.Text`
-  color: ${Colors.alertGreen};
-  font-family: 'manrope-bold';
-  font-style: normal;
-  font-size: 12px;
-  line-height: 14px;
+export const RadioButtonBase = styled.View`
+  height: 22px;
+  width: 22px;
+  border-radius: 12px;
+  border-width: 1px;
+  border-color: ${(props: CustomProps) =>
+    props.isSelected ? Colors.magenta : Colors.midGray};
+  align-items: center;
+  justify-content: center;
 `;
 
-export const RedText = styled.Text`
-  color: ${Colors.alertRed};
-  font-family: 'manrope-bold';
-  font-style: normal;
-  font-size: 12px;
-  line-height: 14px;
+export const RadioButtonFill = styled.View`
+  height: 14px;
+  width: 14px;
+  border-radius: 7px;
+  background-color: ${Colors.magenta};
+`;
+
+export const RowWithBottomMargin = styled.View`
+  margin-bottom: 21px;
 `;
 
 export const FilterFieldBase = styled.TouchableOpacity`

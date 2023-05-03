@@ -23,6 +23,13 @@ export const H3Subheading = styled.Text`
   line-height: 33px;
 `;
 
+export const H4Subheading = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 20px;
+  line-height: 27px;
+`;
+
 export const H4CardNavTab = styled.Text`
   font-family: 'manrope-semiBold';
   font-style: normal;
@@ -51,6 +58,13 @@ export const Body1SemiboldText = styled.Text`
   line-height: 19px;
 `;
 
+export const Body2SemiboldSubtext = styled.Text`
+  font-family: 'manrope-semiBold';
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
+`;
+
 export const Body2Subtext = styled.Text`
   font-family: 'manrope-regular';
   font-style: normal;
@@ -68,11 +82,11 @@ export const MagentaText = styled.Text`
   color: ${Colors.magenta};
 `;
 
-export const ErrorText = styled.Text`
+export const RedText = styled.Text`
   color: ${Colors.alertRed};
 `;
 
-export const SuccessText = styled.Text`
+export const GreenText = styled.Text`
   color: ${Colors.alertGreen};
 `;
 
