@@ -12,7 +12,6 @@ import {
   ButtonContainer,
   ScannerContainer,
   BodyContainer,
-  VoucherCountContainer,
   styles,
 } from './styles';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
@@ -115,9 +114,7 @@ export default function ScanningScreen({
         >
           <ButtonTextMagenta>Review and Submit</ButtonTextMagenta>
         </ButtonWhite>
-        <VoucherCountContainer>
-          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
-        </VoucherCountContainer>
+        <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
       </ButtonContainer>
     </>
   );
