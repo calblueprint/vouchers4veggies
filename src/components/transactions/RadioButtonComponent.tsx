@@ -30,7 +30,7 @@ export default function RadioButtonList({
             </LeftAlignContainer>
             <RadioButtonContainer>
               <RadioButtonBase isSelected={selected === index}>
-                selected === index && <RadioButtonFill />
+                {selected === index && <RadioButtonFill />}
               </RadioButtonBase>
             </RadioButtonContainer>
           </SelectableRow>
