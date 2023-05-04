@@ -31,13 +31,13 @@ export default function ReviewVoucherCard({
     setSerialNumber(serialNumber);
   };
 
-  const displayValue = formatValueForDisplay(value);
-
   return (
     <Card>
       <Column>
         <Body1Text>{`SN ${serialNumber}`}</Body1Text>
-        <H4SubheadingSemibold>{`${displayValue}`}</H4SubheadingSemibold>
+        <H4SubheadingSemibold>{`${formatValueForDisplay(
+          value,
+        )}`}</H4SubheadingSemibold>
       </Column>
 
       <IconContainer>
