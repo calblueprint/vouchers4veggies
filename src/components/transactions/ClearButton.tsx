@@ -8,20 +8,15 @@ type ClearButtonProps = {
 };
 
 export default function ClearButton({ isDisabled, onPress }: ClearButtonProps) {
-  if (!isDisabled) {
-    return (
-      <TouchableOpacity onPress={onPress}>
-        <BlueText>
-          <Body1Text>Clear</Body1Text>
-        </BlueText>
-      </TouchableOpacity>
-    );
-  }
   return (
-    <TouchableOpacity disabled>
-      <MidGrayText>
-        <Body1Text>Clear</Body1Text>
-      </MidGrayText>
+    <TouchableOpacity disabled={isDisabled} onPress={onPress}>
+      <Body1Text>
+        {isDisabled ? (
+          <MidGrayText>Clear</MidGrayText>
+        ) : (
+          <BlueText>Clear</BlueText>
+        )}
+      </Body1Text>
     </TouchableOpacity>
   );
 }
