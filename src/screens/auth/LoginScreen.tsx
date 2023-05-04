@@ -28,7 +28,7 @@ import {
   FormContainer,
   HeadingContainer,
   RowContainer,
-  Styles,
+  styles,
   VerticalSpacingButtonContainer,
 } from './styles';
 import BackButton from '../../components/common/BackButton';
@@ -89,7 +89,7 @@ export default function LoginScreen({
             <Body1TextSemibold>Password</Body1TextSemibold>
           </LeftAlignContainer>
           <RightAlignContainer>
-            <Body1Text style={Styles.underline} onPress={resetPassword}>
+            <Body1Text style={styles.underline} onPress={resetPassword}>
               Forgot password?
             </Body1Text>
           </RightAlignContainer>

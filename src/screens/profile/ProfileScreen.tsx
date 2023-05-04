@@ -11,15 +11,12 @@ import {
 } from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
-import {
-  MagentaButtonContainer,
-  LeftAlignContainer,
-  IconContainer,
-  Styles,
-} from './styles';
+import { MagentaButtonContainer, styles } from './styles';
 import {
   ButtonMagenta,
   Card,
+  Column,
+  LeftAlignContainer,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -60,28 +57,23 @@ export default function ProfileScreen({
       </TitleContainer>
       <StartOfListView />
       <Card>
-        <LeftAlignContainer>
+        <Column>
           <Body1Text>Email</Body1Text>
           <H4CardNavTab>{vendorEmail}</H4CardNavTab>
-        </LeftAlignContainer>
+        </Column>
       </Card>
       <TouchableOpacity onPress={() => navigation.navigate('ContactUsScreen')}>
         <Card>
-          <IconContainer>
+          <LeftAlignContainer>
             <Icon2
               name="phone"
               size={25}
-              style={Styles.icon}
+              style={styles.icon}
               color={Colors.darkGray}
             />
             <H4CardNavTab>Contact Us</H4CardNavTab>
-          </IconContainer>
-          <Icon
-            name="right"
-            size={25}
-            style={Styles.icon}
-            color={Colors.midGray}
-          />
+          </LeftAlignContainer>
+          <Icon name="right" size={25} color={Colors.midGray} />
         </Card>
       </TouchableOpacity>
       <MagentaButtonContainer>

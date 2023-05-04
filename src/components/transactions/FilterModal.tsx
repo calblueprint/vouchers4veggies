@@ -8,7 +8,7 @@ import {
   CenteredTextContainer,
   CloseButtonContainer,
   FilterModalContainer,
-  Styles,
+  styles,
   SubheadingContainer,
   DatePickerContainer,
   CenteredContainer,
@@ -66,7 +66,7 @@ export default function FilterModal({
     <Modal
       isVisible={isVisible}
       coverScreen={false}
-      style={Styles.modal}
+      style={styles.modal}
       backdropTransitionOutTiming={0}
     >
       <FilterModalContainer>

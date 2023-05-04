@@ -9,9 +9,9 @@ import {
   StatusContainer,
   LeftAlignColumn,
   ValueContainer,
-  Styles,
+  styles,
 } from './styles';
-import { Card } from '../../../assets/Components';
+import { Card, Column } from '../../../assets/Components';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';
 import {
@@ -48,10 +48,10 @@ export default function TransactionCard({
       }}
     >
       <Card>
-        <LeftAlignColumn>
+        <Column>
           <Body1Text>{time.format('M/D')}</Body1Text>
           <Body1Text>{formatTimeForDisplay(time)}</Body1Text>
-        </LeftAlignColumn>
+        </Column>
 
         <ValueContainer>
           <H3Subheading>${formatValueForDisplay(value)}</H3Subheading>
@@ -64,7 +64,7 @@ export default function TransactionCard({
         <Icon
           name="right"
           size={25}
-          style={Styles.iconWithPadding}
+          style={styles.icon}
           color={Colors.midGray}
         />
       </Card>

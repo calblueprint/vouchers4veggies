@@ -90,7 +90,14 @@ export const Card = styled.View`
   height: 67px;
   border: 0px solid ${Colors.lightGray};
   border-bottom-width: 1px;
+  padding-horizontal: 29px;
   width: 100%;
+`;
+
+export const Column = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 `;
 
 export const CardContainer = styled.View`

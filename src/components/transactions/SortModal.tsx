@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {
   CloseButtonContainer,
   SortModalContainer,
-  Styles,
+  styles,
   CenteredContainer,
   PaddedScrollView,
   ClearButtonContainer,
@@ -37,7 +37,7 @@ export default function SortModal({
     <Modal
       isVisible={isVisible}
       coverScreen={false}
-      style={Styles.modal}
+      style={styles.modal}
       backdropTransitionOutTiming={0}
     >
       <SortModalContainer>

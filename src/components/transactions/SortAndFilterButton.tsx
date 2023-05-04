@@ -1,6 +1,6 @@
 import React from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import { SortAndFilterBase, Styles } from './styles';
+import { SortAndFilterBase, styles } from './styles';
 import { Body2Subtext, MagentaText } from '../../../assets/Fonts';
 import { CenteredRow } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
@@ -33,7 +33,7 @@ export default function SortAndFilterButton({
       name="tune"
       size={16}
       color={iconColor}
-      style={Styles.icon}
+      style={styles.icon}
     />
   );
   if (type === 'sort') {
@@ -42,7 +42,7 @@ export default function SortAndFilterButton({
         name="sort-desc"
         size={16}
         color={iconColor}
-        style={Styles.icon}
+        style={styles.icon}
       />
     );
   }
