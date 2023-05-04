@@ -55,13 +55,13 @@ export default function SortAndFilterButton({
     >
       <CenteredRow>
         {icon}
-        {isSelected || modalIsVisible ? (
-          <MagentaText>
-            <Body2Subtext>{text}</Body2Subtext>
-          </MagentaText>
-        ) : (
-          <Body2Subtext>{text}</Body2Subtext>
-        )}
+        <Body2Subtext>
+          {isSelected || modalIsVisible ? (
+            <MagentaText>{text}</MagentaText>
+          ) : (
+            text
+          )}
+        </Body2Subtext>
       </CenteredRow>
     </SortAndFilterBase>
   );
