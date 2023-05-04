@@ -12,13 +12,14 @@ type VoucherCardProps = {
   value: number;
 };
 export default function VoucherCard({ serialNumber, value }: VoucherCardProps) {
+  const displayValue = formatValueForDisplay(value);
   return (
     <Card>
       <LeftAlignContainer>
         <Body1Text>SN {serialNumber}</Body1Text>
       </LeftAlignContainer>
       <RightAlignContainer>
-        <H4Subheading>${formatValueForDisplay(value)}</H4Subheading>
+        <H4Subheading>${displayValue}</H4Subheading>
       </RightAlignContainer>
     </Card>
   );
