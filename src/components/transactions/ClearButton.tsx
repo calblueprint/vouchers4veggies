@@ -1,26 +1,27 @@
 import React from 'react';
-import { ClearButtonBase } from './styles';
+import { TouchableOpacity } from 'react-native';
 import { BlueText, Body1Text, MidGrayText } from '../../../assets/Fonts';
 
 type ClearButtonProps = {
   isDisabled: boolean;
   onPress: () => void;
 };
+
 export default function ClearButton({ isDisabled, onPress }: ClearButtonProps) {
   if (!isDisabled) {
     return (
-      <ClearButtonBase onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
         <BlueText>
           <Body1Text>Clear</Body1Text>
         </BlueText>
-      </ClearButtonBase>
+      </TouchableOpacity>
     );
   }
   return (
-    <ClearButtonBase disabled>
+    <TouchableOpacity disabled>
       <MidGrayText>
         <Body1Text>Clear</Body1Text>
       </MidGrayText>
-    </ClearButtonBase>
+    </TouchableOpacity>
   );
 }

@@ -6,7 +6,7 @@ import {
   CloseButtonContainer,
   SortModalContainer,
   styles,
-  CenteredContainer,
+  ButtonMagentaContainer,
   PaddedScrollView,
   ClearButtonContainer,
 } from './styles';
@@ -76,7 +76,7 @@ export default function SortModal({
             />
           </View>
 
-          <CenteredContainer>
+          <ButtonMagentaContainer>
             <ButtonMagenta
               onPress={() => {
                 setIsVisible(false);
@@ -85,7 +85,7 @@ export default function SortModal({
             >
               <ButtonTextWhite>Apply</ButtonTextWhite>
             </ButtonMagenta>
-          </CenteredContainer>
+          </ButtonMagentaContainer>
         </PaddedScrollView>
       </SortModalContainer>
     </Modal>

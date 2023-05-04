@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { CustomProps } from '../../types/types';
-import { LeftAlignContainer } from '../../../assets/Components';
+import { LeftAlignContainer, Row } from '../../../assets/Components';
 
-export const SubheadingContainer = styled.View`
+export const SubheadingContainer = styled(Row)`
   margin-top: 38px;
   margin-bottom: 9px;
 `;
@@ -96,28 +96,22 @@ export const FilterTagBase = styled.TouchableOpacity`
       props.isSelected ? Colors.midBlack : Colors.unselectedGray};
 `;
 
-export const ClearButtonBase = styled.TouchableOpacity`
-  text-align: center;
-  align-items: center;
-`;
-
-export const SortModalContainer = styled.View`
+const ModalContainer = styled.View`
   background: ${Colors.offWhite};
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+`;
+
+export const SortModalContainer = styled(ModalContainer)`
   max-height: 50%;
 `;
 
-export const PaddedScrollView = styled.ScrollView`
-  padding-right: 29px;
-  padding-left: 29px;
+export const FilterModalContainer = styled(ModalContainer)`
+  max-height: 75%;
 `;
 
-export const FilterModalContainer = styled.View`
-  background: ${Colors.offWhite};
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  max-height: 75%;
+export const PaddedScrollView = styled.ScrollView`
+  padding-horizontal: 29px;
 `;
 
 export const CloseButtonContainer = styled.View`
@@ -133,7 +127,7 @@ export const CenteredTextContainer = styled.Text`
   text-align: center;
 `;
 
-export const CenteredContainer = styled.View`
+export const ButtonMagentaContainer = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -179,6 +173,12 @@ export const styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
     paddingHorizontal: 6,
+  },
+  bringToTop: {
+    zIndex: 5,
+  },
+  marginRight: {
+    marginRight: 20,
   },
   modal: {
     justifyContent: 'flex-end',
