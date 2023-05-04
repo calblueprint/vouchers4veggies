@@ -4,75 +4,6 @@ import Colors from '../../../assets/Colors';
 import { CustomProps } from '../../types/types';
 import { Row } from '../../../assets/Components';
 
-export const SubheadingContainer = styled(Row)`
-  margin-top: 38px;
-  margin-bottom: 9px;
-`;
-
-export const StatusContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-end;
-  margin-right: 30px;
-`;
-
-export const ValueContainer = styled.View`
-  flex: 1.5;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin-horizontal: 10px;
-`;
-
-const StatusComponentBase = styled.View`
-  text-align: center;
-  align-items: center;
-  border-radius: 9px;
-  min-width: 63px;
-  padding: 9px;
-`;
-
-export const StatusComponentRed = styled(StatusComponentBase)`
-  background: ${Colors.alertLightRed};
-  border: 2px solid ${Colors.alertLightRed};
-`;
-
-export const StatusComponentGreen = styled(StatusComponentBase)`
-  background: ${Colors.lightGreen};
-  border: 2px solid ${Colors.lightGreen};
-`;
-
-export const RadioButtonContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-  margin-horizontal: 10px;
-`;
-
-export const RadioButtonBase = styled.View`
-  height: 22px;
-  width: 22px;
-  border-radius: 12px;
-  border-width: 1px;
-  border-color: ${(props: CustomProps) =>
-    props.isSelected ? Colors.magenta : Colors.midGray};
-  align-items: center;
-  justify-content: center;
-`;
-
-export const RadioButtonFill = styled.View`
-  height: 14px;
-  width: 14px;
-  border-radius: 7px;
-  background-color: ${Colors.magenta};
-`;
-
-export const RowWithBottomMargin = styled.View`
-  margin-bottom: 21px;
-`;
-
 export const FilterFieldBase = styled.TouchableOpacity`
   width: 100%;
   align-items: flex-start;
@@ -110,24 +41,61 @@ export const FilterModalContainer = styled(ModalContainer)`
   max-height: 75%;
 `;
 
-export const PaddedScrollView = styled.ScrollView`
-  padding-horizontal: 29px;
-`;
-
 export const ModalHeader = styled(Row)`
   margin-top: 19px;
   margin-bottom: 21px;
   padding-horizontal: 29px;
 `;
 
-export const CenteredTextContainer = styled.Text`
-  text-align: center;
+export const SubheadingContainer = styled(Row)`
+  margin-top: 38px;
+  margin-bottom: 9px;
+`;
+
+export const DatePickerContainer = styled.View`
+  position: absolute;
+  top: 40px;
+  right: 0;
+  left: 0;
+  background-color: ${Colors.midGray};
+  align-items: center;
+  justify-content: center;
+`;
+
+export const PaddedScrollView = styled.ScrollView`
+  padding-horizontal: 29px;
 `;
 
 export const ButtonMagentaContainer = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
+`;
+
+export const RadioButtonContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  margin-horizontal: 10px;
+`;
+
+export const RadioButtonBase = styled.View`
+  height: 22px;
+  width: 22px;
+  border-radius: 12px;
+  border-width: 1px;
+  border-color: ${(props: CustomProps) =>
+    props.isSelected ? Colors.magenta : Colors.midGray};
+  align-items: center;
+  justify-content: center;
+`;
+
+export const RadioButtonFill = styled.View`
+  height: 14px;
+  width: 14px;
+  border-radius: 7px;
+  background-color: ${Colors.magenta};
 `;
 
 export const SortAndFilterBase = styled.TouchableOpacity`
@@ -146,14 +114,38 @@ export const SortAndFilterBase = styled.TouchableOpacity`
   margin-bottom: 28px;
 `;
 
-export const DatePickerContainer = styled.View`
-  position: absolute;
-  top: 40px;
-  right: 0;
-  left: 0;
-  background-color: ${Colors.midGray};
+const StatusComponentBase = styled.View`
+  text-align: center;
   align-items: center;
-  justify-content: center;
+  border-radius: 9px;
+  min-width: 63px;
+  padding: 9px;
+`;
+
+export const StatusComponentRed = styled(StatusComponentBase)`
+  background: ${Colors.alertLightRed};
+  border: 2px solid ${Colors.alertLightRed};
+`;
+
+export const StatusComponentGreen = styled(StatusComponentBase)`
+  background: ${Colors.lightGreen};
+  border: 2px solid ${Colors.lightGreen};
+`;
+
+export const StatusContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 30px;
+`;
+
+export const ValueContainer = styled.View`
+  flex: 1.5;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-horizontal: 10px;
 `;
 
 export const styles = StyleSheet.create({
