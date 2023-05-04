@@ -4,14 +4,6 @@ import Colors from '../../../assets/Colors';
 import { CustomProps } from '../../types/types';
 import { LeftAlignContainer } from '../../../assets/Components';
 
-export const LeftAlignColumn = styled.View`
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-content: flex-start;
-  margin-left: 29px;
-`;
-
 export const SubheadingContainer = styled.View`
   margin-top: 38px;
   margin-bottom: 9px;

@@ -5,12 +5,7 @@ import moment from 'moment';
 import { TouchableOpacity } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { Body1Text, H3Subheading } from '../../../assets/Fonts';
-import {
-  StatusContainer,
-  LeftAlignColumn,
-  ValueContainer,
-  styles,
-} from './styles';
+import { StatusContainer, ValueContainer, styles } from './styles';
 import { Card, Column } from '../../../assets/Components';
 import StatusComponent from './StatusComponent';
 import { TransactionStackParamList } from '../../navigation/types';
