@@ -14,7 +14,6 @@ export const StatusContainer = styled.View`
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
-  padding: 10px;
   margin-right: 30px;
 `;
 
@@ -23,6 +22,7 @@ export const ValueContainer = styled.View`
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  margin-horizontal: 10px;
 `;
 
 const StatusComponentBase = styled.View`

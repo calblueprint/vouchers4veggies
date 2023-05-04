@@ -34,14 +34,14 @@ export default function TransactionCard({
 }: TransactionCardProps) {
   const time = moment(date);
 
+  const onNavigate = () => {
+    navigation.navigate('TransactionDetailsScreen', {
+      transactionUuid: id,
+    });
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.navigate('TransactionDetailsScreen', {
-          transactionUuid: id,
-        });
-      }}
-    >
+    <TouchableOpacity onPress={onNavigate}>
       <Card>
         <Column>
           <Body1Text>{time.format('M/D')}</Body1Text>
