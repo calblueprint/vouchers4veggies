@@ -6,10 +6,11 @@ import {
   ButtonTextWhite,
   Body1Text,
 } from '../../../assets/Fonts';
-import { MagentaButtonContainer, LeftAlignContainer } from './styles';
+import { MagentaButtonContainer } from './styles';
 import {
   ButtonMagenta,
   Card,
+  Column,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -31,17 +32,17 @@ export default function ContactUsScreen({
       </TitleContainer>
       <StartOfListView />
       <Card>
-        <LeftAlignContainer>
+        <Column>
           <Body1Text>Phone Number</Body1Text>
           <H4CardNavTab>1-833-VEG4YOU</H4CardNavTab>
-        </LeftAlignContainer>
+        </Column>
       </Card>
       <TouchableOpacity>
         <Card>
-          <LeftAlignContainer>
+          <Column>
             <Body1Text>Location</Body1Text>
             <H4CardNavTab>1001 Potrero Ave, San Francisco</H4CardNavTab>
-          </LeftAlignContainer>
+          </Column>
         </Card>
       </TouchableOpacity>
       <MagentaButtonContainer>

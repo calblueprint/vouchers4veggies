@@ -50,7 +50,7 @@ export const SmallTextContainer = styled.View`
   margin-top: 6%;
 `;
 
-export const Styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   underline: {
     textDecorationLine: 'underline',
   },

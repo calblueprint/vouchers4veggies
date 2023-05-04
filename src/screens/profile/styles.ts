@@ -18,22 +18,7 @@ export const MainProfileContainer = styled.View`
   margin-right: 32px;
 `;
 
-export const LeftAlignContainer = styled.View`
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-content: flex-start;
-  padding-left: 29px;
-`;
-export const IconContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-content: center;
-  padding-left: 29px;
-`;
-
-export const Styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
     paddingRight: 12,

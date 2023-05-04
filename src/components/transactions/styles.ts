@@ -183,12 +183,7 @@ export const ClearButtonContainer = styled(LeftAlignContainer)`
   margin-left: 29px;
 `;
 
-export const Styles = StyleSheet.create({
-  iconWithPadding: {
-    justifyContent: 'center',
-    backgroundColor: Colors.offWhite,
-    paddingRight: 29,
-  },
+export const styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
     paddingHorizontal: 6,
