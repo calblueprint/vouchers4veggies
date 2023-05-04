@@ -7,13 +7,13 @@ import RNDateTimePicker, {
 } from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {
-  CloseButtonContainer,
   FilterModalContainer,
   styles,
   SubheadingContainer,
   DatePickerContainer,
   ButtonMagentaContainer,
   PaddedScrollView,
+  ModalHeader,
 } from './styles';
 import {
   Body1TextSemibold,
@@ -151,6 +151,26 @@ export default function FilterModal({
       maxAmount: null,
     });
 
+  const onSubmitFilters = () => {
+    if (
+      filterState.inProgressMinDateIsSet &&
+      filterState.inProgressMaxDateIsSet &&
+      filterState.inProgressMaxDate < filterState.inProgressMinDate
+    ) {
+      Alert.alert('Oh no! Invalid date filter.', 'Please try again', [
+        {
+          text: 'OK',
+        },
+      ]);
+    } else {
+      setIsVisible(false);
+      Promise.resolve().then(() => {
+        filterDispatch({ type: 'ON_SUBMIT' });
+        sortDispatch({ type: 'ON_RELOAD' });
+      });
+    }
+  };
+
   return (
     <Modal
       isVisible={isVisible}
@@ -159,11 +179,13 @@ export default function FilterModal({
       backdropTransitionOutTiming={0}
     >
       <FilterModalContainer>
-        <CloseButtonContainer>
-          <TouchableOpacity onPress={onClose}>
-            <Icon name="close" size={24} color={Colors.midBlack} />
-          </TouchableOpacity>
-        </CloseButtonContainer>
+        <ModalHeader>
+          <RightAlignContainer>
+            <TouchableOpacity onPress={onClose}>
+              <Icon name="close" size={24} color={Colors.midBlack} />
+            </TouchableOpacity>
+          </RightAlignContainer>
+        </ModalHeader>
 
         <PaddedScrollView alwaysBounceVertical={false}>
           <CenterText>
@@ -186,7 +208,7 @@ export default function FilterModal({
           </SubheadingContainer>
 
           <Row style={styles.bringToTop}>
-            <LeftAlignContainer style={styles.marginRight}>
+            <LeftAlignContainer style={styles.rightSpacing}>
               <FilterField
                 isSelected={filterState.inProgressMinDateIsSet}
                 onPress={onSelectMinDatePicker}
@@ -345,31 +367,7 @@ export default function FilterModal({
           </Row>
 
           <ButtonMagentaContainer>
-            <ButtonMagenta
-              onPress={() => {
-                if (
-                  filterState.inProgressMinDateIsSet &&
-                  filterState.inProgressMaxDateIsSet &&
-                  filterState.inProgressMaxDate < filterState.inProgressMinDate
-                ) {
-                  Alert.alert(
-                    'Oh no! Invalid date filter.',
-                    'Please try again',
-                    [
-                      {
-                        text: 'OK',
-                      },
-                    ],
-                  );
-                } else {
-                  setIsVisible(false);
-                  Promise.resolve().then(() => {
-                    filterDispatch({ type: 'ON_SUBMIT' });
-                    sortDispatch({ type: 'ON_RELOAD' });
-                  });
-                }
-              }}
-            >
+            <ButtonMagenta onPress={onSubmitFilters}>
               <ButtonTextWhite>{`Apply${
                 filterState.inProgressFilterCount > 0
                   ? ` (${filterState.inProgressFilterCount})`

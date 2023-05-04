@@ -3,17 +3,20 @@ import Modal from 'react-native-modal';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
-  CloseButtonContainer,
   SortModalContainer,
   styles,
   ButtonMagentaContainer,
   PaddedScrollView,
-  ClearButtonContainer,
+  ModalHeader,
 } from './styles';
 import { ButtonTextWhite, H4CardNavTab } from '../../../assets/Fonts';
 import RadioButton from './RadioButtonComponent';
 import { SortDispatch, SortState } from '../../utils/transactionUtils';
-import { Row, ButtonMagenta } from '../../../assets/Components';
+import {
+  ButtonMagenta,
+  LeftAlignContainer,
+  RightAlignContainer,
+} from '../../../assets/Components';
 import ClearButton from './ClearButton';
 import Colors from '../../../assets/Colors';
 
@@ -25,6 +28,7 @@ type SortModalProps = {
   sortDispatch: SortDispatch;
   sortDescriptions: string[];
 };
+
 export default function SortModal({
   name,
   isVisible,
@@ -33,6 +37,22 @@ export default function SortModal({
   sortDispatch,
   sortDescriptions,
 }: SortModalProps) {
+  const onClearSort = () => sortDispatch({ type: 'CLEAR_SORT' });
+
+  const onCloseModal = () => {
+    setIsVisible(false);
+    sortDispatch({ type: 'RESET_IN_PROGRESS' });
+  };
+
+  const onSetSelected = (index: number) => {
+    sortDispatch({ type: 'SORT_BY', option: index });
+  };
+
+  const onSubmitSort = () => {
+    setIsVisible(false);
+    sortDispatch({ type: 'ON_SUBMIT' });
+  };
+
   return (
     <Modal
       isVisible={isVisible}
@@ -41,48 +61,36 @@ export default function SortModal({
       backdropTransitionOutTiming={0}
     >
       <SortModalContainer>
-        <Row>
-          <ClearButtonContainer>
+        <ModalHeader>
+          <LeftAlignContainer>
             <ClearButton
               isDisabled={
                 !sortState.isActive && sortState.inProgressSortType === -1
               }
-              onPress={() => sortDispatch({ type: 'CLEAR_SORT' })}
+              onPress={onClearSort}
             />
-          </ClearButtonContainer>
-          <CloseButtonContainer>
-            <TouchableOpacity
-              onPress={() => {
-                setIsVisible(false);
-                sortDispatch({ type: 'RESET_IN_PROGRESS' });
-              }}
-            >
+          </LeftAlignContainer>
+          <RightAlignContainer>
+            <TouchableOpacity onPress={onCloseModal}>
               <Icon name="close" size={24} color={Colors.midBlack} />
             </TouchableOpacity>
-          </CloseButtonContainer>
-        </Row>
+          </RightAlignContainer>
+        </ModalHeader>
 
         <PaddedScrollView alwaysBounceVertical={false}>
           <H4CardNavTab
-            style={{ marginBottom: 22 }}
+            style={styles.bottomSpacing}
           >{`Sort ${name} by`}</H4CardNavTab>
-          <View style={{ marginBottom: 22 }}>
+          <View style={styles.bottomSpacing}>
             <RadioButton
               data={sortDescriptions}
               selected={sortState.inProgressSortType}
-              setSelected={(index: number) => {
-                sortDispatch({ type: 'SORT_BY', option: index });
-              }}
+              setSelected={onSetSelected}
             />
           </View>
 
           <ButtonMagentaContainer>
-            <ButtonMagenta
-              onPress={() => {
-                setIsVisible(false);
-                sortDispatch({ type: 'ON_SUBMIT' });
-              }}
-            >
+            <ButtonMagenta onPress={onSubmitSort}>
               <ButtonTextWhite>Apply</ButtonTextWhite>
             </ButtonMagenta>
           </ButtonMagentaContainer>

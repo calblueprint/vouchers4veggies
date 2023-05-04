@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { CustomProps } from '../../types/types';
-import { LeftAlignContainer, Row } from '../../../assets/Components';
+import { Row } from '../../../assets/Components';
 
 export const SubheadingContainer = styled(Row)`
   margin-top: 38px;
@@ -114,13 +114,10 @@ export const PaddedScrollView = styled.ScrollView`
   padding-horizontal: 29px;
 `;
 
-export const CloseButtonContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+export const ModalHeader = styled(Row)`
   margin-top: 19px;
   margin-bottom: 21px;
-  margin-right: 29px;
+  padding-horizontal: 29px;
 `;
 
 export const CenteredTextContainer = styled.Text`
@@ -159,16 +156,6 @@ export const DatePickerContainer = styled.View`
   justify-content: center;
 `;
 
-export const ClearButtonContainer = styled(LeftAlignContainer)`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-content: center;
-  margin-top: 19px;
-  margin-bottom: 21px;
-  margin-left: 29px;
-`;
-
 export const styles = StyleSheet.create({
   icon: {
     justifyContent: 'center',
@@ -177,8 +164,11 @@ export const styles = StyleSheet.create({
   bringToTop: {
     zIndex: 5,
   },
-  marginRight: {
+  rightSpacing: {
     marginRight: 20,
+  },
+  bottomSpacing: {
+    marginBottom: 22,
   },
   modal: {
     justifyContent: 'flex-end',
