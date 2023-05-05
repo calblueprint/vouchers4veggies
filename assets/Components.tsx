@@ -70,7 +70,7 @@ export const RightAlignContainer = styled.View`
 export const StartOfListView = styled.View`
   width: 100%;
   height: 1px;
-  border-top: 1px solid ${Colors.lightGray};
+  border: 1px solid ${Colors.lightGray};
 `;
 
 export const Card = styled.View`
@@ -79,8 +79,16 @@ export const Card = styled.View`
   align-items: center;
   justify-content: flex-start;
   height: 67px;
-  border-bottom: 1px solid ${Colors.lightGray};
+  border: 0px solid ${Colors.lightGray};
+  border-bottom-width: 1px;
   width: 100%;
+`;
+
+export const CardContainer = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 export const TitleContainer = styled.View`

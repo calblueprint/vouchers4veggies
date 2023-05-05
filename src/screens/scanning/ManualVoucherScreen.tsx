@@ -9,12 +9,12 @@ import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
 import {
-  Body1SemiboldText,
-  Body1Text,
-  Body2Subtext,
-  ButtonTextBlack,
   ButtonTextWhite,
+  ButtonTextBlack,
   H4CardNavTab,
+  Body1TextSemibold,
+  Body2Subtext,
+  Body1Text,
   RedText,
 } from '../../../assets/Fonts';
 
@@ -80,7 +80,7 @@ export default function ManualVoucherScreen({
 
   return (
     <BodyContainer>
-      <Body1SemiboldText>Serial Number</Body1SemiboldText>
+      <Body1TextSemibold>Serial Number</Body1TextSemibold>
       <OTPTextInput
         ref={otpInput}
         inputCount={7}

@@ -3,13 +3,13 @@ import CurrencyInput from 'react-native-currency-input';
 import { Keyboard, TextInput } from 'react-native';
 import { ButtonMagenta, SafeArea } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
-import Styles from '../../components/auth/styles';
+import { styles, fieldFocused } from '../../components/common/styles';
 import { VoucherValueError, VoucherValueResult } from '../../types/types';
 import {
   ButtonTextWhite,
   CenterText,
   H2Heading,
-  Body1SemiboldText,
+  Body1TextSemibold,
   Body2Subtext,
   RedText,
   // CounterText,
@@ -96,7 +96,7 @@ export default function ConfirmValueScreen({
             <H2Heading>Confirm Value</H2Heading>
           </CenterText>
         </TitleContainer>
-        <Body1SemiboldText>Voucher Value</Body1SemiboldText>
+        <Body1TextSemibold>Voucher Value</Body1TextSemibold>
         <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
           value={voucherAmount}
           onChangeValue={onChangeVoucherAmount}
@@ -105,7 +105,7 @@ export default function ConfirmValueScreen({
               {...props}
               onBlur={() => setIsActive(false)}
               onFocus={() => setIsActive(true)}
-              style={isActive ? Styles.formFieldFocus : Styles.formField}
+              style={isActive ? fieldFocused : styles.fieldDefault}
               placeholderTextColor={Colors.midGray}
               secureTextEntry={false}
               autoCorrect={false}

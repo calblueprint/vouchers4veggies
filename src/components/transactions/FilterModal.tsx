@@ -15,7 +15,7 @@ import {
   PaddedScrollView,
 } from './styles';
 import {
-  Body1SemiboldText,
+  Body1TextSemibold,
   Body1Text,
   ButtonTextWhite,
   H4CardNavTab,
@@ -88,7 +88,7 @@ export default function FilterModal({
 
           <SubheadingContainer>
             <Row>
-              <Body1SemiboldText>Filter by date</Body1SemiboldText>
+              <Body1TextSemibold>Filter by date</Body1TextSemibold>
               <RightAlignContainer>
                 <ClearButton
                   isDisabled={
@@ -189,7 +189,7 @@ export default function FilterModal({
 
           <SubheadingContainer>
             <Row>
-              <Body1SemiboldText>Filter by status</Body1SemiboldText>
+              <Body1TextSemibold>Filter by status</Body1TextSemibold>
               <RightAlignContainer>
                 <ClearButton
                   isDisabled={filterState.inProgressStatusFilter === 'none'}
@@ -244,7 +244,7 @@ export default function FilterModal({
 
           <SubheadingContainer>
             <Row>
-              <Body1SemiboldText>Filter by amount</Body1SemiboldText>
+              <Body1TextSemibold>Filter by amount</Body1TextSemibold>
               <RightAlignContainer>
                 <ClearButton
                   isDisabled={

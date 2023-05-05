@@ -6,7 +6,7 @@ import {
   RightAlignContainer,
 } from '../../../assets/Components';
 import {
-  Body1SemiboldText,
+  Body1TextSemibold,
   Body1Text,
   H2Heading,
   H4CardNavTab,
@@ -75,7 +75,7 @@ export default function LoginScreen({
           <H2Heading>Welcome back!</H2Heading>
         </HeadingContainer>
 
-        <Body1SemiboldText>Email</Body1SemiboldText>
+        <Body1TextSemibold>Email</Body1TextSemibold>
         <InputField
           onChange={onChangeEmail}
           value={email}
@@ -86,7 +86,7 @@ export default function LoginScreen({
 
         <RowContainer>
           <LeftAlignContainer>
-            <Body1SemiboldText>Password</Body1SemiboldText>
+            <Body1TextSemibold>Password</Body1TextSemibold>
           </LeftAlignContainer>
           <RightAlignContainer>
             <Body1Text style={Styles.underline} onPress={resetPassword}>

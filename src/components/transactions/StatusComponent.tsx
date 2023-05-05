@@ -2,7 +2,7 @@ import React from 'react';
 import { TransactionStatus } from '../../types/types';
 import { StatusComponentGreen, StatusComponentRed } from './styles';
 import {
-  Body2SemiboldSubtext,
+  Body2SubtextSemibold,
   GreenText,
   RedText,
 } from '../../../assets/Fonts';
@@ -14,13 +14,13 @@ export default function StatusComponent({ status }: StatusComponentProps) {
   return status === TransactionStatus.PAID ? (
     <StatusComponentGreen>
       <GreenText>
-        <Body2SemiboldSubtext>{status.toUpperCase()}</Body2SemiboldSubtext>
+        <Body2SubtextSemibold>{status.toUpperCase()}</Body2SubtextSemibold>
       </GreenText>
     </StatusComponentGreen>
   ) : (
     <StatusComponentRed>
       <RedText>
-        <Body2SemiboldSubtext>{status.toUpperCase()}</Body2SemiboldSubtext>
+        <Body2SubtextSemibold>{status.toUpperCase()}</Body2SubtextSemibold>
       </RedText>
     </StatusComponentRed>
   );
