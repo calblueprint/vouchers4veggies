@@ -25,9 +25,9 @@ enum permissions {
   DENIED,
   GRANTED,
 }
-interface ScanningScreenProps {
+type ScanningScreenProps = {
   navigation: VoucherEntryNavigationProps;
-}
+};
 
 export default function ScanningScreen({ navigation }: ScanningScreenProps) {
   const [hasPermission, setHasPermission] = useState(permissions.LOADING);

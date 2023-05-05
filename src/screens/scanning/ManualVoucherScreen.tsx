@@ -18,9 +18,9 @@ import {
   RedText,
 } from '../../../assets/Fonts';
 
-interface ManualVoucherScreenProps {
+type ManualVoucherScreenProps = {
   navigation: VoucherEntryNavigationProps;
-}
+};
 
 export default function ManualVoucherScreen({
   navigation,

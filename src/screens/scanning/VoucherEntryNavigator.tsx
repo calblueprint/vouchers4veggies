@@ -21,9 +21,9 @@ import ManualVoucherScreen from './ManualVoucherScreen';
 import ScanningScreen from './ScanningScreen';
 import VoucherBatchScreen from './VoucherBatchScreen';
 
-interface VoucherEntryNavigatorProps {
+type VoucherEntryNavigatorProps = {
   navigation: VoucherEntryNavigationProps;
-}
+};
 
 enum tabs {
   SERIAL,

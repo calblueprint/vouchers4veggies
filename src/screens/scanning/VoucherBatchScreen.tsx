@@ -33,9 +33,10 @@ import {
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import Colors from '../../../assets/Colors';
 
-interface VoucherBatchScreenProps {
+type VoucherBatchScreenProps = {
   navigation: VoucherEntryNavigationProps;
-}
+};
+
 export default function VoucherBatchScreen({
   navigation,
 }: VoucherBatchScreenProps) {
