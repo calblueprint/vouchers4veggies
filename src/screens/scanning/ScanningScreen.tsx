@@ -14,11 +14,7 @@ import {
   BodyContainer,
   styles,
 } from './styles';
-import {
-  ButtonMagenta,
-  ButtonWhite,
-  SafeArea,
-} from '../../../assets/Components';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
