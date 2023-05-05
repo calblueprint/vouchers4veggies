@@ -15,9 +15,8 @@ export const VoucherCounter = styled.View`
 `;
 
 export const BodyContainer = styled.View`
-  margin: 20px 0px;
+  margin-vertical: 20px;
   width: 277px;
-  align-items: center;
 `;
 
 export const TitleContainer = styled.View`
@@ -42,10 +41,6 @@ export const ButtonContainer = styled.View`
   display: flex;
   flex-direction: column;
   align-content: space-between;
-`;
-
-export const FormContainer = styled.View`
-  width: 277px;
 `;
 
 export const ReviewTitleContainer = styled.View`

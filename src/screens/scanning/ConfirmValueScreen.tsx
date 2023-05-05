@@ -18,7 +18,6 @@ import StandardHeader from '../../components/common/StandardHeader';
 import {
   TitleContainer,
   BodyContainer,
-  FormContainer,
   ErrorContainer,
   RedText,
   // VoucherCounter,
@@ -97,53 +96,51 @@ export default function ConfirmValueScreen({
             <H2Heading>Confirm Value</H2Heading>
           </CenterText>
         </TitleContainer>
-        <FormContainer>
-          <InputTitleText>Voucher Value</InputTitleText>
-          <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
-            value={voucherAmount}
-            onChangeValue={onChangeVoucherAmount}
-            renderTextInput={props => (
-              <TextInput
-                {...props}
-                onBlur={() => setIsActive(false)}
-                onFocus={() => setIsActive(true)}
-                style={isActive ? Styles.FormFieldFocus : Styles.FormField}
-                placeholderTextColor={Colors.midGray}
-                secureTextEntry={false}
-                autoCorrect={false}
-                autoCapitalize="none"
-                keyboardType="number-pad"
-                returnKeyType="done"
-                selection={{
-                  start: String(props.value).length,
-                  end: String(props.value).length,
-                }}
-                caretHidden
-              />
-            )}
-            prefix="$"
-            minValue={0}
-            separator="."
-            delimiter=","
-            precision={2}
-          />
-          <ErrorContainer>
-            {showZeroError ? (
-              <RedText>
-                <Body2Subtext>
-                  Voucher must be redeemed for more than $0.
-                </Body2Subtext>
-              </RedText>
-            ) : null}
-            {showExceedError ? (
-              <RedText>
-                <Body2Subtext>
-                  Voucher value exceeds maximum redemption limit.
-                </Body2Subtext>
-              </RedText>
-            ) : null}
-          </ErrorContainer>
-        </FormContainer>
+        <InputTitleText>Voucher Value</InputTitleText>
+        <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
+          value={voucherAmount}
+          onChangeValue={onChangeVoucherAmount}
+          renderTextInput={props => (
+            <TextInput
+              {...props}
+              onBlur={() => setIsActive(false)}
+              onFocus={() => setIsActive(true)}
+              style={isActive ? Styles.FormFieldFocus : Styles.FormField}
+              placeholderTextColor={Colors.midGray}
+              secureTextEntry={false}
+              autoCorrect={false}
+              autoCapitalize="none"
+              keyboardType="number-pad"
+              returnKeyType="done"
+              selection={{
+                start: String(props.value).length,
+                end: String(props.value).length,
+              }}
+              caretHidden
+            />
+          )}
+          prefix="$"
+          minValue={0}
+          separator="."
+          delimiter=","
+          precision={2}
+        />
+        <ErrorContainer>
+          {showZeroError ? (
+            <RedText>
+              <Body2Subtext>
+                Voucher must be redeemed for more than $0.
+              </Body2Subtext>
+            </RedText>
+          ) : null}
+          {showExceedError ? (
+            <RedText>
+              <Body2Subtext>
+                Voucher value exceeds maximum redemption limit.
+              </Body2Subtext>
+            </RedText>
+          ) : null}
+        </ErrorContainer>
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>
         </ButtonMagenta>

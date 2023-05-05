@@ -96,7 +96,7 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
   }
 
   return (
-    <SafeArea>
+    <>
       <BodyContainer>
         <Body1Text>
           <CenterText>
@@ -130,6 +130,6 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
           <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
         </VoucherCountContainer>
       </ButtonContainer>
-    </SafeArea>
+    </>
   );
 }
