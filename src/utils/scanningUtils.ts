@@ -1,8 +1,7 @@
 import { Alert } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Toast from 'react-native-toast-message';
 import { ScanningDispatch } from '../screens/scanning/ScanningContext';
-import { ScannerStackParamList } from '../navigation/types';
+import { VoucherEntryNavigationProps } from '../navigation/types';
 
 /** Reset all variables and start a new invoice */
 export const newInvoice = (dispatch: ScanningDispatch) =>
@@ -49,12 +48,7 @@ export const testContext = (dispatch: ScanningDispatch) => {
 /** Declares prop types for usePreventLeave */
 type PreventLeaveProps = {
   hasUnsavedChanges: boolean;
-  navigation: NativeStackNavigationProp<
-    ScannerStackParamList,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    any,
-    undefined
-  >;
+  navigation: VoucherEntryNavigationProps;
   dispatch: ScanningDispatch;
 };
 

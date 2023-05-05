@@ -18,14 +18,18 @@ import {
   RedText,
   VoucherCountContainer,
 } from './styles';
-import { ScannerStackScreenProps } from '../../navigation/types';
+import { VoucherEntryNavigationProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
 
+interface ManualVoucherScreenProps {
+  navigation: VoucherEntryNavigationProps;
+}
+
 export default function ManualVoucherScreen({
   navigation,
-}: ScannerStackScreenProps<'ManualVoucherScreen'>) {
+}: ManualVoucherScreenProps) {
   const [serialNumberInput, setSerialNumberInput] = useState<string>('');
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');

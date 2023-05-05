@@ -12,7 +12,7 @@ import Toast from 'react-native-toast-message';
 import { SafeArea } from '../../../assets/Components';
 import { NavButtonText, TitleText } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
-import { ScannerStackScreenProps } from '../../navigation/types';
+import { VoucherEntryNavigationProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { handlePreventLeave } from '../../utils/scanningUtils';
@@ -21,9 +21,13 @@ import ManualVoucherScreen from './ManualVoucherScreen';
 import ScanningScreen from './ScanningScreen';
 import VoucherBatchScreen from './VoucherBatchScreen';
 
+interface VoucherEntryNavigatorProps {
+  navigation: VoucherEntryNavigationProps;
+}
+
 export default function VoucherEntryNavigator({
   navigation,
-}: ScannerStackScreenProps<'VoucherEntryNavigator'>) {
+}: VoucherEntryNavigatorProps) {
   const [selection, setSelection] = useState(1);
   const { voucherMap, dispatch } = useScanningContext();
   const hasUnsavedChanges = Boolean(voucherMap.size);

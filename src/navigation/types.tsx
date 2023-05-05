@@ -40,6 +40,10 @@ export type ProfileStackParamList = {
   ContactUsScreen: undefined;
 };
 
+export type VoucherEntryNavigationProps = {
+  navigate: (to: string, props?: unknown) => void;
+};
+
 export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =
   NativeStackScreenProps<ProfileStackParamList, T>;
 
