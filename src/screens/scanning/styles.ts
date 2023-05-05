@@ -44,6 +44,10 @@ export const ButtonContainer = styled.View`
   align-content: space-between;
 `;
 
+export const FormContainer = styled.View`
+  width: 277px;
+`;
+
 export const ReviewTitleContainer = styled.View`
   display: flex;
   padding-top: 12px;
