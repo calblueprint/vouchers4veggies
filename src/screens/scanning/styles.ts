@@ -40,6 +40,9 @@ export const ScannerContainer = styled.View`
 
 export const ButtonContainer = styled.View`
   display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   align-content: space-between;
 `;
@@ -90,34 +93,14 @@ export const VoucherRangeContainer = styled.View`
   margin-bottom: 6px;
 `;
 
-// TODO: refactor to use selene's dropdown component
-export const DropDownContainer = styled.View`
-  width: 277px;
-  height: 35px;
-  background: ${Colors.offWhite};
-  border: 2px solid ${Colors.lightMagenta};
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 6px;
-  margin-bottom: 8px;
-`;
-
 export const StartContainer = styled.View`
   top: 193px;
   margin: 0px 49px;
+  align-items: center;
 `;
 
 export const HeroContainer = styled.View`
   margin-bottom: 40px;
-`;
-
-export const VoucherCountContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 277px;
 `;
 
 export const LoadingContainer = styled.View`
@@ -147,5 +130,14 @@ export const styles = StyleSheet.create({
   container: {
     overflow: 'hidden',
     borderRadius: 10,
+  },
+  otpTextInputStyle: {
+    borderWidth: 1,
+    borderRadius: 2,
+    width: 30,
+    height: '95%',
+  },
+  otpContainerStyle: {
+    marginVertical: 3,
   },
 });

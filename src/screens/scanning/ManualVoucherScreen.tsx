@@ -3,7 +3,7 @@ import { TextInput } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 import { VoucherCreateError } from '../../types/types';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
-import { BodyContainer, ErrorContainer, VoucherCountContainer } from './styles';
+import { BodyContainer, ErrorContainer } from './styles';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
@@ -119,9 +119,7 @@ export default function ManualVoucherScreen({
           <H4CardNavTab>Review and Submit</H4CardNavTab>
         </ButtonTextBlack>
       </ButtonWhite>
-      <VoucherCountContainer>
-        <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
-      </VoucherCountContainer>
+      <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
     </BodyContainer>
   );
 }
