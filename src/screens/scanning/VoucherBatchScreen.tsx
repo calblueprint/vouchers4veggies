@@ -20,7 +20,7 @@ import {
   VoucherCountContainer,
   LoadingContainer,
 } from './styles';
-import { ScannerStackScreenProps } from '../../navigation/types';
+import { VoucherEntryNavigationProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import {
   validateSerialNumber,
@@ -34,9 +34,12 @@ import {
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import Colors from '../../../assets/Colors';
 
+interface VoucherBatchScreenProps {
+  navigation: VoucherEntryNavigationProps;
+}
 export default function VoucherBatchScreen({
   navigation,
-}: ScannerStackScreenProps<'VoucherBatchScreen'>) {
+}: VoucherBatchScreenProps) {
   const [isProcessing, setProcessingVouchers] = useState(false);
 
   const [startSerialNumberInput, setStartSerialNumber] = useState<string>('');

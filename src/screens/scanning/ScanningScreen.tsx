@@ -19,7 +19,7 @@ import {
   ButtonWhite,
   SafeArea,
 } from '../../../assets/Components';
-import { ScannerStackScreenProps } from '../../navigation/types';
+import { VoucherEntryNavigationProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
@@ -36,10 +36,11 @@ enum permissions {
   DENIED,
   GRANTED,
 }
+interface ScanningScreenProps {
+  navigation: VoucherEntryNavigationProps;
+}
 
-export default function ScanningScreen({
-  navigation,
-}: ScannerStackScreenProps<'ScanningScreen'>) {
+export default function ScanningScreen({ navigation }: ScanningScreenProps) {
   const [hasPermission, setHasPermission] = useState(permissions.LOADING);
   const [type] = useState<never>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = useState<boolean>(true);
