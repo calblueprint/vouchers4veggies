@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { CustomProps } from '../../components/common/styles';
 import { Row } from '../../../assets/Components';
