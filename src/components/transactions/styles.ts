@@ -33,23 +33,21 @@ export const ValueContainer = styled.View`
   justify-content: flex-start;
 `;
 
-export const StatusComponentRed = styled.View`
+const StatusComponentBase = styled.View`
   text-align: center;
   align-items: center;
   border-radius: 9px;
   min-width: 63px;
+  padding: 9px;
+`;
+
+export const StatusComponentRed = styled(StatusComponentBase)`
   background: ${Colors.alertLightRed};
-  padding: 6px;
   border: 2px solid ${Colors.alertLightRed};
 `;
 
-export const StatusComponentGreen = styled.View`
-  text-align: center;
-  align-items: center;
-  border-radius: 9px;
-  min-width: 63px;
+export const StatusComponentGreen = styled(StatusComponentBase)`
   background: ${Colors.lightGreen};
-  padding: 9px;
   border: 2px solid ${Colors.lightGreen};
 `;
 

@@ -6,7 +6,7 @@ import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  InputTitleText,
+  Body1SemiboldText,
   Body2Subtext,
   Body1Text,
   LoadingText,
@@ -176,7 +176,7 @@ export default function VoucherBatchScreen({
       ) : (
         <>
           <VoucherRangeContainer>
-            <InputTitleText>From</InputTitleText>
+            <Body1SemiboldText>From</Body1SemiboldText>
             <OTPTextInput
               ref={otpInput1}
               inputCount={7}
@@ -196,7 +196,7 @@ export default function VoucherBatchScreen({
               returnKeyType="done"
               autoFocus={false}
             />
-            <InputTitleText> {'\n'} To</InputTitleText>
+            <Body1SemiboldText> {'\n'} To</Body1SemiboldText>
             <OTPTextInput
               ref={otpInput2}
               inputCount={7}

@@ -9,7 +9,7 @@ import {
   ButtonTextWhite,
   CenterText,
   H2Heading,
-  InputTitleText,
+  Body1SemiboldText,
   Body2Subtext,
   RedText,
   // CounterText,
@@ -96,7 +96,7 @@ export default function ConfirmValueScreen({
             <H2Heading>Confirm Value</H2Heading>
           </CenterText>
         </TitleContainer>
-        <InputTitleText>Voucher Value</InputTitleText>
+        <Body1SemiboldText>Voucher Value</Body1SemiboldText>
         <CurrencyInput // TODO: refactor currency input & validation with custom text input base components
           value={voucherAmount}
           onChangeValue={onChangeVoucherAmount}

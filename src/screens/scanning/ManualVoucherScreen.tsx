@@ -3,24 +3,20 @@ import { TextInput } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 import { VoucherCreateError } from '../../types/types';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
-import {
-  ButtonTextWhite,
-  ButtonTextBlack,
-  H4CardNavTab,
-  InputTitleText,
-  Body2Subtext,
-  Body1Text,
-} from '../../../assets/Fonts';
-import {
-  BodyContainer,
-  ErrorContainer,
-  RedText,
-  VoucherCountContainer,
-} from './styles';
+import { BodyContainer, ErrorContainer, VoucherCountContainer } from './styles';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
+import {
+  Body1SemiboldText,
+  Body1Text,
+  Body2Subtext,
+  ButtonTextBlack,
+  ButtonTextWhite,
+  H4CardNavTab,
+  RedText,
+} from '../../../assets/Fonts';
 
 interface ManualVoucherScreenProps {
   navigation: VoucherEntryNavigationProps;
@@ -84,7 +80,7 @@ export default function ManualVoucherScreen({
 
   return (
     <BodyContainer>
-      <InputTitleText>Serial Number</InputTitleText>
+      <Body1SemiboldText>Serial Number</Body1SemiboldText>
       <OTPTextInput
         ref={otpInput}
         inputCount={7}
