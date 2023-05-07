@@ -2,52 +2,31 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
 export const StartContainer = styled.View`
-  top: 26%;
+  top: 25%;
 `;
 
-export const HeadingContainer = styled.View`
-  align-items: flex-start;
-  margin-bottom: 10%;
+export const BodyContainer = styled.View`
+  padding-horizontal: 49px;
 `;
 
-export const FormContainer = styled.View`
-  width: 75%;
-`;
-
-export const RowContainer = styled.View`
+export const TextContainer = styled.View`
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: flex-start;
+  margin-bottom: 20px;
 `;
 
-export const VerticalSpacingContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 4%;
-`;
-
-export const VerticalSpacingButtonContainer = styled.View`
+export const StartButtonContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 15%;
+  margin-top: 40px;
 `;
 
 export const ButtonContainer = styled.View`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 5%;
-`;
-
-export const SmallTextContainer = styled.View`
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 6%;
+  margin-top: 24px;
 `;
 
 export const styles = StyleSheet.create({
@@ -55,14 +34,3 @@ export const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
-
-export const ButtonSpacing = styled.View`
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 40px;
-`;
-export const StartLogoContainer = styled.ImageBackground`
-  width: 100px;
-  height: 100px;
-`;

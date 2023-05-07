@@ -33,10 +33,7 @@ export const ButtonWhite = styled(ButtonBase)`
 `;
 
 export const TitleContainer = styled.View`
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-left: 32px;
-  margin-right: 32px;
+  padding-vertical: 20px;
   justify-content: center;
 `;
 

@@ -4,6 +4,7 @@ import {
   SafeArea,
   LeftAlignContainer,
   RightAlignContainer,
+  Row,
 } from '../../../assets/Components';
 import {
   Body1TextSemibold,
@@ -23,15 +24,9 @@ import { useAuthContext } from './AuthContext';
 //   validatePasswordInput,
 // } from '../../utils/validationUtils';
 import StandardHeader from '../../components/common/StandardHeader';
-
-import {
-  FormContainer,
-  HeadingContainer,
-  RowContainer,
-  styles,
-  VerticalSpacingButtonContainer,
-} from './styles';
+import { ButtonContainer, BodyContainer, styles } from './styles';
 import BackButton from '../../components/common/BackButton';
+import { TitleContainer } from '../scanning/styles';
 
 export default function LoginScreen({
   navigation,
@@ -40,6 +35,8 @@ export default function LoginScreen({
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const { errorMessage, dispatch } = useAuthContext();
+
+  const onPressBackButton = () => navigation.goBack();
 
   const handleSignIn = async () => {
     if (email && password) {
@@ -67,13 +64,13 @@ export default function LoginScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={onPressBackButton} />
       </StandardHeader>
 
-      <FormContainer>
-        <HeadingContainer>
+      <BodyContainer>
+        <TitleContainer>
           <H2Heading>Welcome back!</H2Heading>
-        </HeadingContainer>
+        </TitleContainer>
 
         <Body1TextSemibold>Email</Body1TextSemibold>
         <InputField
@@ -84,7 +81,7 @@ export default function LoginScreen({
           keyboardType="email-address"
         />
 
-        <RowContainer>
+        <Row>
           <LeftAlignContainer>
             <Body1TextSemibold>Password</Body1TextSemibold>
           </LeftAlignContainer>
@@ -93,7 +90,7 @@ export default function LoginScreen({
               Forgot password?
             </Body1Text>
           </RightAlignContainer>
-        </RowContainer>
+        </Row>
         <InputField
           onChange={onChangePassword}
           value={password}
@@ -101,19 +98,19 @@ export default function LoginScreen({
           secureTextEntry
           // validate={validatePasswordInput}
         />
-        {showErrorMessage && errorMessage && (
-          <RedText>
-            <Body1Text>{errorMessage}</Body1Text>
-          </RedText>
-        )}
-        <VerticalSpacingButtonContainer>
+        <Body1Text>
+          {showErrorMessage && errorMessage && (
+            <RedText>{errorMessage}</RedText>
+          )}
+        </Body1Text>
+        <ButtonContainer>
           <ButtonMagenta onPress={handleSignIn}>
             <WhiteText>
               <H4CardNavTab>Login</H4CardNavTab>
             </WhiteText>
           </ButtonMagenta>
-        </VerticalSpacingButtonContainer>
-      </FormContainer>
+        </ButtonContainer>
+      </BodyContainer>
     </SafeArea>
   );
 }
