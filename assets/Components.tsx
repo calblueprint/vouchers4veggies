@@ -49,14 +49,6 @@ export const CenteredRow = styled(Row)`
   justify-content: center;
 `;
 
-export const SelectableRow = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-`;
-
 export const LeftAlignContainer = styled.View`
   display: flex;
   flex: 1;

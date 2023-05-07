@@ -6,7 +6,7 @@ import {
   ButtonTextWhite,
   Body1Text,
 } from '../../../assets/Fonts';
-import { MagentaButtonContainer } from './styles';
+import { ButtonMagentaContainer } from './styles';
 import {
   ButtonMagenta,
   Card,
@@ -22,14 +22,21 @@ import { ProfileStackScreenProps } from '../../navigation/types';
 export default function ContactUsScreen({
   navigation,
 }: ProfileStackScreenProps<'ContactUsScreen'>) {
+  const onPressBackButton = () => navigation.goBack();
+
+  const onPressEmailUs = () =>
+    Linking.openURL('mailto: v4vdevelopment@gmail.com');
+
   return (
     <SafeArea>
       <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={onPressBackButton} />
       </StandardHeader>
+
       <TitleContainer>
         <H2Heading>Contact Us</H2Heading>
       </TitleContainer>
+
       <StartOfListView />
       <Card>
         <Column>
@@ -45,13 +52,12 @@ export default function ContactUsScreen({
           </Column>
         </Card>
       </TouchableOpacity>
-      <MagentaButtonContainer>
-        <ButtonMagenta
-          onPress={() => Linking.openURL('mailto: v4vdevelopment@gmail.com')}
-        >
+
+      <ButtonMagentaContainer>
+        <ButtonMagenta onPress={onPressEmailUs}>
           <ButtonTextWhite>Email Us</ButtonTextWhite>
         </ButtonMagenta>
-      </MagentaButtonContainer>
+      </ButtonMagentaContainer>
     </SafeArea>
   );
 }

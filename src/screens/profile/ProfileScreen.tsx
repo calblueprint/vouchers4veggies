@@ -7,11 +7,10 @@ import {
   H2Heading,
   ButtonTextWhite,
   Body1Text,
-  CenterText,
 } from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
-import { MagentaButtonContainer, styles } from './styles';
+import { ButtonMagentaContainer, styles } from './styles';
 import {
   ButtonMagenta,
   Card,
@@ -35,6 +34,7 @@ export default function ProfileScreen({
   const { vendorUuid } = useAuthContext();
   const [vendorName, setVendorName] = useState<string>(' ');
   const [vendorEmail, setVendorEmail] = useState<string>(' ');
+
   useEffect(() => {
     const fetchData = async () => {
       if (vendorUuid) {
@@ -45,16 +45,19 @@ export default function ProfileScreen({
     };
     fetchData();
   }, [vendorUuid]);
+
+  const onNavigateToContactUs = () => navigation.navigate('ContactUsScreen');
+
   return (
     <SafeArea>
       <StandardHeader>
         <StandardLogo />
       </StandardHeader>
+
       <TitleContainer>
-        <CenterText>
-          <H2Heading>Hi, {vendorName}!</H2Heading>
-        </CenterText>
+        <H2Heading>Hi, {vendorName}!</H2Heading>
       </TitleContainer>
+
       <StartOfListView />
       <Card>
         <Column>
@@ -62,7 +65,7 @@ export default function ProfileScreen({
           <H4CardNavTab>{vendorEmail}</H4CardNavTab>
         </Column>
       </Card>
-      <TouchableOpacity onPress={() => navigation.navigate('ContactUsScreen')}>
+      <TouchableOpacity onPress={onNavigateToContactUs}>
         <Card>
           <LeftAlignContainer>
             <Icon2
@@ -76,11 +79,12 @@ export default function ProfileScreen({
           <Icon name="right" size={25} color={Colors.midGray} />
         </Card>
       </TouchableOpacity>
-      <MagentaButtonContainer>
+
+      <ButtonMagentaContainer>
         <ButtonMagenta onPress={handleSignOut}>
           <ButtonTextWhite>Log Out</ButtonTextWhite>
         </ButtonMagenta>
-      </MagentaButtonContainer>
+      </ButtonMagentaContainer>
     </SafeArea>
   );
 }
