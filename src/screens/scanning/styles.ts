@@ -3,17 +3,6 @@ import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { Row } from '../../../assets/Components';
 
-export const VoucherCounter = styled.View`
-  width: 30px;
-  height: 30px;
-  background: ${Colors.lightMagenta});
-  border: 1px solid ${Colors.brightMagenta};
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const BodyContainer = styled.View`
   margin-vertical: 20px;
   width: 277px;

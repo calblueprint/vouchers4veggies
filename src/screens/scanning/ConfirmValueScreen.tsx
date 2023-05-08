@@ -17,14 +17,9 @@ import {
   Body1TextSemibold,
   Body2Subtext,
   RedText,
-  // CounterText,
 } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
-import {
-  BodyContainer,
-  ErrorContainer,
-  // VoucherCounter,
-} from './styles';
+import { BodyContainer, ErrorContainer } from './styles';
 import { ScannerStackScreenProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { addVoucher, showSuccessToast } from '../../utils/scanningUtils';
@@ -89,11 +84,6 @@ export default function ConfirmValueScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        {/* <TouchableOpacity onPress={() => navigation.navigate('ReviewScreen')}>
-          <VoucherCounter>
-            <CounterText>{voucherMap.size}</CounterText>
-          </VoucherCounter>
-        </TouchableOpacity> */}
         <BackButton onPress={() => navigation.goBack()} />
       </StandardHeader>
 
