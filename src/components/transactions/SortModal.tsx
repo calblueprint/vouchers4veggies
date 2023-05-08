@@ -10,7 +10,7 @@ import {
   ModalHeader,
 } from './styles';
 import { ButtonTextWhite, H4CardNavTab } from '../../../assets/Fonts';
-import RadioButton from './RadioButtonComponent';
+import RadioButtonList from './RadioButtonList';
 import { SortDispatch, SortState } from '../../utils/invoiceUtils';
 import {
   ButtonMagenta,
@@ -78,11 +78,9 @@ export default function SortModal({
         </ModalHeader>
 
         <PaddedScrollView alwaysBounceVertical={false}>
-          <H4CardNavTab
-            style={styles.bottomSpacing}
-          >{`Sort ${name} by`}</H4CardNavTab>
-          <View style={styles.bottomSpacing}>
-            <RadioButton
+          <H4CardNavTab>{`Sort ${name} by`}</H4CardNavTab>
+          <View>
+            <RadioButtonList
               data={sortDescriptions}
               selected={sortState.inProgressSortType}
               setSelected={onSetSelected}

@@ -311,7 +311,7 @@ export default function FilterModal({
             </RightAlignContainer>
           </SubheadingContainer>
 
-          <Row style={{ marginBottom: 48 }}>
+          <Row>
             <ScrollView horizontal alwaysBounceHorizontal={false}>
               <FilterTag
                 isSelected={

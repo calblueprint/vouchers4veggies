@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import {
   RadioButtonBase,
   RadioButtonContainer,
@@ -21,12 +21,12 @@ export default function RadioButtonList({
   setSelected,
 }: RadioButtonListProps) {
   return (
-    <View>
+    <>
       {data.map((item, index) => (
         <TouchableOpacity
           key={item}
           onPress={() => setSelected(index)}
-          style={styles.bottomSpacing}
+          style={styles.topSpacing}
         >
           <Row>
             <LeftAlignContainer>
@@ -40,6 +40,6 @@ export default function RadioButtonList({
           </Row>
         </TouchableOpacity>
       ))}
-    </View>
+    </>
   );
 }

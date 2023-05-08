@@ -34,7 +34,7 @@ const ModalContainer = styled.View`
 `;
 
 export const SortModalContainer = styled(ModalContainer)`
-  max-height: 50%;
+  max-height: 55%;
 `;
 
 export const FilterModalContainer = styled(ModalContainer)`
@@ -70,6 +70,7 @@ export const ButtonMagentaContainer = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
+  margin-top: 40px;
 `;
 
 export const RadioButtonContainer = styled.View`
@@ -159,8 +160,8 @@ export const styles = StyleSheet.create({
   rightSpacing: {
     marginRight: 20,
   },
-  bottomSpacing: {
-    marginBottom: 22,
+  topSpacing: {
+    marginTop: 22,
   },
   modal: {
     justifyContent: 'flex-end',
