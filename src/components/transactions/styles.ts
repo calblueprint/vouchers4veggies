@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { CustomProps } from '../../types/types';
+import { SelectionProps } from '../../types/types';
 import { Row } from '../../../assets/Components';
 
 export const FilterFieldBase = styled.TouchableOpacity`
@@ -12,18 +12,18 @@ export const FilterFieldBase = styled.TouchableOpacity`
   padding-vertical: 8px;
   padding-horizontal: 15px;
   border: 1px solid
-    ${(props: CustomProps) =>
+    ${(props: SelectionProps) =>
       props.isSelected ? Colors.midBlack : Colors.unselectedGray};
 `;
 
 export const FilterTagBase = styled.TouchableOpacity`
   align-items: flex-start;
   border-radius: 24px;
-  background: ${(props: CustomProps) =>
+  background: ${(props: SelectionProps) =>
     props.isSelected ? Colors.midBlack : Colors.offWhite};
   padding-vertical: 8px;
   border: 1px solid
-    ${(props: CustomProps) =>
+    ${(props: SelectionProps) =>
       props.isSelected ? Colors.midBlack : Colors.unselectedGray};
 `;
 
@@ -85,7 +85,7 @@ export const RadioButtonBase = styled.View`
   width: 22px;
   border-radius: 12px;
   border-width: 1px;
-  border-color: ${(props: CustomProps) =>
+  border-color: ${(props: SelectionProps) =>
     props.isSelected ? Colors.magenta : Colors.midGray};
   align-items: center;
   justify-content: center;
@@ -104,12 +104,12 @@ export const SortAndFilterBase = styled.TouchableOpacity`
   justify-content: center;
   border-radius: 5px;
   width: 146px;
-  background: ${(props: CustomProps) =>
+  background: ${(props: SelectionProps) =>
     props.isSelected ? Colors.lightMagenta : Colors.offWhite};
   padding: 11px;
   margin: 12px;
   border: 1px solid
-    ${(props: CustomProps) =>
+    ${(props: SelectionProps) =>
       props.isSelected ? Colors.magenta : Colors.midGray};
   margin-bottom: 28px;
 `;

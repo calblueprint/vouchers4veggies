@@ -1,6 +1,6 @@
 import { Timestamp } from 'firebase/firestore';
 
-export type CustomProps = {
+export type SelectionProps = {
   isSelected: boolean;
 };
 
