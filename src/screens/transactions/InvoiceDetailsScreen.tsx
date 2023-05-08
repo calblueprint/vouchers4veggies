@@ -11,19 +11,16 @@ import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StatusComponent from '../../components/transactions/StatusComponent';
 import VoucherCard from '../../components/transactions/VoucherCard';
-import { getTransaction, getVoucher } from '../../database/queries';
-import { TransactionStackScreenProps } from '../../navigation/types';
-import { Transaction, Voucher } from '../../types/types';
+import { getInvoice, getVoucher } from '../../database/queries';
+import { InvoiceStackScreenProps } from '../../navigation/types';
+import { Invoice, Voucher } from '../../types/types';
 import StandardHeader from '../../components/common/StandardHeader';
 import {
   formatTimeForDisplay,
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 import BodyContainer from './styles';
-import {
-  SortVoucherOption,
-  useSortReducer,
-} from '../../utils/transactionUtils';
+import { SortVoucherOption, useSortReducer } from '../../utils/invoiceUtils';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
 import {
@@ -40,12 +37,12 @@ const sortDescriptionText = [
   'Date: Oldest',
 ];
 
-export default function TransactionDetailsScreen({
+export default function InvoiceDetailsScreen({
   route,
   navigation,
-}: TransactionStackScreenProps<'TransactionDetailsScreen'>) {
-  const { transactionUuid } = route.params;
-  const [transactionData, setTransactionData] = useState<Transaction>();
+}: InvoiceStackScreenProps<'InvoiceDetailsScreen'>) {
+  const { invoiceUuid } = route.params;
+  const [transactionData, setTransactionData] = useState<Invoice>();
   const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>([]);
   const [displayedVoucherArray, setDisplayedVoucherArray] = useState<Voucher[]>(
     [],
@@ -63,7 +60,7 @@ export default function TransactionDetailsScreen({
   const fetchData = async (Uuid: string | null) => {
     try {
       if (Uuid) {
-        const data = await getTransaction(Uuid);
+        const data = await getInvoice(Uuid);
         setTransactionData(data);
 
         const voucherData = await Promise.all(
@@ -82,16 +79,16 @@ export default function TransactionDetailsScreen({
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
-    fetchData(transactionUuid).then(() => {
+    fetchData(invoiceUuid).then(() => {
       sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [transactionUuid, sortDispatch]);
+  }, [invoiceUuid, sortDispatch]);
 
   useEffect(() => {
-    fetchData(transactionUuid).then(() => {
+    fetchData(invoiceUuid).then(() => {
       sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [transactionUuid, sortDispatch]);
+  }, [invoiceUuid, sortDispatch]);
 
   const time = moment(transactionData?.timestamp.toDate());
 

@@ -11,7 +11,7 @@ import {
 } from './styles';
 import { ButtonTextWhite, H4CardNavTab } from '../../../assets/Fonts';
 import RadioButton from './RadioButtonComponent';
-import { SortDispatch, SortState } from '../../utils/transactionUtils';
+import { SortDispatch, SortState } from '../../utils/invoiceUtils';
 import {
   ButtonMagenta,
   LeftAlignContainer,

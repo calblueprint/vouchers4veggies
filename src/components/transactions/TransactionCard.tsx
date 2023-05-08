@@ -8,16 +8,16 @@ import { Body1Text, H3Subheading } from '../../../assets/Fonts';
 import { StatusContainer, ValueContainer, styles } from './styles';
 import { Card, Column } from '../../../assets/Components';
 import StatusComponent from './StatusComponent';
-import { TransactionStackParamList } from '../../navigation/types';
+import { InvoiceStackParamList } from '../../navigation/types';
 import {
   formatTimeForDisplay,
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 
-type TransactionCardProps = {
+type InvoiceCardProps = {
   navigation: NativeStackNavigationProp<
-    TransactionStackParamList,
-    'TransactionsScreen',
+    InvoiceStackParamList,
+    'InvoicesScreen',
     undefined
   >;
   date: Date;
@@ -25,18 +25,18 @@ type TransactionCardProps = {
   value: number;
   status: string;
 };
-export default function TransactionCard({
+export default function InvoiceCard({
   navigation,
   date,
   id,
   value,
   status,
-}: TransactionCardProps) {
+}: InvoiceCardProps) {
   const time = moment(date);
 
   const onNavigate = () => {
-    navigation.navigate('TransactionDetailsScreen', {
-      transactionUuid: id,
+    navigation.navigate('InvoiceDetailsScreen', {
+      invoiceUuid: id,
     });
   };
 

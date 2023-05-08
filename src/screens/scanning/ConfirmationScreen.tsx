@@ -27,15 +27,14 @@ export default function ConfirmationScreen({
 }: ScannerStackScreenProps<'ConfirmationScreen'>) {
   const { count } = route.params;
   const { dispatch } = useScanningContext();
-  const nestedNavigation =
-    useNavigation<BottomTabScreenProps<'Transactions'>>();
+  const nestedNavigation = useNavigation<BottomTabScreenProps<'Invoices'>>();
 
   const onNavigateToInvoices = () => {
     navigation.reset({
       index: 0,
       routes: [{ name: 'VoucherEntryStartScreen' }],
     });
-    nestedNavigation.navigate('Transactions');
+    nestedNavigation.navigate('Invoices');
   };
 
   const onSubmitMore = () => navigation.navigate('VoucherEntryStartScreen');

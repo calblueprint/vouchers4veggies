@@ -6,7 +6,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Colors from '../../assets/Colors';
 import ProfileStackNavigator from './stacks/ProfileStackNavigator';
 import ScannerStackNavigator from './stacks/ScannerStackNavigator';
-import TransactionStackNavigator from './stacks/TransactionStackNavigator';
+import InvoiceStackNavigator from './stacks/InvoiceStackNavigator';
 import { BottomTabParamList } from './types';
 
 const initialRouteName = 'Home';
@@ -21,7 +21,7 @@ function ProfileIcon({ color }: { color: string }) {
   return <Ionicons name="md-person-outline" color={color} size={26} />;
 }
 
-function TransactionIcon({ color }: { color: string }) {
+function InvoiceIcon({ color }: { color: string }) {
   return <MaterialIcons name="compare-arrows" color={color} size={26} />;
 }
 
@@ -48,11 +48,11 @@ export default function NavigationBar() {
         }}
       />
       <Tab.Screen
-        name="Transactions"
-        component={TransactionStackNavigator}
+        name="Invoices"
+        component={InvoiceStackNavigator}
         options={{
           tabBarLabel: 'Invoices',
-          tabBarIcon: TransactionIcon,
+          tabBarIcon: InvoiceIcon,
         }}
       />
     </Tab.Navigator>

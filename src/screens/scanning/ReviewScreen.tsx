@@ -31,8 +31,8 @@ import { validateVoucherAmount } from '../../utils/validationUtils';
 import { deleteVoucher, editVoucher } from '../../utils/scanningUtils';
 import BackButton from '../../components/common/BackButton';
 import { formatValueForDisplay } from '../../utils/displayUtils';
-import { createTransaction, createVoucher } from '../../database/queries';
-import { TransactionStatus } from '../../types/types';
+import { createInvoice, createVoucher } from '../../database/queries';
+import { InvoiceStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import StandardHeader from '../../components/common/StandardHeader';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
@@ -132,8 +132,8 @@ export default function ReviewScreen({
         ),
       );
 
-      createTransaction({
-        status: TransactionStatus.UNPAID,
+      createInvoice({
+        status: InvoiceStatus.UNPAID,
         voucherSerialNumbers: Array.from(voucherMap.keys()),
         vendorUuid,
       });

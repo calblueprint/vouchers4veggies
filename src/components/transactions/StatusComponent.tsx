@@ -1,5 +1,5 @@
 import React from 'react';
-import { TransactionStatus } from '../../types/types';
+import { InvoiceStatus } from '../../types/types';
 import { StatusComponentGreen, StatusComponentRed } from './styles';
 import {
   Body2SubtextSemibold,
@@ -11,7 +11,7 @@ type StatusComponentProps = {
   status: string;
 };
 export default function StatusComponent({ status }: StatusComponentProps) {
-  return status === TransactionStatus.PAID ? (
+  return status === InvoiceStatus.PAID ? (
     <StatusComponentGreen>
       <GreenText>
         <Body2SubtextSemibold>{status.toUpperCase()}</Body2SubtextSemibold>

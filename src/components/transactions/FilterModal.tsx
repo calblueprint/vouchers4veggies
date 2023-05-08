@@ -34,10 +34,10 @@ import {
   FilterDispatch,
   FilterState,
   SortDispatch,
-} from '../../utils/transactionUtils';
+} from '../../utils/invoiceUtils';
 import FilterField from './FilterField';
 
-import { TransactionStatus } from '../../types/types';
+import { InvoiceStatus } from '../../types/types';
 import FilterTag from './FilterTag';
 import Colors from '../../../assets/Colors';
 
@@ -114,12 +114,12 @@ export default function FilterModal({
   const onSelectPaidFilter = () =>
     filterDispatch({
       type: 'SET_STATUS_FILTER',
-      status: TransactionStatus.UNPAID,
+      status: InvoiceStatus.UNPAID,
     });
   const onSelectUnpaidFilter = () =>
     filterDispatch({
       type: 'SET_STATUS_FILTER',
-      status: TransactionStatus.PAID,
+      status: InvoiceStatus.PAID,
     });
 
   const onClearAmountFilter = () =>
@@ -274,7 +274,7 @@ export default function FilterModal({
           <Row>
             <FilterTag
               isSelected={
-                filterState.inProgressStatusFilter === TransactionStatus.UNPAID
+                filterState.inProgressStatusFilter === InvoiceStatus.UNPAID
               }
               onSelectedPress={onClearStatusFilter}
               onUnselectedPress={onSelectPaidFilter}
@@ -286,7 +286,7 @@ export default function FilterModal({
 
             <FilterTag
               isSelected={
-                filterState.inProgressStatusFilter === TransactionStatus.PAID
+                filterState.inProgressStatusFilter === InvoiceStatus.PAID
               }
               onSelectedPress={onClearStatusFilter}
               onUnselectedPress={onSelectUnpaidFilter}

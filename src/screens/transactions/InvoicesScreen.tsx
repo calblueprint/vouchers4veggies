@@ -3,10 +3,10 @@ import { FlatList, RefreshControl } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
-import TransactionCard from '../../components/transactions/TransactionCard';
-import { getTransactionsByVendorUuid } from '../../database/queries';
-import { TransactionStackScreenProps } from '../../navigation/types';
-import { Transaction } from '../../types/types';
+import InvoiceCard from '../../components/transactions/TransactionCard';
+import { getInvoicesByVendorUuid } from '../../database/queries';
+import { InvoiceStackScreenProps } from '../../navigation/types';
+import { Invoice } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import {
   CardContainer,
@@ -18,9 +18,9 @@ import {
 import StandardHeader from '../../components/common/StandardHeader';
 import {
   useFilterReducer,
-  SortTransactionOption,
+  SortInvoiceOption,
   useSortReducer,
-} from '../../utils/transactionUtils';
+} from '../../utils/invoiceUtils';
 import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
@@ -33,15 +33,13 @@ const sortDescriptionText = [
   'Date: Oldest',
 ];
 
-export default function TransactionsScreen({
+export default function InvoicesScreen({
   navigation,
-}: TransactionStackScreenProps<'TransactionsScreen'>) {
+}: InvoiceStackScreenProps<'InvoicesScreen'>) {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [defaultTransactions, setDefaultTransactions] = useState<Transaction[]>(
-    [],
-  );
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [defaultTransactions, setDefaultTransactions] = useState<Invoice[]>([]);
+  const [transactions, setTransactions] = useState<Invoice[]>([]);
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
   const [filterModalIsVisible, setFilterModalIsVisible] = useState(false);
@@ -51,7 +49,7 @@ export default function TransactionsScreen({
   const { vendorUuid } = useAuthContext();
 
   const { sortState, sortDispatch } = useSortReducer(
-    'transactions',
+    'invoices',
     undefined,
     undefined,
     undefined,
@@ -67,7 +65,7 @@ export default function TransactionsScreen({
   const fetchData = async (Uuid: string | null) => {
     try {
       if (Uuid) {
-        const transactionsArray = await getTransactionsByVendorUuid(Uuid);
+        const transactionsArray = await getInvoicesByVendorUuid(Uuid);
         setDefaultTransactions(transactionsArray);
         setTransactions(transactionsArray);
         setIsLoading(false);
@@ -110,7 +108,7 @@ export default function TransactionsScreen({
         <SortAndFilterButton
           modalIsVisible={sortModalIsVisible}
           setModalIsVisible={setSortModalIsVisible}
-          isSelected={sortState.sortType !== SortTransactionOption.NO_SORT}
+          isSelected={sortState.sortType !== SortInvoiceOption.NO_SORT}
           type="sort"
           text={
             sortState.isActive
@@ -136,7 +134,7 @@ export default function TransactionsScreen({
           <FlatList
             data={transactions}
             renderItem={({ item }) => (
-              <TransactionCard
+              <InvoiceCard
                 navigation={navigation}
                 id={item.uuid}
                 date={item.timestamp.toDate()}
