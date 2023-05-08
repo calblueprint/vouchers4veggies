@@ -35,14 +35,14 @@ export default function InvoiceCard({
 }: InvoiceCardProps) {
   const time = moment(date);
 
-  const onNavigate = () => {
+  const onPress = () => {
     navigation.navigate('InvoiceDetailsScreen', {
       invoiceUuid: id,
     });
   };
 
   return (
-    <TouchableOpacity onPress={onNavigate}>
+    <TouchableOpacity onPress={onPress}>
       <Card>
         <Column>
           <Body1Text>{time.format('M/D')}</Body1Text>

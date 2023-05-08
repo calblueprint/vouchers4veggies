@@ -17,7 +17,8 @@ import { ButtonMagentaContainer, BodyContainer } from './styles';
 export default function VoucherEntryStartScreen({
   navigation,
 }: ScannerStackScreenProps<'VoucherEntryStartScreen'>) {
-  const onStartSubmitting = () => navigation.navigate('VoucherEntryNavigator');
+  const navigateToVoucherEntry = () =>
+    navigation.navigate('VoucherEntryNavigator');
 
   return (
     <SafeArea>
@@ -31,7 +32,7 @@ export default function VoucherEntryStartScreen({
           </Body1Text>
 
           <ButtonMagentaContainer>
-            <ButtonMagenta onPress={onStartSubmitting}>
+            <ButtonMagenta onPress={navigateToVoucherEntry}>
               <WhiteText>
                 <H4CardNavTab>Start submitting</H4CardNavTab>
               </WhiteText>

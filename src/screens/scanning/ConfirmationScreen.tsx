@@ -29,7 +29,7 @@ export default function ConfirmationScreen({
   const { dispatch } = useScanningContext();
   const nestedNavigation = useNavigation<BottomTabScreenProps<'Invoices'>>();
 
-  const onNavigateToInvoices = () => {
+  const navigateToInvoices = () => {
     navigation.reset({
       index: 0,
       routes: [{ name: 'VoucherEntryStartScreen' }],
@@ -37,7 +37,8 @@ export default function ConfirmationScreen({
     nestedNavigation.navigate('Invoices');
   };
 
-  const onSubmitMore = () => navigation.navigate('VoucherEntryStartScreen');
+  const navigateToVoucherEntryStart = () =>
+    navigation.navigate('VoucherEntryStartScreen');
 
   useEffect(() => {
     newInvoice(dispatch);
@@ -56,13 +57,13 @@ export default function ConfirmationScreen({
           </CenterText>
         </TitleContainer>
 
-        <ButtonWhite onPress={onNavigateToInvoices}>
+        <ButtonWhite onPress={navigateToInvoices}>
           <DarkGrayText>
             <H4CardNavTab>Review Invoices</H4CardNavTab>
           </DarkGrayText>
         </ButtonWhite>
 
-        <ButtonMagenta onPress={onSubmitMore}>
+        <ButtonMagenta onPress={navigateToVoucherEntryStart}>
           <WhiteText>
             <H4CardNavTab>Submit More</H4CardNavTab>
           </WhiteText>

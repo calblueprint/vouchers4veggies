@@ -21,7 +21,7 @@ export default function SortAndFilterButton({
   title,
   width = 146,
 }: SortAndFilterButtonProps) {
-  const handleOnPress = () => setModalIsVisible(true);
+  const onPress = () => setModalIsVisible(true);
 
   let iconColor = Colors.midBlack;
   if (isSelected) {
@@ -50,7 +50,7 @@ export default function SortAndFilterButton({
   return (
     <SortAndFilterBase
       isSelected={isSelected || modalIsVisible}
-      onPress={handleOnPress}
+      onPress={onPress}
       style={{ width }}
     >
       <CenteredRow>

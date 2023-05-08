@@ -51,7 +51,7 @@ export default function VoucherBatchScreen({
   const otpInput1 = useRef<TextInput>(null);
   const otpInput2 = useRef<TextInput>(null);
 
-  const onSubmit = () => navigation.navigate('ReviewScreen');
+  const navigateToReview = () => navigation.navigate('ReviewScreen');
 
   const clearText = () => {
     otpInput1.current?.clear();
@@ -211,7 +211,10 @@ export default function VoucherBatchScreen({
           <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
             <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
           </ButtonMagenta>
-          <ButtonWhite onPress={onSubmit} disabled={voucherMap.size === 0}>
+          <ButtonWhite
+            onPress={navigateToReview}
+            disabled={voucherMap.size === 0}
+          >
             <ButtonTextBlack>
               <H4CardNavTab>Review and Submit</H4CardNavTab>
             </ButtonTextBlack>

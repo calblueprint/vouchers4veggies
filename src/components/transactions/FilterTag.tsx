@@ -21,7 +21,7 @@ export default function FilterTag({
   minWidth = 'auto',
   margin = 0,
 }: FilterTagProps) {
-  const handleOnPress = () => {
+  const onPress = () => {
     if (isSelected) {
       onSelectedPress();
     } else {
@@ -31,7 +31,7 @@ export default function FilterTag({
 
   return (
     <View style={{ marginRight: margin }}>
-      <FilterTagBase isSelected={isSelected} onPress={handleOnPress}>
+      <FilterTagBase isSelected={isSelected} onPress={onPress}>
         <Row>
           <CenterText style={{ minWidth }}>
             {isSelected ? (

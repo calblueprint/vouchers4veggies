@@ -12,7 +12,7 @@ import StartLogo from '../../components/auth/StartLogo';
 export default function StartScreen({
   navigation,
 }: AuthStackScreenProps<'Start'>) {
-  const onNavigateToLogin = () => navigation.navigate('Login');
+  const navigateToLogin = () => navigation.navigate('Login');
 
   return (
     <SafeArea>
@@ -21,7 +21,7 @@ export default function StartScreen({
         <H1Heading>{"Hello! Let's get\nyou started."}</H1Heading>
 
         <StartButtonContainer>
-          <ButtonMagenta onPress={onNavigateToLogin}>
+          <ButtonMagenta onPress={navigateToLogin}>
             <WhiteText>
               <H4CardNavTab>Login</H4CardNavTab>
             </WhiteText>

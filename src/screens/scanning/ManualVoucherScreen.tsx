@@ -78,7 +78,7 @@ export default function ManualVoucherScreen({
     }
   };
 
-  const onNavigateToReviewScreen = () => navigation.navigate('ReviewScreen');
+  const navigateToReview = () => navigation.navigate('ReviewScreen');
 
   return (
     <BodyContainer>
@@ -106,10 +106,7 @@ export default function ManualVoucherScreen({
       <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
         <ButtonTextWhite>Add Voucher</ButtonTextWhite>
       </ButtonMagenta>
-      <ButtonWhite
-        onPress={onNavigateToReviewScreen}
-        disabled={voucherMap.size === 0}
-      >
+      <ButtonWhite onPress={navigateToReview} disabled={voucherMap.size === 0}>
         <ButtonTextBlack>
           <H4CardNavTab>Review and Submit</H4CardNavTab>
         </ButtonTextBlack>

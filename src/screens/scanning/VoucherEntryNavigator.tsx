@@ -50,7 +50,7 @@ export default function VoucherEntryNavigator({
 
   const onSelectBarcode = () => setSelection(tabs.BARCODE);
 
-  const onNavigate = () => {
+  const handleNavigate = () => {
     switch (selection) {
       case tabs.SERIAL:
         return <ManualVoucherScreen navigation={navigation} />;
@@ -95,7 +95,7 @@ export default function VoucherEntryNavigator({
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-          {onNavigate()}
+          {handleNavigate()}
         </KeyboardAvoidingView>
         <Toast />
       </SafeArea>

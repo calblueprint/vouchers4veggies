@@ -46,7 +46,7 @@ export default function ProfileScreen({
     fetchData();
   }, [vendorUuid]);
 
-  const onNavigateToContactUs = () => navigation.navigate('ContactUsScreen');
+  const navigateToContactUs = () => navigation.navigate('ContactUsScreen');
 
   return (
     <SafeArea>
@@ -65,7 +65,7 @@ export default function ProfileScreen({
           <H4CardNavTab>{vendorEmail}</H4CardNavTab>
         </Column>
       </Card>
-      <TouchableOpacity onPress={onNavigateToContactUs}>
+      <TouchableOpacity onPress={navigateToContactUs}>
         <Card>
           <LeftAlignContainer>
             <Icon2

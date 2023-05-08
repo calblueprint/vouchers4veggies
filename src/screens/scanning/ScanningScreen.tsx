@@ -86,7 +86,7 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
 
   const onScan = () => setScanned(false);
 
-  const onNavigateToReviewScreen = () => navigation.navigate('ReviewScreen');
+  const navigateToReview = () => navigation.navigate('ReviewScreen');
 
   return (
     <BodyContainer>
@@ -110,10 +110,7 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
         <ButtonTextWhite>Scan</ButtonTextWhite>
       </ButtonMagenta>
 
-      <ButtonWhite
-        onPress={onNavigateToReviewScreen}
-        disabled={voucherMap.size === 0}
-      >
+      <ButtonWhite onPress={navigateToReview} disabled={voucherMap.size === 0}>
         <ButtonTextMagenta>Review and Submit</ButtonTextMagenta>
       </ButtonWhite>
       <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>

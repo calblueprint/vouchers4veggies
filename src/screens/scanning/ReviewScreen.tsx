@@ -61,6 +61,12 @@ export default function ReviewScreen({
     }),
   );
 
+  const onPressBackButton = () => navigation.goBack();
+
+  const onChangeText = (input: string) => setEditDialogText(input);
+
+  const onSubmitEmptyInvoice = () => navigation.popToTop();
+
   const setSerialNumber = (serialNumber: number) => {
     setFocusedSerialNumber(serialNumber);
   };
@@ -143,12 +149,6 @@ export default function ReviewScreen({
       count: voucherMap.size,
     });
   };
-
-  const onPressBackButton = () => navigation.goBack();
-
-  const onChangeText = (input: string) => setEditDialogText(input);
-
-  const onSubmitEmptyInvoice = () => navigation.popToTop();
 
   return (
     <SafeArea>
