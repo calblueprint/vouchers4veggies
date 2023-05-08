@@ -16,7 +16,11 @@ const RootNavBackButton = styled.TouchableOpacity`
   padding: 9px 18px 9px 0px;
 `;
 
-export default function BackButton({ onPress }: { onPress: () => void }) {
+type BackButtonProps = {
+  onPress: () => void;
+};
+
+export default function BackButton({ onPress }: BackButtonProps) {
   return (
     <BackButtonContainer>
       <RootNavBackButton onPress={onPress}>
