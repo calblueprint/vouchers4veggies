@@ -110,7 +110,7 @@ export default function InvoicesScreen({
           setModalIsVisible={setSortModalIsVisible}
           isSelected={sortState.sortType !== SortInvoiceOption.NO_SORT}
           type="sort"
-          text={
+          title={
             sortState.isActive
               ? `Sort by: ${sortButtonText[sortState.sortType]}`
               : 'Sort by'
@@ -122,7 +122,7 @@ export default function InvoicesScreen({
           setModalIsVisible={setFilterModalIsVisible}
           isSelected={filterState.filterCount > 0}
           type="filter"
-          text={`Filter (${filterState.filterCount})`}
+          title={`Filter (${filterState.filterCount})`}
         />
       </CenteredRow>
 
@@ -153,7 +153,7 @@ export default function InvoicesScreen({
       )}
 
       <SortModal
-        name="invoices"
+        title="invoices"
         isVisible={sortModalIsVisible}
         setIsVisible={setSortModalIsVisible}
         sortDescriptions={sortDescriptionText}

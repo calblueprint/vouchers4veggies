@@ -21,7 +21,7 @@ import ClearButton from './ClearButton';
 import Colors from '../../../assets/Colors';
 
 type SortModalProps = {
-  name: 'invoices' | 'vouchers';
+  title: 'invoices' | 'vouchers';
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
   sortState: SortState;
@@ -30,7 +30,7 @@ type SortModalProps = {
 };
 
 export default function SortModal({
-  name,
+  title,
   isVisible,
   setIsVisible,
   sortState,
@@ -78,7 +78,7 @@ export default function SortModal({
         </ModalHeader>
 
         <PaddedScrollView alwaysBounceVertical={false}>
-          <H4CardNavTab>{`Sort ${name} by`}</H4CardNavTab>
+          <H4CardNavTab>{`Sort ${title} by`}</H4CardNavTab>
           <View>
             <RadioButtonList
               data={sortDescriptions}

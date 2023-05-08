@@ -25,6 +25,7 @@ type InvoiceCardProps = {
   value: number;
   status: string;
 };
+
 export default function InvoiceCard({
   navigation,
   date,

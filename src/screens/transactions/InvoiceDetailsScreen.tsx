@@ -120,7 +120,7 @@ export default function InvoiceDetailsScreen({
                 setModalIsVisible={setSortModalIsVisible}
                 isSelected={sortState.sortType !== SortVoucherOption.NO_SORT}
                 type="sort"
-                text={
+                title={
                   sortState.isActive
                     ? `Sort by: ${sortButtonText[sortState.sortType]}`
                     : 'Sort by'
@@ -157,7 +157,7 @@ export default function InvoiceDetailsScreen({
       )}
 
       <SortModal
-        name="vouchers"
+        title="vouchers"
         isVisible={sortModalIsVisible}
         setIsVisible={setSortModalIsVisible}
         sortDescriptions={sortDescriptionText}

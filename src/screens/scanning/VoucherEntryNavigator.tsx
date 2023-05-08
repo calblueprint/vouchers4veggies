@@ -78,17 +78,17 @@ export default function VoucherEntryNavigator({
           <NavButton
             isSelected={selection === tabs.SERIAL}
             onPress={onSelectSerial}
-            text="Serial"
+            title="Serial"
           />
           <NavButton
             isSelected={selection === tabs.RANGE}
             onPress={onSelectRange}
-            text="Range"
+            title="Range"
           />
           <NavButton
             isSelected={selection === tabs.BARCODE}
             onPress={onSelectBarcode}
-            text="Barcode"
+            title="Barcode"
           />
         </Row>
 

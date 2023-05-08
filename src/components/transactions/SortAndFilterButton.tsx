@@ -10,7 +10,7 @@ type SortAndFilterButtonProps = {
   setModalIsVisible: (visibility: boolean) => void;
   isSelected: boolean;
   type: 'sort' | 'filter';
-  text: string;
+  title: string;
   width?: string | number;
 };
 export default function SortAndFilterButton({
@@ -18,7 +18,7 @@ export default function SortAndFilterButton({
   setModalIsVisible,
   isSelected,
   type,
-  text,
+  title,
   width = 146,
 }: SortAndFilterButtonProps) {
   const handleOnPress = () => setModalIsVisible(true);
@@ -57,9 +57,9 @@ export default function SortAndFilterButton({
         {icon}
         <Body2Subtext>
           {isSelected || modalIsVisible ? (
-            <MagentaText>{text}</MagentaText>
+            <MagentaText>{title}</MagentaText>
           ) : (
-            text
+            title
           )}
         </Body2Subtext>
       </CenteredRow>

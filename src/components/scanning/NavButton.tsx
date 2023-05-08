@@ -4,17 +4,17 @@ import { NavButtonBase, NavButtonText } from './styles';
 type NavButtonProps = {
   isSelected: boolean;
   onPress: () => void;
-  text: string;
+  title: string;
 };
 
 export default function NavButton({
   isSelected,
   onPress,
-  text,
+  title,
 }: NavButtonProps) {
   return (
     <NavButtonBase isSelected={isSelected} onPress={onPress}>
-      <NavButtonText isSelected={isSelected}>{text}</NavButtonText>
+      <NavButtonText isSelected={isSelected}>{title}</NavButtonText>
     </NavButtonBase>
   );
 }
