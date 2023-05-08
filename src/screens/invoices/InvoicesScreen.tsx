@@ -3,7 +3,7 @@ import { FlatList, RefreshControl } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
-import InvoiceCard from '../../components/transactions/TransactionCard';
+import InvoiceCard from '../../components/invoices/TransactionCard';
 import { getInvoicesByVendorUuid } from '../../database/queries';
 import { InvoiceStackScreenProps } from '../../navigation/types';
 import { Invoice } from '../../types/types';
@@ -21,9 +21,9 @@ import {
   SortInvoiceOption,
   useSortReducer,
 } from '../../utils/invoiceUtils';
-import FilterModal from '../../components/transactions/FilterModal';
-import SortModal from '../../components/transactions/SortModal';
-import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
+import FilterModal from '../../components/invoices/FilterModal';
+import SortModal from '../../components/invoices/SortModal';
+import SortAndFilterButton from '../../components/invoices/SortAndFilterButton';
 
 const sortButtonText = ['Amount', 'Amount', 'Date', 'Date'];
 const sortDescriptionText = [

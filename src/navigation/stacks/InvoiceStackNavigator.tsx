@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import InvoiceDetailsScreen from '../../screens/transactions/InvoiceDetailsScreen';
-import InvoicesScreen from '../../screens/transactions/InvoicesScreen';
+import InvoiceDetailsScreen from '../../screens/invoices/InvoiceDetailsScreen';
+import InvoicesScreen from '../../screens/invoices/InvoicesScreen';
 import { InvoiceStackParamList } from '../types';
 
 const InvoiceStack = createNativeStackNavigator<InvoiceStackParamList>();

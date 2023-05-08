@@ -9,8 +9,8 @@ import {
 } from '../../../assets/Components';
 import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import StatusComponent from '../../components/transactions/StatusComponent';
-import VoucherCard from '../../components/transactions/VoucherCard';
+import StatusComponent from '../../components/invoices/StatusComponent';
+import VoucherCard from '../../components/invoices/VoucherCard';
 import { getInvoice, getVoucher } from '../../database/queries';
 import { InvoiceStackScreenProps } from '../../navigation/types';
 import { Invoice, Voucher } from '../../types/types';
@@ -21,8 +21,8 @@ import {
 } from '../../utils/displayUtils';
 import BodyContainer from './styles';
 import { SortVoucherOption, useSortReducer } from '../../utils/invoiceUtils';
-import SortModal from '../../components/transactions/SortModal';
-import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
+import SortModal from '../../components/invoices/SortModal';
+import SortAndFilterButton from '../../components/invoices/SortAndFilterButton';
 import {
   Body1TextSemibold,
   H5Subheading,
