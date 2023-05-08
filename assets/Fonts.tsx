@@ -83,14 +83,6 @@ export const CounterText = styled.Text`
   font-size: 16px;
 `;
 
-export const NavButtonText = styled.Text`
-  text-align: center;
-  padding-vertical: 11px;
-  font-size: 14px;
-  color: ${Colors.darkGray};
-  font-family: manrope-bold;
-`;
-
 export const LoadingText = styled.Text`
   font-family: 'manrope-semiBold';
   font-style: normal;

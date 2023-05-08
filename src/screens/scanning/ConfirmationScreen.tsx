@@ -5,12 +5,14 @@ import {
   H4CardNavTab,
   WhiteText,
   DarkGrayText,
+  CenterText,
 } from '../../../assets/Fonts';
-import { ButtonContainer, ConfirmationTitleContainer } from './styles';
 import {
   ButtonMagenta,
   ButtonWhite,
   SafeArea,
+  StartContainer,
+  TitleContainer,
 } from '../../../assets/Components';
 import {
   BottomTabScreenProps,
@@ -28,45 +30,45 @@ export default function ConfirmationScreen({
   const nestedNavigation =
     useNavigation<BottomTabScreenProps<'Transactions'>>();
 
+  const onNavigateToInvoices = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'VoucherEntryStartScreen' }],
+    });
+    nestedNavigation.navigate('Transactions');
+  };
+
+  const onSubmitMore = () => navigation.navigate('VoucherEntryStartScreen');
+
   useEffect(() => {
     newInvoice(dispatch);
   }, [dispatch]);
 
   return (
     <SafeArea>
-      <ConfirmationTitleContainer>
-        <H1Heading style={{ textAlign: 'center' }}>
-          {count === 1
-            ? `You submitted ${count}\n voucher!`
-            : `You submitted ${count}\n vouchers!`}
-        </H1Heading>
-      </ConfirmationTitleContainer>
+      <StartContainer>
+        <TitleContainer>
+          <CenterText>
+            <H1Heading>
+              {count === 1
+                ? `You submitted ${count}\n voucher!`
+                : `You submitted ${count}\n vouchers!`}
+            </H1Heading>
+          </CenterText>
+        </TitleContainer>
 
-      <ButtonContainer>
-        <ButtonWhite
-          onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'VoucherEntryStartScreen' }],
-            });
-            nestedNavigation.navigate('Transactions');
-          }}
-        >
+        <ButtonWhite onPress={onNavigateToInvoices}>
           <DarkGrayText>
             <H4CardNavTab>Review Invoices</H4CardNavTab>
           </DarkGrayText>
         </ButtonWhite>
-      </ButtonContainer>
 
-      <ButtonContainer>
-        <ButtonMagenta
-          onPress={() => navigation.navigate('VoucherEntryStartScreen')}
-        >
+        <ButtonMagenta onPress={onSubmitMore}>
           <WhiteText>
             <H4CardNavTab>Submit More</H4CardNavTab>
           </WhiteText>
         </ButtonMagenta>
-      </ButtonContainer>
+      </StartContainer>
     </SafeArea>
   );
 }

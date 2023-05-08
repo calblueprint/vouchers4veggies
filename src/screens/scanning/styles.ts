@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-import { CustomProps } from '../../types/types';
 import { Row } from '../../../assets/Components';
 
 export const VoucherCounter = styled.View`
@@ -20,10 +19,6 @@ export const BodyContainer = styled.View`
   width: 277px;
 `;
 
-export const TitleContainer = styled.View`
-  padding-bottom: 12px;
-`;
-
 export const ScannerContainer = styled.View`
   width: 277px;
   height: 237px;
@@ -36,21 +31,7 @@ export const ScannerContainer = styled.View`
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 40px;
-`;
-
-export const ButtonContainer = styled.View`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  align-content: space-between;
-`;
-
-export const ReviewTitleContainer = styled.View`
-  display: flex;
-  padding-top: 12px;
-  padding-bottom: 40px;
+  margin-top: 20px;
 `;
 
 export const SummaryRow = styled(Row)`
@@ -58,18 +39,12 @@ export const SummaryRow = styled(Row)`
   padding-top: 10px;
 `;
 
-export const ConfirmationTitleContainer = styled.View`
-  display: flex;
-  padding: 40px;
-  padding-top: 200px;
-`;
-
 export const ConstrainedHeightContainer = styled.View`
   width: 100%;
   min-height: 268px;
 `;
 
-export const ReviewButtonContainer = styled.View`
+export const ButtonMagentaContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,29 +53,7 @@ export const ReviewButtonContainer = styled.View`
 
 export const ErrorContainer = styled.View`
   width: 100%;
-  height: 15px;
-  margin: 10px 0px;
-`;
-
-export const RangeInputContainer = styled.View`
-  width: 120px;
-`;
-
-export const VoucherRangeContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 6px;
-`;
-
-export const StartContainer = styled.View`
-  top: 193px;
-  margin: 0px 49px;
-  align-items: center;
-`;
-
-export const HeroContainer = styled.View`
-  margin-bottom: 40px;
+  margin-vertical: 10px;
 `;
 
 export const LoadingContainer = styled.View`
@@ -110,20 +63,6 @@ export const LoadingContainer = styled.View`
   flex-drection: row;
   justify-content: flex-start;
   align-items: center;
-`;
-
-export const NavButtonContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-`;
-
-export const NavButton = styled.Pressable`
-  width: 33.333%;
-  border-bottom-width: 3px;
-  border-color: ${(props: CustomProps) =>
-    props.isSelected ? Colors.magenta : Colors.lightGray};
 `;
 
 export const styles = StyleSheet.create({

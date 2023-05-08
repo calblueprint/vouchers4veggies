@@ -1,10 +1,6 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
-export const StartContainer = styled.View`
-  top: 25%;
-`;
-
 export const BodyContainer = styled.View`
   padding-horizontal: 49px;
 `;

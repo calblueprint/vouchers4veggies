@@ -6,6 +6,7 @@ import {
   SafeArea,
   styles,
   fieldFocused,
+  TitleContainer,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { VoucherValueError, VoucherValueResult } from '../../types/types';
@@ -19,9 +20,7 @@ import {
   // CounterText,
 } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
-
 import {
-  TitleContainer,
   BodyContainer,
   ErrorContainer,
   // VoucherCounter,
@@ -83,6 +82,10 @@ export default function ConfirmValueScreen({
     }
   };
 
+  const onBlur = () => setIsActive(false);
+
+  const onFocus = () => setIsActive(true);
+
   return (
     <SafeArea>
       <StandardHeader>
@@ -107,8 +110,8 @@ export default function ConfirmValueScreen({
           renderTextInput={props => (
             <TextInput
               {...props}
-              onBlur={() => setIsActive(false)}
-              onFocus={() => setIsActive(true)}
+              onBlur={onBlur}
+              onFocus={onFocus}
               style={isActive ? fieldFocused : styles.fieldDefault}
               placeholderTextColor={Colors.midGray}
               secureTextEntry={false}
@@ -130,20 +133,13 @@ export default function ConfirmValueScreen({
           precision={2}
         />
         <ErrorContainer>
-          {showZeroError ? (
+          <Body2Subtext>
             <RedText>
-              <Body2Subtext>
-                Voucher must be redeemed for more than $0.
-              </Body2Subtext>
+              {showZeroError && 'Voucher must be redeemed for more than $0.'}
+              {showExceedError &&
+                'Voucher value exceeds maximum redemption limit.'}
             </RedText>
-          ) : null}
-          {showExceedError ? (
-            <RedText>
-              <Body2Subtext>
-                Voucher value exceeds maximum redemption limit.
-              </Body2Subtext>
-            </RedText>
-          ) : null}
+          </Body2Subtext>
         </ErrorContainer>
         <ButtonMagenta onPress={handleVoucherAdd}>
           <ButtonTextWhite>Confirm Value</ButtonTextWhite>

@@ -9,10 +9,9 @@ import {
   LoadingText,
 } from '../../../assets/Fonts';
 import {
-  ReviewButtonContainer,
+  ButtonMagentaContainer,
   ConstrainedHeightContainer,
   LoadingContainer,
-  ReviewTitleContainer,
   SummaryRow,
 } from './styles';
 import {
@@ -22,6 +21,7 @@ import {
   RightAlignContainer,
   SafeArea,
   StartOfListView,
+  TitleContainer,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
@@ -144,22 +144,28 @@ export default function ReviewScreen({
     });
   };
 
+  const onPressBackButton = () => navigation.goBack();
+
+  const onChangeText = (input: string) => setEditDialogText(input);
+
+  const onSubmitEmptyInvoice = () => navigation.popToTop();
+
   return (
     <SafeArea>
       <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={onPressBackButton} />
       </StandardHeader>
 
-      <ReviewTitleContainer>
+      <TitleContainer>
         <H2Heading>Review vouchers</H2Heading>
-      </ReviewTitleContainer>
+      </TitleContainer>
 
       <Dialog.Container visible={editDialogIsVisible}>
         <Dialog.Title>Enter Number</Dialog.Title>
         <Dialog.Description>Edit voucher amount</Dialog.Description>
         <Dialog.Input
           placeholderTextColor={Colors.midGray}
-          onChangeText={(input: string) => setEditDialogText(input)}
+          onChangeText={onChangeText}
           secureTextEntry={false}
           autoCorrect={false}
           autoCapitalize="none"
@@ -194,7 +200,7 @@ export default function ReviewScreen({
           label="Discard"
           bold
           color={Colors.alertRed}
-          onPress={() => navigation.popToTop()}
+          onPress={onSubmitEmptyInvoice}
         />
       </Dialog.Container>
 
@@ -243,11 +249,11 @@ export default function ReviewScreen({
               </RightAlignContainer>
             </SummaryRow>
 
-            <ReviewButtonContainer>
+            <ButtonMagentaContainer>
               <ButtonMagenta onPress={onSubmit}>
                 <ButtonTextWhite>Submit</ButtonTextWhite>
               </ButtonMagenta>
-            </ReviewButtonContainer>
+            </ButtonMagentaContainer>
           </ScrollView>
         </CardContainer>
       )}

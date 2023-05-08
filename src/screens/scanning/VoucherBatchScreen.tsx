@@ -15,7 +15,6 @@ import {
 import {
   BodyContainer,
   ErrorContainer,
-  VoucherRangeContainer,
   LoadingContainer,
   styles,
 } from './styles';
@@ -173,44 +172,40 @@ export default function VoucherBatchScreen({
         </LoadingContainer>
       ) : (
         <>
-          <VoucherRangeContainer>
-            <Body1TextSemibold>From</Body1TextSemibold>
-            <OTPTextInput
-              ref={otpInput1}
-              inputCount={7}
-              tintColor={Colors.magenta}
-              defaultValue={startSerialNumberInput}
-              inputCellLength={1}
-              handleTextChange={onChangeStartSerialNumber}
-              containerStyle={styles.otpContainerStyle}
-              textInputStyle={styles.otpTextInputStyle}
-              isValid={!showInvalidError}
-              keyboardType="number-pad"
-              returnKeyType="done"
-              autoFocus={false}
-            />
-            <Body1TextSemibold> {'\n'} To</Body1TextSemibold>
-            <OTPTextInput
-              ref={otpInput2}
-              inputCount={7}
-              tintColor={Colors.magenta}
-              defaultValue={endSerialNumberInput}
-              inputCellLength={1}
-              handleTextChange={onChangeEndSerialNumber}
-              containerStyle={styles.otpContainerStyle}
-              textInputStyle={styles.otpTextInputStyle}
-              isValid={!showInvalidError}
-              keyboardType="number-pad"
-              returnKeyType="done"
-              autoFocus={false}
-            />
-          </VoucherRangeContainer>
+          <Body1TextSemibold>From</Body1TextSemibold>
+          <OTPTextInput
+            ref={otpInput1}
+            inputCount={7}
+            tintColor={Colors.magenta}
+            defaultValue={startSerialNumberInput}
+            inputCellLength={1}
+            handleTextChange={onChangeStartSerialNumber}
+            containerStyle={styles.otpContainerStyle}
+            textInputStyle={styles.otpTextInputStyle}
+            isValid={!showInvalidError}
+            keyboardType="number-pad"
+            returnKeyType="done"
+            autoFocus={false}
+          />
+          <Body1TextSemibold> {'\n'}To</Body1TextSemibold>
+          <OTPTextInput
+            ref={otpInput2}
+            inputCount={7}
+            tintColor={Colors.magenta}
+            defaultValue={endSerialNumberInput}
+            inputCellLength={1}
+            handleTextChange={onChangeEndSerialNumber}
+            containerStyle={styles.otpContainerStyle}
+            textInputStyle={styles.otpTextInputStyle}
+            isValid={!showInvalidError}
+            keyboardType="number-pad"
+            returnKeyType="done"
+            autoFocus={false}
+          />
           <ErrorContainer>
-            {showInvalidError ? (
-              <RedText>
-                <Body2Subtext>{errorMessage}</Body2Subtext>
-              </RedText>
-            ) : null}
+            <Body2Subtext>
+              {showInvalidError && <RedText>{errorMessage}</RedText>}
+            </Body2Subtext>
           </ErrorContainer>
 
           <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>

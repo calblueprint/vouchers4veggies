@@ -32,6 +32,10 @@ export const ButtonWhite = styled(ButtonBase)`
   border-color: ${Colors.magenta};
 `;
 
+export const StartContainer = styled.View`
+  top: 25%;
+`;
+
 export const TitleContainer = styled.View`
   padding-vertical: 20px;
   justify-content: center;

@@ -3,7 +3,7 @@ import { TextInput } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 import { VoucherCreateError } from '../../types/types';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
-import { BodyContainer, ErrorContainer } from './styles';
+import { BodyContainer, ErrorContainer, styles } from './styles';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
@@ -78,6 +78,8 @@ export default function ManualVoucherScreen({
     }
   };
 
+  const onNavigateToReviewScreen = () => navigation.navigate('ReviewScreen');
+
   return (
     <BodyContainer>
       <Body1TextSemibold>Serial Number</Body1TextSemibold>
@@ -88,31 +90,24 @@ export default function ManualVoucherScreen({
         defaultValue={serialNumberInput}
         inputCellLength={1}
         handleTextChange={onChangeSerialNumber}
-        containerStyle={{ marginVertical: 3 }}
-        textInputStyle={{
-          borderWidth: 1,
-          borderRadius: 2,
-          width: 30,
-          height: '95%',
-        }}
+        containerStyle={styles.otpContainerStyle}
+        textInputStyle={styles.otpTextInputStyle}
         isValid={!showError}
         keyboardType="number-pad"
         returnKeyType="done"
         autoFocus={false}
       />
       <ErrorContainer>
-        {showError ? (
-          <RedText>
-            <Body2Subtext>{errorMessage}</Body2Subtext>
-          </RedText>
-        ) : null}
+        <Body2Subtext>
+          {showError && <RedText>{errorMessage}</RedText>}
+        </Body2Subtext>
       </ErrorContainer>
 
       <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
         <ButtonTextWhite>Add Voucher</ButtonTextWhite>
       </ButtonMagenta>
       <ButtonWhite
-        onPress={() => navigation.navigate('ReviewScreen')}
+        onPress={onNavigateToReviewScreen}
         disabled={voucherMap.size === 0}
       >
         <ButtonTextBlack>
