@@ -74,7 +74,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 2,
     width: 30,
-    height: '95%',
+    height: 40,
+    marginBottom: 0,
   },
   otpContainerStyle: {
     marginVertical: 3,

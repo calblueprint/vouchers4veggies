@@ -5,6 +5,7 @@ import {
   LeftAlignContainer,
   RightAlignContainer,
   Row,
+  TitleContainer,
 } from '../../../assets/Components';
 import {
   Body1TextSemibold,
@@ -26,7 +27,6 @@ import { useAuthContext } from './AuthContext';
 import StandardHeader from '../../components/common/StandardHeader';
 import { ButtonContainer, BodyContainer, styles } from './styles';
 import BackButton from '../../components/common/BackButton';
-import { TitleContainer } from '../scanning/styles';
 
 export default function LoginScreen({
   navigation,
