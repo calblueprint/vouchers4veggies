@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { Row, SafeArea } from '../../../assets/Components';
-import { TitleText } from '../../../assets/Fonts';
+import { H2Heading } from '../../../assets/Fonts';
 import StandardHeader from '../../components/common/StandardHeader';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
@@ -68,7 +68,7 @@ export default function VoucherEntryNavigator({
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <SafeArea>
         <StandardHeader>
-          <TitleText>Add a voucher</TitleText>
+          <H2Heading>Add a voucher</H2Heading>
           <TouchableOpacity onPress={onPreventLeave}>
             <Icon name="close" size={24} color={Colors.midBlack} />
           </TouchableOpacity>

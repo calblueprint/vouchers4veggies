@@ -1,6 +1,14 @@
 import styled from 'styled-components/native';
 import Colors from './Colors';
 
+export const TitleText = styled.Text`
+  font-family: 'manrope-bold';
+  font-style: normal;
+  font-size: 42px;
+  line-height: 57px;
+  text-align: center;
+`;
+
 export const H1Heading = styled.Text`
   font-family: 'manrope-bold';
   font-style: normal;
@@ -14,13 +22,6 @@ export const H2Heading = styled.Text`
   font-size: 30px;
   line-height: 41px;
   flex-wrap: wrap;
-`;
-
-export const TitleText = styled.Text`
-  font-family: 'manrope-bold';
-  font-style: normal;
-  font-size: 28px;
-  line-height: 38px;
 `;
 
 export const H3Subheading = styled.Text`
@@ -48,11 +49,11 @@ export const H4CardNavTab = styled.Text`
   line-height: 25px;
 `;
 
-export const H5Subheading2 = styled.Text`
-  font-family: 'manrope-semiBold';
+export const H5Subheading = styled.Text`
+  font-family: 'manrope-regular';
   font-style: normal;
-  font-size: 14px;
-  line-height: 19px;
+  font-size: 16px;
+  line-height: 22px;
 `;
 
 export const Body1Text = styled.Text`

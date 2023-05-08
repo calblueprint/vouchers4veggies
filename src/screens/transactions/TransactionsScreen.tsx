@@ -8,9 +8,9 @@ import { getTransactionsByVendorUuid } from '../../database/queries';
 import { TransactionStackScreenProps } from '../../navigation/types';
 import { Transaction } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
-import { CenteredOneLine } from './styles';
 import {
   CardContainer,
+  CenteredRow,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -25,6 +25,14 @@ import FilterModal from '../../components/transactions/FilterModal';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
 
+const sortButtonText = ['Amount', 'Amount', 'Date', 'Date'];
+const sortDescriptionText = [
+  'Amount: High to Low',
+  'Amount: Low to High',
+  'Date: Newest',
+  'Date: Oldest',
+];
+
 export default function TransactionsScreen({
   navigation,
 }: TransactionStackScreenProps<'TransactionsScreen'>) {
@@ -34,14 +42,6 @@ export default function TransactionsScreen({
     [],
   );
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  const sortButtonText = ['Amount', 'Amount', 'Date', 'Date'];
-  const sortDescriptionText = [
-    'Amount: High to Low',
-    'Amount: Low to High',
-    'Date: Newest',
-    'Date: Oldest',
-  ];
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
   const [filterModalIsVisible, setFilterModalIsVisible] = useState(false);
@@ -58,6 +58,7 @@ export default function TransactionsScreen({
     transactions,
     setTransactions,
   );
+
   const { filterState, filterDispatch } = useFilterReducer(
     defaultTransactions,
     setTransactions,
@@ -105,7 +106,7 @@ export default function TransactionsScreen({
         <H2Heading>Invoices</H2Heading>
       </TitleContainer>
 
-      <CenteredOneLine>
+      <CenteredRow>
         <SortAndFilterButton
           modalIsVisible={sortModalIsVisible}
           setModalIsVisible={setSortModalIsVisible}
@@ -125,7 +126,7 @@ export default function TransactionsScreen({
           type="filter"
           text={`Filter (${filterState.filterCount})`}
         />
-      </CenteredOneLine>
+      </CenteredRow>
 
       {isLoading ? (
         <LoadingSpinner />

@@ -5,7 +5,7 @@ import {
   ButtonTextWhite,
   H2Heading,
   H3Subheading,
-  H5Subheading2,
+  Body1TextSemibold,
   LoadingText,
 } from '../../../assets/Fonts';
 import {
@@ -228,7 +228,7 @@ export default function ReviewScreen({
 
             <SummaryRow>
               <LeftAlignContainer>
-                <H5Subheading2>Amount</H5Subheading2>
+                <Body1TextSemibold>Amount</Body1TextSemibold>
               </LeftAlignContainer>
               <RightAlignContainer>
                 <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
@@ -237,7 +237,7 @@ export default function ReviewScreen({
 
             <SummaryRow>
               <LeftAlignContainer>
-                <H5Subheading2>Total</H5Subheading2>
+                <Body1TextSemibold>Total</Body1TextSemibold>
               </LeftAlignContainer>
               <RightAlignContainer>
                 <H3Subheading>{`$${formatValueForDisplay(

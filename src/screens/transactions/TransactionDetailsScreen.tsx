@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import {
   CardContainer,
+  CenteredRow,
   SafeArea,
   StartOfListView,
 } from '../../../assets/Components';
@@ -18,19 +19,26 @@ import {
   formatTimeForDisplay,
   formatValueForDisplay,
 } from '../../utils/displayUtils';
-import {
-  CenteredOneLine,
-  CountContainer,
-  MediumText,
-  Size14BoldText,
-  Title,
-} from './styles';
+import BodyContainer from './styles';
 import {
   SortVoucherOption,
   useSortReducer,
 } from '../../utils/transactionUtils';
 import SortModal from '../../components/transactions/SortModal';
 import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
+import {
+  Body1TextSemibold,
+  H5Subheading,
+  TitleText,
+} from '../../../assets/Fonts';
+
+const sortButtonText = ['SN', 'SN', 'Date', 'Date'];
+const sortDescriptionText = [
+  'Serial Number: High to Low',
+  'Serial Number: Low to High',
+  'Date: Newest',
+  'Date: Oldest',
+];
 
 export default function TransactionDetailsScreen({
   route,
@@ -51,14 +59,6 @@ export default function TransactionDetailsScreen({
     defaultVoucherArray,
     setDisplayedVoucherArray,
   );
-
-  const sortButtonText = ['SN', 'SN', 'Date', 'Date'];
-  const sortDescriptionText = [
-    'Serial Number: High to Low',
-    'Serial Number: Low to High',
-    'Date: Newest',
-    'Date: Oldest',
-  ];
 
   const fetchData = async (Uuid: string | null) => {
     try {
@@ -95,39 +95,43 @@ export default function TransactionDetailsScreen({
 
   const time = moment(transactionData?.timestamp.toDate());
 
+  const onPressBackButton = () => navigation.goBack();
+
   return (
     <SafeArea>
       <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={onPressBackButton} />
       </StandardHeader>
 
       {transactionData ? (
         <>
           <StatusComponent status={transactionData.status} />
-          <Title>${formatValueForDisplay(transactionData.value)}</Title>
-          <MediumText>Date: {time.format('M/D/YY')}</MediumText>
-          <MediumText>Time: {formatTimeForDisplay(time)}</MediumText>
+          <TitleText>${formatValueForDisplay(transactionData.value)}</TitleText>
+          <H5Subheading>Date: {time.format('M/D/YY')}</H5Subheading>
+          <H5Subheading>Time: {formatTimeForDisplay(time)}</H5Subheading>
 
-          <CountContainer>
-            <Size14BoldText>
+          <BodyContainer>
+            <Body1TextSemibold>
               Count: {transactionData.voucherSerialNumbers.length}
-            </Size14BoldText>
-          </CountContainer>
+            </Body1TextSemibold>
+          </BodyContainer>
 
-          <CenteredOneLine style={{ paddingHorizontal: 22 }}>
-            <SortAndFilterButton
-              modalIsVisible={sortModalIsVisible}
-              setModalIsVisible={setSortModalIsVisible}
-              isSelected={sortState.sortType !== SortVoucherOption.NO_SORT}
-              type="sort"
-              text={
-                sortState.isActive
-                  ? `Sort by: ${sortButtonText[sortState.sortType]}`
-                  : 'Sort by'
-              }
-              style={{ width: '100%' }}
-            />
-          </CenteredOneLine>
+          <BodyContainer>
+            <CenteredRow>
+              <SortAndFilterButton
+                modalIsVisible={sortModalIsVisible}
+                setModalIsVisible={setSortModalIsVisible}
+                isSelected={sortState.sortType !== SortVoucherOption.NO_SORT}
+                type="sort"
+                text={
+                  sortState.isActive
+                    ? `Sort by: ${sortButtonText[sortState.sortType]}`
+                    : 'Sort by'
+                }
+                width="100%"
+              />
+            </CenteredRow>
+          </BodyContainer>
 
           <CardContainer>
             <StartOfListView />
