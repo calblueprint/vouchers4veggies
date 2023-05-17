@@ -39,7 +39,7 @@ export default function InvoicesScreen({
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [defaultInvoices, setDefaultInvoices] = useState<Invoice[]>([]);
-  const [invoices, setInvoices] = useState<Invoice[]>([]);
+  const [displayedInvoices, setDisplayedInvoices] = useState<Invoice[]>([]);
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
   const [filterModalIsVisible, setFilterModalIsVisible] = useState(false);
@@ -53,13 +53,13 @@ export default function InvoicesScreen({
     undefined,
     undefined,
     undefined,
-    invoices,
-    setInvoices,
+    displayedInvoices,
+    setDisplayedInvoices,
   );
 
   const { filterState, filterDispatch } = useFilterReducer(
     defaultInvoices,
-    setInvoices,
+    setDisplayedInvoices,
   );
 
   const fetchData = async (Uuid: string | null) => {
@@ -67,7 +67,7 @@ export default function InvoicesScreen({
       if (Uuid) {
         const invoiceArray = await getInvoicesByVendorUuid(Uuid);
         setDefaultInvoices(invoiceArray);
-        setInvoices(invoiceArray);
+        setDisplayedInvoices(invoiceArray);
         setIsLoading(false);
       }
     } catch (error) {
@@ -132,7 +132,7 @@ export default function InvoicesScreen({
         <CardContainer>
           <StartOfListView />
           <FlatList
-            data={invoices}
+            data={displayedInvoices}
             renderItem={({ item }) => (
               <InvoiceCard
                 navigation={navigation}
