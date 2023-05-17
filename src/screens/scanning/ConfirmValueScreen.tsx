@@ -32,13 +32,12 @@ export default function ConfirmValueScreen({
   const { serialNumber, maxValue, type } = route.params;
   const [voucherAmount, setVoucherAmount] = useState<number>(maxValue / 100);
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [showZeroError, setShowZeroError] = useState(false);
-  const [showExceedError, setShowExceedError] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const { dispatch } = useScanningContext();
 
   const onChangeVoucherAmount = (value: number) => {
-    setShowZeroError(false);
-    setShowExceedError(false);
+    setShowErrorMessage(false);
     setVoucherAmount(value ?? 0.0);
   };
 
@@ -60,11 +59,13 @@ export default function ConfirmValueScreen({
     const result = handleVoucherAddError(centAmount);
     const { ok, error } = result;
     if (error === VoucherValueError.ZeroValue) {
-      setShowZeroError(true);
+      setErrorMessage('Voucher must be redeemed for more than $0.');
+      setShowErrorMessage(true);
     }
 
     if (error === VoucherValueError.ExceedMax) {
-      setShowExceedError(true);
+      setErrorMessage('Voucher value exceeds maximum redemption limit.');
+      setShowErrorMessage(true);
     }
 
     if (ok) {
@@ -124,11 +125,7 @@ export default function ConfirmValueScreen({
         />
         <ErrorContainer>
           <Body2Subtext>
-            <RedText>
-              {showZeroError && 'Voucher must be redeemed for more than $0.'}
-              {showExceedError &&
-                'Voucher value exceeds maximum redemption limit.'}
-            </RedText>
+            {showErrorMessage && <RedText>{errorMessage}</RedText>}
           </Body2Subtext>
         </ErrorContainer>
         <ButtonMagenta onPress={handleVoucherAdd}>

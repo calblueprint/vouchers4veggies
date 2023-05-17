@@ -26,7 +26,7 @@ export default function ManualVoucherScreen({
   navigation,
 }: ManualVoucherScreenProps) {
   const [serialNumberInput, setSerialNumberInput] = useState<string>('');
-  const [showError, setShowError] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap } = useScanningContext();
@@ -37,7 +37,7 @@ export default function ManualVoucherScreen({
   };
 
   const onChangeSerialNumber = (text: string) => {
-    setShowError(false);
+    setShowErrorMessage(false);
     const value = text.replace(/\D/g, '');
     setSerialNumberInput(value);
   };
@@ -47,14 +47,14 @@ export default function ManualVoucherScreen({
     // checks for duplicates within the current invoice draft
     if (voucherMap.has(serialNumber)) {
       setErrorMessage("You've already added this serial number!");
-      setShowError(true);
+      setShowErrorMessage(true);
     } else {
       const result = await validateSerialNumber(serialNumber);
       const { ok } = result;
       // `ok` is true indicates valid serial number input
       if (ok) {
         setSerialNumberInput('');
-        setShowError(false);
+        setShowErrorMessage(false);
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
         const { maxValue, type } = result.voucherRange;
         navigation.navigate('ConfirmValueScreen', {
@@ -73,7 +73,7 @@ export default function ManualVoucherScreen({
         } else {
           setErrorMessage('Oh no! Invalid serial number.');
         }
-        setShowError(true);
+        setShowErrorMessage(true);
       }
     }
   };
@@ -92,18 +92,18 @@ export default function ManualVoucherScreen({
         handleTextChange={onChangeSerialNumber}
         containerStyle={styles.otpContainerStyle}
         textInputStyle={styles.otpTextInputStyle}
-        isValid={!showError}
+        isValid={!showErrorMessage}
         keyboardType="number-pad"
         returnKeyType="done"
         autoFocus={false}
       />
       <ErrorContainer>
         <Body2Subtext>
-          {showError && <RedText>{errorMessage}</RedText>}
+          {showErrorMessage && <RedText>{errorMessage}</RedText>}
         </Body2Subtext>
       </ErrorContainer>
 
-      <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
+      <ButtonMagenta disabled={showErrorMessage} onPress={handleVoucherAdd}>
         <ButtonTextWhite>Add Voucher</ButtonTextWhite>
       </ButtonMagenta>
       <ButtonWhite onPress={navigateToReview} disabled={voucherMap.size === 0}>

@@ -43,8 +43,8 @@ export default function VoucherBatchScreen({
 
   const [startSerialNumberInput, setStartSerialNumber] = useState<string>('');
   const [endSerialNumberInput, setEndSerialNumber] = useState<string>('');
-  const [showInvalidError, setShowInvalidError] = useState(false);
 
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap, dispatch } = useScanningContext();
@@ -59,12 +59,12 @@ export default function VoucherBatchScreen({
   };
 
   const onChangeStartSerialNumber = (text: string) => {
-    setShowInvalidError(false);
+    setShowErrorMessage(false);
     setStartSerialNumber(text);
   };
 
   const onChangeEndSerialNumber = (text: string) => {
-    setShowInvalidError(false);
+    setShowErrorMessage(false);
     setEndSerialNumber(text);
   };
 
@@ -79,8 +79,8 @@ export default function VoucherBatchScreen({
     // ensures there aren't more than 24 vouchers in voucher batch
     if (endSerialNumber - startSerialNumber >= 24) {
       setProcessingVouchers(false);
-      setShowInvalidError(true);
       setErrorMessage('You may only add up to 24 vouchers at once!');
+      setShowErrorMessage(true);
       return;
     }
 
@@ -89,20 +89,20 @@ export default function VoucherBatchScreen({
     const isEndDuplicate = voucherMap.has(endSerialNumber);
     if (isStartDuplicate && isEndDuplicate) {
       setProcessingVouchers(false);
-      setShowInvalidError(true);
       setErrorMessage("You've already added these serial numbers!");
+      setShowErrorMessage(true);
       return;
     }
     if (isStartDuplicate) {
       setProcessingVouchers(false);
-      setShowInvalidError(true);
       setErrorMessage("You've already added the starting serial number!");
+      setShowErrorMessage(true);
       return;
     }
     if (isEndDuplicate) {
       setProcessingVouchers(false);
-      setShowInvalidError(true);
       setErrorMessage("You've already added the ending serial number!");
+      setShowErrorMessage(true);
       return;
     }
 
@@ -111,20 +111,20 @@ export default function VoucherBatchScreen({
     const endResult = await validateSerialNumber(endSerialNumber);
     if (!startResult.ok && !endResult.ok) {
       setProcessingVouchers(false);
-      setShowInvalidError(true);
       setErrorMessage('Both serial numbers are invalid!');
+      setShowErrorMessage(true);
       return;
     }
     if (!startResult.ok) {
       setProcessingVouchers(false);
-      setShowInvalidError(true);
       setErrorMessage('Start serial number is invalid!');
+      setShowErrorMessage(true);
       return;
     }
     if (!endResult.ok || startSerialNumber >= endSerialNumber) {
       setProcessingVouchers(false);
-      setShowInvalidError(true);
       setErrorMessage('End serial number is invalid!');
+      setShowErrorMessage(true);
       return;
     }
 
@@ -154,7 +154,7 @@ export default function VoucherBatchScreen({
     // timeout to ensure that serial input is cleared after navigation
     setStartSerialNumber('');
     setEndSerialNumber('');
-    setShowInvalidError(false);
+    setShowErrorMessage(false);
     setErrorMessage('');
     setTimeout(() => {
       clearText();
@@ -182,7 +182,7 @@ export default function VoucherBatchScreen({
             handleTextChange={onChangeStartSerialNumber}
             containerStyle={styles.otpContainerStyle}
             textInputStyle={styles.otpTextInputStyle}
-            isValid={!showInvalidError}
+            isValid={!showErrorMessage}
             keyboardType="number-pad"
             returnKeyType="done"
             autoFocus={false}
@@ -197,18 +197,18 @@ export default function VoucherBatchScreen({
             handleTextChange={onChangeEndSerialNumber}
             containerStyle={styles.otpContainerStyle}
             textInputStyle={styles.otpTextInputStyle}
-            isValid={!showInvalidError}
+            isValid={!showErrorMessage}
             keyboardType="number-pad"
             returnKeyType="done"
             autoFocus={false}
           />
           <ErrorContainer>
             <Body2Subtext>
-              {showInvalidError && <RedText>{errorMessage}</RedText>}
+              {showErrorMessage && <RedText>{errorMessage}</RedText>}
             </Body2Subtext>
           </ErrorContainer>
 
-          <ButtonMagenta disabled={showInvalidError} onPress={handleVoucherAdd}>
+          <ButtonMagenta disabled={showErrorMessage} onPress={handleVoucherAdd}>
             <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
           </ButtonMagenta>
           <ButtonWhite
