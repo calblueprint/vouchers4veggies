@@ -3,7 +3,7 @@ import { FlatList, RefreshControl } from 'react-native';
 import { H2Heading } from '../../../assets/Fonts';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import StandardLogo from '../../components/common/StandardLogo';
-import InvoiceCard from '../../components/invoices/TransactionCard';
+import InvoiceCard from '../../components/invoices/InvoiceCard';
 import { getInvoicesByVendorUuid } from '../../database/queries';
 import { InvoiceStackScreenProps } from '../../navigation/types';
 import { Invoice } from '../../types/types';
@@ -38,8 +38,8 @@ export default function InvoicesScreen({
 }: InvoiceStackScreenProps<'InvoicesScreen'>) {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [defaultTransactions, setDefaultTransactions] = useState<Invoice[]>([]);
-  const [transactions, setTransactions] = useState<Invoice[]>([]);
+  const [defaultInvoices, setDefaultInvoices] = useState<Invoice[]>([]);
+  const [invoices, setInvoices] = useState<Invoice[]>([]);
 
   const [sortModalIsVisible, setSortModalIsVisible] = useState(false);
   const [filterModalIsVisible, setFilterModalIsVisible] = useState(false);
@@ -53,26 +53,26 @@ export default function InvoicesScreen({
     undefined,
     undefined,
     undefined,
-    transactions,
-    setTransactions,
+    invoices,
+    setInvoices,
   );
 
   const { filterState, filterDispatch } = useFilterReducer(
-    defaultTransactions,
-    setTransactions,
+    defaultInvoices,
+    setInvoices,
   );
 
   const fetchData = async (Uuid: string | null) => {
     try {
       if (Uuid) {
-        const transactionsArray = await getInvoicesByVendorUuid(Uuid);
-        setDefaultTransactions(transactionsArray);
-        setTransactions(transactionsArray);
+        const invoiceArray = await getInvoicesByVendorUuid(Uuid);
+        setDefaultInvoices(invoiceArray);
+        setInvoices(invoiceArray);
         setIsLoading(false);
       }
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error('(useEffect)[TransactionsScreen]', error);
+      console.error('(useEffect)[InvoicesScreen]', error);
     }
   };
 
@@ -132,7 +132,7 @@ export default function InvoicesScreen({
         <CardContainer>
           <StartOfListView />
           <FlatList
-            data={transactions}
+            data={invoices}
             renderItem={({ item }) => (
               <InvoiceCard
                 navigation={navigation}
