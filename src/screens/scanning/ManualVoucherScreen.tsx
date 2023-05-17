@@ -3,29 +3,24 @@ import { TextInput } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
 import { VoucherCreateError } from '../../types/types';
 import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
-import {
-  ButtonTextWhite,
-  ButtonTextBlack,
-  H4CardNavTab,
-  InputTitleText,
-  Body2Subtext,
-  Body1Text,
-} from '../../../assets/Fonts';
-import {
-  BodyContainer,
-  FormContainer,
-  ErrorContainer,
-  RedText,
-  VoucherCountContainer,
-} from './styles';
+import { BodyContainer, ErrorContainer, styles } from './styles';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import Colors from '../../../assets/Colors';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
+import {
+  ButtonTextWhite,
+  ButtonTextBlack,
+  H4CardNavTab,
+  Body1TextSemibold,
+  Body2Subtext,
+  Body1Text,
+  RedText,
+} from '../../../assets/Fonts';
 
-interface ManualVoucherScreenProps {
+type ManualVoucherScreenProps = {
   navigation: VoucherEntryNavigationProps;
-}
+};
 
 export default function ManualVoucherScreen({
   navigation,
@@ -83,52 +78,40 @@ export default function ManualVoucherScreen({
     }
   };
 
+  const navigateToReview = () => navigation.navigate('ReviewScreen');
+
   return (
     <BodyContainer>
-      <FormContainer>
-        <InputTitleText>Serial Number</InputTitleText>
-        <OTPTextInput
-          ref={otpInput}
-          inputCount={7}
-          tintColor={Colors.magenta}
-          defaultValue={serialNumberInput}
-          inputCellLength={1}
-          handleTextChange={onChangeSerialNumber}
-          containerStyle={{ marginVertical: 3 }}
-          textInputStyle={{
-            borderWidth: 1,
-            borderRadius: 2,
-            width: 30,
-            height: '95%',
-          }}
-          isValid={!showError}
-          keyboardType="number-pad"
-          returnKeyType="done"
-          autoFocus={false}
-        />
-        <ErrorContainer>
-          {showError ? (
-            <RedText>
-              <Body2Subtext>{errorMessage}</Body2Subtext>
-            </RedText>
-          ) : null}
-        </ErrorContainer>
-      </FormContainer>
+      <Body1TextSemibold>Serial Number</Body1TextSemibold>
+      <OTPTextInput
+        ref={otpInput}
+        inputCount={7}
+        tintColor={Colors.magenta}
+        defaultValue={serialNumberInput}
+        inputCellLength={1}
+        handleTextChange={onChangeSerialNumber}
+        containerStyle={styles.otpContainerStyle}
+        textInputStyle={styles.otpTextInputStyle}
+        isValid={!showError}
+        keyboardType="number-pad"
+        returnKeyType="done"
+        autoFocus={false}
+      />
+      <ErrorContainer>
+        <Body2Subtext>
+          {showError && <RedText>{errorMessage}</RedText>}
+        </Body2Subtext>
+      </ErrorContainer>
 
       <ButtonMagenta disabled={showError} onPress={handleVoucherAdd}>
         <ButtonTextWhite>Add Voucher</ButtonTextWhite>
       </ButtonMagenta>
-      <ButtonWhite
-        onPress={() => navigation.navigate('ReviewScreen')}
-        disabled={voucherMap.size === 0}
-      >
+      <ButtonWhite onPress={navigateToReview} disabled={voucherMap.size === 0}>
         <ButtonTextBlack>
           <H4CardNavTab>Review and Submit</H4CardNavTab>
         </ButtonTextBlack>
       </ButtonWhite>
-      <VoucherCountContainer>
-        <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
-      </VoucherCountContainer>
+      <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
     </BodyContainer>
   );
 }

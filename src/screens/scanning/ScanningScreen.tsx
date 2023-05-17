@@ -9,36 +9,26 @@ import {
   ButtonTextMagenta,
 } from '../../../assets/Fonts';
 import {
-  ButtonContainer,
   ScannerContainer,
   BodyContainer,
-  VoucherCountContainer,
+  styles,
+  LoadingContainer,
 } from './styles';
-import {
-  ButtonMagenta,
-  ButtonWhite,
-  SafeArea,
-} from '../../../assets/Components';
+import { ButtonMagenta, ButtonWhite } from '../../../assets/Components';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import { validateSerialNumber } from '../../database/queries';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-
-const styles = StyleSheet.create({
-  container: {
-    overflow: 'hidden',
-    borderRadius: 10,
-  },
-});
 
 enum permissions {
   LOADING,
   DENIED,
   GRANTED,
 }
-interface ScanningScreenProps {
+
+type ScanningScreenProps = {
   navigation: VoucherEntryNavigationProps;
-}
+};
 
 export default function ScanningScreen({ navigation }: ScanningScreenProps) {
   const [hasPermission, setHasPermission] = useState(permissions.LOADING);
@@ -53,7 +43,6 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
         status === 'granted' ? permissions.GRANTED : permissions.DENIED,
       );
     };
-
     getBarCodeScannerPermissions();
   }, []);
 
@@ -86,25 +75,27 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
 
   if (hasPermission === permissions.LOADING) {
     return (
-      <BodyContainer>
+      <LoadingContainer>
         <LoadingSpinner />
-      </BodyContainer>
+      </LoadingContainer>
     );
   }
   if (hasPermission === permissions.DENIED) {
     return <Text>No access to camera</Text>;
   }
 
+  const onScan = () => setScanned(false);
+
+  const navigateToReview = () => navigation.navigate('ReviewScreen');
+
   return (
-    <SafeArea>
-      <BodyContainer>
+    <BodyContainer>
+      <CenterText>
         <Body1Text>
-          <CenterText>
-            Point your camera at the barcode and line it up with the{' '}
-            <MagentaText>purple box.</MagentaText>
-          </CenterText>
+          Point your camera at the barcode and line it up with the{' '}
+          <MagentaText>purple box.</MagentaText>
         </Body1Text>
-      </BodyContainer>
+      </CenterText>
 
       <ScannerContainer>
         <BarCodeScanner
@@ -115,21 +106,14 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
         />
       </ScannerContainer>
 
-      <ButtonContainer>
-        <ButtonMagenta disabled={!scanned} onPress={() => setScanned(false)}>
-          <ButtonTextWhite>Scan</ButtonTextWhite>
-        </ButtonMagenta>
+      <ButtonMagenta disabled={!scanned} onPress={onScan}>
+        <ButtonTextWhite>Scan</ButtonTextWhite>
+      </ButtonMagenta>
 
-        <ButtonWhite
-          onPress={() => navigation.navigate('ReviewScreen')}
-          disabled={voucherMap.size === 0}
-        >
-          <ButtonTextMagenta>Review and Submit</ButtonTextMagenta>
-        </ButtonWhite>
-        <VoucherCountContainer>
-          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
-        </VoucherCountContainer>
-      </ButtonContainer>
-    </SafeArea>
+      <ButtonWhite onPress={navigateToReview} disabled={voucherMap.size === 0}>
+        <ButtonTextMagenta>Review and Submit</ButtonTextMagenta>
+      </ButtonWhite>
+      <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
+    </BodyContainer>
   );
 }

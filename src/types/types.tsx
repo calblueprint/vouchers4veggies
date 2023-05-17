@@ -1,5 +1,9 @@
 import { Timestamp } from 'firebase/firestore';
 
+export type SelectionProps = {
+  isSelected: boolean;
+};
+
 export type Uuid = string;
 
 export type Vendor = {
@@ -50,21 +54,21 @@ export type VoucherValueResult =
   | { ok: true; error: null }
   | { ok: false; error: VoucherValueError };
 
-export type Transaction = {
+export type Invoice = {
   uuid: Uuid;
   timestamp: Timestamp;
-  status: TransactionStatus;
+  status: InvoiceStatus;
   value: number;
   voucherSerialNumbers: number[];
   vendorUuid: Uuid;
 };
 
-export type TransactionCreate = Pick<
-  Transaction,
+export type InvoiceCreate = Pick<
+  Invoice,
   'status' | 'voucherSerialNumbers' | 'vendorUuid'
 >;
 
-export enum TransactionStatus {
+export enum InvoiceStatus {
   PAID = 'paid',
   UNPAID = 'unpaid',
 }

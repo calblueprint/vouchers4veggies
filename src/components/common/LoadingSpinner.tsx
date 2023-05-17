@@ -2,12 +2,10 @@ import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import Colors from '../../../assets/Colors';
 
+const style = { flex: 1 };
+
 export default function LoadingSpinner() {
   return (
-    <ActivityIndicator
-      style={{ flex: 1 }}
-      size="large"
-      color={Colors.magenta}
-    />
+    <ActivityIndicator style={style} size="large" color={Colors.magenta} />
   );
 }

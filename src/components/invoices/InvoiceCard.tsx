@@ -5,24 +5,19 @@ import moment from 'moment';
 import { TouchableOpacity } from 'react-native';
 import Colors from '../../../assets/Colors';
 import { Body1Text, H3Subheading } from '../../../assets/Fonts';
-import {
-  StatusContainer,
-  LeftAlignColumn,
-  ValueContainer,
-  Styles,
-} from './styles';
-import { Row } from '../../../assets/Components';
+import { StatusContainer, ValueContainer, styles } from './styles';
+import { Card, Column } from '../../../assets/Components';
 import StatusComponent from './StatusComponent';
-import { TransactionStackParamList } from '../../navigation/types';
+import { InvoiceStackParamList } from '../../navigation/types';
 import {
   formatTimeForDisplay,
   formatValueForDisplay,
 } from '../../utils/displayUtils';
 
-type TransactionCardProps = {
+type InvoiceCardProps = {
   navigation: NativeStackNavigationProp<
-    TransactionStackParamList,
-    'TransactionsScreen',
+    InvoiceStackParamList,
+    'InvoicesScreen',
     undefined
   >;
   date: Date;
@@ -30,28 +25,29 @@ type TransactionCardProps = {
   value: number;
   status: string;
 };
-export default function TransactionCard({
+
+export default function InvoiceCard({
   navigation,
   date,
   id,
   value,
   status,
-}: TransactionCardProps) {
+}: InvoiceCardProps) {
   const time = moment(date);
 
+  const onPress = () => {
+    navigation.navigate('InvoiceDetailsScreen', {
+      invoiceUuid: id,
+    });
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.navigate('TransactionDetailsScreen', {
-          transactionUuid: id,
-        });
-      }}
-    >
-      <Row>
-        <LeftAlignColumn>
+    <TouchableOpacity onPress={onPress}>
+      <Card>
+        <Column>
           <Body1Text>{time.format('M/D')}</Body1Text>
           <Body1Text>{formatTimeForDisplay(time)}</Body1Text>
-        </LeftAlignColumn>
+        </Column>
 
         <ValueContainer>
           <H3Subheading>${formatValueForDisplay(value)}</H3Subheading>
@@ -64,10 +60,10 @@ export default function TransactionCard({
         <Icon
           name="right"
           size={25}
-          style={Styles.iconWithPadding}
+          style={styles.icon}
           color={Colors.midGray}
         />
-      </Row>
+      </Card>
     </TouchableOpacity>
   );
 }

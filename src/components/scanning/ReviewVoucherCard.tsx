@@ -1,11 +1,10 @@
 import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import Colors from '../../../assets/Colors';
-import { Body1Text } from '../../../assets/Fonts';
-import { LeftAlignColumn, Styles } from '../transactions/styles';
-import { Row } from '../../../assets/Components';
+import { H4SubheadingSemibold, Body1Text } from '../../../assets/Fonts';
+import { Card, Column } from '../../../assets/Components';
 import { formatValueForDisplay } from '../../utils/displayUtils';
-import MediumSemiBoldText from './styles';
+import { IconContainer, styles } from './styles';
 
 type ReviewVoucherCardProps = {
   serialNumber: number;
@@ -14,6 +13,7 @@ type ReviewVoucherCardProps = {
   showDeleteDialog: () => void;
   setSerialNumber: (serialNumber: number) => void;
 };
+
 export default function ReviewVoucherCard({
   serialNumber,
   value,
@@ -32,29 +32,32 @@ export default function ReviewVoucherCard({
   };
 
   return (
-    <Row>
-      <LeftAlignColumn>
+    <Card>
+      <Column>
         <Body1Text>{`SN ${serialNumber}`}</Body1Text>
-        <MediumSemiBoldText>{`$${formatValueForDisplay(
+        <H4SubheadingSemibold>{`${formatValueForDisplay(
           value,
-        )}`}</MediumSemiBoldText>
-      </LeftAlignColumn>
+        )}`}</H4SubheadingSemibold>
+      </Column>
 
-      <AntDesign.Button
-        name="edit"
-        size={25}
-        style={Styles.iconWithPadding}
-        color={Colors.midGray}
-        onPress={onEdit}
-      />
-
-      <AntDesign.Button
-        name="delete"
-        size={25}
-        style={Styles.iconWithPadding}
-        color={Colors.midGray}
-        onPress={onDelete}
-      />
-    </Row>
+      <IconContainer>
+        <AntDesign.Button
+          name="edit"
+          size={25}
+          style={styles.icon}
+          color={Colors.midGray}
+          onPress={onEdit}
+        />
+      </IconContainer>
+      <IconContainer>
+        <AntDesign.Button
+          name="delete"
+          size={25}
+          style={styles.icon}
+          color={Colors.midGray}
+          onPress={onDelete}
+        />
+      </IconContainer>
+    </Card>
   );
 }

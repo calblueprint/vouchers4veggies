@@ -74,7 +74,7 @@ export const handlePreventLeave = ({
         {
           text: 'Discard',
           style: 'destructive',
-          // If the user confirms, then we reset the Transaction
+          // If the user confirms, then we reset the Invoice
           onPress: () => {
             newInvoice(dispatch);
             navigation.navigate('VoucherEntryStartScreen');

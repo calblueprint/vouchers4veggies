@@ -1,12 +1,8 @@
 import React from 'react';
 import { MaterialIcons, Octicons } from '@expo/vector-icons';
-import {
-  SelectedSortAndFilterBase,
-  Styles,
-  UnselectedSortAndFilterBase,
-} from './styles';
+import { SortAndFilterBase, styles } from './styles';
 import { Body2Subtext, MagentaText } from '../../../assets/Fonts';
-import { CenteredOneLine } from '../common/styles';
+import { CenteredRow } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 
 type SortAndFilterButtonProps = {
@@ -14,17 +10,19 @@ type SortAndFilterButtonProps = {
   setModalIsVisible: (visibility: boolean) => void;
   isSelected: boolean;
   type: 'sort' | 'filter';
-  text: string;
-  style?: object;
+  title: string;
+  width?: string | number;
 };
 export default function SortAndFilterButton({
   modalIsVisible,
   setModalIsVisible,
   isSelected,
   type,
-  text,
-  style = {},
+  title,
+  width = 146,
 }: SortAndFilterButtonProps) {
+  const onPress = () => setModalIsVisible(true);
+
   let iconColor = Colors.midBlack;
   if (isSelected) {
     iconColor = Colors.magenta;
@@ -35,7 +33,7 @@ export default function SortAndFilterButton({
       name="tune"
       size={16}
       color={iconColor}
-      style={Styles.icon}
+      style={styles.icon}
     />
   );
   if (type === 'sort') {
@@ -44,35 +42,27 @@ export default function SortAndFilterButton({
         name="sort-desc"
         size={16}
         color={iconColor}
-        style={Styles.icon}
+        style={styles.icon}
       />
     );
   }
 
-  if (isSelected || modalIsVisible) {
-    return (
-      <SelectedSortAndFilterBase
-        onPress={() => setModalIsVisible(true)}
-        style={style}
-      >
-        <CenteredOneLine>
-          {icon}
-          <MagentaText>
-            <Body2Subtext>{text}</Body2Subtext>
-          </MagentaText>
-        </CenteredOneLine>
-      </SelectedSortAndFilterBase>
-    );
-  }
   return (
-    <UnselectedSortAndFilterBase
-      onPress={() => setModalIsVisible(true)}
-      style={style}
+    <SortAndFilterBase
+      isSelected={isSelected || modalIsVisible}
+      onPress={onPress}
+      style={{ width }}
     >
-      <CenteredOneLine>
+      <CenteredRow>
         {icon}
-        <Body2Subtext>{text}</Body2Subtext>
-      </CenteredOneLine>
-    </UnselectedSortAndFilterBase>
+        <Body2Subtext>
+          {isSelected || modalIsVisible ? (
+            <MagentaText>{title}</MagentaText>
+          ) : (
+            title
+          )}
+        </Body2Subtext>
+      </CenteredRow>
+    </SortAndFilterBase>
   );
 }

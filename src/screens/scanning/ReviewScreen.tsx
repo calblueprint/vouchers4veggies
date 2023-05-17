@@ -5,23 +5,23 @@ import {
   ButtonTextWhite,
   H2Heading,
   H3Subheading,
-  H5Subheading2,
+  Body1TextSemibold,
   LoadingText,
 } from '../../../assets/Fonts';
 import {
-  BorderlessRow,
-  LeftAlignContainer,
-  RightAlignContainer,
-  ReviewButtonContainer,
+  ButtonMagentaContainer,
   ConstrainedHeightContainer,
   LoadingContainer,
-  ReviewTitleContainer,
+  SummaryRow,
 } from './styles';
 import {
   ButtonMagenta,
   CardContainer,
+  LeftAlignContainer,
+  RightAlignContainer,
   SafeArea,
   StartOfListView,
+  TitleContainer,
 } from '../../../assets/Components';
 import Colors from '../../../assets/Colors';
 import { ScannerStackScreenProps } from '../../navigation/types';
@@ -31,8 +31,8 @@ import { validateVoucherAmount } from '../../utils/validationUtils';
 import { deleteVoucher, editVoucher } from '../../utils/scanningUtils';
 import BackButton from '../../components/common/BackButton';
 import { formatValueForDisplay } from '../../utils/displayUtils';
-import { createTransaction, createVoucher } from '../../database/queries';
-import { TransactionStatus } from '../../types/types';
+import { createInvoice, createVoucher } from '../../database/queries';
+import { InvoiceStatus } from '../../types/types';
 import { useAuthContext } from '../auth/AuthContext';
 import StandardHeader from '../../components/common/StandardHeader';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
@@ -60,6 +60,12 @@ export default function ReviewScreen({
       voucherData,
     }),
   );
+
+  const onPressBackButton = () => navigation.goBack();
+
+  const onChangeText = (input: string) => setEditDialogText(input);
+
+  const onSubmitEmptyInvoice = () => navigation.popToTop();
 
   const setSerialNumber = (serialNumber: number) => {
     setFocusedSerialNumber(serialNumber);
@@ -102,13 +108,13 @@ export default function ReviewScreen({
     setDeleteDialogIsVisible(true);
   };
 
-  const hideDeleteDialog = () => {
+  const onCloseDeleteDialog = () => {
     setDeleteDialogIsVisible(false);
   };
 
   const onDeleteHelper = () => {
     deleteVoucher(dispatch, focusedSerialNumber);
-    hideDeleteDialog();
+    onCloseDeleteDialog();
   };
 
   const onSubmit = async () => {
@@ -132,8 +138,8 @@ export default function ReviewScreen({
         ),
       );
 
-      createTransaction({
-        status: TransactionStatus.UNPAID,
+      createInvoice({
+        status: InvoiceStatus.UNPAID,
         voucherSerialNumbers: Array.from(voucherMap.keys()),
         vendorUuid,
       });
@@ -147,64 +153,56 @@ export default function ReviewScreen({
   return (
     <SafeArea>
       <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={onPressBackButton} />
       </StandardHeader>
 
-      <ReviewTitleContainer>
+      <TitleContainer>
         <H2Heading>Review vouchers</H2Heading>
-      </ReviewTitleContainer>
+      </TitleContainer>
 
-      {editDialogIsVisible ? (
-        <Dialog.Container visible>
-          <Dialog.Title>Enter Number</Dialog.Title>
-          <Dialog.Description>Edit voucher amount</Dialog.Description>
-          <Dialog.Input
-            placeholderTextColor={Colors.midGray}
-            onChangeText={(input: string) => setEditDialogText(input)}
-            secureTextEntry={false}
-            autoCorrect={false}
-            autoCapitalize="none"
-            placeholder="0.00"
-            keyboardType="decimal-pad"
-            returnKeyType="done"
-          />
-          <Dialog.Button label="Submit" onPress={onSubmitVoucherAmount} />
-        </Dialog.Container>
-      ) : null}
+      <Dialog.Container visible={editDialogIsVisible}>
+        <Dialog.Title>Enter Number</Dialog.Title>
+        <Dialog.Description>Edit voucher amount</Dialog.Description>
+        <Dialog.Input
+          placeholderTextColor={Colors.midGray}
+          onChangeText={onChangeText}
+          secureTextEntry={false}
+          autoCorrect={false}
+          autoCapitalize="none"
+          placeholder="0.00"
+          keyboardType="decimal-pad"
+          returnKeyType="done"
+        />
+        <Dialog.Button label="Submit" onPress={onSubmitVoucherAmount} />
+      </Dialog.Container>
 
-      {invalidDialogIsVisible ? (
-        <Dialog.Container visible>
-          <Dialog.Title>Invalid voucher amount.</Dialog.Title>
-          <Dialog.Button label="Close" onPress={onCloseInvalidValueDialog} />
-        </Dialog.Container>
-      ) : null}
+      <Dialog.Container visible={invalidDialogIsVisible}>
+        <Dialog.Title>Invalid voucher amount.</Dialog.Title>
+        <Dialog.Button label="Close" onPress={onCloseInvalidValueDialog} />
+      </Dialog.Container>
 
-      {deleteDialogIsVisible ? (
-        <Dialog.Container visible>
-          <Dialog.Title>
-            Are you sure you want to delete this voucher?
-          </Dialog.Title>
-          <Dialog.Button label="Cancel" onPress={hideDeleteDialog} />
-          <Dialog.Button
-            label="Delete"
-            color={Colors.alertRed}
-            bold
-            onPress={onDeleteHelper}
-          />
-        </Dialog.Container>
-      ) : null}
+      <Dialog.Container visible={deleteDialogIsVisible}>
+        <Dialog.Title>
+          Are you sure you want to delete this voucher?
+        </Dialog.Title>
+        <Dialog.Button label="Cancel" onPress={onCloseDeleteDialog} />
+        <Dialog.Button
+          label="Delete"
+          color={Colors.alertRed}
+          bold
+          onPress={onDeleteHelper}
+        />
+      </Dialog.Container>
 
-      {emptyInvoiceDialogIsVisible ? (
-        <Dialog.Container visible>
-          <Dialog.Title>This invoice is empty.</Dialog.Title>
-          <Dialog.Button
-            label="Discard"
-            bold
-            color={Colors.alertRed}
-            onPress={() => navigation.popToTop()}
-          />
-        </Dialog.Container>
-      ) : null}
+      <Dialog.Container visible={emptyInvoiceDialogIsVisible}>
+        <Dialog.Title>This invoice is empty.</Dialog.Title>
+        <Dialog.Button
+          label="Discard"
+          bold
+          color={Colors.alertRed}
+          onPress={onSubmitEmptyInvoice}
+        />
+      </Dialog.Container>
 
       {isProcessing ? (
         <LoadingContainer>
@@ -228,18 +226,18 @@ export default function ReviewScreen({
               ))}
             </ConstrainedHeightContainer>
 
-            <BorderlessRow>
+            <SummaryRow>
               <LeftAlignContainer>
-                <H5Subheading2>Amount</H5Subheading2>
+                <Body1TextSemibold>Amount</Body1TextSemibold>
               </LeftAlignContainer>
               <RightAlignContainer>
                 <H3Subheading>{`x${voucherMap.size}`}</H3Subheading>
               </RightAlignContainer>
-            </BorderlessRow>
+            </SummaryRow>
 
-            <BorderlessRow>
+            <SummaryRow>
               <LeftAlignContainer>
-                <H5Subheading2>Total</H5Subheading2>
+                <Body1TextSemibold>Total</Body1TextSemibold>
               </LeftAlignContainer>
               <RightAlignContainer>
                 <H3Subheading>{`$${formatValueForDisplay(
@@ -249,13 +247,13 @@ export default function ReviewScreen({
                   ),
                 )}`}</H3Subheading>
               </RightAlignContainer>
-            </BorderlessRow>
+            </SummaryRow>
 
-            <ReviewButtonContainer>
+            <ButtonMagentaContainer>
               <ButtonMagenta onPress={onSubmit}>
                 <ButtonTextWhite>Submit</ButtonTextWhite>
               </ButtonMagenta>
-            </ReviewButtonContainer>
+            </ButtonMagentaContainer>
           </ScrollView>
         </CardContainer>
       )}

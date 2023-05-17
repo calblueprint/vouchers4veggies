@@ -3,42 +3,46 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import {
   CardContainer,
-  FullSizeContainer,
+  CenteredRow,
   SafeArea,
   StartOfListView,
 } from '../../../assets/Components';
 import BackButton from '../../components/common/BackButton';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import StatusComponent from '../../components/transactions/StatusComponent';
-import VoucherCard from '../../components/transactions/VoucherCard';
-import { getTransaction, getVoucher } from '../../database/queries';
-import { TransactionStackScreenProps } from '../../navigation/types';
-import { Transaction, Voucher } from '../../types/types';
+import StatusComponent from '../../components/invoices/StatusComponent';
+import VoucherCard from '../../components/invoices/VoucherCard';
+import { getInvoice, getVoucher } from '../../database/queries';
+import { InvoiceStackScreenProps } from '../../navigation/types';
+import { Invoice, Voucher } from '../../types/types';
 import StandardHeader from '../../components/common/StandardHeader';
 import {
   formatTimeForDisplay,
   formatValueForDisplay,
 } from '../../utils/displayUtils';
+import BodyContainer from './styles';
+import { SortVoucherOption, useSortReducer } from '../../utils/invoiceUtils';
+import SortModal from '../../components/invoices/SortModal';
+import SortAndFilterButton from '../../components/invoices/SortAndFilterButton';
 import {
-  CenteredOneLine,
-  CountContainer,
-  MediumText,
-  Size14BoldText,
-  Title,
-} from './styles';
-import {
-  SortVoucherOption,
-  useSortReducer,
-} from '../../utils/transactionUtils';
-import SortModal from '../../components/transactions/SortModal';
-import SortAndFilterButton from '../../components/transactions/SortAndFilterButton';
+  Body1TextSemibold,
+  H5Subheading,
+  TitleText,
+} from '../../../assets/Fonts';
 
-export default function TransactionDetailsScreen({
+const sortButtonText = ['SN', 'SN', 'Date', 'Date'];
+const sortDescriptionText = [
+  'Serial Number: High to Low',
+  'Serial Number: Low to High',
+  'Date: Newest',
+  'Date: Oldest',
+];
+
+export default function InvoiceDetailsScreen({
   route,
   navigation,
-}: TransactionStackScreenProps<'TransactionDetailsScreen'>) {
-  const { transactionUuid } = route.params;
-  const [transactionData, setTransactionData] = useState<Transaction>();
+}: InvoiceStackScreenProps<'InvoiceDetailsScreen'>) {
+  const { invoiceUuid } = route.params;
+  const [transactionData, setTransactionData] = useState<Invoice>();
   const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>([]);
   const [displayedVoucherArray, setDisplayedVoucherArray] = useState<Voucher[]>(
     [],
@@ -53,18 +57,10 @@ export default function TransactionDetailsScreen({
     setDisplayedVoucherArray,
   );
 
-  const sortButtonText = ['SN', 'SN', 'Date', 'Date'];
-  const sortDescriptionText = [
-    'Serial Number: High to Low',
-    'Serial Number: Low to High',
-    'Date: Newest',
-    'Date: Oldest',
-  ];
-
   const fetchData = async (Uuid: string | null) => {
     try {
       if (Uuid) {
-        const data = await getTransaction(Uuid);
+        const data = await getInvoice(Uuid);
         setTransactionData(data);
 
         const voucherData = await Promise.all(
@@ -83,52 +79,56 @@ export default function TransactionDetailsScreen({
     setTimeout(() => {
       setIsRefreshing(false);
     }, 1000);
-    fetchData(transactionUuid).then(() => {
+    fetchData(invoiceUuid).then(() => {
       sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [transactionUuid, sortDispatch]);
+  }, [invoiceUuid, sortDispatch]);
 
   useEffect(() => {
-    fetchData(transactionUuid).then(() => {
+    fetchData(invoiceUuid).then(() => {
       sortDispatch({ type: 'ON_RELOAD' });
     });
-  }, [transactionUuid, sortDispatch]);
+  }, [invoiceUuid, sortDispatch]);
 
   const time = moment(transactionData?.timestamp.toDate());
+
+  const onPressBackButton = () => navigation.goBack();
 
   return (
     <SafeArea>
       <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={onPressBackButton} />
       </StandardHeader>
 
       {transactionData ? (
-        <FullSizeContainer>
+        <>
           <StatusComponent status={transactionData.status} />
-          <Title>${formatValueForDisplay(transactionData.value)}</Title>
-          <MediumText>Date: {time.format('M/D/YY')}</MediumText>
-          <MediumText>Time: {formatTimeForDisplay(time)}</MediumText>
+          <TitleText>${formatValueForDisplay(transactionData.value)}</TitleText>
+          <H5Subheading>Date: {time.format('M/D/YY')}</H5Subheading>
+          <H5Subheading>Time: {formatTimeForDisplay(time)}</H5Subheading>
 
-          <CountContainer>
-            <Size14BoldText>
+          <BodyContainer>
+            <Body1TextSemibold>
               Count: {transactionData.voucherSerialNumbers.length}
-            </Size14BoldText>
-          </CountContainer>
+            </Body1TextSemibold>
+          </BodyContainer>
 
-          <CenteredOneLine style={{ paddingHorizontal: 22 }}>
-            <SortAndFilterButton
-              modalIsVisible={sortModalIsVisible}
-              setModalIsVisible={setSortModalIsVisible}
-              isSelected={sortState.sortType !== SortVoucherOption.NO_SORT}
-              type="sort"
-              text={
-                sortState.isActive
-                  ? `Sort by: ${sortButtonText[sortState.sortType]}`
-                  : 'Sort by'
-              }
-              style={{ width: '100%' }}
-            />
-          </CenteredOneLine>
+          <BodyContainer>
+            <CenteredRow>
+              <SortAndFilterButton
+                modalIsVisible={sortModalIsVisible}
+                setModalIsVisible={setSortModalIsVisible}
+                isSelected={sortState.sortType !== SortVoucherOption.NO_SORT}
+                type="sort"
+                title={
+                  sortState.isActive
+                    ? `Sort by: ${sortButtonText[sortState.sortType]}`
+                    : 'Sort by'
+                }
+                width="100%"
+              />
+            </CenteredRow>
+          </BodyContainer>
 
           <CardContainer>
             <StartOfListView />
@@ -151,13 +151,13 @@ export default function TransactionDetailsScreen({
               onRefresh={onRefresh}
             />
           </CardContainer>
-        </FullSizeContainer>
+        </>
       ) : (
         <LoadingSpinner />
       )}
 
       <SortModal
-        name="vouchers"
+        title="vouchers"
         isVisible={sortModalIsVisible}
         setIsVisible={setSortModalIsVisible}
         sortDescriptions={sortDescriptionText}

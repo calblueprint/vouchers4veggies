@@ -6,10 +6,11 @@ import {
   ButtonTextWhite,
   Body1Text,
 } from '../../../assets/Fonts';
-import { MagentaButtonContainer, LeftAlignContainer } from './styles';
+import { ButtonMagentaContainer } from './styles';
 import {
   ButtonMagenta,
-  Row,
+  Card,
+  Column,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -21,36 +22,42 @@ import { ProfileStackScreenProps } from '../../navigation/types';
 export default function ContactUsScreen({
   navigation,
 }: ProfileStackScreenProps<'ContactUsScreen'>) {
+  const onPressBackButton = () => navigation.goBack();
+
+  const onPressEmailUs = () =>
+    Linking.openURL('mailto: v4vdevelopment@gmail.com');
+
   return (
     <SafeArea>
       <StandardHeader>
-        <BackButton onPress={() => navigation.goBack()} />
+        <BackButton onPress={onPressBackButton} />
       </StandardHeader>
+
       <TitleContainer>
         <H2Heading>Contact Us</H2Heading>
       </TitleContainer>
+
       <StartOfListView />
-      <Row>
-        <LeftAlignContainer>
+      <Card>
+        <Column>
           <Body1Text>Phone Number</Body1Text>
           <H4CardNavTab>1-833-VEG4YOU</H4CardNavTab>
-        </LeftAlignContainer>
-      </Row>
+        </Column>
+      </Card>
       <TouchableOpacity>
-        <Row>
-          <LeftAlignContainer>
+        <Card>
+          <Column>
             <Body1Text>Location</Body1Text>
             <H4CardNavTab>1001 Potrero Ave, San Francisco</H4CardNavTab>
-          </LeftAlignContainer>
-        </Row>
+          </Column>
+        </Card>
       </TouchableOpacity>
-      <MagentaButtonContainer>
-        <ButtonMagenta
-          onPress={() => Linking.openURL('mailto: v4vdevelopment@gmail.com')}
-        >
+
+      <ButtonMagentaContainer>
+        <ButtonMagenta onPress={onPressEmailUs}>
           <ButtonTextWhite>Email Us</ButtonTextWhite>
         </ButtonMagenta>
-      </MagentaButtonContainer>
+      </ButtonMagentaContainer>
     </SafeArea>
   );
 }

@@ -1,23 +1,26 @@
 import React from 'react';
-import { Body1Text } from '../../../assets/Fonts';
+import { Body1Text, H4Subheading } from '../../../assets/Fonts';
 import { formatValueForDisplay } from '../../utils/displayUtils';
-import { LeftAlignColumn, H4Subheading } from './styles';
-import { Row } from '../../../assets/Components';
-import { RightAlignContainer } from '../common/styles';
+import {
+  Card,
+  LeftAlignContainer,
+  RightAlignContainer,
+} from '../../../assets/Components';
 
 type VoucherCardProps = {
   serialNumber: number;
   value: number;
 };
+
 export default function VoucherCard({ serialNumber, value }: VoucherCardProps) {
   return (
-    <Row>
-      <LeftAlignColumn>
+    <Card>
+      <LeftAlignContainer>
         <Body1Text>SN {serialNumber}</Body1Text>
-      </LeftAlignColumn>
-      <RightAlignContainer style={{ marginRight: 29 }}>
+      </LeftAlignContainer>
+      <RightAlignContainer>
         <H4Subheading>${formatValueForDisplay(value)}</H4Subheading>
       </RightAlignContainer>
-    </Row>
+    </Card>
   );
 }

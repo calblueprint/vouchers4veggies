@@ -1,26 +1,11 @@
 import styled from 'styled-components/native';
 import { StyleSheet } from 'react-native';
 import Colors from '../../../assets/Colors';
-
-export const VoucherCounter = styled.View`
-  width: 30px;
-  height: 30px;
-  background: ${Colors.lightMagenta});
-  border: 1px solid ${Colors.brightMagenta};
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { Row } from '../../../assets/Components';
 
 export const BodyContainer = styled.View`
-  margin: 20px 0px;
+  margin-vertical: 20px;
   width: 277px;
-  align-items: center;
-`;
-
-export const TitleContainer = styled.View`
-  padding-bottom: 12px;
 `;
 
 export const ScannerContainer = styled.View`
@@ -35,55 +20,12 @@ export const ScannerContainer = styled.View`
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 40px;
+  margin-top: 20px;
 `;
 
-export const ButtonContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-`;
-
-export const FormContainer = styled.View`
-  width: 277px;
-`;
-
-export const BorderlessRow = styled.View`
-  margin-top: 10px;
-  display: flex;
-  background-color: #fff;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-`;
-
-export const LeftAlignContainer = styled.View`
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  padding-left: 29px;
-`;
-
-export const RightAlignContainer = styled.View`
-  flex: 1;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-content: center;
-  padding-right: 29px;
-`;
-
-export const ReviewTitleContainer = styled.View`
-  display: flex;
-  padding-top: 12px;
-  padding-bottom: 40px;
-`;
-
-export const ConfirmationTitleContainer = styled.View`
-  display: flex;
-  padding: 40px;
-  padding-top: 200px;
+export const SummaryRow = styled(Row)`
+  padding-horizontal: 29px;
+  padding-top: 10px;
 `;
 
 export const ConstrainedHeightContainer = styled.View`
@@ -91,7 +33,7 @@ export const ConstrainedHeightContainer = styled.View`
   min-height: 268px;
 `;
 
-export const ReviewButtonContainer = styled.View`
+export const ButtonMagentaContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,61 +42,7 @@ export const ReviewButtonContainer = styled.View`
 
 export const ErrorContainer = styled.View`
   width: 100%;
-  height: 15px;
-  margin: 10px 0px;
-`;
-
-export const WhiteText = styled.Text`
-  color: ${Colors.offWhite};
-`;
-
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
-`;
-
-export const RedText = styled.Text`
-  color: ${Colors.alertRed};
-`;
-
-export const RangeInputContainer = styled.View`
-  width: 120px;
-`;
-
-export const VoucherRangeContainer = styled.View`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 6px;
-`;
-
-// TODO: refactor to use selene's dropdown component
-export const DropDownContainer = styled.View`
-  width: 277px;
-  height: 35px;
-  background: ${Colors.offWhite};
-  border: 2px solid ${Colors.lightMagenta};
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 6px;
-  margin-bottom: 8px;
-`;
-
-export const StartContainer = styled.View`
-  top: 193px;
-  margin: 0px 49px;
-`;
-
-export const HeroContainer = styled.View`
-  margin-bottom: 40px;
-`;
-
-export const VoucherCountContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 277px;
+  margin-vertical: 10px;
 `;
 
 export const LoadingContainer = styled.View`
@@ -166,24 +54,19 @@ export const LoadingContainer = styled.View`
   align-items: center;
 `;
 
-export const NavButtonContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-`;
-
-export const NavButton = styled.Pressable`
-  width: 33.333%;
-`;
-
-export default StyleSheet.create({
-  selectedBtn: {
-    borderBottomWidth: 3,
-    borderColor: Colors.magenta,
+export const styles = StyleSheet.create({
+  container: {
+    overflow: 'hidden',
+    borderRadius: 10,
   },
-  unselectedBtn: {
-    borderBottomWidth: 3,
-    borderColor: Colors.lightGray,
+  otpTextInputStyle: {
+    borderWidth: 1,
+    borderRadius: 2,
+    width: 30,
+    height: 40,
+    marginBottom: 0,
+  },
+  otpContainerStyle: {
+    marginVertical: 3,
   },
 });
