@@ -18,13 +18,6 @@ export enum SortVoucherOption {
   DATE_ASC,
 }
 
-export type SortState = {
-  dispatch: SortDispatch;
-  isActive: boolean;
-  sortType: SortVoucherOption | SortInvoiceOption;
-  inProgressSortType: SortVoucherOption | SortInvoiceOption;
-};
-
 export enum SortInvoiceOption {
   NO_SORT = -1,
   AMOUNT_DESC,
@@ -32,6 +25,13 @@ export enum SortInvoiceOption {
   DATE_DESC,
   DATE_ASC,
 }
+
+export type SortState = {
+  dispatch: SortDispatch;
+  isActive: boolean;
+  sortType: SortVoucherOption | SortInvoiceOption;
+  inProgressSortType: SortVoucherOption | SortInvoiceOption;
+};
 
 const sortVouchersBySerialNumberAsc = (data: Voucher[]) => {
   const dataCopy = [...data];

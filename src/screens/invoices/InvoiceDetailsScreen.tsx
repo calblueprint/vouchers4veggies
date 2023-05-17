@@ -42,7 +42,7 @@ export default function InvoiceDetailsScreen({
   navigation,
 }: InvoiceStackScreenProps<'InvoiceDetailsScreen'>) {
   const { invoiceUuid } = route.params;
-  const [transactionData, setTransactionData] = useState<Invoice>();
+  const [invoiceData, setInvoiceData] = useState<Invoice>();
   const [defaultVoucherArray, setDefaultVoucherArray] = useState<Voucher[]>([]);
   const [displayedVoucherArray, setDisplayedVoucherArray] = useState<Voucher[]>(
     [],
@@ -61,7 +61,7 @@ export default function InvoiceDetailsScreen({
     try {
       if (Uuid) {
         const data = await getInvoice(Uuid);
-        setTransactionData(data);
+        setInvoiceData(data);
 
         const voucherData = await Promise.all(
           data.voucherSerialNumbers.map(item => getVoucher(item)),
@@ -70,7 +70,7 @@ export default function InvoiceDetailsScreen({
       }
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error('(useEffect)[TransactionDetailsScreen]', error);
+      console.error('(useEffect)[InvoicenDetailsScreen]', error);
     }
   };
 
@@ -90,7 +90,7 @@ export default function InvoiceDetailsScreen({
     });
   }, [invoiceUuid, sortDispatch]);
 
-  const time = moment(transactionData?.timestamp.toDate());
+  const time = moment(invoiceData?.timestamp.toDate());
 
   const onPressBackButton = () => navigation.goBack();
 
@@ -100,16 +100,16 @@ export default function InvoiceDetailsScreen({
         <BackButton onPress={onPressBackButton} />
       </StandardHeader>
 
-      {transactionData ? (
+      {invoiceData ? (
         <>
-          <StatusComponent status={transactionData.status} />
-          <TitleText>${formatValueForDisplay(transactionData.value)}</TitleText>
+          <StatusComponent status={invoiceData.status} />
+          <TitleText>${formatValueForDisplay(invoiceData.value)}</TitleText>
           <H5Subheading>Date: {time.format('M/D/YY')}</H5Subheading>
           <H5Subheading>Time: {formatTimeForDisplay(time)}</H5Subheading>
 
           <BodyContainer>
             <Body1TextSemibold>
-              Count: {transactionData.voucherSerialNumbers.length}
+              Count: {invoiceData.voucherSerialNumbers.length}
             </Body1TextSemibold>
           </BodyContainer>
 

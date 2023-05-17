@@ -7,7 +7,7 @@ import { InvoiceStackParamList } from '../types';
 const InvoiceStack = createNativeStackNavigator<InvoiceStackParamList>();
 
 /**
- * Stack navigator for the transaction/invoice screens.
+ * Stack navigator for the invoice screens.
  */
 export default function InvoiceStackNavigator() {
   return (
