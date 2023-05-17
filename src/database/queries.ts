@@ -30,9 +30,9 @@ import fbApp from './clientApp';
 const db = getFirestore(fbApp);
 const testColl = collection(db, 'test-col');
 const vendorCollection = collection(db, 'vendors');
-const voucherTypeCollection = collection(db, 'voucher-ranges');
+const voucherTypeCollection = collection(db, 'voucher-types');
 const voucherCollection = collection(db, 'vouchers');
-const invoiceCollection = collection(db, 'transactions');
+const invoiceCollection = collection(db, 'invoices');
 
 /**
  * Function to test connection to Firestore.
@@ -103,7 +103,7 @@ export const getVendorByEmail = async (
 };
 
 /**
- * Get all voucher types from the `voucher-ranges` collection.
+ * Get all voucher types from the `voucher-types` collection.
  *
  * Returns an array of VoucherType objects.
  */
@@ -120,7 +120,7 @@ export const getAllVoucherTypes = async (): Promise<VoucherType[]> => {
 };
 
 /**
- * Query the `voucher-ranges` collection.
+ * Query the `voucher-types` collection.
  *
  * Returns a VoucherType if the given serialNumber is in range of any voucher type.
  *
