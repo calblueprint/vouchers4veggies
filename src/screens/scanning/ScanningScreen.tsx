@@ -60,8 +60,8 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
         navigation.navigate('ConfirmValueScreen', {
           serialNumber,
-          maxValue: result.voucherRange.maxValue,
-          type: result.voucherRange.type,
+          maxValue: result.voucherType.maxValue,
+          type: result.voucherType.type,
         });
       } else {
         Alert.alert('Oh no! Invalid serial number.', 'Please try again', [

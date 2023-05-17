@@ -56,7 +56,7 @@ export default function ManualVoucherScreen({
         setSerialNumberInput('');
         setShowErrorMessage(false);
         // provides the maxVoucherValue to the confirm value screen to autofill the text box
-        const { maxValue, type } = result.voucherRange;
+        const { maxValue, type } = result.voucherType;
         navigation.navigate('ConfirmValueScreen', {
           serialNumber,
           maxValue,

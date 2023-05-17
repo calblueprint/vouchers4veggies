@@ -12,7 +12,7 @@ export type Vendor = {
   name: string;
 };
 
-export type VoucherRange = {
+export type VoucherType = {
   startSerialNum: number;
   endSerialNum: number;
   type: string;
@@ -39,7 +39,7 @@ export enum VoucherCreateError {
 
 export type SerialNumberValidationResult =
   | { ok: false; error: VoucherCreateError }
-  | { ok: true; voucherRange: VoucherRange };
+  | { ok: true; voucherType: VoucherType };
 
 export type VoucherCreateResult =
   | { ok: true; docId: string }

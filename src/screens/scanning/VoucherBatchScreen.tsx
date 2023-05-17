@@ -22,7 +22,7 @@ import { VoucherEntryNavigationProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import {
   validateSerialNumber,
-  validateEntireVoucherRange,
+  validateVoucherRange,
 } from '../../database/queries';
 import {
   addMultipleVouchers,
@@ -129,7 +129,7 @@ export default function VoucherBatchScreen({
     }
 
     // validates the entire range of serialNumbers
-    const validSerialNumbers = await validateEntireVoucherRange(
+    const validSerialNumbers = await validateVoucherRange(
       startSerialNumber,
       endSerialNumber,
     );
@@ -138,8 +138,8 @@ export default function VoucherBatchScreen({
     addMultipleVouchers(
       dispatch,
       validSerialNumbers,
-      startResult.voucherRange.maxValue,
-      startResult.voucherRange.type,
+      startResult.voucherType.maxValue,
+      startResult.voucherType.type,
     );
 
     // if fewer serialNumbers are returned than expected, show a specific error
