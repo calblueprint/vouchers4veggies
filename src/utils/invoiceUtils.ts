@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { TransactionStatus, Transaction, Voucher } from '../types/types';
+import { InvoiceStatus, Invoice, Voucher } from '../types/types';
 
 type SortAction =
   | { type: 'SORT_BY'; option: number }
@@ -18,20 +18,20 @@ export enum SortVoucherOption {
   DATE_ASC,
 }
 
-export type SortState = {
-  dispatch: SortDispatch;
-  isActive: boolean;
-  sortType: SortVoucherOption | SortTransactionOption;
-  inProgressSortType: SortVoucherOption | SortTransactionOption;
-};
-
-export enum SortTransactionOption {
+export enum SortInvoiceOption {
   NO_SORT = -1,
   AMOUNT_DESC,
   AMOUNT_ASC,
   DATE_DESC,
   DATE_ASC,
 }
+
+export type SortState = {
+  dispatch: SortDispatch;
+  isActive: boolean;
+  sortType: SortVoucherOption | SortInvoiceOption;
+  inProgressSortType: SortVoucherOption | SortInvoiceOption;
+};
 
 const sortVouchersBySerialNumberAsc = (data: Voucher[]) => {
   const dataCopy = [...data];
@@ -49,19 +49,19 @@ const sortVouchersByDateDesc = (data: Voucher[]) => [...data];
 
 const sortVouchersByDateAsc = (data: Voucher[]) => [...data].reverse();
 
-const sortTransactionsByAmountDesc = (data: Transaction[]) => {
+const sortInvoicesByAmountDesc = (data: Invoice[]) => {
   const dataCopy = [...data];
   const sortedArray = dataCopy.sort((a, b) => b.value - a.value);
   return sortedArray;
 };
 
-const sortTransactionsByAmountAsc = (data: Transaction[]) => {
+const sortInvoicesByAmountAsc = (data: Invoice[]) => {
   const dataCopy = [...data];
   const sortedArray = dataCopy.sort((a, b) => a.value - b.value);
   return sortedArray;
 };
 
-const sortTransactionsByDateDesc = (data: Transaction[]) => {
+const sortInvoicesByDateDesc = (data: Invoice[]) => {
   const dataCopy = [...data];
   const sortedArray = dataCopy.sort(
     (a, b) => b.timestamp.seconds - a.timestamp.seconds,
@@ -69,7 +69,7 @@ const sortTransactionsByDateDesc = (data: Transaction[]) => {
   return sortedArray;
 };
 
-const sortTransactionsByDateAsc = (data: Transaction[]) => {
+const sortInvoicesByDateAsc = (data: Invoice[]) => {
   const dataCopy = [...data];
   const sortedArray = dataCopy.sort(
     (a, b) => a.timestamp.seconds - b.timestamp.seconds,
@@ -78,12 +78,12 @@ const sortTransactionsByDateAsc = (data: Transaction[]) => {
 };
 
 export const useSortReducer = (
-  type: 'vouchers' | 'transactions',
+  type: 'vouchers' | 'invoices',
   voucherArray?: Voucher[],
   defaultVoucherArray?: Voucher[],
   setVoucherArray?: (array: Voucher[]) => void,
-  transactionArray?: Transaction[],
-  setTransactionArray?: (array: Transaction[]) => void,
+  invoiceArray?: Invoice[],
+  setInvoiceArray?: (array: Invoice[]) => void,
 ) => {
   const [sortState, sortDispatch] = useReducer(
     (prevState: SortState, action: SortAction) => {
@@ -104,7 +104,7 @@ export const useSortReducer = (
           if (type === 'vouchers' && voucherArray && setVoucherArray) {
             let sortedArray = voucherArray;
             switch (prevState.inProgressSortType) {
-              case SortTransactionOption.NO_SORT:
+              case SortInvoiceOption.NO_SORT:
                 return { ...prevState };
               case SortVoucherOption.DATE_ASC:
                 if (defaultVoucherArray)
@@ -121,28 +121,24 @@ export const useSortReducer = (
                   sortedArray = sortVouchersByDateDesc(defaultVoucherArray);
             }
             setVoucherArray(sortedArray);
-          } else if (
-            type === 'transactions' &&
-            setTransactionArray &&
-            transactionArray
-          ) {
-            let sortedArray = transactionArray;
+          } else if (type === 'invoices' && setInvoiceArray && invoiceArray) {
+            let sortedArray = invoiceArray;
             switch (prevState.inProgressSortType) {
-              case SortTransactionOption.NO_SORT:
+              case SortInvoiceOption.NO_SORT:
                 return { ...prevState };
-              case SortTransactionOption.DATE_ASC:
-                sortedArray = sortTransactionsByDateAsc(transactionArray);
+              case SortInvoiceOption.DATE_ASC:
+                sortedArray = sortInvoicesByDateAsc(invoiceArray);
                 break;
-              case SortTransactionOption.AMOUNT_ASC:
-                sortedArray = sortTransactionsByAmountAsc(transactionArray);
+              case SortInvoiceOption.AMOUNT_ASC:
+                sortedArray = sortInvoicesByAmountAsc(invoiceArray);
                 break;
-              case SortTransactionOption.AMOUNT_DESC:
-                sortedArray = sortTransactionsByAmountDesc(transactionArray);
+              case SortInvoiceOption.AMOUNT_DESC:
+                sortedArray = sortInvoicesByAmountDesc(invoiceArray);
                 break;
               default:
-                sortedArray = sortTransactionsByDateDesc(transactionArray);
+                sortedArray = sortInvoicesByDateDesc(invoiceArray);
             }
-            setTransactionArray(sortedArray);
+            setInvoiceArray(sortedArray);
           }
           return {
             ...prevState,
@@ -168,26 +164,22 @@ export const useSortReducer = (
                   sortedArray = sortVouchersByDateDesc(defaultVoucherArray);
             }
             setVoucherArray(sortedArray);
-          } else if (
-            type === 'transactions' &&
-            setTransactionArray &&
-            transactionArray
-          ) {
-            let sortedArray = transactionArray;
+          } else if (type === 'invoices' && setInvoiceArray && invoiceArray) {
+            let sortedArray = invoiceArray;
             switch (prevState.sortType) {
-              case SortTransactionOption.DATE_ASC:
-                sortedArray = sortTransactionsByDateAsc(transactionArray);
+              case SortInvoiceOption.DATE_ASC:
+                sortedArray = sortInvoicesByDateAsc(invoiceArray);
                 break;
-              case SortTransactionOption.AMOUNT_ASC:
-                sortedArray = sortTransactionsByAmountAsc(transactionArray);
+              case SortInvoiceOption.AMOUNT_ASC:
+                sortedArray = sortInvoicesByAmountAsc(invoiceArray);
                 break;
-              case SortTransactionOption.AMOUNT_DESC:
-                sortedArray = sortTransactionsByAmountDesc(transactionArray);
+              case SortInvoiceOption.AMOUNT_DESC:
+                sortedArray = sortInvoicesByAmountDesc(invoiceArray);
                 break;
               default:
-                sortedArray = sortTransactionsByDateDesc(transactionArray);
+                sortedArray = sortInvoicesByDateDesc(invoiceArray);
             }
-            setTransactionArray(sortedArray);
+            setInvoiceArray(sortedArray);
             return prevState;
           }
           return {
@@ -223,7 +215,7 @@ type FilterAction =
   | { type: 'SET_MIN_DATE'; date: Date }
   | { type: 'SET_MAX_DATE'; date: Date }
   | { type: 'SET_AMOUNT'; minAmount: number; maxAmount: number | null }
-  | { type: 'SET_STATUS_FILTER'; status: TransactionStatus }
+  | { type: 'SET_STATUS_FILTER'; status: InvoiceStatus }
   | { type: 'CLEAR_DATE_FILTERS' }
   | { type: 'CLEAR_STATUS_FILTER' }
   | { type: 'CLEAR_AMOUNT_FILTERS' }
@@ -256,10 +248,10 @@ export type FilterState = {
 };
 
 export const useFilterReducer = (
-  defaultTransactions: Transaction[],
-  setTransactions: (array: Transaction[]) => void,
+  defaultInvoices: Invoice[],
+  setInvoices: (array: Invoice[]) => void,
 ) => {
-  const filterByDate = (filterState: FilterState, array: Transaction[]) => {
+  const filterByDate = (filterState: FilterState, array: Invoice[]) => {
     let minTime = 0;
     if (filterState.inProgressMinDateIsSet) {
       const oneDay = 24 * 3600 * 1000;
@@ -273,14 +265,14 @@ export const useFilterReducer = (
     return filteredArray;
   };
 
-  const filterByStatus = (filterState: FilterState, array: Transaction[]) => {
+  const filterByStatus = (filterState: FilterState, array: Invoice[]) => {
     const filteredArray = array?.filter(
       t => t.status === filterState.statusFilter,
     );
     return filteredArray;
   };
 
-  const filterByAmount = (filterState: FilterState, array: Transaction[]) => {
+  const filterByAmount = (filterState: FilterState, array: Invoice[]) => {
     let filteredArray = null;
     if (filterState.maxAmountIsSet) {
       filteredArray = array?.filter(
@@ -300,7 +292,7 @@ export const useFilterReducer = (
     (prevState: FilterState, action: FilterAction) => {
       let count = prevState.inProgressFilterCount;
       let newState = { ...prevState };
-      let transactions = [...defaultTransactions];
+      let invoices = [...defaultInvoices];
 
       switch (action.type) {
         case 'SET_MIN_DATE':
@@ -404,15 +396,15 @@ export const useFilterReducer = (
           };
         case 'ON_RELOAD':
           if (prevState.minDateIsSet || prevState.maxDateIsSet) {
-            transactions = filterByDate(prevState, transactions);
+            invoices = filterByDate(prevState, invoices);
           }
           if (prevState.statusFilter !== 'none') {
-            transactions = filterByStatus(prevState, transactions);
+            invoices = filterByStatus(prevState, invoices);
           }
           if (prevState.minAmountIsSet || prevState.maxAmountIsSet) {
-            transactions = filterByAmount(prevState, transactions);
+            invoices = filterByAmount(prevState, invoices);
           }
-          setTransactions(transactions);
+          setInvoices(invoices);
           return prevState;
         case 'ON_SUBMIT':
           newState = {
@@ -430,15 +422,15 @@ export const useFilterReducer = (
           };
 
           if (newState.minDateIsSet || newState.maxDateIsSet) {
-            transactions = filterByDate(newState, transactions);
+            invoices = filterByDate(newState, invoices);
           }
           if (newState.statusFilter !== 'none') {
-            transactions = filterByStatus(newState, transactions);
+            invoices = filterByStatus(newState, invoices);
           }
           if (newState.minAmountIsSet || newState.maxAmountIsSet) {
-            transactions = filterByAmount(newState, transactions);
+            invoices = filterByAmount(newState, invoices);
           }
-          setTransactions(transactions);
+          setInvoices(invoices);
           return newState;
         case 'RESET_IN_PROGRESS':
           return {

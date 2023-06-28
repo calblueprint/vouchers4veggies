@@ -3,90 +3,95 @@ import Modal from 'react-native-modal';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {
-  CloseButtonContainer,
   SortModalContainer,
-  Styles,
-  CenteredContainer,
+  styles,
+  ButtonMagentaContainer,
   PaddedScrollView,
-  ClearButtonContainer,
+  ModalHeader,
 } from './styles';
 import { ButtonTextWhite, H4CardNavTab } from '../../../assets/Fonts';
-import RadioButton from '../common/RadioButton';
-import { SortDispatch, SortState } from '../../utils/transactionUtils';
-import { ButtonMagenta } from '../../../assets/Components';
-import { OneLine } from '../common/styles';
+import RadioButtonList from './RadioButtonList';
+import { SortDispatch, SortState } from '../../utils/invoiceUtils';
+import {
+  ButtonMagenta,
+  LeftAlignContainer,
+  RightAlignContainer,
+} from '../../../assets/Components';
 import ClearButton from './ClearButton';
 import Colors from '../../../assets/Colors';
 
 type SortModalProps = {
-  name: 'invoices' | 'vouchers';
+  title: 'invoices' | 'vouchers';
   isVisible: boolean;
   setIsVisible: (visibility: boolean) => void;
   sortState: SortState;
   sortDispatch: SortDispatch;
   sortDescriptions: string[];
 };
+
 export default function SortModal({
-  name,
+  title,
   isVisible,
   setIsVisible,
   sortState,
   sortDispatch,
   sortDescriptions,
 }: SortModalProps) {
+  const onClearSort = () => sortDispatch({ type: 'CLEAR_SORT' });
+
+  const onCloseModal = () => {
+    setIsVisible(false);
+    sortDispatch({ type: 'RESET_IN_PROGRESS' });
+  };
+
+  const onSetSelected = (index: number) => {
+    sortDispatch({ type: 'SORT_BY', option: index });
+  };
+
+  const onSubmitSort = () => {
+    setIsVisible(false);
+    sortDispatch({ type: 'ON_SUBMIT' });
+  };
+
   return (
     <Modal
       isVisible={isVisible}
       coverScreen={false}
-      style={Styles.modal}
+      style={styles.modal}
       backdropTransitionOutTiming={0}
     >
       <SortModalContainer>
-        <OneLine>
-          <ClearButtonContainer>
+        <ModalHeader>
+          <LeftAlignContainer>
             <ClearButton
               isDisabled={
                 !sortState.isActive && sortState.inProgressSortType === -1
               }
-              onPress={() => sortDispatch({ type: 'CLEAR_SORT' })}
+              onPress={onClearSort}
             />
-          </ClearButtonContainer>
-          <CloseButtonContainer>
-            <TouchableOpacity
-              onPress={() => {
-                setIsVisible(false);
-                sortDispatch({ type: 'RESET_IN_PROGRESS' });
-              }}
-            >
+          </LeftAlignContainer>
+          <RightAlignContainer>
+            <TouchableOpacity onPress={onCloseModal}>
               <Icon name="close" size={24} color={Colors.midBlack} />
             </TouchableOpacity>
-          </CloseButtonContainer>
-        </OneLine>
+          </RightAlignContainer>
+        </ModalHeader>
 
         <PaddedScrollView alwaysBounceVertical={false}>
-          <H4CardNavTab
-            style={{ marginBottom: 22 }}
-          >{`Sort ${name} by`}</H4CardNavTab>
-          <View style={{ marginBottom: 22 }}>
-            <RadioButton
+          <H4CardNavTab>{`Sort ${title} by`}</H4CardNavTab>
+          <View>
+            <RadioButtonList
               data={sortDescriptions}
               selected={sortState.inProgressSortType}
-              setSelected={(index: number) => {
-                sortDispatch({ type: 'SORT_BY', option: index });
-              }}
+              setSelected={onSetSelected}
             />
           </View>
 
-          <CenteredContainer>
-            <ButtonMagenta
-              onPress={() => {
-                setIsVisible(false);
-                sortDispatch({ type: 'ON_SUBMIT' });
-              }}
-            >
+          <ButtonMagentaContainer>
+            <ButtonMagenta onPress={onSubmitSort}>
               <ButtonTextWhite>Apply</ButtonTextWhite>
             </ButtonMagenta>
-          </CenteredContainer>
+          </ButtonMagentaContainer>
         </PaddedScrollView>
       </SortModalContainer>
     </Modal>

@@ -2,19 +2,25 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import styled from 'styled-components/native';
 import Colors from '../../../assets/Colors';
-import { RootNavBackButton } from '../../../assets/Components';
+import { DarkGrayText } from '../../../assets/Fonts';
 
-export const BackButtonContainer = styled.View`
+const BackButtonContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
 `;
 
-export const DarkGrayText = styled.Text`
-  color: ${Colors.darkGray};
+const RootNavBackButton = styled.TouchableOpacity`
+  text-align: center;
+  align-items: center;
+  padding: 9px 18px 9px 0px;
 `;
 
-export default function BackButton({ onPress }: { onPress: () => void }) {
+type BackButtonProps = {
+  onPress: () => void;
+};
+
+export default function BackButton({ onPress }: BackButtonProps) {
   return (
     <BackButtonContainer>
       <RootNavBackButton onPress={onPress}>

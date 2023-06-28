@@ -7,7 +7,7 @@ import ReviewScreen from '../../screens/scanning/ReviewScreen';
 import { ScanningContextProvider } from '../../screens/scanning/ScanningContext';
 import ScanningScreen from '../../screens/scanning/ScanningScreen';
 import { ScannerStackParamList } from '../types';
-import TransactionStackNavigator from './TransactionStackNavigator';
+import InvoiceStackNavigator from './InvoiceStackNavigator';
 import VoucherEntryStartScreen from '../../screens/scanning/VoucherEntryStartScreen';
 import VoucherBatchScreen from '../../screens/scanning/VoucherBatchScreen';
 import VoucherEntryNavigator from '../../screens/scanning/VoucherEntryNavigator';
@@ -31,7 +31,7 @@ export default function ScannerStackNavigator() {
         />
         <ScannerStack.Screen
           name="InvoicesScreen"
-          component={TransactionStackNavigator}
+          component={InvoiceStackNavigator}
         />
         <ScannerStack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
           <ScannerStack.Screen

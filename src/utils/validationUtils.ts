@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { getVoucherRange } from '../database/queries';
+import { getVoucherType } from '../database/queries';
 
 export const validateEmailInput = (input: string) => {
   try {
@@ -47,8 +47,8 @@ export const validateVoucherAmount = async (
     currencySchema.parse(input);
 
     const value = Math.round(parseFloat(input.replace(',', '.')) * 100);
-    const voucherRange = await getVoucherRange(serialNumber);
-    if (voucherRange && voucherRange.maxValue < value) {
+    const voucherType = await getVoucherType(serialNumber);
+    if (voucherType && voucherType.maxValue < value) {
       throw new Error('Value exceeds maximum');
     }
     return true;

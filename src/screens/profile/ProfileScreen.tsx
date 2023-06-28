@@ -7,19 +7,15 @@ import {
   H2Heading,
   ButtonTextWhite,
   Body1Text,
-  CenterText,
 } from '../../../assets/Fonts';
 import { signOut } from '../../utils/authUtils';
 import { useAuthContext } from '../auth/AuthContext';
-import {
-  MagentaButtonContainer,
-  LeftAlignContainer,
-  IconContainer,
-  Styles,
-} from './styles';
+import { ButtonMagentaContainer, styles } from './styles';
 import {
   ButtonMagenta,
-  Row,
+  Card,
+  Column,
+  LeftAlignContainer,
   SafeArea,
   StartOfListView,
   TitleContainer,
@@ -38,6 +34,7 @@ export default function ProfileScreen({
   const { vendorUuid } = useAuthContext();
   const [vendorName, setVendorName] = useState<string>(' ');
   const [vendorEmail, setVendorEmail] = useState<string>(' ');
+
   useEffect(() => {
     const fetchData = async () => {
       if (vendorUuid) {
@@ -48,47 +45,46 @@ export default function ProfileScreen({
     };
     fetchData();
   }, [vendorUuid]);
+
+  const navigateToContactUs = () => navigation.navigate('ContactUsScreen');
+
   return (
     <SafeArea>
       <StandardHeader>
         <StandardLogo />
       </StandardHeader>
+
       <TitleContainer>
-        <CenterText>
-          <H2Heading>Hi, {vendorName}!</H2Heading>
-        </CenterText>
+        <H2Heading>Hi, {vendorName}!</H2Heading>
       </TitleContainer>
+
       <StartOfListView />
-      <Row>
-        <LeftAlignContainer>
+      <Card>
+        <Column>
           <Body1Text>Email</Body1Text>
           <H4CardNavTab>{vendorEmail}</H4CardNavTab>
-        </LeftAlignContainer>
-      </Row>
-      <TouchableOpacity onPress={() => navigation.navigate('ContactUsScreen')}>
-        <Row>
-          <IconContainer>
+        </Column>
+      </Card>
+      <TouchableOpacity onPress={navigateToContactUs}>
+        <Card>
+          <LeftAlignContainer>
             <Icon2
               name="phone"
               size={25}
-              style={Styles.icon}
+              style={styles.icon}
               color={Colors.darkGray}
             />
             <H4CardNavTab>Contact Us</H4CardNavTab>
-          </IconContainer>
-          <Icon
-            name="right"
-            size={25}
-            style={Styles.icon}
-            color={Colors.midGray}
-          />
-        </Row>
+          </LeftAlignContainer>
+          <Icon name="right" size={25} color={Colors.midGray} />
+        </Card>
       </TouchableOpacity>
-      <MagentaButtonContainer>
+
+      <ButtonMagentaContainer>
         <ButtonMagenta onPress={handleSignOut}>
           <ButtonTextWhite>Log Out</ButtonTextWhite>
         </ButtonMagenta>
-      </MagentaButtonContainer>
+      </ButtonMagentaContainer>
     </SafeArea>
   );
 }

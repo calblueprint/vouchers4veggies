@@ -13,7 +13,7 @@ export type AuthStackScreenProps<T extends keyof AuthStackParamList> =
 export type BottomTabParamList = {
   Home: undefined;
   Profile: undefined;
-  Transactions: undefined;
+  Invoices: undefined;
 };
 
 export type BottomTabScreenProps<T extends keyof BottomTabParamList> =
@@ -50,11 +50,10 @@ export type ProfileStackScreenProps<T extends keyof ProfileStackParamList> =
 export type ScannerStackScreenProps<T extends keyof ScannerStackParamList> =
   NativeStackScreenProps<ScannerStackParamList, T>;
 
-export type TransactionStackParamList = {
-  TransactionsScreen: undefined;
-  TransactionDetailsScreen: { transactionUuid: string };
+export type InvoiceStackParamList = {
+  InvoicesScreen: undefined;
+  InvoiceDetailsScreen: { invoiceUuid: string };
 };
 
-export type TransactionStackScreenProps<
-  T extends keyof TransactionStackParamList,
-> = NativeStackScreenProps<TransactionStackParamList, T>;
+export type InvoiceStackScreenProps<T extends keyof InvoiceStackParamList> =
+  NativeStackScreenProps<InvoiceStackParamList, T>;

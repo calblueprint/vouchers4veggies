@@ -6,25 +6,23 @@ import {
   ButtonTextWhite,
   ButtonTextBlack,
   H4CardNavTab,
-  InputTitleText,
+  Body1TextSemibold,
   Body2Subtext,
   Body1Text,
   LoadingText,
+  RedText,
 } from '../../../assets/Fonts';
 import {
   BodyContainer,
-  FormContainer,
   ErrorContainer,
-  RedText,
-  VoucherRangeContainer,
-  VoucherCountContainer,
   LoadingContainer,
+  styles,
 } from './styles';
 import { VoucherEntryNavigationProps } from '../../navigation/types';
 import { useScanningContext } from './ScanningContext';
 import {
   validateSerialNumber,
-  validateEntireVoucherRange,
+  validateVoucherRange,
 } from '../../database/queries';
 import {
   addMultipleVouchers,
@@ -34,25 +32,26 @@ import {
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import Colors from '../../../assets/Colors';
 
-interface VoucherBatchScreenProps {
+type VoucherBatchScreenProps = {
   navigation: VoucherEntryNavigationProps;
-}
+};
+
 export default function VoucherBatchScreen({
   navigation,
 }: VoucherBatchScreenProps) {
   const [isProcessing, setProcessingVouchers] = useState(false);
 
   const [startSerialNumberInput, setStartSerialNumber] = useState<string>('');
-  const [showStartInvalidError, setShowStartInvalidError] = useState(false);
-
   const [endSerialNumberInput, setEndSerialNumber] = useState<string>('');
-  const [showEndInvalidError, setShowEndInvalidError] = useState(false);
 
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const { voucherMap, dispatch } = useScanningContext();
   const otpInput1 = useRef<TextInput>(null);
   const otpInput2 = useRef<TextInput>(null);
+
+  const navigateToReview = () => navigation.navigate('ReviewScreen');
 
   const clearText = () => {
     otpInput1.current?.clear();
@@ -60,12 +59,12 @@ export default function VoucherBatchScreen({
   };
 
   const onChangeStartSerialNumber = (text: string) => {
-    setShowStartInvalidError(false);
+    setShowErrorMessage(false);
     setStartSerialNumber(text);
   };
 
   const onChangeEndSerialNumber = (text: string) => {
-    setShowEndInvalidError(false);
+    setShowErrorMessage(false);
     setEndSerialNumber(text);
   };
 
@@ -77,11 +76,11 @@ export default function VoucherBatchScreen({
     const startSerialNumber = Number(startSerialNumberInput);
     const endSerialNumber = Number(endSerialNumberInput);
 
-    // ensures there aren't more than 20 vouchers in voucher batch
+    // ensures there aren't more than 24 vouchers in voucher batch
     if (endSerialNumber - startSerialNumber >= 24) {
       setProcessingVouchers(false);
-      setShowEndInvalidError(true);
       setErrorMessage('You may only add up to 24 vouchers at once!');
+      setShowErrorMessage(true);
       return;
     }
 
@@ -90,21 +89,20 @@ export default function VoucherBatchScreen({
     const isEndDuplicate = voucherMap.has(endSerialNumber);
     if (isStartDuplicate && isEndDuplicate) {
       setProcessingVouchers(false);
-      setShowStartInvalidError(true);
-      setShowEndInvalidError(true);
       setErrorMessage("You've already added these serial numbers!");
+      setShowErrorMessage(true);
       return;
     }
     if (isStartDuplicate) {
       setProcessingVouchers(false);
-      setShowStartInvalidError(true);
       setErrorMessage("You've already added the starting serial number!");
+      setShowErrorMessage(true);
       return;
     }
     if (isEndDuplicate) {
       setProcessingVouchers(false);
-      setShowEndInvalidError(true);
       setErrorMessage("You've already added the ending serial number!");
+      setShowErrorMessage(true);
       return;
     }
 
@@ -113,26 +111,25 @@ export default function VoucherBatchScreen({
     const endResult = await validateSerialNumber(endSerialNumber);
     if (!startResult.ok && !endResult.ok) {
       setProcessingVouchers(false);
-      setShowStartInvalidError(true);
-      setShowEndInvalidError(true);
       setErrorMessage('Both serial numbers are invalid!');
+      setShowErrorMessage(true);
       return;
     }
     if (!startResult.ok) {
       setProcessingVouchers(false);
-      setShowStartInvalidError(true);
       setErrorMessage('Start serial number is invalid!');
+      setShowErrorMessage(true);
       return;
     }
     if (!endResult.ok || startSerialNumber >= endSerialNumber) {
       setProcessingVouchers(false);
-      setShowEndInvalidError(true);
       setErrorMessage('End serial number is invalid!');
+      setShowErrorMessage(true);
       return;
     }
 
     // validates the entire range of serialNumbers
-    const validSerialNumbers = await validateEntireVoucherRange(
+    const validSerialNumbers = await validateVoucherRange(
       startSerialNumber,
       endSerialNumber,
     );
@@ -141,8 +138,8 @@ export default function VoucherBatchScreen({
     addMultipleVouchers(
       dispatch,
       validSerialNumbers,
-      startResult.voucherRange.maxValue,
-      startResult.voucherRange.type,
+      startResult.voucherType.maxValue,
+      startResult.voucherType.type,
     );
 
     // if fewer serialNumbers are returned than expected, show a specific error
@@ -157,8 +154,7 @@ export default function VoucherBatchScreen({
     // timeout to ensure that serial input is cleared after navigation
     setStartSerialNumber('');
     setEndSerialNumber('');
-    setShowStartInvalidError(false);
-    setShowEndInvalidError(false);
+    setShowErrorMessage(false);
     setErrorMessage('');
     setTimeout(() => {
       clearText();
@@ -175,75 +171,56 @@ export default function VoucherBatchScreen({
           <LoadingText>Processing Voucher Range</LoadingText>
         </LoadingContainer>
       ) : (
-        <FormContainer>
-          <VoucherRangeContainer>
-            <InputTitleText>From</InputTitleText>
-            <OTPTextInput
-              ref={otpInput1}
-              inputCount={7}
-              tintColor={Colors.magenta}
-              defaultValue={startSerialNumberInput}
-              inputCellLength={1}
-              handleTextChange={onChangeStartSerialNumber}
-              containerStyle={{ marginVertical: 3 }}
-              textInputStyle={{
-                borderWidth: 1,
-                borderRadius: 2,
-                width: 30,
-                height: '95%',
-              }}
-              isValid={!showStartInvalidError}
-              keyboardType="number-pad"
-              returnKeyType="done"
-              autoFocus={false}
-            />
-            <InputTitleText> {'\n'} To</InputTitleText>
-            <OTPTextInput
-              ref={otpInput2}
-              inputCount={7}
-              tintColor={Colors.magenta}
-              defaultValue={endSerialNumberInput}
-              inputCellLength={1}
-              handleTextChange={onChangeEndSerialNumber}
-              containerStyle={{ marginVertical: 3 }}
-              textInputStyle={{
-                borderWidth: 1,
-                borderRadius: 2,
-                width: 30,
-                height: '95%',
-              }}
-              isValid={!showEndInvalidError}
-              keyboardType="number-pad"
-              returnKeyType="done"
-              autoFocus={false}
-            />
-          </VoucherRangeContainer>
+        <>
+          <Body1TextSemibold>From</Body1TextSemibold>
+          <OTPTextInput
+            ref={otpInput1}
+            inputCount={7}
+            tintColor={Colors.magenta}
+            defaultValue={startSerialNumberInput}
+            inputCellLength={1}
+            handleTextChange={onChangeStartSerialNumber}
+            containerStyle={styles.otpContainerStyle}
+            textInputStyle={styles.otpTextInputStyle}
+            isValid={!showErrorMessage}
+            keyboardType="number-pad"
+            returnKeyType="done"
+            autoFocus={false}
+          />
+          <Body1TextSemibold> {'\n'}To</Body1TextSemibold>
+          <OTPTextInput
+            ref={otpInput2}
+            inputCount={7}
+            tintColor={Colors.magenta}
+            defaultValue={endSerialNumberInput}
+            inputCellLength={1}
+            handleTextChange={onChangeEndSerialNumber}
+            containerStyle={styles.otpContainerStyle}
+            textInputStyle={styles.otpTextInputStyle}
+            isValid={!showErrorMessage}
+            keyboardType="number-pad"
+            returnKeyType="done"
+            autoFocus={false}
+          />
           <ErrorContainer>
-            {showStartInvalidError || showEndInvalidError ? (
-              <RedText>
-                <Body2Subtext>{errorMessage}</Body2Subtext>
-              </RedText>
-            ) : null}
+            <Body2Subtext>
+              {showErrorMessage && <RedText>{errorMessage}</RedText>}
+            </Body2Subtext>
           </ErrorContainer>
 
-          <ButtonMagenta
-            disabled={showStartInvalidError || showEndInvalidError}
-            onPress={handleVoucherAdd}
-          >
+          <ButtonMagenta disabled={showErrorMessage} onPress={handleVoucherAdd}>
             <ButtonTextWhite>Add Voucher Range</ButtonTextWhite>
           </ButtonMagenta>
           <ButtonWhite
-            onPress={() => navigation.navigate('ReviewScreen')}
+            onPress={navigateToReview}
             disabled={voucherMap.size === 0}
           >
             <ButtonTextBlack>
               <H4CardNavTab>Review and Submit</H4CardNavTab>
             </ButtonTextBlack>
           </ButtonWhite>
-          <VoucherCountContainer>
-            <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
-          </VoucherCountContainer>
-        </FormContainer>
+          <Body1Text>Voucher Count: {voucherMap.size}</Body1Text>
+        </>
       )}
     </BodyContainer>
   );

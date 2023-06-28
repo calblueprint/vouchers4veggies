@@ -16,13 +16,13 @@ import {
 import {
   Uuid,
   Vendor,
-  VoucherRange,
+  VoucherType,
   Voucher,
   VoucherCreate,
   VoucherCreateError,
   VoucherCreateResult,
-  Transaction,
-  TransactionCreate,
+  Invoice,
+  InvoiceCreate,
   SerialNumberValidationResult,
 } from '../types/types';
 import fbApp from './clientApp';
@@ -30,9 +30,9 @@ import fbApp from './clientApp';
 const db = getFirestore(fbApp);
 const testColl = collection(db, 'test-col');
 const vendorCollection = collection(db, 'vendors');
-const voucherRangeCollection = collection(db, 'voucher-ranges');
+const voucherTypeCollection = collection(db, 'voucher-types');
 const voucherCollection = collection(db, 'vouchers');
-const transactionCollection = collection(db, 'transactions');
+const invoiceCollection = collection(db, 'invoices');
 
 /**
  * Function to test connection to Firestore.
@@ -103,41 +103,41 @@ export const getVendorByEmail = async (
 };
 
 /**
- * Get all voucher ranges from the `voucher-ranges` collection.
+ * Get all voucher types from the `voucher-types` collection.
  *
- * Returns an array of VoucherRange objects.
+ * Returns an array of VoucherType objects.
  */
-export const getAllVoucherRanges = async (): Promise<VoucherRange[]> => {
+export const getAllVoucherTypes = async (): Promise<VoucherType[]> => {
   try {
-    const dbQuery = query(voucherRangeCollection);
+    const dbQuery = query(voucherTypeCollection);
     const querySnapshots = await getDocs(dbQuery);
-    return querySnapshots.docs.map(document => document.data() as VoucherRange);
+    return querySnapshots.docs.map(document => document.data() as VoucherType);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(getAllVoucherRanges)', e);
+    console.warn('(getAllVoucherTypes)', e);
     throw e;
   }
 };
 
 /**
- * Query the `voucher-ranges` collection.
+ * Query the `voucher-types` collection.
  *
- * Returns a VoucherRange if the given serialNumber is in any voucher range.
+ * Returns a VoucherType if the given serialNumber is in range of any voucher type.
  *
  * Otherwise, return null.
  */
-export const getVoucherRange = async (
+export const getVoucherType = async (
   serialNumber: number,
-): Promise<VoucherRange | null> => {
+): Promise<VoucherType | null> => {
   try {
     const dbQuery = query(
-      voucherRangeCollection,
+      voucherTypeCollection,
       where('endSerialNum', '>=', serialNumber),
     );
     const querySnapshot = await getDocs(dbQuery);
 
     if (querySnapshot.docs.length > 0) {
-      const result = querySnapshot.docs[0]?.data() as VoucherRange;
+      const result = querySnapshot.docs[0]?.data() as VoucherType;
       if (result.startSerialNum <= serialNumber) {
         return result;
       }
@@ -146,7 +146,7 @@ export const getVoucherRange = async (
     return null;
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(getVoucherRange)', e);
+    console.warn('(getVoucherType)', e);
     throw e;
   }
 };
@@ -171,7 +171,7 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
 
 /**
  * Query to validate an inputted serial number in Firebase and
- * return the voucherRange object for use in the following screens.
+ * return the voucherType object for use in the following screens.
  *
  * Parameters: a json with fields
  *
@@ -179,7 +179,7 @@ export const getVoucher = async (serialNumber: number): Promise<Voucher> => {
  *
  * Returns a json.
  *
- * If the query executes successfully, `ok` is true and the `voucherRange` object
+ * If the query executes successfully, `ok` is true and the `voucherType` object
  * contains the maximum dollar input allowed for the given voucher type, as well
  * as the type of voucher.
  *
@@ -192,8 +192,8 @@ export const validateSerialNumber = async (
     const docId = serialNumber.toString();
     const docRef = doc(db, 'vouchers', docId);
     // check that serialNumber exists within the NPO's defined range of vouchers
-    const voucherRange = await getVoucherRange(serialNumber);
-    if (voucherRange === null) {
+    const voucherType = await getVoucherType(serialNumber);
+    if (voucherType === null) {
       return { ok: false, error: VoucherCreateError.InvalidSerialNumber };
     }
     // check that serialNumber has not already been used
@@ -201,13 +201,14 @@ export const validateSerialNumber = async (
     if (voucherDoc.exists()) {
       return { ok: false, error: VoucherCreateError.SerialNumberAlreadyUsed };
     }
-    return { ok: true, voucherRange };
+    return { ok: true, voucherType };
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('(getVoucher)', e);
     throw e;
   }
 };
+
 /**
  * Query to filter through a range of serial numbers in Firebase.
  *
@@ -218,7 +219,7 @@ export const validateSerialNumber = async (
  *
  * Returns a list of serial numbers not already stored in the database.
  */
-export const validateEntireVoucherRange = async (
+export const validateVoucherRange = async (
   startSerialNumber: number,
   endSerialNumber: number,
 ) => {
@@ -297,21 +298,21 @@ export const getVouchersByVendorUuid = async (
 };
 
 /**
- * Query the `transactions` collection and return a Transaction if the uuid is found.
+ * Query the `invoices` collection and return an Invoice if the uuid is found.
  */
-export const getTransaction = async (uuid: Uuid): Promise<Transaction> => {
+export const getInvoice = async (uuid: Uuid): Promise<Invoice> => {
   try {
-    const dbQuery = query(transactionCollection, where('uuid', '==', uuid));
+    const dbQuery = query(invoiceCollection, where('uuid', '==', uuid));
     const querySnapshot = await getDocs(dbQuery);
-    return querySnapshot.docs[0]?.data() as Transaction;
+    return querySnapshot.docs[0]?.data() as Invoice;
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(getTransaction)', e);
+    console.warn('(getInvoice)', e);
     throw e;
   }
 };
 /**
- * Helper for calculating a Transaction's value.
+ * Helper for calculating an Invoice's value.
  *
  * Returns the sum in cents of all vouchers in the given array.
  */
@@ -335,11 +336,11 @@ export const calculateTotalVouchersValue = async (
 };
 
 /**
- * Query to create a new transaction in Firebase.
+ * Query to create a new invoice in Firebase.
  *
  * Parameters: a json with fields
  *
- *    `status`: the payment status of a transaction
+ *    `status`: the payment status of a invoice
  *
  *    `voucherSerialNumbers`: an array of voucher serial numbers
  *
@@ -347,13 +348,11 @@ export const calculateTotalVouchersValue = async (
  *
  * Returns the doc id if the query executes successfully.
  */
-export const createTransaction = async (
-  transaction: TransactionCreate,
-): Promise<Uuid> => {
+export const createInvoice = async (invoice: InvoiceCreate): Promise<Uuid> => {
   try {
-    const docRef = await addDoc(transactionCollection, transaction);
+    const docRef = await addDoc(invoiceCollection, invoice);
     const value = await calculateTotalVouchersValue(
-      transaction.voucherSerialNumbers,
+      invoice.voucherSerialNumbers,
     );
     await updateDoc(docRef, {
       uuid: docRef.id,
@@ -363,54 +362,54 @@ export const createTransaction = async (
     return docRef.id;
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(createTransaction)', e);
+    console.warn('(createInvoice)', e);
     throw e;
   }
 };
 
 /**
- * Helper for all Transaction setter functions.
+ * Helper for all Invoice setter functions.
  */
-const updateTransaction = async (transaction: Partial<Transaction>) => {
+const updateInvoice = async (invoice: Partial<Invoice>) => {
   try {
-    const docRef = doc(voucherCollection, transaction.uuid);
-    await updateDoc(docRef, transaction);
+    const docRef = doc(voucherCollection, invoice.uuid);
+    await updateDoc(docRef, invoice);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(updateTransaction)', e);
+    console.warn('(updateInvoice)', e);
     throw e;
   }
 };
 
 /**
- * Setter function to update a Transaction's voucherSerialNumbers.
+ * Setter function to update a Invoice's voucherSerialNumbers.
  */
-export const setTransactionVoucherSerialNumbers = async (
+export const setInvoiceVoucherSerialNumbers = async (
   uuid: Uuid,
   voucherSerialNumbers: number[],
 ) => {
   const value = await calculateTotalVouchersValue(voucherSerialNumbers);
-  updateTransaction({ uuid, voucherSerialNumbers, value });
+  updateInvoice({ uuid, voucherSerialNumbers, value });
 };
 
 /**
- * Fetch all transactions for a given vendor.
+ * Fetch all invoices for a given vendor.
  *
- * Returns an array of Transaction objects.
+ * Returns an array of Invoice objects.
  */
-export const getTransactionsByVendorUuid = async (
+export const getInvoicesByVendorUuid = async (
   vendorUuid: Uuid,
-): Promise<Transaction[]> => {
+): Promise<Invoice[]> => {
   try {
     const dbQuery = query(
-      transactionCollection,
+      invoiceCollection,
       where('vendorUuid', '==', vendorUuid),
     );
     const querySnapshots = await getDocs(dbQuery);
-    return querySnapshots.docs.map(document => document.data() as Transaction);
+    return querySnapshots.docs.map(document => document.data() as Invoice);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn('(getTransactionsByVendorUuid)', e);
+    console.warn('(getInvoicesByVendorUuid)', e);
     throw e;
   }
 };
