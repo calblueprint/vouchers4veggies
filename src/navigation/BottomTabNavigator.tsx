@@ -35,7 +35,7 @@ export default function NavigationBar() {
         name="Home"
         component={ScannerStackNavigator}
         options={{
-          tabBarLabel: 'Scan',
+          tabBarLabel: 'Add',
           tabBarIcon: ScanIcon,
         }}
       />
