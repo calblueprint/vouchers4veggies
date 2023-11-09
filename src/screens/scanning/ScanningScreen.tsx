@@ -48,7 +48,6 @@ export default function ScanningScreen({ navigation }: ScanningScreenProps) {
 
   const handleBarCodeScanned = async (scanningResult: BarCodeScannerResult) => {
     if (!scanned) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { data } = scanningResult;
       const serialNumber = Number(data);
       setScanned(true);
